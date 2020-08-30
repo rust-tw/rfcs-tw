@@ -1,0 +1,965 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>0809-box-and-in-for-stdlib - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html" class="active">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: box_syntax, placement_in_syntax</li>
+<li>Start Date: 2015-02-04</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/809">rust-lang/rfcs#809</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/22181">rust-lang/rust#22181</a></li>
+</ul>
+<h1><a class="header" href="#this-rfc-has-been-unapproved" id="this-rfc-has-been-unapproved">This RFC has been <strong>unapproved</strong></a></h1>
+<p>For details see the <a href="https://github.com/rust-lang/rust/issues/27779#issuecomment-378416911">summary comment</a>.</p>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<ul>
+<li>
+<p>Change placement-new syntax from: <code>box (&lt;place-expr&gt;) &lt;expr&gt;</code> instead
+to: <code>in &lt;place-expr&gt; { &lt;block&gt; }</code>.</p>
+</li>
+<li>
+<p>Change <code>box &lt;expr&gt;</code> to an overloaded operator that chooses its
+implementation based on the expected type.</p>
+</li>
+<li>
+<p>Use unstable traits in <code>core::ops</code> for both operators, so that
+libstd can provide support for the overloaded operators; the
+traits are unstable so that the language designers are free to
+revise the underlying protocol in the future post 1.0.</p>
+</li>
+<li>
+<p>Feature-gate the placement-<code>in</code> syntax via the feature name <code>placement_in_syntax</code>.</p>
+</li>
+<li>
+<p>The overloaded <code>box &lt;expr&gt;</code> will reuse the <code>box_syntax</code> feature name.</p>
+</li>
+</ul>
+<p>(Note that <code>&lt;block&gt;</code> here denotes the interior of a block expression; i.e.:</p>
+<pre><code>&lt;block&gt; ::= [ &lt;stmt&gt; ';' | &lt;item&gt; ] * [ &lt;expr&gt; ]
+</code></pre>
+<p>This is the same sense in which the <code>block</code> nonterminal is used in the
+reference manual.)</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>Goal 1: We want to support an operation analogous to C++'s placement
+new, as discussed previously in <a href="https://github.com/rust-lang/rfcs/pull/470">Placement Box RFC PR 470</a>.</p>
+<p>Goal 2: We also would like to overload our <code>box</code> syntax so that more
+types, such as <code>Rc&lt;T&gt;</code> and <code>Arc&lt;T&gt;</code> can gain the benefit of avoiding
+intermediate copies (i.e. allowing expressions to install their result
+value directly into the backing storage of the <code>Rc&lt;T&gt;</code> or <code>Arc&lt;T&gt;</code>
+when it is created).</p>
+<p>However, during discussion of <a href="https://github.com/rust-lang/rfcs/pull/470">Placement Box RFC PR 470</a>, some things
+became clear:</p>
+<ul>
+<li>
+<p>Many syntaxes using the <code>in</code> keyword are superior to <code>box (&lt;place-expr&gt;) &lt;expr&gt;</code> for the operation analogous to placement-new.</p>
+<p>The proposed <code>in</code>-based syntax avoids ambiguities such as having
+to write <code>box () (&lt;expr&gt;)</code> (or <code>box (alloc::HEAP) (&lt;expr&gt;)</code>) when
+one wants to surround <code>&lt;expr&gt;</code> with parentheses.
+It allows the parser to provide clearer error messages when
+encountering <code>in &lt;place-expr&gt; &lt;expr&gt;</code> (clearer compared to the previous
+situation with <code>box &lt;place-expr&gt; &lt;expr&gt;</code>).</p>
+</li>
+<li>
+<p>It would be premature for Rust to commit to any particular
+protocol for supporting placement-<code>in</code>. A number of participants in
+the discussion of <a href="https://github.com/rust-lang/rfcs/pull/470">Placement Box RFC PR 470</a> were unhappy with the
+baroque protocol, especially since it did not support DST and
+potential future language changes would allow the protocol
+proposed there to be significantly simplified.</p>
+</li>
+</ul>
+<p>Therefore, this RFC proposes a middle ground for 1.0: Support the
+desired syntax, but do not provide stable support for end-user
+implementations of the operators. The only stable ways to use the
+overloaded <code>box &lt;expr&gt;</code> or <code>in &lt;place-expr&gt; { &lt;block&gt; }</code> operators will be in
+tandem with types provided by the stdlib, such as <code>Box&lt;T&gt;</code>.</p>
+<h1><a class="header" href="#detailed-design" id="detailed-design">Detailed design</a></h1>
+<ul>
+<li>
+<p>Add traits to <code>core::ops</code> for supporting the new operators.
+This RFC does not commit to any particular set of traits,
+since they are not currently meant to be implemented outside
+of the stdlib. (However, a demonstration of one working set
+of traits is given in <a href="#appendix-a-sample-operator-traits">Appendix A</a>.)</p>
+<p>Any protocol that we adopt for the operators needs to properly
+handle panics; i.e., <code>box &lt;expr&gt;</code> must properly cleanup any
+intermediate state if <code>&lt;expr&gt;</code> panics during its evaluation,
+and likewise for <code>in &lt;place-expr&gt; { &lt;block&gt; }</code></p>
+<p>(See <a href="https://github.com/rust-lang/rfcs/pull/470">Placement Box RFC PR 470</a> or <a href="#appendix-a-sample-operator-traits">Appendix A</a> for discussion on
+ways to accomplish this.)</p>
+</li>
+<li>
+<p>Change <code>box &lt;expr&gt;</code> from built-in syntax (tightly integrated with
+<code>Box&lt;T&gt;</code>) into an overloaded-<code>box</code> operator that uses the expected
+return type to decide what kind of value to create.  For example, if
+<code>Rc&lt;T&gt;</code> is extended with an implementation of the appropriate
+operator trait, then</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x: Rc&lt;_&gt; = box format!(&quot;Hello&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>could be a legal way to create an <code>Rc&lt;String&gt;</code> without having to
+invoke the <code>Rc::new</code> function. This will be more efficient for
+building instances of <code>Rc&lt;T&gt;</code> when <code>T</code> is a large type.  (It is also
+arguably much cleaner syntax to read, regardless of the type <code>T</code>.)</p>
+<p>Note that this change will require end-user code to no longer assume
+that <code>box &lt;expr&gt;</code> always produces a <code>Box&lt;T&gt;</code>; such code will need to
+either add a type annotation e.g. saying <code>Box&lt;_&gt;</code>, or will need to
+call <code>Box::new(&lt;expr&gt;)</code> instead of using <code>box &lt;expr&gt;</code>.</p>
+</li>
+<li>
+<p>Add support for parsing <code>in &lt;place-expr&gt; { &lt;block&gt; }</code> as the basis for the
+placement operator.</p>
+<p>Remove support for <code>box (&lt;place-expr&gt;) &lt;expr&gt;</code> from the parser.</p>
+<p>Make <code>in &lt;place-expr&gt; { &lt;block&gt; }</code> an overloaded operator that uses
+the <code>&lt;place-expr&gt;</code> to determine what placement code to run.</p>
+<p>Note: when <code>&lt;place-expr&gt;</code> is just an identifier,
+<code>&lt;place-expr&gt; { &lt;block&gt; }</code> is not parsed as a struct literal.
+We accomplish this via the same means that is used e.g. for <code>if</code> expressions:
+we restrict <code>&lt;place-expr&gt;</code> to not include struct literals
+(see <a href="https://github.com/rust-lang/rfcs/blob/master/text/0092-struct-grammar.md">RFC 92</a>).</p>
+</li>
+</ul>
+<ul>
+<li>
+<p>The only stabilized implementation for the <code>box &lt;expr&gt;</code> operator
+proposed by this RFC is <code>Box&lt;T&gt;</code>. The question of which other types
+should support integration with <code>box &lt;expr&gt;</code> is a library design
+issue and needs to go through the conventions and library
+stabilization process.</p>
+<p>Similarly, this RFC does not propose <em>any</em> stabilized implementation
+for the <code>in &lt;place-expr&gt; { &lt;block&gt; }</code> operator. (An obvious candidate for
+<code>in &lt;place-expr&gt; { &lt;block&gt; }</code> integration would be a <code>Vec::emplace_back</code>
+method; but again, the choice of which such methods to add is a
+library design issue, beyond the scope of this RFC.)</p>
+<p>(A sample implementation illustrating how to support the operators
+on other types is given in <a href="#appendix-a-sample-operator-traits">Appendix A</a>.)</p>
+</li>
+<li>
+<p>Feature-gate the two syntaxes under separate feature identifiers, so that we
+have the option of removing the gate for one syntax without the other.
+(I.e. we already have much experience with non-overloaded <code>box &lt;expr&gt;</code>,
+but we have nearly no experience with placement-<code>in</code> as described here).</p>
+</li>
+</ul>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<ul>
+<li>
+<p>End-users might be annoyed that they cannot add implementations of
+the overloaded-<code>box</code> and placement-<code>in</code> operators themselves. But
+such users who want to do such a thing will probably be using the
+nightly release channel, which will not have the same stability
+restrictions.</p>
+</li>
+<li>
+<p>The currently-implemented desugaring does not infer that in an
+expression like <code>box &lt;expr&gt; as Box&lt;Trait&gt;</code>, the use of <code>box &lt;expr&gt;</code>
+should evaluate to some <code>Box&lt;_&gt;</code>. pnkfelix has found that this is
+due to a weakness in compiler itself (<a href="https://github.com/rust-lang/rust/pull/22012">Rust PR 22012</a>).</p>
+<p>Likewise, the currently-implemented desugaring does not interact
+well with the combination of type-inference and implicit coercions
+to trait objects. That is, when <code>box &lt;expr&gt;</code> is used in a context
+like this:</p>
+<pre><code>fn foo(Box&lt;SomeTrait&gt;) { ... }
+foo(box some_expr());
+</code></pre>
+<p>the type inference system attempts to unify the type <code>Box&lt;SomeTrait&gt;</code>
+with the return-type of <code>::protocol::Boxed::finalize(place)</code>.
+This may also be due to weakness in the compiler, but that is not
+immediately obvious.</p>
+<p><a href="#appendix-b-examples-of-interaction-between-desugaring-type-inference-and-coercion">Appendix B</a> has a complete code snippet (using a desugaring much like
+the one found in the other appendix) that illustrates two cases of
+interest where this weakness arises.</p>
+</li>
+</ul>
+<h1><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h1>
+<ul>
+<li>
+<p>We could keep the <code>box (&lt;place-expr&gt;) &lt;expr&gt;</code> syntax. It is hard
+to see what the advantage of that is, unless (1.) we can identify
+many cases of types that benefit from supporting both
+overloaded-<code>box</code> and placement-<code>in</code>, or unless (2.) we anticipate
+some integration with <code>box</code> pattern syntax that would motivate using
+the <code>box</code> keyword for placement.</p>
+</li>
+<li>
+<p>We could use the <code>in (&lt;place-expr&gt;) &lt;expr&gt;</code> syntax. An earlier
+version of this RFC used this alternative. It is easier to implement
+on the current code base, but I do not know of any other benefits.
+(Well, maybe parentheses are less &quot;heavyweight&quot; than curly-braces?)</p>
+</li>
+<li>
+<p>A number of other syntaxes for placement have been proposed in the
+past; see for example discussion on <a href="https://github.com/rust-lang/rfcs/issues/405">RFC PR 405</a> as well as
+<a href="https://github.com/pnkfelix/rfcs/blob/fsk-placement-box-rfc/text/0000-placement-box.md#same-semantics-but-different-surface-syntax">the previous placement RFC</a>.</p>
+<p>The main constraints I want to meet are:</p>
+<ol>
+<li>Do not introduce ambiguity into the grammar for Rust</li>
+<li>Maintain left-to-right evaluation order (so the place should
+appear to the left of the value expression in the text).</li>
+</ol>
+<p>But otherwise I am not particularly attached to any single
+syntax.</p>
+<p>One particular alternative that might placate those who object
+to placement-<code>in</code>'s <code>box</code>-free form would be:
+<code>box (in &lt;place-expr&gt;) &lt;expr&gt;</code>.</p>
+</li>
+</ul>
+<ul>
+<li>Do nothing. I.e. do not even accept an unstable libstd-only protocol
+for placement-<code>in</code> and overloaded-<code>box</code>. This would be okay, but
+unfortunate, since in the past some users have identified
+intermediate copies to be a source of inefficiency, and proper use
+of <code>box &lt;expr&gt;</code> and placement-<code>in</code> can help remove intermediate
+copies.</li>
+</ul>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<p>This RFC represents the current plan for <code>box</code>/<code>in</code>. However, in the
+<a href="https://github.com/rust-lang/rfcs/pull/809">RFC discussion</a> a number of questions arose, including possible
+design alternatives that might render the <code>in</code> keyword unnecessary.
+Before the work in this RFC can be unfeature-gated, these questions should
+be satisfactorily resolved:</p>
+<ul>
+<li>
+<p>Can the type-inference and coercion system of the compiler be
+enriched to the point where overloaded <code>box</code> and <code>in</code> are
+seamlessly usable? Or are type-ascriptions unavoidable when
+supporting overloading?</p>
+<p>In particular, I am assuming here that some amount of current
+weakness cannot be blamed on any particular details of the
+sample desugaring.</p>
+<p>(See <a href="#appendix-b-examples-of-interaction-between-desugaring-type-inference-and-coercion">Appendix B</a> for example code showing weaknesses in
+<code>rustc</code> of today.)</p>
+</li>
+<li>
+<p>Do we want to change the syntax for <code>in(place) expr</code> / <code>in place { expr }</code>?</p>
+</li>
+<li>
+<p>Do we need <code>in</code> at all, or can we replace it with some future possible feature such as <code>DerefSet</code> or <code>&amp;out</code> etc?</p>
+</li>
+<li>
+<p>Do we want to improve the protocol in some way?</p>
+<ul>
+<li>Note that the protocol was specifically excluded from this RFC.</li>
+<li>Support for DST expressions such as <code>box [22, ..count]</code> (where <code>count</code> is a dynamic value)?</li>
+<li>Protocol making use of more advanced language features?</li>
+</ul>
+</li>
+</ul>
+<h1><a class="header" href="#appendices" id="appendices">Appendices</a></h1>
+<h2><a class="header" href="#appendix-a-sample-operator-traits" id="appendix-a-sample-operator-traits">Appendix A: sample operator traits</a></h2>
+<p>The goal is to show that code like the following can be made to work
+in Rust today via appropriate desugarings and trait definitions.</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    use std::rc::Rc;
+
+    let mut v = vec![1,2];
+    in v.emplace_back() { 3 }; // has return type `()`
+    println!(&quot;v: {:?}&quot;, v); // prints [1,2,3]
+
+    let b4: Box&lt;i32&gt; = box 4;
+    println!(&quot;b4: {}&quot;, b4);
+
+    let b5: Rc&lt;i32&gt; = box 5;
+    println!(&quot;b5: {}&quot;, b5);
+
+    let b6 = in HEAP { 6 }; // return type Box&lt;i32&gt;
+    println!(&quot;b6: {}&quot;, b6);
+}
+</code></pre></pre>
+<p>To demonstrate the above, this appendix provides code that runs today;
+it demonstrates sample protocols for the proposed operators.
+(The entire code-block below should work when e.g. cut-and-paste into
+http::play.rust-lang.org )</p>
+<pre><pre class="playground"><code class="language-rust">#![feature(unsafe_destructor)] // (hopefully unnecessary soon with RFC PR 769)
+#![feature(alloc)]
+
+// The easiest way to illustrate the desugaring is by implementing
+// it with macros.  So, we will use the macro `in_` for placement-`in`
+// and the macro `box_` for overloaded-`box`; you should read
+// `in_!( (&lt;place-expr&gt;) &lt;expr&gt; )` as if it were `in &lt;place-expr&gt; { &lt;expr&gt; }`
+// and
+// `box_!( &lt;expr&gt; )` as if it were `box &lt;expr&gt;`.
+
+// The two macros have been designed to both 1. work with current Rust
+// syntax (which in some cases meant avoiding certain associated-item
+// syntax that currently causes the compiler to ICE) and 2. infer the
+// appropriate code to run based only on either `&lt;place-expr&gt;` (for
+// placement-`in`) or on the expected result type (for
+// overloaded-`box`).
+
+macro_rules! in_ {
+    (($placer:expr) $value:expr) =&gt; { {
+        let p = $placer;
+        let mut place = ::protocol::Placer::make_place(p);
+        let raw_place = ::protocol::Place::pointer(&amp;mut place);
+        let value = $value;
+        unsafe {
+            ::std::ptr::write(raw_place, value);
+            ::protocol::InPlace::finalize(place)
+        }
+    } }
+}
+
+macro_rules! box_ {
+    ($value:expr) =&gt; { {
+        let mut place = ::protocol::BoxPlace::make_place();
+        let raw_place = ::protocol::Place::pointer(&amp;mut place);
+        let value = $value;
+        unsafe {
+            ::std::ptr::write(raw_place, value);
+            ::protocol::Boxed::finalize(place)
+        }
+    } }
+}
+
+// Note that while both desugarings are very similar, there are some
+// slight differences.  In particular, the placement-`in` desugaring
+// uses `InPlace::finalize(place)`, which is a `finalize` method that
+// is overloaded based on the `place` argument (the type of which is
+// derived from the `&lt;place-expr&gt;` input); on the other hand, the
+// overloaded-`box` desugaring uses `Boxed::finalize(place)`, which is
+// a `finalize` method that is overloaded based on the expected return
+// type. Thus, the determination of which `finalize` method to call is
+// derived from different sources in the two desugarings.
+
+// The above desugarings refer to traits in a `protocol` module; these
+// are the traits that would be put into `std::ops`, and are given
+// below.
+
+mod protocol {
+
+/// Both `in PLACE { BLOCK }` and `box EXPR` desugar into expressions
+/// that allocate an intermediate &quot;place&quot; that holds uninitialized
+/// state.  The desugaring evaluates EXPR, and writes the result at
+/// the address returned by the `pointer` method of this trait.
+///
+/// A `Place` can be thought of as a special representation for a
+/// hypothetical `&amp;uninit` reference (which Rust cannot currently
+/// express directly). That is, it represents a pointer to
+/// uninitialized storage.
+///
+/// The client is responsible for two steps: First, initializing the
+/// payload (it can access its address via `pointer`). Second,
+/// converting the agent to an instance of the owning pointer, via the
+/// appropriate `finalize` method (see the `InPlace`.
+///
+/// If evaluating EXPR fails, then the destructor for the
+/// implementation of Place to clean up any intermediate state
+/// (e.g. deallocate box storage, pop a stack, etc).
+pub trait Place&lt;Data: ?Sized&gt; {
+    /// Returns the address where the input value will be written.
+    /// Note that the data at this address is generally uninitialized,
+    /// and thus one should use `ptr::write` for initializing it.
+    fn pointer(&amp;mut self) -&gt; *mut Data;
+}
+
+/// Interface to implementations of  `in PLACE { BLOCK }`.
+///
+/// `in PLACE { BLOCK }` effectively desugars into:
+///
+/// ```
+/// let p = PLACE;
+/// let mut place = Placer::make_place(p);
+/// let raw_place = Place::pointer(&amp;mut place);
+/// let value = { BLOCK };
+/// unsafe {
+///     std::ptr::write(raw_place, value);
+///     InPlace::finalize(place)
+/// }
+/// ```
+///
+/// The type of `in PLACE { BLOCK }` is derived from the type of `PLACE`;
+/// if the type of `PLACE` is `P`, then the final type of the whole
+/// expression is `P::Place::Owner` (see the `InPlace` and `Boxed`
+/// traits).
+///
+/// Values for types implementing this trait usually are transient
+/// intermediate values (e.g. the return value of `Vec::emplace_back`)
+/// or `Copy`, since the `make_place` method takes `self` by value.
+pub trait Placer&lt;Data: ?Sized&gt; {
+    /// `Place` is the intermedate agent guarding the
+    /// uninitialized state for `Data`.
+    type Place: InPlace&lt;Data&gt;;
+
+    /// Creates a fresh place from `self`.
+    fn make_place(self) -&gt; Self::Place;
+}
+
+/// Specialization of `Place` trait supporting `in PLACE { BLOCK }`.
+pub trait InPlace&lt;Data: ?Sized&gt;: Place&lt;Data&gt; {
+    /// `Owner` is the type of the end value of `in PLACE { BLOCK }`
+    ///
+    /// Note that when `in PLACE { BLOCK }` is solely used for
+    /// side-effecting an existing data-structure,
+    /// e.g. `Vec::emplace_back`, then `Owner` need not carry any
+    /// information at all (e.g. it can be the unit type `()` in that
+    /// case).
+    type Owner;
+
+    /// Converts self into the final value, shifting
+    /// deallocation/cleanup responsibilities (if any remain), over to
+    /// the returned instance of `Owner` and forgetting self.
+    unsafe fn finalize(self) -&gt; Self::Owner;
+}
+
+/// Core trait for the `box EXPR` form.
+///
+/// `box EXPR` effectively desugars into:
+///
+/// ```
+/// let mut place = BoxPlace::make_place();
+/// let raw_place = Place::pointer(&amp;mut place);
+/// let value = $value;
+/// unsafe {
+///     ::std::ptr::write(raw_place, value);
+///     Boxed::finalize(place)
+/// }
+/// ```
+///
+/// The type of `box EXPR` is supplied from its surrounding
+/// context; in the above expansion, the result type `T` is used
+/// to determine which implementation of `Boxed` to use, and that
+/// `&lt;T as Boxed&gt;` in turn dictates determines which
+/// implementation of `BoxPlace` to use, namely:
+/// `&lt;&lt;T as Boxed&gt;::Place as BoxPlace&gt;`.
+pub trait Boxed {
+    /// The kind of data that is stored in this kind of box.
+    type Data;  /* (`Data` unused b/c cannot yet express below bound.) */
+    type Place; /* should be bounded by BoxPlace&lt;Self::Data&gt; */
+
+    /// Converts filled place into final owning value, shifting
+    /// deallocation/cleanup responsibilities (if any remain), over to
+    /// returned instance of `Self` and forgetting `filled`.
+    unsafe fn finalize(filled: Self::Place) -&gt; Self;
+}
+
+/// Specialization of `Place` trait supporting `box EXPR`.
+pub trait BoxPlace&lt;Data: ?Sized&gt; : Place&lt;Data&gt; {
+    /// Creates a globally fresh place.
+    fn make_place() -&gt; Self;
+}
+
+} // end of `mod protocol`
+
+// Next, we need to see sample implementations of these traits.
+// First, `Box&lt;T&gt;` needs to support overloaded-`box`: (Note that this
+// is not the desired end implementation; e.g.  the `BoxPlace`
+// representation here is less efficient than it could be. This is
+// just meant to illustrate that an implementation *can* be made;
+// i.e. that the overloading *works*.)
+//
+// Also, just for kicks, I am throwing in `in HEAP { &lt;block&gt; }` support,
+// though I do not think that needs to be part of the stable libstd.
+
+struct HEAP;
+
+mod impl_box_for_box {
+    use protocol as proto;
+    use std::mem;
+    use super::HEAP;
+
+    struct BoxPlace&lt;T&gt; { fake_box: Option&lt;Box&lt;T&gt;&gt; }
+
+    fn make_place&lt;T&gt;() -&gt; BoxPlace&lt;T&gt; {
+        let t: T = unsafe { mem::zeroed() };
+        BoxPlace { fake_box: Some(Box::new(t)) }
+    }
+
+    unsafe fn finalize&lt;T&gt;(mut filled: BoxPlace&lt;T&gt;) -&gt; Box&lt;T&gt; {
+        let mut ret = None;
+        mem::swap(&amp;mut filled.fake_box, &amp;mut ret);
+        ret.unwrap()
+    }
+
+    impl&lt;'a, T&gt; proto::Placer&lt;T&gt; for HEAP {
+        type Place = BoxPlace&lt;T&gt;;
+        fn make_place(self) -&gt; BoxPlace&lt;T&gt; { make_place() }
+    }
+
+    impl&lt;T&gt; proto::Place&lt;T&gt; for BoxPlace&lt;T&gt; {
+        fn pointer(&amp;mut self) -&gt; *mut T {
+            match self.fake_box {
+                Some(ref mut b) =&gt; &amp;mut **b as *mut T,
+                None =&gt; panic!(&quot;impossible&quot;),
+            }
+        }
+    }
+
+    impl&lt;T&gt; proto::BoxPlace&lt;T&gt; for BoxPlace&lt;T&gt; {
+        fn make_place() -&gt; BoxPlace&lt;T&gt; { make_place() }
+    }
+
+    impl&lt;T&gt; proto::InPlace&lt;T&gt; for BoxPlace&lt;T&gt; {
+        type Owner = Box&lt;T&gt;;
+        unsafe fn finalize(self) -&gt; Box&lt;T&gt; { finalize(self) }
+    }
+
+    impl&lt;T&gt; proto::Boxed for Box&lt;T&gt; {
+        type Data = T;
+        type Place = BoxPlace&lt;T&gt;;
+        unsafe fn finalize(filled: BoxPlace&lt;T&gt;) -&gt; Self { finalize(filled) }
+    }
+}
+
+// Second, it might be nice if `Rc&lt;T&gt;` supported overloaded-`box`.
+//
+// (Note again that this may not be the most efficient implementation;
+// it is just meant to illustrate that an implementation *can* be
+// made; i.e. that the overloading *works*.)
+ 
+mod impl_box_for_rc {
+    use protocol as proto;
+    use std::mem;
+    use std::rc::{self, Rc};
+
+    struct RcPlace&lt;T&gt; { fake_box: Option&lt;Rc&lt;T&gt;&gt; }
+
+    impl&lt;T&gt; proto::Place&lt;T&gt; for RcPlace&lt;T&gt; {
+        fn pointer(&amp;mut self) -&gt; *mut T {
+            if let Some(ref mut b) = self.fake_box {
+                if let Some(r) = rc::get_mut(b) {
+                    return r as *mut T
+                }
+            }
+            panic!(&quot;impossible&quot;);
+        }
+    }
+
+    impl&lt;T&gt; proto::BoxPlace&lt;T&gt; for RcPlace&lt;T&gt; {
+        fn make_place() -&gt; RcPlace&lt;T&gt; {
+            unsafe {
+                let t: T = mem::zeroed();
+                RcPlace { fake_box: Some(Rc::new(t)) }
+            }
+        }
+    }
+
+    impl&lt;T&gt; proto::Boxed for Rc&lt;T&gt; {
+        type Data = T;
+        type Place = RcPlace&lt;T&gt;;
+        unsafe fn finalize(mut filled: RcPlace&lt;T&gt;) -&gt; Self {
+            let mut ret = None;
+            mem::swap(&amp;mut filled.fake_box, &amp;mut ret);
+            ret.unwrap()
+        }
+    }
+}
+
+// Third, we want something to demonstrate placement-`in`. Let us use
+// `Vec::emplace_back` for that:
+
+mod impl_in_for_vec_emplace_back {
+    use protocol as proto;
+
+    use std::mem;
+
+    struct VecPlacer&lt;'a, T:'a&gt; { v: &amp;'a mut Vec&lt;T&gt; }
+    struct VecPlace&lt;'a, T:'a&gt; { v: &amp;'a mut Vec&lt;T&gt; }
+
+    pub trait EmplaceBack&lt;T&gt; { fn emplace_back(&amp;mut self) -&gt; VecPlacer&lt;T&gt;; }
+
+    impl&lt;T&gt; EmplaceBack&lt;T&gt; for Vec&lt;T&gt; {
+        fn emplace_back(&amp;mut self) -&gt; VecPlacer&lt;T&gt; { VecPlacer { v: self } }
+    }
+
+    impl&lt;'a, T&gt; proto::Placer&lt;T&gt; for VecPlacer&lt;'a, T&gt; {
+        type Place = VecPlace&lt;'a, T&gt;;
+        fn make_place(self) -&gt; VecPlace&lt;'a, T&gt; { VecPlace { v: self.v } }
+    }
+
+    impl&lt;'a, T&gt; proto::Place&lt;T&gt; for VecPlace&lt;'a, T&gt; {
+        fn pointer(&amp;mut self) -&gt; *mut T {
+            unsafe {
+                let idx = self.v.len();
+                self.v.push(mem::zeroed());
+                &amp;mut self.v[idx]
+            }
+        }
+    }
+    impl&lt;'a, T&gt; proto::InPlace&lt;T&gt; for VecPlace&lt;'a, T&gt; {
+        type Owner = ();
+        unsafe fn finalize(self) -&gt; () {
+            mem::forget(self);
+        }
+    }
+
+    #[unsafe_destructor]
+    impl&lt;'a, T&gt; Drop for VecPlace&lt;'a, T&gt; {
+        fn drop(&amp;mut self) {
+            unsafe {
+                mem::forget(self.v.pop())
+            }
+        }
+    }
+}
+
+// Okay, that's enough for us to actually demonstrate the syntax!
+// Here's our `fn main`:
+
+fn main() {
+    use std::rc::Rc;
+    // get hacked-in `emplace_back` into scope
+    use impl_in_for_vec_emplace_back::EmplaceBack;
+
+    let mut v = vec![1,2];
+    in_!( (v.emplace_back()) 3 );
+    println!(&quot;v: {:?}&quot;, v);
+
+    let b4: Box&lt;i32&gt; = box_!( 4 );
+    println!(&quot;b4: {}&quot;, b4);
+
+    let b5: Rc&lt;i32&gt; = box_!( 5 );
+    println!(&quot;b5: {}&quot;, b5);
+
+    let b6 = in_!( (HEAP) 6 ); // return type Box&lt;i32&gt;
+    println!(&quot;b6: {}&quot;, b6);
+}
+</code></pre></pre>
+<h2><a class="header" href="#appendix-b-examples-of-interaction-between-desugaring-type-inference-and-coercion" id="appendix-b-examples-of-interaction-between-desugaring-type-inference-and-coercion">Appendix B: examples of interaction between desugaring, type-inference, and coercion</a></h2>
+<p>The following code works with the current version of <code>box</code> syntax in Rust, but needs some sort
+of type annotation in Rust as it stands today for the desugaring of <code>box</code> to work out.</p>
+<p>(The following code uses <code>cfg</code> attributes to make it easy to switch between slight variations
+on the portions that expose the weakness.)</p>
+<pre><pre class="playground"><code class="language-rust">#![feature(box_syntax)]
+
+// NOTE: Scroll down to &quot;START HERE&quot;
+
+fn main() { }
+
+macro_rules! box_ {
+    ($value:expr) =&gt; { {
+        let mut place = ::BoxPlace::make();
+        let raw_place = ::Place::pointer(&amp;mut place);
+        let value = $value;
+        unsafe { ::std::ptr::write(raw_place, value); ::Boxed::fin(place) }
+    } }
+}
+
+// (Support traits and impls for examples below.)
+
+pub trait BoxPlace&lt;Data: ?Sized&gt; : Place&lt;Data&gt; { fn make() -&gt; Self; }
+pub trait Place&lt;Data: ?Sized&gt; { fn pointer(&amp;mut self) -&gt; *mut Data; }
+pub trait Boxed { type Place; fn fin(filled: Self::Place) -&gt; Self; }
+
+struct BP&lt;T: ?Sized&gt; { _fake_box: Option&lt;Box&lt;T&gt;&gt; }
+
+impl&lt;T&gt; BoxPlace&lt;T&gt; for BP&lt;T&gt; { fn make() -&gt; BP&lt;T&gt; { make_pl() } }
+impl&lt;T: ?Sized&gt; Place&lt;T&gt; for BP&lt;T&gt; { fn pointer(&amp;mut self) -&gt; *mut T { pointer(self) } }
+impl&lt;T: ?Sized&gt; Boxed for Box&lt;T&gt; { type Place = BP&lt;T&gt;; fn fin(x: BP&lt;T&gt;) -&gt; Self { finaliz(x) } }
+
+fn make_pl&lt;T&gt;() -&gt; BP&lt;T&gt; { loop { } }
+fn finaliz&lt;T: ?Sized&gt;(mut _filled: BP&lt;T&gt;) -&gt; Box&lt;T&gt; { loop { } }
+fn pointer&lt;T: ?Sized&gt;(_p: &amp;mut BP&lt;T&gt;) -&gt; *mut T { loop { } }
+
+// START HERE
+
+pub type BoxFn&lt;'a&gt; = Box&lt;Fn() + 'a&gt;;
+
+#[cfg(all(not(coerce_works1),not(coerce_works2),not(coerce_works3)))]
+pub fn coerce&lt;'a, F&gt;(f: F) -&gt; BoxFn&lt;'a&gt; where F: Fn(), F: 'a { box_!( f ) }
+
+#[cfg(coerce_works1)]
+pub fn coerce&lt;'a, F&gt;(f: F) -&gt; BoxFn&lt;'a&gt; where F: Fn(), F: 'a {   box  f   }
+
+#[cfg(coerce_works2)]
+pub fn coerce&lt;'a, F&gt;(f: F) -&gt; BoxFn&lt;'a&gt; where F: Fn(), F: 'a { let b: Box&lt;_&gt; = box_!( f ); b }
+
+#[cfg(coerce_works3)] // (This one assumes PR 22012 has landed)
+pub fn coerce&lt;'a, F&gt;(f: F) -&gt; BoxFn&lt;'a&gt; where F: Fn(), F: 'a { box_!( f ) as BoxFn }
+
+
+trait Duh { fn duh() -&gt; Self; }
+
+#[cfg(all(not(duh_works1),not(duh_works2)))]
+impl&lt;T&gt; Duh for Box&lt;[T]&gt; { fn duh() -&gt; Box&lt;[T]&gt; { box_!( [] ) } }
+
+#[cfg(duh_works1)]
+impl&lt;T&gt; Duh for Box&lt;[T]&gt; { fn duh() -&gt; Box&lt;[T]&gt; {   box  [] } }
+
+#[cfg(duh_works2)]
+impl&lt;T&gt; Duh for Box&lt;[T]&gt; { fn duh() -&gt; Box&lt;[T]&gt; { let b: Box&lt;[_; 0]&gt; =  box_!( [] ); b } }
+</code></pre></pre>
+<p>You can pass <code>--cfg duh_worksN</code> and <code>--cfg coerce_worksM</code> for suitable
+<code>N</code> and <code>M</code> to see them compile.  Here is a transcript with those attempts,
+including the cases where type-inference fails in the desugaring.</p>
+<pre><code>% rustc /tmp/foo6.rs --cfg duh_works1 --cfg coerce_works1
+% rustc /tmp/foo6.rs --cfg duh_works1 --cfg coerce_works2
+% rustc /tmp/foo6.rs --cfg duh_works2 --cfg coerce_works1
+% rustc /tmp/foo6.rs --cfg duh_works1
+/tmp/foo6.rs:10:25: 10:41 error: the trait `Place&lt;F&gt;` is not implemented for the type `BP&lt;core::ops::Fn()&gt;` [E0277]
+/tmp/foo6.rs:10         let raw_place = ::Place::pointer(&amp;mut place);
+                                        ^~~~~~~~~~~~~~~~
+/tmp/foo6.rs:7:1: 14:2 note: in expansion of box_!
+/tmp/foo6.rs:37:64: 37:76 note: expansion site
+/tmp/foo6.rs:9:25: 9:41 error: the trait `core::marker::Sized` is not implemented for the type `core::ops::Fn()` [E0277]
+/tmp/foo6.rs:9         let mut place = ::BoxPlace::make();
+                                       ^~~~~~~~~~~~~~~~
+/tmp/foo6.rs:7:1: 14:2 note: in expansion of box_!
+/tmp/foo6.rs:37:64: 37:76 note: expansion site
+error: aborting due to 2 previous errors
+% rustc /tmp/foo6.rs                  --cfg coerce_works1
+/tmp/foo6.rs:10:25: 10:41 error: the trait `Place&lt;[_; 0]&gt;` is not implemented for the type `BP&lt;[T]&gt;` [E0277]
+/tmp/foo6.rs:10         let raw_place = ::Place::pointer(&amp;mut place);
+                                        ^~~~~~~~~~~~~~~~
+/tmp/foo6.rs:7:1: 14:2 note: in expansion of box_!
+/tmp/foo6.rs:52:51: 52:64 note: expansion site
+/tmp/foo6.rs:9:25: 9:41 error: the trait `core::marker::Sized` is not implemented for the type `[T]` [E0277]
+/tmp/foo6.rs:9         let mut place = ::BoxPlace::make();
+                                       ^~~~~~~~~~~~~~~~
+/tmp/foo6.rs:7:1: 14:2 note: in expansion of box_!
+/tmp/foo6.rs:52:51: 52:64 note: expansion site
+error: aborting due to 2 previous errors
+% 
+</code></pre>
+<p>The point I want to get across is
+this: It looks like both of these cases can be worked around via
+explicit type ascription.  Whether or not this is an acceptable cost
+is a reasonable question.</p>
+<ul>
+<li>Note that type ascription is especially annoying for the <code>fn duh</code> case,
+where one needs to keep the array-length encoded in the type consistent
+with the length of the array generated by the expression.
+This might motivate extending the use of wildcard <code>_</code> within type expressions
+to include wildcard constants, for use in the array length, i.e.: <code>[T; _]</code>.</li>
+</ul>
+<p>The <code>fn coerce</code> example comes from uses of the <code>fn combine_structure</code> function in the
+<code>libsyntax</code> crate.</p>
+<p>The <code>fn duh</code> example comes from the implementation of the <code>Default</code>
+trait for <code>Box&lt;[T]&gt;</code>.</p>
+<p>Both examples are instances of coercion; the <code>fn coerce</code> example is
+trying to express a coercion of a <code>Box&lt;Type&gt;</code> to a <code>Box&lt;Trait&gt;</code>
+(i.e. making a trait-object), and the <code>fn duh</code> example is trying to
+express a coercion of a <code>Box&lt;[T; k]&gt;</code> (specifically <code>[T; 0]</code>) to a
+<code>Box&lt;[T]&gt;</code>.  Both are going from a pointer-to-sized to a
+pointer-to-unsized.</p>
+<p>(Maybe there is a way to handle both of these cases in a generic
+fashion; pnkfelix is not sufficiently familiar with how coercions
+currently interact with type-inference in the first place.)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="0803-type-ascription.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="0823-hash-simplification.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="0803-type-ascription.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="0823-hash-simplification.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

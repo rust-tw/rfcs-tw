@@ -1,0 +1,869 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>1824-crates.io-default-ranking - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html" class="active">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: crates_io_default_ranking</li>
+<li>Start Date: 2016-12-19</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/1824">rust-lang/rfcs#1824</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/41616">rust-lang/rust#41616</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Crates.io has many useful libraries for a variety of purposes, but it's
+difficult to find which crates are meant for a particular purpose and then to
+decide among the available crates which one is most suitable in a particular
+context. <a href="https://github.com/rust-lang/crates.io/pull/473">Categorization</a> and <a href="https://github.com/rust-lang/crates.io/pull/481">badges</a> are coming to
+crates.io; categories help with finding a set of crates to consider and badges
+help communicate attributes of crates.</p>
+<p><strong>This RFC aims to create a default ranking of crates within a list of crates
+that have a category or keyword in order to make a recommendation to crate users
+about which crates are likely to deserve further manual evaluation.</strong></p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>Finding and evaluating crates can be time consuming. People already familiar
+with the Rust ecosystem often know which crates are best for which puproses, but
+we want to share that knowledge with everyone. For example, someone looking for
+a crate to help create a parser should be able to navigate to a category
+for that purpose and get a list of crates to consider. This list would include
+crates such as <a href="https://crates.io/crates/nom">nom</a> and <a href="https://crates.io/crates/peresil">peresil</a>, and the order in which they appear
+should be significant and should help make the decision between the crates in
+this category easier.</p>
+<p>This helps address the goal of &quot;Rust should provide easy access to high quality
+crates&quot; as stated in the <a href="https://github.com/rust-lang/rfcs/pull/1774">Rust 2017 Roadmap</a>.</p>
+<h1><a class="header" href="#detailed-design" id="detailed-design">Detailed design</a></h1>
+<p>Please see the <a href="#appendix-comparative-research">Appendix: Comparative Research</a> section
+for ways that other package manager websites have solved this problem, and the
+<a href="#appendix-user-research">Appendix: User Research</a> section for results of a user research
+survey we did on how people evaluate crates by hand today.</p>
+<p>A few assumptions we made:</p>
+<ul>
+<li>Measures that can be made automatically are preferred over measures that
+would need administrators, curators, or the community to spend time on
+manually.</li>
+<li>Measures that can be made for any crate regardless of that crate's choice of
+version control, repository host, or CI service are preferred over measures
+that would only be available or would be more easily available with git,
+GitHub, Travis, and Appveyor. Our thinking is that when this additional
+information is available, it would be better to display a badge indicating it
+since this is valuable information, but it should not influence the ranking
+of the crates.</li>
+<li>There are some measures, like &quot;suitability for the current task&quot; or &quot;whether
+I like the way the crate is implemented&quot; that crates.io shouldn't even
+attempt to assess, since those could potentially differ across situations for
+the same person looking for a crate.</li>
+<li>We assume we will be able to calculate these in a reasonable amount of time
+either on-demand or by a background job initiated on crate publish and saved
+in the database as appropriate. We think the measures we have proposed can be
+done without impacting the performance of either publishing or browsing
+crates noticeably. If this does not turn out to be the case, we will have to
+adjust the formula.</li>
+</ul>
+<h2><a class="header" href="#order-by-recent-downloads" id="order-by-recent-downloads">Order by recent downloads</a></h2>
+<p>Through the iterations of this RFC, there was no consensus around a way to order
+crates that would be useful, understandable, resistent to being gamed, and not
+require work of curators, reviewers, or moderators. Furthermore, different
+people in different situations may value different aspects of crates.</p>
+<p>Instead of attempting to order crates as a majority of people would rank them,
+we propose a coarser measure to expose the set of crates worthy of further
+consideration on the first page of a category or keyword. At that point, the
+person looking for a crate can use other indicators on the page to decide which
+crates best meet their needs.</p>
+<p><strong>The default ordering of crates within a keyword or category will be changed to
+be the number of downloads in the last 90 days.</strong></p>
+<p>While coarse, downloads show how many people or other crates have found this
+crate to be worthy of using. By limiting to the last 90 days, crates that have
+been around the longest won't have an advantage over new crates that might be
+better. Crates that are lower in the &quot;stack&quot;, such as <code>libc</code>, will always have a
+higher number of downloads than those higher in the stack due to the number of
+crates using a lower-level crate as a dependency. Within a category or keyword,
+however, crates are likely to be from the same level of the stack and thus their
+download numbers will be comparable.</p>
+<p>Crates are currently ordered by all-time downloads and the sort option button
+says &quot;Downloads&quot;. We will:</p>
+<ul>
+<li>change the ordering to be downloads in the last 90 days</li>
+<li>change the number of downloads displayed with each crate to be those made in
+the last 90 days</li>
+<li>change the sort option button to say &quot;Recent Downloads&quot;.</li>
+</ul>
+<p>&quot;All-time Downloads&quot; could become another sort option in the menu, alongside
+&quot;Alphabetical&quot;.</p>
+<h2><a class="header" href="#add-more-badges-filters-and-sorting-options" id="add-more-badges-filters-and-sorting-options">Add more badges, filters, and sorting options</a></h2>
+<p>Crates.io now has badges for master branch CI status, and <a href="https://github.com/rust-lang/crates.io/pull/540">will soon have a
+badge indicating the version(s) of Rust a particular version builds
+successfully on</a>.</p>
+<p>To enable a person to narrow down relevant crates to find the one that will best
+meet their needs, we will add more badges and indicators. <strong>Badges will not
+influence crate ordering</strong>.</p>
+<p>Some badges may require use of third-party services such as GitHub. We recognize
+that not everyone uses these services, but note a specific badge is only one
+factor that people can consider out of many.</p>
+<p>Through <a href="#appendix-user-research">the survey we conducted</a>, we found that when people
+evaluate crates, they are primarily looking for signals of:</p>
+<ul>
+<li>Ease of use</li>
+<li>Maintenance</li>
+<li>Quality</li>
+</ul>
+<p>Secondary signals that were used to infer the primary signals:</p>
+<ul>
+<li>Popularity (covered by the default ordering by recent downloads)</li>
+<li>Credibility</li>
+</ul>
+<h3><a class="header" href="#ease-of-use" id="ease-of-use">Ease of use</a></h3>
+<p>By far, the most common attribute people said they considered in the survey was
+whether a crate had good documentation. Frequently mentioned when discussing
+documentation was the desire to quickly find an example of how to use the crate.</p>
+<p>This would be addressed in two ways.</p>
+<h4><a class="header" href="#render-readme-on-a-crates-page" id="render-readme-on-a-crates-page">Render README on a crate's page</a></h4>
+<p><a href="https://github.com/rust-lang/crates.io/issues/81">Render README files on a crate's page on crates.io</a> so that
+people can quickly see for themselves the information that a crate author
+chooses to make available in their README. We can nudge towards having an
+example in the README by adding a template README that includes an Examples
+section <a href="https://github.com/rust-lang/cargo/issues/3506">in what <code>cargo new</code> generates</a>.</p>
+<h4><a class="header" href="#well-documented-badge" id="well-documented-badge">&quot;Well Documented&quot; badge</a></h4>
+<p>For each crate published, in a background job, unpack the crate files and
+calculate the ratio of lines of documentation to lines of code as follows:</p>
+<ul>
+<li>Find the number of lines of documentation in Rust files:
+<code>grep -r &quot;//[!/]&quot; --binary-files=without-match --include=*.rs . | wc -l</code></li>
+<li>Find the number of lines in the README file, if specified in Cargo.toml</li>
+<li>Find the number of lines in Rust files: <code>find . -name '*.rs' | xargs wc -l</code></li>
+</ul>
+<p>We would then add the lines in the README to the lines of documentation,
+subtract the lines of documentation from the total lines of code, and divide
+the lines of documentation by the lines of non-documentation in order to get
+the ratio of documentation to code. Test code (and any documentation within
+test code) <em>is</em> part of this calculation.</p>
+<p>Any crate getting in the top 20% of all crates would get a badge saying &quot;well
+documented&quot;.</p>
+<p>This measure is gameable if a crate adds many lines that match the
+documentation regex but don't provide meaningful content, such as <code>/// lol</code>.
+While this may be easy to implement, a person looking at the documentation for
+a crate using this technique would immediately be able to see that the author
+is trying to game the system and reject it. If this becomes a common problem,
+we can re-evaluate this situation, but we believe the community of crate
+authors genuinely want to provide great documentation to crate users. We want
+to encourage and reward well-documented crates, and this outweighs the risk of
+potential gaming of the system.</p>
+<ul>
+<li>
+<p>combine:</p>
+<ul>
+<li>1,195 lines of documentation</li>
+<li>99 lines in README.md</li>
+<li>5,815 lines of Rust</li>
+<li>(1195 + 99) / (5815 - 1195) = 1294/4620 = .28</li>
+</ul>
+</li>
+<li>
+<p>nom:</p>
+<ul>
+<li>2,263 lines of documentation</li>
+<li>372 lines in README.md</li>
+<li>15,661 lines of Rust</li>
+<li>(2263 + 372) / (15661 - 2263) = 2635/13398 = .20</li>
+</ul>
+</li>
+<li>
+<p>peresil:</p>
+<ul>
+<li>159 lines of documentation</li>
+<li>20 lines in README.md</li>
+<li>1,341 lines of Rust</li>
+<li>(159 + 20) / (1341 - 159) = 179/1182 = .15</li>
+</ul>
+</li>
+<li>
+<p>lalrpop: (<a href="https://github.com/nikomatsakis/lalrpop/tree/master/lalrpop">in the /lalrpop directory in the repo</a>)</p>
+<ul>
+<li>742 lines of documentation</li>
+<li>110 lines in ../README.md</li>
+<li>94,104 lines of Rust</li>
+<li>(742 + 110) / (94104 - 742) = 852/93362 = .01</li>
+</ul>
+</li>
+<li>
+<p>peg:</p>
+<ul>
+<li>3 lines of documentation</li>
+<li>no readme specified in Cargo.toml</li>
+<li>1,531 lines of Rust</li>
+<li>(3 + 0) / (1531 - 3) = 3/1528 = .00</li>
+</ul>
+</li>
+</ul>
+<p>If we assume these are all the crates on crates.io for this example, then
+combine is the top 20% and would get a badge.</p>
+<h3><a class="header" href="#maintenance" id="maintenance">Maintenance</a></h3>
+<p>We will add a way for maintainers to communicate their intended level of
+maintenance and support. We will add indicators of issues resolved from the
+various code hosting services.</p>
+<h4><a class="header" href="#self-reported-maintenance-intention" id="self-reported-maintenance-intention">Self-reported maintenance intention</a></h4>
+<p>We will add an optional attribute to Cargo.toml that crate authors could use to
+self-report their maintenance intentions. The valid values would be along the
+lines of the following, and would influence the ranking in the order they're
+presented:</p>
+<dl>
+  <dt>Actively developed</dt>
+  <dd>
+    New features are being added and bugs are being fixed.
+  </dd>
+<dt>Passively maintained</dt>
+  <dd>
+    There are no plans for new features, but the maintainer intends to respond
+    to issues that get filed.
+  </dd>
+<dt>As-is</dt>
+  <dd>
+    The crate is feature complete, the maintainer does not intend to continue
+    working on it or providing support, but it works for the purposes it was
+    designed for.
+  </dd>
+<dt><i>none</i></dt>
+  <dd>
+    We display nothing. Since the maintainer has not chosen to specify their
+    intentions, potential crate users will need to investigate on their own.
+  </dd>
+<dt>Experimental</dt>
+  <dd>
+    The author wants to share it with the community but is not intending to meet
+    anyone's particular use case.
+  </dd>
+<dt>Looking for maintainer</dt>
+  <dd>
+    The current maintainer would like to transfer the crate to someone else.
+  </dd>
+</dl>
+<p>These would be displayed as badges on lists of crates.</p>
+<p>These levels would not have any time commitments attached to them-- maintainers
+who would like to batch changes into releases every 6 months could report
+&quot;actively developed&quot; just as much as mantainers who like to release every 6
+weeks. This would need to be clearly communicated to set crate user
+expectations properly.</p>
+<p>This is also inherently a crate author's statement of current intentions, which
+may get out of sync with the reality of the crate's maintenance over time.</p>
+<p>If I had to guess for the maintainers of the parsing crates, I would assume:</p>
+<ul>
+<li>nom: actively developed</li>
+<li>combine: actively developed</li>
+<li>lalrpop: actively developed</li>
+<li>peg: actively developed</li>
+<li>peresil: passively maintained</li>
+</ul>
+<h4><a class="header" href="#github-issue-badges" id="github-issue-badges">GitHub issue badges</a></h4>
+<p><a href="http://isitmaintained.com/">isitmaintained.com</a> provides badges indicating the time to resolution of GitHub issues and percentage of GitHub issues that are open.</p>
+<p>We will enable maintainers to add these badges to their crate.</p>
+<table><thead><tr><th>Crate</th><th>Issue Resolution</th><th>Open Issues</th></tr></thead><tbody>
+<tr><td>combine</td><td><a href="http://isitmaintained.com/project/Marwes/combine" title="Average time to resolve an issue"><img src="http://isitmaintained.com/badge/resolution/Marwes/combine.svg" alt="Average time to resolve an issue" /></a></td><td><a href="http://isitmaintained.com/project/Marwes/combine" title="Percentage of issues still open"><img src="http://isitmaintained.com/badge/open/Marwes/combine.svg" alt="Percentage of issues still open" /></a></td></tr>
+<tr><td>nom</td><td><a href="http://isitmaintained.com/project/Geal/nom" title="Average time to resolve an issue"><img src="http://isitmaintained.com/badge/resolution/Geal/nom.svg" alt="Average time to resolve an issue" /></a></td><td><a href="http://isitmaintained.com/project/Geal/nom" title="Percentage of issues still open"><img src="http://isitmaintained.com/badge/open/Geal/nom.svg" alt="Percentage of issues still open" /></a></td></tr>
+<tr><td>lalrpop</td><td><a href="http://isitmaintained.com/project/nikomatsakis/lalrpop" title="Average time to resolve an issue"><img src="http://isitmaintained.com/badge/resolution/nikomatsakis/lalrpop.svg" alt="Average time to resolve an issue" /></a></td><td><a href="http://isitmaintained.com/project/nikomatsakis/lalrpop" title="Percentage of issues still open"><img src="http://isitmaintained.com/badge/open/nikomatsakis/lalrpop.svg" alt="Percentage of issues still open" /></a></td></tr>
+<tr><td>peg</td><td><a href="http://isitmaintained.com/project/kevinmehall/rust-peg" title="Average time to resolve an issue"><img src="http://isitmaintained.com/badge/resolution/kevinmehall/rust-peg.svg" alt="Average time to resolve an issue" /></a></td><td><a href="http://isitmaintained.com/project/kevinmehall/rust-peg" title="Percentage of issues still open"><img src="http://isitmaintained.com/badge/open/kevinmehall/rust-peg.svg" alt="Percentage of issues still open" /></a></td></tr>
+<tr><td>peresil</td><td><a href="http://isitmaintained.com/project/shepmaster/peresil" title="Average time to resolve an issue"><img src="http://isitmaintained.com/badge/resolution/shepmaster/peresil.svg" alt="Average time to resolve an issue" /></a></td><td><a href="http://isitmaintained.com/project/shepmaster/peresil" title="Percentage of issues still open"><img src="http://isitmaintained.com/badge/open/shepmaster/peresil.svg" alt="Percentage of issues still open" /></a></td></tr>
+</tbody></table>
+<h3><a class="header" href="#quality" id="quality">Quality</a></h3>
+<p>We will enable maintainers to add <a href="https://coveralls.io">Coveralls</a> badges to indicate the
+crate's test coverage. If there are other services offering test coverage
+reporting and badges, we will add support for those as well, but this is the
+only service we know of at this time that offers code coverage reporting that
+works with Rust projects.</p>
+<p>This excludes projects that cannot use Coveralls, which only currently supports
+repositories hosted on GitHub or BitBucket that use CI on Travis, CircleCI,
+Jenkins, Semaphore, or Codeship.</p>
+<p>nom has coveralls.io configured: <a href="https://coveralls.io/r/Geal/nom?branch=master"><img src="https://coveralls.io/repos/Geal/nom/badge.svg?branch=master" alt="Coverage Status" /></a></p>
+<h3><a class="header" href="#credibility" id="credibility">Credibility</a></h3>
+<p>We have <a href="https://github.com/rust-lang/crates.io/issues/494">an idea for a &quot;favorite authors&quot; list</a> that we
+think would help indicate credibility. With this proposed feature, each person
+can define &quot;credibility&quot; for themselves, which makes this measure less gameable
+and less of a popularity contest.</p>
+<h2><a class="header" href="#out-of-scope" id="out-of-scope">Out of scope</a></h2>
+<p>This proposal is not advocating to change the default order of <strong>search
+results</strong>; those should still be ordered by relevancy to the query based on the
+indexed content. We will add the ability to sort search results by recent
+downloads.</p>
+<h1><a class="header" href="#evaluation" id="evaluation">Evaluation</a></h1>
+<p>If ordering by number of recent downloads and providing more indicators is not
+helpful, we expect to get bug reports from the community and feedback on the
+users forum, reddit, IRC, etc.</p>
+<p>In the community survey scheduled to be taken around May 2017, we will ask
+about people's satisfaction with the information that crates.io provides.</p>
+<p>If changes are needed that are significant, we will open a new RFC. If smaller
+tweaks need to be made, the process will be managed through crates.io's issues.
+We will consult with the tools team and core team to determine whether a change
+is significant enough to warrant a new RFC.</p>
+<h1><a class="header" href="#how-do-we-teach-this" id="how-do-we-teach-this">How do we teach this?</a></h1>
+<p>We will change the label on the default ordering button to read &quot;Recent
+Downloads&quot; rather than &quot;Downloads&quot;.</p>
+<p>Badges will have tooltips on hover that provide additional information.</p>
+<p>We will also add a page to doc.crates.io that details all possible indicators
+and their values, and explains to crate authors how to configure or earn the
+different badges.</p>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p>We might create a system that incentivizes attributes that are not useful, or
+worse, actively harmful to the Rust ecosystem. For example, the documentation
+percentage could be gamed by having one line of uninformative documentation for
+all public items, thus giving a score of 100% without the value that would come
+with a fully documented library. We hope the community at large will agree
+these attributes are valuable to approach in good faith, and that trying to
+game the badges will be easily discoverable. We could have a reporting
+mechanism for crates that are attempting to gain badges artificially, and
+implement a way for administrators to remove badges from those crates.</p>
+<h1><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h1>
+<h2><a class="header" href="#manual-curation" id="manual-curation">Manual curation</a></h2>
+<ol>
+<li>We could keep the default ranking as number of downloads, and leave further
+curation to sites like <a href="https://github.com/kud1ing/awesome-rust">Awesome Rust</a>.</li>
+</ol>
+<ol start="2">
+<li>We could build entirely manual ranking into crates.io, as <a href="https://emberobserver.com/about">Ember Observer</a>
+does. This would be a lot of work that would need to be done by someone, but
+would presumably result in higher quality evaluations and be less vulnerable to
+gaming.</li>
+</ol>
+<ol start="3">
+<li>We could add user ratings or reviews in the form of upvote/downvote, 1-5
+stars, and/or free text, and weight more recent ratings higher than older
+ratings. This could have the usual problems that come with online rating
+systems, such as spam, paid reviews, ratings influenced by personal
+disagreements, etc.</li>
+</ol>
+<h2><a class="header" href="#more-sorting-and-filtering-options" id="more-sorting-and-filtering-options">More sorting and filtering options</a></h2>
+<p>There are even more options for interacting with the metadata that crates.io
+has than we are proposing in this RFC at this time. For example:</p>
+<ol>
+<li>
+<p>We could add filtering options for metadata, so that each user could choose,
+for example, &quot;show me only crates that work on stable&quot; or &quot;show me only crates
+that have a version greater than 1.0&quot;.</p>
+</li>
+<li>
+<p>We could add independent axes of sorting criteria in addition to the existing
+alphabetical and number of downloads, such as by number of owners or most
+recent version release date.</p>
+</li>
+</ol>
+<p>We would probably want to implement saved search configurations per user, so
+that people wouldn't have to re-enter their criteria every time they wanted to
+do a similar search.</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<p>All questions have now been resolved.</p>
+<h1><a class="header" href="#appendix-comparative-research" id="appendix-comparative-research">Appendix: Comparative Research</a></h1>
+<p>This is how other package hosting websites handle default sorting within
+categories.</p>
+<h2><a class="header" href="#django-packages" id="django-packages">Django Packages</a></h2>
+<p><a href="https://djangopackages.org/">Django Packages</a> has the concept of <a href="https://djangopackages.org/grids/">grids</a>, which are large tables
+of packages in a particular category. Each package is a column, and each row is
+some attribute of packages. The default ordering from left to right appears to
+be GitHub stars.</p>
+<img src="http://i.imgur.com/YAp9WYf.png" alt="Example of a Django Packages grid" width="800" />
+<h2><a class="header" href="#libhunt" id="libhunt">Libhunt</a></h2>
+<p><a href="https://rust.libhunt.com/">Libhunt</a> pulls libraries and categories from <a href="https://github.com/kud1ing/awesome-rust">Awesome Rust</a>, then
+adds some metadata and navigation.</p>
+<p>The default ranking is relative popularity, measured by GitHub stars and scaled
+to be a number out of 10 as compared to the most popular crate. The other
+ordering offered is dev activity, which again is a score out of 10, relative to
+all other crates, and calculated by giving a higher weight to more recent
+commits.</p>
+<img src="http://i.imgur.com/Yv6diFU.png" alt="Example of a Libhunt category" width="800" />
+<p>You can also choose to compare two libraries on a number of attributes:</p>
+<img src="http://i.imgur.com/HBtCH2E.png" alt="Example of comparing two crates on Libhunt" width="800" />
+<h2><a class="header" href="#maven-repository" id="maven-repository">Maven Repository</a></h2>
+<p><a href="http://mvnrepository.com">Maven Repository</a> appears to order by the number of reverse dependencies
+(&quot;# usages&quot;):</p>
+<img src="http://i.imgur.com/nZEQdAr.png" alt="Example of a maven repository category" width="800" />
+<h2><a class="header" href="#pypi" id="pypi">Pypi</a></h2>
+<p><a href="https://pypi.python.org/pypi?%3Aaction=browse">Pypi</a> lets you choose multiple categories, which are not only based on
+topic but also other attributes like library stability and operating system:</p>
+<img src="http://i.imgur.com/Y3llc5m.png" alt="Example of filtering by Pypi categories" width="800" />
+<p>Once you've selected categories and click the &quot;show all&quot; packages in these
+categories link, the packages are in alphabetical order... but the alphabet
+starts over multiple times... it's unclear from the interface why this is the
+case.</p>
+<img src="http://i.imgur.com/xEKGTsQ.jpg" alt="Example of Pypi ordering" width="800" />
+<h2><a class="header" href="#github-showcases" id="github-showcases">GitHub Showcases</a></h2>
+<p>To get incredibly meta, GitHub has the concept of <a href="https://github.com/showcases">showcases</a> for a variety
+of topics, and they have <a href="https://github.com/showcases/package-managers">a showcase of package managers</a>. The
+default ranking is by GitHub stars (cargo is 17/27 currently).</p>
+<img src="http://i.imgur.com/SCvKQi2.png" alt="Example of a GitHub showcase" width="800" />
+<h2><a class="header" href="#ruby-toolbox" id="ruby-toolbox">Ruby toolbox</a></h2>
+<p><a href="https://www.ruby-toolbox.com">Ruby toolbox</a> sorts by a relative popularity score, which is calculated
+from a combination of GitHub stars/watchers and number of downloads:</p>
+<img src="http://i.imgur.com/5Qt03n3.png" alt="How Ruby Toolbox's popularity ranking is calculated" width="800" />
+<p>Category pages have a bar graph showing the top gems in that category, which
+looks like a really useful way to quickly see the differences in relative
+popularity. For example, this shows nokogiri is far and away the most popular
+HTML parser:</p>
+<img src="http://i.imgur.com/tj8emlu.png" alt="Example of Ruby Toolbox ordering" width="800" />
+<p>Also of note is the amount of information shown by default, but with a
+magnifying glass icon that, on hover or tap, reveals more information without a
+page load/reload:</p>
+<img src="http://i.imgur.com/0NPi6ct.png" alt="Expanded Ruby Toolbox info" width="800" />
+<h2><a class="header" href="#npms" id="npms">npms</a></h2>
+<p>While <a href="https://npms.io">npms</a> doesn't have categories, its search appears to do some exact
+matching of the query and then rank the rest of the results <a href="https://api-docs.npms.io/">weighted</a> by
+three different scores:</p>
+<ul>
+<li>score-effect:14: Set the effect that package scores have for the final search
+score, defaults to 15.3</li>
+<li>quality-weight:1: Set the weight that quality has for the each package score,
+defaults to 1.95</li>
+<li>popularity-weight:1: Set the weight that popularity has for the each package
+score, defaults to 3.3</li>
+<li>maintenance-weight:1: Set the weight that the quality has for the each
+package score, defaults to 2.05</li>
+</ul>
+<img src="http://i.imgur.com/aWMeNv5.png" alt="Example npms search results" width="800" />
+<p>There are <a href="https://npms.io/about">many factors</a> that go into the three scores, and more are planned
+to be added in the future. Implementation details are available in the
+<a href="https://github.com/npms-io/npms-analyzer/blob/master/docs/architecture.md">architecture documentation</a>.</p>
+<img src="http://i.imgur.com/0i897ts.png" alt="Explanation of the data analyzed by npms" width="800" />
+<h2><a class="header" href="#package-control-sublime" id="package-control-sublime">Package Control (Sublime)</a></h2>
+<p><a href="https://packagecontrol.io/">Package Control</a> is for Sublime Text packages. It has Labels that are
+roughly equivalent to categories:</p>
+<img src="http://i.imgur.com/81PGbFM.png" alt="Package Control homepage showing Labels like language syntax, snippets" width="800" />
+<p>The only available ordering within a label is alphabetical, but each result has
+the number of downloads plus badges for Sublime Text version compatibility, OS
+compatibility, Top 25/100, and new/trending:</p>
+<img src="http://i.imgur.com/KtWcOXV.png" alt="Sample Package Control list of packages within a label, sorted alphabetically" width="800" />
+<h1><a class="header" href="#appendix-user-research" id="appendix-user-research">Appendix: User Research</a></h1>
+<h2><a class="header" href="#demographics" id="demographics">Demographics</a></h2>
+<p>We ran a survey for 1 week and got 134 responses. The responses we got seem to
+be representative of the current Rust community: skewing heavily towards more
+experienced programmers and just about evenly distributed between Rust
+experience starting before 1.0, since 1.0, in the last year, and in the last 6
+months, with a slight bias towards longer amounts of experience. 0 Graydons
+responded to the survey.</p>
+<img src="http://i.imgur.com/huSYPyd.png" width="800" alt="Distribution of programming experience of survey repsondents, over half have been programming for over 10 years" />
+<img src="http://i.imgur.com/t3kVXy9.png" width="800" alt="Distribution of Rust experience of survey respondents, slightly biased towards those who have been using Rust before 1.0 and since 1.0 over those with less than a year and less than 6 months" />
+<p>Since this matches about what we'd expect of the Rust community, we believe
+this survey is representative. Given the bias towards more experience
+programming, we think the answers are worthy of using to inform recommendations
+crates.io will be making to programmers of all experience levels.</p>
+<h2><a class="header" href="#crate-ranking-agreement" id="crate-ranking-agreement">Crate ranking agreement</a></h2>
+<p>The community ranking of the 5 crates presented in the survey for which order
+people would try them out for parsing comes out to be:</p>
+<p>1.) nom</p>
+<p>2.) combine</p>
+<p>3.) and 4.) peg and lalrpop, in some order</p>
+<p>5.) peresil</p>
+<p>This chart shows how many people ranked the crates in each slot:</p>
+<img src="http://i.imgur.com/x5SOTps.png" width="800" alt="Raw votes for each crate in each slot, showing that nom and combine are pretty clearly 1 and 2, peresil is clearly 5, and peg and lalrpop both got slotted in 4th most often" />
+<p>This chart shows the cumulative number of votes: each slot contains the number
+of votes each crate got for that ranking or above.</p>
+<img src="http://i.imgur.com/QsfwVNj.png" width="800" alt="" />
+<p>Whatever default ranking formula we come up with in this RFC, when applied to
+these 5 crates, it should generate an order for the crates that aligns with the
+community ordering. Also, not everyone will agree with the crates.io ranking,
+so we should display other information and provide alternate filtering and
+sorting mechanisms so that people who prioritize different attributes than the
+majority of the community will be able to find what they are looking for.</p>
+<h2><a class="header" href="#factors-considered-when-ranking-crates" id="factors-considered-when-ranking-crates">Factors considered when ranking crates</a></h2>
+<p>The following table shows the top 25 mentioned factors for the two free answer
+sections. We asked both &quot;Please explain what information you used to evaluate
+the crates and how that information influenced your ranking.&quot; and &quot;Was there
+any information you wish was available, or that would have taken more than 15
+minutes for you to get?&quot;, but some of the same factors were deemed to take too
+long to find out or not be easily available, while others did consider those,
+so we've ranked by the combination of mentions of these factors in both
+questions.</p>
+<p>Far and away, good documentation was the most mentioned factor people used to
+evaluate which crates to try.</p>
+<table><thead><tr><th></th><th>Feature</th><th>Used in evaluation</th><th>Not available/too much time needed</th><th>Total</th><th>Notes</th></tr></thead><tbody>
+<tr><td>1</td><td>Good documentation</td><td>94</td><td>10</td><td>104</td><td></td></tr>
+<tr><td>2</td><td>README</td><td>42</td><td>19</td><td>61</td><td></td></tr>
+<tr><td>3</td><td>Number of downloads</td><td>58</td><td>0</td><td>58</td><td></td></tr>
+<tr><td>4</td><td>Most recent version date</td><td>54</td><td>0</td><td>54</td><td></td></tr>
+<tr><td>5</td><td>Obvious / easy to find usage examples</td><td>37</td><td>14</td><td>51</td><td></td></tr>
+<tr><td>6</td><td>Examples in the repo</td><td>38</td><td>6</td><td>44</td><td></td></tr>
+<tr><td>7</td><td>Reputation of the author</td><td>36</td><td>3</td><td>39</td><td></td></tr>
+<tr><td>8</td><td>Description or README containing Introduction / goals / value prop / use cases</td><td>29</td><td>5</td><td>34</td><td></td></tr>
+<tr><td>9</td><td>Number of reverse dependencies (Dependent Crates)</td><td>23</td><td>7</td><td>30</td><td></td></tr>
+<tr><td>10</td><td>Version &gt;= 1.0.0</td><td>30</td><td>0</td><td>30</td><td></td></tr>
+<tr><td>11</td><td>Commit activity</td><td>23</td><td>6</td><td>29</td><td>Depends on VCS</td></tr>
+<tr><td>12</td><td>Fits use case</td><td>26</td><td>3</td><td>29</td><td>Situational</td></tr>
+<tr><td>13</td><td>Number of dependencies (more = worse)</td><td>28</td><td>0</td><td>28</td><td></td></tr>
+<tr><td>14</td><td>Number of open issues, activity on issues&quot;</td><td>22</td><td>6</td><td>28</td><td>Depends on GitHub</td></tr>
+<tr><td>15</td><td>Easy to use or understand</td><td>27</td><td>0</td><td>27</td><td>Situational</td></tr>
+<tr><td>16</td><td>Publicity (blog posts, reddit, urlo, &quot;have I heard of it&quot;)</td><td>25</td><td>0</td><td>25</td><td></td></tr>
+<tr><td>17</td><td>Most recent commit date</td><td>17</td><td>5</td><td>22</td><td>Dependent on VCS</td></tr>
+<tr><td>18</td><td>Implementation details</td><td>22</td><td>0</td><td>22</td><td>Situational</td></tr>
+<tr><td>19</td><td>Nice API</td><td>22</td><td>0</td><td>22</td><td>Situational</td></tr>
+<tr><td>20</td><td>Mentioned using/wanting to use docs.rs</td><td>8</td><td>13</td><td>21</td><td></td></tr>
+<tr><td>21</td><td>Tutorials</td><td>18</td><td>3</td><td>21</td><td></td></tr>
+<tr><td>22</td><td>Number or frequency of released versions</td><td>19</td><td>1</td><td>20</td><td></td></tr>
+<tr><td>23</td><td>Number of maintainers/contributors</td><td>12</td><td>6</td><td>18</td><td>Depends on VCS</td></tr>
+<tr><td>24</td><td>CI results</td><td>15</td><td>2</td><td>17</td><td>Depends on CI service</td></tr>
+<tr><td>25</td><td>Whether the crate works on nightly, stable, particular stable versions</td><td>8</td><td>8</td><td>16</td><td></td></tr>
+</tbody></table>
+<h2><a class="header" href="#relevant-quotes-motivating-our-choice-of-factors" id="relevant-quotes-motivating-our-choice-of-factors">Relevant quotes motivating our choice of factors</a></h2>
+<h3><a class="header" href="#easy-to-use" id="easy-to-use">Easy to use</a></h3>
+<blockquote>
+<ol>
+<li>Documentation linked from crates.io  2) Documentation contains decent
+example on front page</li>
+</ol>
+</blockquote>
+<hr />
+<blockquote>
+<ol start="3">
+<li>&quot;Docs Coverage&quot; info - I'm not sure if there's a way to get that right
+now, but this is almost more important that test coverage.</li>
+</ol>
+</blockquote>
+<hr />
+<blockquote>
+<p>rust docs:  Is there an intro and example on the top-level page?  are the
+rustdoc examples detailed enough to cover a range of usecases?  can i avoid
+reading through the files in the examples folder?</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>Documentation:</p>
+<ul>
+<li>Is there a README? Does it give me example usage of the library? Point me
+to more details?</li>
+<li>Are functions themselves documented?</li>
+<li>Does the documentation appear to be up to date?</li>
+</ul>
+</blockquote>
+<hr />
+<blockquote>
+<p>The GitHub repository pages, because there are no examples or detailed
+descriptions on crates.io. From the GitHub readme I first checked the readme
+itself for a code example, to get a feeling for the library. Then I looked
+for links to documentation or tutorials and examples. The crates that did not
+have this I discarded immediately.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>When evaluating any library from crates.io, I first follow the repository
+link -- often the readme is enough to know whether or not I like the actual
+library structure. For me personally a library's usability is much more
+important than performance concerns, so I look for code samples that show me
+how the library is used.    In the examples given, only peresil forces me to
+look at the actual documentation to find an example of use. I want something
+more than &quot;check the docs&quot; in a readme in regards to getting started.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>I would like the entire README.md of each package to be visible on crates.io
+I would like a culture where each README.md contains a runnable example</p>
+</blockquote>
+<hr />
+<p>Ok, this one isn't from the survey, it's from <a href="https://users.rust-lang.org/t/lets-talk-about-ecosystem-documentation/2791/24?u=carols10cents">a Sept 2015 internals thread</a>:</p>
+<blockquote>
+<blockquote>
+<p>there should be indicator in Crates.io that show how much code is
+documented, this would help with choosing well done package.</p>
+</blockquote>
+<p>I really love this idea! Showing a percentage or a little progress bar next
+to each crate with the proportion of public items with at least some docs
+would be a great starting point.</p>
+</blockquote>
+<h3><a class="header" href="#maintenance-1" id="maintenance-1">Maintenance</a></h3>
+<blockquote>
+<p>On nom's crates.io page I checked the version (2.0.0) and when the latest
+version came out (less than a month ago). I know that versioning is
+inconsistent across crates, but I'm reassured when a crate has V &gt;= 1.0
+because it typically indicates that the authors are confident the crate is
+production-ready. I also like to see multiple, relatively-recent releases
+because it signals the authors are serious about maintenance.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>Answering yes scores points:  crates.io page:  Does the crate have a major
+version &gt;= 1?  Has there been a release recently, and maybe even a steady
+stream of minor or patch-level releases?</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>From github:</p>
+<ul>
+<li>Number of commits and of contributors (A small number of commits (&lt; 100)
+and of contributors (&lt; 3) is often the sign of a personal project, probably
+not very much used except by its author. All other things equal, I tend to
+prefer active projects.);</li>
+</ul>
+</blockquote>
+<h3><a class="header" href="#quality-1" id="quality-1">Quality</a></h3>
+<blockquote>
+<p>Tests:</p>
+<ul>
+<li>Is critical functionality well tested?</li>
+<li>Is the entire package well tested?</li>
+<li>Are the tests clear and descriptive?</li>
+<li>Could I reimplement the library based on these tests?</li>
+<li>Does the project have CI?</li>
+<li>Is master green?</li>
+</ul>
+</blockquote>
+<h3><a class="header" href="#popularitycredibility" id="popularitycredibility">Popularity/credibility</a></h3>
+<blockquote>
+<ol start="2">
+<li>I look  at the number of download. If it is too small (~ &lt;1000), I assume
+the crate has not yet reached a good quality. nom catches my attention
+because it has 200K download: I assume it is a high quality crate.</li>
+</ol>
+</blockquote>
+<hr />
+<blockquote>
+<ol>
+<li>Compare the number of downloads: More downloads = more popular = should be
+the best</li>
+</ol>
+</blockquote>
+<hr />
+<blockquote>
+<p>Popularity:  - Although not being a huge factor, it can help tip the scale
+when one is more popular or well supported than another when all other
+factors are close.</p>
+</blockquote>
+<h3><a class="header" href="#overall" id="overall">Overall</a></h3>
+<blockquote>
+<p>I can't pick a most important trait because certain ones outweigh others when
+combined, etc. I.e. number of downloads is OK, but may only suggest that it's
+been around the longest. Same with number of dependent crates (which probably
+spikes number of downloads). I like a crate that is well documented, has a
+large user base (# dependent crates + downloads + stars), is post 1.0, is
+active (i.e. a release within the past 6 months?), and it helps when it's a
+prominent author (but that I feel is an unfair metric).</p>
+</blockquote>
+<h2><a class="header" href="#relevant-bugs-capturing-other-feedback" id="relevant-bugs-capturing-other-feedback">Relevant bugs capturing other feedback</a></h2>
+<p>There was a wealth of good ideas and feedback in the survey answers, but not
+all of it pertained to crate ranking directly. Commonly mentioned improvements
+that could greatly help the usability and usefulness of crates.io included:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/crates.io/issues/81">Rendering the README on crates.io</a></li>
+<li><a href="https://github.com/rust-lang/crates.io/pull/459">Linking to docs.rs if the crate hasn't specified a Documentation link</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/2760"><code>cargo doc</code> should render crate examples and link to them on main documentation page</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/739"><code>cargo doc</code> could support building/testing standalone markdown files</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/15470">Allow documentation to be read from an external file</a></li>
+<li><a href="https://github.com/rust-lang/crates.io/issues/494">Have &quot;favorite authors&quot; and highlight crates by your favorite authors in crate lists</a></li>
+<li><a href="https://github.com/rust-lang/crates.io/issues/496">Show the number of reverse dependencies next to the link</a></li>
+<li><a href="https://github.com/rust-lang/crates.io/issues/495">Reverse dependencies should be ordered by number of downloads by default</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="1789-as-cell.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="1826-change-doc-default-urls.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="1789-as-cell.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="1826-change-doc-default-urls.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

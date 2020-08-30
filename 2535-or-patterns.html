@@ -1,0 +1,1087 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2535-or-patterns - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html" class="active">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: <code>or_patterns</code></li>
+<li>Start Date: 2018-08-29</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2535">rust-lang/rfcs#2535</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/54883">rust-lang/rust#54883</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Allow <code>|</code> to be arbitrarily nested within a pattern such
+that <code>Some(A(0) | B(1 | 2))</code> becomes a valid pattern.</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>Nothing this RFC proposes adds anything with respect to expressive power.
+Instead, the aim is to make the power we already have more easy to wield.
+For example, we wish to improve ergonomics, readability, and the mental model.</p>
+<h2><a class="header" href="#dont-repeat-yourself" id="dont-repeat-yourself">Don't repeat yourself</a></h2>
+<p>Consider an example match arm such as (1):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Some(Enum::A) | Some(Enum::B) | Some(Enum::C) | Some(Enum::D) =&gt; ..
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here, we are repeating <code>Some($pat)</code> three times.</p>
+<p>Compare (1) to how we could have written this with this RFC (2):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..
+<span class="boring">}
+</span></code></pre></pre>
+<p>We can see that this is clearly shorter and that the amount of extra work
+we have to do scales linearly with the number of inner variants we mention.
+The ability to nest patterns in this way therefore results in improved
+writing ergonomics.</p>
+<h2><a class="header" href="#mental-model" id="mental-model">Mental model</a></h2>
+<p>However, as we know, code is read more than it is written. So are we trading
+readability for increased ergonomics? We believe this is not the case.
+Instead, this RFC aims to improve the readability of code by reducing the
+amount of redundant information that needs to be scanned.</p>
+<p>In addition, we aim to more closely align Rust with the mental model that
+<em>humans</em> have and how we usually speak and communicate.</p>
+<p>Consider that you wanted to ask someone what the <em>colour</em> of their <em>car</em> was.
+Would you be more inclined to ask:</p>
+<blockquote>
+<p>Is your car red, white, or blue?</p>
+</blockquote>
+<p>Or would you instead ask:</p>
+<blockquote>
+<p>Is your car red, your car white, or your car blue?</p>
+</blockquote>
+<p>When researching for this RFC; many people were asked and all of them preferred
+the first alternative. This user testing was done on both programmers and
+non-programmers alike and included speakers of: English, German (2) Swedish (3),
+French (2), Portuguese (1), Spanish (2), Farsi (3), Finnish (1), Esperanto (1),
+and Japanese (1).</p>
+<p>Thus, we conjecture that it's more common for humans to not distribute and to
+instead use something akin to <em>conjunctive normal form</em> (<a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">CNF</a>) when communicating.
+A likely consequence of this is that a common way to understand snippet (1)
+formulated in <em>disjunctive normal form</em> (<a href="https://en.wikipedia.org/wiki/Disjunctive_normal_form">DNF</a>) is to first mentally reconstruct
+it into CNF and then understand the implications of the pattern.</p>
+<p>By allowing users to encode their logic in the way they think instead of going
+through more indirect routes, we can improve the understandability of code.</p>
+<h2><a class="header" href="#reducing-complexity-with-uniformity" id="reducing-complexity-with-uniformity">Reducing complexity with uniformity</a></h2>
+<p>A principal way in which programming languages accumulate complexity is by
+adding more and more rules that a programmer needs to keep in their head to
+write or understand what a program does. A consequence of this is that often
+times, caveats and corner cases make for a language that is harder to learn,
+understand, and write in. To avoid such caveats, it is thus imperative that
+we should try to keep the language more uniform rather than less.
+This is an important means through which it becomes possible to give users
+more expressiveness but at the same time limit the cost each feature takes
+from our complexity budget.</p>
+<p>With this RFC, we try to reduce the complexity of the language by extending
+a feature which already exists, and which many users already know about,
+to another place. In a sense, giving the user more capabilities results
+in a negative increase in complexity.</p>
+<p>In concrete terms, where before we only allowed a pattern of the form
+<code>pat | pat</code> at the top level of <code>match</code> and <a href="https://github.com/rust-lang/rfcs/pull/2175">similar constructs</a>,
+which special cased the language, we now allow <code>pat | pat</code> anywhere a pattern
+may occur whereby we simplify the ruleset of the language.
+In fact, there are already users that try this expecting it to work but
+then find out that it does not.</p>
+<p>Furthermore, allowing <code>pat | pat</code> in the pattern grammar also allows macros to
+produce disjunctions such as <code>$p | $q</code>.</p>
+<h2><a class="header" href="#real-world-use-cases" id="real-world-use-cases">Real world use cases</a></h2>
+<p>This RFC wouldn't be complete without concrete use cases which it would
+facilitate. While there are not an overabundance of cases where <code>pat | pat</code>
+would help, there are some where it would. Let's go through a few of them.</p>
+<ol>
+<li>
+<p>One example which was raised in the <a href="https://github.com/rust-lang/rfcs/blob/de235887a80555427314c7eb25c6214523d50cce/text/0000-pipe-in-patterns.md">precursor</a> to this RFC was building a
+state machine which is iterating through <code>chars_indices</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match iter.next() {
+    Some(_, ' ' | '\n' | '\r' | '\u{21A1}') =&gt; {
+        // Change state
+    }
+    Some(index, ch) =&gt; {
+        // Look at char
+    }
+    None =&gt; return Err(Eof),
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+</ol>
+<ol start="2">
+<li>
+<p>Other examples are listed in the equivalent <a href="https://github.com/osa1/ghc-proposals/blob/77ee8e615aa28fbf2d0ef2be876a852c4e63c53b/proposals/0000-or-patterns.rst#real-world-examples">GHC proposal</a>.</p>
+</li>
+<li>
+<p>Another example which was provided in the <a href="https://github.com/rust-lang/rfcs/blob/de235887a80555427314c7eb25c6214523d50cce/text/0000-pipe-in-patterns.md">precursor</a> RFC was:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for event in event_pump.poll_iter() {
+    use sdl2::event::Event;
+    use sdl2::keyboard::Keycode::{Escape, Q};
+    match event {
+        Event::KeyDown { keycode: Some(Escape | Q), ... } =&gt; break 'game,
+        _ =&gt; {},
+    }
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Other cases where this feature was requested include:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/issues/15219">https://github.com/rust-lang/rust/issues/15219</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/14516">https://github.com/rust-lang/rust/issues/14516</a></li>
+</ul>
+</li>
+</ol>
+<ol start="5">
+<li>
+<p>Another use case due to <a href="https://discordapp.com/channels/442252698964721669/448237931136679936/483325957130813440">@alercah</a> is:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn is_green(self) -&gt; bool {
+    match self {
+        | Tile::Suited(Suit::Souzu, 2 | 3 | 4 | 6 | 8)
+        | Tile::Dragon(Dragon::Green) =&gt; true,
+        _ =&gt; false,
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Some further examples found with sourcegraph include:</p>
+<p>From <a href="https://github.com/alexcrichton/cc-rs/blob/74ce606aa227a30a97d7c1990c1e8d322e01c6d8/src/lib.rs#L1307-L1319">cc-rs</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span> match (self.cpp_set_stdlib.as_ref(), cmd.family) {
+     (None, _) =&gt; {}
+     (Some(stdlib), ToolFamily::Gnu | ToolFamily::Clang) =&gt; {
+         cmd.push_cc_arg(format!(&quot;-stdlib=lib{}&quot;, stdlib).into());
+     }
+     _ =&gt; {
+         ...
+     }
+ }
+<span class="boring">}
+</span></code></pre></pre>
+<p>From <a href="https://github.com/capnproto/capnproto-rust/blob/35027494bb6e741aa478597358bac8ac92108a30/capnp/src/private/layout.rs#L1979-L2002">capnproto</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Check whether the size is compatible.
+match expected_element_size {
+    None | Some(Void | InlineComposite) =&gt; (),
+    Some(Bit) =&gt; { ... }
+    Some(Byte | TwoBytes | FourBytes | EightBytes) =&gt; { ... },
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>From <a href="https://github.com/chronotope/chrono/blob/94b43fa2e8bd43e7f42bb5b67afd1c3415b27683/src/format/parsed.rs#L271-L308">chrono</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn resolve_year(y: Option&lt;i32&gt;, q: Option&lt;i32&gt;,
+                r: Option&lt;i32&gt;) -&gt; ParseResult&lt;Option&lt;i32&gt;&gt; {
+    match (y, q, r) {
+        (y, None, None) =&gt; Ok(y),
+        (Some(y), q, r @ (Some(0...99) | None)) =&gt; { ... },
+        ...
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>From maidsafe's <a href="https://github.com/maidsafe/routing/blob/0081a48d59e4fe3fb86b20da1fceb8f757855112/src/states/node.rs#L2138-L2180">routing</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match self.peer_mgr.connection_info_received(...) {
+    ...,
+    Ok(IsProxy | IsClient | IsJoiningNode) =&gt; { ... },
+    Ok(Waiting | IsConnected) | Err(_) =&gt; (),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Also from <a href="https://github.com/maidsafe/routing/blob/0081a48d59e4fe3fb86b20da1fceb8f757855112/src/states/node.rs#L2215-L2245">routing</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>     match self.peer_mgr.connection_info_received(...) {
+         Ok(Ready(our_info, their_info)) =&gt; { ... }
+         Ok(Prepare(_) | IsProxy | IsClient | IsJoiningNode) =&gt; { ... }
+         Ok(Waiting | IsConnected) | Err(_) =&gt; (),
+     }
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>From <a href="https://github.com/redox-os/termion/blob/d2945cd36c452824aeabd5d7c13980d9567eb8a2/src/input.rs#L143-L153">termion</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for c in self.bytes() {
+    match c {
+        Err(e) =&gt; return Err(e),
+        Ok(0 | 3 | 4) =&gt; return Ok(None),
+        Ok(0x7f) =&gt; { buf.pop(); }
+        Ok(b'\n' | b'\r') =&gt; break,
+        Ok(c) =&gt; buf.push(c),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Some other use cases are:</p>
+<p>In code using git2-rs:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match obj.kind() {
+    Some(Commit | Tag | Tree) =&gt; ...
+    Some(Blob) =&gt; ...
+    None =&gt; ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>From <a href="https://salsa.debian.org/rust-team/debcargo/blob/4355097810264644cb08ddaa8f7464d5887275f1/src/debian/dependency.rs#L234-291">debcargo</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match (op, &amp;mmp.clone()) {
+    (&amp;Lt, &amp;(M(0) | MM(0, 0) | MMP(0, 0, 0))) =&gt; debcargo_bail!(
+        &quot;Unrepresentable dependency version predicate: {} {:?}&quot;,
+        dep.name(),
+        p
+    ),
+    (&amp;Tilde, &amp;(M(_) | MM(_, _))) =&gt; {
+        vr.constrain_lt(mmp.inclast());
+        vr.constrain_ge(mmp);
+    }
+    (&amp;Compatible, &amp;(MMP(0, minor, _) | MM(0, minor))) =&gt; {
+        vr.constrain_lt(MM(0, minor + 1));
+        vr.constrain_ge(mmp);
+    }
+    (&amp;Compatible, &amp;(MMP(major, _, _) | MM(major, _) | M(major))) =&gt; {
+        vr.constrain_lt(M(major + 1));
+        vr.constrain_ge(mmp);
+    }
+    ...,
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>From rustc, we have:</p>
+<p>In <code>src/librustc_mir/interpret/eval_context.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Some(Def::Static(..) | Def::Const(..) | Def::AssociatedConst(..)) =&gt; {},
+<span class="boring">}
+</span></code></pre></pre>
+<p>In <code>src/librustc_mir/util/borrowck_errors.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>(&amp;ty::TyArray(_, _), Some(true) | None) =&gt; &quot;array&quot;,
+<span class="boring">}
+</span></code></pre></pre>
+<p>In <code>src/librustc/middle/reachable.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Some(Def::Local(node_id) | Def::Upvar(node_id, ..)) =&gt; { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>In <code>src/librustc/infer/error_reporting/mod.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Some(hir_map::NodeBlock(_) | hir_map::NodeExpr(_)) =&gt; &quot;body&quot;,
+<span class="boring">}
+</span></code></pre></pre>
+<p>In <code>src/libfmt_macros/lib.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Some((_, '&gt;' | '&lt;' | '^')) =&gt; { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>In <code>src/librustc/traits/select.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>ty::TyInfer(ty::IntVar(_) | ty::FloatVar(_)) | .. =&gt; { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>In <code>src/librustc_typeck/check/mod.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>ty::TyInt(ast::IntTy::I8 | ast::IntTy::I16) | ty::TyBool =&gt; { .. }
+
+...
+
+ty::TyUint(ast::UintTy::U8 | ast::UintTy::U16) =&gt; { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>In <code>src/tools/cargo/src/cargo/sources/path.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Some(&quot;Cargo.lock&quot; | &quot;target&quot;) =&gt; continue,
+<span class="boring">}
+</span></code></pre></pre>
+<p>In <code>src/libsyntax_ext/format_foreign.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>('h' | 'l' | 'L' | 'z' | 'j' | 't' | 'q', _) =&gt; {
+    state = Type;
+    length = Some(at.slice_between(next).unwrap());
+    move_to!(next);
+},
+
+...
+
+let width = match self.width {
+    Some(Num::Next) =&gt; {
+        // NOTE: Rust doesn't support this.
+        return None;
+    }
+    w @ Some(Num::Arg(_) | Num::Num(_)) =&gt; w,
+    None =&gt; None,
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>In <code>src/libsyntax/parse/token.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>BinOp(Minus | Star | Or | And) | OrOr =&gt; true,
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+</ol>
+<h1><a class="header" href="#guide-level-explanation" id="guide-level-explanation">Guide-level explanation</a></h1>
+<p>Simply put, <code>$p | $q</code> where <code>$p</code> and <code>$q</code> are some patterns is now itself
+a legal pattern.</p>
+<p>This means that you may for example write:</p>
+<pre><pre class="playground"><code class="language-rust">enum Foo&lt;T&gt; {
+    Bar,
+    Baz,
+    Quux(T),
+}
+
+fn main() {
+    match Some(Foo::Bar) {
+        Some(Foo::Bar | Foo::Baz) =&gt; { .. },
+        _ =&gt; { .. },
+    }
+}
+</code></pre></pre>
+<p>Because <code>$p | $q</code> is itself a pattern, this means that you can nest arbitrarily:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    match Some(Foo::Bar) {
+        Some(Foo::Bar | Foo::Quux(0 | 1 | 3)) =&gt; { .. },
+        _ =&gt; { .. }
+    }
+}
+</code></pre></pre>
+<p>Note that the operator <code>|</code> has a low precedence. This means that if you
+want the same outcome as <code>foo @ 1 | foo @ 2 | foo @ 3</code>, you have to write
+<code>foo @ (1 | 2 | 3)</code> instead of writing <code>foo @ 1 | 2 | 3</code>.
+This is discussed in the <a href="#rationale-and-alternatives">rationale</a>.</p>
+<p>You can also use <code>p | q</code> in:</p>
+<ol>
+<li>
+<p><code>if let</code> expressions:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let Foo::Bar | Foo::Quux(1 | 2) = some_computation() {
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><code>while let</code> expressions:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>while let Ok(1 | 2) | Err(3) = different_computation() {
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><code>let</code> statements:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let Ok(x) | Err(x) = another_computation();
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this case, the pattern must be irrefutable as <code>Ok(x) | Err(x)</code> is.</p>
+</li>
+<li>
+<p><code>fn</code> arguments:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo((Ok(x) | Err(x)): Result&lt;u8, u8&gt;) {
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here too, the pattern must be irrefutable.</p>
+</li>
+<li>
+<p>closure arguments:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let closure = |(Ok(x) | Err(x))| x + 1;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Notice that in this case, we have to wrap the pattern in parenthesis.
+This restriction is currently enforced to avoid backtracking but may possibly
+be lifted in the future based on other developments in the grammar.</p>
+</li>
+<li>
+<p>macros by example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>macro_rules! foo {
+    ($p:pat) =&gt; { ... }
+}
+
+foo!((Ok(x) | Err(x)));
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here we must wrap the pattern in parenthesis since <code>$p:pat | $q:pat</code> is
+already legal in patterns.</p>
+</li>
+</ol>
+<h1><a class="header" href="#reference-level-explanation" id="reference-level-explanation">Reference-level explanation</a></h1>
+<h2><a class="header" href="#grammar" id="grammar">Grammar</a></h2>
+<p>We parameterize the <code>pat</code> grammar by the choice whether to allow top level
+<code>pat | pat</code>. We then change the pattern grammar to:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pat&lt;allow_top_alt&gt;
+: pat&lt;allow_top_alt&gt; '|' pat&lt;allow_top_alt&gt;
+| ...
+;
+
+pat&lt;no_top_alt&gt;
+: &quot;(&quot; pat&lt;allow_top_alt&gt; &quot;)&quot;
+| ...
+;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here <code>|</code> has the lowest precedence.
+In particular, the operator <code>@</code> binds more tightly than <code>|</code> does.
+Thus, <code>i @ p | q</code> associates as <code>(i @ p) | q</code> as opposed to <code>i @ (p | q)</code>.</p>
+<p>Note: <code>pat&lt;T&gt;</code> does not entail that the grammar of Rust is context sensitive
+because we &quot;monomorphize&quot; the parameterization below.</p>
+<p>We then introduce a production:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>top_pat : '|'? pat&lt;allow_top_alt&gt; ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>We then change the grammar of <code>let</code> statements to (as compared to <a href="https://github.com/rust-lang/rfcs/pull/2175">RFC 2175</a>):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let : LET top_pat maybe_ty_ascription maybe_init_expr ';' ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>We change the grammar of <code>if let</code> expressions to:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>expr_if_let : IF LET top_pat '=' expr_nostruct block (ELSE block_or_if)? ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>And for <code>while let</code> expressions:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>expr_while_let : maybe_label WHILE LET top_pat '=' expr_nostruct block ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>For <code>for</code> loop expressions we now have:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>expr_for : maybe_label FOR top_pat IN expr_nostruct block ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>For <code>match</code> expressions we now have:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>expr_match : MATCH expr_nostruct '{' match_clause* nonblock_match_clause? '}' ;
+match_clause : nonblock_match_clause ',' | block_match_clause ','? ;
+nonblock_match_clause : match_arm (nonblock_expr | block_expr_dot) ;
+block_match_clause : match_arm (block | block_expr) ;
+
+match_arm : maybe_outer_attrs top_pat (IF expr_nostruct)? FAT_ARROW ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>In other words, in all of the contexts where a pattern is currently accepted,
+the compiler will now accept pattern alternations of form <code>p | q</code> where
+<code>p</code> and <code>q</code> are arbitrary patterns.</p>
+<p>For the patterns of <code>fn</code> arguments we now have:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>param : pat&lt;no_top_alt&gt; ':' ty_sum ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>For closures we now have:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>inferrable_param : pat&lt;no_top_alt&gt; maybe_ty_ascription ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Finally, <code>pat</code> macro fragment specifiers will also match the <code>pat&lt;no_top_alt&gt;</code>
+production as opposed to <code>pat&lt;allow_top_alt&gt;</code>.</p>
+<h3><a class="header" href="#error-messages" id="error-messages">Error messages</a></h3>
+<p>As previously noted, the precedence of the operator <code>|</code> is lower than that of
+the operator <code>@</code>. This results in <code>i @ p | q</code> being interpreted as <code>(i @ p) | q</code>.
+In turn, this would result in an error because <code>i</code> is not defined in all
+alternations. An example:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    match 1 {
+        i @ 0 | 1 =&gt; {},
+    }
+}
+</code></pre></pre>
+<p>This would result in:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error[E0408]: variable `i` is not bound in all patterns
+ --&gt; src/main.rs:3:17
+  |
+3 |         i @ 0 | 1 =&gt; {},
+  |         -       ^ pattern doesn't bind `i`
+  |         |
+  |         variable not in all patterns
+<span class="boring">}
+</span></code></pre></pre>
+<p>However, it is quite likely that a user who wrote <code>i @ p | q</code> wanted the
+semantics of <code>i @ (p | q)</code> because it would be the only thing that would
+be a well formed pattern. To guide the user on the way, we recommend special
+casing the error message for such circumstances with for example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error[E0408]: variable `i` is not bound in all patterns
+ --&gt; src/main.rs:3:17
+  |
+3 |         i @ 0 | 1 =&gt; {},
+  |         -       ^ pattern doesn't bind `i`
+  |         |
+  |         variable not in all patterns
+  |
+  | hint: if you wanted `i` to cover both cases, try adding parentheses around:
+  |
+  |         i @ 0 | 1
+  |             ^^^^^
+<span class="boring">}
+</span></code></pre></pre>
+<p>The particular design of such an error message is left open to implementations.</p>
+<h2><a class="header" href="#static-semantics" id="static-semantics">Static semantics</a></h2>
+<ol>
+<li>
+<p>Given a pattern <code>p | q</code> at some depth for some arbitrary patterns <code>p</code> and <code>q</code>,
+the pattern is considered ill-formed if:</p>
+<ul>
+<li>the type inferred for <code>p</code> does not unify with the type inferred for <code>q</code>, or</li>
+<li>the same set of bindings are not introduced in <code>p</code> and <code>q</code>, or</li>
+<li>the type of any two bindings with the same name in <code>p</code> and <code>q</code> do not unify
+with respect to types or binding modes.</li>
+</ul>
+<p>Unification of types is in all instances aforementioned exact and
+implicit <a href="https://doc.rust-lang.org/reference/type-coercions.html">type coercions</a> do not apply.</p>
+</li>
+<li>
+<p>When type checking an expression <code>match e_s { a_1 =&gt; e_1, ... a_n =&gt; e_n }</code>,
+for each match arm <code>a_i</code> which contains a pattern of form <code>p_i | q_i</code>,
+the pattern <code>p_i | q_i</code> is considered ill formed if,
+at the depth <code>d</code> where it exists the fragment of <code>e_s</code> at depth <code>d</code>,
+the type of the expression fragment does not unify with <code>p_i | q_i</code>.</p>
+</li>
+<li>
+<p>With respect to exhaustiveness checking, a pattern <code>p | q</code> is
+considered to cover <code>p</code> as well as <code>q</code>. For some constructor <code>c(x, ..)</code>
+the distributive law applies such that <code>c(p | q, ..rest)</code> covers the same
+set of value as <code>c(p, ..rest) | c(q, ..rest)</code> does. This can be applied
+recursively until there are no more nested patterns of form <code>p | q</code> other
+than those that exist at the top level.</p>
+<p>Note that by <em>&quot;constructor&quot;</em> we do not refer to tuple struct patterns,
+but rather we refer to a pattern for any product type.
+This includes enum variants, tuple structs, structs with named fields,
+arrays, tuples, and slices.</p>
+</li>
+</ol>
+<h2><a class="header" href="#dynamic-semantics" id="dynamic-semantics">Dynamic semantics</a></h2>
+<ol>
+<li>The dynamic semantics of pattern matching a scrutinee expression <code>e_s</code>
+against a pattern <code>c(p | q, ..rest)</code> at depth <code>d</code> where <code>c</code> is some constructor,
+<code>p</code> and <code>q</code> are arbitrary patterns, and <code>rest</code> is optionally any remaining
+potential factors in <code>c</code>, is defined as being the same as that of
+<code>c(p, ..rest) | c(q, ..rest)</code>.</li>
+</ol>
+<h2><a class="header" href="#implementation-notes" id="implementation-notes">Implementation notes</a></h2>
+<p>With respect to both static and dynamic semantics,
+it is always valid to first desugar a pattern <code>c(p | q)</code>
+in CNF to its equivalent form in DNF, i.e. <code>c(p) | c(q)</code>.</p>
+<p>However, implementing <code>c(p | q)</code> in terms of a pure desugaring to <code>c(p) | c(q)</code>
+may not be optimal as the desugaring can result in multiplicative blow-up of patterns.
+An example of such blow up can be seen with:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match expr {
+    (0 | 1, 0 | 1, 0 | 1, 0 | 1) =&gt; { ... },
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>If we expanded this naively to DNF we would get:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match expr {
+    | (0, 0, 0, 0)
+    | (0, 0, 0, 1)
+    | (0, 0, 1, 0)
+    | (0, 0, 1, 1)
+    | (0, 1, 0, 0)
+    | (0, 1, 0, 1)
+    | (0, 1, 1, 0)
+    | (0, 1, 1, 1)
+    | (1, 0, 0, 0)
+    | (1, 0, 0, 1)
+    | (1, 0, 1, 0)
+    | (1, 0, 1, 1)
+    | (1, 1, 0, 0)
+    | (1, 1, 0, 1)
+    | (1, 1, 1, 0)
+    | (1, 1, 1, 1)
+    =&gt; { ... },
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Instead, it is more likely that a one-step case analysis will be more efficient.</p>
+<p>Which implementation technique to use is left open to each Rust compiler.</p>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<ol>
+<li>Some parsers will have to be rewritten by a tiny bit;
+We do this with any syntactic change in the language so
+there should not be any problem.</li>
+</ol>
+<h1><a class="header" href="#rationale-and-alternatives" id="rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>As for why the change as proposed in this RFC should be done,
+it is discussed in the <a href="#motivation">motivation</a>.</p>
+<h2><a class="header" href="#syntax" id="syntax">Syntax</a></h2>
+<p>Since we already use <code>|</code> for alternation at the top level, the only consistent
+operator syntax for alternations in nested patterns would be <code>|</code>.
+Therefore, there are not many design choices to make with respect to <em>how</em>
+this change should be done rather than <em>if</em>.</p>
+<h2><a class="header" href="#precedence" id="precedence">Precedence</a></h2>
+<p>With respect to the precedence of <code>|</code>, we cannot interpret <code>i @ p | q</code>
+as <code>i @ (p | q)</code> because it is already legal to write <code>i @ p | j @ q</code>
+at the top level of a pattern. Therefore, if we say that <code>|</code> binds more tightly,
+then <code>i @ p | j @ q</code> will associate as <code>i @ (p | j @ q)</code> which as a different
+meaning than what we currently have, thus causing a breaking change.</p>
+<p>And even if we could associate <code>i @ p | q</code> as <code>i @ (p | q)</code> there is a good
+reason why we should not. Simply put, we should understand <code>@</code> as a
+pattern / set intersection operator and the operator <code>|</code> as the union operator.
+This is analogous to multiplication and addition as well as conjunction and
+disjunction in logic. In these fields, it is customary for multiplication and
+conjunction to bind more tightly. That is, we interpret <code>a * b + c</code> as
+<code>(a * b) + c</code> and not <code>a * (b + c)</code>. Similarly, we interpret <code>p ∧ q ∨ r</code>
+as <code>(p ∧ q) ∨ r</code> and not <code>p ∧ (q ∨ r)</code>.</p>
+<h2><a class="header" href="#leading-" id="leading-">Leading <code>|</code></a></h2>
+<p>The only real choice that we do have to make is whether the new addition to the
+pattern grammar should be <code>pat : .. | pat &quot;|&quot; pat ;</code> or if it instead should be
+<code>pat : .. | &quot;|&quot;? pat &quot;|&quot; pat ;</code>. We have chosen the former for 4 reasons:</p>
+<ol>
+<li>
+<p>If we chose the former we can later change to the latter but not vice versa.
+This is thus the conservative choice.</p>
+</li>
+<li>
+<p>There is precedent for such a decision due to <a href="#ocaml">OCaml</a>.</p>
+</li>
+<li>
+<p>The benefit to macros is dubious as they don't have to produce leading
+alternations.</p>
+</li>
+<li>
+<p>Leading alternations inside patterns is considered poor style.</p>
+</li>
+</ol>
+<p>However, there is one notable advantage to permitting leading <code>|</code> in nested
+pattern:</p>
+<ol>
+<li>Libraries or tools such as <code>syn</code> will have <em>slightly</em> easier time parsing
+the grammar of Rust.</li>
+</ol>
+<h2><a class="header" href="#fn-arguments" id="fn-arguments"><code>fn</code> arguments</a></h2>
+<p>In this RFC, we allow <code>p | q</code> inside patterns of <code>fn</code> arguments.
+The rationale for this is simply consistency with <code>let</code> which also permit
+these and did so before this RFC at the top level with <a href="https://github.com/rust-lang/rfcs/pull/2175">RFC 2175</a>.</p>
+<h2><a class="header" href="#macros-and-closures" id="macros-and-closures">Macros and closures</a></h2>
+<p>See the section on <a href="#unresolved-questions">unresolved</a> questions for a brief discussion.</p>
+<h1><a class="header" href="#prior-art" id="prior-art">Prior art</a></h1>
+<h2><a class="header" href="#css4-selectors" id="css4-selectors">CSS4 selectors</a></h2>
+<p>In <a href="https://drafts.csswg.org/selectors/#matches">CSS4</a> (draft proposal), it is possible to write a selector
+<code>div &gt; *:matches(ul, ol)</code> which is equivalent to <code>div &gt; ul, div &gt; ol</code>.
+The moral equivalent of this in Rust would be: <code>Div(Ul | Ol)</code>.</p>
+<h2><a class="header" href="#regular-expressions" id="regular-expressions">Regular expressions</a></h2>
+<p>Most <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression</a> formalisms support at least the
+following operations (where <code>a</code>, <code>b</code>, and <code>c</code> are arbitrary regexes):</p>
+<ul>
+<li>
+<p>Concatenation: <em>&quot;<code>a</code> followed by <code>b</code>&quot;</em>.
+Commonly written by just saying <code>ab</code>.</p>
+</li>
+<li>
+<p>Alternation: <em>&quot;first match <code>a</code> or otherwise match <code>b</code>&quot;</em>
+Commonly written as <code>a | b</code>.
+<code>|</code> binds more loosely than concatenation.</p>
+</li>
+<li>
+<p>Grouping: used to define the scope of what operators apply to.
+Commonly written as <code>(a)</code>.</p>
+</li>
+</ul>
+<p>Formally, the the minimal formalism we need is:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pat : terminal | pat pat | pat &quot;|&quot; pat | &quot;(&quot; pat &quot;)&quot; ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Given this formalism, it is then possible to encode a regex:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>a(b | c)
+<span class="boring">}
+</span></code></pre></pre>
+<p>By the law of distributivity, we can rewrite this as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>ab | ac
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#ocaml" id="ocaml">OCaml</a></h2>
+<p><a href="https://caml.inria.fr/pub/docs/manual-ocaml/patterns.html#sec108">This is supported</a> in OCaml.
+An example from &quot;Real World OCaml&quot; is:</p>
+<pre><code class="language-ocaml">let is_ocaml_source s =
+  match String.rsplit2 s ~on:'.' with
+  | Some (_, (&quot;ml&quot; | &quot;mli&quot;)) -&gt; true
+  | _ -&gt; false
+</code></pre>
+<p>While OCaml will permit the following:</p>
+<pre><code class="language-ocaml">let foo =
+  match Some(1) with
+  | Some(1 | 2) -&gt; true
+  | _ -&gt; false
+</code></pre>
+<p>the OCaml compiler will reject:</p>
+<pre><code class="language-ocaml">let foo =
+  match Some(1) with
+  | Some(| 1 | 2) -&gt; true (* Note in particular the leading | in Some(..). *)
+  | _ -&gt; false
+</code></pre>
+<p>We have chosen to impose the same restriction as OCaml here with respect to
+not allowing leading <code>|</code> in nested pattern alternations.</p>
+<h2><a class="header" href="#f" id="f">F#</a></h2>
+<p>A language which is quite similar to OCaml is F#.
+With respect to <a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/pattern-matching">pattern matching</a>, we may write:</p>
+<pre><code class="language-fsharp">let detectZeroOR point =
+    match point with
+    | (0, 0) | (0, _) | (_, 0) -&gt; printfn &quot;Zero found.&quot;
+    | _ -&gt; printfn &quot;Both nonzero.&quot;
+</code></pre>
+<p>F# calls these &quot;OR pattern&quot;s and includes
+<code>pattern1 | pattern2</code> in the pattern grammar.</p>
+<h2><a class="header" href="#haskell" id="haskell">Haskell</a></h2>
+<p>The <a href="https://github.com/ghc-proposals/ghc-proposals/pull/43">equivalent proposal</a> is currently being discussed for
+inclusion in Haskell.</p>
+<h2><a class="header" href="#lisp" id="lisp">Lisp</a></h2>
+<p>There is support for or-patterns in <a href="https://stackoverflow.com/a/3798659/1063961">various lisp libraries</a>.</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<ol>
+<li>
+<p>Should we allow <code>top_pat</code> or <code>pat&lt;allow_top_alt&gt;</code> in <code>inferrable_param</code> such
+that closures permit <code>|Ok(x) | Err(x)|</code> without first wrapping in parenthesis?</p>
+<p>We defer this decision to stabilization as it may depend on experimentation.
+Our current inclination is to keep the RFC as-is because the ambiguity is not
+just for the compiler; for humans, it is likely also ambiguous and thus
+harder to read.</p>
+<p>This also applies to functions which, although do not look as ambiguous,
+benefit from better consistency with closures. With respect to function
+arguments there's also the issue that not disambiguating with parenthesis
+makes it less clear whether the type ascription applies to the or-pattern
+as a whole or just the last alternative.</p>
+</li>
+<li>
+<p>Should the <code>pat</code> macro fragment specifier match <code>top_pat</code> in different
+Rust editions or should it match <code>pat&lt;no_top_alt&gt;</code> as currently specified?
+We defer such decisions to stabilization because it depends on the outcome
+of crater runs to see what the extent of the breakage would be.</p>
+</li>
+</ol>
+<p>The benefit of avoiding <code>pat&lt;no_top_alt&gt;</code> in as many places as possible would
+both be grammatical consistency and fewer surprises for uses.
+The drawbacks would be possible ambiguity or backtracking for closures and
+breakage for macros.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2532-associated-type-defaults.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2539-cfg_attr-multiple-attrs.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2532-associated-type-defaults.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2539-cfg_attr-multiple-attrs.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

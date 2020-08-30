@@ -1,0 +1,894 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2476-clippy-uno - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html" class="active">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: <code>clippy_uno</code></li>
+<li>Start Date: 2018-06-14</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2539">rust-lang/rfcs#2539</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang-nursery/rust-clippy/issues/3343">rust-lang-nursery/rust-clippy#54881</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Release Clippy 1.0, in preparation for it being shipped via rustup and eventually available via Rust Stable.</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>See also: <a href="https://manishearth.github.io/blog/2018/06/05/the-future-of-clippy-the-rust-linter/">The Future of Clippy</a></p>
+<p>Clippy, the linter for Rust, has been a nightly-only plugin to Rust for many years.
+In that time, it's grown big, but it's nightly-only nature makes it pretty hard to use.</p>
+<p>The eventual plan is to integrate it in Rustup à la Rustfmt/RLS so that you can simply fetch prebuilt binaries
+for your system and <code>cargo clippy</code> Just Works ™️. In preparation for this, we'd like to nail down various things
+about its lints and their categorization.</p>
+<h1><a class="header" href="#guide-level-explanation" id="guide-level-explanation">Guide-level explanation</a></h1>
+<h2><a class="header" href="#usage-and-lint-philosophy" id="usage-and-lint-philosophy">Usage and lint philosophy</a></h2>
+<p>We expect Clippy to be used via <code>cargo clippy</code>.</p>
+<p>Clippy aims to follow the general Rust style. It may be somewhat opiniated in some situations.</p>
+<p>In general Clippy is intended to be used with a liberal sprinkling of <code>#[allow()]</code> and <code>#[warn()]</code>; <em>it is okay</em> to
+disagree with Clippy's choices. This is a weaker philosophy than that behind rustc's lints, where usually flipping
+one is an indication of a very specialized situation.</p>
+<h2><a class="header" href="#lint-attributes" id="lint-attributes">Lint attributes</a></h2>
+<p>Currently to allow/deny Clippy lints you have to <code>#[cfg_attr(clippy, allow(lintname))]</code> which is somewhat tedious.</p>
+<p>The compiler should support something like <code>#[allow(clippy::lintname)]</code> which won't attempt to warn about nonexistant lints
+at all when not running Clippy.</p>
+<h2><a class="header" href="#stability-guarantees" id="stability-guarantees">Stability guarantees</a></h2>
+<p>Clippy will have the same idea of lint stability as rustc; essentially we do not guarantee stability under <code>#[deny(lintname)]</code>.
+This is not a problem since deny only affects the current crate (dependencies have their lints capped)
+so at most you’ll be forced to slap on an <code>#[allow()]</code> for your <em>own</em> crate following a Rust upgrade.</p>
+<p>This means that we will never remove lints. We may recategorize lints, and we may &quot;deprecate&quot; them. Deprecation &quot;removes&quot; them by
+removing their functionality and marking them as deprecated, which may cause further warnings but cannot cause a compiler
+error.</p>
+<p>It also means that we won't make fundamentally large changes to lints. You can expect that turning on a lint will keep it behaving
+mostly similarly over time, unless it is removed. The kinds of changes we will make are:</p>
+<ul>
+<li>Adding entirely new lints</li>
+<li>Fixing false positives (A lint may no longer lint in a buggy case)</li>
+<li>Fixing false negatives (A case where the lint <em>should</em> be linting but doesn’t is fixed)</li>
+<li>Bugfixes (When the lint panics or does something otherwise totally broken)</li>
+</ul>
+<p>When fixing false negatives this will usually be fixing things that can be
+understood as comfortably within the scope of the lint as documented/named.
+For example, a lint on having the type <code>Box&lt;Vec&lt;_&gt;&gt;</code> may be changed to also catch <code>Box&lt;Vec&lt;T&gt;&gt;</code>
+where <code>T</code> is generic, but will not be changed to also catch <code>Box&lt;String&gt;</code> (which can be linted
+on for the same reasons).</p>
+<p>An exception to this is the &quot;nursery&quot; lints — Clippy has a lint category for unpolished lints called the &quot;nursery&quot; which
+are allow-by-default. These may experience radical changes, however they will never be entirely &quot;removed&quot; either.</p>
+<p>Pre-1.0 we may also flush out all of the deprecated lints.</p>
+<p>The configuration file for clippy, clippy.toml, is not stabilized in this RFC. Instead, we propose to require clippy.toml users set a <code>clippy_toml_is_unstable_and_may_go_away</code> option.</p>
+<p>The interface and existence of <code>cargo-clippy</code> is also not stabilized in this RFC. We will continue shipping it with rustup, but it may be replaced in the future with a combined <code>cargo lint</code> command.</p>
+<h2><a class="header" href="#lint-audit-and-categories" id="lint-audit-and-categories">Lint audit and categories</a></h2>
+<p>A couple months ago we did a lint audit to recategorize all the Clippy lints. The <a href="#lint-categorization">Reference-Level explanation below</a> contains a list
+of all of these lints as currently categorized.</p>
+<p>The categories we came up with are:</p>
+<ul>
+<li>Correctness (Deny): Probable bugs, e.g. calling <code>.clone()</code> on <code>&amp;&amp;T</code>,
+which clones the (<code>Copy</code>) reference and not the actual type</li>
+<li>Style (Warn): Style issues; where the fix usually doesn't semantically change the code but instead changes naming/formatting.
+For example, having a method named <code>into_foo()</code> that doesn't take <code>self</code> by-move</li>
+<li>Complexity (Warn): For detecting unnecessary code complexities and helping
+simplify them. For example, a lint that asks you to replace <code>.filter(..).next()</code> with <code>.find(..)</code></li>
+<li>Perf (Warn): Detecting potential performance footguns, like using <code>Box&lt;Vec&lt;T&gt;&gt;</code> or calling <code>.or(foo())</code> instead of <code>or_else(foo)</code>.</li>
+<li>Pedantic (Allow): Controversial or exceedingly pedantic lints</li>
+<li>Nursery (Allow): For lints which are buggy or need more work</li>
+<li>Cargo (Allow): Lints about your Cargo setup</li>
+<li>Restriction (Allow): Lints for things which are not usually a problem, but may be something specific situations may dictate disallowing.</li>
+<li>Internal (Allow): Nothing to see here, move along</li>
+<li>Deprecated (Allow): Empty lints that exist to ensure that <code>#[allow(lintname)]</code> still compiles after the lint was deprecated.</li>
+</ul>
+<p>Lints can only belong to one lint group at a time, and the lint group defines the lint level. There is a bunch of overlap between
+the style and complexity groups -- a lot of style issues are also complexity issues and vice versa. We separate these groups
+so that people can opt in to the complexity lints without having to opt in to Clippy's style.</p>
+<h2><a class="header" href="#compiler-uplift" id="compiler-uplift">Compiler uplift</a></h2>
+<p>The compiler has historically had a &quot;no new lints&quot; policy, partly with the desire that lints would
+incubate outside of the compiler (so usually in Clippy). This feels like a good time to look into uplifting these lints.</p>
+<p>This RFC does not <em>yet</em> propose lints to be uplifted, but the intention is that the RFC
+discussion will bring up lints that the community feels <em>should</em> be uplifted and we can list them here.</p>
+<p>Such an uplift may change the lint level; correctness lints are Deny
+by default in Clippy but would probably switch to Warn if uplifted since the compiler is more
+conservative here (Using Clippy is in itself an opt-in to a &quot;please annoy me more&quot; mode).</p>
+<p>We'd also like to establish a rough policy for future lints here:  Some correctness lints should probably belong in the compiler,
+whereas style/complexity/etc lints should probably belong in Clippy. Lints may be incubated in Clippy, of course.</p>
+<p>I don't think the compler will want <em>all</em> correctness lints here, however if the lint is about a common enough situation
+where it being <em>not</em> a bug is an exceedingly rare case (i.e. very low false positive frequency) it should probably belong in the
+compiler.</p>
+<h2><a class="header" href="#what-lints-belong-in-clippy" id="what-lints-belong-in-clippy">What lints belong in clippy?</a></h2>
+<p>Essentially, we consider the categorization itself to be a definition of boundaries -- if it doesn't fit in the categories,
+it doesn't fit in clippy (or needs an RFC for, specifically).</p>
+<p>In itself this isn't complete, we explicitly have a &quot;pedantic&quot; group that's kinda ill defined.</p>
+<p>The rules for the main categories (style/complexity/correctness/perf -- things which are warn or deny by default) are:</p>
+<ul>
+<li>Main category lints need to be something the community has general agreement on. This does <em>not</em> mean each lint
+addition must go through an RFC-like process. Instead, this is to be judged by the maintainers during the review of the lint pull request
+(taking into account objections raised if any). If the lint turns out to be controversial in the future we can flip it off or recategorize it.</li>
+<li>Generally, <em>if</em> a lint is triggered, this should be <em>useful</em> to <em>most</em> Rust programmers seeing it <em>most</em> of the time.</li>
+<li>It is okay for a lint to deal with niche code that usually won't even be triggered. Lints can target subsets of the community provided they don't randomly trigger for others.</li>
+<li>It is okay if the lint has some false positives (cases where it lints for things which are actually okay), as long as they don't dominate.</li>
+<li>It is also okay if the lint warns about things which people do not feel are worth fixing -- i.e. the programmer agrees that it is a problem
+but does not wish to fix this. Using clippy is itself an opt-in to more finicky linting. However, this is sometimes an indicator of such a lint potentially belonging in the pedantic group.</li>
+<li>Clippy is meant to be used with a liberal sprinkling of <code>allow</code>. If there's a specific use case where a lint doesn't apply, and the solution
+is to slap <code>allow</code> on it, that's okay. A minor level of false positives like this is to be tolerated. Similarly, style lints are allowed to be
+about things a lot of people don't care about (i.e. they don't prefer the <em>opposite</em> style, they just don't care). </li>
+<li>Clippy lints <em>do</em> deal with the visual presentation of your code, but only for things which <code>rustfmt</code> doesn't or can't handle. So, for example,
+rustfmt will not ask you to replace <code>if {} else { if {} }</code> with <code>if {} else if {}</code>, but clippy might. There is some overlap in this area and we expect
+to work with rustfmt on precisely figuring out what goes where. Such lints are usually <code>style</code> lints or <code>complexity</code> lints.</li>
+<li>Clippy lints are allowed to make some kind of semantic changes, but not all:
+<ul>
+<li>The general rule is that clippy will not attempt to change what it perceives to be the intent of the code, but will rather change
+the code to make it closer to the intent or make it achieve that intent better</li>
+<li>Clippy lints <em>do</em> deal with potential typos and mistakes. For example, clippy will detect <code>for x in y.next()</code> which is
+very likely a bug (you either mean <code>if let</code> or mean to unwrap). Such lints are usually <code>correctness</code> lints.</li>
+<li>Clippy lints also <em>do</em> deal with misunderstandings of Rust, for example code doing <code>foo == NaN</code> is a misunderstanding
+of how Rust floats work. These are also usually <code>correctness</code> lints.</li>
+<li>Clippy lints <em>do not</em> comment on the business logic of your program. This comes from the &quot;perceived intent&quot; rule
+above, changes to business logic are a change to perceived intent.</li>
+<li>Clippy lints <em>do</em> ask you to make semantic changes that achieve the same <em>effect</em> with
+perhaps better performance.  Such lints are usually <code>perf</code> lints.</li>
+</ul>
+</li>
+</ul>
+<p>For the other categories (these are allow by default):</p>
+<ul>
+<li>Lints which are &quot;pedantic&quot; should still roughly fall into one of the main categories, just that they are too annoying
+(or possibly controversial) to be warn by default. So a lint must follow all the above rules if pedantic, but is allowed to be
+&quot;too finicky to fix&quot;, and may have looser consensus (i.e. some controversy).</li>
+<li>Similar rules for &quot;nursery&quot; except their reason for being allow by default is lack of maturity (i.e. the lint is buggy or still needs some thought)</li>
+<li>&quot;restriction&quot; lints follow all the rules for semantic changes, but do not bother with the rules
+for the lint being useful to most rust programmers. A restriction lint must still be such that you have a
+good reason to enable it — &quot;I dislike such code&quot; is insufficient — but will likely be a lint most programmers
+wish to keep off by default for most of their code. The goal of restriction lints is to provide tools with which you can supplement
+the language checks in very specific cases where you need it, e.g. forbidding panics from a certain area of code.</li>
+<li>&quot;cargo&quot; lints follow the same rules as pedantic lints (we only have one of them right now, so we may be experimenting with this in the future)</li>
+</ul>
+<h1><a class="header" href="#reference-level-explanation" id="reference-level-explanation">Reference-level explanation</a></h1>
+<h2><a class="header" href="#lint-categorization" id="lint-categorization">Lint categorization</a></h2>
+<p>This categorization can be browsed <a href="http://rust-lang-nursery.github.io/rust-clippy/current/">online</a>.</p>
+<p>Please leave comments on thoughts about these lints -- if their categorization is correct, if they should exist at all, and if we should be uplifting them to the compiler.</p>
+<p>For ease of review, the lints below are as they were listed in the original RFC. The proposed changes are:</p>
+<ul>
+<li><code>shadow_unrelated</code> be moved from <code>restriction</code> to <code>pedantic</code></li>
+<li>Various lints be uplifted to the compiler (and potentially renamed). This is tracked in https://github.com/rust-lang/rust/issues/53224</li>
+<li><code>explicit_iter_loop</code> and <code>explicit_into_iter_loop</code> be moved from <code>style</code> to <code>pedantic</code></li>
+</ul>
+<h1><a class="header" href="#correctness-deny" id="correctness-deny">correctness (Deny)</a></h1>
+<ul>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#for_loop_over_option">for_loop_over_option</a>: Checks for <code>for</code> loops over <code>Option</code> values.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#eq_op">eq_op</a>: Checks for equal operands to comparison, logical and
+bitwise, difference and division binary operators (<code>==</code>, <code>&gt;</code>, etc., <code>&amp;&amp;</code>,
+<code>||</code>, <code>&amp;</code>, <code>|</code>, <code>^</code>, <code>-</code> and <code>/</code>).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#iter_next_loop">iter_next_loop</a>: Checks for loops on <code>x.next()</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#deprecated_semver">deprecated_semver</a>: Checks for <code>#[deprecated]</code> annotations with a <code>since</code>
+field that is not a valid semantic version.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#drop_copy">drop_copy</a>: Checks for calls to <code>std::mem::drop</code> with a value
+that derives the Copy trait</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#not_unsafe_ptr_arg_deref">not_unsafe_ptr_arg_deref</a>: Checks for public functions that dereferences raw pointer
+arguments but are not marked unsafe.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#logic_bug">logic_bug</a>: Checks for boolean expressions that contain terminals that
+can be eliminated.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#clone_double_ref">clone_double_ref</a>: Checks for usage of <code>.clone()</code> on an <code>&amp;&amp;T</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#almost_swapped">almost_swapped</a>: Checks for <code>foo = bar; bar = foo</code> sequences.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#possible_missing_comma">possible_missing_comma</a>: Checks for possible missing comma in an array. It lints if
+an array element is a binary operator expression and it lies on two lines.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#wrong_transmute">wrong_transmute</a>: Checks for transmutes that can't ever be correct on any
+architecture.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#invalid_regex">invalid_regex</a>: Checks <a href="https://crates.io/crates/regex">regex</a> creation
+(with <code>Regex::new</code>,<code>RegexBuilder::new</code> or <code>RegexSet::new</code>) for correct
+regex syntax.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#bad_bit_mask">bad_bit_mask</a>: Checks for incompatible bit masks in comparisons.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#drop_ref">drop_ref</a>: Checks for calls to <code>std::mem::drop</code> with a reference
+instead of an owned value.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#derive_hash_xor_eq">derive_hash_xor_eq</a>: Checks for deriving <code>Hash</code> but implementing <code>PartialEq</code>
+explicitly or vice versa.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#useless_attribute">useless_attribute</a>: Checks for <code>extern crate</code> and <code>use</code> items annotated with
+lint attributes</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#temporary_cstring_as_ptr">temporary_cstring_as_ptr</a>: Checks for getting the inner pointer of a temporary
+<code>CString</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#min_max">min_max</a>: Checks for expressions where <code>std::cmp::min</code> and <code>max</code> are
+used to clamp values, but switched so that the result is constant.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unit_cmp">unit_cmp</a>: Checks for comparisons to unit.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#reverse_range_loop">reverse_range_loop</a>: Checks for loops over ranges <code>x..y</code> where both <code>x</code> and <code>y</code>
+are constant and <code>x</code> is greater or equal to <code>y</code>, unless the range is
+reversed or has a negative <code>.step_by(_)</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#erasing_op">erasing_op</a>: Checks for erasing operations, e.g. <code>x * 0</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#suspicious_op_assign_impl">suspicious_op_assign_impl</a>: Lints for suspicious operations in impls of OpAssign, e.g.
+subtracting elements in an AddAssign impl.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#float_cmp">float_cmp</a>: Checks for (in-)equality comparisons on floating-point
+values (apart from zero), except in functions called <code>*eq*</code> (which probably
+implement equality for a type involving floats).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#zero_width_space">zero_width_space</a>: Checks for the Unicode zero-width space in the code.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#fn_to_numeric_cast_with_truncation">fn_to_numeric_cast_with_truncation</a>: Checks for casts of a function pointer to a numeric type not enough to store address.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#suspicious_arithmetic_impl">suspicious_arithmetic_impl</a>: Lints for suspicious operations in impls of arithmetic operators, e.g.
+subtracting elements in an Add impl.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#approx_constant">approx_constant</a>: Checks for floating point literals that approximate
+constants which are defined in
+<a href="https://doc.rust-lang.org/stable/std/f32/consts/#constants"><code>std::f32::consts</code></a> or <a href="https://doc.rust-lang.org/stable/std/f64/consts/#constants"><code>std::f64::consts</code></a>, respectively, suggesting to use the predefined constant.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#while_immutable_condition">while_immutable_condition</a>: Checks whether variables used within while loop condition
+can be (and are) mutated in the body.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#never_loop">never_loop</a>: Checks for loops that will always <code>break</code>, <code>return</code> or
+<code>continue</code> an outer loop.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#nonsensical_open_options">nonsensical_open_options</a>: Checks for duplicate open options as well as combinations
+that make no sense.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#forget_copy">forget_copy</a>: Checks for calls to <code>std::mem::forget</code> with a value that
+derives the Copy trait</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#if_same_then_else">if_same_then_else</a>: Checks for <code>if/else</code> with the same body as the <em>then</em> part
+and the <em>else</em> part.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cast_ptr_alignment">cast_ptr_alignment</a>: Checks for casts from a less-strictly-aligned pointer to a
+more-strictly-aligned pointer</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#ifs_same_cond">ifs_same_cond</a>: Checks for consecutive <code>if</code>s with the same condition.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#out_of_bounds_indexing">out_of_bounds_indexing</a>: Checks for out of bounds array indexing with a constant
+index.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#modulo_one">modulo_one</a>: Checks for getting the remainder of a division by one.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#inline_fn_without_body">inline_fn_without_body</a>: Checks for <code>#[inline]</code> on trait methods without bodies</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cmp_nan">cmp_nan</a>: Checks for comparisons to NaN.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#ineffective_bit_mask">ineffective_bit_mask</a>: Checks for bit masks in comparisons which can be removed
+without changing the outcome.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#infinite_iter">infinite_iter</a>: Checks for iteration that is guaranteed to be infinite.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#mut_from_ref">mut_from_ref</a>: This lint checks for functions that take immutable
+references and return
+mutable ones.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unused_io_amount">unused_io_amount</a>: Checks for unused written/read amount.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#invalid_ref">invalid_ref</a>: Checks for creation of references to zeroed or uninitialized memory.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#serde_api_misuse">serde_api_misuse</a>: Checks for mis-uses of the serde API.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#forget_ref">forget_ref</a>: Checks for calls to <code>std::mem::forget</code> with a reference
+instead of an owned value.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#absurd_extreme_comparisons">absurd_extreme_comparisons</a>: Checks for comparisons where one side of the relation is
+either the minimum or maximum value for its type and warns if it involves a
+case that is always true or always false. Only integer and boolean types are
+checked.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#for_loop_over_result">for_loop_over_result</a>: Checks for <code>for</code> loops over <code>Result</code> values.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#iterator_step_by_zero">iterator_step_by_zero</a>: Checks for calling <code>.step_by(0)</code> on iterators,
+which never terminates.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#enum_clike_unportable_variant">enum_clike_unportable_variant</a>: Checks for C-like enumerations that are
+<code>repr(isize/usize)</code> and have values that don't fit into an <code>i32</code>.</li>
+</ul>
+<h1><a class="header" href="#style-warn" id="style-warn">style (Warn)</a></h1>
+<ul>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#inconsistent_digit_grouping">inconsistent_digit_grouping</a>: Warns if an integral or floating-point constant is
+grouped inconsistently with underscores.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#get_unwrap">get_unwrap</a>: Checks for use of <code>.get().unwrap()</code> (or
+<code>.get_mut().unwrap</code>) on a standard library type which implements <code>Index</code></li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#match_bool">match_bool</a>: Checks for matches where match expression is a <code>bool</code>. It
+suggests to replace the expression with an <code>if...else</code> block.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cmp_null">cmp_null</a>: This lint checks for equality comparisons with <code>ptr::null</code></li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#write_with_newline">write_with_newline</a>: This lint warns when you use <code>write!()</code> with a format
+string that
+ends in a newline.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unneeded_field_pattern">unneeded_field_pattern</a>: Checks for structure field patterns bound to wildcards.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#new_without_default_derive">new_without_default_derive</a>: Checks for types with a <code>fn new() -&gt; Self</code> method
+and no implementation of
+<a href="https://doc.rust-lang.org/std/default/trait.Default.html"><code>Default</code></a>,
+where the <code>Default</code> can be derived by <code>#[derive(Default)]</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#zero_ptr">zero_ptr</a>: Catch casts from <code>0</code> to some pointer type</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#wrong_self_convention">wrong_self_convention</a>: Checks for methods with certain name prefixes and which
+doesn't match how self is taken.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#iter_skip_next">iter_skip_next</a>: Checks for use of <code>.skip(x).next()</code> on iterators.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#large_digit_groups">large_digit_groups</a>: Warns if the digits of an integral or floating-point
+constant are grouped into groups that
+are too large.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#range_minus_one">range_minus_one</a>: Checks for inclusive ranges where 1 is subtracted from
+the upper bound, e.g. <code>x..=(y-1)</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#regex_macro">regex_macro</a>: Checks for usage of <code>regex!(_)</code> which (as of now) is
+usually slower than <code>Regex::new(_)</code> unless called in a loop (which is a bad
+idea anyway).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#op_ref">op_ref</a>: Checks for arguments to <code>==</code> which have their address
+taken to satisfy a bound
+and suggests to dereference the other argument instead</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#question_mark">question_mark</a>: Checks for expressions that could be replaced by the question mark operator</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#redundant_closure">redundant_closure</a>: Checks for closures which just call another function where
+the function can be called directly. <code>unsafe</code> functions or calls where types
+get adjusted are ignored.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#print_with_newline">print_with_newline</a>: This lint warns when you use <code>print!()</code> with a format
+string that
+ends in a newline.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#match_ref_pats">match_ref_pats</a>: Checks for matches where all arms match a reference,
+suggesting to remove the reference and deref the matched expression
+instead. It also checks for <code>if let &amp;foo = bar</code> blocks.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#ptr_arg">ptr_arg</a>: This lint checks for function arguments of type <code>&amp;String</code>
+or <code>&amp;Vec</code> unless the references are mutable. It will also suggest you
+replace <code>.clone()</code> calls with the appropriate <code>.to_owned()</code>/<code>to_string()</code>
+calls.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#chars_last_cmp">chars_last_cmp</a>: Checks for usage of <code>.chars().last()</code> or
+<code>.chars().next_back()</code> on a <code>str</code> to check if it ends with a given char.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#assign_op_pattern">assign_op_pattern</a>: Checks for <code>a = a op b</code> or <code>a = b commutative_op a</code>
+patterns.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#mixed_case_hex_literals">mixed_case_hex_literals</a>: Warns on hexadecimal literals with mixed-case letter
+digits.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#blacklisted_name">blacklisted_name</a>: Checks for usage of blacklisted names for variables, such
+as <code>foo</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#double_neg">double_neg</a>: Detects expressions of the form <code>--x</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unnecessary_fold">unnecessary_fold</a>: Checks for using <code>fold</code> when a more succinct alternative exists.
+Specifically, this checks for <code>fold</code>s which could be replaced by <code>any</code>, <code>all</code>,
+<code>sum</code> or <code>product</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#let_unit_value">let_unit_value</a>: Checks for binding a unit value.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#needless_range_loop">needless_range_loop</a>: Checks for looping over the range of <code>0..len</code> of some
+collection just to get the values by index.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#excessive_precision">excessive_precision</a>: Checks for float literals with a precision greater
+than that supported by the underlying type</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#duplicate_underscore_argument">duplicate_underscore_argument</a>: Checks for function arguments having the similar names
+differing by an underscore.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#println_empty_string">println_empty_string</a>: This lint warns when you use <code>println!(&quot;&quot;)</code> to
+print a newline.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#panic_params">panic_params</a>: Checks for missing parameters in <code>panic!</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#writeln_empty_string">writeln_empty_string</a>: This lint warns when you use <code>writeln!(buf, &quot;&quot;)</code> to
+print a newline.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#infallible_destructuring_match">infallible_destructuring_match</a>: Checks for matches being used to destructure a single-variant enum
+or tuple struct where a <code>let</code> will suffice.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#block_in_if_condition_stmt">block_in_if_condition_stmt</a>: Checks for <code>if</code> conditions that use blocks containing
+statements, or conditions that use closures with blocks.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unreadable_literal">unreadable_literal</a>: Warns if a long integral or floating-point constant does
+not contain underscores.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unsafe_removed_from_name">unsafe_removed_from_name</a>: Checks for imports that remove &quot;unsafe&quot; from an item's
+name.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#builtin_type_shadow">builtin_type_shadow</a>: Warns if a generic shadows a built-in type.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#option_map_or_none">option_map_or_none</a>: Checks for usage of <code>_.map_or(None, _)</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#neg_multiply">neg_multiply</a>: Checks for multiplication by -1 as a form of negation.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#const_static_lifetime">const_static_lifetime</a>: Checks for constants with an explicit <code>'static</code> lifetime.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#explicit_iter_loop">explicit_iter_loop</a>: Checks for loops on <code>x.iter()</code> where <code>&amp;x</code> will do, and
+suggests the latter.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#single_match">single_match</a>: Checks for matches with a single arm where an <code>if let</code>
+will usually suffice.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#for_kv_map">for_kv_map</a>: Checks for iterating a map (<code>HashMap</code> or <code>BTreeMap</code>) and
+ignoring either the keys or values.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#if_let_some_result">if_let_some_result</a>: * Checks for unnecessary <code>ok()</code> in if let.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#collapsible_if">collapsible_if</a>: Checks for nested <code>if</code> statements which can be collapsed
+by <code>&amp;&amp;</code>-combining their conditions and for <code>else { if ... }</code> expressions
+that
+can be collapsed to <code>else if ...</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#len_without_is_empty">len_without_is_empty</a>: Checks for items that implement <code>.len()</code> but not
+<code>.is_empty()</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unnecessary_mut_passed">unnecessary_mut_passed</a>: Detects giving a mutable reference to a function that only
+requires an immutable reference.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#useless_let_if_seq">useless_let_if_seq</a>: Checks for variable declarations immediately followed by a
+conditional affectation.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#new_ret_no_self">new_ret_no_self</a>: Checks for <code>new</code> not returning <code>Self</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#write_literal">write_literal</a>: This lint warns about the use of literals as <code>write!</code>/<code>writeln!</code> args.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#block_in_if_condition_expr">block_in_if_condition_expr</a>: Checks for <code>if</code> conditions that use blocks to contain an
+expression.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#toplevel_ref_arg">toplevel_ref_arg</a>: Checks for function arguments and let bindings denoted as
+<code>ref</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#suspicious_else_formatting">suspicious_else_formatting</a>: Checks for formatting of <code>else if</code>. It lints if the <code>else</code>
+and <code>if</code> are not on the same line or the <code>else</code> seems to be missing.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#fn_to_numeric_cast">fn_to_numeric_cast</a>: Checks for casts of a function pointer to a numeric type except <code>usize</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#let_and_return">let_and_return</a>: Checks for <code>let</code>-bindings, which are subsequently
+returned.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#len_zero">len_zero</a>: Checks for getting the length of something via <code>.len()</code>
+just to compare to zero, and suggests using <code>.is_empty()</code> where applicable.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#suspicious_assignment_formatting">suspicious_assignment_formatting</a>: Checks for use of the non-existent <code>=*</code>, <code>=!</code> and <code>=-</code>
+operators.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#redundant_field_names">redundant_field_names</a>: Checks for fields in struct literals where shorthands
+could be used.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#string_lit_as_bytes">string_lit_as_bytes</a>: Checks for the <code>as_bytes</code> method called on string literals
+that contain only ASCII characters.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#verbose_bit_mask">verbose_bit_mask</a>: Checks for bit masks that can be replaced by a call
+to <code>trailing_zeros</code></li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#map_clone">map_clone</a>: Checks for mapping <code>clone()</code> over an iterator.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#new_without_default">new_without_default</a>: Checks for types with a <code>fn new() -&gt; Self</code> method and no
+implementation of
+<a href="https://doc.rust-lang.org/std/default/trait.Default.html"><code>Default</code></a>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#should_implement_trait">should_implement_trait</a>: Checks for methods that should live in a trait
+implementation of a <code>std</code> trait (see <a href="http://llogiq.github.io/2015/07/30/traits.html">llogiq's blog
+post</a> for further
+information) instead of an inherent implementation.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#match_wild_err_arm">match_wild_err_arm</a>: Checks for arm which matches all errors with <code>Err(_)</code>
+and take drastic actions like <code>panic!</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#iter_cloned_collect">iter_cloned_collect</a>: Checks for the use of <code>.cloned().collect()</code> on slice to
+create a <code>Vec</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#module_inception">module_inception</a>: Checks for modules that have the same name as their
+parent module</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#many_single_char_names">many_single_char_names</a>: Checks for too many variables whose name consists of a
+single character.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#enum_variant_names">enum_variant_names</a>: Detects enumeration variants that are prefixed or suffixed
+by the same characters.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#string_extend_chars">string_extend_chars</a>: Checks for the use of <code>.extend(s.chars())</code> where s is a
+<code>&amp;str</code> or <code>String</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#needless_return">needless_return</a>: Checks for return statements at the end of a block.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#print_literal">print_literal</a>: This lint warns about the use of literals as <code>print!</code>/<code>println!</code> args.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#implicit_hasher">implicit_hasher</a>: Checks for public <code>impl</code> or <code>fn</code> missing generalization
+over different hashers and implicitly defaulting to the default hashing
+algorithm (SipHash).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#needless_pass_by_value">needless_pass_by_value</a>: Checks for functions taking arguments by value, but not
+consuming them in its
+body.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#trivial_regex">trivial_regex</a>: Checks for trivial <a href="https://crates.io/crates/regex">regex</a>
+creation (with <code>Regex::new</code>, <code>RegexBuilder::new</code> or <code>RegexSet::new</code>).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#while_let_on_iterator">while_let_on_iterator</a>: Checks for <code>while let</code> expressions on iterators.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#redundant_pattern">redundant_pattern</a>: Checks for patterns in the form <code>name @ _</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#match_overlapping_arm">match_overlapping_arm</a>: Checks for overlapping match arms.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#just_underscores_and_digits">just_underscores_and_digits</a>: Checks if you have variables whose name consists of just
+underscores and digits.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#ok_expect">ok_expect</a>: Checks for usage of <code>ok().expect(..)</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#empty_loop">empty_loop</a>: Checks for empty <code>loop</code> expressions.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#explicit_into_iter_loop">explicit_into_iter_loop</a>: Checks for loops on <code>y.into_iter()</code> where <code>y</code> will do, and
+suggests the latter.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#if_let_redundant_pattern_matching">if_let_redundant_pattern_matching</a>: Lint for redundant pattern matching over <code>Result</code> or
+<code>Option</code></li>
+</ul>
+<h1><a class="header" href="#complexity-warn" id="complexity-warn">complexity (Warn)</a></h1>
+<ul>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#option_option">option_option</a>: Checks for use of <code>Option&lt;Option&lt;_&gt;&gt;</code> in function signatures and type
+definitions</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#precedence">precedence</a>: Checks for operations where precedence may be unclear
+and suggests to add parentheses. Currently it catches the following:
+<ul>
+<li>mixed usage of arithmetic and bit shifting/combining operators without
+parentheses</li>
+<li>a &quot;negative&quot; numeric literal (which is really a unary <code>-</code> followed by a
+numeric literal)
+followed by a method call</li>
+</ul>
+</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#useless_transmute">useless_transmute</a>: Checks for transmutes to the original type of the object
+and transmutes that could be a cast.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#partialeq_ne_impl">partialeq_ne_impl</a>: Checks for manual re-implementations of <code>PartialEq::ne</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#redundant_closure_call">redundant_closure_call</a>: Detects closures called in the same expression where they
+are defined.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#manual_swap">manual_swap</a>: Checks for manual swapping.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#option_map_unit_fn">option_map_unit_fn</a>: Checks for usage of <code>option.map(f)</code> where f is a function
+or closure that returns the unit type.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#overflow_check_conditional">overflow_check_conditional</a>: Detects classic underflow/overflow checks.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#transmute_ptr_to_ref">transmute_ptr_to_ref</a>: Checks for transmutes from a pointer to a reference.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#chars_next_cmp">chars_next_cmp</a>: Checks for usage of <code>.chars().next()</code> on a <code>str</code> to check
+if it starts with a given char.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#transmute_bytes_to_str">transmute_bytes_to_str</a>: Checks for transmutes from a <code>&amp;[u8]</code> to a <code>&amp;str</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#identity_conversion">identity_conversion</a>: Checks for always-identical <code>Into</code>/<code>From</code> conversions.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#double_parens">double_parens</a>: Checks for unnecessary double parentheses.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#zero_divided_by_zero">zero_divided_by_zero</a>: Checks for <code>0.0 / 0.0</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#useless_asref">useless_asref</a>: Checks for usage of <code>.as_ref()</code> or <code>.as_mut()</code> where the
+types before and after the call are the same.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#too_many_arguments">too_many_arguments</a>: Checks for functions with too many parameters.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#range_zip_with_len">range_zip_with_len</a>: Checks for zipping a collection with the range of
+<code>0.._.len()</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#temporary_assignment">temporary_assignment</a>: Checks for construction of a structure or tuple just to
+assign a value in it.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#no_effect">no_effect</a>: Checks for statements which have no effect.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#short_circuit_statement">short_circuit_statement</a>: Checks for the use of short circuit boolean conditions as
+a
+statement.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cast_lossless">cast_lossless</a>: Checks for on casts between numerical types that may
+be replaced by safe conversion functions.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unnecessary_operation">unnecessary_operation</a>: Checks for expression statements that can be reduced to a
+sub-expression.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cyclomatic_complexity">cyclomatic_complexity</a>: Checks for methods with high cyclomatic complexity.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#while_let_loop">while_let_loop</a>: Detects <code>loop + match</code> combinations that are easier
+written as a <code>while let</code> loop.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#needless_update">needless_update</a>: Checks for needlessly including a base struct on update
+when all fields are changed anyway.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#identity_op">identity_op</a>: Checks for identity operations, e.g. <code>x + 0</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#search_is_some">search_is_some</a>: Checks for an iterator search (such as <code>find()</code>,
+<code>position()</code>, or <code>rposition()</code>) followed by a call to <code>is_some()</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#useless_format">useless_format</a>: Checks for the use of <code>format!(&quot;string literal with no argument&quot;)</code> and <code>format!(&quot;{}&quot;, foo)</code> where <code>foo</code> is a string.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#diverging_sub_expression">diverging_sub_expression</a>: Checks for diverging calls that are not match arms or
+statements.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#transmute_ptr_to_ptr">transmute_ptr_to_ptr</a>: Checks for transmutes from a pointer to a pointer, or
+from a reference to a reference.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#crosspointer_transmute">crosspointer_transmute</a>: Checks for transmutes between a type <code>T</code> and <code>*T</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#needless_borrowed_reference">needless_borrowed_reference</a>: Checks for useless borrowed references.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#transmute_int_to_char">transmute_int_to_char</a>: Checks for transmutes from an integer to a <code>char</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#nonminimal_bool">nonminimal_bool</a>: Checks for boolean expressions that can be written more
+concisely.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#needless_bool">needless_bool</a>: Checks for expressions of the form <code>if c { true } else { false }</code>
+(or vice versa) and suggest using the condition directly.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#misrefactored_assign_op">misrefactored_assign_op</a>: Checks for <code>a op= a op b</code> or <code>a op= b op a</code> patterns.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#neg_cmp_op_on_partial_ord">neg_cmp_op_on_partial_ord</a>: Checks for the usage of negated comparision operators on types which only implement
+<code>PartialOrd</code> (e.g. <code>f64</code>).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#zero_prefixed_literal">zero_prefixed_literal</a>: Warns if an integral constant literal starts with <code>0</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#bool_comparison">bool_comparison</a>: Checks for expressions of the form <code>x == true</code> (or vice
+versa) and suggest using the variable directly.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#extra_unused_lifetimes">extra_unused_lifetimes</a>: Checks for lifetimes in generics that are never used
+anywhere else.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#int_plus_one">int_plus_one</a>: Checks for usage of <code>x &gt;= y + 1</code> or <code>x - 1 &gt;= y</code> (and <code>&lt;=</code>) in a block</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#duration_subsec">duration_subsec</a>: Checks for calculation of subsecond microseconds or milliseconds
+from other <code>Duration</code> methods.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unnecessary_cast">unnecessary_cast</a>: Checks for casts to the same type.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unused_label">unused_label</a>: Checks for unused labels.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#result_map_unit_fn">result_map_unit_fn</a>: Checks for usage of <code>result.map(f)</code> where f is a function
+or closure that returns the unit type.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#clone_on_copy">clone_on_copy</a>: Checks for usage of <code>.clone()</code> on a <code>Copy</code> type.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unit_arg">unit_arg</a>: Checks for passing a unit value as an argument to a function without using a unit literal (<code>()</code>).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#transmute_int_to_float">transmute_int_to_float</a>: Checks for transmutes from an integer to a float.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#double_comparisons">double_comparisons</a>: Checks for double comparions that could be simpified to a single expression.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#eval_order_dependence">eval_order_dependence</a>: Checks for a read and a write to the same variable where
+whether the read occurs before or after the write depends on the evaluation
+order of sub-expressions.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#ref_in_deref">ref_in_deref</a>: Checks for references in expressions that use
+auto dereference.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#mut_range_bound">mut_range_bound</a>: Checks for loops which have a range bound that is a mutable variable</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#transmute_int_to_bool">transmute_int_to_bool</a>: Checks for transmutes from an integer to a <code>bool</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#needless_lifetimes">needless_lifetimes</a>: Checks for lifetime annotations which can be removed by
+relying on lifetime elision.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#explicit_counter_loop">explicit_counter_loop</a>: Checks <code>for</code> loops over slices with an explicit counter
+and suggests the use of <code>.enumerate()</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#explicit_write">explicit_write</a>: Checks for usage of <code>write!()</code> / <code>writeln()!</code> which can be
+replaced with <code>(e)print!()</code> / <code>(e)println!()</code></li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#deref_addrof">deref_addrof</a>: Checks for usage of <code>*&amp;</code> and <code>*&amp;mut</code> in expressions.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#filter_next">filter_next</a>: Checks for usage of <code>_.filter(_).next()</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#borrowed_box">borrowed_box</a>: Checks for use of <code>&amp;Box&lt;T&gt;</code> anywhere in the code.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#type_complexity">type_complexity</a>: Checks for types used in structs, parameters and <code>let</code>
+declarations above a certain complexity threshold.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#match_as_ref">match_as_ref</a>: Checks for match which is used to add a reference to an
+<code>Option</code> value.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#char_lit_as_u8">char_lit_as_u8</a>: Checks for expressions where a character literal is cast
+to <code>u8</code> and suggests using a byte literal instead.</li>
+</ul>
+<h1><a class="header" href="#perf-warn" id="perf-warn">perf (Warn)</a></h1>
+<ul>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#mutex_atomic">mutex_atomic</a>: Checks for usages of <code>Mutex&lt;X&gt;</code> where an atomic will do.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#large_enum_variant">large_enum_variant</a>: Checks for large size differences between variants on
+<code>enum</code>s.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#manual_memcpy">manual_memcpy</a>: Checks for for-loops that manually copy items between
+slices that could be optimized by having a memcpy.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#boxed_local">boxed_local</a>: Checks for usage of <code>Box&lt;T&gt;</code> where an unboxed <code>T</code> would
+work fine.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#box_vec">box_vec</a>: Checks for use of <code>Box&lt;Vec&lt;_&gt;&gt;</code> anywhere in the code.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#useless_vec">useless_vec</a>: Checks for usage of <code>&amp;vec![..]</code> when using <code>&amp;[..]</code> would
+be possible.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#map_entry">map_entry</a>: Checks for uses of <code>contains_key</code> + <code>insert</code> on <code>HashMap</code>
+or <code>BTreeMap</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cmp_owned">cmp_owned</a>: Checks for conversions to owned values just for the sake
+of a comparison.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#or_fun_call">or_fun_call</a>: Checks for calls to <code>.or(foo(..))</code>, <code>.unwrap_or(foo(..))</code>,
+etc., and suggests to use <code>or_else</code>, <code>unwrap_or_else</code>, etc., or
+<code>unwrap_or_default</code> instead.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unused_collect">unused_collect</a>: Checks for using <code>collect()</code> on an iterator without using
+the result.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#expect_fun_call">expect_fun_call</a>: Checks for calls to <code>.expect(&amp;format!(...))</code>, <code>.expect(foo(..))</code>,
+etc., and suggests to use <code>unwrap_or_else</code> instead</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#naive_bytecount">naive_bytecount</a>: Checks for naive byte counts</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#iter_nth">iter_nth</a>: Checks for use of <code>.iter().nth()</code> (and the related
+<code>.iter_mut().nth()</code>) on standard library types with O(1) element access.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#single_char_pattern">single_char_pattern</a>: Checks for string methods that receive a single-character
+<code>str</code> as an argument, e.g. <code>_.split(&quot;x&quot;)</code>.</li>
+</ul>
+<h1><a class="header" href="#pedantic-allow" id="pedantic-allow">pedantic (Allow)</a></h1>
+<ul>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#expl_impl_clone_on_copy">expl_impl_clone_on_copy</a>: Checks for explicit <code>Clone</code> implementations for <code>Copy</code>
+types.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#result_map_unwrap_or_else">result_map_unwrap_or_else</a>: Checks for usage of <code>result.map(_).unwrap_or_else(_)</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#maybe_infinite_iter">maybe_infinite_iter</a>: Checks for iteration that may be infinite.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cast_possible_wrap">cast_possible_wrap</a>: Checks for casts from an unsigned type to a signed type of
+the same size. Performing such a cast is a 'no-op' for the compiler,
+i.e. nothing is changed at the bit level, and the binary representation of
+the value is reinterpreted. This can cause wrapping if the value is too big
+for the target signed type. However, the cast works as defined, so this lint
+is <code>Allow</code> by default.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cast_sign_loss">cast_sign_loss</a>: Checks for casts from a signed to an unsigned numerical
+type. In this case, negative values wrap around to large positive values,
+which can be quite surprising in practice. However, as the cast works as
+defined, this lint is <code>Allow</code> by default.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#enum_glob_use">enum_glob_use</a>: Checks for <code>use Enum::*</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#match_same_arms">match_same_arms</a>: Checks for <code>match</code> with identical arm bodies.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#single_match_else">single_match_else</a>: Checks for matches with a two arms where an <code>if let</code> will
+usually suffice.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#pub_enum_variant_names">pub_enum_variant_names</a>: Detects enumeration variants that are prefixed or suffixed
+by the same characters.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#use_self">use_self</a>: Checks for unnecessary repetition of structure name when a
+replacement with <code>Self</code> is applicable.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#option_map_unwrap_or_else">option_map_unwrap_or_else</a>: Checks for usage of <code>_.map(_).unwrap_or_else(_)</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#items_after_statements">items_after_statements</a>: Checks for items declared after some statement in a block.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#empty_enum">empty_enum</a>: Checks for <code>enum</code>s with no variants.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#needless_continue">needless_continue</a>: The lint checks for <code>if</code>-statements appearing in loops
+that contain a <code>continue</code> statement in either their main blocks or their
+<code>else</code>-blocks, when omitting the <code>else</code>-block possibly with some
+rearrangement of code can make the code easier to understand.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#string_add_assign">string_add_assign</a>: Checks for string appends of the form <code>x = x + y</code> (without
+<code>let</code>!).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#used_underscore_binding">used_underscore_binding</a>: Checks for the use of bindings with a single leading
+underscore.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cast_possible_truncation">cast_possible_truncation</a>: Checks for on casts between numerical types that may
+truncate large values. This is expected behavior, so the cast is <code>Allow</code> by
+default.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#doc_markdown">doc_markdown</a>: Checks for the presence of <code>_</code>, <code>::</code> or camel-case words
+outside ticks in documentation.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unseparated_literal_suffix">unseparated_literal_suffix</a>: Warns if literal suffixes are not separated by an
+underscore.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#if_not_else">if_not_else</a>: Checks for usage of <code>!</code> or <code>!=</code> in an if condition with an
+else branch.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#filter_map">filter_map</a>: Checks for usage of <code>_.filter(_).map(_)</code>,
+<code>_.filter(_).flat_map(_)</code>, <code>_.filter_map(_).flat_map(_)</code> and similar.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#stutter">stutter</a>: Detects type names that are prefixed or suffixed by the
+containing module's name.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#similar_names">similar_names</a>: Checks for names that are very similar and thus confusing.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#replace_consts">replace_consts</a>: Checks for usage of <code>ATOMIC_X_INIT</code>, <code>ONCE_INIT</code>, and
+<code>uX/iX::MIN/MAX</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#option_map_unwrap_or">option_map_unwrap_or</a>: Checks for usage of <code>_.map(_).unwrap_or(_)</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#inline_always">inline_always</a>: Checks for items annotated with <code>#[inline(always)]</code>,
+unless the annotated function is empty or simply panics.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#linkedlist">linkedlist</a>: Checks for usage of any <code>LinkedList</code>, suggesting to use a
+<code>Vec</code> or a <code>VecDeque</code> (formerly called <code>RingBuf</code>).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#mut_mut">mut_mut</a>: Checks for instances of <code>mut mut</code> references.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#non_ascii_literal">non_ascii_literal</a>: Checks for non-ASCII characters in string literals.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unicode_not_nfc">unicode_not_nfc</a>: Checks for string literals that contain Unicode in a form
+that is not equal to its
+<a href="http://www.unicode.org/reports/tr15/#Norm_Forms">NFC-recomposition</a>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#cast_precision_loss">cast_precision_loss</a>: Checks for casts from any numerical to a float type where
+the receiving type cannot store all values from the original type without
+rounding errors. This possible rounding is to be expected, so this lint is
+<code>Allow</code> by default.
+Basically, this warns on casting any integer with 32 or more bits to <code>f32</code>
+or any 64-bit integer to <code>f64</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#invalid_upcast_comparisons">invalid_upcast_comparisons</a>: Checks for comparisons where the relation is always either
+true or false, but where one side has been upcast so that the comparison is
+necessary. Only integer types are checked.</li>
+</ul>
+<h1><a class="header" href="#nursery-allow" id="nursery-allow">nursery (Allow)</a></h1>
+<ul>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#empty_line_after_outer_attr">empty_line_after_outer_attr</a>: Checks for empty lines after outer attributes</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#needless_borrow">needless_borrow</a>: Checks for address of operations (<code>&amp;</code>) that are going to
+be dereferenced immediately by the compiler.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#mutex_integer">mutex_integer</a>: Checks for usages of <code>Mutex&lt;X&gt;</code> where <code>X</code> is an integral
+type.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#range_plus_one">range_plus_one</a>: Checks for exclusive ranges where 1 is added to the
+upper bound, e.g. <code>x..(y+1)</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#fallible_impl_from">fallible_impl_from</a>: Checks for impls of <code>From&lt;..&gt;</code> that contain <code>panic!()</code> or <code>unwrap()</code></li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unnecessary_unwrap">unnecessary_unwrap</a>: Checks for calls of <code>unwrap[_err]()</code> that cannot fail.</li>
+</ul>
+<h1><a class="header" href="#restriction-allow" id="restriction-allow">restriction (Allow)</a></h1>
+<ul>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#integer_arithmetic">integer_arithmetic</a>: Checks for plain integer arithmetic.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#shadow_reuse">shadow_reuse</a>: Checks for bindings that shadow other bindings already in
+scope, while reusing the original value.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#option_unwrap_used">option_unwrap_used</a>: Checks for <code>.unwrap()</code> calls on <code>Option</code>s.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#assign_ops">assign_ops</a>: Checks for compound assignment operations (<code>+=</code> and
+similar).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#shadow_unrelated">shadow_unrelated</a>: Checks for bindings that shadow other bindings already in
+scope, either without a initialization or with one that does not even use
+the original value.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#clone_on_ref_ptr">clone_on_ref_ptr</a>: Checks for usage of <code>.clone()</code> on a ref-counted pointer,
+(<code>Rc</code>, <code>Arc</code>, <code>rc::Weak</code>, or <code>sync::Weak</code>), and suggests calling Clone via unified
+function syntax instead (e.g. <code>Rc::clone(foo)</code>).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#wrong_pub_self_convention">wrong_pub_self_convention</a>: This is the same as
+<a href="#wrong_self_convention"><code>wrong_self_convention</code></a>, but for public items.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#indexing_slicing">indexing_slicing</a>: Checks for usage of indexing or slicing.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#float_arithmetic">float_arithmetic</a>: Checks for float arithmetic.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#string_add">string_add</a>: Checks for all instances of <code>x + _</code> where <code>x</code> is of type
+<code>String</code>, but only if <a href="#string_add_assign"><code>string_add_assign</code></a> does <em>not</em>
+match.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#else_if_without_else">else_if_without_else</a>: Checks for usage of if expressions with an <code>else if</code> branch,
+but without a final <code>else</code> branch.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#shadow_same">shadow_same</a>: Checks for bindings that shadow other bindings already in
+scope, while just changing reference level or mutability.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#missing_docs_in_private_items">missing_docs_in_private_items</a>: Warns if there is missing doc for any documentable item
+(public or private).</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#use_debug">use_debug</a>: Checks for use of <code>Debug</code> formatting. The purpose of this
+lint is to catch debugging remnants.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#mem_forget">mem_forget</a>: Checks for usage of <code>std::mem::forget(t)</code> where <code>t</code> is
+<code>Drop</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#unimplemented">unimplemented</a>: Checks for usage of <code>unimplemented!</code>.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#print_stdout">print_stdout</a>: Checks for printing on <em>stdout</em>. The purpose of this lint
+is to catch debugging remnants.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#result_unwrap_used">result_unwrap_used</a>: Checks for <code>.unwrap()</code> calls on <code>Result</code>s.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#multiple_inherent_impl">multiple_inherent_impl</a>: Checks for multiple inherent implementations of a struct</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#decimal_literal_representation">decimal_literal_representation</a>: Warns if there is a better representation for a numeric literal.</li>
+<li><a href="https://rust-lang-nursery.github.io/rust-clippy/master/index.html#float_cmp_const">float_cmp_const</a>: Checks for (in-)equality comparisons on floating-point
+value and constant, except in functions called <code>*eq*</code> (which probably
+implement equality for a type involving floats).</li>
+</ul>
+<h1><a class="header" href="#rationale-and-alternatives" id="rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>We don't particularly <em>need</em> a 1.0, however it's good to have a milestone here, and a general idea of stability as we move forward in this process.</p>
+<p>It's also good to have some community involvement in the lint design/categorization process since Clippy lints
+both reflect and affect the general style of the community.</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<p>Through the process of this RFC we hope to determine if there are lints which need
+to be uplifted, recategorized, or removed.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2471-lint-test-inner-function.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2480-liballoc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2471-lint-test-inner-function.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2480-liballoc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

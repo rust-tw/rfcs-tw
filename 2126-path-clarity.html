@@ -1,0 +1,856 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2126-path-clarity - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html" class="active">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: TBD</li>
+<li>Start Date: 2017-08-24</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2126">rust-lang/rfcs#2126</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/44660">rust-lang/rust#44660</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>This RFC seeks to clarify and streamline Rust's story around paths and visibility for modules and crates. That story will look as follows:</p>
+<ul>
+<li>Absolute paths should begin with a crate name, where the keyword <code>crate</code> refers to the current crate (other forms are linted, see below)</li>
+<li><code>extern crate</code> is no longer necessary, and is linted (see below); dependencies are available at the root unless shadowed.</li>
+<li>The <code>crate</code> keyword also acts as a visibility modifier, equivalent to today's <code>pub(crate)</code>. Consequently, uses of bare <code>pub</code> on items that are not actually publicly exported are linted, suggesting <code>crate</code> visibility instead.</li>
+<li>A <code>foo.rs</code> and <code>foo/</code> subdirectory may coexist; <code>mod.rs</code> is no longer needed when placing submodules in a subdirectory.</li>
+</ul>
+<p><strong>These changes do not require a new edition</strong>. The new features are purely additive. They can ship with <strong>allow-by-default</strong> lints, which can gradually be moved to warn-by-default and deny-by-default over time, as better tooling is developed and more code has actively made the switch.</p>
+<p><em>This RFC incorporates some text written by @withoutboats and @cramertj, who have both been involved in the long-running discussions on this topic.</em></p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>A major theme of this year's <a href="https://github.com/rust-lang/rfcs/pull/1774">roadmap</a> is improving the learning curve and
+ergonomics of the core language. That's based on overwhelming feedback that the
+single biggest barrier to Rust adoption is its learning curve.</p>
+<p>One part of Rust that has long been a source of friction for some is its
+module system. There are two related perspectives for improvement here:
+learnability and productivity:</p>
+<ul>
+<li>
+<p>Modules are not a place that Rust was trying to innovate at 1.0, but they are
+nevertheless often reported as one of the major stumbling blocks to learning
+Rust. We should fix that.</p>
+</li>
+<li>
+<p>Even for seasoned Rustaceans, the module system has some deficiencies, as
+we’ll dig into below. Ideally, we can solve these problems while also making
+modules easier to learn.</p>
+</li>
+</ul>
+<h2><a class="header" href="#the-core-problems" id="the-core-problems">The core problems</a></h2>
+<p>This RFC does not attempt to <em>comprehensively</em> solve the problems that have been
+raised in today's module system. The focus is instead high-impact problems with
+noninvasive solutions.</p>
+<h3><a class="header" href="#defining-versus-bringing-into-scope" id="defining-versus-bringing-into-scope">Defining versus bringing into scope</a></h3>
+<p>A persistent point of confusion is the relationship between <em>defining an item</em>
+and <em>bringing an item into scope</em>. First, let's look at the rules as they exist
+today:</p>
+<ul>
+<li>
+<p>When you refer to items within definitions (e.g. a <code>fn</code> signature or body),
+those items must be <strong>in scope</strong> (unless you use a leading <code>::</code> or <code>super</code>).</p>
+</li>
+<li>
+<p>Defining an item &quot;mounts&quot; its name within the current crate's module
+hierarchy, making it available through absolute paths.</p>
+</li>
+<li>
+<p>All items defined within a module are also in scope throughout that
+module. This includes <code>use</code> statements, which actually <em>define</em> (i.e. mount)
+items within the current module.</p>
+</li>
+<li>
+<p>Additional names are brought into scope through things like function
+parameters or generics.</p>
+</li>
+</ul>
+<p>There's a beautiful uniformity and sparseness in these rules that makes them
+appealing. And they turn out to be reasonably intuitive for items whose full
+definition is given within the module (e.g. <code>struct</code> definitions).</p>
+<p>The struggle tends to instead be with items like <code>extern crate</code> and <code>mod foo;</code>
+which &quot;bring in&quot; other crates or files. This RFC focuses on the former, so let's
+explore that in more detail.</p>
+<p>When you write <code>extern crate futures</code> in your crate root, there are two consequences per
+the above rules:</p>
+<ul>
+<li>The external crate <code>futures</code> is &quot;mounted&quot; at the root absolute path.</li>
+<li>The external crate <code>futures</code> is brought into scope for the top-level module.</li>
+</ul>
+<p>When writing code at crate root, you're able to freely refer to <code>futures</code> to start
+paths in <em>both</em> <code>use</code> statements <em>and</em> in references to items:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>extern crate futures;
+
+use futures::Future;
+
+fn my_poll() -&gt; futures::Poll { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>These consequences make it easy to build an incorrect mental model, in which
+<code>extern crate</code> <em>globally</em> adds the external crate name as something you can
+start <em>any</em> path with--made worse because it's half true. (This confusion is
+undoubtedly influenced by the way that external package references work in many
+other languages, where absolute paths <em>always</em> begin with a package reference.)
+This wrong mental model works fine in the crate root, but breaks down as soon as
+you try it in a submodule:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>extern crate futures;
+
+mod submodule {
+    // this still works fine!
+    use futures::Future;
+
+    // but suddenly this doesn't...
+    fn my_poll() -&gt; futures::Poll { ... }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The fact that adding a <code>use futures;</code> statement to the submodule makes the <code>fn</code>
+declaration work is almost worse: it reinforces the idea that external crates
+define names in the root namespace, but that <em>sometimes</em> you need to write <code>use futures</code> to refer to them... but not to refer to them in <code>use</code> declarations!
+This is the point where some people get exasperated by the module system, which
+seems to be enforcing some mysterious and pedantic distinctions. And this is
+perhaps worst with <code>std</code>, in which there's an <em>implicit</em> <code>extern crate</code> in the
+root module, so that <code>fn make_vec() -&gt; std::vec::Vec&lt;u8&gt;</code> works fine in crate
+root but requires <code>use std</code> elsewhere.</p>
+<p>In other words, while there are simple and consistent <em>rules</em> defining the
+module system, their <em>consequences</em> can feel inconsistent, counterintuitive and
+mysterious.</p>
+<p>It's tempting to say that we can fully address these problems by better
+documentation and compiler diagnostics--and surely we should improve them! But
+for folks trying out Rust, there's already plenty to learn, and there's a sense
+that the module system is &quot;getting in the way&quot; early on, forcing you to stop and
+try to understand its particular set of rules before you can get back to trying
+to understand ownership and other aspects of Rust.</p>
+<p>This RFC instead tweaks the handling of external crates and absolute paths, so
+that when you apply the general rules of the module system, you get an outcome
+that feels more consistent and intuitive, and requires less front-loading of
+explanation. As we'll see below, in practice these changes will also improve
+clarity and readability even for users with a full understanding of the rules.</p>
+<p>(We'll revisit this example at the end of the Guide section to explain how the
+RFC helps.)</p>
+<h3><a class="header" href="#nonlocal-reasoning" id="nonlocal-reasoning">Nonlocal reasoning</a></h3>
+<p>There are at least two ways in which today's module system doesn't support local
+reasoning. These affect newcomers and old hands alike.</p>
+<ul>
+<li>
+<p><strong>Is a <code>use</code> path talking about this crate or an external one?</strong> When reading
+<code>use</code> statements, to know the source of the import you need to have in your
+head a list of external crates and/or top-level modules for the current
+crate. It has long been idiomatic to visually group imports from the current
+crate separately from external imports. In general, this suggests a certain
+muddiness around the root namespace.</p>
+</li>
+<li>
+<p><strong>Is an item marked <code>pub</code> <em>actually</em> public?</strong> It's a fairly common idiom
+today to have a private module that contains <code>pub</code> items used by its parent
+and siblings only. This idiom arises in part because of ergonomic concerns;
+writing <code>pub(super)</code> or <code>pub(crate)</code> on these internal items feels
+heavier. But the consequence is that, when reading code, visibility
+annotations tell you less than you might hope, and in general you have to walk
+up the module tree looking for re-exports to know exactly how public an item
+is.</p>
+</li>
+</ul>
+<h3><a class="header" href="#the-modrs-file" id="the-modrs-file">The <code>mod.rs</code> file</a></h3>
+<p>A final issue, though far less important, is the use of <code>mod.rs</code> files when
+creating a directory containing submodules. There are several downsides:</p>
+<ul>
+<li>From a learnability perspective, the fact that the paths in the module system
+aren't <em>quite</em> in direct correspondence with the file system is another small
+speedbump, and in particular makes <code>mod foo;</code> declarations entail extra
+ceremony (since the parent module must be moved into a new directory). A
+simpler rule would be: the path to a module's file is the path to it within
+Rust code, with <code>.rs</code> appended.</li>
+<li>From an ergonomics perspective, one often ends up with many <code>mod.rs</code> files
+open, and thus must depend on editor smarts to easily navigate between
+them. Again, a minor but nontrivial papercut.</li>
+<li>When refactoring code to introduce submodules, having to use <code>mod.rs</code> means
+you often have to move existing files around. Another papercut.</li>
+</ul>
+<p>The main <em>benefit</em> to <code>mod.rs</code> is that the code for a parent module and its
+children live more closely together (not necessarily desirable!) and that it
+provides a consistent story with <code>lib.rs</code>.</p>
+<h2><a class="header" href="#some-evidence-of-learning-struggles" id="some-evidence-of-learning-struggles">Some evidence of learning struggles</a></h2>
+<p>In the survey data collected in both 2016 and 2017, learnability and ergonomics
+issues were one of the major challenges for people using or considering
+Rust. While there were other features that were raised more frequently than the
+module system (lifetimes for example), ideally the module system, which isn't
+<em>meant</em> to be novel, would not be a learnability problem at all!</p>
+<p>Here are some select quotes (these are not the only responses that mention the module
+system):</p>
+<blockquote>
+<p>Also the module system is confusing (not that I say is wrong, just confusing
+until you are experienced in it).</p>
+</blockquote>
+<blockquote>
+<p>a colleague of mine that started rust got really confused over the module
+system</p>
+</blockquote>
+<blockquote>
+<p>You had to import everything in the main module, but you also had to in
+submodules, but if it was only imported in a submodule it wouldn't work.</p>
+</blockquote>
+<blockquote>
+<p>I especially find the modules and crates design weird and verbose</p>
+</blockquote>
+<blockquote>
+<p>fix the module system</p>
+</blockquote>
+<p>One user states that the reason they stopped using Rust was that the
+&quot;module system is really unintuitive.&quot; Similar data is present in the 2016 survey.</p>
+<p>Experiences along similar lines can be found in Rust forums, StackOverflow, and
+similar, some of which has been collected into <a href="https://gist.github.com/aturon/2f10f19f084f39330cfe2ee028b2ea0c">a gist</a>.</p>
+<p>The problems presented above represent a boiled down subset of the problems
+raised in this feedback.</p>
+<h1><a class="header" href="#guide-level-explanation" id="guide-level-explanation">Guide-level explanation</a></h1>
+<h2><a class="header" href="#as-we-would-teach-it" id="as-we-would-teach-it">As we would teach it</a></h2>
+<p>The following sections sketch a plausible way of teaching the module system once
+this RFC has been fully implemented.</p>
+<h3><a class="header" href="#using-external-dependencies" id="using-external-dependencies">Using external dependencies</a></h3>
+<p>To add an external dependency, record it in the <code>[dependencies]</code> section of
+<code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[dependencies]
+serde = &quot;1.0.0&quot;
+</code></pre>
+<p>By default, crates have an automatic dependency on <code>std</code>, the standard library.</p>
+<p>Once your dependency has been added, you can bring it or its exports into scope with
+<code>use</code> declarations:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std; // bring `std` itself into scope
+use std::vec::Vec;
+
+use serde::Serialize;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Note that these <code>use</code> declarations all begin with a crate name.</p>
+<p>Once an item is in scope, you can reference it directly within definitions:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Both of these work, because we brought `std` and `Vec` into scope:
+fn make_vec() -&gt; Vec&lt;u8&gt; { ... }
+fn make_vec() -&gt; std::vec::Vec&lt;u8&gt; { ... }
+
+// Only the first of these work, because we didn't bring `serde` into scope:
+impl Serialize for MyType { ... }
+impl serde::Serialize for MyType { ... } // the name `serde` is not in scope here
+<span class="boring">}
+</span></code></pre></pre>
+<p>You can also reference items from a crate without bringing them into scope by
+writing a <strong>fully qualified path</strong>, designated by a leading <code>::</code>, as follows:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl ::serde::Serialize for MyType { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>All <code>use</code> declarations are interpreted as fully qualified paths, making the
+leading <code>::</code> optional for them.</p>
+<blockquote>
+<p><strong>Note: that means that you can write <code>use serde::Serialize</code> in <em>any</em> module
+without trouble, as long as <code>serde</code> is an external dependency!</strong></p>
+</blockquote>
+<h3><a class="header" href="#adding-a-new-file-to-your-crate" id="adding-a-new-file-to-your-crate">Adding a new file to your crate</a></h3>
+<p>Rust crates have a distinguished entry point (generally called <code>main.rs</code> or
+<code>lib.rs</code>) which is used to determine the crate's structure. Other files and
+directories within <code>src/</code> are <em>not</em> automatically included in the crate.
+Instead, you explicitly declare <em>submodules</em> using <code>mod</code> declarations.</p>
+<p>Let's see how this looks with an example. First, we might set up a directory
+structure like the following:</p>
+<pre><code>src
+├── cli
+│   ├── parse.rs
+│   └── usage.rs
+├── cli.rs
+├── main.rs
+├── process
+│   ├── read.rs
+│   └── write.rs
+└── process.rs
+</code></pre>
+<p>The intent is for the crate to have two top-level modules, <code>cli</code> and <code>process</code>,
+each of which contain two submodules. To turn these files into submodules, we
+use <code>mod</code> declarations as follows:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/main.rs
+mod cli;
+mod process;
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/cli.rs
+mod parse;
+mod usage;
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/process.rs
+mod read;
+mod write;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Note how these declarations follow the structure of the filesystem (except that
+the entry point, <code>main.rs</code>, has its children modules as sibling files). By
+default, <code>mod</code> declarations assume this kind of direct mapping to the
+filesystem; they are used to tell Rust to incorporate those files, and to set
+attributes on the resulting modules (as we'll see in a moment).</p>
+<h3><a class="header" href="#importing-items-from-other-parts-of-your-crate" id="importing-items-from-other-parts-of-your-crate">Importing items from other parts of your crate</a></h3>
+<p>In Rust, all items defined in a module are <em>private</em> by default, which means
+they can only be accessed by the module defining them (or any of its
+submodules). If you want an item to have greater visibility, you can use a
+<em>visibility modifier</em>. The two most important of these are:</p>
+<ul>
+<li><code>crate</code>, which makes an item visible anywhere within the current crate, but
+not outside of it.</li>
+<li><code>pub</code>, which makes an item public, i.e. visible everywhere.</li>
+</ul>
+<p>For binary crates (which have no consumers), <code>crate</code> and <code>pub</code> are equivalent.</p>
+<p>Going back to the earlier example, we might instead write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/main.rs
+pub mod cli;
+pub mod process;
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/cli.rs
+pub mod parse;
+pub mod usage;
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/cli/usage.rs
+pub fn print_usage() { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/process.rs
+pub mod read;
+pub mod write;
+<span class="boring">}
+</span></code></pre></pre>
+<p>To refer to an item within your own crate, you can use a fully qualified path
+that starts with one of the following:</p>
+<ul>
+<li><code>crate</code>, to start at the root of your crate, e.g. <code>crate::cli::usage::print_usage</code></li>
+<li><code>self</code>, to start at the current module</li>
+<li><code>super</code>, to start at the current module's parent</li>
+</ul>
+<p>So we could write in <code>main.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">use crate::cli::usage;
+
+fn main() {
+    // ...
+    usage::print_usage()
+    // ...
+}
+</code></pre></pre>
+<p>In general, then, fully qualified paths always start with an initial location: an external
+crate name, or <code>crate</code>/<code>self</code>/<code>super</code>.</p>
+<h2><a class="header" href="#guide-level-thoughts-when-comparing-to-todays-system" id="guide-level-thoughts-when-comparing-to-todays-system">Guide-level thoughts when comparing to today's system</a></h2>
+<p>Let's revisit one of the motivating examples. Today, you might write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>extern crate futures;
+fn my_poll() -&gt; futures::Poll { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>and then be confused when the following doesn't work:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>extern crate futures;
+mod submodule {
+    fn my_poll() -&gt; futures::Poll { ... }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>because you've been led to think that <code>extern crate</code> brings the name into scope
+everywhere.</p>
+<p>After this RFC, you would no longer write <code>extern crate futures</code>. You might try to write just:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn my_poll() -&gt; futures::Poll { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>but the compiler would produce an error, saying that there's no <code>futures</code> in
+scope; maybe you meant the external dependency, which you can bring into scope
+by writing <code>use futures;</code>? So you do that:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use futures;
+fn my_poll() -&gt; futures::Poll { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>and now, when you refactor, you're much more likely to understand that the <code>use</code>
+should come along for the ride:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod submodule {
+    use futures;
+    fn my_poll() -&gt; futures::Poll { ... }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Together with the fact that you use <code>crate::</code> in <code>use</code> declarations, this
+strongly reinforces the idea that:</p>
+<ul>
+<li><code>use</code> brings items into scope, based on paths that start by identifying the crate</li>
+<li>an item needs to be in scope before you can refer to it</li>
+</ul>
+<h1><a class="header" href="#reference-level-explanation" id="reference-level-explanation">Reference-level explanation</a></h1>
+<p>First, a bit of terminology: a <em>fully qualified path</em> is a path starting with
+<code>::</code>, which <em>all</em> paths in <code>use</code> do implicitly.</p>
+<p>The actual changes in this RFC are fairly small tweaks to the current module
+system; most of the complexity comes from the migration plans.</p>
+<p>The proposed migration plan is minimally disruptive; <strong>it does not require an
+edition</strong>.</p>
+<h2><a class="header" href="#basic-changes" id="basic-changes">Basic changes</a></h2>
+<ul>
+<li>
+<p>You can write <code>mod bar;</code> statements even when not in a <code>mod.rs</code> or equivalent;
+in this case, the submodules must appear within a subdirectory with
+the same name as the current module. Thus, <code>foo.rs</code> can contain <code>mod bar;</code> if
+there is also a <code>foo/bar.rs</code>.</p>
+<ul>
+<li>It is not permitted to have both <code>foo.rs</code> and <code>foo/mod.rs</code> at the same point
+in the file system.</li>
+<li>The use of <code>mod.rs</code> continues to be allowed without any deprecation. It is
+expected that tooling like Clippy will push for at least style consistency
+within a project, and perhaps eventually across the ecosystem.</li>
+</ul>
+</li>
+<li>
+<p>We introduce <code>crate</code> as a new visibility specifier, shorthand for <code>pub(crate)</code>
+visibility.</p>
+</li>
+<li>
+<p>We introduce <code>crate</code> as a new path component which designates the root of the
+current crate.</p>
+</li>
+<li>
+<p>In a path fully qualified path <code>::foo</code>, resolution will first attempt to
+resolve to a top-level definition of <code>foo</code>, and otherwise fall back to
+available external crates.</p>
+</li>
+<li>
+<p>Cargo will provide a new <code>alias</code> key for aliasing dependencies, so that
+e.g. users who want to use the <code>rand</code> crate but call its library crate
+<code>random</code> instead can now write <code>rand = { version = &quot;0.3&quot;, alias = &quot;random&quot; }</code>.</p>
+</li>
+<li>
+<p>We introduce several lints, which all start out allow-by-default but are
+expected to ratchet up over time:</p>
+<ul>
+<li>
+<p>A lint for fully qualified paths that do not begin with one of: an external
+crate name, <code>crate</code>, <code>super</code>, or <code>self</code>.</p>
+</li>
+<li>
+<p>A lint for use of <code>extern crate</code>.</p>
+</li>
+<li>
+<p>A lint against use of bare <code>pub</code> for items which are not reachable via some
+fully-<code>pub</code> path. That is, bare <code>pub</code> should truly mean <em>public</em>, and <code>crate</code>
+should be used for crate-level visibility.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2><a class="header" href="#resolving-fully-qualified-paths" id="resolving-fully-qualified-paths">Resolving fully-qualified paths</a></h2>
+<p>The only way to refer to an external crate without using <code>extern crate</code> is
+through a fully-qualified path.</p>
+<p>When resolving a fully-qualified path that begins with a name (and not <code>crate</code>,
+<code>super</code> or <code>self</code>, we go through a two-stage process:</p>
+<ul>
+<li>First, attempt to resolve the name as an item defined in the top-level module.
+<ul>
+<li>If successful, issue a deprecation warning, saying that the <code>crate</code> prefix
+should be used.</li>
+</ul>
+</li>
+<li>Otherwise, attempt to resolve the name as an external crate, exactly as we do
+with <code>extern crate</code> today.</li>
+</ul>
+<p>In particular, no change to the compilation model or interface between <code>rustc</code>
+and Cargo/the ambient build system is needed.</p>
+<p>This approach is designed for backwards compatibility, but it means that you
+cannot have a top-level module and an external crate with the same
+name. Allowing that would require all fully-qualified paths into the current
+crate to start with <code>crate</code>, which can only be done on a future edition. We can
+and should consider making such a change eventually, but it is not required for
+this RFC.</p>
+<h2><a class="header" href="#migration-experience" id="migration-experience">Migration experience</a></h2>
+<p>We will provide a high-fidelity <code>rustfix</code> tool that makes changes to the a crate
+such that the lints proposed in this RFC would not fire. In particular, the tool
+will introduce <code>crate::</code> prefixes, downgrade from <code>pub</code> to <code>crate</code> where
+appropriate, and remove <code>extern crate</code>. It must be sound (i.e. keep the meaning
+of code intact and keep it compiling) but may not be complete (i.e. you may
+still get some deprecation warnings after running it).</p>
+<p>Such a tool should be working at with very high coverage before we consider
+changing any of the lints to warn-by-default.</p>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p>The most important drawback is that this RFC pushes toward <em>ultimately</em> changing
+most Rust code in existence. There is risk of this reintroducing a sense that
+Rust is unstable, if not handled properly. However, that risk is mitigated by
+several factors:</p>
+<ul>
+<li>The fact that existing forms continue to work indefinitely.</li>
+<li>The fact that we will provide migration tooling with high coverage.</li>
+<li>The fact that nudges toward new forms (in the forms of lints) are introduced
+gradually, and only after strong tooling exists.</li>
+</ul>
+<p>Imports from within your crate become more verbose, since they require a leading
+<code>crate</code>. However, this downside is considerably mitigated if <a href="https://github.com/rust-lang/rfcs/pull/2128">nesting in <code>use</code></a>
+is permitted.</p>
+<p>There is some concern that introducing and encouraging the use of <code>crate</code> as a
+visibility will, counter to the goals of the RFC, lead to people <em>increasing</em>
+the visibility of items rather than decreasing it (and hence increasing
+inter-module coupling). This could happen if, for example, an item needs to be
+exposed to a cousin module, where a Rust user might hesitate to make it <code>pub</code>
+but feel that <code>crate</code> is sufficiently &quot;safe&quot; (when really a refactoring is
+called for). While this is indeed a possibility, it's offset by some other
+cultural and design factors: Rust's design strongly encourages narrow access
+rights (privacy by default; immutability by default), and this orientation has a
+strong cultural sway within the Rust community.</p>
+<p>In previous discussions about deprecating <code>extern crate</code>, there were concerns
+about the impact on non-Cargo tooling, and in overall explicitness. This RFC
+fully addresses both concerns by leveraging the new, unambiguous nature of fully
+qualified paths.</p>
+<p>Moving crate renaming externally has implications for procedural macros with
+dependencies: their clients must include those dependencies without renaming
+them.</p>
+<h1><a class="header" href="#rationale-and-alternatives" id="rationale-and-alternatives">Rationale and Alternatives</a></h1>
+<p>The core rationale here should be clear given the detailed analysis in the
+motivation. The crucial insight of the design is that, by making absolute paths
+unambiguous about which crate they draw from, we can solve a number of
+confusions and papercuts with the module system.</p>
+<h2><a class="header" href="#edition-based-migration-story" id="edition-based-migration-story">Edition-based migration story</a></h2>
+<p>We can avoid the need for fallback in resolution by leveraging editions
+instead. On the current edition, we would make <code>crate::</code> paths available and
+start warning about <em>not</em> using them for crate-internal paths, but we would not
+issue warnings about <code>extern crate</code>. In the next edition, we would change
+absolute path interpretations, such that warning-free code on the previous
+edition would continue to compile and have the same meaning.</p>
+<h2><a class="header" href="#bike-sheddy-choices" id="bike-sheddy-choices">Bike-sheddy choices</a></h2>
+<p>There are a few aspects of this proposal that could be colored a bit differently
+without fundamental change.</p>
+<ul>
+<li>
+<p>Rather than <code>crate::top_level_module</code>, we could consider <code>extern::serde</code> or
+something like it, which would eliminate the need for any fallback in name
+resolution. That would come with some significant downsides, though.</p>
+<ul>
+<li>First, having paths typically start with a crate name, with <code>crate</code>
+referring to the current crate, provides a <em>very simple</em> and easy to
+understand model for paths---and its one that's pretty commonly used in other languages.</li>
+<li>Second, one benefit of <code>crate</code> is that it helps reduce confusion about paths
+appearing in <code>use</code> versus references to names elsewhere. In particular, it
+serves as a reminder that <code>use</code> paths are absolute.</li>
+</ul>
+</li>
+<li>
+<p>Rather than using <code>crate</code> as a visibility specifier, we could use something
+like <code>local</code>. (If we used it purely as a visibility specifier, we could make
+it a contextual keyword). That might be preferable, since <code>local</code> is an
+adjective and is arguably more intuitive. This is an unresolved question.</p>
+</li>
+<li>
+<p>The lint checking for <code>pub</code> items that are not actually public could be
+extended to check for <em>all</em> visibility levels. The RFC stuck with just <code>pub</code>
+because the ergonomics of <code>crate</code> make it more feasible to go from <code>pub</code> to
+<code>crate</code>, which should always work. It seems less feasible to ask people to
+annotate definitions with e.g. <code>pub(super)</code>, though maybe this is a sign that
+the <code>pub(restricted)</code> syntax is too unergonomic or underused.</p>
+</li>
+</ul>
+<h2><a class="header" href="#the-community-discussion-around-modules" id="the-community-discussion-around-modules">The community discussion around modules</a></h2>
+<p>For the past several months, the Rust community has been investigating the
+module system, its weaknesses, strengths, and areas of potential
+improvement. The discussion is far too wide-ranging to summarize here, so I'll
+just present links.</p>
+<p>Two blog posts serve as milestones in the discussion, laying out a
+part of the argument in favor of improving the module system:</p>
+<ul>
+<li><a href="https://withoutboats.github.io/blog/rust/2017/01/04/the-rust-module-system-is-too-confusing.html">The Rust module system is too confusing</a> by @withoutboats</li>
+<li><a href="https://aturon.github.io/blog/2017/07/26/revisiting-rusts-modules/">Revisiting Rust's modules</a> by @aturon</li>
+</ul>
+<p>And in addition there's been extensive discussion on internals:</p>
+<ul>
+<li><a href="https://internals.rust-lang.org/t/revisiting-rusts-modules/5628">Revisiting Rust’s modules</a> - aturon, Jul 26</li>
+<li><a href="https://internals.rust-lang.org/t/revisiting-rust-s-modules-part-2/5700?u=carols10cents">Revisiting Rust’s modules, part 2</a> - aturon, Aug 2</li>
+<li><a href="https://internals.rust-lang.org/t/revisiting-modules-take-3/5715?u=carols10cents">Revisting Modules, take 3</a> - withoutboats, Aug 4</li>
+<li><a href="https://internals.rust-lang.org/t/pre-rfc-inline-mod/5716?u=carols10cents">pre-RFC: inline mod</a> - ahmedcharles, Aug 4</li>
+<li><a href="https://internals.rust-lang.org/t/my-preferred-module-system-a-fusion-of-earlier-proposals/5718?u=carols10cents">My Preferred Module System (a fusion of earlier proposals)</a> - phaylon, Aug 5</li>
+<li><a href="https://internals.rust-lang.org/t/pre-rfc-yet-another-take-on-modules/5717?u=carols10cents">[Pre-RFC] Yet another take on modules</a> - newpavlov, Aug 5</li>
+<li><a href="https://internals.rust-lang.org/t/pre-rfc-from-crate-use-item/5719?u=carols10cents">pre-RFC: from crate use item</a> - ahmedcharles, Aug 5</li>
+<li><a href="https://internals.rust-lang.org/t/decoupled-module-improvements/5724?u=carols10cents">Decoupled Module Improvements</a> - phaylon, Aug 6</li>
+<li><a href="https://internals.rust-lang.org/t/revisiting-modules-other-crate-path-syntax/5728">Revisiting modules – <code>[other_crate]::path</code> syntax</a> - le-jzr, Aug 7</li>
+<li><a href="https://internals.rust-lang.org/t/poll-which-other-crate-relative-path-syntax-do-you-prefer/5744?u=carols10cents">Poll: Which other-crate-relative-path syntax do you prefer?</a> - elahn, Aug 9</li>
+</ul>
+<p>These discussions ultimately led to <a href="https://github.com/rust-lang/rfcs/pull/2108">two</a> <a href="https://github.com/rust-lang/rfcs/pull/2121">failed</a> RFCs.</p>
+<p>These earlier RFCs were shooting for a more comprehensive set of improvements
+around the module system, and in particular both involved eliminating the need
+for <code>mod</code> declarations in common cases. However, there are enough concerns and
+open questions about that direction that we chose to split those more ambitious
+ideas off into a separate <em>experimental</em> RFC:</p>
+<blockquote>
+<p>We recognize that this is a major point of controversy and so will put aside trying to complete a full RFC on the topic at this time; however, we believe the idea has enough merit that it's worth an experimental implementation in the compiler that we can use to gather more data, e.g. around the impact on workflow. We would still like to do this before the impl period, so that we can do that exploration during the impl period. (To be clear: experimental RFCs are to approve landing unstable features that seem promising but where we need more experience; they require a standard RFC to be merged before they can be stabilized.)</p>
+</blockquote>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<ul>
+<li>How should we approach migration? Via a fallback, as proposed, or via
+editions? It is probably best to make this determination with more experience,
+e.g. after we have a <code>rustfix</code> tool in hand.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2124-option-filter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2128-use-nested-groups.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2124-option-filter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2128-use-nested-groups.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

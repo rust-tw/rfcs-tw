@@ -1,0 +1,604 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2795-format-args-implicit-identifiers - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html" class="active">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: <code>format_args_implicits</code></li>
+<li>Start Date: 2019-10-27</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2795">rust-lang/rfcs#2795</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/67984">rust-lang/rust#67984</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Add implicit named arguments to <code>std::format_args!</code>, inferred from the format string literal.</p>
+<p>This would result in downstream macros based on <code>format_args!</code> to accept implicit named arguments, for example:</p>
+<pre><code>let (person, species, name) = (&quot;Charlie Brown&quot;, &quot;dog&quot;, &quot;Snoopy&quot;);
+
+// implicit named argument `person`
+print!(&quot;Hello {person}&quot;);
+
+// implicit named arguments `species` and `name`
+format!(&quot;The {species}'s name is {name}.&quot;);
+</code></pre>
+<p>Implicit named argument capture only occurs when a corresponding named argument is not provided to the macro invocation. So in the below example, no implicit lookup for <code>species</code> is performed:</p>
+<pre><code>// explicit named argument `species`
+// implicit named argument `name`
+format!(&quot;The {species}'s name is {name}.&quot;, species=&quot;cat&quot;);
+</code></pre>
+<p>(Downstream macros based on <code>format_args!</code> include but are not limited to <code>format!</code>, <code>print!</code>, <code>write!</code>, <code>panic!</code>, and macros in the <code>log</code> crate.)</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>The macros for formatting text are a core piece of the Rust standard library. They're often one of the first things users new to the language will be exposed to. Making small changes to improve the ergonomics of these macros will improve the language for all - whether new users writing their first lines of Rust, or seasoned developers scattering logging calls throughout their program.</p>
+<p>This proposal to introduce implicit named arguments aims to improve ergonomics by reducing the amount of typing needed in typical invocations of these macros, as well as (subjectively) improving readability.</p>
+<h1><a class="header" href="#guide-level-explanation" id="guide-level-explanation">Guide-level explanation</a></h1>
+<p>If this proposal were captured, the following (currently invalid) macro invocation:</p>
+<pre><code>format_args!(&quot;hello {person}&quot;)
+</code></pre>
+<p>would become a valid macro invocation, and would be equivalent to a shorthand for the already valid:</p>
+<pre><code>format_args!(&quot;hello {person}&quot;, person=person)
+</code></pre>
+<p>This identifier <code>person</code> would be known as an <strong>implicit named argument</strong> to the macro. <code>format_args!</code> would be able to accept any number of such implicit named arguments in this fashion. Each implicit named argument would have to be an identifier which existed in the scope in which the macro is invoked.</p>
+<p>Should <code>person</code> not exist in the scope, the usual error E0425 would be emitted by the compiler:</p>
+<pre><code>error[E0425]: cannot find value `person` in this scope
+ --&gt; .\foo.rs:X:Y
+  |
+X |     println!(&quot;hello {person}&quot;);
+  |                     ^^^^^^^^ not found in this scope
+</code></pre>
+<p>As a result of this change, downstream macros based on <code>format_args!</code> would also be able to accept implicit named arguments in the same way. This would provide ergonomic benefit to many macros across the ecosystem, including:</p>
+<ul>
+<li><code>format!</code></li>
+<li><code>print!</code> and <code>println!</code></li>
+<li><code>eprint!</code> and <code>eprintln!</code></li>
+<li><code>write!</code> and <code>writeln!</code></li>
+<li><code>panic!</code>, <code>unreachable!</code> and <code>unimplemented!</code></li>
+<li><code>assert!</code> and similar</li>
+<li>macros in the <code>log</code> crate</li>
+<li>macros in the <code>failure</code> crate</li>
+</ul>
+<p>(This is not an exhaustive list of the many macros this would affect. In discussion of this RFC if any further commonly-used macros are noted, they may be added to this list.)</p>
+<h2><a class="header" href="#precedence" id="precedence">Precedence</a></h2>
+<p>Implicit arguments would have lower precedence than the existing named arguments <code>format_args!</code> already accepts. For example, in the example below, the <code>person</code> named argument is explicit, and so the <code>person</code> variable in the same scope would not be captured:</p>
+<pre><code>let person = &quot;Charlie&quot;;
+
+// Person is an explicit named argument, so this
+// expands to &quot;hello Snoopy&quot;.
+println!(&quot;hello {person}&quot;, person=&quot;Snoopy&quot;);
+</code></pre>
+<p>Indeed, in this example above the <code>person</code> variable would be unused, and so in this case the unused varible warning will apply, like the below:</p>
+<pre><code>warning: unused variable: `person`
+ --&gt; src/foo.rs:X:Y
+  |
+X |     let person = &quot;Charlie&quot;;
+  |         ^^^^^^ help: consider prefixing with an underscore: `_person`
+  |
+  = note: `#[warn(unused_variables)]` on by default
+</code></pre>
+<p>Because implicit named arguments would have lower precedence than explicit named arguments, it is anticipated that no breaking changes would occur to existing code by implementing this RFC.</p>
+<h2><a class="header" href="#generated-format-strings" id="generated-format-strings">Generated Format Strings</a></h2>
+<p><code>format_args!</code> can accept an expression instead of a string literal as its first argument. <code>format_args!</code> will attempt to expand any such expression to a string literal. If successful then the <code>format_args!</code> expansion will continue as if the user had passed that string literal verbatim.</p>
+<p>No implicit named argument capture will be performed if the format string is generated from an expansion. See the <a href="#macro-hygiene">macro hygiene</a> discussion for the motivation behind this decision.</p>
+<h1><a class="header" href="#reference-level-explanation" id="reference-level-explanation">Reference-level explanation</a></h1>
+<p>The implementation pathway is directly motivated by the guide level explanation given above:</p>
+<ol>
+<li>
+<p>The <code>format_args!</code> macro can continue to parse the format string and arguments provided to it in the existing fashion, categorising arguments as either positional or named.</p>
+</li>
+<li>
+<p>In the current implementation of <code>format_args!</code>, after parsing has occurred, all the arguments referred to by the format string are validated against the actual arguments provided. If a named argument is referred to in the format string but no corresponding named argument was provided to the macro, then an error is emitted:</p>
+<pre><code> error: there is no argument named `person`
+ --&gt; src/foo.rs:X:Y
+  |
+X |     println!(&quot;hello {person}&quot;);
+  |                     ^^^^^^^^
+</code></pre>
+<p>If this RFC were implemented, instead of this resulting in an error, this named argument would be treated as an <strong>implicit named argument</strong> and the final result of the expansion of the <code>format_args!</code> macro would be the same as if a named argument, with name equivalent to the identifier, had been provided to the macro invocation.</p>
+<p>Because <code>person</code> is only treated as an implicit named argument if no exisiting named argument can be found, this ensures that implicit named arguments have lower precedence than explicit named arguments.</p>
+</li>
+</ol>
+<h2><a class="header" href="#macro-hygiene" id="macro-hygiene">Macro Hygiene</a></h2>
+<p>Expanding the macro in this fashion will need to generate an identifier which corresponds to the implicit named argument. The hygiene of this generated identifier would be inherited from the format string, with location information reduced to the section of the format string which contains the implicit named argument.</p>
+<p>An interesting case to consider is that <code>format_args!</code>-based macros can accept any expression in the format string position. The macro then attempts to expand this expression to a string literal.</p>
+<p>This means the below examples of <code>format!</code> invocations could compile successfully in stable Rust today:</p>
+<pre><code>format!(include_str!(&quot;README.md&quot;), foo=1)
+format!(concat!(&quot;hello &quot;, &quot;{bar}&quot;)), bar=2)
+</code></pre>
+<p>This RFC argues that <code>format_args!</code> should not attempt to expand any implicit named arguments if the macro is provided with an expression instead of a verbatim string literal.</p>
+<p>The following are motivations why this RFC argues this case:</p>
+<ul>
+<li>
+<p>This RFC's motivation for implicit named arguments is to give users a concise syntax for string formatting. When the format string is generated from some other expression this motivation for concise syntax is irrelevant.</p>
+</li>
+<li>
+<p>The hygienic context of the string literal generated by the expansion is entirely dependent on the expression. For example, the string literal produced by the <code>concat!</code> macro resides in a separate hygienic context. In combination with implicit named arguments using hygiene inherited from the format string, this would lead to puzzling errors like the below:</p>
+<pre><code>error[E0425]: cannot find value `person` in this scope
+ --&gt; scratch/test.rs:4:14
+  |
+  |     let person = &quot;Charlie&quot;;
+4 |     println!(concat!(&quot;hello {person}&quot;));
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+</code></pre>
+</li>
+<li>
+<p>The expression may expand to a format string which contains new identifiers not written by the users, bypassing macro hygiene in suprising ways. For example, if the <code>concat!</code> macro did not have the hygiene issue described above, it could be to &quot;splice together&quot; an implicit named argument like so:</p>
+<pre><code> let person = &quot;Charlie&quot;;
+ println!(concat!(&quot;hello {p&quot;, &quot;er&quot;, &quot;son&quot;, &quot;}&quot;));
+</code></pre>
+<p>The RFC author argues that it appears highly undesirable that implicit capture of the <code>person</code> identifier should occur in this example given above.</p>
+</li>
+<li>
+<p>Using the hygienic context of the format string for implicit named arguments can have potentially suprising results even just with <code>macro_rules!</code> macros.</p>
+<p>For example, the RFC author found that with a proof-of-concept implementation of implicit named arguments the invocation below would print <code>&quot;Snoopy&quot;</code>:</p>
+<pre><code>const PERSON: &amp;'static str = &quot;Charlie&quot;;
+
+fn main() {
+    macro_rules! bar {
+      () =&gt; { &quot;{PERSON}&quot; };
+    }
+
+    const PERSON: &amp;'static str = &quot;Snoopy&quot;;
+    println!(bar!());
+}
+</code></pre>
+<p>However, by merely changing to <code>let</code> bindings and moving the <code>&quot;Charlie&quot;</code> declaration three lines down to be inside the <code>main()</code> function, as below, the invocation would instead print <code>&quot;Charlie&quot;</code>:</p>
+<pre><code>fn main() {
+    let person = &quot;Charlie&quot;;
+    macro_rules! bar {
+        () =&gt; { &quot;{person}&quot; };
+    }
+
+    let person = &quot;Snoopy&quot;;
+    println!(bar!());
+}
+</code></pre>
+<p>While it can be argued that this example is very contrived, the RFC author believes that it is undesirable to add such subtle interactions to the <code>format_args!</code> family of macros.</p>
+</li>
+</ul>
+<p>These appear to give strong motivation to disable implicit argument capture when <code>format_args!</code> expands an expression instead of a verbatim string literal.</p>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p>As the syntax proposed does not currently compile, the author of this RFC does not foresee concerns about this addition creating breaking changes to Rust code already in production.</p>
+<p>However, this proposal does increase the complexity of the macros in question, as there would now be three options for how users may provide arguments to the them (positional arguments, named arguments, and the new implicit named arguments).</p>
+<p>It would also alter the learning pathway for users as they encounter these macros for the first time. If implicit named arguments prove convenient and popular in the Rust ecosystem, it may be that new users of the language learn how to use the macros in implicit named argument form before they encounter the other two options, and may even not learn about the other two options until some time into their Rust journey.</p>
+<p>Furthermore, users familiar with implicit named arguments, but not the other options, may attempt to pass expressions as arguments to format macros. Expressions would not be valid implicit named arguments. For example:</p>
+<pre><code>// get_person() is a function call expression, not an identifier,
+// so could not be accepted as an implicit named argument
+println!(&quot;hello {}&quot;, get_person());
+</code></pre>
+<p>This is not world-ending, as users who only know about implicit named arguments (and not positional or named arguments) might write something like the following:</p>
+<pre><code>let person = get_person();
+println!(&quot;hello {person}&quot;);
+</code></pre>
+<p>While two lines rather than one, it is still perfectly readable code.</p>
+<h1><a class="header" href="#rationale-and-alternatives" id="rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>The core macro resonsible for all Rust's string formatting mechanism is <code>std::format_args!</code>. It requires a format string, as well as a corresponding number of additional arguments which will be substituted into appropriate locations in the format string.</p>
+<p>There are two types of arguments <code>format_args!</code> can accept:</p>
+<ol>
+<li>
+<p>Positional arguments, which require less typing and so (in the RFC author's experience) are used more frequently:</p>
+<pre><code>format_args!(&quot;The {}'s name is {}.&quot;, species, name)
+</code></pre>
+</li>
+<li>
+<p>Named arguments, which require more typing but (in the RFC author's experience) have the upside that the the format string itself is easier to read:</p>
+<pre><code>format_args!(
+    &quot;The {species}'s name is {name}&quot;,
+    species=species,
+    name=name
+)
+</code></pre>
+</li>
+</ol>
+<p>Neither positional or named arguments are restricted to identifiers. They can accept any valid Rust expression, for example:</p>
+<pre><code>format_args!(&quot;Hello {}&quot;, get_person())
+format_args!(&quot;Hello {person}&quot;, person=get_person())
+</code></pre>
+<p>However, this RFC author's experience is that a significant majority of arguments to formatting macros are simple identifiers. (It is openly acknowledged that this is a subjective statement.)</p>
+<p>Implicit named arguments seek to combine the brevity of positional arguments with the clarity that named arguments provide to the format string:</p>
+<pre><code>format_args!(&quot;The {species}'s name is {name}&quot;)
+</code></pre>
+<h2><a class="header" href="#alternative-implementations-and-syntax" id="alternative-implementations-and-syntax">Alternative Implementations and Syntax</a></h2>
+<p>Users who wish to use implicit named arguments could make use of a third-party crate, for example the existing <a href="https://crates.io/crates/fstrings">fstrings crate</a>, which was built during early discussion about this proposal. This RFC accepts that deferring to a third-party crate is a reasonable option. It would however miss out on the opportunity to provide a small and straightforward ergnomic boost to many macros which are core to the rust language as well as the ecosytem which is derived from these standard library macros.</p>
+<p>For similar reasons this RFC would argue that introducing a new alternative macro to <code>format_args!</code> in the standard library would not be a good outcome compared to adding to the existing macro.</p>
+<p>An alternative syntax for implicit named arguments is welcomed by this RFC if it can be argued why it is preferable to the RFC's proposed form. The RFC author argues the chosen syntax is the most suitable, because it matches the existing syntax for named arguments.</p>
+<h2><a class="header" href="#alternative-solution---interpolation" id="alternative-solution---interpolation">Alternative Solution - Interpolation</a></h2>
+<p>Some may argue that if it becomes possible to write identifiers into format strings and have them passed as implicit named arguments to the macro, why not make it possible to do similar with expressions. For example, these macro invocations seem innocent enough, reasonably readable, and are supported in Python 3 and Javascript's string formatting mechanisms:</p>
+<pre><code>println!(&quot;hello {get_person()}&quot;);  // function call
+println!(&quot;hello {self.person}&quot;);   // field access
+</code></pre>
+<p>The RFC author anticipates in particular that field access may be requested by many as part of this RFC. After careful consideration this RFC does not propose to go further than the single identifier special case, proposed above as implicit named arguments.</p>
+<p>If any expressions beyond identifiers become accepted in format strings, then the RFC author expects that users will inevitably ask &quot;why is <em>my</em> particular expression not accepted?&quot;. This could lead to feature creep, and before long perhaps the following might become valid Rust:</p>
+<pre><code>println!(&quot;hello { if self.foo { &amp;self.person } else { &amp;self.other_person } }&quot;);
+</code></pre>
+<p>This no longer seems easily readable to the RFC author.</p>
+<h3><a class="header" href="#proposed-interpolation-syntax" id="proposed-interpolation-syntax">Proposed Interpolation Syntax</a></h3>
+<p>Early review of this RFC raised an observation that the endpoint of such feature creep would be that eventually Rust would embrace interpolation of any expressions inside these macros.</p>
+<p>To keep interpolation isolated from named and positional arguments, as well as for readability and (possibly) to reduce parsing complexity, curly-plus-bracket syntax was proposed for interpolation:</p>
+<pre><code>println!(&quot;hello {(get_person())}&quot;);
+println!(&quot;hello {(self.person)}&quot;);
+</code></pre>
+<p>Indeed the RFC's perverse example reads slightly easier with this syntax:</p>
+<pre><code>println!(&quot;hello {( if self.foo { &amp;self.person } else { &amp;self.other_person } )}&quot;);
+</code></pre>
+<p>Because the interpolation syntax <code>{(expr)}</code> is orthogonal to positional <code>{}</code> and named <code>{ident}</code> argument syntax, and is a superset of the functionality which would be offered by implict named arguments, the argument was made that we should make the leap directly to interpolation without introducing implicit named arguments so as to avoid complicating the existing cases.</p>
+<h3><a class="header" href="#argument-against-interpolation" id="argument-against-interpolation">Argument Against Interpolation</a></h3>
+<p>It should first be noted that the interpolation in other languages is often a language feature; if they have string formatting functions they typically do not enjoy syntax-level support. Instead other language formatting functions often behave similarly to Rust's positional and/or named arguments to formatting macros.</p>
+<p>For example, Python 3's <code>.format()</code> method is on the surface extremely similar to Rust's formatting macros:</p>
+<pre><code>&quot;hello {}&quot;.format(person)
+&quot;hello {person}&quot;.format(person=person)
+</code></pre>
+<p>However, Python 3 cannot improve the ergonomics of these functions in the same way that this RFC proposes to use implicit named arguments. This is for technical reasons: Python simply does not have a language mechanism which could be used to add implicit named arguments to the <code>.format()</code> method. As a result, offering improved ergonomics in Python necessitated the introduction of a language-level interpolation syntax (f-strings, described in the <a href="#prior-art">prior art</a> section).</p>
+<p>(Note, the closest Python 3's <code>.format()</code> can get to implicit named arguments is this:</p>
+<pre><code>&quot;hello {person}&quot;.format(**locals())
+</code></pre>
+<p>but as noted in <a href="https://www.python.org/dev/peps/pep-0498/#no-use-of-globals-or-locals">PEP 498</a>, the Python language designers had reasons why they wanted to avoid this pattern becoming commonplace in Python code.)</p>
+<p>Rust's macros are not constrained by the same technical limitations, being free to introduce syntax as long as it is supported by the macro system and hygiene. The macros can therefore enjoy carefully-designed ergonomic improvements without needing to reach for large extensions such as interpolation.</p>
+<p>The RFC author would argue that if named arguments (implicit or regular) become popular as a result of implementation of this RFC, then the following interpolation-free invocations would be easy to read and good style:</p>
+<pre><code>// Just use named arguments in simple cases
+println!(&quot;hello {person}&quot;, person=get_person());
+println!(&quot;hello {person}&quot;, person=self.person);
+
+// For longwinded expressions, create identifiers to pass implicitly
+// so as to keep the macro invocation concise.
+let person = if self.foo { &amp;self.person } else { &amp;self.other_person };
+println!(&quot;hello {person}&quot;);
+</code></pre>
+<p>Similar to how implicit named arguments can be offered by third-party crates, interpolation macros already exist in the <a href="https://crates.io/crates/ifmt">ifmt crate</a>.</p>
+<h3><a class="header" href="#interpolation-summary" id="interpolation-summary">Interpolation Summary</a></h3>
+<p>The overall argument is not to deny that the standard library macros in question would not become more expressive if they were to gain fully interpolation.</p>
+<p>However, the RFC author argues that adding interpolation to these macros is less neccessary to improve ergonomics when comparing against other languages which chose to introduce language-level interpolation support. Introduction of implicit named arguments will cater for many of the common instances where interpolation would have been desired. The existing positional and named arguments can accept arbitrary expressions, and are not so unergonomic that they feel overly cumbersome when the expression in question is also nontrivial.</p>
+<h1><a class="header" href="#prior-art" id="prior-art">Prior art</a></h1>
+<h2><a class="header" href="#field-init-shorthand" id="field-init-shorthand">Field Init Shorthand</a></h2>
+<p>Rust already has another case in the language where the single identifier case is special-cased:</p>
+<pre><code>struct Foo { bar: u8 }
+let bar = 1u8;
+
+let foo = Foo { bar: bar };
+let foo = Foo { bar };        // This shorthand only accepts single identifiers
+</code></pre>
+<p>This syntax is widely used and clear to read. It's <a href="https://doc.rust-lang.org/book/ch05-01-defining-structs.html#using-the-field-init-shorthand-when-variables-and-fields-have-the-same-name">introduced in the Rust Book as one of the first topics in the section on structs</a>. This sets a precedent that the Rust language is prepared to accept special treatment for single identifiers when it keeps syntax concise and clear.</p>
+<h2><a class="header" href="#other-languages" id="other-languages">Other languages</a></h2>
+<p>A number of languages support string-interpolation functionality with similar syntax to what Rust's formatting macros. The RFC author's influence comes primarily from Python 3's &quot;f-strings&quot; and Javscript's backticks.</p>
+<p>The following code would be the equivalent way to produce a new string combining a <code>greeting</code> and a <code>person</code> in a variety of languages:</p>
+<pre><code>// Rust
+format!(&quot;{} {}&quot;, greeting, person)                                // positional form,
+format!(&quot;{greeting} {person}&quot;, greeting=greeting, person=person)  // or named form
+
+# Python 3
+f&quot;{greeting} {person}&quot;
+
+// Javascript
+`${greeting} ${person}`
+
+// C# / VB
+$&quot;{greeting} {person}&quot;
+
+// Swift
+&quot;\(greeting) \(person)&quot;
+
+// Ruby
+&quot;#{greeting} #{person}&quot;
+
+// Scala
+s&quot;$greeting $person&quot;
+
+// Perl and PHP
+&quot;$greeting $person&quot;
+</code></pre>
+<p>It is the RFC author's experience that these interpolating mechanisms read easily from left-to-right and it is clear where each variable is being substituted into the format string.</p>
+<p>In the Rust formatting macros as illustrated above, the positional form suffers the drawback of not reading strictly from left to right; the reader of the code must refer back-and-forth between the format string and the argument list to determine where each variable will be subsituted. The named form avoids this drawback at the cost of much longer code.</p>
+<p>Implementing implicit named arguments in the fashion suggested in this RFC would eliminate the drawbacks of each of the Rust forms and permit new syntax much closer to the other languages:</p>
+<pre><code>// Rust - implicit named arguments
+format!(&quot;{greeting} {person}&quot;)
+</code></pre>
+<p>It should be noted, however, that other languages' string interpolation mechanisms allow substitution of a wide variety of expressions beyond the simple identifier case that this RFC is focussed on.</p>
+<p>Please see the discussion on <a href="#interpolation">interpolation</a> as an alternative to this RFC.</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<h2><a class="header" href="#interaction-with-panic" id="interaction-with-panic">Interaction with <code>panic!</code></a></h2>
+<p>The <code>panic!</code> macro forwards to <code>format_args!</code> for string formatting. For example, the below code compiles on stable Rust today:</p>
+<pre><code>fn main() {
+    panic!(&quot;Error code: {code}&quot;, code=1);
+    // thread 'main' panicked at 'Error code: 1' ...
+}
+</code></pre>
+<p>However, in current stable Rust the <code>panic!</code> macro does not forward to <code>format_args!</code> if there is only a single argument. This would interact poorly with implicit named arguments. In the invocation below, for example, users familiar with implicit named argument capture would expect the panic message to be formatted. Instead, given <code>panic!</code>'s current semantics, the panic message would be the unformatted literal:</p>
+<pre><code>fn main() {
+    let code = 1;
+    panic!(&quot;Error code: {code}&quot;);
+    // thread 'main' panicked at 'Error code: {code}' ...
+}
+</code></pre>
+<p>This semantic of <code>panic!</code> has previously been acknowledged as a &quot;papercut&quot;, for example in <a href="https://github.com/rust-lang/rust/issues/22932">this Rust issue</a>. However, it has so far been left as-is because changing the design was low priority, and changing it may break existing code.</p>
+<p>If this RFC were to be implemented, users will very likely expect invoking <code>panic!</code> with only a string literal will capture any implicit named arguments. This semantic would quickly become percieved as a major bug rather than a papercut.</p>
+<p>Implementing this RFC therefore would bring strong motivation for making a small breaking change to <code>panic!</code>: when a single argument passed to panic is a string literal, instead of the final panic message being that literal (the current behavior), the final panic message will be the formatted literal, substituting any implicit named arguments denoted in the literal.</p>
+<p>That is, the desired behavior is as the example below:</p>
+<pre><code>fn main() {
+    let code = 1;
+    panic!(&quot;Error code: {code}&quot;);
+    // thread 'main' panicked at 'Error code: 1' ...
+}
+</code></pre>
+<p>This change to <code>panic!</code> would alter the behavior of existing code (such as the example above). It would also stop some code from being accepted, such as <code>panic!(&quot;{}&quot;)</code>, which is valid code today but would become a compile fail (because this would be a missing positional argument). Crates implementing macros with similar semantics to <code>panic!</code> (such as <code>failure</code>) may also wish to make changes to their crates in sync with the change to <code>panic!</code>. This suggests that this change to <code>panic!</code> would perhaps be ideal for release as part of a future Rust edition, say, 2021.</p>
+<p>The details of this pathway to change panic are open to discussion. Some possible options:</p>
+<ul>
+<li>
+<p><code>panic!</code> itself could be made a builtin macro (which would allow its behavior to vary between editions)</p>
+</li>
+<li>
+<p>A <code>$expr:literal</code> match arm could be added to <code>panic!</code>. This arm could forward to a built-in macro which controlled behaviour appropriately.</p>
+</li>
+<li>
+<p>A new implementation of <code>panic!</code> could be written, and switching between them could be done with a new <code>std::prelude</code>.</p>
+</li>
+</ul>
+<p>Whichever route is chosen, it is agreed that this RFC should not be stabilised unless <code>format!(&quot;{foo}&quot;)</code> and <code>panic!(&quot;{foo}&quot;)</code> can be made consistent with respect to implicit named arguments.</p>
+<h2><a class="header" href="#should-implicit-named-arguments-be-captured-for-formatting-parameters" id="should-implicit-named-arguments-be-captured-for-formatting-parameters">Should implicit named arguments be captured for formatting parameters?</a></h2>
+<p>Some of the formatting traits can accept additional formatting parameters to control how the argument is displayed. For example, the precision with which to display a floating-point number:</p>
+<pre><code>println!(&quot;{:.5}&quot;, x);  // print x to 5 decimal places
+</code></pre>
+<p>It is also possible for the precision to refer to either positional or named arguments using &quot;dollar syntax&quot;:</p>
+<pre><code>println!(&quot;{:.1$}&quot;, x, 5);
+println!(&quot;{:.prec$}&quot;, x, prec=5);
+</code></pre>
+<p>As a result of this RFC, formatting parameters could potentially also make use implicit named argument capture:</p>
+<pre><code>println!(&quot;{x:.precision$}&quot;);
+</code></pre>
+<p>The RFC author believes Rust users familiar with implicit named arguments may expect the above to compile (as long as <code>x</code> and <code>precision</code> were valid identifiers in the scope in question). However, feedback is requested during this RFC process as to whether the this should be indeed become acceptable as part of the RFC.</p>
+<p>All such formatting parameters can refer to arguments using dollar syntax, and so this question also applies to them.</p>
+<h2><a class="header" href="#should-we-improve-the-error-for-invalid-expressions-in-format-strings" id="should-we-improve-the-error-for-invalid-expressions-in-format-strings">Should we improve the error for invalid expressions in format strings?</a></h2>
+<p>Users familiar with implicit named arguments may attempt to write expressions inside format strings, for example a function call:</p>
+<pre><code>println!(&quot;hello {get_person()}&quot;);
+</code></pre>
+<p>The current error message that would be emitted does not explain that arbitrary expressions are not possible inside format strings:</p>
+<pre><code>error: invalid format string: expected `'}'`, found `'('`
+--&gt; .\foo.rs:X:Y
+  |
+3 |     println!(&quot;hello {get_person()}&quot;);
+  |                     -          ^ expected `}` in format string
+  |                     |
+  |                     because of this opening brace
+  |
+  = note: if you intended to print `{`, you can escape it using `{{`
+</code></pre>
+<p>An new message which informs the users of alternative possibilities may be helpful:</p>
+<pre><code>error: expressions may not be used inside format strings
+--&gt; .\scratch\test.rs:3:37
+  |
+3 |     println!(&quot;hello {get_person()}&quot;);
+  |                     ^^^^^^^^^^^^^^ expression is here
+  |
+= note: if you wanted to pass an expression as an argument to a formatting macro,
+  try as a positional argument, e.g. println!(&quot;hello {}&quot;, get_person());
+        or as a named argument, e.g. println!(&quot;hello {foo}&quot;, foo=get_person());
+</code></pre>
+<p>It is not clear how significant a change this might require to <code>format_args!</code>'s parsing machinery, or how this error message might scale with the complexity of the format string in question.</p>
+<h1><a class="header" href="#future-possibilities" id="future-possibilities">Future possibilities</a></h1>
+<p>The main alternative raised by this RFC is interpolation, which is a superset of the functionality offered by implicit named arguments. However, for reasons discussed above, interpolation is not the objective of this RFC.</p>
+<p>Accepting the addition of implicit named arguments now is not incompatible with adding interpolation at a later date.</p>
+<p>Future discussion on this topic may also focus on adding interpolation for just a subset of possible expressions, for example <code>dotted.paths</code>. We noted in debate for this RFC that particularly for formatting parameters the existing dollar syntax appears problematic for both parsing and reading, for example <code>{self.x:self.width$.self.precision$}</code>.</p>
+<p>The conclusion we came to in the RFC discussion is that adding even just interpolations for <code>dotted.paths</code> will therefore want a new syntax, which we nominally chose as the <code>{(expr)}</code> syntax already suggested in the <a href="#interpolation">interpolation</a> alternative section of this RFC.</p>
+<p>Using this parentheses syntax, for example, we might one day accept <code>{(self.x):(self.width).(self.precision)}</code> to support <code>dotted.paths</code> and a few other simple expressions. The choice of whether to support an expanded subset, support interpolation of all expressions, or not to add any further complexity to this macro is deferred to the future.</p>
+<p>A future proposal for extending interpolation support might wish to explore alternative syntaxes to <code>{(expr)}</code> parentheses which can also be parsed and read comfortably.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2707-dotdot-patterns.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2797-project-ffi-unwind.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2707-dotdot-patterns.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2797-project-ffi-unwind.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

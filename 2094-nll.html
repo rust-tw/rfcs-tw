@@ -1,0 +1,2199 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2094-nll - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html" class="active">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: nll</li>
+<li>Start Date: 2017-08-02</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2094">rust-lang/rfcs#2094</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/44928">rust-lang/rust#44928</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Extend Rust's borrow system to support <strong>non-lexical lifetimes</strong> --
+these are lifetimes that are based on the control-flow graph, rather
+than lexical scopes. The RFC describes in detail how to infer these
+new, more flexible regions, and also describes how to adjust our error
+messages. The RFC also describes a few other extensions to the borrow
+checker, the total effect of which is to eliminate many common cases
+where small, function-local code modifications would be required to pass the
+borrow check. (The appendix describes some of the remaining
+borrow-checker limitations that are not addressed by this RFC.)</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<h2><a class="header" href="#what-is-a-lifetime" id="what-is-a-lifetime">What is a lifetime?</a></h2>
+<p>The basic idea of the borrow checker is that values may not be mutated
+or moved while they are borrowed, but how do we know whether a value
+is borrowed? The idea is quite simple: whenever you create a borrow,
+the compiler assigns the resulting reference a <strong>lifetime</strong>. This
+lifetime corresponds to the span of the code where the reference may
+be used. The compiler will infer this lifetime to be the smallest
+lifetime that it can have that still encompasses all the uses of the
+reference.</p>
+<p>Note that Rust uses the term lifetime in a very particular way.  In
+everyday speech, the word lifetime can be used in two distinct -- but
+similar -- ways:</p>
+<ol>
+<li>The lifetime of a <strong>reference</strong>, corresponding to the span of time in
+which that reference is <strong>used</strong>.</li>
+<li>The lifetime of a <strong>value</strong>, corresponding to the span of time
+before that value gets <strong>freed</strong> (or, put another way, before the
+destructor for the value runs).</li>
+</ol>
+<p>This second span of time, which describes how long a value is valid,
+is very important. To distinguish the two, we refer to that
+second span of time as the value's <strong>scope</strong>. Naturally, lifetimes and
+scopes are linked to one another. Specifically, if you make a
+reference to a value, the lifetime of that reference cannot outlive
+the scope of that value. Otherwise, your reference would be pointing
+into freed memory.</p>
+<p>To better see the distinction between lifetime and scope, let's
+consider a simple example. In this example, the vector <code>data</code> is
+borrowed (mutably) and the resulting reference is passed to a function
+<code>capitalize</code>. Since <code>capitalize</code> does not return the reference back,
+the <em>lifetime</em> of this borrow will be confined to just that call. The
+<em>scope</em> of data, in contrast, is much larger, and corresponds to a
+suffix of the fn body, stretching from the <code>let</code> until the end of the
+enclosing scope.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo() {
+    let mut data = vec!['a', 'b', 'c']; // --+ 'scope
+    capitalize(&amp;mut data[..]);          //   |
+//  ^~~~~~~~~~~~~~~~~~~~~~~~~ 'lifetime //   |
+    data.push('d');                     //   |
+    data.push('e');                     //   |
+    data.push('f');                     //   |
+} // &lt;---------------------------------------+
+
+fn capitalize(data: &amp;mut [char]) {
+    // do something
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This example also demonstrates something else. Lifetimes in Rust today
+are quite a bit more flexible than scopes (if not as flexible as we
+might like, hence this RFC):</p>
+<ul>
+<li>A scope generally corresponds to some block (or, more specifically,
+a <em>suffix</em> of a block that stretches from the <code>let</code> until the end of
+the enclosing block) [<a href="#temporaries">1</a>].</li>
+<li>A lifetime, in contrast, can also span an individual expression, as
+this example demonstrates. The lifetime of the borrow in the example
+is confined to just the call to <code>capitalize</code>, and doesn't extend
+into the rest of the block. This is why the calls to <code>data.push</code>
+that come below are legal.</li>
+</ul>
+<p>So long as a reference is only used within one statement, today's
+lifetimes are typically adequate. Problems arise however when you have
+a reference that spans multiple statements. In that case, the compiler
+requires the lifetime to be the innermost expression (which is often a
+block) that encloses both statements, and that is typically much
+bigger than is really necessary or desired. Let's look at some example
+problem cases. Later on, we'll see how non-lexical lifetimes fix these
+cases.</p>
+<h2><a class="header" href="#problem-case-1-references-assigned-into-a-variable" id="problem-case-1-references-assigned-into-a-variable">Problem case #1: references assigned into a variable</a></h2>
+<p>One common problem case is when a reference is assigned into a
+variable. Consider this trivial variation of the previous example,
+where the <code>&amp;mut data[..]</code> slice is not passed directly to
+<code>capitalize</code>, but is instead stored into a local variable:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn bar() {
+    let mut data = vec!['a', 'b', 'c'];
+    let slice = &amp;mut data[..]; // &lt;-+ 'lifetime
+    capitalize(slice);         //   |
+    data.push('d'); // ERROR!  //   |
+    data.push('e'); // ERROR!  //   |
+    data.push('f'); // ERROR!  //   |
+} // &lt;------------------------------+
+<span class="boring">}
+</span></code></pre></pre>
+<p>The way that the compiler currently works, assigning a reference into
+a variable means that its lifetime must be as large as the entire
+scope of that variable. In this case, that means the lifetime is now
+extended all the way until the end of the block. This in turn means
+that the calls to <code>data.push</code> are now in error, because they occur
+during the lifetime of <code>slice</code>. It's logical, but it's annoying.</p>
+<p>In this particular case, you could resolve the problem by putting
+<code>slice</code> into its own block:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn bar() {
+    let mut data = vec!['a', 'b', 'c'];
+    {
+        let slice = &amp;mut data[..]; // &lt;-+ 'lifetime
+        capitalize(slice);         //   |
+    } // &lt;------------------------------+
+    data.push('d'); // OK
+    data.push('e'); // OK
+    data.push('f'); // OK
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Since we introduced a new block, the scope of <code>slice</code> is now smaller,
+and hence the resulting lifetime is smaller. Introducing a
+block like this is kind of artificial and also not an entirely obvious
+solution.</p>
+<h2><a class="header" href="#problem-case-2-conditional-control-flow" id="problem-case-2-conditional-control-flow">Problem case #2: conditional control flow</a></h2>
+<p>Another common problem case is when references are used in only one
+given match arm (or, more generally, one control-flow path). This most
+commonly arises around maps. Consider this function, which, given some
+<code>key</code>, processes the value found in <code>map[key]</code> if it exists, or else
+inserts a default value:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn process_or_default() {
+    let mut map = ...;
+    let key = ...;
+    match map.get_mut(&amp;key) { // -------------+ 'lifetime
+        Some(value) =&gt; process(value),     // |
+        None =&gt; {                          // |
+            map.insert(key, V::default()); // |
+            //  ^~~~~~ ERROR.              // |
+        }                                  // |
+    } // &lt;------------------------------------+
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This code will not compile today. The reason is that the <code>map</code> is
+borrowed as part of the call to <code>get_mut</code>, and that borrow must
+encompass not only the call to <code>get_mut</code>, but also the <code>Some</code> branch
+of the match. The innermost expression that encloses both of these
+expressions is the match itself (as depicted above), and hence the
+borrow is considered to extend until the end of the
+match. Unfortunately, the match encloses not only the <code>Some</code> branch,
+but also the <code>None</code> branch, and hence when we go to insert into the
+map in the <code>None</code> branch, we get an error that the <code>map</code> is still
+borrowed.</p>
+<p>This <em>particular</em> example is relatively easy to workaround. In many cases,
+one can move the code for <code>None</code> out from the <code>match</code> like so:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn process_or_default1() {
+    let mut map = ...;
+    let key = ...;
+    match map.get_mut(&amp;key) { // -------------+ 'lifetime
+        Some(value) =&gt; {                   // |
+            process(value);                // |
+            return;                        // |
+        }                                  // |
+        None =&gt; {                          // |
+        }                                  // |
+    } // &lt;------------------------------------+
+    map.insert(key, V::default());
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>When the code is adjusted this way, the call to <code>map.insert</code> is not
+part of the match, and hence it is not part of the borrow.  While this
+works, it is unfortunate to require these sorts of
+manipulations, just as it was when we introduced an artificial block
+in the previous example.</p>
+<h2><a class="header" href="#problem-case-3-conditional-control-flow-across-functions" id="problem-case-3-conditional-control-flow-across-functions">Problem case #3: conditional control flow across functions</a></h2>
+<p>While we were able to work around problem case #2 in a relatively
+simple, if irritating, fashion, there are other variations of
+conditional control flow that cannot be so easily resolved. This is
+particularly true when you are returning a reference out of a
+function. Consider the following function, which returns the value for
+a key if it exists, and inserts a new value otherwise (for the
+purposes of this section, assume that the <code>entry</code> API for maps does
+not exist):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_default&lt;'r,K:Hash+Eq+Copy,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
+                                            key: K)
+                                            -&gt; &amp;'r mut V {
+    match map.get_mut(&amp;key) { // -------------+ 'r
+        Some(value) =&gt; value,              // |
+        None =&gt; {                          // |
+            map.insert(key, V::default()); // |
+            //  ^~~~~~ ERROR               // |
+            map.get_mut(&amp;key).unwrap()     // |
+        }                                  // |
+    }                                      // |
+}                                          // v
+<span class="boring">}
+</span></code></pre></pre>
+<p>At first glance, this code appears quite similar to the code we saw
+before, and indeed, just as before, it will not compile. In fact,
+the lifetimes at play are quite different. The reason is that, in the
+<code>Some</code> branch, the value is being <strong>returned out</strong> to the caller.
+Since <code>value</code> is a reference into the map, this implies that the <code>map</code>
+will remain borrowed <strong>until some point in the caller</strong> (the point
+<code>'r</code>, to be exact). To get a better intuition for what this lifetime
+parameter <code>'r</code> represents, consider some hypothetical caller of
+<code>get_default</code>: the lifetime <code>'r</code> then represents the span of code in
+which that caller will use the resulting reference:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn caller() {
+    let mut map = HashMap::new();
+    ...
+    {
+        let v = get_default(&amp;mut map, key); // -+ 'r
+          // +-- get_default() -----------+ //  |
+          // | match map.get_mut(&amp;key) {  | //  |
+          // |   Some(value) =&gt; value,    | //  |
+          // |   None =&gt; {                | //  |
+          // |     ..                     | //  |
+          // |   }                        | //  |
+          // +----------------------------+ //  |
+        process(v);                         //  |
+    } // &lt;--------------------------------------+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>If we attempt the same workaround for this case that we tried
+in the previous example, we will find that it does not work:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_default1&lt;'r,K:Hash+Eq+Copy,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
+                                             key: K)
+                                             -&gt; &amp;'r mut V {
+    match map.get_mut(&amp;key) { // -------------+ 'r
+        Some(value) =&gt; return value,       // |
+        None =&gt; { }                        // |
+    }                                      // |
+    map.insert(key, V::default());         // |
+    //  ^~~~~~ ERROR (still)                  |
+    map.get_mut(&amp;key).unwrap()             // |
+}                                          // v
+<span class="boring">}
+</span></code></pre></pre>
+<p>Whereas before the lifetime of <code>value</code> was confined to the match, this
+new lifetime extends out into the caller, and therefore the borrow
+does not end just because we exited the match. Hence it is still in
+scope when we attempt to call <code>insert</code> after the match.</p>
+<p>The workaround for this problem is a bit more involved. It relies on
+the fact that the borrow checker uses the precise control-flow of the
+function to determine which borrows are in scope.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_default2&lt;'r,K:Hash+Eq+Copy,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
+                                             key: K)
+                                             -&gt; &amp;'r mut V {
+    if map.contains(&amp;key) {
+    // ^~~~~~~~~~~~~~~~~~ 'n
+        return match map.get_mut(&amp;key) { // + 'r
+            Some(value) =&gt; value,        // |
+            None =&gt; unreachable!()       // |
+        };                               // v
+    }
+
+    // At this point, `map.get_mut` was never
+    // called! (As opposed to having been called,
+    // but its result no longer being in use.)
+    map.insert(key, V::default()); // OK now.
+    map.get_mut(&amp;key).unwrap()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>What has changed here is that we moved the call to <code>map.get_mut</code>
+inside of an <code>if</code>, and we have set things up so that the if body
+unconditionally returns. What this means is that a borrow begins at
+the point of <code>get_mut</code>, and that borrow lasts until the point <code>'r</code> in
+the caller, but the borrow checker can see that this borrow <em>will not
+have even started</em> outside of the <code>if</code>. It does not consider the
+borrow in scope at the point where we call <code>map.insert</code>.</p>
+<p>This workaround is more troublesome than the others, because the
+resulting code is actually less efficient at runtime, since it must do
+multiple lookups.</p>
+<p>It's worth noting that Rust's hashmaps include an <code>entry</code> API that
+one could use to implement this function today. The resulting code is
+both nicer to read and more efficient even than the original version,
+since it avoids extra lookups on the &quot;not present&quot; path as well:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_default3&lt;'r,K:Hash+Eq,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
+                                        key: K)
+                                        -&gt; &amp;'r mut V {
+    map.entry(key)
+       .or_insert_with(|| V::default())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Regardless, the problem exists for other data structures besides
+<code>HashMap</code>, so it would be nice if the original code passed the borrow
+checker, even if in practice using the <code>entry</code> API would be
+preferable. (Interestingly, the limitation of the borrow checker here
+was one of the motivations for developing the <code>entry</code> API in the first
+place!)</p>
+<h2><a class="header" href="#problem-case-4-mutating-mut-references" id="problem-case-4-mutating-mut-references">Problem case #4: mutating <code>&amp;mut</code> references</a></h2>
+<p>The current borrow checker forbids reassigning an <code>&amp;mut</code> variable <code>x</code>
+when the referent (<code>*x</code>) has been borrowed. This most commonly arises
+when writing a loop that progressively &quot;walks down&quot; a data structure.
+Consider this function, which converts a linked list <code>&amp;mut List&lt;T&gt;</code>
+into a <code>Vec&lt;&amp;mut T&gt;</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct List&lt;T&gt; {
+    value: T,
+    next: Option&lt;Box&lt;List&lt;T&gt;&gt;&gt;,
+}
+
+fn to_refs&lt;T&gt;(mut list: &amp;mut List&lt;T&gt;) -&gt; Vec&lt;&amp;mut T&gt; {
+    let mut result = vec![];
+    loop {
+        result.push(&amp;mut list.value);
+        if let Some(n) = list.next.as_mut() {
+            list = n;
+        } else {
+            return result;
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>If we attempt to compile this, we get an error (actually, we get
+multiple errors):</p>
+<pre><code>error[E0506]: cannot assign to `list` because it is borrowed
+  --&gt; /Users/nmatsakis/tmp/x.rs:11:13
+   |
+9  |         result.push(&amp;mut list.value);
+   |                          ---------- borrow of `list` occurs here
+10 |         if let Some(n) = list.next.as_mut() {
+11 |             list = n;
+   |             ^^^^^^^^ assignment to borrowed `list` occurs here
+</code></pre>
+<p>Specifically, what's gone wrong is that we borrowed <code>list.value</code> (or,
+more explicitly, <code>(*list).value</code>). The current borrow checker enforces
+the rule that when you borrow a path, you cannot assign to that path
+or any prefix of that path. In this case, that means you cannot assign to any
+of the following:</p>
+<ul>
+<li><code>(*list).value</code></li>
+<li><code>*list</code></li>
+<li><code>list</code></li>
+</ul>
+<p>As a result, the <code>list = n</code> assignment is forbidden. These rules make
+sense in some cases (for example, if <code>list</code> were of type <code>List&lt;T&gt;</code>,
+and not <code>&amp;mut List&lt;T&gt;</code>, then overwriting <code>list</code> would also overwrite
+<code>list.value</code>), but not in the case where we cross a mutable reference.</p>
+<p>As described in <a href="https://github.com/rust-lang/rust/issues/10520">Issue #10520</a>, there exist various workarounds
+for this problem. One trick is to move the <code>&amp;mut</code> reference into a
+temporary variable that you won't have to modify:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn to_refs&lt;T&gt;(mut list: &amp;mut List&lt;T&gt;) -&gt; Vec&lt;&amp;mut T&gt; {
+    let mut result = vec![];
+    loop {
+        let list1 = list;
+        result.push(&amp;mut list1.value);
+        if let Some(n) = list1.next.as_mut() {
+            list = n;
+        } else {
+            return result;
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>When you frame the program this way, the borrow checker sees that
+<code>(*list1).value</code> is borrowed (not <code>list</code>). This does not prevent us
+from later assigning to <code>list</code>.</p>
+<p>Clearly this workaround is annoying. The problem here, it turns out,
+is not specific to non-lexical lifetimes per se. Rather, it is that
+the rules which the borrow checker enforces when a path is borrowed
+are too strict and do not account for the indirection inherent in a
+borrowed reference. This RFC proposes a tweak to address that.</p>
+<h2><a class="header" href="#the-rough-outline-of-our-solution" id="the-rough-outline-of-our-solution">The rough outline of our solution</a></h2>
+<p>This RFC proposes a more flexible model for lifetimes. Whereas
+previously lifetimes were based on the abstract syntax tree, we now
+propose lifetimes that are defined via the control-flow graph. More
+specifically, lifetimes will be derived based on the <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">MIR</a>
+used internally in the compiler.</p>
+<p>Intuitively, in the new proposal, the lifetime of a reference lasts
+only for those portions of the function in which the reference may
+later be used (where the reference is <strong>live</strong>, in compiler
+speak). This can range from a few sequential statements (as in problem
+case #1) to something more complex, such as covering one arm in a
+match but not the others (problem case #2).</p>
+<p>However, in order to sucessfully type the full range of examples that
+we would like, we have to go a bit further than just changing
+lifetimes to a portion of the control-flow graph. <strong>We also have to
+take location into account when doing subtyping checks</strong>. This is in
+contrast to how the compiler works today, where subtyping relations
+are &quot;absolute&quot;. That is, in the current compiler, the type <code>&amp;'a ()</code> is
+a subtype of the type <code>&amp;'b ()</code> whenever <code>'a</code> outlives <code>'b</code> (<code>'a: 'b</code>),
+which means that <code>'a</code> corresponds to a bigger portion of the function.
+Under this proposal, subtyping can instead be established <strong>at a
+particular point P</strong>. In that case, the lifetime <code>'a</code> must only
+outlive those portions of <code>'b</code> that are reachable from P.</p>
+<p>The ideas in this RFC have been implemented in
+<a href="https://github.com/nikomatsakis/nll">prototype form</a>. This prototype includes a simplified
+control-flow graph that allows one to create the various kinds of
+region constraints that can arise and implements the region inference
+algorithm which then solves those constraints.</p>
+<h1><a class="header" href="#detailed-design" id="detailed-design">Detailed design</a></h1>
+<h2><a class="header" href="#layering-the-design" id="layering-the-design">Layering the design</a></h2>
+<p>We describe the design in &quot;layers&quot;:</p>
+<ol>
+<li>Initially, we will describe a basic design focused on control-flow
+within one function.</li>
+<li>Next, we extend the control-flow graph to better handle infinite loops.</li>
+<li>Next, we extend the design to handle dropck, and specifically the
+<code>#[may_dangle]</code> attribute introduced by RFC 1327.</li>
+<li>Next, we will extend the design to consider named lifetime parameters,
+like those in problem case 3.</li>
+<li>Finally, we give a brief description of the borrow checker.</li>
+</ol>
+<h2><a class="header" href="#layer-0-definitions" id="layer-0-definitions">Layer 0: Definitions</a></h2>
+<p>Before we can describe the design, we have to define the terms that we
+will be using. The RFC is defined in terms of a simplified version of
+MIR, eliding various details that don't introduce fundamental
+complexity.</p>
+<p><strong>Lvalues</strong>. A MIR &quot;lvalue&quot; is a path that leads to a memory location.
+The full MIR Lvalues are defined <a href="https://github.com/rust-lang/rust/blob/bf0a9e0b4d3a4dd09717960840798e2933ec7568/src/librustc/mir/mod.rs#L839-L851">via a Rust enum</a> and
+contain a number of knobs, most of which are not relevant for this RFC.
+We will present a simplified form of lvalues for now:</p>
+<pre><code>LV = x       // local variable
+   | LV.f    // field access
+   | *LV     // deref
+</code></pre>
+<p>The precedence of <code>*</code> is low, so <code>*a.b.c</code> will deref <code>a.b.c</code>; to deref
+just <code>a</code>, one would write <code>(*a).b.c</code>.</p>
+<p><strong>Prefixes.</strong> We say that the prefixes of an lvalue are all the
+lvalues you get by stripping away fields and derefs. The prefixes
+of <code>*a.b</code> would be <code>*a.b</code>, <code>a.b</code>, and <code>a</code>.</p>
+<p><strong>Control-flow graph.</strong> MIR is organized into a
+<a href="https://en.wikipedia.org/wiki/Control_flow_graph">control-flow graph</a> rather than an abstract syntax tree. It is
+created in the compiler by transforming the &quot;HIR&quot; (high-level IR). The
+MIR CFG consists of a set of <a href="https://github.com/rust-lang/rust/blob/bf0a9e0b4d3a4dd09717960840798e2933ec7568/src/librustc/mir/mod.rs#L443-L463">basic blocks</a>. Each basic block
+has a series of <a href="https://github.com/rust-lang/rust/blob/bf0a9e0b4d3a4dd09717960840798e2933ec7568/src/librustc/mir/mod.rs#L774-L814">statements</a> and a
+<a href="https://github.com/rust-lang/rust/blob/bf0a9e0b4d3a4dd09717960840798e2933ec7568/src/librustc/mir/mod.rs#L465-L552">terminator</a>. Statements that concern us in this RFC fall into
+three categories:</p>
+<ul>
+<li>assignments like <code>x = y</code>; the RHS of such an assignment is called an
+<a href="https://github.com/rust-lang/rust/blob/bf0a9e0b4d3a4dd09717960840798e2933ec7568/src/librustc/mir/mod.rs#L1037-L1071">rvalue</a>. There are no compound rvalues, and hence each statement
+is a discrete action that executes instantaneously. For example, the
+Rust expression <code>a = b + c + d</code> would be compiled into two MIR
+instructions, like <code>tmp0 = b + c; a = tmp0 + d;</code>.</li>
+<li><code>drop(lvalue)</code> deallocates an lvalue, if there is a value in it; in the
+limit, this requires runtime checks (a pass in mir, called elaborate drops,
+performs this transformation).</li>
+<li><code>StorageDead(x)</code> deallocates the stack storage for <code>x</code>. These are used by LLVM to allow
+stack-allocated values to use the same stack slot (if their live storage ranges are disjoint).
+<a href="https://www.ralfj.de/blog/2017/06/06/MIR-semantics.html">Ralf Jung's recent blog post has more details.</a></li>
+</ul>
+<h2><a class="header" href="#layer-1-control-flow-within-a-function" id="layer-1-control-flow-within-a-function">Layer 1: Control-flow within a function</a></h2>
+<h3><a class="header" href="#running-example" id="running-example">Running Example</a></h3>
+<p>We will explain the design with reference to a running example, called
+<strong>Example 4</strong>. After presenting the design, we will apply it to the three
+problem cases, as well as a number of other interesting examples.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut foo: T = ...;
+let mut bar: T = ...;
+let mut p: &amp;T;
+
+p = &amp;foo;
+// (0)
+if condition {
+    print(*p);
+    // (1)
+    p = &amp;bar;
+    // (2)
+}
+// (3)
+print(*p);
+// (4)
+<span class="boring">}
+</span></code></pre></pre>
+<p>The key point of this example is that the variable <code>foo</code> should only
+be considered borrowed at points 0 and 3, but not point 1. <code>bar</code>,
+in contrast, should be considered borrowed at points 2 and 3. Neither
+of them need to be considered borrowed at point 4, as the reference <code>p</code>
+is not used there.</p>
+<p>We can convert this example into the control-flow graph that follows.
+Recall that a control-flow graph in MIR consists of basic blocks
+containing a list of discrete statements and a trailing terminator:</p>
+<pre><code>// let mut foo: i32;
+// let mut bar: i32;
+// let mut p: &amp;i32;
+
+A
+[ p = &amp;foo     ]
+[ if condition ] ----\ (true)
+       |             |
+       |     B       v
+       |     [ print(*p)     ]
+       |     [ ...           ]
+       |     [ p = &amp;bar      ]
+       |     [ ...           ]
+       |     [ goto C        ]
+       |             |
+       +-------------/
+       |
+C      v
+[ print(*p)    ]
+[ return       ]
+</code></pre>
+<p>We will use a notation like <code>Block/Index</code> to refer to a specific
+statement or terminate in the control-flow graph. <code>A/0</code> and <code>B/4</code>
+refer to <code>p = &amp;foo</code> and <code>goto C</code>, respectively.</p>
+<h3><a class="header" href="#what-is-a-lifetime-and-how-does-it-interact-with-the-borrow-checker" id="what-is-a-lifetime-and-how-does-it-interact-with-the-borrow-checker">What is a lifetime and how does it interact with the borrow checker</a></h3>
+<p>To start with, we will consider lifetimes as a <strong>set of points in the
+control-flow graph</strong>; later in the RFC we will extend the domain of
+these sets to include &quot;skolemized&quot; lifetimes, which correspond to
+named lifetime parameters declared on a function. If a lifetime
+contains the point P, that implies that references with that lifetime
+are valid on entry to P. Lifetimes appear in various places in the MIR
+representation:</p>
+<ul>
+<li>The types of variables (and temporaries, etc) may contain lifetimes.</li>
+<li>Every borrow expression has a designated lifetime.</li>
+</ul>
+<p>We can extend our example 4 to include explicit lifetime names. There
+are three lifetimes that result. We will call them <code>'p</code>, <code>'foo</code>, and
+<code>'bar</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut foo: T = ...;
+let mut bar: T = ...;
+let mut p: &amp;'p T;
+//      --
+p = &amp;'foo foo;
+//   ----
+if condition {
+    print(*p);
+    p = &amp;'bar bar;
+    //   ----
+}
+print(*p);
+<span class="boring">}
+</span></code></pre></pre>
+<p>As you can see, the lifetime <code>'p</code> is part of the type of the variable
+<code>p</code>. It indicates the portions of the control-flow graph where <code>p</code> can
+safely be dereferenced. The lifetimes <code>'foo</code> and <code>'bar</code> are different:
+they refer to the lifetimes for which <code>foo</code> and <code>bar</code> are borrowed,
+respectively.</p>
+<p>Lifetimes attached to a borrow expression, like <code>'foo</code> and <code>'bar</code>, are
+important to the borrow checker. Those correspond to the portions of
+the control-flow graph in which the borrow checker will enforce its
+restrictions. In this case, since both borrows are shared borrows
+(<code>&amp;</code>), the borrow checker will prevent <code>foo</code> from being modified
+during <code>'foo</code> and it will prevent <code>bar</code> from being modified during
+<code>'bar</code>. If these had been mutable borrows (<code>&amp;mut</code>), the borrow checker
+would have prevented <strong>all</strong> access to <code>foo</code> and <code>bar</code> during those
+lifetimes.</p>
+<p>There are many valid choices one could make for <code>'foo</code> and <code>'bar</code>.
+This RFC however describes an inference algorithm that aims to pick
+the <strong>minimal</strong> lifetimes for each borrow which could possibly work.
+This corresponds to imposing the fewest restrictions we can.</p>
+<p>In the case of example 4, therefore, we wish our algorithm to compute
+that <code>'foo</code> is <code>{A/1, B/0, C/0}</code>, which notably excludes the points B/1
+through B/4. <code>'bar</code> should be inferred to the set <code>{B/3, B/4, C/0}</code>. The lifetime <code>'p</code> will be the union of <code>'foo</code> and <code>'bar</code>, since
+it contains all the points where the variable <code>p</code> is valid.</p>
+<h3><a class="header" href="#lifetime-inference-constraints" id="lifetime-inference-constraints">Lifetime inference constraints</a></h3>
+<p>The inference algorithm works by analyzing the MIR and creating a
+series of <strong>constraints</strong>. These constraints obey the following
+grammar:</p>
+<pre><code>// A constraint set C:
+C = true
+  | C, (L1: L2) @ P    // Lifetime L1 outlives Lifetime L2 at point P
+
+// A lifetime L:
+L = 'a
+  | {P}
+</code></pre>
+<p>Here the terminal <code>P</code> represents a point in the control-flow graph,
+and the notation <code>'a</code> refers to some named lifetime inference variable
+(e.g., <code>'p</code>, <code>'foo</code> or <code>'bar</code>).</p>
+<p>Once the constraints are created, the <strong>inference algorithm</strong> solves
+the constraints. This is done via fixed-point iteration: each
+lifetime variable begins as an empty set and we iterate over the
+constaints, repeatedly growing the lifetimes until they are big enough
+to satisfy all constraints.</p>
+<p>(If you'd like to compare this to the prototype code, the file
+<a href="https://github.com/nikomatsakis/nll/blob/master/nll/src/regionck.rs"><code>regionck.rs</code></a> is responsible for creating the constraints, and
+<a href="https://github.com/nikomatsakis/nll/blob/master/nll/src/infer.rs"><code>infer.rs</code></a> is responsible for solving them.)</p>
+<h3><a class="header" href="#liveness" id="liveness">Liveness</a></h3>
+<p>One key ingredient to understanding how NLL should work is
+understanding <strong>liveness</strong>. The term &quot;liveness&quot; derives from compiler
+analysis, but it's fairly intuitive. We say that <strong>a variable is live
+if the current value that it holds may be used later</strong>. This is very
+important to Example 4:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut foo: T = ...;
+let mut bar: T = ...;
+let mut p: &amp;'p T = &amp;foo;
+// `p` is live here: its value may be used on the next line.
+if condition {
+    // `p` is live here: its value will be used on the next line.
+    print(*p);
+    // `p` is DEAD here: its value will not be used.
+    p = &amp;bar;
+    // `p` is live here: its value will be used later.
+}
+// `p` is live here: its value may be used on the next line.
+print(*p);
+// `p` is DEAD here: its value will not be used.
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here you see a variable <code>p</code> that is assigned in the beginning of the
+program, and then maybe re-assigned during the <code>if</code>. The key point is
+that <code>p</code> becomes <strong>dead</strong> (not live) in the span before it is
+reassigned.  This is true even though the variable <code>p</code> will be used
+again, because the <strong>value</strong> that is in <code>p</code> will not be used.</p>
+<p>Traditional compiler compute liveness based on variables, but we wish
+to compute liveness for <strong>lifetimes</strong>. We can extend a variable-based
+analysis to lifetimes by saying that a lifetime L is live at a point P
+if there is some variable <code>p</code> which is live at P, and L appears in the
+type of <code>p</code>. (Later on, when we cover the dropck, we will use a more
+selective notion of liveness for lifetimes in which <em>some</em> of the
+lifetimes in a variable's type may be live while others are not.) So,
+in our running example, the lifetime <code>'p</code> would be live at precisely
+the same points that <code>p</code> is live. The lifetimes <code>'foo</code> and <code>'bar</code> have
+no points where they are (directly) live, since they do not appear in
+the types of any variables.</p>
+<ul>
+<li>However, this does not mean these lifetimes are irrelevant; as
+shown below, subtyping constraints introduced by subsequent
+analyses will eventually require <code>'foo</code> and <code>'bar</code> to <em>outlive</em>
+<code>'p</code>.</li>
+</ul>
+<h4><a class="header" href="#liveness-based-constraints-for-lifetimes" id="liveness-based-constraints-for-lifetimes">Liveness-based constraints for lifetimes</a></h4>
+<p>The first set of constraints that we generate are derived from
+liveness. Specifically, if a lifetime L is live at the point P,
+then we will introduce a constraint like:</p>
+<pre><code>(L: {P}) @ P
+</code></pre>
+<p>(As we'll see later when we cover solving constraints, this constraint
+effectively just inserts <code>P</code> into the set for <code>L</code>. In fact, the
+prototype doesn't bother to materialize such constraints, instead just
+immediately inserting <code>P</code> into <code>L</code>.)</p>
+<p>For our running example, this means that we would introduce the following
+liveness constraints:</p>
+<pre><code>('p: {A/1}) @ A/1
+('p: {B/0}) @ B/0
+('p: {B/3}) @ B/3
+('p: {B/4}) @ B/4
+('p: {C/0}) @ C/0
+</code></pre>
+<h3><a class="header" href="#subtyping" id="subtyping">Subtyping</a></h3>
+<p>Whenever references are copied from one location to another, the Rust
+subtyping rules require that the lifetime of the source reference
+<strong>outlives</strong> the lifetime of the target location. As discussed
+earlier, in this RFC, we extend the notion of subtyping to be
+<strong>location-aware</strong>, meaning that we take into account the point where
+the value is being copied.</p>
+<p>For example, at the point A/0, our running example contains a borrow
+expression <code>p = &amp;'foo foo</code>. In this case, the borrow expression will
+produce a reference of type <code>&amp;'foo T</code>, where <code>T</code> is the type of
+<code>foo</code>. This value is then assigned to <code>p</code>, which has the type <code>&amp;'p T</code>.
+Therefore, we wish to require that <code>&amp;'foo T</code> be a subtype of <code>&amp;'p T</code>.
+Moreover, this relation needs to hold at the point A/1 -- the
+<strong>successor</strong> of the point A/0 where the assignment occurs (this is
+because the new value of <code>p</code> is first visible in A/1). We write that
+subtyping constraint as follows:</p>
+<pre><code>(&amp;'foo T &lt;: &amp;'p T) @ A/1
+</code></pre>
+<p>The standard Rust subtyping rules (two examples of which are given
+below) can then &quot;break down&quot; this subtyping rule into the lifetime
+constraints we need for inference:</p>
+<pre><code>(T_a &lt;: T_b) @ P
+('a: 'b) @ P      // &lt;-- a constraint for our inference algorithm
+------------------------
+(&amp;'a T_a &lt;: &amp;'b T_b) @ P
+
+(T_a &lt;: T_b) @ P
+(T_b &lt;: T_a) @ P  // (&amp;mut T is invariant)
+('a: 'b) @ P      // &lt;-- another constraint
+------------------------
+(&amp;'a mut T_a &lt;: &amp;'b mut T_b) @ P
+</code></pre>
+<p>In the case of our running example, we generate the following subtyping
+constraints:</p>
+<pre><code>(&amp;'foo T &lt;: &amp;'p T) @ A/1
+(&amp;'bar T &lt;: &amp;'p T) @ B/3
+</code></pre>
+<p>These can be converted into the following lifetime constraints:</p>
+<pre><code>('foo: 'p) @ A/1
+('bar: 'p) @ B/3
+</code></pre>
+<h3><a class="header" href="#reborrow-constraints" id="reborrow-constraints">Reborrow constraints</a></h3>
+<p>There is one final source of constraints. It frequently happens that we
+have a borrow expression that &quot;reborrows&quot; the referent of an
+existing reference:</p>
+<pre><code>let x: &amp;'x i32 = ...;
+let y: &amp;'y i32 = &amp;*x;
+</code></pre>
+<p>In such cases, there is a connection between the lifetime <code>'y</code> of the
+borrow and the lifetime <code>'x</code> of the original reference. In particular,
+<code>'x</code> must outlive <code>'y</code> (<code>'x: 'y</code>). In simple cases like this, the
+relationship is the same regardless of whether the original reference
+<code>x</code> is a shared (<code>&amp;</code>) or mutable (<code>&amp;mut</code>) reference. However, in more
+complex cases that involve multiple dereferences, the treatment is
+different.</p>
+<p><strong>Supporting prefixes.</strong> To define the reborrow constraints, we first
+introduce the idea of supporting prefixes -- this definition will be
+useful in a few places. The <em>supporting prefixes</em> for an lvalue are
+formed by stripping away fields and derefs, except that we stop when
+we reach the deref of a shared reference. Inituitively, shared
+references are different because they are <code>Copy</code> -- and hence one
+could always copy the shared reference into a temporary and get an
+equivalent path. Here are some examples of supporting prefixes:</p>
+<pre><code>let r: (&amp;(i32, i64), (f32, f64));
+
+// The path (*r.0).1 has type `i64` and supporting prefixes:
+// - (*r.0).1
+// - *r.0
+
+// The path r.1.0 has type `f32` and supporting prefixes:
+// - r.1.0
+// - r.1
+// - r
+
+let m: (&amp;mut (i32, i64), (f32, f64));
+
+// The path (*m.0).1 has type `i64` and supporting prefixes:
+// - (*m.0).1
+// - *m.0
+// - m.0
+// - m
+</code></pre>
+<p><strong>Reborrow constraints.</strong> Consider the case where we have a borrow
+(shared or mutable) of some lvalue <code>lv_b</code> for the lifetime <code>'b</code>:</p>
+<pre><code>lv_l = &amp;'b lv_b      // or:
+lv_l = &amp;'b mut lv_b
+</code></pre>
+<p>In that case, we compute the supporting prefixes of <code>lv_b</code>, and find
+every deref lvalue <code>*lv</code> in the set where <code>lv</code> is a reference with
+lifetime <code>'a</code>. We then add a constraint <code>('a: 'b) @ P</code>, where <code>P</code> is
+the point following the borrow (that's the point where the borrow
+takes effect).</p>
+<p>Let's look at some examples. In each case, we will link to the
+corresponding test from the prototype implementation.</p>
+<p><a href="https://github.com/nikomatsakis/nll/blob/master/test/borrowck-read-variable-while-borrowed-indirect.nll"><strong>Example 1.</strong></a> To see why this rule is needed, let's
+first consider a simple example involving a single reference:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut foo: i32     = 22;
+let r_a: &amp;'a mut i32 = &amp;'a mut foo;
+let r_b: &amp;'b mut i32 = &amp;'b mut *r_a;
+...
+use(r_b);
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this case, the supporting prefixes of <code>*r_a</code> are <code>*r_a</code> and <code>r_a</code>
+(because <code>r_a</code> is a mutable reference, we recurse). Only one of those,
+<code>*r_a</code>, is a deref lvalue, and the reference <code>r_a</code> being dereferenced
+has the lifetime <code>'a</code>. We would add the constraint that <code>'a: 'b</code>,
+thus ensuring that <code>foo</code> is considered borrowed so long as <code>r_b</code> is in
+use. Without this constraint, the lifetime <code>'a</code> would end after the
+second borrow, and hence <code>foo</code> would be considered unborrowed, even
+though <code>*r_b</code> could still be used to access <code>foo</code>.</p>
+<p><a href="https://github.com/nikomatsakis/nll/blob/master/test/borrowck-write-variable-after-ref-extracted.nll"><strong>Example 2.</strong></a> Consider now a case with a double indirection:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut foo: i32     = 22;
+let mut r_a: &amp;'a i32 = &amp;'a foo;
+let r_b: &amp;'b &amp;'a i32 = &amp;'b r_a;
+let r_c: &amp;'c i32     = &amp;'c **r_b;
+// What is considered borrowed here?
+use(r_c);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Just as before, it is important that, so long as <code>r_c</code> is in use,
+<code>foo</code> is considered borrowed. However, what about the variable <code>r_a</code>:
+should <em>it</em> considered borrowed? The answer is no: once <code>r_c</code> is
+initialized, the value of <code>r_a</code> is no longer important, and it would
+be fine to (for example) overwrite <code>r_a</code> with a new value, even as
+<code>foo</code> is still considered borrowed. This result falls out from our
+reborrowing rules: the supporting paths of <code>**r_b</code> is just <code>**r_b</code>.
+We do not add any more paths because this path is already a
+dereference of <code>*r_b</code>, and <code>*r_b</code> has (shared reference) type <code>&amp;'a i32</code>. Therefore, we would add one reborrow constraint: that <code>'a: 'c</code>.
+This constraint ensures that as long as <code>r_c</code> is in use, the borrow of
+<code>foo</code> remains in force, but the borrow of <code>r_a</code> (which has the
+lifetime <code>'b</code>) can expire.</p>
+<p><a href="https://github.com/nikomatsakis/nll/blob/master/test/borrowck-read-ref-while-referent-mutably-borrowed.nll"><strong>Example 3.</strong></a> The previous example showed how a borrow
+of a shared reference can expire once it has been dereferenced. With
+mutable references, however, this is not safe. Consider the following example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let foo = Foo { ... };
+let p: &amp;'p mut Foo = &amp;mut foo;
+let q: &amp;'q mut &amp;'p mut Foo = &amp;mut p;
+let r: &amp;'r mut Foo = &amp;mut **q;
+use(*p); // &lt;-- This line should result in an ERROR
+use(r);
+<span class="boring">}
+</span></code></pre></pre>
+<p>The key point here is that we create a reference <code>r</code> by reborrowing
+<code>**q</code>; <code>r</code> is then later used in the final line of the program. This
+use of <code>r</code> must extend the lifetime of the borrows used to create
+<em>both</em> <code>p</code> <em>and</em> <code>q</code>. Otherwise, one could access (and mutate) the
+same memory through both <code>*r</code> and <code>*p</code>. (In fact, the real rustc did
+in its early days have a soundness bug much like this one.)</p>
+<p>Because dereferencing a mutable reference does not stop the supporting
+prefixes from being enumerated, the supporting prefixes of <code>**q</code> are
+<code>**q</code>, <code>*q</code>, and <code>q</code>. Therefore, we add two reborrow constraints: <code>'q: 'r</code> and <code>'p: 'r</code>, and hence both borrows are indeed considered in
+scope at the line in question.</p>
+<p>As an alternate way of looking at the previous example, consider it
+like this. To create the mutable reference <code>p</code>, we get a &quot;lock&quot; on
+<code>foo</code> (that lasts so long as <code>p</code> is in use). We then take a lock on
+the mutable reference <code>p</code> to create <code>q</code>; this lock must last for as
+long as <code>q</code> is in use. When we create <code>r</code> by borrowing <code>**q</code>, that is
+the last direct use of <code>q</code> -- so you might think we can release the
+lock on <code>p</code>, since <code>q</code> is no longer in (direct) use. However, that
+would be unsound, since then <code>r</code> and <code>*p</code> could both be used to access
+the same memory. The key is to recognize that <code>r</code> represents an
+indirect use of <code>q</code> (and <code>q</code> in turn is an indirect use of <code>p</code>), and
+hence so long as <code>r</code> is in use, <code>p</code> and <code>q</code> must also be considered &quot;in
+use&quot; (and hence their &quot;locks&quot; still enforced).</p>
+<h3><a class="header" href="#solving-constraints" id="solving-constraints">Solving constraints</a></h3>
+<p>Once the constraints are created, the <strong>inference algorithm</strong> solves
+the constraints. This is done via fixed-point iteration: each
+lifetime variable begins as an empty set and we iterate over the
+constaints, repeatedly growing the lifetimes until they are big enough
+to satisfy all constraints.</p>
+<p>The meaning of a constraint like <code>('a: 'b) @ P</code> is that, starting from
+the point P, the lifetime <code>'a</code> must include all points in <code>'b</code> that
+are reachable from the point P. The implementation
+<a href="https://github.com/nikomatsakis/nll/blob/1cff361c9aeb6f553b528078866f5717f1872dad/nll/src/infer.rs#L71-L113">does a depth-first search starting from P</a>; the search stops if
+we exit the lifetime <code>'b</code>. Otherwise, for each point we find, we add
+it to <code>'a</code>.</p>
+<p>In our example, the full set of constraints is:</p>
+<pre><code>('foo: 'p) @ A/1
+('bar: 'p) @ B/3
+('p: {A/1}) @ A/1
+('p: {B/0}) @ B/0
+('p: {B/3}) @ B/3
+('p: {B/4}) @ B/4
+('p: {C/0}) @ C/0
+</code></pre>
+<p>Solving these constraints results in the following lifetimes,
+which are precisely the answers we expected:</p>
+<pre><code>'p   = {A/1, B/0, B/3, B/4, C/0}
+'foo = {A/1, B/0, C/0}
+'bar = {B/3, B/4, C/0}
+</code></pre>
+<h3><a class="header" href="#intuition-for-why-this-algorithm-is-correct" id="intuition-for-why-this-algorithm-is-correct">Intuition for why this algorithm is correct</a></h3>
+<p>For the algorithm to be correct, there is a critical invariant that we
+must maintain. Consider some path H that is borrowed with lifetime L
+at a point P to create a reference R; this reference R (or some
+copy/move of it) is then later dereferenced at some point Q.</p>
+<p>We must ensure that the reference has not been invalidated: this means
+that the memory which was borrowed must not have been freed by the
+time we reach Q. If the reference R is a shared reference (<code>&amp;T</code>), then
+the memory must also not have been written (modulo <code>UnsafeCell</code>). If
+the reference R is a mutable reference (<code>&amp;mut T</code>), then the memory
+must not have been accessed at all, except through the reference R.
+<strong>To guarantee these properties, we must prevent actions that might
+affect the borrowed memory for all of the points between P (the
+borrow) and Q (the use).</strong></p>
+<p>This means that L must at least include all the points between P and
+Q. There are two cases to consider. First, the case where the access
+at point Q occurs through the same reference R that was created by
+the borrow:</p>
+<pre><code>R = &amp;H; // point P
+...
+use(R); // point Q
+</code></pre>
+<p>In this case, the variable R will be <strong>live</strong> on all the points
+between P and Q. The liveness-based rules suffice for this case:
+specifically, because the type of R includes the lifetime L, we know
+that L must include all the points between P and Q, since R is live
+there.</p>
+<p>The second case is when the memory referenced by R is accessed, but
+through an alias (or move):</p>
+<pre><code>R = &amp;H;  // point P
+R2 = R;  // last use of R, point A
+...
+use(R2); // point Q
+</code></pre>
+<p>In this case, the liveness rules alone do not suffice. The problem is
+that the <code>R2 = R</code> assignment may well be the last use of R, and so the
+<strong>variable</strong> R is dead at this point. However, the <em>value</em> in R will
+still be dereferenced later (through R2), and hence we want the
+lifetime L to include those points. This is where the <strong>subtyping
+constraints</strong> come into play: the type of R2 includes a lifetime L2,
+and the assignment <code>R2 = R</code> will establish an outlives constraint <code>(L: L2) @ A</code> between L and L2. Moreover, this new variable R2 must be
+live between the assignment and the ultimate use (that is, along the
+path A...Q). Putting these two facts together, we see that L will
+ultimately include the points from P to A (because of the liveness of
+R) and the points from A to Q (because the subtyping requirement
+propagates the liveness of R2).</p>
+<p>Note that it is possible for these lifetimes to have gaps. This can occur
+when the same variable is used and overwritten multiple times:</p>
+<pre><code>let R: &amp;L i32;
+let R2: &amp;L2 i32;
+
+R = &amp;H1; // point P1
+R2 = R;  // point A1
+use(R2); // point Q1
+...
+R2 = &amp;H2; // point P2
+use(R2);  // point Q2
+</code></pre>
+<p>In this example, the liveness constraints on R2 will ensure that L2
+(the lifetime in its type) includes Q1 and Q2 (because R2 is live at
+those two points), but not the &quot;...&quot; nor the points P1 or P2. Note
+that the subtyping relationship (<code>(L: L2) @ A1)</code>) at A1 here ensures
+that L also includes Q1, but doesn't require that L includes Q2 (even
+though L2 has point Q2). This is because the value in R2 at Q2 cannot
+have come from the assignment at A1; if it could have done, then
+either R2 would have to be live between A1 and Q2 or else there would
+be a subtyping constraint.</p>
+<h3><a class="header" href="#other-examples" id="other-examples">Other examples</a></h3>
+<p>Let us work through some more examples. We begin with problem cases #1
+and #2 (problem case #3 will be covered after we cover named lifetimes
+in a later section).</p>
+<h4><a class="header" href="#problem-case-1" id="problem-case-1">Problem case #1.</a></h4>
+<p>Translated into MIR, the example will look roughly as follows:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut data: Vec&lt;i32&gt;;
+let slice: &amp;'slice mut i32;
+START {
+    data = ...;
+    slice = &amp;'borrow mut data;
+    capitalize(slice);
+    data.push('d');
+    data.push('e');
+    data.push('f');
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The constraints generated will be as follows:</p>
+<pre><code>('slice: {START/2}) @ START/2
+('borrow: 'slice) @ START/2
+</code></pre>
+<p>Both <code>'slice</code> and <code>'borrow</code> will therefore be inferred to START/2, and
+hence the accesses to <code>data</code> in START/3 and the following statements
+are permitted.</p>
+<h4><a class="header" href="#problem-case-2" id="problem-case-2">Problem case #2.</a></h4>
+<p>Translated into MIR, the example will look roughly as follows (some
+irrelevant details are elided). Note that the <code>match</code> statement is
+translated into a SWITCH, which tests the variant, and a &quot;downcast&quot;,
+which lets us extract the contents out from the <code>Some</code> variant (this
+operation is specific to MIR and has no Rust equivalent, other than as
+part of a match).</p>
+<pre><code>let map: HashMap&lt;K,V&gt;;
+let key: K;
+let tmp0: &amp;'tmp0 mut HashMap&lt;K,V&gt;;
+let tmp1: &amp;K;
+let tmp2: Option&lt;&amp;'tmp2 mut V&gt;;
+let value: &amp;'value mut V;
+
+START {
+/*0*/ map = ...;
+/*1*/ key = ...;
+/*2*/ tmp0 = &amp;'map mut map;
+/*3*/ tmp1 = &amp;key;
+/*4*/ tmp2 = HashMap::get_mut(tmp0, tmp1);
+/*5*/ SWITCH tmp2 { None =&gt; NONE, Some =&gt; SOME }
+}
+
+NONE {
+/*0*/ ...
+/*1*/ goto EXIT;
+}
+
+SOME {
+/*0*/ value = tmp2.downcast&lt;Some&gt;.0;
+/*1*/ process(value);
+/*2*/ goto EXIT;
+}
+
+EXIT {
+}
+</code></pre>
+<p>The following liveness constraints are generated:</p>
+<pre><code>('tmp0: {START/3}) @ START/3
+('tmp0: {START/4}) @ START/4
+('tmp2: {SOME/0}) @ SOME/0
+('value: {SOME/1}) @ SOME/1
+</code></pre>
+<p>The following subtyping-based constraints are generated:</p>
+<pre><code>('map: 'tmp0) @ START/3
+('tmp0: 'tmp2) @ START/5
+('tmp2: 'value) @ SOME/1
+</code></pre>
+<p>Ultimately, the lifetime we are most interested in is <code>'map</code>,
+which indicates the duration for which <code>map</code> is borrowed. If we solve
+the constraints above, we will get:</p>
+<pre><code>'map == {START/3, START/4, SOME/0, SOME/1}
+'tmp0 == {START/3, START/4, SOME/0, SOME/1}
+'tmp2 == {SOME/0, SOME/1}
+'value == {SOME/1}
+</code></pre>
+<p>These results indicate that <code>map</code> <strong>can</strong> be mutated in the <code>None</code>
+arm; <code>map</code> could also be mutated in the <code>Some</code> arm, but only after
+<code>process()</code> is called (i.e., starting at SOME/2). This is the desired
+result.</p>
+<h4><a class="header" href="#example-4-invariant" id="example-4-invariant">Example 4, invariant</a></h4>
+<p>It's worth looking at a variant of our running example (&quot;Example 4&quot;).
+This is the same pattern as before, but instead of using <code>&amp;'a T</code>
+references, we use <code>Foo&lt;'a&gt;</code> references, which are <strong>invariant</strong> with
+respect to <code>'a</code>.  This means that the <code>'a</code> lifetime in a <code>Foo&lt;'a&gt;</code>
+value cannot be approximated (i.e., you can't make it shorter, as you
+can with a normal reference). Usually invariance arises because of
+mutability (e.g., <code>Foo&lt;'a&gt;</code> might have a field of type <code>Cell&lt;&amp;'a ()&gt;</code>). The key point here is that invariance actually makes <strong>no
+difference at all</strong> the outcome. This is true because of
+location-based subtyping.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut foo: T = ...;
+let mut bar: T = ...;
+let p: Foo&lt;'a&gt;;
+
+p = Foo::new(&amp;foo);
+if condition {
+    print(*p);
+    p = Foo::new(&amp;bar);
+}
+print(*p);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Effectively, we wind up with the same constraints as before, but where
+we only had <code>'foo: 'p</code>/<code>'bar: 'p</code> constraints before (due to subtyping), we now
+also have <code>'p: 'foo</code> and <code>'p: 'bar</code> constraints:</p>
+<pre><code>('foo: 'p) @ A/1
+('p: 'foo) @ A/1
+('bar: 'p) @ B/3
+('p: 'bar) @ B/3
+('p: {A/1}) @ A/1
+('p: {B/0}) @ B/0
+('p: {B/3}) @ B/3
+('p: {B/4}) @ B/4
+('p: {C/0}) @ C/0
+</code></pre>
+<p>The key point is that the new constraints don't affect the final answer:
+the new constraints were already satisfied with the older answer.</p>
+<h4><a class="header" href="#vec-push-ref" id="vec-push-ref">vec-push-ref</a></h4>
+<p>In previous iterations of this proposal, the location-aware subtyping
+rules were replaced with transformations such as SSA form. The
+vec-push-ref example demonstrates the value of location-aware
+subtyping in contrast to these approaches.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let foo: i32;
+let vec: Vec&lt;&amp;'vec i32&gt;;
+let p: &amp;'p i32;
+
+foo = ...;
+vec = Vec::new();
+p = &amp;'foo foo;
+if true {
+    vec.push(p);
+} else {
+    // Key point: `foo` not borrowed here.
+    use(vec);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This can be converted to control-flow graph form:</p>
+<pre><code>block START {
+    v = Vec::new();
+    p = &amp;'foo foo;
+    goto B C;
+}
+
+block B {
+    vec.push(p);
+    goto EXIT;
+}
+
+block C {
+    // Key point: `foo` not borrowed here
+    use(vec);
+    goto EXIT;
+}
+
+block EXIT {
+}
+</code></pre>
+<p>Here the relations from liveness are:</p>
+<pre><code>('vec: {START/1}) @ START/1
+('vec: {START/2}) @ START/2
+('vec: {B/0}) @ B/0
+('vec: {C/0}) @ C/0
+('p: {START/2}) @ START/2
+('p: {B/0}) @ B/0
+</code></pre>
+<p>Meanwhile, the call to <code>vec.push(p)</code> establishes this subtyping
+relation:</p>
+<pre><code>('p: 'vec) @ B/1
+('foo: 'p) @ START/2
+</code></pre>
+<p>The solution is:</p>
+<pre><code>'vec = {START/1, START/2, B/0, C/0}
+'p = {START/2, B/0}
+'foo = {START/2, B/0}
+</code></pre>
+<p>What makes this example interesting is that <strong>the lifetime <code>'vec</code> must
+include both halves of the <code>if</code></strong> -- because it is used in both branches
+-- but <code>'vec</code> only becomes &quot;entangled&quot; with the lifetime <code>'p</code> on one
+path. Thus even though <code>'vec</code> has to outlive <code>'p</code>, <code>'p</code> never winds up
+including the &quot;else&quot; branch thanks to location-aware subtyping.</p>
+<h2><a class="header" href="#layer-2-avoiding-infinite-loops" id="layer-2-avoiding-infinite-loops">Layer 2: Avoiding infinite loops</a></h2>
+<p>The previous design was described in terms of the &quot;pure&quot; MIR
+control-flow graph. However, using the raw graph has some undesirable
+properties around infinite loops. In such cases, the graph has no
+exit, which undermines the traditional definition of reverse analyses
+like liveness. To address this, when we build the control-flow graph
+for our functions, we will augment it with additional edges -- in
+particular, for every infinite loop (<code>loop { }</code>), we will add false
+&quot;unwind&quot; edges. This ensures that the control-flow graph has a final
+exit node (the success of the RETURN and RESUME nodes) that
+postdominates all other nodes in the graph.</p>
+<p>If we did not add such edges, the result would also allow a number of surprising
+programs to type-check. For example, it would be possible to borrow local variables
+with <code>'static</code> lifetime, so long as the function never returned:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x: usize;
+    let y: &amp;'static x = &amp;x;
+    loop { }
+}
+</code></pre></pre>
+<p>This would work because (as covered in detail under the borrow check
+section) the <code>StorageDead(x)</code> instruction would never be reachable,
+and hence any lifetime of borrow would be acceptable. This further leads to
+other surprising programs that still type-check, such as this example which
+uses an (incorrect, but declared as unsafe) API for spawning threads:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let scope = Scope::new();
+let mut foo = 22;
+
+unsafe {
+    // dtor joins the thread
+    let _guard = scope.spawn(&amp;mut foo);
+    loop {
+        foo += 1;
+    }
+    // drop of `_guard` joins the thread
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Without the unwind edges, this code would pass the borrowck, since the
+drop of <code>_guard</code> (and <code>StorageDead</code> instruction) is not reachable, and
+hence <code>_guard</code> is not considered live (after all, its destructor will
+indeed never run). However, this would permit the <code>foo</code> variable to be
+modified both during the infinite loop and by the thread launched by
+<code>scope.spawn()</code>, which was given access to an <code>&amp;mut foo</code> reference
+(albeit one with a theoretically short lifetime).</p>
+<p>With the false unwind edge, the compiler essentially always assumes
+that a destructor <em>may</em> run, since every scope may theoretically
+execute. This extends the <code>&amp;mut foo</code> borrow given to <code>scope.spawn()</code>
+to cover the body of the loop, resulting in a borrowck error.</p>
+<h2><a class="header" href="#layer-3-accommodating-dropck" id="layer-3-accommodating-dropck">Layer 3: Accommodating dropck</a></h2>
+<p>MIR includes an action that corresponds to &quot;dropping&quot; a variable:</p>
+<pre><code>DROP(variable)
+</code></pre>
+<p>Note that while MIR supports general drops of any lvalue, at the point
+where this analysis is running, we are always dropping entire
+variables at a time. This operation executes the destructor for
+<code>variable</code>, effectively &quot;de-initializing&quot; the memory in which the
+value resides (if the variable -- or parts of the variable -- have
+already been dropped, then drop has no effect; this is not relevant to
+the current analysis).</p>
+<p>Interestingly, in many cases dropping a value does not require that the
+lifetimes in the dropped value be valid. After all, dropping a
+reference of type <code>&amp;'a T</code> or <code>&amp;'a mut T</code> is defined as a no-op, so it
+does not matter if the reference points at valid memory. In cases like
+this, we say that the lifetime <code>'a</code> <strong>may dangle</strong>. This is inspired by the C
+term &quot;dangling pointer&quot; which means a pointer to freed or invalid
+memory.</p>
+<p>However, if that same reference is stored in the field of a struct
+which implements the <code>Drop</code> trait, when the struct may, during its
+destructor, access the referenced value, so it's very important that
+the reference be valid in that case. Put another way, if you have a
+value <code>v</code> of type <code>Foo&lt;'a&gt;</code> that implements <code>Drop</code>, then <code>'a</code>
+typically <strong>cannot dangle</strong> when <code>v</code> is dropped (just as <code>'a</code> would
+not be allowed to dangle for any other operation).</p>
+<p>More generally, RFC 1327 defined specific rules for which lifetimes in
+a type may dangle during drop and which may not. We integrate those
+rules into our liveness analysis as follows: the MIR instruction
+<code>DROP(variable)</code> is not treated like other MIR instructions when it
+comes to liveness. In a sense, conceptually we run two distinct liveness analyses (in practice, the prototype
+uses two bits per variable):</p>
+<ol>
+<li>The first, which we've already seen, indicates when a variable's
+current value may be <strong>used</strong> in the future. This corresponds to
+&quot;non-drop&quot; uses of the variable in the MIR. Whenever a variable is live by this definition,
+all of the lifetimes in its type are live.</li>
+<li>The second, which we are adding now, indicates when a variable's
+current value may be <strong>dropped</strong> in the future. This corresponds to
+&quot;drop&quot; uses of the variable in the MIR. Whenever a variable is live
+in <em>this</em> sense, all of the lifetimes in its type <strong>except those
+marked as may-dangle</strong> are live.</li>
+</ol>
+<p>Permitting lifetimes to dangle during drop is very important! In fact,
+it is essential to even the most basic non-lexical lifetime examples,
+such as Problem Case #1.  After all, if we translate Problem Case #1
+into MIR, we see that the reference <code>slice</code> will wind up being dropped
+at the end of the block:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut data: Vec&lt;i32&gt;;
+let slice: &amp;'slice mut i32;
+START {
+    ...
+    slice = &amp;'borrow mut data;
+    capitalize(slice);
+    data.push('d');
+    data.push('e');
+    data.push('f');
+    DROP(slice);
+    DROP(data);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This poses no problem for our analysis, however, because <code>'slice</code> &quot;may
+dangle&quot; during the drop, and hence is not considered live.</p>
+<h2><a class="header" href="#layer-4-named-lifetimes" id="layer-4-named-lifetimes">Layer 4: Named lifetimes</a></h2>
+<p>Until now, we've only considered lifetimes that are confined to the
+extent of a function. Often, we want to reason about
+lifetimes that begin or end after the current function has ended. More
+subtly, we sometimes want to have lifetimes that sometimes begin and
+end in the current function, but which may (along some paths) extend
+into the caller. Consider Problem Case #3 (the corresponding test case
+in the prototype is the <a href="https://github.com/nikomatsakis/nll/blob/master/test/get-default.nll">get-default</a> test):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_default&lt;'r,K,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
+                               key: K)
+                               -&gt; &amp;'r mut V {
+    match map.get_mut(&amp;key) { // -------------+ 'r
+        Some(value) =&gt; value,              // |
+        None =&gt; {                          // |
+            map.insert(key, V::default()); // |
+            //  ^~~~~~ ERROR               // |
+            map.get_mut(&amp;key).unwrap()     // |
+        }                                  // |
+    }                                      // |
+}                                          // v
+<span class="boring">}
+</span></code></pre></pre>
+<p>When we translate this into MIR, we get something like the following
+(this is &quot;pseudo-MIR&quot;):</p>
+<pre><code>block START {
+  m1 = &amp;'m1 mut *map;  // temporary created for `map.get_mut()` call
+  v = Map::get_mut(m1, &amp;key);
+  switch v { SOME NONE };
+}
+
+block SOME {
+  return = v.as&lt;Some&gt;.0; // assign to return value slot
+  goto END;
+}
+
+block NONE {
+  Map::insert(&amp;*map, key, ...);
+  m2 = &amp;'m2 mut *map;  // temporary created for `map.get_mut()` call
+  v = Map::get_mut(m2, &amp;key);
+  return = ... // &quot;unwrap&quot; of `v`
+  goto END;
+}
+
+block END {
+  return;
+}
+</code></pre>
+<p>The key to this example is that the first borrow of <code>map</code>, with the
+lifetime <code>'m1</code>, must extend to the end of the <code>'r</code>, but only if we
+branch to SOME. Otherwise, it should end once we enter the NONE block.</p>
+<p>To accommodate cases like this, we will extend the notion of a region
+so that it includes not only points in the control-flow graph, but
+also includes a (possibly empty) set of &quot;end regions&quot; for various
+named lifetimes.  We denote these as <code>end('r)</code> for some named region
+<code>'r</code>. The region <code>end('r)</code> can be understood semantically as referring
+to some portion of the caller's control-flow graph (actually, they
+could extend beyond the end of the caller, into the caller's caller,
+and so forth, but that doesn't concern us). This new region might then
+be denoted as the following (in pseudocode form):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Region {
+  points: Set&lt;Point&gt;,
+  end_regions: Set&lt;NamedLifetime&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this case, when a type mentions a named lifetime, such as <code>'r</code>, that
+can be represented by a region that includes:</p>
+<ul>
+<li>the entire CFG,</li>
+<li>and, the end region for that named lifetime (<code>end('r)</code>).</li>
+</ul>
+<p>Furthermore, we can <strong>elaborate</strong> the set to include <code>end('x)</code> for
+every named lifetime <code>'x</code> such that <code>'r: 'x</code>. This is because, if <code>'r: 'x</code>, then we know that <code>'r</code> doesn't end up until <code>'x</code> has already
+ended.</p>
+<p>Finally, we must adjust our definition of subtyping to accommodate
+this amended definition of a region, which we do as follows. When we have
+an outlives relation </p>
+<pre><code>'b: 'a @ P
+</code></pre>
+<p>where the end point of the CFG is reachable from P without leaving
+<code>'a</code>, the existing inference algorithm would simply add the end-point
+to <code>'b</code> and stop. The new algorithm would also add any end regions
+that are included in <code>'a</code> to <code>'b</code> at that time. (Expressed less
+operationally, <code>'b</code> only outlives <code>'a</code> if it also includes the
+end-regions that <code>'a</code> includes, presuming that the end point of the
+CFG is reachable from P). The reason that we require the end point of
+the CFG to be reachable is because otherwise the data never escapes
+the current function, and hence <code>end('r)</code> is not reachable (since
+<code>end('r)</code> only covers the code in callers that executes <em>after</em> the
+return).</p>
+<p>NB: This part of the prototype is partially
+implemented. <a href="https://github.com/nikomatsakis/nll/issues/12">Issue #12</a>
+describes the current status and links to the in-progress PRs.</p>
+<h2><a class="header" href="#layer-5-how-the-borrow-check-works" id="layer-5-how-the-borrow-check-works">Layer 5: How the borrow check works</a></h2>
+<p>For the most part, the focus of this RFC is on the structure of
+lifetimes, but it's worth talking a bit about how to integrate
+these non-lexical lifetimes into the borrow checker. In particular,
+along the way, we'd like to fix two shortcomings of the borrow checker:</p>
+<p><strong>First, support nested method calls like <code>vec.push(vec.len())</code>.</strong>
+Here, the plan is to continue with the <code>mut2</code> borrow solution proposed
+in <a href="https://github.com/rust-lang/rfcs/pull/2025">RFC 2025</a>. This RFC does not (yet) propose one of the type-based
+solutions described in RFC 2025, such as &quot;borrowing for the future&quot; or
+<code>Ref2</code>. The reasons why are discussed in the Alternatives section. For
+simplicity, this description of the borrow checker ignores
+<a href="https://github.com/rust-lang/rfcs/pull/2025">RFC 2025</a>. The extensions described here are fairly orthogonal to the
+changes proposed in <a href="https://github.com/rust-lang/rfcs/pull/2025">RFC 2025</a>, which in effect cause the start of a
+borrow to be delayed.</p>
+<p><strong>Second, permit variables containing mutable references to be
+modified, even if their referent is borrowed.</strong> This refers to the
+&quot;Problem Case #4&quot; described in the introduction; we wish to accept the
+original program.</p>
+<h3><a class="header" href="#borrow-checker-phase-1-computing-loans-in-scope" id="borrow-checker-phase-1-computing-loans-in-scope">Borrow checker phase 1: computing loans in scope</a></h3>
+<p>The first phase of the borrow checker computes, at each point in
+the CFG, the set of in-scope <strong>loans</strong>. A &quot;loan&quot; is represented as a tuple
+<code>('a, shared|uniq|mut, lvalue)</code> indicating:</p>
+<ol>
+<li>the lifetime <code>'a</code> for which the value was borrowed;</li>
+<li>whether this was a shared, unique, or mutable loan;
+<ul>
+<li>&quot;unique&quot; loans are exactly like mutable loans, but they do not permit
+mutation of their referents. They are used only in closure desugarings
+and are not part of Rust's surface syntax.</li>
+</ul>
+</li>
+<li>the lvalue that was borrowed (e.g., <code>x</code> or <code>(*x).foo</code>).</li>
+</ol>
+<p>The set of in-scope loans at each point is found via a fixed-point
+dataflow computation. We create a loan tuple from each borrow rvalue
+in the MIR (that is, every assignment statement like <code>tmp = &amp;'a b.c.d</code>), giving each tuple a unique index <code>i</code>. We can then represent
+the set of loans that are in scope at a particular point using a
+bit-set and do a standard forward data-flow propagation.</p>
+<p>For a statement at point P in the graph, we define the &quot;transfer
+function&quot; -- that is, which loans it brings into or out of scope -- as
+follows:</p>
+<ul>
+<li>any loans whose region does not include P are killed;</li>
+<li>if this is a borrow statement, the corresponding loan is generated;</li>
+<li>if this is an assignment <code>lv = &lt;rvalue&gt;</code>, then any loan for some path P
+of which <code>lv</code> is a prefix is killed.</li>
+</ul>
+<p>The last point bears some elaboration. This rule is what allows us to
+support cases like the one in Problem Case #4:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let list: &amp;mut List&lt;T&gt; = ...;
+let v = &amp;mut (*list).value;
+list = ...; // &lt;-- assignment
+<span class="boring">}
+</span></code></pre></pre>
+<p>At the point of the marked assignment, the loan of <code>(*list).value</code> is
+in-scope, but it does not have to be considered in-scope
+afterwards. This is because the variable <code>list</code> now holds a fresh
+value, and that new value has not yet been borrowed (or else we could
+not have produced it). Specifically, whenever we see an assignment <code>lv = &lt;rvalue&gt;</code> in MIR, we can clear all loans where the borrowed path
+<code>lv_loan</code> has <code>lv</code> as a prefix. (In our example, the assignment is to
+<code>list</code>, and the loan path <code>(*list).value</code> has <code>list</code> as a prefix.)</p>
+<p><strong>NB.</strong> In this phase, when there is an assignment, we always clear
+all loans that applied to the overwritten path; however, in some cases
+the <strong>assignment itself</strong> may be illegal due to those very loans. In
+our example, this would be the case if the type of <code>list</code> had been
+<code>List&lt;T&gt;</code> and not <code>&amp;mut List&lt;T&gt;</code>.  In such cases, errors will be
+reported by the next portion of the borrowck, described in the next
+section.</p>
+<h3><a class="header" href="#borrow-checker-phase-2-reporting-errors" id="borrow-checker-phase-2-reporting-errors">Borrow checker phase 2: reporting errors</a></h3>
+<p>At this point, we have computed which loans are in scope at each
+point. Next, we traverse the MIR and identify actions that are illegal
+given the loans in scope. Rather than go through every kind of MIR statement,
+we can break things down into two kinds of actions that can be performed:</p>
+<ul>
+<li>Accessing an lvalue, which we categorize along two axes (shallow vs deep, read vs write)</li>
+<li>Dropping an lvalue</li>
+</ul>
+<p>For each of these kinds of actions, we will specify below the rules
+that determine when they are legal, given the set of loans L in scope
+at the start of the action. The second phase of the borrow check
+therefore consists of iterating over each statement in the MIR and
+checking, given the in-scope loans, whether the actions it performs
+are legal. Translating MIR statements into actions is mostly
+straightforward:</p>
+<ul>
+<li>A <code>StorageDead</code> statement counts as a <strong>shallow write</strong>.</li>
+<li>An assignment statement <code>LV = RV</code> is a <strong>shallow write</strong> to <code>LV</code>;</li>
+<li>and, within the rvalue <code>RV</code>:
+<ul>
+<li>Each lvalue operand is either a <strong>deep read</strong> or a <strong>deep write</strong> action, depending
+on whether or not the type of the lvalue implements <code>Copy</code>.
+<ul>
+<li>Note that moves count as &quot;deep writes&quot;.</li>
+</ul>
+</li>
+<li>A shared borrow <code>&amp;LV</code> counts as a <strong>deep read</strong>.</li>
+<li>A mutable borrow <code>&amp;mut LV</code> counts as <strong>deep write</strong>.</li>
+</ul>
+</li>
+</ul>
+<p>There are a few interesting cases to keep in mind:</p>
+<ul>
+<li>MIR models discriminants more precisely. They should be
+thought of as a distinct <em>field</em> when it comes to borrows.</li>
+<li>In the compiler today, <code>Box</code> is still &quot;built-in&quot; to MIR. This RFC
+ignores that possibility and instead acts as though borrowed
+references (<code>&amp;</code> and <code>&amp;mut</code>) and raw pointers (<code>*const</code> and <code>*mut</code>)
+were the only sorts of pointers.  It should be straight-forward to
+extend the text here to cover <code>Box</code>, though some questions arise
+around the handling of drop (see the section on drops for details).</li>
+</ul>
+<p><strong>Accessing an lvalue LV.</strong> When accessing an lvalue LV, there are two
+axes to consider:</p>
+<ul>
+<li>The access can be SHALLOW or DEEP:
+<ul>
+<li>A <em>shallow</em> access means that the immediate fields reached at LV
+are accessed, but references or pointers found within are not
+dereferenced. Right now, the only access that is shallow is an
+assignment like <code>x = ...</code>, which would be a <strong>shallow write</strong> of
+<code>x</code>.</li>
+<li>A <em>deep</em> access means that all data reachable through a given lvalue
+may be invalidated or accessed by this action.</li>
+</ul>
+</li>
+<li>The access can be a READ or WRITE:
+<ul>
+<li>A <em>read</em> means that the existing data may be read, but will not be changed.</li>
+<li>A <em>write</em> means that the data may be mutated to new values or
+otherwise invalidated (for example, it could be de-initialized, as
+in a move operation).</li>
+</ul>
+</li>
+</ul>
+<p>&quot;Deep&quot; accesses are often deep because they create and release an
+alias, in which case the &quot;deep&quot; qualifier reflects what might happen
+through that alias. For example, if you have <code>let x = &amp;mut y</code>, that is
+considered a <strong>deep write</strong> of <code>y</code>, even though the <strong>actual borrow</strong>
+doesn't do anything at all, we create a mutable alias <code>x</code> that can be
+used to mutate anything reachable from <code>y</code>. A move <code>let x = y</code> is
+similar: it writes to the shallow content of <code>y</code>, but then -- via the
+new name <code>x</code> -- we can access all other content accessible through
+<code>y</code>.</p>
+<p>The pseudocode for deciding when an access is legal looks like this:</p>
+<pre><code>fn access_legal(lvalue, is_shallow, is_read) {
+    let relevant_borrows = select_relevant_borrows(lvalue, is_shallow);
+
+    for borrow in relevant_borrows {
+        // shared borrows like `&amp;x` still permit reads from `x` (but not writes)
+        if is_read &amp;&amp; borrow.is_read { continue; }
+        
+        // otherwise, report an error, because we have an access
+        // that conflicts with an in-scope borrow
+        report_error();
+    }
+}
+</code></pre>
+<p>As you can see, it works in two steps. First, we enumerate a set of
+in-scope borrows that are relevant to <code>lvalue</code> -- this set is affected
+by whether this is a &quot;shallow&quot; or &quot;deep&quot; action, as will be described
+shortly. Then, for each such borrow, we check if it conflicts with the
+action (i.e.,, if at least one of them is potentially writing), and,
+if so, we report an error.</p>
+<p>For <strong>shallow</strong> accesses to the path <code>lvalue</code>, we consider borrows relevant
+if they meet one of the following criteria:</p>
+<ul>
+<li>there is a loan for the path <code>lvalue</code>;
+<ul>
+<li>so: writing a path like <code>a.b.c</code> is illegal if <code>a.b.c</code> is borrowed</li>
+</ul>
+</li>
+<li>there is a loan for some prefix of the path <code>lvalue</code>;
+<ul>
+<li>so: writing a path like <code>a.b.c</code> is illegal if <code>a</code> or <code>a.b</code> is borrowed</li>
+</ul>
+</li>
+<li><code>lvalue</code> is a <strong>shallow prefix</strong> of the loan path
+<ul>
+<li>shallow prefixes are found by stripping away fields, but stop at
+any dereference</li>
+<li>so: writing a path like <code>a</code> is illegal if <code>a.b</code> is borrowed</li>
+<li>but: writing <code>a</code> is legal if <code>*a</code> is borrowed, whether or not <code>a</code>
+is a shared or mutable reference</li>
+</ul>
+</li>
+</ul>
+<p>For <strong>deep</strong> accesses to the path <code>lvalue</code>, we consider borrows relevant
+if they meet one of the following criteria:</p>
+<ul>
+<li>there is a loan for the path <code>lvalue</code>;
+<ul>
+<li>so: reading a path like <code>a.b.c</code> is illegal if <code>a.b.c</code> is mutably borrowed</li>
+</ul>
+</li>
+<li>there is a loan for some prefix of the path <code>lvalue</code>;
+<ul>
+<li>so: reading a path like <code>a.b.c</code> is illegal if <code>a</code> or <code>a.b</code> is mutably borrowed</li>
+</ul>
+</li>
+<li><code>lvalue</code> is a <strong>supporting prefix</strong> of the loan path
+<ul>
+<li>supporting prefixes were defined earlier</li>
+<li>so: reading a path like <code>a</code> is illegal if <code>a.b</code> is mutably
+borrowed, but -- in contrast with shallow accesses -- reading <code>a</code> is also
+illegal if <code>*a</code> is mutably borrowed</li>
+</ul>
+</li>
+</ul>
+<p><strong>Dropping an lvalue LV.</strong> Dropping an lvalue can be treated as a DEEP
+WRITE, like a move, but this is overly conservative. The rules here
+are under active development, see
+<a href="https://github.com/nikomatsakis/nll-rfc/issues/40">#40</a>.</p>
+<h1><a class="header" href="#how-we-teach-this" id="how-we-teach-this">How We Teach This</a></h1>
+<h2><a class="header" href="#terminology" id="terminology">Terminology</a></h2>
+<p>In this RFC, I've opted to continue using the term &quot;lifetime&quot; to refer
+to the portion of the program in which a reference is in active use
+(or, alternatively, to the &quot;duration of a borrow&quot;). As the intro to
+the RFC makes clear, this terminology somewhat conflicts with an
+alternative usage, in which lifetime refers to the dynamic extent of a
+value (what we call the &quot;scope&quot;). I think that -- if we were starting
+over -- it might have been preferable to find an alternative term that
+is more specific. However, it would be rather difficult to try and
+change the term &quot;lifetime&quot; at this point, and hence this RFC does not
+attempt do so. To avoid confusion, however, it seems best if the error
+messages result from the region and borrow check avoid the term
+lifetime where possible, or use qualification to make the meaning more
+clear.</p>
+<h2><a class="header" href="#leveraging-intuition-framing-errors-in-terms-of-points" id="leveraging-intuition-framing-errors-in-terms-of-points">Leveraging intuition: framing errors in terms of points</a></h2>
+<p>Part of the reason that Rust currently uses lexical scopes to
+determine lifetimes is that it was thought that they would be simpler
+for users to reason about. Time and experience have not borne this
+hypothesis out: for many users, the fact that borrows are
+&quot;artificially&quot; extended to the end of the block is more surprising
+than not. Furthermore, most users have a pretty intuitive
+understanding of control flow (which makes sense: you have to, in
+order to understand what your program will do).</p>
+<p>We therefore propose to leverage this intution when explaining borrow
+and lifetime errors. To the extent possible, we will try to explain
+all errors in terms of three points:</p>
+<ul>
+<li>The point where the borrow occurred (B).</li>
+<li>The point where the resulting reference is used (U).</li>
+<li>An intervening point that might have invalidated the reference (A).</li>
+</ul>
+<p>We should select three points such that B can reach A and A can reach
+U. In general, the approach is to describe the errors in &quot;narrative&quot; form:</p>
+<ul>
+<li>First, value is borrowed occurs.</li>
+<li>Next, the action occurs, invalidating the reference.</li>
+<li>Finally, the next use occcurs, after the reference has been invalidated.</li>
+</ul>
+<p>This approach is similar to what we do today, but we often neglect to
+mention this third point, where the next use occurs. Note that the
+&quot;point of error&quot; remains the <em>second</em> action -- that is, the error,
+conceptually, is to perform an invalidating action in between two uses
+of the reference (rather than, say, to use the reference after an
+invalidating action). This actually reflects the definition of
+undefined behavior more accurately (that is, performing an illegal
+write is what causes undefined behavior, but the write is illegal
+because of the latter use).</p>
+<p>To see the difference, consider this erroneous program:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut i = 3;
+    let x = &amp;i;
+    i += 1;
+    println!(&quot;{}&quot;, x);
+}
+</code></pre></pre>
+<p>Currently, we emit the following error:</p>
+<pre><code>error[E0506]: cannot assign to `i` because it is borrowed
+ --&gt; &lt;anon&gt;:4:5
+   |
+ 3 |     let x = &amp;i;
+   |              - borrow of `i` occurs here
+ 4 |     i += 1;
+   |     ^^^^^^ assignment to borrowed `i` occurs here
+</code></pre>
+<p>Here, the points B and A are highlighted, but not the point of use
+U. Moreover, the &quot;blame&quot; is placed on the assignment. Under this RFC,
+we would display the error as follows:</p>
+<pre><code>error[E0506]: cannot write to `i` while borrowed
+ --&gt; &lt;anon&gt;:4:5
+   |
+ 3 |     let x = &amp;i;
+   |              - (shared) borrow of `i` occurs here
+ 4 |     i += 1;
+   |     ^^^^^^ write to `i` occurs here, while borrow is still active
+ 5 |     println!(&quot;{}&quot;, x);
+   |                    - borrow is later used here
+</code></pre>
+<p>Another example, this time using a <code>match</code>:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut x = Some(3);
+    match &amp;mut x {
+        Some(i) =&gt; {
+            x = None;
+            *i += 1;
+        }
+        None =&gt; {
+            x = Some(0); // OK
+        }
+    }
+}
+</code></pre></pre>
+<p>The error might be:</p>
+<pre><code>error[E0506]: cannot write to `x` while borrowed
+ --&gt; &lt;anon&gt;:4:5
+   |
+ 3 |     match &amp;mut x {
+   |           ------ (mutable) borrow of `x` occurs here
+ 4 |         Some(i) =&gt; {
+ 5 |              x = None;
+   |              ^^^^^^^^ write to `x` occurs here, while borrow is still active
+ 6 |              *i += 1;
+   |              -- borrow is later used here
+   |
+</code></pre>
+<p>(Note that the assignment in the <code>None</code> arm is not an error, since the
+borrow is never used again.)</p>
+<h2><a class="header" href="#some-special-cases" id="some-special-cases">Some special cases</a></h2>
+<p>There are some cases where the three points are not all visible
+in the user syntax where we may need some careful treatment.</p>
+<h3><a class="header" href="#drop-as-last-use" id="drop-as-last-use">Drop as last use</a></h3>
+<p>There are times when the last use of a variable will in fact be its
+destructor. Consider an example like this:</p>
+<pre><pre class="playground"><code class="language-rust">struct Foo&lt;'a&gt; { field: &amp;'a u32 }
+impl&lt;'a&gt; Drop for Foo&lt;'a&gt; { .. }
+
+fn main() {
+    let mut x = 22;
+    let y = Foo { field: &amp;x };
+    x += 1;
+}
+</code></pre></pre>
+<p>This code would be legal, but for the destructor on <code>y</code>, which will
+implicitly execute at the end of the enclosing scope. The error
+message might be shown as follows:</p>
+<pre><code>error[E0506]: cannot write to `x` while borrowed
+ --&gt; &lt;anon&gt;:4:5
+   |
+ 6 |     let y = Foo { field: &amp;x };
+   |                          -- borrow of `x` occurs here
+ 7 |     x += 1;
+   |     ^ write to `x` occurs here, while borrow is still active
+ 8 | }
+   | - borrow is later used here, when `y` is dropped
+</code></pre>
+<h3><a class="header" href="#method-calls" id="method-calls">Method calls</a></h3>
+<p>One example would be method calls:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut x = vec![1];
+    x.push(x.pop().unwrap());
+}
+</code></pre></pre>
+<p>We propose the following error for this sort of scenario:</p>
+<pre><code>error[E0506]: cannot write to `x` while borrowed
+ --&gt; &lt;anon&gt;:4:5
+   |
+ 3 |     x.push(x.pop().unwrap());
+   |     - ---- ^^^^^^^^^^^^^^^^
+   |     | |    write to `x` occurs here, while borrow is still in active use
+   |     | borrow is later used here, during the call
+   |     `x` borrowed here
+</code></pre>
+<p>If you are not using a method, the error would look slightly different,
+but be similar in concept:</p>
+<pre><code>error[E0506]: cannot assign to `x` because it is borrowed
+ --&gt; &lt;anon&gt;:4:5
+   |
+ 3 |     Vec::push(&amp;mut x, x.pop().unwrap());
+   |     --------- ------  ^^^^^^^^^^^^^^^^
+   |     |         |       write to `x` occurs here, while borrow is still in active use
+   |     |         `x` borrowed here
+   |     borrow is later used here, during the call
+</code></pre>
+<p>We can detect this scenario in MIR readily enough by checking when the
+point of use turns out to be a &quot;call&quot; terminator. We'll have to tweak
+the spans to get everything to look correct, but that is easy enough.</p>
+<h3><a class="header" href="#closures" id="closures">Closures</a></h3>
+<p>As today, when the initial borrow is part of constructing a closure,
+we wish to highlight not only the point where the closure is
+constructed, but the point <em>within</em> the closure where the variable in
+question is used.</p>
+<h2><a class="header" href="#borrowing-a-variable-for-longer-than-its-scope" id="borrowing-a-variable-for-longer-than-its-scope">Borrowing a variable for longer than its scope</a></h2>
+<p>Consider this example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let p;
+{
+    let x = 3;
+    p = &amp;x;
+}
+println!(&quot;{}&quot;, p);
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this example, the reference <code>p</code> refers to <code>x</code> with a lifetime that
+exceeds the scope of <code>x</code>. In short, that portion of the stack will be
+popped with <code>p</code> still in active use. In today's compiler, this is
+detected during the borrow checker by a special check that computes
+the &quot;maximal scope&quot; of the path being borrowed (<code>x</code>, here). This makes
+sense in the existing system since lifetimes and scopes are expressed
+in the same units (portions of the AST).  In the newer, non-lexical
+formulation, this error would be detected somewhat differently. As
+described earlier, we would see that a <code>StorageDead</code> instruction frees
+the slot for <code>x</code> while <code>p</code> is still in use. We can thus present the
+error in the same &quot;three-point style&quot;:</p>
+<pre><code>error[E0506]: variable goes out of scope while still borrowed
+ --&gt; &lt;anon&gt;:4:5
+   |
+ 3 |     p = &amp;x;
+   |          - `x` borrowed here
+ 4 | }
+   | ^ `x` goes out of scope here, while borrow is still in active use
+ 5 | println!(&quot;{}&quot;, p);
+   |                - borrow used here, after invalidation
+</code></pre>
+<h2><a class="header" href="#errors-during-inference" id="errors-during-inference">Errors during inference</a></h2>
+<p>The remaining set of lifetime-related errors come about primarily due
+to the interaction with function signatures. For example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Foo {
+    fn foo(&amp;self, y: &amp;u8) -&gt; &amp;u8 {
+        x
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>We already have work-in-progress on presenting these sorts of errors
+in a better way (see <a href="https://github.com/rust-lang/rust/issues/42516">issue 42516</a> for numerous examples and
+details), all of which should be applicable here. In short, the name
+of the game is to identify patterns and suggest changes to improve the
+function signature to match the body (or at least diagnose the problem
+more clearly).</p>
+<p>Whenever possible, we should leverage points in the control-flow and
+try to explain errors in &quot;narrative&quot; form.</p>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p>There are very few drawbacks to this proposal. The primary one is that
+the <strong>rules</strong> for the system become more complex. However, this
+permits us to accept a larger number of programs, and so we expect
+that <strong>using Rust</strong> will feel simpler. Moreover, experience has shown
+that -- for many users -- the current scheme of tying reference
+lifetimes to lexical scoping is confusing and surprising.</p>
+<h1><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h1>
+<h3><a class="header" href="#alternative-formulations-of-nll" id="alternative-formulations-of-nll">Alternative formulations of NLL</a></h3>
+<p>During the runup to this RFC, a number of alternate schemes and
+approaches to describing NLL were tried and discarded.</p>
+<p><strong>RFC 396.</strong> <a href="https://github.com/rust-lang/rfcs/pull/396">RFC 396</a> defined lifetimes to be a &quot;prefix&quot; of the
+dominator tree -- roughly speaking, a single-entry, multiple-exit
+region of the control-flow graph. Unlike our system, this definition
+did not permit gaps or holes in a lifetime. Ensuring continuous lifetimes was
+meant to guarantee soundness; in this RFC, we use the liveness
+constraints to achieve a similar effect. This more flexible setup
+allows us to handle cases like Problem Case #3, which RFC 396 would
+not have accepted. RFC 396 also did not cover dropck and a number of
+other complications.</p>
+<p><strong>SSA or SSI transformation.</strong> Rather than incorporating the &quot;current location&quot; into
+the subtype check, we also considered formulations that first applied
+an SSA transformation to the input program, and then gave each of those
+variables a distinct type. This does allow some examples to type-check that
+wouldn't otherwise, but it is not flexible enough for the <code>vec-push-ref</code>
+example covered earlier.</p>
+<p>Using SSA also introduces other complications. Among other things,
+Rust permits variables and temporaries to be borrowed and mutated
+indirectly (e.g., via <code>&amp;mut</code>).  If we were to apply SSA to MIR in a
+naive fashion, then, it would ignore these assignments when creating
+numberings. For example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut x = 1;      // x0, has value 1
+let mut p = &amp;mut x; // p0
+*p += 1;
+use(x);             // uses `x0`, but it now has value 2
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here, the value of <code>x0</code> changed due to a write from <code>p</code>. Thus this is
+not a true SSA form. Normally, SSA transformations achieve this by
+making local variables like <code>x</code> and <code>p</code> be pointers into stack slots,
+and then lifting those stack slots into locals when safe. MIR was
+intentionally not done using SSA form precisely to avoid the need for
+such contortions (we can leave that to the optimizing backend).</p>
+<p><strong>Type per program point.</strong> Going further than SSA, one can
+accommodate <code>vec-push-ref</code> through a scheme that gives each variable a
+distinct type at each point in the CFG (similar to what Ericson2314
+describes in the <a href="https://github.com/Ericson2314/a-stateful-mir-for-rust">stateful MIR for Rust</a>) and applies
+transformations to the lifetimes on every edge. During the rustc
+design sprint, the compiler team also enumerated such a design. The
+author believes this RFC to be a roughly equivalent analysis, but with
+an alternative, more familiar formulation that still uses one type per
+variable (rather than one type per variable per point).</p>
+<p>There are several advantages to the design enumerated here. For one
+thing, it involves far fewer inference variables (if each variable has
+many types, each of those types needs distinct inference variables at
+each point) and far fewer constraints (we don't need constraints just
+for connecting the type of a variable between distinct points). It is
+also a more natural fit for the surface language, in which variables
+have a single type.</p>
+<h3><a class="header" href="#different-lifetime-roles" id="different-lifetime-roles">Different &quot;lifetime roles&quot;</a></h3>
+<p>In the discussion about nested method calls (<a href="https://github.com/rust-lang/rfcs/pull/2025">RFC 2025</a>, and the
+discussions that led up to it), there were various proposals that were
+aimed at accepting the naive desugaring of a call like <code>vec.push(vec.len())</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let tmp0 = &amp;mut vec;
+let tmp1 = vec.len(); // does a shared borrow of vec
+Vec::push(tmp0, tmp1);
+<span class="boring">}
+</span></code></pre></pre>
+<p>The alternatives to RFC 2025 were focused on augmenting the type of
+references to have distinct &quot;roles&quot; -- the most prominent such
+proposal was <code>Ref2&lt;'r, 'w&gt;</code>, in which mutable references change to
+have two distinct lifetimes, a &quot;read&quot; lifetime (<code>'r</code>) and a &quot;write&quot;
+lifetime (<code>'w</code>), where read encompasses the entire span of the
+reference, but write only contains those points where writes are
+occuring. This RFC does not attempt to change the approach to nested
+method calls, rather continuing with the RFC 2025 approach (which
+affects only the borrowck handling). However, if we did wish to adopt
+a <code>Ref2</code>-style approach in the future, it could be done backwards
+compatibly, but it would require modifying (for example) the liveness
+requirements. For example, currently, if a variable <code>x</code> is live at
+some point P, then all lifetimes in the type of <code>x</code> must contain P --
+but in the <code>Ref2</code> approach, only the read lifetime would have to
+contain P. This implies that lifetimes are treated differently
+depending on their &quot;role&quot;. It seems like a good idea to isolate such a
+change into a distinct RFC.</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<p>None at present.</p>
+<h1><a class="header" href="#appendix-what-this-proposal-will-not-fix" id="appendix-what-this-proposal-will-not-fix">Appendix: What this proposal will not fix</a></h1>
+<p>It is worth discussing a few kinds of borrow check errors that the
+current RFC will <strong>not</strong> eliminate. These are generally errors that
+cross procedural boundaries in some form or another.</p>
+<p><strong>Closure desugaring.</strong> The first kind of error has to do with the
+closure desugaring. Right now, closures always capture local
+variables, even if the closure only uses some sub-path of the variable
+internally:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let get_len = || self.vec.len(); // borrows `self`, not `self.vec`
+self.vec2.push(...); // error: self is borrowed
+<span class="boring">}
+</span></code></pre></pre>
+<p>This was discussed on <a href="https://internals.rust-lang.org/t/borrow-the-full-stable-name-in-closures-for-ergonomics/5387">an internals thread</a>. It is possible to fix
+this <a href="https://internals.rust-lang.org/t/borrow-the-full-stable-name-in-closures-for-ergonomics/5387/11?u=nikomatsakis">by making the closure desugaring smarter</a>.</p>
+<p><strong>Disjoint fields across functions.</strong> Another kind of error is when
+you have one method that only uses a field <code>a</code> and another that only
+uses some field <code>b</code>; right now, you can't express that, and hence
+these two methods cannot be used &quot;in parallel&quot; with one another:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Foo {
+    fn get_a(&amp;self) -&gt; &amp;A { &amp;self.a }
+    fn inc_b(&amp;mut self) { self.b.value += 1; }
+    fn bar(&amp;mut self) {
+        let a = self.get_a();
+        self.inc_b(); // Error: self is already borrowed
+        use(a);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The fix for this is to refactor so as to expose the fact that the methods
+operate on disjoint data. For example, one can factor out the methods into
+methods on the fields themselves:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn bar(&amp;mut self) {
+    let a = self.a.get();
+    self.b.inc();
+    use(a);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This way, when looking at <code>bar()</code> alone, we see borrows of <code>self.a</code>
+and <code>self.b</code>, rather than two borrows of <code>self</code>. Another technique is
+to introduce &quot;free functions&quot; (e.g., <code>get(&amp;self.a)</code> and <code>inc(&amp;mut self.b)</code>) that expose more clearly which fields are operated upon, or
+to inline the method bodies. This is a non-trivial bit of design and
+is out of scope for this RFC. See
+<a href="https://internals.rust-lang.org/t/partially-borrowed-moved-struct-types/5392/2">this comment on an internals thread</a> for further thoughts.</p>
+<p><strong>Self-referential structs.</strong> The final limitation we are not fixing
+yet is the inability to have &quot;self-referential structs&quot;. That is, you
+cannot have a struct that stores, within itself, an arena and pointers
+into that arena, and then move that struct around. This comes up in a
+number of settings.  There are various workarounds: sometimes you can
+use a vector with indices, for example, or
+<a href="https://crates.io/crates/owning_ref">the <code>owning_ref</code> crate</a>. The
+latter, when combined with <a href="https://github.com/rust-lang/rfcs/pull/1598">associated type constructors</a>, might
+be an adequate solution for some uses cases, actually (it's basically
+a way of modeling &quot;existential lifetimes&quot; in library code). For the
+case of futures especially, <a href="https://github.com/rust-lang/rfcs/pull/1858">the <code>?Move</code> RFC</a> proposes another
+lightweight and interesting approach.</p>
+<h1><a class="header" href="#endnotes" id="endnotes">Endnotes</a></h1>
+<p><a name="temporaries"></a></p>
+<p><strong>1.</strong> Scopes always correspond to blocks with one exception: the
+scope of a temporary value is sometimes the enclosing
+statement.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2093-infer-outlives.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2102-unnamed-fields.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2093-infer-outlives.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2102-unnamed-fields.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

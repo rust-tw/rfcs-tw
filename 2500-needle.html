@@ -1,0 +1,1914 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2500-needle - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html" class="active">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: <code>needle</code></li>
+<li>Start Date: 2018-07-06</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2500">rust-lang/rfcs#2500</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/56345">rust-lang/rust#56345</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Generalize the needle (née pattern) API to support <code>&amp;str</code>, <code>&amp;mut str</code>, <code>&amp;[T]</code>, <code>&amp;mut [T]</code>, <code>Vec&lt;T&gt;</code> and <code>&amp;OsStr</code>.</p>
+<!-- TOC depthTo:2 -->
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#motivation">Motivation</a>
+<ul>
+<li><a href="#stabilize-the-pattern-api">Stabilize the Pattern API</a></li>
+<li><a href="#implement-omg-wtf-8">Implement OMG-WTF-8</a></li>
+</ul>
+</li>
+<li><a href="#guide-level-explanation">Guide-level explanation</a></li>
+<li><a href="#reference-level-explanation">Reference-level explanation</a>
+<ul>
+<li><a href="#api">API</a></li>
+<li><a href="#standard-library-changes">Standard library changes</a></li>
+<li><a href="#performance">Performance</a></li>
+</ul>
+</li>
+<li><a href="#drawbacks">Drawbacks</a></li>
+<li><a href="#rationale-and-alternatives">Rationale and alternatives</a>
+<ul>
+<li><a href="#principles">Principles</a></li>
+<li><a href="#design-rationales">Design rationales</a></li>
+<li><a href="#miscellaneous-decisions">Miscellaneous decisions</a></li>
+<li><a href="#alternatives">Alternatives</a></li>
+</ul>
+</li>
+<li><a href="#prior-art">Prior art</a>
+<ul>
+<li><a href="#previous-attempts">Previous attempts</a></li>
+<li><a href="#haskell">Haskell</a></li>
+</ul>
+</li>
+<li><a href="#unresolved-questions">Unresolved questions</a></li>
+</ul>
+<!-- /TOC -->
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<h2><a class="header" href="#stabilize-the-pattern-api" id="stabilize-the-pattern-api">Stabilize the Pattern API</a></h2>
+<p>Pattern API v1.0 (<a href="https://github.com/rust-lang/rfcs/pull/528">RFC 528</a> / <a href="https://github.com/rust-lang/rust/issues/27721">issue 27721</a>) has been implemented for nearly 3 years,
+but we still haven't decided to stabilize. One of the blockers is attempting to generalize the API
+to support <code>str</code>, <code>[T]</code> and <code>OsStr</code>, though it only exists as sketches and never finalized.</p>
+<p>This RFC is raised as attempt to</p>
+<ol>
+<li>
+<p>Generalize the pattern API so that all built-in slice-like types <code>&amp;str</code>, <code>&amp;mut str</code>, <code>&amp;[T]</code>,
+<code>&amp;mut [T]</code>, <code>Vec&lt;T&gt;</code> and <code>&amp;OsStr</code> can be searched.</p>
+</li>
+<li>
+<p>Revise the API to address some performance and usability issues identified in
+the previous attempts.</p>
+</li>
+</ol>
+<p>We hope that this RFC could revitalize the Pattern API development and make its stabilization
+foreseeable.</p>
+<h2><a class="header" href="#implement-omg-wtf-8" id="implement-omg-wtf-8">Implement OMG-WTF-8</a></h2>
+<p>The OMG-WTF-8 encoding was introduced to allow slicing an <code>&amp;OsStr</code>, and thus enable extending
+the Pattern API to <code>&amp;OsStr</code> without special-casing (<a href="https://github.com/rust-lang/rfcs/pull/2295">RFC 2295</a> / <a href="https://github.com/rust-lang/rust/issues/49802">issue 49802</a>). That RFC expects
+a Pattern API working with <code>OsStr</code> to generalize some methods (e.g. <code>OsStr::ends_with()</code>).
+This RFC would unblock the implementation of RFC 2295, as to decide whether to integrate with
+a Pattern API, or just go with the non-generic version.</p>
+<h1><a class="header" href="#guide-level-explanation" id="guide-level-explanation">Guide-level explanation</a></h1>
+<p>You may check the prototype package <a href="https://crates.io/crates/pattern-3"><code>pattern-3</code></a> for API documentation and source code.</p>
+<h1><a class="header" href="#reference-level-explanation" id="reference-level-explanation">Reference-level explanation</a></h1>
+<p>Key concepts:</p>
+<ul>
+<li>Searching is based on <em>trisection</em>, splitting a string into 3 parts: the substring before, being,
+and after the match. <code>&quot;ab123cedf&quot; == &quot;ab&quot; ++ &quot;123&quot; ++ &quot;cdef&quot;</code>.</li>
+<li><em>Haystack</em> teaches the search algorithm how to perform splitting with proper ownership transfer.</li>
+<li><em>Searcher</em> is responsible for finding the range of the match.</li>
+<li>Utilizing these together to safely construct many useful algorithms related to string matching.</li>
+</ul>
+<h2><a class="header" href="#api" id="api">API</a></h2>
+<p>All items below should be placed in the <code>core::needle</code> module, re-exported as <code>std::needle</code>.</p>
+<p>We renamed &quot;Pattern API&quot; into &quot;Needle API&quot; to avoid confusion with the language's pattern matching
+i.e. the <code>match</code> expression.</p>
+<h3><a class="header" href="#hay" id="hay">Hay</a></h3>
+<p>A <code>Hay</code> is the core type which the search algorithm will run on.
+It is implemented on the unsized slice-like types like <code>str</code>, <code>OsStr</code> and <code>[T]</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub unsafe trait Hay {
+    type Index: Copy + Debug + Eq;
+
+    fn empty&lt;'a&gt;() -&gt; &amp;'a Self;
+
+    fn start_index(&amp;self) -&gt; Self::Index;
+    fn end_index(&amp;self) -&gt; Self::Index;
+
+    unsafe fn next_index(&amp;self, index: Self::Index) -&gt; Self::Index;
+    unsafe fn prev_index(&amp;self, index: Self::Index) -&gt; Self::Index;
+
+    unsafe fn slice_unchecked(&amp;self, range: Range&lt;Self::Index&gt;) -&gt; &amp;Self;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The trait is unsafe to implement because it needs to guarantee all methods (esp. <code>.start_index()</code>
+and <code>.end_index()</code>) follow the documented requirements, which cannot be checked automatically.</p>
+<p>We allow a hay to customize the <code>Index</code> type. While <code>str</code>, <code>[T]</code> and <code>OsStr</code> all  use <code>usize</code> as
+the index, we do want the Needle API to support other linear structures like <code>LinkedList&lt;T&gt;</code>,
+where a cursor/pointer would be more suitable for allowing sub-linear splitting.</p>
+<pre><code>start_index() = 0   next_index(2) = 6
+        |         +-------------------+
+        v         ^                   v
+        0    1    2    3    4    5    6    7
+        +----+----+----+----+----+----+----+
+        | 48 | 69 | f0   9f   8c   8d | 21 |
+        +----+----+----+----+----+----+----+
+        0    1    2    3    4    5    6    7
+             ^    v                        ^
+             +----+                        |
+        prev_index(2) = 1            end_index() = 7
+</code></pre>
+<h3><a class="header" href="#haystack" id="haystack">Haystack</a></h3>
+<p>A <code>Haystack</code> is any linear structure which we can do string/array matching on,
+and can be sliced or split so they could be returned from the <code>matches()</code> and <code>split()</code> iterators.</p>
+<p>Haystack is implemented on the reference or collection itself e.g. <code>&amp;[T]</code>, <code>&amp;mut [T]</code> and <code>Vec&lt;T&gt;</code>.
+A hay can <em>borrowed</em> from a haystack.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub unsafe trait Haystack: Deref&lt;Target: Hay&gt; + Sized {
+    fn empty() -&gt; Self;
+    unsafe fn split_around(self, range: Range&lt;Self::Target::Index&gt;) -&gt; [Self; 3];
+
+    unsafe fn slice_unchecked(self, range: Range&lt;Self::Target::Index&gt;) -&gt; Self {
+        let [_, middle, _] = self.split_around(range);
+        middle
+    }
+
+    fn restore_range(
+        &amp;self,
+        original: Range&lt;Self::Target::Index&gt;,
+        parent: Range&lt;Self::Target::Index&gt;,
+    ) -&gt; Range&lt;Self::Target::Index&gt;;
+}
+// we assume either RFC 2089 (issue #44491) or RFC 2289 is implemented.
+// for simplicity we're ignoring issue #38078 which forces us to write `&lt;Self::Target as Hay&gt;::Index`.
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>We assume either Implied Bounds (<a href="https://github.com/rust-lang/rfcs/pull/2089">RFC 2089</a> / <a href="https://github.com/rust-lang/rust/issues/44491">issue 44491</a>) is implemented (thus fixing
+[issue 20671]), or Associated Type Bounds (<a href="https://github.com/rust-lang/rfcs/pull/2289">RFC 2289</a>) has been accepted and implemented.</p>
+<p>For simplicity we are ignoring <a href="https://github.com/rust-lang/rust/issues/38078">issue 38078</a>,
+which forces us to write <code>&lt;Self::Target as Hay&gt;::Index</code> instead of <code>Self::Target::Index</code>.</p>
+</blockquote>
+<p>The <code>self.restore_range(original, parent)</code> method is implemented to solve:</p>
+<ul>
+<li>given haystacks <code>a</code> and <code>b</code></li>
+<li>given <code>a = b[original]</code> and <code>self = a[parent]</code></li>
+<li>find <code>range</code> such that <code>self == b[original][parent] == b[range]</code></li>
+</ul>
+<p>This method is used to recover the original range in functions like <code>find()</code> and <code>match_indices()</code>.
+It is usually just implemented as <code>(original.start + parent.start)..(original.start + parent.end)</code>.</p>
+<p>When an index is based on a pointer, splitting a haystack will <em>invalidate</em> those pointers.
+However, a pointer is persisted with slicing, so they could implement this method simply as
+<code>self.start_index()..self.end_index()</code>.</p>
+<h3><a class="header" href="#shared-haystack" id="shared-haystack">Shared haystack</a></h3>
+<p>A <code>SharedHaystack</code> is a marker sub-trait which tells the compiler this haystack can cheaply be
+cheaply cloned (i.e. shared), e.g. a <code>&amp;H</code> or <code>Rc&lt;H&gt;</code>. Implementing this trait alters some behavior
+of the <code>Span</code> structure discussed next section.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait SharedHaystack: Haystack + Clone {}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>.restore_range()</code> will never be called with a shared haystack and should be implemented as
+<code>unreachable!()</code>.</p>
+<h3><a class="header" href="#span" id="span">Span</a></h3>
+<p>A <code>Span</code> is a haystack coupled with information where the original span is found.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Span&lt;H: Haystack&gt; { /* hidden */ }
+
+impl&lt;H: Haystack&gt; Span&lt;H&gt; {
+    pub fn original_range(&amp;self) -&gt; Range&lt;H::Target::Index&gt;;
+    pub fn borrow(&amp;self) -&gt; Span&lt;&amp;H::Target&gt;;
+    pub fn is_empty(&amp;self) -&gt; bool;
+    pub fn take(&amp;mut self) -&gt; Self;
+
+    pub unsafe fn split_around(self, subrange: Range&lt;H::Target::Index&gt;) -&gt; [Self; 3];
+    pub unsafe fn slice_unchecked(self, subrange: Range&lt;H::Target::Index&gt;) -&gt; Self;
+}
+
+impl&lt;H: SharedHaystack&gt; Span&lt;H&gt; {
+    pub fn into_parts(self) -&gt; (H, Range&lt;H::Target::Index&gt;);
+    pub unsafe fn from_parts(haystack: H, range: Range&lt;H::Target::Index&gt;) -&gt; Self;
+}
+
+impl&lt;H: Haystack&gt; From&lt;H&gt; for Span&lt;H&gt; { ... }
+impl&lt;H: Haystack&gt; From&lt;Span&lt;H&gt;&gt; for H { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>The behavior of a span differs slightly between a shared haystack and unique haystack
+(this is also the main reason why the <code>Span</code> structure is introduced).</p>
+<pre><code class="language-text">                     Span&lt;&amp;str&gt;                         Span&lt;&amp;mut str&gt;
+
+               -+---+---+---+---+---+-               +---+---+---+---+---+
+                | C | D | E | F | G |                | C | D | E | F | G |
+               -+---+---+---+---+---+-               +---+---+---+---+---+
+                ^___________________^                ^                   ^
+                 3..8                                3                   8
+
+split_around:           ^_______^                            ^_______^
+                         5..7                                 2..4
+
+               -+---+---+---+---+---+-               +---+---+
+                | C | D | E | F | G |                | C | D |
+               -+---+---+---+---+---+-               +---+---+
+                ^_______^                            ^       ^
+                 3..5                                3       5
+
+               -+---+---+---+---+---+-                       +---+---+
+                | C | D | E | F | G |                        | E | F |
+               -+---+---+---+---+---+-                       +---+---+
+                        ^_______^                            ^       ^
+                         5..7                                5       7
+
+               -+---+---+---+---+---+-                               +---+
+                | C | D | E | F | G |                                | G |
+               -+---+---+---+---+---+-                               +---+
+                                ^___^                                ^   ^
+                                 7..8                                7   8
+</code></pre>
+<p>A span of shared haystack will always store a copy of the original haystack when splitting,
+because the haystack can be cheaply cloned. Splitting is thus just manipulation of the range only.
+Slicing is only done when returning from an algorithm.</p>
+<p>A non-shared haystack needs to maintain unique ownership for each haystack slice. Therefore,
+a haystack will be split as soon as the span is split. The &quot;original range&quot; becomes a value
+disconnected from the haystack, and this is where <code>.restore_range()</code> is needed:
+to recover the indices in the middle (<code>5 == 3 + 2</code> and <code>7 == 3 + 4</code>).</p>
+<h3><a class="header" href="#searcher" id="searcher">Searcher</a></h3>
+<p>A searcher only provides a single method: <code>.search()</code>. It takes a span as input,
+and returns the first sub-range where the given needle is found.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub unsafe trait Searcher&lt;A: Hay + ?Sized&gt; {
+    fn search(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;Range&lt;A::Index&gt;&gt;;
+}
+
+pub unsafe trait ReverseSearcher&lt;A: Hay + ?Sized&gt;: Searcher&lt;A&gt; {
+    fn rsearch(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;Range&lt;A::Index&gt;&gt;;
+}
+
+pub unsafe trait DoubleEndedSearcher&lt;A: Hay + ?Sized&gt;: ReverseSearcher&lt;A&gt; {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>.search()</code> function is safe because there is no safe ways to construct a <code>Span&lt;&amp;A&gt;</code>
+with invalid ranges. Implementations of <code>.search()</code> often start with:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    fn search(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;Range&lt;A::Index&gt;&gt; {
+        let (hay, range) = span.into_parts();
+        // search for needle from `hay` restricted to `range`.
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>The trait is unsafe to implement because it needs to guarantee the returned range is valid.</p>
+<p>There is a &quot;reverse&quot; version of the trait, which supports searching from the end
+with the <code>.rsearch()</code> method besides from the start.</p>
+<p>Furthermore, there is a &quot;double-ended&quot; version, which is a marker trait saying that
+searching from both ends will give consistent results. The searcher of a substring needle is
+an example which implements <code>ReverseSearcher</code> but not <code>DoubleEndedSearcher</code>, e.g.</p>
+<ul>
+<li>Forward searching the needle <code>xx</code> in the haystack <code>xxxxx</code> will yield <code>[xx][xx]x</code></li>
+<li>Backward searching the needle <code>xx</code> in the haystack <code>xxxxx</code> will yield <code>x[xx][xx]</code></li>
+</ul>
+<h3><a class="header" href="#consumer" id="consumer">Consumer</a></h3>
+<p>A consumer provides the <code>.consume()</code> method to implement <code>starts_with()</code> and <code>trim_start()</code>. It
+takes a span as input, and if the beginning matches the needle, returns the end index of the match.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub unsafe trait Consumer&lt;A: Hay + ?Sized&gt; {
+    fn consume(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;A::Index&gt;;
+}
+
+pub unsafe trait ReverseConsumer&lt;A: Hay + ?Sized&gt;: Consumer&lt;A&gt; {
+    fn rconsume(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;A::Index&gt;;
+}
+
+pub unsafe trait DoubleEndedConsumer&lt;A: Hay + ?Sized&gt;: ReverseConsumer&lt;A&gt; {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Comparing searcher and consumer, the <code>.search()</code> method will look for the first slice
+matching the searcher's needle in the span,
+and returns the range where the slice is found (relative to the hay's start index).
+The <code>.consume()</code> method is similar, but anchored to the start of the span.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let span = unsafe { Span::from_parts(&quot;CDEFG&quot;, 3..8) };
+// we can find &quot;CD&quot; at the start of the span.
+assert_eq!(&quot;CD&quot;.into_searcher().search(span.clone()), Some(3..5));
+assert_eq!(&quot;CD&quot;.into_consumer().consume(span.clone()), Some(5));
+// we can only find &quot;EF&quot; in the middle of the span.
+assert_eq!(&quot;EF&quot;.into_searcher().search(span.clone()), Some(5..7));
+assert_eq!(&quot;EF&quot;.into_consumer().consume(span.clone()), None);
+// we cannot find &quot;GH&quot; in the span.
+assert_eq!(&quot;GH&quot;.into_searcher().search(span.clone()), None);
+assert_eq!(&quot;GH&quot;.into_consumer().consume(span.clone()), None);
+<span class="boring">}
+</span></code></pre></pre>
+<p>The trait also provides a <code>.trim_start()</code> method in case a faster specialization exists.</p>
+<p>Similar to searchers, the consumers also have the &quot;reverse&quot; and &quot;double-ended&quot; variants.</p>
+<h3><a class="header" href="#needle" id="needle">Needle</a></h3>
+<p>A needle is simply a &quot;factory&quot; of a searcher and consumer.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Needle&lt;H: Haystack&gt;: Sized {
+    type Searcher: Searcher&lt;H::Target&gt;;
+    type Consumer: Consumer&lt;H::Target&gt;;
+
+    fn into_searcher(self) -&gt; Self::Searcher;
+    fn into_consumer(self) -&gt; Self::Consumer;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Needles are the types where users used to supply into the algorithms.
+Needles are usually immutable (stateless), while searchers sometimes require pre-computation and
+mutable state when implementing some more sophisticated string searching algorithms.</p>
+<p>The relation between <code>Needle</code> and <code>Searcher</code>/<code>Consumer</code> is thus like <code>IntoIterator</code> and <code>Iterator</code>.</p>
+<p>There are two required methods <code>.into_searcher()</code> and <code>.into_consumer()</code>.
+In some needles (e.g. substring search), checking if a prefix match will require much less
+pre-computation than checking if any substring match.
+Therefore, a consumer could use a more efficient structure with this specialized purpose.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;H: Haystack&lt;Target = str&gt;&gt; Needle&lt;H&gt; for &amp;'p str {
+    type Searcher = SliceSearcher&lt;'p, [u8]&gt;;
+    type Consumer = NaiveSearcher&lt;'p, [u8]&gt;;
+    #[inline]
+    fn into_searcher(self) -&gt; Self::Searcher {
+        // create a searcher based on Two-Way algorithm.
+        SliceSearcher::new(self)
+    }
+    #[inline]
+    fn into_consumer(self) -&gt; Self::Consumer {
+        // create a searcher based on naive search (which requires no pre-computation)
+        NaiveSearcher::new(self)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Note that, unlike <code>IntoIterator</code>, the standard library is unable to provide a blanket impl:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;H, S&gt; Needle&lt;H&gt; for S
+where
+    H: Haystack,
+    S: Searcher&lt;H::Target&gt; + Consumer&lt;H::Target&gt;,
+{
+    type Searcher = Self;
+    type Consumer = Self;
+    fn into_searcher(self) -&gt; Self { self }
+    fn into_consumer(self) -&gt; Self { self }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This is because there is already an existing Needle impl:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'h, F&gt; Needle&lt;&amp;'h str&gt; for F
+where
+    F: FnMut(char) -&gt; bool,
+{ ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>and a type can implement all of <code>(FnMut(char) -&gt; bool) + Searcher&lt;str&gt; + Consumer&lt;str&gt;</code>,
+causing impl conflict.</p>
+<h3><a class="header" href="#algorithms" id="algorithms">Algorithms</a></h3>
+<p>Standard algorithms are provided as <em>functions</em> in the <code>core::needle::ext</code> module.</p>
+<details><summary>List of algorithms</summary>
+<p><strong>Starts with, ends with</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn starts_with&lt;H, P&gt;(haystack: H, needle: P) -&gt; bool
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn ends_with&lt;H, P&gt;(haystack: H, needle: P) -&gt; bool
+where
+    H: Haystack,
+    P: Needle&lt;H, Consumer: ReverseConsumer&lt;H::Target&gt;&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Trim</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn trim_start&lt;H, P&gt;(haystack: H, needle: P) -&gt; H
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn trim_end&lt;H, P&gt;(haystack: H, needle: P) -&gt; H
+where
+    H: Haystack,
+    P: Needle&lt;H, Consumer: ReverseConsumer&lt;H::Target&gt;&gt;;
+
+pub fn trim&lt;H, P&gt;(haystack: H, needle: P) -&gt; H
+where
+    H: Haystack,
+    P: Needle&lt;H, Consumer: DoubleEndedConsumer&lt;H::Target&gt;&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Matches</strong></p>
+<p>(These function do return concrete iterators in the actual implementation.)</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn matches&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn rmatches&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H, Searcher: ReverseSearcher&lt;H::Target&gt;&gt;;
+
+pub fn contains&lt;H, P&gt;(haystack: H, needle: P) -&gt; bool
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn match_indices&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = (H::Target::Index, H)&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn rmatch_indices&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = (H::Target::Index, H)&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H, Searcher: ReverseSearcher&lt;H::Target&gt;&gt;;
+
+pub fn find&lt;H, P&gt;(haystack: H, needle: P) -&gt; Option&lt;H::Target::Index&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn rfind&lt;H, P&gt;(haystack: H, needle: P) -&gt; Option&lt;H::Target::Index&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H, Searcher: ReverseSearcher&lt;H::Target&gt;&gt;;
+
+pub fn match_ranges&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = (Range&lt;H::Target::Index&gt;, H)&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn rmatch_ranges&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = (Range&lt;H::Target::Index&gt;, H)&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H, Searcher: ReverseSearcher&lt;H::Target&gt;&gt;;
+
+pub fn find_range&lt;H, P&gt;(haystack: H, needle: P) -&gt; Option&lt;Range&lt;H::Target::Index&gt;&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn rfind_range&lt;H, P&gt;(haystack: H, needle: P) -&gt; Option&lt;Range&lt;H::Target::Index&gt;&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H, Searcher: ReverseSearcher&lt;H::Target&gt;&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Split</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn split&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn rsplit&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H, Searcher: ReverseSearcher&lt;H::Target&gt;&gt;;
+
+pub fn split_terminator&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn rsplit_terminator&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H, Searcher: ReverseSearcher&lt;H::Target&gt;&gt;;
+
+pub fn splitn&lt;H, P&gt;(haystack: H, n: usize, needle: P) -&gt; impl Iterator&lt;Item = H&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;;
+
+pub fn rsplitn&lt;H, P&gt;(haystack: H, n: usize, needle: P) -&gt; impl Iterator&lt;Item = H&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H, Searcher: ReverseSearcher&lt;H::Target&gt;&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Replace</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn replace_with&lt;H, P, F, W&gt;(src: H, from: P, replacer: F, writer: W)
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;,
+    F: FnMut(H) -&gt; H,
+    W: FnMut(H);
+
+pub fn replacen_with&lt;H, P, F, W&gt;(src: H, from: P, replacer: F, n: usize, writer: W)
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;,
+    F: FnMut(H) -&gt; H,
+    W: FnMut(H);
+<span class="boring">}
+</span></code></pre></pre>
+</details>
+<p>Most algorithms are very simple to implement using trisection (<code>.split_around()</code>). For instance,
+<code>split()</code> can be implemented as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>gen fn split&lt;H, P&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;,
+{
+    let mut searcher = needle.into_searcher();
+    let mut rest = Span::from(haystack);
+    while let Some(range) = searcher.search(rest.borrow()) {
+        let [left, _, right] = unsafe { rest.split_around(range) };
+        yield left.into();
+        rest = right;
+    }
+    yield rest;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>These functions are forwarded as <em>inherent methods</em> of the haystack type, e.g.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl str {
+    ...
+
+    pub fn split_mut&lt;'a&gt;(
+        &amp;'a mut self,
+        needle: impl Needle&lt;&amp;'a mut str&gt;,
+    ) -&gt; impl Iterator&lt;Item = &amp;'a mut str&gt; {
+        core::needle::split(self, needle)
+    }
+
+    pub fn replace&lt;'a&gt;(
+        &amp;'a self,
+        from: impl Needle&lt;&amp;'a str&gt;,
+        to: &amp;str,
+    ) -&gt; String {
+        let mut res = String::with_capacity(self.len());
+        core::needle::replace_with(self, from, |_| to, |r| res.push_str(r));
+        res
+    }
+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#standard-library-changes" id="standard-library-changes">Standard library changes</a></h2>
+<ul>
+<li>
+<p>Remove the entire <code>core::str::pattern</code> module from public, as this is unstable.</p>
+</li>
+<li>
+<p>Add the <code>core::needle</code> module with traits and structs shown above.</p>
+</li>
+<li>
+<p>Implement <code>Hay</code> to <code>str</code>, <code>[T]</code> and <code>OsStr</code>.</p>
+</li>
+<li>
+<p>Implement <code>Haystack</code> to <code>∀H: Hay. &amp;H</code>, <code>&amp;mut str</code> and <code>&amp;mut [T]</code>.</p>
+</li>
+<li>
+<p>Implement <code>Needle</code> as following:</p>
+<ul>
+<li><code>Needle&lt;&amp;{mut} str&gt;</code> for <code>char</code></li>
+<li><code>Needle&lt;&amp;{mut} str&gt;</code> for <code>&amp;[char]</code> and <code>FnMut(char)-&gt;bool</code></li>
+<li><code>Needle&lt;&amp;{mut} str&gt;</code> for <code>&amp;str</code>, <code>&amp;&amp;str</code> and <code>&amp;String</code></li>
+<li><code>Needle&lt;&amp;{mut} [T]&gt;</code> for <code>FnMut(&amp;T)-&gt;bool</code></li>
+<li><code>Needle&lt;&amp;{mut} [T]&gt;</code> for <code>&amp;[T]</code> where <code>T: PartialEq</code></li>
+<li><code>Needle&lt;&amp;OsStr&gt;</code> for <code>&amp;OsStr</code> and <code>&amp;str</code></li>
+</ul>
+</li>
+<li>
+<p>Change the following methods of <code>str</code> to use the Needle API:</p>
+<ul>
+<li><code>.contains()</code>, <code>.starts_with()</code>, <code>.ends_with()</code></li>
+<li><code>.find()</code>, <code>.rfind()</code></li>
+<li><code>.split()</code>, <code>.rsplit()</code></li>
+<li><code>.split_terminator()</code>, <code>.rsplit_terminator()</code></li>
+<li><code>.splitn()</code>, <code>.rsplitn()</code></li>
+<li><code>.matches()</code>, <code>.rmatches()</code></li>
+<li><code>.match_indices()</code>, <code>.rmatch_indices()</code></li>
+<li><code>.trim_matches()</code>, <code>.trim_left_matches()</code>, <code>.trim_right_matches()</code></li>
+<li><code>.replace()</code>, <code>.replacen()</code></li>
+</ul>
+<p>Note also <a href="https://github.com/rust-lang/rust/issues/30459">issue 30459</a> suggests deprecating <code>trim_{left, right}</code>
+and rename them to <code>trim_{start, end}</code>.</p>
+</li>
+<li>
+<p>Add the following range-returning methods to <code>str</code>:</p>
+<ul>
+<li><code>.find_range()</code>, <code>.rfind_range()</code></li>
+<li><code>.match_ranges()</code>, <code>.rmatch_ranges()</code></li>
+</ul>
+</li>
+<li>
+<p>Add the following mutable methods to <code>str</code>, they should all take <code>&amp;mut self</code>:</p>
+<ul>
+<li><code>.split_mut()</code>, <code>.rsplit_mut()</code></li>
+<li><code>.split_terminator_mut()</code>, <code>.rsplit_terminator_mut()</code></li>
+<li><code>.splitn_mut()</code>, <code>.rsplitn_mut()</code></li>
+<li><code>.matches_mut()</code>, <code>.rmatches_mut()</code></li>
+<li><code>.match_indices_mut()</code>, <code>.rmatch_indices_mut()</code></li>
+<li><code>.match_ranges_mut()</code>, <code>.rmatch_ranges_mut()</code></li>
+</ul>
+</li>
+<li>
+<p>Modify the following iterators in <code>core::str</code> to type alias of the corresponding Needle API
+iterators, and mark them as deprecated:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>macro_rules! forward_to_needle_api {
+    ($($name:ident)+) =&gt; {
+        $(
+            #[rustc_deprecated]
+            pub type $name&lt;'a, P&gt; = needle::ext::$name&lt;&amp;'a str, &lt;P as Pattern&lt;&amp;'a str&gt;&gt;::Searcher&gt;;
+        )+
+    }
+}
+
+forward_to_needle_api! {
+    MatchIndices Matches Split SplitN SplitTerminator
+    RMatchIndices RMatches RSplit RSplitN RSplitTerminator
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Rust allows the type alias to be stable while the underlying type be unstable.</p>
+</li>
+<li>
+<p>Generalize these methods of <code>[T]</code> to use the new Needle API:</p>
+<ul>
+<li><code>.split()</code>, <code>.split_mut()</code>, <code>.rsplit()</code>, <code>.rsplit_mut()</code></li>
+<li><code>.splitn()</code>, <code>.splitn_mut()</code>, <code>.rsplitn()</code>, <code>rsplitn_mut()</code></li>
+<li><code>.starts_with()</code>, <code>.ends_with()</code></li>
+</ul>
+</li>
+<li>
+<p>Add the following methods to <code>[T]</code>:</p>
+<ul>
+<li><code>.contains_match()</code>
+(<em>note</em>: the existing <code>.contains()</code> method is incompatible with Needle API)</li>
+<li><code>.find()</code>, <code>.rfind()</code>, <code>.find_range()</code>, <code>.rfind_range()</code></li>
+<li><code>.matches()</code>, <code>.matches_mut()</code>, <code>.rmatches()</code>, <code>.rmatches_mut()</code></li>
+<li><code>.match_indices()</code>, <code>.match_indices_mut()</code>, <code>.rmatch_indices()</code>, <code>.rmatch_indices_mut()</code></li>
+<li><code>.match_ranges()</code>, <code>.match_ranges_mut()</code>, <code>.rmatch_ranges()</code>, <code>.rmatch_ranges_mut()</code></li>
+<li><code>.trim_matches()</code>, <code>.trim_start_matches()</code>, <code>.trim_end_matches()</code></li>
+<li><code>.replace()</code>, <code>.replacen()</code> (produce a <code>Vec&lt;T&gt;</code>)</li>
+</ul>
+</li>
+<li>
+<p>Modify the following iterators in <code>core::slice</code> to type alias of the corresponding
+Needle API iterators, and mark them as deprecated:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>macro_rules! forward_to_needle_api {
+    ($($name:ident $name_mut:ident)+) =&gt; {
+        $(
+            #[rustc_deprecated]
+            pub type $name&lt;'a, T, P&gt; = needle::ext::$name&lt;&amp;'a [T], ElemSearcher&lt;P&gt;&gt;;
+            #[rustc_deprecated]
+            pub type $name_mut&lt;'a, T, P&gt; = needle::ext::$name&lt;&amp;'a mut [T], ElemSearcher&lt;P&gt;&gt;;
+        )+
+    }
+}
+
+forward_to_needle_api! {
+    Split SplitMut
+    SplitN SplitNMut
+    RSplit RSplitMut
+    RSplitN RSplitNMut
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Add all immutable Needle API algorithms to <code>OsStr</code>. The <code>.replace()</code> and <code>.replacen()</code> methods
+should produce an <code>OsString</code>.</p>
+</li>
+</ul>
+<h2><a class="header" href="#performance" id="performance">Performance</a></h2>
+<p>The benchmark of the <code>pattern_3</code> package shows that algorithms using the Needle API (&quot;v3.0 API&quot;)
+is close to or much faster than the corresponding methods in libstd using v1.0.</p>
+<p>The main performance improvement comes from <code>trim()</code>. In v1.0, <code>trim()</code> depends on
+the <code>Searcher::next_reject()</code> method, which requires initializing a searcher and compute
+the critical constants for the Two-Way search algorithm. Search algorithms mostly concern about
+quickly skip through mismatches, but the purpose of <code>.next_reject()</code> is to find mismatches, so a
+searcher would be a job mismatch for <code>trim()</code>. This justifies the <code>Consumer</code> trait in v3.0.</p>
+<details><summary>Summary of benchmark</summary>
+<p>(The lower the number, the better)</p>
+<table><thead><tr><th>Test case</th><th align="right">v3.0 time change</th></tr></thead><tbody>
+<tr><td><code>contains('!')</code></td><td align="right">−75%</td></tr>
+<tr><td><code>contains(&quot;!&quot;)</code></td><td align="right">−26%</td></tr>
+<tr><td><code>ends_with('/')</code></td><td align="right">−31%</td></tr>
+<tr><td><code>ends_with('💤')</code></td><td align="right">+32%</td></tr>
+<tr><td><code>find('_')</code></td><td align="right">−80%</td></tr>
+<tr><td><code>find('💤')</code></td><td align="right">−74%</td></tr>
+<tr><td><code>find(_ == ' ')</code></td><td align="right">−30%</td></tr>
+<tr><td><code>match_indices(&quot;&quot;).count()</code></td><td align="right">−26%</td></tr>
+<tr><td><code>match_indices(&quot;a&quot;).count()</code></td><td align="right">−5%</td></tr>
+<tr><td><code>rfind('_')</code></td><td align="right">−18%</td></tr>
+<tr><td><code>rfind('💤')</code></td><td align="right">−18%</td></tr>
+<tr><td><code>rfind(_ == ' ')</code></td><td align="right">−8%</td></tr>
+<tr><td><code>split(&quot; &quot;).count()</code></td><td align="right">−4%</td></tr>
+<tr><td><code>split(&quot;a&quot;).count()</code></td><td align="right">−1%</td></tr>
+<tr><td><code>split(&quot;ad&quot;).count()</code></td><td align="right">−20%</td></tr>
+<tr><td><code>starts_with('/')</code></td><td align="right">−70%</td></tr>
+<tr><td><code>starts_with('💤')</code></td><td align="right">−56%</td></tr>
+<tr><td><code>starts_with(&quot;💩💩&quot;)</code></td><td align="right">−40%</td></tr>
+<tr><td><code>starts_with(_.is_ascii())</code></td><td align="right">−11%</td></tr>
+<tr><td><code>trim_end('!')</code></td><td align="right">−19%</td></tr>
+<tr><td><code>trim_end(&quot;m!&quot;)</code></td><td align="right">−97%</td></tr>
+<tr><td><code>trim_left(_.is_ascii())</code></td><td align="right">−57%</td></tr>
+<tr><td><code>trim_right(_.is_ascii())</code></td><td align="right">−54%</td></tr>
+<tr><td><code>trim_start('💩')</code></td><td align="right">−32%</td></tr>
+<tr><td><code>trim_start(&quot;💩💩&quot;)</code></td><td align="right">−97%</td></tr>
+</tbody></table>
+</details>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<ul>
+<li>
+<p>This RFC suggests generalizing some stabilized methods of <code>str</code> and <code>[T]</code> to adapt
+the Needle API. This might cause inference breakage.</p>
+</li>
+<li>
+<p>Some parts of the Haystack trait (e.g. the <code>.restore_range()</code> method) may not be intuitive enough.</p>
+</li>
+<li>
+<p>This RFC does not address some problems raised in <a href="https://github.com/rust-lang/rust/issues/27721">issue 27721</a>:</p>
+<ol>
+<li>
+<p>v3.0 still assumes strict left-to-right or right-to-left searching.
+Some niche data structures like <a href="https://docs.rs/suffix/1.0.0/suffix/struct.SuffixTable.html#method.positions">suffix table</a> as a haystack would return matches without
+any particular order, and thus cannot be supported.</p>
+</li>
+<li>
+<p>Needles are still moved when converting to a Searcher or Consumer.
+Taking the entire ownership of the needle might prevent some use cases... ?</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Stabilization of this RFC is blocked by <a href="https://github.com/rust-lang/rfcs/pull/1672">RFC 1672</a> (disjointness based on associated types)
+which is postponed.</p>
+<p>The default Needle implementation currently uses an impl that covers all haystacks
+(<code>impl&lt;H: Haystack&lt;Target = A&gt;&gt; Needle&lt;H&gt; for N</code>) for some types, and several impls for
+individual types for others (<code>impl&lt;'h&gt; Needle&lt;&amp;'h A&gt; for N</code>). Ideally <em>every</em> such impl
+should use the blanket impl.
+Unfortunately, due to lack of RFC 1672, there would be conflict between these impls:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 1.
+impl&lt;'p, H&gt; Needle&lt;H&gt; for &amp;'p [char]
+where
+    H: Haystack&lt;Target = str&gt;,
+{ ... }
+impl&lt;'p, H&gt; Needle&lt;H&gt; for &amp;'p [T] // `T` can be `char`
+where
+    H: Haystack&lt;Target = [T]&gt;,
+    T: PartialEq + 'p,
+{ ... }
+
+// 2.
+impl&lt;H, F&gt; Needle&lt;H&gt; for F
+where
+    H: Haystack&lt;Target = str&gt;,
+    F: FnMut(char) -&gt; bool,
+{ ... }
+impl&lt;T, H, F&gt; Needle&lt;H&gt; for F
+where
+    H: Haystack&lt;Target = [T]&gt;,
+    F: FnMut(&amp;T) -&gt; bool, // `F` can impl both `FnMut(char)-&gt;bool` and `FnMut(&amp;T)-&gt;bool`.
+    T: PartialEq,
+{ ... }
+
+// 3.
+impl&lt;'p, H&gt; Needle&lt;H&gt; for &amp;'p str
+where
+    H: Haystack&lt;Target = str&gt;,
+{ ... }
+impl&lt;'p, H&gt; Needle&lt;H&gt; for &amp;'p str
+where
+    H: Haystack&lt;Target = OsStr&gt;,
+{ ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>We currently provide concrete impls like <code>impl&lt;'h, 'p&gt; Needle&lt;&amp;'h OsStr&gt; for &amp;'p str</code>
+as workaround, but if we stabilize the <code>Needle</code> trait before RFC 1672 is implemented,
+a third-party crate can sneak in an impl:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyOsString { ... };
+impl Deref for MyOsString {
+    type Target = OsStr;
+    ...
+}
+impl Haystack for MyOsString { ... }
+
+impl&lt;'p&gt; Needle&lt;MyOsString&gt; for &amp;'p str { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>and causes the standard library not able to further generalize (this is a breaking change).</p>
+<p>RFC 1672 is currently blocked by <code>chalk</code> integration before it could be reopened.</p>
+</li>
+</ul>
+<h1><a class="header" href="#rationale-and-alternatives" id="rationale-and-alternatives">Rationale and alternatives</a></h1>
+<h2><a class="header" href="#principles" id="principles">Principles</a></h2>
+<p>These are some guiding principles v3.0 will adhere to.</p>
+<h3><a class="header" href="#generic-algorithms" id="generic-algorithms">Generic algorithms</a></h3>
+<ol>
+<li>
+<p>The Needle API should define an interface which can be used to easily implement
+all algorithms the standard library currently provides:</p>
+<ul>
+<li><code>starts_with()</code>, <code>ends_with()</code></li>
+<li><code>trim_left_matches()</code>, <code>trim_right_matches()</code>, <code>trim_matches()</code></li>
+<li><code>contains()</code>, <code>find()</code>, <code>rfind()</code></li>
+<li><code>matches()</code>, <code>rmatches()</code>, <code>match_indices()</code>, <code>rmatch_indices()</code></li>
+<li><code>split()</code>, <code>rsplit()</code>, <code>split_terminator()</code>, <code>rsplit_terminator()</code></li>
+<li><code>splitn()</code>, <code>rsplitn()</code></li>
+<li><code>replace()</code>, <code>replacen()</code></li>
+</ul>
+</li>
+<li>
+<p>We should not need &quot;non-local unsafety&quot; when writing these algorithms. Mainly, we should not need
+to do borrowck by hand (e.g. ensuring there is no overlapping mutable slices across functions).</p>
+</li>
+</ol>
+<h3><a class="header" href="#haystack-implementor" id="haystack-implementor">Haystack implementor</a></h3>
+<ol start="3">
+<li>
+<p>The standard slice types must be supported:
+<code>&amp;str</code>, <code>&amp;mut str</code>, <code>&amp;[T]</code>, <code>&amp;mut [T]</code>, <code>Vec&lt;T&gt;</code>, and <code>&amp;OsStr</code>.</p>
+</li>
+<li>
+<p>The API should be compatible with linked list and rope data structure as haystack,
+assuming we get either custom DST or GATs implemented.</p>
+</li>
+</ol>
+<h3><a class="header" href="#needlesearcher-implementor" id="needlesearcher-implementor">Needle/Searcher implementor</a></h3>
+<ol start="5">
+<li>
+<p>The existing needle for <code>&amp;str</code> and <code>&amp;mut str</code> should be supported:</p>
+<ul>
+<li><code>char</code></li>
+<li><code>FnMut(char) -&gt; bool</code>, <code>&amp;[char]</code></li>
+<li><code>&amp;str</code>, <code>&amp;&amp;str</code>, <code>&amp;String</code></li>
+</ul>
+<p>Additionally, these re-implementations should not be slower than
+the existing ones in the standard library.</p>
+</li>
+<li>
+<p>These needles for <code>&amp;[T]</code>, <code>&amp;mut [T]</code> and <code>Vec&lt;T&gt;</code> should be supported:</p>
+<ul>
+<li><code>FnMut(&amp;T) -&gt; bool</code></li>
+<li><code>&amp;[T]</code> where <code>T: PartialEq</code></li>
+</ul>
+</li>
+<li>
+<p>These needles for <code>&amp;OsStr</code> should be supported:</p>
+<ul>
+<li><code>&amp;str</code></li>
+<li><code>&amp;OsStr</code></li>
+</ul>
+</li>
+<li>
+<p>It should be possible to implement <code>Needle</code> for <code>&amp;Regex</code> within the <code>regex</code> package.</p>
+</li>
+<li>
+<p>One should not need to implement a <code>Searcher</code> three times to support <code>&amp;[T]</code>, <code>&amp;mut [T]</code> and
+<code>Vec&lt;T&gt;</code>. The searcher should rely on that these all can be borrowed as an <code>&amp;[T]</code>.</p>
+</li>
+</ol>
+<h2><a class="header" href="#design-rationales" id="design-rationales">Design rationales</a></h2>
+<p>The section lists some important use cases which shape v3.0.</p>
+<h3><a class="header" href="#no-more-next_reject" id="no-more-next_reject">No more <code>.next_reject()</code></a></h3>
+<p>In v1.0 a searcher provides a <code>.next()</code> method which returns what is being seen ahead:
+a match, no-match, or end-to-string, and then advance the cursor.</p>
+<p>None of the generic algorithms besides <code>starts_with()</code>/<code>ends_with()</code>
+uses the full power of <code>.next()</code>. The rest depend entirely on filtered versions of <code>.next()</code>:</p>
+<ul>
+<li><code>.next_match()</code>, which produces ranges of matches, is used for <code>matches()</code> and <code>split()</code> etc.</li>
+<li><code>.next_reject()</code>, which produces ranges of non-matches, is used for <code>trim()</code>.</li>
+</ul>
+<p>Implementing <code>.next()</code> is sometimes not trivial. In v1.2 this method is entirely abolished
+in favor of implementing <code>.next_match()</code> and <code>.next_reject()</code> directly.
+The <code>starts_with()</code> methods are supported instead via a specialized method in the Needle trait.</p>
+<p>However, we see that even <code>.next_reject()</code> is not something obvious. Given that <code>.next_reject()</code>
+is only used in <code>trim()</code>, in v3.0 we decide to remove this method as well,
+and instead make the Needle implement <code>trim()</code> directly.</p>
+<h3><a class="header" href="#searching-in-a-mut-str" id="searching-in-a-mut-str">Searching in a <code>&amp;mut str</code></a></h3>
+<p>In all versions of Pattern APIs up to v2.0, the &quot;haystack&quot; is directly managed by the searcher.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v2.0
+trait Pattern&lt;H: PatternHaystack&gt; {
+    type Searcher: Searcher&lt;H&gt;;
+    fn into_searcher(self, haystack: H) -&gt; Self::Searcher;
+}
+trait Searcher&lt;H: PatternHaystack&gt; {
+    fn haystack(&amp;self) -&gt; H::Haystack; // e.g. returns (*mut u8, *mut u8) for H = &amp;mut str
+    fn next_match(&amp;mut self) -&gt; Option&lt;(H::Cursor, H::Cursor)&gt;;
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The generic algorithms like <code>matches()</code> and <code>split()</code> would turn the cursor pair back into slices.
+With mutable slices, this means logically both the searcher and the <code>matches()</code>/<code>split()</code> iterators
+would hold a copy of the same mutable slice, which violates the &quot;Aliasing XOR Mutability&quot; rule.</p>
+<p>This could be avoid by having the searcher carefully written to not look back into parts given out
+via <code>next_match()</code>/<code>next_reject()</code>/<code>next_match_back()</code>/<code>next_reject_back()</code>,
+however this kind of unsafety is very un-rustic (contradicts with &quot;fearless concurrency&quot;).</p>
+<p>A better way to avoid this is to ensure there is a unique owner to the haystack. Therefore, the
+generic algorithm must now <em>borrow</em> the haystack for the searcher to work with:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v3.0-alpha.1
+trait Needle&lt;H: Haystack&gt; {
+    type Searcher: Searcher&lt;H&gt;;
+    fn into_searcher(self) -&gt; Self::Searcher;
+    //^ searcher no longer captures the haystack.
+}
+trait Searcher&lt;H: Haystack&gt; {
+    // no more haystack() method.
+    fn search(&amp;mut self, haystack: &amp;H) -&gt; Option&lt;Range&lt;H::Index&gt;&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>matches()</code> algorithm can then take the whole responsibility to split out
+non-overlapping slices of the haystack it owns:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v3.0-alpha.1
+gen fn matches&lt;H: Haystack, P: Needle&lt;H&gt;&gt;(mut haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt; {
+    let mut searcher = needle.into_searcher();
+    while let Some(range) = searcher.search(&amp;haystack) {
+        // split the haystack into 3 parts.
+        let [_, matched, rest] = haystack.split_around(range);
+        haystack = rest;
+        yield matched;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#matching-a-regex" id="matching-a-regex">Matching a <code>&amp;Regex</code></a></h3>
+<p>In the prototype above, we always feed the remaining haystack into <code>.search()</code>.
+This works fine for built-in needle types like <code>char</code> and <code>&amp;str</code>,
+but is totally broken for more advanced regular expression needles.</p>
+<p>The main issue is due to anchors and look-around.
+Anchors like <code>^</code> and <code>$</code> depend on the actual position where the slice appears.
+Look-around like <code>(?=foo)</code>, <code>(?&lt;!foo)</code> and <code>\b</code> depend on parts which may have already matched.
+These means to make regex work, we must pass the entire haystack (not just the remaining part),
+and a range indicating what's the part should be matched.</p>
+<p>In fact, this behavior is consistent with all regex libraries in the wild,
+e.g. <a href="https://crates.io/crates/regex"><code>regex</code></a>, <a href="https://crates.io/crates/onig"><code>onig</code></a> and <a href="https://crates.io/crates/pcre"><code>pcre</code></a>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v3.0-alpha.2
+trait Searcher&lt;H: Haystack&gt; {
+    fn search(&amp;mut self, full_haystack: &amp;H, range: Range&lt;H::Index&gt;) -&gt; Option&lt;Range&lt;H::Index&gt;&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This API completely conflicts with <code>&amp;mut str</code> as a haystack though. This is fine as a <code>&amp;mut str</code> is
+incompatible with look-around anyway, but it is not OK for <code>matches()</code> which need to support both
+&quot;matching <code>&amp;mut str</code> with <code>char</code>&quot; and &quot;matching <code>&amp;str</code> with <code>&amp;Regex</code>&quot;.</p>
+<p>We fix this problem by treating the haystack and range as a single entity we call <strong>span</strong>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v3.0-alpha.3
+trait Searcher&lt;H: Haystack&gt; {
+    fn search(&amp;mut self, span: (&amp;H, Range&lt;H::Index&gt;)) -&gt; Option&lt;Range&lt;H::Index&gt;&gt;;
+}
+gen fn matches&lt;H: Haystack, P: Needle&lt;H&gt;&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt; {
+    let mut searcher = needle.into_searcher();
+    let mut span = (haystack, haystack.start_index()..haystack.end_index());
+    while let Some(range) = searcher.search((&amp;span.0, span.1.clone())) {
+        // split the span into 3 parts.
+        let [_, matched, rest] = span.split_around(range);
+        span = rest;
+        yield matched.0.slice_unchecked(matched.1);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>For a span of <code>&amp;str</code>, we will implement <code>.split_around()</code> to keep the original haystack,
+and only split the ranges. While for <code>&amp;mut str</code>, this method will split the haystack apart.</p>
+<p>The call the these a <em>shared span</em> and <em>unique span</em> respectively. The split behavior of shared span
+in fact is independent of haystack, and the operation is done entirely on the Range alone.
+Thus we could reduce repetitive implementation by providing <code>Span&lt;H&gt;</code> in the standard library.
+The Haystack implementation only needs to specify which flavor is chosen by a marker trait.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v3.0-alpha.4
+trait SharedHaystack: Haystack + Clone {}
+
+struct Span&lt;H: Haystack&gt; {
+    haystack: H,
+    range: Range&lt;H::Index&gt;,
+}
+
+impl&lt;H: Haystack&gt; Span&lt;H&gt; {
+    fn split_around(self, range: Range&lt;H::Index&gt;) -&gt; [Self; 3];
+    fn borrow(&amp;self) -&gt; (&amp;H::Target, Range&lt;H::Index&gt;);
+    ...
+}
+
+gen fn matches&lt;H: Haystack, P: Needle&lt;H&gt;&gt;(haystack: H, needle: P) -&gt; impl Iterator&lt;Item = H&gt; {
+    let mut searcher = needle.into_searcher();
+    let mut span = H::Span::from(haystack);
+    while let Some(range) = searcher.search(span.borrow()) {
+        let [_, matched, rest] = span.split_around(range);
+        span = rest;
+        yield H::from(matched);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#hay-dont-repeat-yourself" id="hay-dont-repeat-yourself">Hay: Don't repeat yourself</a></h3>
+<p>When we support searching both <code>&amp;str</code> and <code>&amp;mut str</code>, we'll often need to implement the same
+algorithm to both types. v2.0 solves this by using macros, which works but is not elegant.</p>
+<p>Since both <code>&amp;str</code> and <code>&amp;mut str</code> can be borrowed as a <code>str</code>, we could force every haystack
+to implement <code>Borrow</code>. We call the borrowed type a <strong>hay</strong>. The searcher can then only work on
+the hay, instead of haystack.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v3.0-alpha.5
+unsafe trait Haystack: Deref&lt;Target: Hay&gt; {
+    ...
+}
+trait Searcher&lt;A: Hay + ?Sized&gt; {
+    fn search(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;Range&lt;A::Index&gt;&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Unfortunately, a Needle must be associated with the Haystack,
+because we must not allow &quot;match <code>&amp;mut str</code> with <code>&amp;Regex</code>&quot; to happen.
+Thus macros would still be needed, though not surrounding the entire module.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v3.0-alpha.5
+trait Needle&lt;H: Haystack&gt; {
+    type Searcher: Searcher&lt;H::Target&gt;;
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#consumer-1" id="consumer-1">Consumer</a></h3>
+<p>In v2.0 and before, a pattern (needle) will need to specialize <code>starts_with()</code> and <code>ends_with()</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v2.0
+trait Pattern&lt;H: PatternHaystack&gt; {
+    ...
+    fn is_prefix_of(self, haystack: H) -&gt; bool;
+    fn is_suffix_of(self, haystack: H) -&gt; bool where Self::Searcher: ReverseSearcher&lt;H&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In v3.0, we have removed <code>.next_reject()</code> from Searcher, and thus Needle needs to provide
+<code>.trim_start()</code> and <code>.trim_end()</code> as well, making the <code>Needle</code> trait quite large.</p>
+<p>There are many disadvantages by putting these specialization methods directly inside <code>Needle</code>:</p>
+<ol>
+<li><a href="https://github.com/rust-lang/rust/issues/20021">Issue 20021</a> means the <code>Needle</code> impl for <code>&amp;Regex</code> will still need to
+implement <code>.is_suffix_of()</code> and <code>.trim_end()</code> even if they are <code>unimplemented!()</code></li>
+<li>These two methods do not use the searcher directly, but is bounded by
+<code>where Self::Searcher: ReverseSearcher&lt;H&gt;</code> which feels strange.</li>
+<li>More code needs to be repeated to delegate an implementation e.g. from <code>&amp;str</code> to <code>&amp;[u8]</code>.</li>
+</ol>
+<p>A solution move <code>.is_prefix_of()</code> and <code>.trim_start()</code> directly into <code>Searcher</code>. However, a searcher
+sometimes requires preprocessing unnecessary for these operations. Therefore, instead we put them
+into a separate entity called a <em>consumer</em>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v3.0-alpha.6
+trait Needle&lt;H: Haystack&gt; {
+    type Consumer: Consumer&lt;H::Target&gt;;
+    fn into_consumer(self) -&gt; Self::Consumer;
+    ...
+}
+trait Consumer&lt;A: Hay + ?Sized&gt; {
+    fn is_prefix_of(&amp;mut self, hay: &amp;A) -&gt; bool;
+    fn trim_start(&amp;mut self, hay: &amp;A) -&gt; A::Index;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>We observed that <code>.is_prefix_of()</code> and <code>.trim_start()</code> have one thing in common: they both
+only match the beginning of text. This allows us to require only a single method in
+the <code>Consumer</code> trait.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// v3.0-alpha.7
+trait Consumer&lt;A: Hay + ?Sized&gt; {
+    fn consume(&amp;mut self, hay: Span&lt;&amp;A&gt;) -&gt; Option&lt;A::Index&gt;;
+    fn trim_start(&amp;mut self, hay: &amp;A) -&gt; A::Index { /* default impl */ }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Both <code>starts_with()</code> and <code>trim()</code> can be efficiently implemented in terms of <code>.consume()</code>,
+though for some needles a specialized <code>trim()</code> can be even faster, so we keep this default method.</p>
+<h2><a class="header" href="#miscellaneous-decisions" id="miscellaneous-decisions">Miscellaneous decisions</a></h2>
+<h3><a class="header" href="#usize-as-index-instead-of-pointers" id="usize-as-index-instead-of-pointers"><code>usize</code> as index instead of pointers</a></h3>
+<p>Pattern API v1.3–v2.0 all used cursors (pointers) as the primary indexing method.
+v3.0 still supports cursor-based indexing, but reverts to <code>usize</code> for the built-in slice types
+(<code>str</code>, <code>[T]</code> and <code>OsStr</code>). There are two reasons for this:</p>
+<ol>
+<li>
+<p><strong>Zero-sized types</strong>. All elements of a slice of ZSTs e.g. <code>[()]</code> have the same pointer.
+A proper haystack/searcher implementation would need to check <code>size_of::&lt;T&gt;()</code>
+and encode the index into (non-zero) pointers when the size is 0. This made the code very ugly
+and easy to get wrong (the v2.0 implementation does not consider ZSTs for instance).</p>
+</li>
+<li>
+<p><strong>No performance advantage</strong>. We have tested the performance and found that using integer index
+or cursor pointer have similar performance.</p>
+</li>
+</ol>
+<h3><a class="header" href="#dsts-instead-of-gats" id="dsts-instead-of-gats">DSTs instead of GATs</a></h3>
+<p>We share a searcher implementation by introducing the <code>Hay</code> trait, as the dereference target of the
+<code>Haystack</code> trait, i.e. <code>&amp;[T]</code>, <code>&amp;mut [T]</code> and <code>Vec&lt;T&gt;</code> will all be delegated to <code>[T]</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>unsafe trait Haystack: Deref&lt;Target: Hay&gt; + Sized {
+    ...
+}
+unsafe trait Searcher&lt;A: Hay + ?Sized&gt; {
+    fn search(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;Range&lt;A::Index&gt;&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The problem is not every haystack can be dereferenced. Proper support of any types beyond slices
+would require custom dynamic-sized types (DSTs).</p>
+<p>An alternative formation is delegating to a shared haystack by generic associated types (GATs):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>unsafe trait Haystack: Sized {
+    type Shared&lt;'a&gt;: SharedHaystack;
+    fn borrow(&amp;self) -&gt; Self::Shared&lt;'_&gt;;
+    ...
+}
+unsafe trait Searcher&lt;H: SharedHaystack&gt; {
+    fn search(&amp;mut self, span: Span&lt;H&gt;) -&gt; Option&lt;Range&lt;H::Index&gt;&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>We have decided to go with the DSTs approach because:</p>
+<ol>
+<li>
+<p><strong>Non-slice haystacks are rare</strong>. The built-in types that v3.0 aims to support all have
+corresponding built-in DSTs (<code>str</code>, <code>[T]</code> and <code>OsStr</code>), making the problem of custom DSTs
+irrelevant in the standard library.</p>
+</li>
+<li>
+<p><strong>GATs is still unimplemented</strong>. While the RFC for GATs has been accepted, the implementation
+has still not landed on the Rust compiler, making it impossible to create a test prototype.</p>
+</li>
+</ol>
+<h3><a class="header" href="#deref-instead-of-borrow" id="deref-instead-of-borrow"><code>Deref</code> instead of <code>Borrow</code></a></h3>
+<p>The <code>Haystack</code> trait inherits <code>Deref</code> and requires its <code>Target</code> to implement <code>Hay</code>. An alternative
+is extending <code>Borrow</code> instead:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>unsafe trait Haystack: Borrow&lt;Self::Hay&gt; + Sized {
+    type Hay: Hay + ?Sized;
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The advantage of <code>Borrow</code> is that it does not force us to rely on custom DST because
+<code>∀T. T: Borrow&lt;T&gt;</code>, but that is not the whole picture — the owned type <code>LinkedList&lt;T&gt;</code> cannot
+implement <code>Hay</code>, because it cannot properly implement <code>slice_unchecked(&amp;self, ...) -&gt; &amp;Self</code>
+(we cannot magically make up a borrowed sub-list).</p>
+<p>And thus the more general <code>Borrow</code> trait offers no advantage over <code>Deref</code>.</p>
+<h3><a class="header" href="#searcher-makes-hay-an-input-type-instead-of-associated-type" id="searcher-makes-hay-an-input-type-instead-of-associated-type">Searcher makes Hay an input type instead of associated type</a></h3>
+<p>The <code>Searcher</code> and <code>Consumer</code> traits makes the hay as input type.
+This makes any algorithm relying on a <code>ReverseSearcher</code> need to spell out the hay as well.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Searcher&lt;A: Hay + ?Sized&gt; {
+    fn search(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;Range&lt;A::Index&gt;&gt;;
+}
+
+fn rfind&lt;H, P&gt;(haystack: H, needle: P) -&gt; Option&lt;H::Target::Index&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;,
+    P::Searcher: ReverseSearcher&lt;H::Target&gt;; // &lt;---
+<span class="boring">}
+</span></code></pre></pre>
+<p>An alternative is to make Hay an associated type:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Searcher {
+    type Hay: Hay + ?Sized;
+    fn search(&amp;mut self, span: Span&lt;&amp;Self::Hay&gt;) -&gt; Option&lt;Range&lt;Self::Hay::Index&gt;&gt;;
+}
+
+fn rfind&lt;H, P&gt;(haystack: H, needle: P) -&gt; Option&lt;H::Target::Index&gt;
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;,
+    P::Searcher: ReverseSearcher;
+<span class="boring">}
+</span></code></pre></pre>
+<p>This would mean a searcher type can only search on one haystack. It turns out a searcher is shared
+quite frequently, e.g. the two-way search algorithm is shared among the needles of <code>&amp;[T]</code>, <code>&amp;str</code>
+and <code>&amp;OsStr</code>. Associated type would force creation of many wrapper types which is annoying.</p>
+<p>Therefore we stay with having the hay as the input type, the same choice taken in v2.0 and before.</p>
+<h3><a class="header" href="#specialization-of-contains" id="specialization-of-contains">Specialization of <code>contains()</code></a></h3>
+<p>v3.0 removed the <code>Needle::is_contained_in()</code> method. The <code>contains()</code> algorithm simply returned
+<code>searcher.search(span).is_some()</code>. The micro-benchmarks shows no performance decrease,
+thus the method is removed to reduce the API surface.</p>
+<h3><a class="header" href="#needle-for-t-only-requires-t-partialeq" id="needle-for-t-only-requires-t-partialeq">Needle for <code>&amp;[T]</code> only requires <code>T: PartialEq</code></a></h3>
+<p>Sub-slice searching nowadays uses the Two-Way search algorithm, which requires ordered alphabet
+i.e. <code>T: Ord</code>. However, there are already two stabilized APIs only assuming <code>T: PartialEq</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; [T] {
+    pub fn starts_with(&amp;self, needle: &amp;[T]) -&gt; bool
+    where
+        T: PartialEq;
+
+    pub fn ends_with(&amp;self, needle: &amp;[T]) -&gt; bool
+    where
+        T: PartialEq;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>While we could allow only <code>starts_with</code>/<code>ends_with</code> to be bound on <code>PartialEq</code> and make the rest
+of the array searching algorithm require <code>T: Ord</code>, it feels very inconsistent to do so.</p>
+<p>With specialization, this dilemma can be easily fixed: we will fallback to an algorithm
+which only requires <code>T: PartialEq</code> (e.g. <a href="https://crates.io/crates/galil-seiferas"><code>galil-seiferas</code></a> or even naive search),
+and use the faster Two-Way algorithm when <code>T: Ord</code>.</p>
+<h3><a class="header" href="#not-having-default-implementations-for-search-and-consume" id="not-having-default-implementations-for-search-and-consume">Not having default implementations for <code>search</code> and <code>consume</code></a></h3>
+<p>In the <code>Searcher</code> and <code>Consumer</code> traits, <code>.search()</code> and <code>.consume()</code> can be implemented
+in terms of each other:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;A, C&gt; Searcher&lt;A&gt; for C
+where
+    A: Hay + ?Sized,
+    C: Consumer&lt;A&gt;,
+{
+    fn search(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;Range&lt;A::Index&gt;&gt; {
+        // we can implement `search` in terms of `consume`
+        let (hay, range) = span.into_parts();
+        loop {
+            unsafe {
+                if let Some(end) = self.consume(Span::from_span(hay, range.clone())) {
+                    return Some(range.start..end);
+                }
+                if range.start == range.end {
+                    return None;
+                }
+                range.start = hay.next_index(range.start);
+            }
+        }
+    }
+}
+
+impl&lt;A, S&gt; Consumer&lt;A&gt; for S
+where
+    A: Hay + ?Sized,
+    S: Searcher&lt;A&gt;,
+{
+    fn consume(&amp;mut self, span: Span&lt;&amp;A&gt;) -&gt; Option&lt;A::Index&gt; {
+        // we can implement `consume` in terms of `search`
+        let start = span.original_range().start;
+        let range = self.search(span)?;
+        if range.start == start {
+            Some(range.end)
+        } else {
+            None
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>These fallbacks should only be used when the needle does not allow more efficient implementations,
+which is often not the case. To encourage needle implementations to support both primitives,
+where they should have full control of the details, we keep them as required methods.</p>
+<h3><a class="header" href="#names-of-everything" id="names-of-everything">Names of everything</a></h3>
+<ul>
+<li>
+<p><strong>Haystack</strong>. Inherited from the v1.0 method <code>Searcher::haystack()</code>. v2.0 called it
+<code>PatternHaystack</code> since <code>Haystack</code> is an associated type referring to a range of cursors,
+but v3.0 does away the exclusive cursor-based design and thus can choose the shorter name
+for the trait.</p>
+</li>
+<li>
+<p><strong>Hay</strong>. Chosen as a shorter but related name from &quot;Haystack&quot;, similar to the relation in
+<code>String</code> → <code>str</code> and <code>PathBuf</code> → <code>Path</code>.</p>
+</li>
+<li>
+<p><strong>Needle</strong>. Renamed from <code>Pattern</code> to clear confusion with the language's pattern matching.
+Calling it &quot;needle&quot; to pair up with &quot;haystack&quot;.</p>
+</li>
+<li>
+<p><strong>Searcher::search()</strong>. The name &quot;Searcher&quot; is the same as v1.0. The method is renamed from
+<code>.next_match()</code> since it needs to take a span as input and thus no longer iterator-like.
+It is renamed to <code>.search()</code> as a shorter verb and also consistent with the trait name.</p>
+</li>
+<li>
+<p><strong>Consumer::consume()</strong>. The name is almost randomly chosen as there's no good name for
+this operation. This name is taken from the same function in the <a href="https://github.com/google/re2/blob/2018-07-01/re2/re2.h#L330-L334"><code>re2</code> library</a>.</p>
+<ul>
+<li>
+<p><code>Consumer</code> is totally different from <code>Searcher</code>. Calling it <code>PrefixSearcher</code> or
+<code>AnchoredSearcher</code> would imply a non-existing sub-classing relationship.</p>
+</li>
+<li>
+<p>We would also like a name which is only a single word.</p>
+</li>
+<li>
+<p>We want the name <em>not</em> start with the letter <strong>S</strong>
+so we could easily distinguish between this and <code>Searcher</code> when quick-scanning the code,
+in particular when <code>ReverseXxxer</code> is involved.</p>
+</li>
+<li>
+<p>&quot;Matcher&quot; (using name from Python) is incompatible with the existing <code>.matches()</code> method.
+Besides, the meaning of &quot;match&quot; is very ambiguous among other libraries.</p>
+</li>
+</ul>
+<details><summary>Names from other languages and libraries</summary>
+<p>| Library                   | Substring         | Start of text     | Entire string         |
+|---------------------------|-------------------|-------------------|-----------------------|
+| <a href="https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex">C# (.NET)</a>     | <code>Match</code>           | -                 | -                     |
+| <a href="https://en.cppreference.com/w/cpp/regex">C++</a>          | <code>regex_search</code>    | -                 | <code>regex_match</code>         |
+| <a href="https://dlang.org/phobos/std_regex.html">D</a>              | <code>matchFirst</code>      | -                 | -                     |
+| <a href="https://api.dartlang.org/stable/1.24.3/dart-core/Pattern-class.html">Dart</a>        | <code>firstMatch</code>      | <code>matchAsPrefix</code>   | -                     |
+| <a href="http://erlang.org/doc/man/re.html">Erlang</a>    | <code>run</code>             | (<code>anchored</code>)      | -                     |
+| <a href="https://golang.org/pkg/regexp/">Go</a>            | <code>Find</code>            | -                 | -                     |
+| <a href="https://hackage.haskell.org/package/regex-base-0.93.2/docs/Text-Regex-Base-RegexLike.html">Haskell</a>  | <code>match</code>           | -                 | -                     |
+| <a href="http://icu-project.org/apiref/icu4c/classRegexMatcher.html">ICU</a>          | <code>find</code>            | <code>lookingAt</code>       | <code>matches</code>             |
+| <a href="https://docs.oracle.com/javase/10/docs/api/java/util/regex/Matcher.html">Java (JVM)</a>  | <code>find</code>            | <code>lookingAt</code>       | <code>matches</code>             |
+| <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">JavaScript</a>    | <code>exec</code>/<code>match</code>    | -                 | -                     |
+| <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/-regex/">Kotlin</a>    | <code>find</code>            | -                 | <code>matchEntire</code>         |
+| <a href="https://www.lua.org/manual/5.3/manual.html#6.4">Lua</a>          | <code>find</code>/<code>match</code>    | -                 | -                     |
+| <a href="https://nim-lang.org/docs/re.html">Nim</a>          | <code>find</code>            | -                 | <code>match</code>               |
+| <a href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html">OCaml</a>      | <code>search_forward</code>  | <code>string_match</code>    | -                     |
+| <a href="https://github.com/kkos/oniguruma/blob/master/doc/API">Oniguruma</a>   | <code>onig_search</code>     | -                 | <code>onig_match</code>          |
+| <a href="https://pcre.org/current/doc/html/pcre2api.html#SEC27">PCRE2</a>      | <code>pcre2_match</code>    | (<code>PCRE2_ANCHORED</code>) | (<code>PCRE2_ENDANCHORED</code>) |
+| <a href="http://pubs.opengroup.org/onlinepubs/9699919799//functions/regexec.html">POSIX</a>      | <code>regexec</code>         | -                 | -                     |
+| <a href="https://docs.python.org/3/library/re.html">Python</a>    | <code>search</code>          | <code>match</code>           | <code>fullmatch</code>           |
+| <a href="https://github.com/google/re2/blob/master/re2/re2.h">re2</a>          | <code>PartialMatch</code>    | <code>Consume</code>         | <code>FullMatch</code>           |
+| <a href="https://ruby-doc.org/core-2.5.0/Regexp.html">Ruby</a>        | <code>match</code>           | -                 | -                     |
+| <a href="https://docs.rs/regex/1.0.1/regex/struct.Regex.html">Rust</a>        | <code>find</code>            | -                 | -                     |
+| <a href="https://www.scala-lang.org/api/current/scala/util/matching/Regex.html">Scala</a>      | <code>findFirstIn</code>     | <code>findPrefixOf</code>    | -                     |
+| <a href="https://developer.apple.com/documentation/foundation/nsregularexpression">Swift</a>      | <code>firstMatch</code>      | -                 | -                     |</p>
+</details>
+</li>
+<li>
+<p><strong>rsearch()</strong>, <strong>rconsume()</strong>. The common naming convention of algorithms for reverse searching
+is adding an <code>r</code> prefix, so we do the same for the trait methods as well.</p>
+</li>
+<li>
+<p><strong>Span</strong>. The name is taken from the rustc compiler.</p>
+</li>
+</ul>
+<h2><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h2>
+<ul>
+<li>The names of everything except <code>Searcher</code> and <code>Haystack</code> are not finalized.</li>
+</ul>
+<h1><a class="header" href="#prior-art" id="prior-art">Prior art</a></h1>
+<h2><a class="header" href="#previous-attempts" id="previous-attempts">Previous attempts</a></h2>
+<h3><a class="header" href="#v10" id="v10">v1.0</a></h3>
+<p>The existing <code>Pattern</code> API was introduced in <a href="https://github.com/rust-lang/rfcs/pull/528">RFC 528</a> to provide a common interface for several
+search-related operations on a string. There were several minor revisions after the RFC was
+accepted, but till nowadays is still an unstable API.</p>
+<p>A <code>Pattern</code> is currently implemented for the following types:</p>
+<ul>
+<li><code>char</code> — search for a single character in a string.</li>
+<li><code>&amp;[char]</code> — search for a character set in a string.</li>
+<li><code>&amp;str</code>, <code>&amp;&amp;str</code>, <code>&amp;String</code> — search for a substring.</li>
+<li><code>FnMut(char) -&gt; bool</code> — search by property of a character.</li>
+<li><code>&amp;regex::Regex</code> — search by regular expression (provided through the <code>regex</code> package).</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Pattern&lt;'a&gt; {
+    type Searcher: Searcher&lt;'a&gt;;
+    fn into_searcher(self, haystack: &amp;'a str) -&gt; Self::Searcher;
+
+    fn is_contained_in(self, haystack: &amp;'a str) -&gt; bool { ... }
+    fn is_prefix_of(self, haystack: &amp;'a str) -&gt; bool { ... }
+    fn is_suffix_of(self, haystack: &amp;'a str) -&gt; bool where Self::Searcher: ReverseSearcher&lt;'a&gt; { ... }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>Pattern</code> trait is a builder object. To perform searching, implementations will convert itself
+into a <code>Searcher</code> object. This conversion serves two purposes:</p>
+<ol>
+<li>Preprocess the pattern to allow for faster algorithm, e.g. the <code>Pattern::into_search</code> for
+substring search will calculate critical information to perform the Two-Way search algorithm.</li>
+<li>Store the mutable search states.</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>unsafe trait Searcher&lt;'a&gt; {
+    fn haystack(&amp;self) -&gt; &amp;'a str;
+    fn next_match(&amp;mut self) -&gt; Option&lt;(usize, usize)&gt; { ... }
+    fn next_reject(&amp;mut self) -&gt; Option&lt;(usize, usize)&gt; { ... }
+    fn next(&amp;mut self) -&gt; SearchStep;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Calling <code>next_match()</code> or <code>next_reject()</code> will yield a range:</p>
+<ul>
+<li><code>next_match()</code> — returns the next substring range of the haystack which matches a single instance
+of the pattern.</li>
+<li><code>next_reject()</code> — returns the next longest substring range of the haystack which contains no
+pattern at all.</li>
+</ul>
+<p>(The <code>next()</code> call interleaves both methods above.)</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// for simplicity, `where` clauses involving ReverseSearcher and DoubleEndedSearcher are omitted.
+impl str {
+    fn contains(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; bool;
+    fn starts_with(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; bool;
+    fn find(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; Option&lt;usize&gt;;
+    fn split(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = &amp;'a str&gt;;
+    fn split_terminator(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = &amp;'a str&gt;;
+    fn splitn(&amp;'a self, n: usize, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = &amp;'a str&gt;;
+    fn matches(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = &amp;'a str&gt;;
+    fn match_indices(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = (usize, &amp;'a str)&gt;;
+    fn trim_left_matches(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; &amp;'a str;
+    fn replace(&amp;'a self, from: impl Pattern&lt;'a&gt;, to: &amp;str) -&gt; String;
+    fn replacen(&amp;'a self, from: impl Pattern&lt;'a&gt;, to: &amp;str, count usize) -&gt; String;
+
+    // The following requires the Pattern's Searcher to additionally be constrained by `ReverseSearcher`
+    fn ends_with(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; bool;
+    fn rfind(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; Option&lt;usize&gt;;
+    fn rsplit(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = &amp;'a str&gt;;
+    fn rsplit_terminator(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = &amp;'a str&gt;;
+    fn rsplitn(&amp;'a self, n: usize, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = &amp;'a str&gt;;
+    fn rmatches(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = &amp;'a str&gt;;
+    fn rmatch_indices(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; impl Iterator&lt;Item = (usize, &amp;'a str)&gt;;
+    fn trim_right_matches(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; &amp;'a str;
+
+    // The following requires the Pattern's Searcher to additionally be constrained by `DoubleEndedSearcher`
+    fn trim_matches(&amp;'a self, pat: impl Pattern&lt;'a&gt;) -&gt; &amp;'a str;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Using the result from the <code>SearchStep</code> stream, the <code>Pattern</code> API can be used to implement the above
+string methods.</p>
+<p>While the pattern-to-searcher conversion is beneficial when searching the entire haystack, it is
+often wasteful in simple functions like <code>starts_with</code> and <code>ends_with</code> (a sub-slice equality check is
+optimal). Therefore, the specialized methods like <code>Pattern::is_prefix_of</code> are provided.</p>
+<h3><a class="header" href="#v12v15" id="v12v15">v1.2–v1.5</a></h3>
+<p>The <code>Pattern</code> API in Rust only supports searching a string. An <a href="https://github.com/rust-lang/rust/issues/27721#issuecomment-185405392">attempt</a> to
+evolve this to arbitrary haystack type can be found in the repository <a href="https://github.com/Kimundi/pattern_api_sketch">Kimundi/pattern_api_sketch</a>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Pattern&lt;H: SearchPtrs&gt;: Sized {
+    type Searcher: Searcher&lt;H&gt;;
+    fn into_searcher(self, haystack: H) -&gt; Self::Searcher;
+    ...
+}
+
+unsafe trait Searcher&lt;H: SearchPtrs&gt; {
+    fn haystack(&amp;self) -&gt; H::Haystack;
+    fn next_match(&amp;mut self) -&gt; Option&lt;(H::Cursor, H::Cursor)&gt;;
+    fn next_reject(&amp;mut self) -&gt; Option&lt;(H::Cursor, H::Cursor)&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The most obvious change is to replace all <code>&amp;'a str</code> by an arbitrary type <code>H</code>. The type still needs
+to &quot;behave like a string&quot; though, thus the <code>SearchPtrs</code> bound, which will be used to turn a pair of
+cursors (equivalent to byte offsets) into a &quot;substring&quot; of the haystack for the <code>split</code> and <code>match</code>
+methods.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait SearchPtrs { // e.g. implemented for &amp;str
+    type Haystack: Copy; // e.g. (*const u8, *const u8)
+    type Cursor: Copy; // e.g. *const u8
+
+    unsafe fn offset_from_start(hs: Self::Haystack, begin: Self::Cursor) -&gt; usize;
+    unsafe fn range_to_self(hs: Self::Haystack, start: Self::Cursor, end: Self::Cursor) -&gt; Self;
+    unsafe fn cursor_at_front(hs: Self::Haystack) -&gt; Self::Cursor;
+    unsafe fn cursor_at_back(hs: Self::Haystack) -&gt; Self::Cursor;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#v20" id="v20">v2.0</a></h3>
+<p>The <a href="https://github.com/Kimundi/rust_pattern_api_v2">v2.0 API</a> was introduced due to <a href="https://github.com/rust-lang/rfcs/pull/1309">RFC 1309</a>,
+trying to cover <code>OsStr</code> as well. But other than <code>OsStr</code> support
+the v2.0 API is essentially the same as the v1.5 API.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Pattern&lt;H: PatternHaystack&gt;: Sized {
+    type Searcher: Searcher&lt;H&gt;;
+    fn into_searcher(self, haystack: H) -&gt; Self::Searcher;
+    ...
+}
+
+unsafe trait Searcher&lt;H: PatternHaystack&gt; {
+    fn haystack(&amp;self) -&gt; H::Haystack;
+    fn next_match(&amp;mut self) -&gt; Option&lt;(H::Cursor, H::Cursor)&gt;;
+    fn next_reject(&amp;mut self) -&gt; Option&lt;(H::Cursor, H::Cursor)&gt;;
+}
+
+trait PatternHaystack: Sized { // same as SearchPtrs in v1.5
+    type Haystack: Copy;
+    type Cursor: Copy + Ord;
+    type MatchType; // yielded item types from `matches()` and `split()`
+
+    fn into_haystack(self) -&gt; Self::Haystack;
+    fn offset_from_front(hs: Self::Haystack, begin: Self::Cursor) -&gt; usize;
+    fn cursor_at_front(hs: Self::Haystack) -&gt; Self::Cursor;
+    fn cursor_at_back(hs: Self::Haystack) -&gt; Self::Cursor;
+    unsafe fn range_to_self(hs: Self::Haystack, start: Self::Cursor, end: Self::Cursor) -&gt; Self::MatchType;
+    fn match_type_len(mt: &amp;Self::MatchType) -&gt; usize;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#haskell" id="haskell">Haskell</a></h2>
+<p>Haskell is perhaps one of the few languages where a generic string matching API is found,
+since it also has so many string types like Rust 😝, and there isn't an official regex
+implementation (unlike C++ which won't give insight how a <code>Searcher</code> interface should be designed).</p>
+<p>Haskell's <a href="https://hackage.haskell.org/package/regex-base"><code>regex-base</code></a> is the base package which provides the type classes for regex matching.</p>
+<p>The type class <code>Extract</code> is corresponding to <code>Haystack</code> in this RFC.</p>
+<pre><code class="language-haskell">class Extract source where
+    empty :: source
+    before :: Int -&gt; source -&gt; source
+    after :: Int -&gt; source -&gt; source
+</code></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// equivalent meaning in terms of Rust.
+trait Extract: Sized {
+    fn empty() -&gt; Self;
+    fn before(self, index: usize) -&gt; Self;
+    fn after(self, index: usize) -&gt; Self;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The type class <code>RegexLike</code> is corresponding to <code>Searcher</code> in this RFC.</p>
+<pre><code class="language-haskell">class (Extract source) =&gt; RegexLike regex source where
+    matchOnceText :: regex -&gt; source -&gt; Maybe (source, MatchText source, source)
+    matchAllText :: regex -&gt; source -&gt; [MatchText source]
+    -- the rest are default implementations depending on these two functions.
+</code></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// equivalent meaning in terms of Rust.
+trait RegexLike&lt;Source: Extract&gt;: Sized {
+    fn match_once_text(self, source: Source) -&gt; Option&lt;(Source, MatchText&lt;Source&gt;, Source)&gt;;
+    fn match_all_text(self, source: Source) -&gt; impl IntoIterator&lt;Item = MatchText&lt;Source&gt;&gt;;
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Similar to this RFC, the primary search method <code>matchOnceText</code> is trisection-based.</p>
+<p>Unlike this RFC, the <code>Extract</code> class is much simpler.</p>
+<ol>
+<li>Haskell doesn't have the shared/mutable/owned variant of the same type of string.
+Therefore it does not need the <code>Hay</code>/<code>Haystack</code> trait separation, and also does not need
+a dedicated <code>split :: Int -&gt; source -&gt; (source, source)</code> method.</li>
+<li>Haskell's strings do not enforce a particular encoding on its string types, thus <code>next_index</code>
+and <code>prev_index</code> become simply <code>(+ 1)</code> and <code>(− 1)</code>.</li>
+<li>The <code>Extract</code> class only supports indexing using an integer, so <code>start_index</code> must be <code>0</code>.
+<code>end_index</code> is also not needed since <code>before</code> and <code>after</code> (the slicing operations) will
+automatically clamp the index.</li>
+</ol>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<ul>
+<li>
+<p>Currently, due to RFC 2089 and/or 2289 not being implemented, using a <code>Haystack</code> in any algorithm
+would need to a redundant where clause:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn starts_with&lt;H, P&gt;(haystack: H, needle: P) -&gt; bool
+where
+    H: Haystack,
+    P: Needle&lt;H&gt;,
+    H::Target: Hay, // &lt;-- this line
+{ ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>This RFC assumes that before stabilizing, either RFC should have been implemented.</p>
+</li>
+<li>
+<p>For simplicity the prototype implementation fallbacks to the &quot;naive search algorithm&quot;
+when <code>T: !Ord</code> by always factorizing the needle <code>arr</code> into <code>arr[..1] ++ arr[1..]</code>.
+It is not proven that this is equivalent to the &quot;naive search&quot;,
+though unit testing does suggest this works.</p>
+<p>As mentioned in the RFC, there are faster algorithms for searching a <code>T: !Ord</code> slice.
+It is not decided if we should complicate the standard library to support this though.</p>
+</li>
+<li>
+<p>We could represent <code>SharedHaystack</code> using a more general concept of &quot;cheaply cloneable&quot;:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait ShallowClone: Clone {}
+impl&lt;'a, T: ?Sized + 'a&gt; ShallowClone for &amp;'a T {}
+impl&lt;T: ?Sized&gt; ShallowClone for Rc&lt;T&gt; {}
+impl&lt;T: ?Sized&gt; ShallowClone for Arc&lt;T&gt; {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>and all <code>H: SharedHaystack</code> bound can be replaced by <code>H: Haystack + ShallowClone</code>.
+But this generalization brings more questions e.g. should <code>[u32; N]: ShallowClone</code>.
+This should be better left to a new RFC, and since <code>SharedHaystack</code> is mainly used for
+the core type <code>&amp;A</code> only, we could keep <code>SharedHaystack</code> unstable longer
+(a separate track from the main Needle API) until this question is resolved.</p>
+</li>
+<li>
+<p>With a benefit of simplified API,
+we may want to merge <code>Consumer</code> and <code>Searcher</code> into a single trait.</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2497-if-let-chains.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2504-fix-error.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2497-if-let-chains.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2504-fix-error.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

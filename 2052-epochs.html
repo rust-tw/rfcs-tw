@@ -1,0 +1,772 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2052-epochs - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html" class="active">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: N/A</li>
+<li>Start Date: 2017-06-26</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2052">rust-lang/rfcs#2052</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/44581">rust-lang/rust#44581</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Rust's ecosystem, tooling, documentation, and compiler are constantly improving. To make it easier to follow development, and to provide a clear, coherent &quot;rallying point&quot; for this work, this RFC proposes that we declare a <em>edition</em> every two or three years. Editions are designated by the year in which they occur, and represent a release in which several elements come together:</p>
+<ul>
+<li>A significant, coherent set of new features and APIs have been stabilized since the previous edition.</li>
+<li>Error messages and other important aspects of the user experience around these features are fully polished.</li>
+<li>Tooling (IDEs, rustfmt, Clippy, etc) has been updated to work properly with these new features.</li>
+<li>There is a guide to the new features, explaining why they're important and how they should influence the way you write Rust code.</li>
+<li>The book has been updated to cover the new features.
+<ul>
+<li>Note that this is already <a href="https://github.com/rust-lang/rfcs/pull/1636">required</a> prior to stabilization, but in general these additions are put in an appendix; updating the book itself requires <em>significant</em> work, because new features can change the book in deep and cross-cutting ways. We don't block stabilization on that.</li>
+</ul>
+</li>
+<li>The standard library and other core ecosystem crates have been updated to use the new features as appropriate.</li>
+<li>A new edition of the Rust Cookbook has been prepared, providing an updated set of guidance for which crates to use for various tasks.</li>
+</ul>
+<p>Sometimes a feature we want to make available in a new edition would require backwards-incompatible changes, like introducing a new keyword. In that case, the feature is only available by explicitly opting in to the new edition. Existing code continues to compile, and crates can freely mix dependencies using different editions.</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<h2><a class="header" href="#the-status-quo" id="the-status-quo">The status quo</a></h2>
+<p>Today, Rust evolution happens steadily through a combination of several mechanisms:</p>
+<ul>
+<li>
+<p><strong>The nightly/stable release channel split</strong>. Features that are still under
+development are usable <em>only</em> on the nightly channel, preventing <em>de facto</em>
+lock-in and thus leaving us free to iterate in ways that involve code breakage
+before &quot;stabilizing&quot; the feature.</p>
+</li>
+<li>
+<p><strong>The rapid (six week) release process</strong>. Frequent releases on the stable
+channel allow features to stabilize as they become ready, rather than as part
+of a massive push toward an infrequent &quot;feature-based&quot; release. Consequently,
+Rust evolves in steady, small increments.</p>
+</li>
+<li>
+<p><strong>Deprecation</strong>. Compiler support for deprecating language features and
+library APIs makes it possible to nudge people toward newer idioms without
+breaking existing code.</p>
+</li>
+</ul>
+<p>All told, the tools work together quite nicely to allow Rust to change and grow
+over time, while keeping old code working (with only occasional, very minor
+adjustments to account for things like changes to type inference.)</p>
+<h2><a class="header" href="#whats-missing" id="whats-missing">What's missing</a></h2>
+<p>So, what's the problem?</p>
+<p>There are a few desires that the current process doesn't have a good story for:</p>
+<ul>
+<li>
+<p><strong>Lack of clear &quot;chapters&quot; in the evolutionary story</strong>. A downside to rapid
+releases is that, while the constant small changes eventually add up to large
+shifts in idioms, there's not an agreed upon line of demarcation between these
+major shifts. Nor is there a clear point at which tooling, books, and other
+artifacts are all fully updated and in sync around a given set of
+features. This is not a huge problem for those following Rust development
+carefully (e.g., readers of this RFC!), but many users and potential users
+don't. Providing greater clarity and coherence around the &quot;chapters&quot; of Rust
+evolution will make it easier to provide an overall narrative arc, and to
+refer easily to large sets of changes.</p>
+</li>
+<li>
+<p><strong>Lack of community rallying points</strong>. The six week release process tends to
+make each individual release a somewhat ho hum affair. On the one hand, that's
+the whole point--we want to avoid marathon marches toward huge, feature-based
+releases, and instead ship things in increments as they become ready. But in
+doing so, we lose an opportunity to, every so often, come together as an
+entire community and produce a &quot;major release&quot; that is polished, coherent, and
+meaningful in a way that each six week increment is not. The <a href="https://github.com/rust-lang/rfcs/pull/1728">roadmap process</a>
+does provide some of this flavor, but it's hard to beat the power of working
+together toward a point-in-time release. The challenge is doing so <em>without</em>
+losing the benefits of our incremental working style.</p>
+</li>
+<li>
+<p><strong>Changes that may require some breakage in corner cases</strong>. The simplest
+example is adding new keywords: the current implementation of <code>catch</code> uses the
+syntax <code>do catch</code> because <code>catch</code> is not a keyword, and cannot be added even
+as a contextual keyword without potential breakage. There are plenty of
+examples of &quot;superficial&quot; breakage like this that do not fit well into the
+current evolution mechanisms.</p>
+</li>
+</ul>
+<p>At the same time, the commitment to stability and rapid releases has been an
+incredible boon for Rust, and we don't want to give up those existing mechanisms
+or their benefits.</p>
+<p>This RFC proposes <em>editions</em> as a mechanism we can layer on top of our existing
+release process, keeping its guarantees while addressing its gaps.</p>
+<h1><a class="header" href="#detailed-design" id="detailed-design">Detailed design</a></h1>
+<h2><a class="header" href="#the-basic-idea" id="the-basic-idea">The basic idea</a></h2>
+<p>To make it easier to follow Rust's evolution, and to provide a clear, coherent
+&quot;rallying point&quot; for the community, the project declares a <em>edition</em> every
+two or three years. Editions are designated by the year in which they occur,
+and represent a release in which several elements come together:</p>
+<ul>
+<li>A significant, coherent set of new features and APIs have been stabilized since the previous edition.</li>
+<li>Error messages and other important aspects of the user experience around these features are fully polished.</li>
+<li>Tooling (IDEs, rustfmt, Clippy, etc) has been updated to work properly with these new features.</li>
+<li>There is a guide to the new features, explaining why they're important and how they should influence the way you write Rust code.</li>
+<li>The book has been updated to cover the new features.
+<ul>
+<li>Note that this is already <a href="https://github.com/rust-lang/rfcs/pull/1636">required</a> prior to stabilization, but in general these additions are put in an appendix; updating the book itself requires <em>significant</em> work, because new features can change the book in deep and cross-cutting ways. We don't block stabilization on that.</li>
+</ul>
+</li>
+<li>The standard library and other core ecosystem crates have been updated to use the new features as appropriate.</li>
+<li>A new edition of the Rust Cookbook has been prepared, providing an updated set of guidance for which crates to use for various tasks.</li>
+</ul>
+<p>The precise list of elements going into an edition is expected to evolve over
+time, as the Rust project and ecosystem grow.</p>
+<p>Sometimes a feature we want to make available in a new edition would require
+backwards-incompatible changes, like introducing a new keyword. In that case,
+the feature is only available by explicitly opting in to the new
+edition. Each <strong>crate</strong> can declare an edition in its <code>Cargo.toml</code> like
+<code>edition = &quot;2019&quot;</code>; otherwise it is assumed to have edition 2015,
+coinciding with Rust 1.0. Thus, new editions are <em>opt in</em>, and the
+dependencies of a crate may use older or newer editions than the crate
+itself.</p>
+<p>To be crystal clear: Rust compilers must support <em>all</em> extant editions, and
+a crate dependency graph may involve several different editions
+simultaneously. Thus, <strong>editions do not split the ecosystem nor do they break
+existing code</strong>.</p>
+<p>Furthermore:</p>
+<ul>
+<li>As with today, each new version of the compiler may gain stabilizations and deprecations.</li>
+<li>When opting in to a new edition, existing deprecations <em>may</em> turn into hard
+errors, and the compiler may take advantage of that fact to repurpose existing
+usage, e.g. by introducing a new keyword. <strong>This is the only kind of
+<em>breaking</em> change a edition opt-in can make.</strong></li>
+</ul>
+<p>Thus, code that compiles without warnings on the previous edition (under the
+latest compiler release) will compile without errors on the next edition
+(modulo the <a href="https://github.com/rust-lang/rfcs/blob/master/text/1122-language-semver.md">usual caveats</a> about type inference changes and so on).</p>
+<p>Alternatively, you can continue working with the previous edition on new
+compiler releases indefinitely, but your code may not have access to new
+features that require new keywords and the like. New features that <em>are</em>
+backwards compatible, however, will be available on older editions.</p>
+<h2><a class="header" href="#edition-timing-stabilizations-and-the-roadmap-process" id="edition-timing-stabilizations-and-the-roadmap-process">Edition timing, stabilizations, and the roadmap process</a></h2>
+<p>As mentioned above, we want to retain our rapid release model, in which new
+features and other improvements are shipped on the stable release channel as
+soon as they are ready. So, to be clear, <strong>we do not hold features back until
+the next edition</strong>.</p>
+<p>Rather, editions, as their name suggests, represent a point of <em>global
+coherence</em>, where documentation, tooling, the compiler, and core libraries are
+all fully aligned on a new set of (already stabilized!) features and other
+changes. This alignment can happen incrementally, but an edition signals that
+it <em>has</em> happened.</p>
+<p>At the same time, editions serve as a rallying point for making sure this
+alignment work gets done in a timely fashion--and helping set scope as
+needed. To make this work, we use the roadmap process:</p>
+<ul>
+<li>
+<p>As today, each year has a [roadmap setting out that year's vision]. Some
+years---like 2017---the roadmap is mostly about laying down major new
+groundwork. Some years, however, they roadmap explicitly proposes to produce a
+new edition during the year.</p>
+</li>
+<li>
+<p>Edition years are focused primarily on <em>stabilization</em>, <em>polish</em>, and
+<em>coherence</em>, rather than brand new ideas. We are trying to put together and
+ship a coherent product, complete with documentation and a well-aligned
+ecosystem. These goals will provide a rallying point for the whole community,
+to put our best foot forward as we publish a significant new version of the
+project.</p>
+</li>
+</ul>
+<p>In short, editions are striking a delicate balance: they're not a cutoff for
+stabilization, which continues every six weeks, but they still provide a strong
+impetus for coming together as a community and putting together a polished product.</p>
+<h3><a class="header" href="#the-preview-period" id="the-preview-period">The preview period</a></h3>
+<p>There's an important tension around stabilization and editions:</p>
+<ul>
+<li>
+<p>We want to enable new features, including those that require an edition
+opt-in, to be available on the stable channel as they become ready.</p>
+<ul>
+<li>That means that we must enable some form of the opt in before the edition
+is fully ready to ship.</li>
+</ul>
+</li>
+<li>
+<p>We want to retain our promise that code compiling on stable will continue to
+do so with new versions of the compiler, with minimum hassle.</p>
+<ul>
+<li>That means that, once <em>any</em> form of the opt in is shipped, it cannot introduce <em>new</em> hard errors.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, at some point within an edition year, we will enable the opt-in on the
+stable release channel, which must include <em>all</em> of the hard errors that will be
+introduced in the next edition, but not yet all of the stabilizations (or
+other artifacts that go into the full edition release). This is the <em>preview
+period</em> for the edition, which ends when a release is produced that
+synchronizes all of the elements that go into an edition and the edition is
+formally announced.</p>
+<h2><a class="header" href="#a-broad-policy-on-edition-changes" id="a-broad-policy-on-edition-changes">A broad policy on edition changes</a></h2>
+<p>There are numerous reasons to limit the scope of changes for new editions, among them:</p>
+<ul>
+<li>
+<p><strong>Limiting churn</strong>. Even if you aren't <em>forced</em> to update your code, even if there are automated tools to do so, churn is still a pain for existing users. It also invalidates, or at least makes harder to use, existing content on the internet, like StackOverflow answers and blog posts. And finally, it plays against the important and hard work we've done to make Rust stable in both reality and perception. In short, while editions avoid <em>ecosystem</em> splits and make churn opt-in, they do not eliminate <em>all</em> drawbacks.</p>
+</li>
+<li>
+<p><strong>Limiting technical debt</strong>. The compiler retains compatibility for old editions, and thus must have distinct &quot;modes&quot; for dealing with them. We need to strongly limit the amount and complexity of code needed for these modes, or the compiler will become very difficult to maintain.</p>
+</li>
+<li>
+<p><strong>Limiting deep conceptual changes</strong>. Just as we want to keep the compiler maintainable, so too do we want to keep the conceptual model sustainable. That is, if we make truly radical changes in a new edition, it will be very difficult for people to reason about code involving different editions, or to remember the precise differences.</p>
+</li>
+</ul>
+<p>These lead to some hard and soft constraints.</p>
+<h3><a class="header" href="#hard-constraints" id="hard-constraints">Hard constraints</a></h3>
+<p><strong>TL;DR: Warning-free code on edition N must compile on edition N+1 and have the
+same behavior.</strong></p>
+<p>There are only two things a new edition can do that a normal release cannot:</p>
+<ul>
+<li>Change an existing deprecation into a hard error.
+<ul>
+<li>This option is only available when the deprecation is expected to hit a relatively small percentage of code.</li>
+</ul>
+</li>
+<li>Change an existing deprecation to <em>deny</em> by default, and leverage the corresponding lint setting to produce error messages <em>as if</em> the feature were removed entirely.</li>
+</ul>
+<p>The second option is to be preferred whenever possible. Note that warning-free code in one edition might produce warnings in the next edition, but it should still compile successfully.</p>
+<p>The Rust compiler supports multiple editions, but <strong>must only support a single version of &quot;core Rust&quot;</strong>. We identify &quot;core Rust&quot; as being, roughly, MIR and the core trait system; this specification will be made more precise over time.  The implication is that the &quot;edition modes&quot; boil down to keeping around multiple desugarings into this core Rust, which greatly limits the complexity and technical debt involved. Similar, core Rust encompasses the core <em>conceptual</em> model of the language, and this constraint guarantees that, even when working with multiple editions, those core concepts remain fixed.</p>
+<h3><a class="header" href="#soft-constraints" id="soft-constraints">Soft constraints</a></h3>
+<p><strong>TL;DR: <em>Most</em> code <em>with</em> warnings on edition N should, after running <code>rustfix</code>, compile on edition N+1 and have the same behavior.</strong></p>
+<p>The core edition design avoids an ecosystem split, which is very important. But it's <em>also</em> important that upgrading your own code to a new edition is minimally disruptive. The basic principle is that <strong>changes that cannot be automated must be required only in a small minority of crates, and even there not require extensive work</strong>. This principle applies not just to editions, but also to cases where we'd like to make a widespread deprecation.</p>
+<p>Note that a <code>rustfix</code> tool will never be perfect, because of conditional compilation and code generation. So it's important that, in the cases it inevitably fails, the manual fixes are not too onerous.</p>
+<p>In addition, migrations that affect a large percentage of code must be &quot;small tweaks&quot; (e.g. clarifying syntax), and as above, must keep the old form intact (though they can enact a deny-by-default lint on it).</p>
+<p>These are &quot;soft constraints&quot; because they use terms like &quot;small minority&quot; and &quot;small tweaks&quot;, which are open for interpretation. More broadly, the more disruption involved, the higher the bar for the change.</p>
+<h3><a class="header" href="#positive-examples-what-edition-opt-ins-can-do" id="positive-examples-what-edition-opt-ins-can-do">Positive examples: What edition opt-ins can do</a></h3>
+<p>Given those principles, let's look in more detail at a few examples of the
+kinds of changes edition opt-ins enable. <strong>These are just examples---this RFC
+doesn't entail any commitment to these language changes</strong>.</p>
+<h4><a class="header" href="#example-new-keywords" id="example-new-keywords">Example: new keywords</a></h4>
+<p>We've taken as a running example introducing new keywords, which sometimes
+cannot be done backwards compatibly (because a contextual keyword isn't
+possible). Let's see how this works out for the case of <code>catch</code>, assuming that
+we're currently in edition 2015.</p>
+<ul>
+<li>First, we deprecate uses of <code>catch</code> as identifiers, preparing it to become a new keyword.</li>
+<li>We may, as today, implement the new <code>catch</code> feature using a temporary syntax
+for nightly (like <code>do catch</code>).</li>
+<li>When the edition opt-in for <code>2019</code> is released, opting into it makes <code>catch</code> into a
+keyword, regardless of whether the <code>catch</code> feature has been implemented. This
+means that opting in may require some adjustment to your code.</li>
+<li>The <code>catch</code> syntax can be hooked into an implementation usable on nightly within the <code>2019</code> edition.</li>
+<li>When we're confident in the <code>catch</code> feature on nightly, we can stabilize it
+<em>onto the stable channel for users opting into <code>2019</code></em>. It cannot be stabilized onto the <code>2015</code> edition,
+since it requires a new keyword.</li>
+<li><code>catch</code> is now a part of Rust, but may not be <em>fully</em> integrated into e.g. the book, IDEs, etc.</li>
+<li>At some point, edition <code>2019</code> is fully shipped, and <code>catch</code> is now fully
+incorporated into tooling, documentation, and core libraries.</li>
+</ul>
+<p>To make this even more concrete, let's imagine the following (aligned with the diagram above):</p>
+<table><thead><tr><th>Rust version</th><th>Latest available edition</th><th>Status of <code>catch</code> in <code>2015</code></th><th>Status of <code>catch</code> in latest edition</th></tr></thead><tbody>
+<tr><td>1.15</td><td>2015</td><td>Valid identifier</td><td>Valid identifier</td></tr>
+<tr><td>1.21</td><td>2015</td><td>Valid identifier; deprecated</td><td>Valid identifier; deprecated</td></tr>
+<tr><td>1.23</td><td>2019 (preview period)</td><td>Valid identifier; deprecated</td><td>Keyword, unimplemented</td></tr>
+<tr><td>1.25</td><td>2019 (preview period)</td><td>Valid identifier; deprecated</td><td>Keyword, implemented</td></tr>
+<tr><td>1.27</td><td>2019 (final)</td><td>Valid identifier; deprecated</td><td>Keyword, implemented</td></tr>
+</tbody></table>
+<p>Now, suppose you have the following code:</p>
+<pre><code>Cargo.toml:
+
+edition = &quot;2015&quot;
+</code></pre>
+<pre><pre class="playground"><code class="language-rust">// main.rs:
+
+fn main() {
+    let catch = &quot;gotcha&quot;;
+    println!(&quot;{}&quot;, catch);
+}
+</code></pre></pre>
+<ul>
+<li>
+<p>This code will compile <strong>as-is</strong> on <em>all</em> Rust versions. On versions 1.21 and
+above, it will yield a warning, saying that <code>catch</code> is deprecated as an
+identifier.</p>
+</li>
+<li>
+<p>On version 1.23, if you change <code>Cargo.toml</code> to use <code>2019</code>, the
+code will fail to compile due to <code>catch</code> being a keyword.</p>
+</li>
+<li>
+<p>However, if you leave it at <code>2015</code>, you can upgrade to Rust 1.27 <strong>and
+use libraries that opt in to the <code>2019</code> edition</strong> with no problem.</p>
+</li>
+</ul>
+<h4><a class="header" href="#example-repurposing-corner-cases" id="example-repurposing-corner-cases">Example: repurposing corner cases</a></h4>
+<p>A similar story plays out for more complex modifications that repurpose existing
+usages. For example, some suggested module system improvements deduce the module
+hierarchy from the filesystem. But there is a corner case today of providing
+both a <code>lib.rs</code> and a <code>bin.rs</code> directly at the top level, which doesn't play
+well with the new feature.</p>
+<p>Using editions, we can deprecate such usage (in favor of the <code>bin</code> directory),
+then make it an error during the preview period. The module system change could
+then be made available (and ultimately stabilized) within the preview period,
+before fully shipping on the next edition.</p>
+<h4><a class="header" href="#example-repurposing-syntax" id="example-repurposing-syntax">Example: repurposing syntax</a></h4>
+<p>A more radical example: changing the syntax for trait objects and <code>impl Trait</code>. In particular, we have
+sometimes <a href="https://github.com/rust-lang/rfcs/pull/1603">discussed</a>:</p>
+<ul>
+<li>Using <code>dyn Trait</code> for trait objects (e.g. <code>Box&lt;dyn Iterator&lt;Item = u32&gt;&gt;</code>)</li>
+<li>Repurposing &quot;bare <code>Trait</code> to use instead of <code>impl Trait</code>, so you can write <code>fn foo() -&gt; Iterator&lt;Item = u32&gt;</code> instead of <code>fn foo -&gt; impl Iterator&lt;Item = u32&gt;</code></li>
+</ul>
+<p>Suppose we wanted to carry out such a change. We could do it over multiple steps:</p>
+<ul>
+<li>First, introduce and stabilize <code>dyn Trait</code>.</li>
+<li>Deprecate bare <code>Trait</code> syntax in favor of <code>dyn Trait</code>.</li>
+<li>In an edition preview period, make it an error to use bare <code>Trait</code> syntax.</li>
+<li>Ship the new edition, and wait until bare <code>Trait</code> syntax is obscure.</li>
+<li>Re-introduce bare <code>Trait</code> syntax, stabilize it, and deprecate <code>impl Trait</code> in
+favor of it.</li>
+</ul>
+<p>Of course, this RFC isn't suggesting that such a course of action is a <em>good</em>
+one, just that it is <em>possible</em> to do without breakage. The policy around such
+changes is left as an open question.</p>
+<h4><a class="header" href="#example-type-inference-changes" id="example-type-inference-changes">Example: type inference changes</a></h4>
+<p>There are a number of details about type inference that seem suboptimal:</p>
+<ul>
+<li>Currently multi-parameter traits like <code>AsRef&lt;T&gt;</code> will infer the value of one
+parameter on the basis of the other. We would at least like an opt-out, but
+employing it for <code>AsRef</code> is backwards-incompatible.</li>
+<li>Coercions don’t always trigger when we wish they would, but altering the rules
+may cause other programs to stop compiling.</li>
+<li>In trait selection, where-clauses take precedence over impls; changing this is backwards-incompatible.</li>
+</ul>
+<p>We may or may not be able to change these details on the existing edition. With
+enough effort, we could probably deprecate cases where type inference rules
+might change and request explicit type annotations, and then—in the new
+edition—tweak those rules.</p>
+<h3><a class="header" href="#negative-examples-what-edition-opt-ins-cant-do" id="negative-examples-what-edition-opt-ins-cant-do">Negative examples: What edition opt-ins can't do</a></h3>
+<p>There are also changes that editions don't help with, due to the constraints
+we impose. These limitations are extremely important for keeping the compiler
+maintainable, the language understandable, and the ecosystem compatible.</p>
+<h4><a class="header" href="#example-changes-to-coherence-rules" id="example-changes-to-coherence-rules">Example: changes to coherence rules</a></h4>
+<p>Trait coherence rules, like the &quot;orphan&quot; rule, provide a kind of protocol about
+which crates can provide which <code>impl</code>s. It's not possible to change protocol
+incompatibly, because existing code will assume the current protocol and provide
+impls accordingly, and there's no way to work around that fact via deprecation.</p>
+<p>More generally, this means that editions can only be used to make changes to the
+language that are applicable <em>crate-locally</em>; they cannot impose new
+requirements or semantics on external crates, since we want to retain
+compatibility with the existing ecosystem.</p>
+<h4><a class="header" href="#example-error-trait-downcasting" id="example-error-trait-downcasting">Example: <code>Error</code> trait downcasting</a></h4>
+<p>See <a href="https://github.com/mozilla/rust/issues/35943">rust-lang/rust#35943</a>. Due to
+a silly oversight, you can’t currently downcast the “cause” of an error to
+introspect what it is. We can’t make the trait have stricter requirements; it
+would break existing impls. And there's no way to do so only in a newer edition,
+because we must be compatible with the older one, meaning that we cannot rely on
+downcasting.</p>
+<p>This is essentially another example of a non-crate-local change.</p>
+<p>More generally, breaking changes to the standard library are not possible.</p>
+<h2><a class="header" href="#the-full-mechanics" id="the-full-mechanics">The full mechanics</a></h2>
+<p>We'll wrap up with the full details of the mechanisms at play.</p>
+<ul>
+<li><code>rustc</code> will take a new flag, <code>--edition</code>, which can specify the edition to
+use. This flag will default to edition 2015.
+<ul>
+<li>This flag should not affect the behavior of the core trait system or passes at the MIR level.</li>
+</ul>
+</li>
+<li><code>Cargo.toml</code> can include an <code>edition</code> value, which is used to pass to <code>rustc</code>.
+<ul>
+<li>If left off, it will assume edition 2015.</li>
+</ul>
+</li>
+<li><code>cargo new</code> will produce a <code>Cargo.toml</code> with the latest <code>edition</code> value
+(including an edition currently in its preview period).</li>
+</ul>
+<h1><a class="header" href="#how-we-teach-this" id="how-we-teach-this">How We Teach This</a></h1>
+<p>First and foremost, if we accept this RFC, we should publicize the plan widely,
+including on the main Rust blog, in a style simlar to <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">previous posts</a> about our
+release policy. This will require extremely careful messaging, to make clear
+that editions are <em>not</em> about breaking Rust code, but instead <em>primarily</em>
+about putting together a globally coherent, polished product on a regular basis,
+while providing some opt-in ways to allow for evolution not possible today.</p>
+<p>In addition, the book should talk about the basics from a user perspective,
+including:</p>
+<ul>
+<li>The fact that, if you do nothing, your code should continue to compile (with
+minimum hassle) when upgrading the compiler.</li>
+<li>If you resolve deprecations as they occur, moving to a new edition should also
+require minimum hassle.</li>
+<li>Best practices about upgrading editions (TBD).</li>
+</ul>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p>There are several drawbacks to this proposal:</p>
+<ul>
+<li>
+<p>Most importantly, it risks muddying our story about stability, which we've
+worked very hard to message clearly.</p>
+<ul>
+<li>To mitigate this, we need to put front and center that, <strong>if you do nothing,
+updating to a new <code>rustc</code> should not be a hassle</strong>, and <strong>staying on an old
+edition doesn't cut you off from the ecosystem</strong>.</li>
+</ul>
+</li>
+<li>
+<p>It adds a degree of complication to an evolution story that is already
+somewhat complex (with release channels and rapid releases).</p>
+<ul>
+<li>On the other hand, edition releases provide greater clarity about major
+steps in Rust evolution, for those who are not following development
+closely.</li>
+</ul>
+</li>
+<li>
+<p>New editions can invalidate existing blog posts and documentation, a problem
+we suffered a lot around the 1.0 release</p>
+<ul>
+<li>
+<p>However, this situation already obtains in the sense of changing idioms; a
+blog post using <code>try!</code> these days already feels like it's using &quot;old
+Rust&quot;. Notably, though, the code still compiles on current Rust.</p>
+</li>
+<li>
+<p>A saving grace is that, with editions, it's more likely that a post will
+mention what edition is being used, for context. Moreover, with sufficient
+work on error messages, it seems plausible to detect that code was intended
+for an earlier editions and explain the situation.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>These downsides are most problematic in cases that involve &quot;breakage&quot; if they
+were done without opt in. They indicate that, even if we do adopt editions, we
+should use them judiciously.</p>
+<h1><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h1>
+<h2><a class="header" href="#within-the-basic-edition-structure" id="within-the-basic-edition-structure">Within the basic edition structure</a></h2>
+<p>There was a significant amount of discussion on the RFC thread about using &quot;2.0&quot;
+rather than &quot;2019&quot;. It's difficult to concisely summarize this discussion, but
+in a nutshell, some feel that 2.0 (with a guarantee of backwards compatibility)
+is more honest and easier to understand, while others worry that it will be
+misconstrued no matter how much we caveat it, and that we cannot risk Rust being
+perceived as unstable or risky.</p>
+<ul>
+<li>The &quot;edition&quot; terminology and current framing arose from this discussion,
+as a way of clarifying what we intend -- i.e., that the concept is
+<em>primarily</em> about putting together a coherent package -- and as a heads up
+that the model is different from that of other languages.</li>
+</ul>
+<p>Sticking with the basic idea of editions, there are a couple alternative setups
+that avoid &quot;preview&quot; editions:</p>
+<ul>
+<li>
+<p>Rather than locking in a set of deprecations up front, we could provide
+&quot;stable channel feature gates&quot;, allowing users to opt in to features of the
+next edition in a fine-grained way, which may introduce new errors.  When
+the new edition is released, one would then upgrade to it and remove all of
+the gates.</p>
+<ul>
+<li>
+<p>The main downside is lack of clarity about what the current &quot;stable Rust&quot;
+is; each combination of gates gives you a slightly different language. While
+this fine-grained variation is acceptable for nightly, since it's meant for
+experimentation, it cuts against some of the overall goals of this proposal
+to introduce such fragmentation on the stable channel. There's risk that
+people would use a mixture of gates in perpetuity, essentially picking their
+preferred dialect of the language.</p>
+</li>
+<li>
+<p>It's feasible to introduce such a fine-grained scheme later on, if it proves
+necessary. Given the risks involved, it seems best to start with a
+coarse-grained flag at the outset.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>We could stabilize features using undesirable syntax at first, making way for
+better syntax only when the new edition is released, then deprecate the &quot;bad&quot;
+syntax in favor of the &quot;good&quot; syntax.</p>
+<ul>
+<li>For <code>catch</code>, this would look like:
+<ul>
+<li>Stabilize <code>do catch</code>.</li>
+<li>Deprecate <code>catch</code> as an identifier.</li>
+<li>Ship new edition, which makes <code>catch</code> a keyword.</li>
+<li>Stabilize <code>catch</code> as a syntax for the <code>catch</code> feature, and deprecate <code>do catch</code> in favor of it.</li>
+</ul>
+</li>
+<li>This approach involves significantly more churn than the one proposed in the RFC.</li>
+</ul>
+</li>
+<li>
+<p>Finally, we could just wait to stabilize features like <code>catch</code> until the
+moment the edition is released.</p>
+<ul>
+<li>This approach seems likely to introduce all the downsides of &quot;feature-based&quot;
+releases, making the edition release extremely high stakes, and preventing
+usage of &quot;ready to go&quot; feature on the stable channel until the edition is
+shipped.</li>
+</ul>
+</li>
+</ul>
+<h2><a class="header" href="#alternatives-to-editions" id="alternatives-to-editions">Alternatives to editions</a></h2>
+<p>The larger alternatives include, of course, not trying to solve the problems
+laid out in the motivation, and instead finding creative alternatives.</p>
+<ul>
+<li>For cases like <code>catch</code> that require a new keyword, it's not clear how to do
+this without ending up with suboptimal syntax.</li>
+</ul>
+<p>The other main alternative is to issue major releases in the semver sense: Rust
+2.0. This strategy could potentially be coupled with a <code>rustfix</code>, depending on
+what kinds of changes we want to allow. Downsides:</p>
+<ul>
+<li>
+<p>Lack of clarity around ecosystem compatibility. If we allow both 1.0 and 2.0
+crates to interoperate, we arrive at something like this RFC. If we don't, we
+risk splitting the ecosystem, which is extremely dangerous.</p>
+</li>
+<li>
+<p>Likely significant blowback based on abandoning stability as a core principle
+of Rust. Even if we provide a perfect <code>rustfix</code>, the message is significantly muddied.</p>
+</li>
+<li>
+<p>Much greater temptation to make sweeping changes, and continuous litigation
+over what those changes should be.</p>
+</li>
+</ul>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<ul>
+<li>
+<p>What impact is there, if any, on breakage permitted today for bug fixing or
+soundness holes? In many cases these are more disruptive than introducing a
+new keyword.</p>
+</li>
+<li>
+<p>Is &quot;edition&quot; the right key in Cargo.toml? Would it be more clear to just say <code>rust = &quot;2019&quot;</code>?</p>
+</li>
+<li>
+<p>Will we ever consider dropping support for very old editions? Given the
+constraints in this RFC, it seems unlikely to ever be worth it.</p>
+</li>
+<li>
+<p>Should <code>rustc</code> default to the latest edition instead?</p>
+</li>
+<li>
+<p>How do we handle macros, particularly procedural macros, that may mix source
+from multiple editions?</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2046-label-break-value.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2056-allow-trivial-where-clause-constraints.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2046-label-break-value.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2056-allow-trivial-where-clause-constraints.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

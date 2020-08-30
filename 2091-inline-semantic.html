@@ -1,0 +1,1343 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2091-inline-semantic - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html" class="active">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: <code>track_caller</code></li>
+<li>Start Date: 2017-07-31</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2091">rust-lang/rfcs#2091</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/47809">rust-lang/rust#47809</a></li>
+</ul>
+<hr />
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Enable accurate caller location reporting during panic in <code>{Option, Result}::{unwrap, expect}</code> with
+the following changes:</p>
+<ol>
+<li>Support the <code>#[track_caller]</code> function attribute, which guarantees a function has access to the
+caller information.</li>
+<li>Add an intrinsic function <code>caller_location()</code> (safe wrapper: <code>Location::caller()</code>) to retrieve
+the caller's source location.</li>
+</ol>
+<p>Example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![feature(track_caller)]
+<span class="boring">fn main() {
+</span>use std::panic::Location;
+
+#[track_caller]
+fn unwrap(self) -&gt; T {
+    panic!(&quot;{}: oh no&quot;, Location::caller());
+}
+
+let n: Option&lt;u32&gt; = None;
+let m = n.unwrap();
+<span class="boring">}
+</span></code></pre></pre>
+<!-- TOC updateOnSave:false -->
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#guide-level-explanation">Guide-level explanation</a>
+<ul>
+<li><a href="#lets-reimplement-unwrap">Let's reimplement <code>unwrap()</code></a></li>
+<li><a href="#track-the-caller">Track the caller</a></li>
+<li><a href="#location-type">Location type</a></li>
+<li><a href="#propagation-of-tracker">Propagation of tracker</a></li>
+<li><a href="#why-do-we-use-implicit-caller-location">Why do we use implicit caller location</a></li>
+</ul>
+</li>
+<li><a href="#reference-level-explanation">Reference-level explanation</a>
+<ul>
+<li><a href="#survey-of-panicking-standard-functions">Survey of panicking standard functions</a></li>
+<li><a href="#procedural-attribute-macro">Procedural attribute macro</a></li>
+<li><a href="#redirection-mir-inlining">Redirection (MIR inlining)</a></li>
+<li><a href="#standard-libraries">Standard libraries</a></li>
+<li><a href="#my-fault-vs-your-fault">“My fault” vs “Your fault”</a></li>
+<li><a href="#location-detail-control">Location detail control</a></li>
+</ul>
+</li>
+<li><a href="#drawbacks">Drawbacks</a>
+<ul>
+<li><a href="#code-bloat">Code bloat</a></li>
+<li><a href="#narrow-solution-scope">Narrow solution scope</a></li>
+<li><a href="#confusing-scoping-rule">Confusing scoping rule</a></li>
+</ul>
+</li>
+<li><a href="#rationale-and-alternatives">Rationale and alternatives</a>
+<ul>
+<li><a href="#rationale">Rationale</a></li>
+<li><a href="#alternatives">Alternatives</a>
+<ul>
+<li><a href="#-name-of-everything-">🚲 Name of everything 🚲</a></li>
+<li><a href="#using-an-abi-instead-of-an-attribute">Using an ABI instead of an attribute</a></li>
+<li><a href="#repurposing-file-line-column">Repurposing <code>file!()</code>, <code>line!()</code>, <code>column!()</code></a></li>
+<li><a href="#inline-mir">Inline MIR</a></li>
+<li><a href="#default-function-arguments">Default function arguments</a></li>
+<li><a href="#semantic-inlining">Semantic inlining</a></li>
+<li><a href="#design-by-contract">Design-by-contract</a></li>
+</ul>
+</li>
+<li><a href="#non-viable-alternatives">Non-viable alternatives</a>
+<ul>
+<li><a href="#macros">Macros</a></li>
+<li><a href="#backtrace">Backtrace</a></li>
+<li><a href="#sourcecontext-generic-parameter"><code>SourceContext</code> generic parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#unresolved-questions">Unresolved questions</a></li>
+</ul>
+<!-- /TOC -->
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>It is well-known that the error message reported by <code>unwrap()</code> is useless:</p>
+<pre><code class="language-text">thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', /checkout/src/libcore/option.rs:335
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+</code></pre>
+<p>There have been numerous discussions (<a href="https://internals.rust-lang.org/t/rfrfc-better-option-result-error-messages/2904">a</a>, <a href="https://internals.rust-lang.org/t/line-info-for-unwrap-expect/3753">b</a>, <a href="https://internals.rust-lang.org/t/better-panic-location-reporting-for-unwrap-and-friends/5042">c</a>) that want <code>unwrap()</code> and friends to provide
+better information to locate the panic. <a href="https://github.com/rust-lang/rfcs/pull/1669">RFC 1669</a> attempted to address this by
+introducing the <code>unwrap!(x)</code> macro to the standard library, but it was closed since the <code>x.unwrap()</code>
+convention is too entrenched.</p>
+<p>This RFC introduces line numbers into <code>unwrap()</code> without requiring users to adapt a new
+idiom, i.e. the user should be able to see the precise location without changing any source
+code.</p>
+<h1><a class="header" href="#guide-level-explanation" id="guide-level-explanation">Guide-level explanation</a></h1>
+<h2><a class="header" href="#lets-reimplement-unwrap" id="lets-reimplement-unwrap">Let's reimplement <code>unwrap()</code></a></h2>
+<p><code>unwrap()</code> and <code>expect()</code> are two methods on <code>Option</code> and <code>Result</code> that are commonly used when you
+are <em>absolutely sure</em> they contain a successful value and you want to extract it.</p>
+<pre><pre class="playground"><code class="language-rust">// 1.rs
+use std::env::args;
+fn main() {
+    println!(&quot;args[1] = {}&quot;, args().nth(1).unwrap());
+    println!(&quot;args[2] = {}&quot;, args().nth(2).unwrap());
+    println!(&quot;args[3] = {}&quot;, args().nth(3).unwrap());
+}
+</code></pre></pre>
+<p>If the assumption is wrong, they will panic and tell you that an error is unexpected.</p>
+<pre><code class="language-text">$ ./1
+thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', 1.rs:4:29
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+$ ./1 arg1
+args[1] = arg1
+thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', 1.rs:5:29
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+$ ./1 arg1 arg2
+args[1] = arg1
+args[2] = arg2
+thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', 1.rs:6:29
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+$ ./1 arg1 arg2 arg3
+args[1] = arg1
+args[2] = arg2
+args[3] = arg3
+</code></pre>
+<p>Let's say you are unhappy with these built-in functions, e.g. you want to provide an alternative
+error message:</p>
+<pre><pre class="playground"><code class="language-rust">// 2.rs
+use std::env::args;
+pub fn my_unwrap&lt;T&gt;(input: Option&lt;T&gt;) -&gt; T {
+    match input {
+        Some(t) =&gt; t,
+        None =&gt; panic!(&quot;nothing to see here, move along&quot;),
+    }
+}
+fn main() {
+    println!(&quot;args[1] = {}&quot;, my_unwrap(args().nth(1)));
+    println!(&quot;args[2] = {}&quot;, my_unwrap(args().nth(2)));
+    println!(&quot;args[3] = {}&quot;, my_unwrap(args().nth(3)));
+}
+</code></pre></pre>
+<p>This trivial implementation, however, will only report the panic that happens inside <code>my_unwrap</code>. This is
+pretty useless since it is the caller of <code>my_unwrap</code> that made the wrong assumption!</p>
+<pre><code class="language-text">$ ./2
+thread 'main' panicked at 'nothing to see here, move along', 2.rs:5:16
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+$ ./2 arg1
+args[1] = arg1
+thread 'main' panicked at 'nothing to see here, move along', 2.rs:5:16
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+$ ./2 arg1 arg2
+args[1] = arg1
+args[2] = arg2
+thread 'main' panicked at 'nothing to see here, move along', 2.rs:5:16
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+$ ./2 arg1 arg2 arg3
+args[1] = arg1
+args[2] = arg2
+args[3] = arg3
+</code></pre>
+<p>The trivial solution would require the user to provide <code>file!()</code>, <code>line!()</code> and <code>column!()</code>. A
+slightly more ergonomic solution would be changing <code>my_unwrap</code> into a macro, allowing these constants to
+be automatically provided.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn my_unwrap_at_source_location&lt;T&gt;(input: Option&lt;T&gt;, file: &amp;str, line: u32, column: u32) -&gt; T {
+    match input {
+        Some(t) =&gt; t,
+        None =&gt; panic!(&quot;nothing to see at {}:{}:{}, move along&quot;, file, line, column),
+    }
+}
+
+macro_rules! my_unwrap {
+    ($input:expr) =&gt; {
+        my_unwrap_at_source_location($input, file!(), line!(), column!())
+    }
+}
+println!(&quot;args[1] = {}&quot;, my_unwrap!(args().nth(1)));
+//                                ^ tell user to add an `!`.
+...
+<span class="boring">}
+</span></code></pre></pre>
+<p>What if you have already published the <code>my_unwrap</code> crate that has thousands of users, and you
+want to maintain API stability? Before Rust 1.XX, the builtin <code>unwrap()</code> had the same problem!</p>
+<h2><a class="header" href="#track-the-caller" id="track-the-caller">Track the caller</a></h2>
+<p>The reason the <code>my_unwrap!</code> macro works is because it copy-and-pastes the entire content of its macro
+definition every time it is used.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>println!(&quot;args[1] = {}&quot;, my_unwrap!(args().nth(1)));
+println!(&quot;args[2] = {}&quot;, my_unwrap!(args().nth(2)));
+...
+
+// is equivalent to:
+
+println!(&quot;args[1] = {}&quot;, my_unwrap(args().nth(1), file!(), line!(), column!()));
+println!(&quot;args[1] = {}&quot;, my_unwrap(args().nth(2), file!(), line!(), column!()));
+...
+<span class="boring">}
+</span></code></pre></pre>
+<p>What if we could instruct the compiler to automatically fill in the file, line, and column?
+Rust 1.YY introduced the <code>#[track_caller]</code> attribute for exactly this reason:</p>
+<pre><pre class="playground"><code class="language-rust">// 3.rs
+#![feature(track_caller)]
+use std::env::args;
+#[track_caller]  // &lt;-- Just add this!
+pub fn my_unwrap&lt;T&gt;(input: Option&lt;T&gt;) -&gt; T {
+    match input {
+        Some(t) =&gt; t,
+        None =&gt; panic!(&quot;nothing to see here, move along&quot;),
+    }
+}
+fn main() {
+    println!(&quot;args[1] = {}&quot;, my_unwrap(args().nth(1)));
+    println!(&quot;args[2] = {}&quot;, my_unwrap(args().nth(2)));
+    println!(&quot;args[3] = {}&quot;, my_unwrap(args().nth(3)));
+}
+</code></pre></pre>
+<p>Now we have truly reproduced how the built-in <code>unwrap()</code> is implemented.</p>
+<pre><code class="language-text">$ ./3
+thread 'main' panicked at 'nothing to see here, move along', 3.rs:12:29
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+$ ./3 arg1
+args[1] = arg1
+thread 'main' panicked at 'nothing to see here, move along', 3.rs:13:29
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+$ ./3 arg1 arg2
+args[1] = arg1
+args[2] = arg2
+thread 'main' panicked at 'nothing to see here, move along', 3.rs:14:29
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+$ ./3 arg1 arg2 arg3
+args[1] = arg1
+args[2] = arg2
+args[3] = arg3
+</code></pre>
+<p><code>#[track_caller]</code> is an automated version of what you've seen in the last section. The attribute
+copies <code>my_unwrap</code> to a new function <code>my_unwrap_at_source_location</code> which accepts the caller's
+location as an additional argument. The attribute also instructs the compiler to replace
+<code>my_unwrap(x)</code> with <code>my_unwrap_at_source_location(x, file!(), line!(), column!())</code> (sort of)
+whenever it sees it. This allows us to maintain the stability guarantee while allowing the user to
+get the new behavior with just one recompile.</p>
+<h2><a class="header" href="#location-type" id="location-type">Location type</a></h2>
+<p>Let's enhance <code>my_unwrap</code> to also log a message to the log file before panicking. We would need to
+get the caller's location as a value. This is supported using the method <code>Location::caller()</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::panic::Location;
+#[track_caller]
+pub fn my_unwrap&lt;T&gt;(input: Option&lt;T&gt;) -&gt; T {
+    match input {
+        Some(t) =&gt; t,
+        None =&gt; {
+            let location = Location::caller();
+            println!(&quot;unwrapping a None from {}:{}&quot;, location.file(), location.line());
+            panic!(&quot;nothing to see here, move along&quot;)
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#propagation-of-tracker" id="propagation-of-tracker">Propagation of tracker</a></h2>
+<p>When your <code>#[track_caller]</code> function calls another <code>#[track_caller]</code> function, the caller location
+will be propagated downwards:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::panic::Location;
+#[track_caller]
+pub fn my_get_index&lt;T&gt;(input: &amp;[T], index: usize) -&gt; &amp;T {
+    my_unwrap(input.get(index))        // line 4
+}
+indirectly_unwrap(None);    // line 6
+<span class="boring">}
+</span></code></pre></pre>
+<p>When you run this, the panic will refer to line 6, the original caller, instead of line 4 where
+<code>my_get_index</code> calls <code>my_unwrap</code>. When a library function is marked <code>#[track_caller]</code>, it is
+expected the function is short, and does not have any logic errors. This allows us to always track
+the caller on failure.</p>
+<p>If a panic that refers to the local location is actually needed, you may workaround by wrapping the
+code in a closure which cannot track the caller:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[track_caller]
+pub fn my_get_index&lt;T&gt;(input: &amp;[T], index: usize) -&gt; &amp;T {
+    (|| {
+        my_unwrap(input.get(index))
+    })()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#why-do-we-use-implicit-caller-location" id="why-do-we-use-implicit-caller-location">Why do we use implicit caller location</a></h2>
+<p>If you are learning Rust alongside other languages, you may wonder why Rust obtains the caller
+information in such a strange way. There are two restrictions that force us to adopt this solution:</p>
+<ol>
+<li>
+<p>Programmatic access to the stack backtrace is often used in interpreted or runtime-heavy
+languages like Python and Java. However, the stack backtrace is not suitable as the only
+solution for systems languages like Rust because optimization often collapses multiple levels
+of function calls.  In some embedded systems, the backtrace may even be unavailable!</p>
+</li>
+<li>
+<p>Solutions that use default function arguments alongside normal arguments are are often used in
+languages that do not perform inference higher than statement level, e.g. Swift and C#. Rust
+does not (yet) support default function arguments or function overloading because they interfere
+with type inference, so such solutions are ruled out.</p>
+</li>
+</ol>
+<h1><a class="header" href="#reference-level-explanation" id="reference-level-explanation">Reference-level explanation</a></h1>
+<h2><a class="header" href="#survey-of-panicking-standard-functions" id="survey-of-panicking-standard-functions">Survey of panicking standard functions</a></h2>
+<p>Many standard functions may panic. These are divided into three categories depending on whether they
+should receive caller information despite the inlining cost associated with it.</p>
+<p>The list of functions is not exhaustive. Only those with a &quot;Panics&quot; section in the documentation
+are included.</p>
+<ol>
+<li>
+<p><strong>Must have.</strong> These functions are designed to generate a panic, or used so often that indicating
+a panic happening from them often gives no useful information.</p>
+<p>| Function | Panic condition |
+|:---------|:----------------|
+| <code>Option::expect</code> | self is None |
+| <code>Option::unwrap</code> | self is None |
+| <code>Result::expect_err</code> | self is Ok |
+| <code>Result::expect</code> | self is Err |
+| <code>Result::unwrap_err</code> | self is Ok |
+| <code>Result::unwrap</code> | self is Err |
+| <code>[T]::index_mut</code> | range out of bounds |
+| <code>[T]::index</code> | range out of bounds |
+| <code>BTreeMap::index</code> | key not found |
+| <code>HashMap::index</code> | key not found |
+| <code>str::index_mut</code> | range out of bounds or off char boundary |
+| <code>str::index</code> | range out of bounds or off char boundary |
+| <code>VecDeque::index_mut</code> | index out of bounds |
+| <code>VecDeque::index</code> | index out of bounds |</p>
+</li>
+<li>
+<p><strong>Nice to have.</strong> These functions are not commonly used, or the panicking condition is pretty
+rare. Often the panic information contains enough clue to fix the error without a backtrace.
+Inlining them would bloat the binary size without much benefit.</p>
+<details><summary>List of category 2 functions</summary>
+<p>| Function | Panic condition |
+|:---------|:----------------|
+| <code>std::env::args</code> | non UTF-8 values |
+| <code>std::env::set_var</code> | invalid key or value |
+| <code>std::env::vars</code> | non UTF-8 values |
+| <code>std::thread::spawn</code> | OS failed to create the thread |
+| <code>[T]::clone_from_slice</code> | slice lengths differ |
+| <code>[T]::copy_from_slice</code> | slice lengths differ |
+| <code>[T]::rotate</code> | index out of bounds |
+| <code>[T]::split_at_mut</code> | index out of bounds |
+| <code>[T]::swap</code> | index out of bounds
+| <code>BinaryHeap::reserve_exact</code> | capacity overflow |
+| <code>BinaryHeap::reserve</code> | capacity overflow |
+| <code>Duration::new</code> | arithmetic overflow |
+| <code>HashMap::reserve</code> | capacity overflow |
+| <code>HashSet::reserve</code> | capacity overflow |
+| <code>i32::overflowing_div</code> | zero divisor |
+| <code>i32::overflowing_rem</code> | zero divisor |
+| <code>i32::wrapping_div</code> | zero divisor |
+| <code>i32::wrapping_rem</code> | zero divisor |
+| <code>Instance::duration_since</code> | time travel |
+| <code>Instance::elapsed</code> | time travel |
+| <code>Iterator::count</code> | extremely long iterator |
+| <code>Iterator::enumerate</code> | extremely long iterator |
+| <code>Iterator::position</code> | extremely long iterator |
+| <code>Iterator::product</code> | arithmetic overflow in debug build |
+| <code>Iterator::sum</code> | arithmetic overflow in debug build |
+| <code>LinkedList::split_off</code> | index out of bounds |
+| <code>LocalKey::with</code> | TLS has been destroyed |
+| <code>RawVec::double_in_place</code> | capacity overflow |
+| <code>RawVec::double</code> | capacity overflow |
+| <code>RawVec::reserve_exact</code> | capacity overflow |
+| <code>RawVec::reserve_in_place</code> | capacity overflow |
+| <code>RawVec::reserve</code> | capacity overflow |
+| <code>RawVec::shrink_to_fit</code> | given amount is larger than current capacity |
+| <code>RawVec::with_capacity</code> | capacity overflow |
+| <code>RefCell::borrow_mut</code> | a borrow or mutable borrow is active |
+| <code>RefCell::borrow</code> | a mutable borrow is active |
+| <code>str::split_at_mut</code> | range out of bounds or off char boundary |
+| <code>str::split_at</code> | range out of bounds or off char boundary |
+| <code>String::drain</code> | range out of bounds or off char boundary |
+| <code>String::insert_str</code> | index out of bounds or off char boundary |
+| <code>String::insert</code> | index out of bounds or off char boundary |
+| <code>String::remove</code> | index out of bounds or off char boundary |
+| <code>String::reserve_exact</code> | capacity overflow |
+| <code>String::reserve</code> | capacity overflow |
+| <code>String::splice</code> | range out of bounds or off char boundary |
+| <code>String::split_off</code> | index out of bounds or off char boundary |
+| <code>String::truncate</code> | off char boundary |
+| <code>Vec::append</code> | capacity overflow |
+| <code>Vec::drain</code> | range out of bounds |
+| <code>Vec::insert</code> | index out of bounds |
+| <code>Vec::push</code> | capacity overflow |
+| <code>Vec::remove</code> | index out of bounds |
+| <code>Vec::reserve_exact</code> | capacity overflow |
+| <code>Vec::reserve</code> | capacity overflow |
+| <code>Vec::splice</code> | range out of bounds |
+| <code>Vec::split_off</code> | index out of bounds |
+| <code>Vec::swap_remove</code> | index out of bounds |
+| <code>VecDeque::append</code> | capacity overflow |
+| <code>VecDeque::drain</code> | range out of bounds |
+| <code>VecDeque::insert</code> | index out of bounds |
+| <code>VecDeque::reserve_exact</code> | capacity overflow |
+| <code>VecDeque::reserve</code> | capacity overflow |
+| <code>VecDeque::split_off</code> | index out of bounds |
+| <code>VecDeque::swap</code> | index out of bounds |
+| <code>VecDeque::with_capacity</code> | capacity overflow |</p>
+</details>
+</li>
+<li>
+<p><strong>Not needed.</strong> Panics from these indicate silly programmer error and the panic itself has
+enough clue to let programmers figure out where the error comes from.</p>
+<details><summary>List of category 3 functions</summary>
+<p>| Function | Panic condition |
+|:---------|:----------------|
+| <code>std::atomic::fence</code> | using invalid atomic ordering |
+| <code>std::char::from_digit</code> | radix is outside <code>2 ..= 36</code> |
+| <code>std::env::remove_var</code> | invalid key |
+| <code>std::format!</code> | the <code>fmt</code> method returns Err |
+| <code>std::panicking::set_hook</code> | called in panicking thread |
+| <code>std::panicking::take_hook</code> | called in panicking thread |
+| <code>[T]::chunks_mut</code> | chunk size == 0 |
+| <code>[T]::chunks</code> | chunk size == 0 |
+| <code>[T]::windows</code> | window size == 0 |
+| <code>AtomicUsize::compare_exchange_weak</code> | using invalid atomic ordering |
+| <code>AtomicUsize::compare_exchange</code> | using invalid atomic ordering |
+| <code>AtomicUsize::load</code> | using invalid atomic ordering |
+| <code>AtomicUsize::store</code> | using invalid atomic ordering |
+| <code>BorrowRef::clone</code> | borrow counter overflows, see <a href="https://github.com/rust-lang/rust/issues/33880">issue 33880</a> |
+| <code>BTreeMap::range_mut</code> | end of range before start of range |
+| <code>BTreeMap::range</code> | end of range before start of range |
+| <code>char::encode_utf16</code> | dst buffer smaller than <code>[u16; 2]</code> |
+| <code>char::encode_utf8</code> | dst buffer smaller than <code>[u8; 4]</code> |
+| <code>char::is_digit</code> | radix is outside <code>2 ..= 36</code> |
+| <code>char::to_digit</code> | radix is outside <code>2 ..= 36</code> |
+| <code>compiler_fence</code> | using invalid atomic ordering |
+| <code>Condvar::wait</code> | waiting on multiple different mutexes |
+| <code>Display::to_string</code> | the <code>fmt</code> method returns Err |
+| <code>ExactSizeIterator::len</code> | size_hint implemented incorrectly |
+| <code>i32::from_str_radix</code> | radix is outside <code>2 ..= 36</code> |
+| <code>Iterator::step_by</code> | step == 0 |</p>
+</details>
+</li>
+</ol>
+<p>This RFC only advocates adding the <code>#[track_caller]</code> attribute to the <code>unwrap</code> and <code>expect</code>
+functions. The <code>index</code> and <code>index_mut</code> functions should also have it if possible, but this is
+currently postponed as it is not investigated yet how to insert the transformation after
+monomorphization.</p>
+<h2><a class="header" href="#procedural-attribute-macro" id="procedural-attribute-macro">Procedural attribute macro</a></h2>
+<p>The <code>#[track_caller]</code> attribute will modify a function at the AST and MIR levels without touching
+the type-checking (HIR level) or the low-level LLVM passes.</p>
+<p>It will first wrap the body of the function in a closure, and then call it:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[track_caller]
+fn foo&lt;C&gt;(x: A, y: B, z: C) -&gt; R {
+    bar(x, y)
+}
+
+// will become:
+
+#[rustc_implicit_caller_location]
+#[inline]
+fn foo&lt;C&gt;(x: A, y: B, z: C) -&gt; R {
+    std::ops::FnOnce::call_once(move |__location| {
+        bar(x, y)
+    }, (unsafe { std::intrinsics::caller_location() },))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This is to split the function into two: the function <code>foo</code> itself, and the closure
+<code>foo::{{closure}}</code> in it. (Technically: it is the simplest way to create two <code>DefId</code>s at the HIR
+level as far as I know.)</p>
+<p>The function signature of <code>foo</code> remains unchanged, so typechecking can proceed normally. The
+attribute will be replaced by <code>#[rustc_implicit_caller_location]</code> to let the compiler internals
+continue to treat it specially. <code>#[inline]</code> is added so external crates can see through <code>foo</code> to
+find <code>foo::{{closure}}</code>.</p>
+<p>The closure <code>foo::{{closure}}</code> is a proper function so that the compiler can write calls directly to
+<code>foo::{{closure}}</code>, skipping <code>foo</code>. Multiple calls to <code>foo</code> from different locations can be done via
+calling <code>foo::{{closure}}</code> directly, instead of copying the function body every time which would
+bloat the binary size.</p>
+<p>The intrinsic <code>caller_location()</code> is a placeholder which will be replaced by the actual caller
+location when one calls <code>foo::{{closure}}</code> directly.</p>
+<p>Currently the <code>foo::{{closure}}</code> cannot inherit attributes defined on the main function. To prevent
+problems regarding ABI, using <code>#[naked]</code> or <code>extern &quot;ABI&quot;</code> together with
+<code>#[rustc_implicit_caller_location]</code> should raise an error.</p>
+<h2><a class="header" href="#redirection-mir-inlining" id="redirection-mir-inlining">Redirection (MIR inlining)</a></h2>
+<p>After all type-checking and validation is done, we can now inject the caller location. This is done
+by redirecting all calls to <code>foo</code> to <code>foo::{{closure}}</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>_r = call foo(_1, _2, _3) -&gt; 'bb1;
+
+// will become:
+
+_c = call std::intrinsics::caller_location() -&gt; 'bbt;
+'bbt:
+_r = call foo::{{closure}} (&amp;[closure: x: _1, y: _2], _c) -&gt; 'bb1;
+<span class="boring">}
+</span></code></pre></pre>
+<p>We will further replace the <code>caller_location()</code> intrinsic according to where <code>foo</code> is called.
+If it is called from an ordinary function, it would be replaced by the callsite's location:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// for ordinary functions,
+
+_c = call std::intrinsics::caller_location() -&gt; 'bbt;
+
+// will become:
+
+_c = Location { file: file!(), line: line!(), column: column!() };
+goto -&gt; 'bbt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>If it is called from an <code>#[rustc_implicit_caller_location]</code>'s closure e.g. <code>foo::{{closure}}</code>, the
+intrinsic will be replaced by the closure argument <code>__location</code> instead, so that the caller location
+can propagate directly</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// for #[rustc_implicit_caller_location] closures,
+
+_c = call std::intrinsics::caller_location() -&gt; 'bbt;
+
+// will become:
+
+_c = __location;
+goto -&gt; 'bbt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>These steps are very similar to inlining, and thus the first proof-of-concept is implemented
+directly as a variant of the MIR inliner (but a separate pass). This also means the redirection pass
+currently suffers from all disadvantages of the MIR inliner, namely:</p>
+<ul>
+<li>
+<p>Locations will not be propagated into diverging functions (<code>fn() -&gt; !</code>), since inlining them is
+not supported yet.</p>
+</li>
+<li>
+<p>MIR passes are run <em>before</em> monomorphization, meaning <code>#[track_caller]</code> currently <strong>cannot</strong> be
+used on trait items:</p>
+</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Trait {
+    fn unwrap(&amp;self);
+}
+impl Trait for u64 {
+    #[track_caller] //~ ERROR: `#[track_caller]` is not supported for trait items yet.
+    fn unwrap(&amp;self) {}
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>To support trait items, the redirection pass must be run as post-monomorphized MIR pass (which does
+not exist yet), or converted to queries provided after resolve, or a custom LLVM inlining pass which
+can extract the caller's source location. This prevents the <code>Index</code> trait from having
+<code>#[track_caller]</code> yet.</p>
+<p>We cannot hack the impl resolution method into pre-monomorphization MIR pass because of deeply
+nested functions like</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>f1::&lt;u32&gt;();
+
+fn f1&lt;T: Trait&gt;() { f2::&lt;T&gt;(); }
+fn f2&lt;T: Trait&gt;() { f3::&lt;T&gt;(); }
+fn f3&lt;T: Trait&gt;() { f4::&lt;T&gt;(); }
+...
+fn f100&lt;T: Trait&gt;() {
+    T::unwrap(); // No one will know T is u32 before monomophization.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Currently the redirection pass always runs before the inlining pass. If the redirection pass is run
+after the normal MIR inlining pass, the normal MIR inliner must treat
+<code>#[rustc_implicit_caller_location]</code> as <code>#[inline(never)]</code>.</p>
+<p>The closure <code>foo::{{closure}}</code> must never be inlined before the redirection pass.</p>
+<p>When <code>#[rustc_implicit_caller_location]</code> functions are called dynamically, no inlining will occur,
+and thus it cannot take the location of the caller. Currently this will report where the function is
+declared. Taking the address of such functions must be allowed due to backward compatibility. (If
+a post-monomorphized MIR pass exists, methods via trait objects would be another case of calling
+<code>#[rustc_implicit_caller_location]</code> functions without caller location.)</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let f: fn(Option&lt;u32&gt;) -&gt; u32 = Option::unwrap;
+let g: fn(Option&lt;u32&gt;) -&gt; u32 = Option::unwrap;
+assert!(f == g); // This must remain `true`.
+f(None);
+g(None); // The effect of these two calls must be the same.
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#standard-libraries" id="standard-libraries">Standard libraries</a></h2>
+<p>The <code>caller_location()</code> intrinsic returns the <code>Location</code> structure which encodes the file, line and
+column of the callsite. This shares the same structure as the existing type <code>std::panic::Location</code>.
+Therefore, the type is promoted to a lang-item, and moved into <code>core::panicking::Location</code>. It is
+re-exported from <code>libstd</code>.</p>
+<p>Thanks to how <code>#[track_caller]</code> is implemented, we could provide a safe wrapper around the
+<code>caller_location()</code> intrinsic:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'a&gt; Location&lt;'a&gt; {
+    #[track_caller]
+    pub fn caller() -&gt; Location&lt;'static&gt; {
+        unsafe {
+            ::intrinsics::caller_location()
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>panic!</code> macro is modified to use <code>Location::caller()</code> (or the intrinsic directly) so it can
+report the caller location inside <code>#[track_caller]</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>macro_rules! panic {
+    ($msg:expr) =&gt; {
+        let loc = $crate::panicking::Location::caller();
+        $crate::panicking::panic(&amp;($msg, loc.file(), loc.line(), loc.column()))
+    };
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Actually this is now more natural for <code>core::panicking::panic_fmt</code> to take <code>Location</code> directly
+instead of tuples, so one should consider changing their signature, but this is out-of-scope for
+this RFC.</p>
+<p><code>panic!</code> is often used outside of <code>#[track_caller]</code> functions. In those cases, the
+<code>caller_location()</code> intrinsic will pass unchanged through all MIR passes into trans. As a fallback,
+the intrinsic will expand to <code>Location { file: file!(), line: line!(), col: column!() }</code> during
+trans.</p>
+<h2><a class="header" href="#my-fault-vs-your-fault" id="my-fault-vs-your-fault">“My fault” vs “Your fault”</a></h2>
+<p>In a <code>#[track_caller]</code> function, we expect all panics being attributed to the caller (thus the
+attribute name). However, sometimes the code panics not due to the caller, but the implementation
+itself. It may be important to distinguish between &quot;my fault&quot; (implementation error) and
+&quot;your fault&quot; (caller violating API requirement). As an example,</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::collections::HashMap;
+use std::hash::Hash;
+
+fn count_slices&lt;T: Hash + Eq&gt;(array: &amp;[T], window: usize) -&gt; HashMap&lt;&amp;[T], usize&gt; {
+    if !(0 &lt; window &amp;&amp; window &lt;= array.len()) {
+        panic!(&quot;invalid window size&quot;);
+        // ^ triggering this panic is &quot;your fault&quot;
+    }
+    let mut result = HashMap::new();
+    for w in array.windows(window) {
+        if let Some(r) = result.get_mut(w) {
+            *r += 1;
+        } else {
+            panic!(&quot;why??&quot;);
+            // ^ triggering this panic is &quot;my fault&quot;
+            //   (yes this code is wrong and entry API should be used)
+        }
+    }
+
+    result
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>One simple solution is to separate the &quot;my fault&quot; panic and &quot;your fault&quot; panic into two, but since
+<a href="https://github.com/rust-lang/rust/pull/39229#issuecomment-274348420">declarative macro 1.0 is insta-stable</a>, this RFC would prefer to postpone introducing
+any new public macros until &quot;Macros 2.0&quot; lands, where stability and scoping are better handled.</p>
+<p>For comparison, the Swift language does
+<a href="https://stackoverflow.com/questions/29673027/difference-between-precondition-and-assert-in-swift">distinguish between the two kinds of panics semantically</a>. The &quot;your fault&quot; ones are
+called <code>precondition</code>, while the &quot;my fault&quot; ones are called <code>assert</code>, though they don't deal with
+caller location, and practically they are equivalent to Rust's <code>assert!</code> and <code>debug_assert!</code>.
+Nevertheless, this also suggests we can still separate existing panicking macros into the &quot;my fault&quot;
+and &quot;your fault&quot; camps accordingly:</p>
+<ul>
+<li>Definitely &quot;my fault&quot; (use actual location): <code>debug_assert!</code> and friends, <code>unreachable!</code>,
+<code>unimplemented!</code></li>
+<li>Probably &quot;your fault&quot; (propagate caller location): <code>assert!</code> and friends, <code>panic!</code></li>
+</ul>
+<p>The question is, should calling <code>unwrap()</code>, <code>expect()</code> and <code>x[y]</code> (<code>index()</code>) be &quot;my fault&quot; or &quot;your
+fault&quot;? Let's consider existing implementation of <code>index()</code> methods:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Vec::index
+fn index(&amp;self, index: usize) -&gt; &amp;T {
+    &amp;(**self)[index]
+}
+
+// BTreeMap::index
+fn index(&amp;self, key: &amp;Q) -&gt; &amp;V {
+    self.get(key).expect(&quot;no entry found for key&quot;)
+}
+
+// Wtf8::index
+fn index(&amp;self, range: ops::RangeFrom&lt;usize&gt;) -&gt; &amp;Wtf8 {
+    // is_code_point_boundary checks that the index is in [0, .len()]
+    if is_code_point_boundary(self, range.start) {
+        unsafe { slice_unchecked(self, range.start, self.len()) }
+    } else {
+        slice_error_fail(self, range.start, self.len())
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>If they all get <code>#[track_caller]</code>, the <code>x[y]</code>, <code>expect()</code> and <code>slice_error_fail()</code> should all report
+&quot;your fault&quot;, i.e. caller location should be propagated downstream. It does mean that the current
+default of caller-location-propagation-by-default is more common. This also means &quot;my fault&quot;
+happening during development may become harder to spot. This can be solved using <code>RUST_BACKTRACE=1</code>,
+or workaround by splitting into two functions:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::collections::HashMap;
+use std::hash::Hash;
+
+#[track_caller]
+fn count_slices&lt;T: Hash + Eq&gt;(array: &amp;[T], window: usize) -&gt; HashMap&lt;&amp;[T], usize&gt; {
+    if !(0 &lt; window &amp;&amp; window &lt;= array.len()) {
+        panic!(&quot;invalid window size&quot;);  // &lt;-- your fault
+    }
+    (|| {
+        let mut result = HashMap::new();
+        for w in array.windows(window) {
+            if let Some(r) = result.get_mut(w) {
+                *r += 1;
+            } else {
+                panic!(&quot;why??&quot;); // &lt;-- my fault (caller propagation can't go into closures)
+            }
+        }
+        result
+    })()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Anyway, treating everything as &quot;your fault&quot; will encourage that <code>#[track_caller]</code> functions should
+be short, which goes in line with the <a href="#survey-of-panicking-standard-functions">&quot;must have&quot; list</a> in
+the RFC. Thus the RFC will remain advocating for propagating caller location implicitly.</p>
+<h2><a class="header" href="#location-detail-control" id="location-detail-control">Location detail control</a></h2>
+<p>An unstable flag <code>-Z location-detail</code> is added to <code>rustc</code> to control how much factual detail will
+be emitted when using <code>caller_location()</code>. The user can toggle <code>file</code>, <code>line</code> and <code>column</code> separately,
+e.g. when compiling with:</p>
+<pre><code class="language-sh">rustc -Zlocation-detail=line
+</code></pre>
+<p>only the line number will be real. The file and column will always be a dummy value like</p>
+<pre><code>thread 'main' panicked at 'error message', &lt;redacted&gt;:192:0
+</code></pre>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<h2><a class="header" href="#code-bloat" id="code-bloat">Code bloat</a></h2>
+<p>Previously, all calls to <code>unwrap()</code> and <code>expect()</code> referred to the same location. Therefore, the
+panicking branch will only needed to reuse a pointer to a single global tuple.</p>
+<p>After this RFC is implemented, the panicking branch will need to allocate space to store the varying caller location,
+so the number of instructions per <code>unwrap()</code>/<code>expect()</code> will increase.</p>
+<p>The optimizer will lose the opportunity to consolidate all jumps to the panicking branch. Before
+this RFC, LLVM would optimize <code>a.unwrap() + b.unwrap()</code>, to something like</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if (a.tag != SOME || b.tag != SOME) {
+    panic(&amp;(&quot;called `Option::unwrap()` on a `None` value&quot;, &quot;src/libcore/option.rs&quot;, 335, 20));
+}
+a.value_of_some + b.value_of_some
+<span class="boring">}
+</span></code></pre></pre>
+<p>After this RFC, LLVM can only lower this to</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if (a.tag != SOME) {
+    panic(&amp;(&quot;called `Option::unwrap()` on a `None` value&quot;, &quot;1.rs&quot;, 1, 1));
+}
+if (b.tag != SOME) {
+    panic(&amp;(&quot;called `Option::unwrap()` on a `None` value&quot;, &quot;1.rs&quot;, 1, 14));
+}
+a.value_of_some + b.value_of_some
+<span class="boring">}
+</span></code></pre></pre>
+<p>One can use <code>-Z location-detail</code> to get the old optimization behavior.</p>
+<h2><a class="header" href="#narrow-solution-scope" id="narrow-solution-scope">Narrow solution scope</a></h2>
+<p><code>#[track_caller]</code> is only useful in solving the &quot;get caller location&quot; problem. Introducing an
+entirely new feature just for this problem seems wasteful.</p>
+<p><a href="#default-function-arguments">Default function arguments</a> is another possible solution for this
+problem but with much wider application.</p>
+<h2><a class="header" href="#confusing-scoping-rule" id="confusing-scoping-rule">Confusing scoping rule</a></h2>
+<p>Consts, statics and closures are separate MIR items, meaning the following marked places will <em>not</em>
+get caller locations:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[track_caller]
+fn foo() {
+    static S: Location = Location::caller(); // will get actual location instead
+    let f = || Location::caller();   // will get actual location instead
+    Location::caller(); // this one will get caller location
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This is confusing, but if we don't support this, we will need two <code>panic!</code> macros which is not a
+better solution.</p>
+<p>Clippy could provide a lint against using <code>Location::caller()</code> outside of <code>#[track_caller]</code>.</p>
+<h1><a class="header" href="#rationale-and-alternatives" id="rationale-and-alternatives">Rationale and alternatives</a></h1>
+<h2><a class="header" href="#rationale" id="rationale">Rationale</a></h2>
+<p>This RFC tries to abide by the following restrictions:</p>
+<ol>
+<li>
+<p><strong>Precise caller location</strong>. Standard library functions which commonly panic will report the
+source location as where the user called them. The source location should never point inside the
+standard library. Examples of these functions include <code>Option::unwrap</code> and <code>HashMap::index</code>.</p>
+</li>
+<li>
+<p><strong>Source compatibility</strong>. Users should never need to modify existing source code to benefit from
+the improved precision.</p>
+</li>
+<li>
+<p><strong>Debug-info independence</strong>. The precise caller location can still be reported even after
+stripping of debug information, which is very common on released software.</p>
+</li>
+<li>
+<p><strong>Interface independence</strong>. The implementation of a trait should be able to decide whether to
+accepts the caller information; it shouldn't require the trait itself to enforce it. It
+should not affect the signature of the function. This is an extension of rule 2, since the
+<code>Index</code> trait is involved in <code>HashMap::index</code>. The stability of <code>Index</code> must be upheld, e.g. it
+should remain object-safe, and existing implementions should not be forced to accept the caller
+location.</p>
+</li>
+</ol>
+<p>Restriction 4 &quot;interface independence&quot; is currently not implemented due to lack of
+post-monomorphized MIR pass, but implementing <code>#[track_caller]</code> as a language feature follows this
+restriction.</p>
+<h2><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h2>
+<h3><a class="header" href="#-name-of-everything-" id="-name-of-everything-">🚲 Name of everything 🚲</a></h3>
+<ul>
+<li>Is <code>#[track_caller]</code> an accurate description?</li>
+<li>Should we move <code>std::panic::Location</code> into <code>core</code>, or just use a 3-tuple to represent the
+location? Note that the former is advocated in <a href="https://github.com/rust-lang/rfcs/pull/2070">RFC 2070</a>.</li>
+<li>Is <code>Location::caller()</code> properly named?</li>
+</ul>
+<h3><a class="header" href="#using-an-abi-instead-of-an-attribute" id="using-an-abi-instead-of-an-attribute">Using an ABI instead of an attribute</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub extern &quot;implicit-caller-location&quot; fn my_unwrap() {
+    panic!(&quot;oh no&quot;);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Compared with attributes, an ABI is a more natural way to tell the post-typechecking steps about
+implicit parameters, pioneered by the <code>extern &quot;rust-call&quot;</code> ABI. However, creating a new ABI will
+change the type of the function as well, causing the following statement to fail:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let f: fn(Option&lt;u32&gt;) -&gt; u32 = Option::unwrap;
+//~^ ERROR: [E0308]: mismatched types
+<span class="boring">}
+</span></code></pre></pre>
+<p>Making this pass will require supporting implicitly coercing <code>extern &quot;implicit-caller-location&quot; fn</code>
+pointer to a normal function pointer. Also, an ABI is not powerful enough to implicitly insert a
+parameter, making it less competitive than just using an attribute.</p>
+<h3><a class="header" href="#repurposing-file-line-column" id="repurposing-file-line-column">Repurposing <code>file!()</code>, <code>line!()</code>, <code>column!()</code></a></h3>
+<p>We could change the meaning of <code>file!()</code>, <code>line!()</code> and <code>column!()</code> so they are only converted to
+real constants after redirection (a MIR or trans pass) instead of early during macro expansion (an
+AST pass). Inside <code>#[track_caller]</code> functions, these macros behave as this RFC's
+<code>caller_location()</code>. The drawback is using these macro will have different values at compile time
+(e.g. inside <code>include!(file!())</code>) vs. runtime.</p>
+<h3><a class="header" href="#inline-mir" id="inline-mir">Inline MIR</a></h3>
+<p>Introduced as an <a href="https://github.com/rust-lang/rfcs/pull/1669#issuecomment-231031865">alternative to RFC 1669</a>, instead of the <code>caller_location()</code> intrinsic,
+we could provide a full-fledged inline MIR macro <code>mir!</code> similar to the inline assembler:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[track_caller]
+fn unwrap(self) -&gt; T {
+    let file: &amp;'static str;
+    let line: u32;
+    let column: u32;
+    unsafe {
+        mir! {
+            StorageLive(file);
+            file = const $CallerFile;
+            StorageLive(line);
+            line = const $CallerLine;
+            StorageLive(column);
+            column = const $CallerColumn;
+            goto -&gt; 'c;
+        }
+    }
+    'c: {
+        panic!(&quot;{}:{}:{}: oh no&quot;, file, line, column);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The problem of <code>mir!</code> in this context is trying to kill a fly with a sledgehammer. <code>mir!</code> is a very
+generic mechanism which requires stabilizing the MIR syntax and considering the interaction with
+the surrounding code. Besides, <code>#[track_caller]</code> itself still exists and the magic constants
+<code>$CallerFile</code> etc are still magical.</p>
+<h3><a class="header" href="#default-function-arguments" id="default-function-arguments">Default function arguments</a></h3>
+<p>Assume this is solved by implementing <a href="https://github.com/rust-lang/rfcs/issues/323">RFC issue 323</a>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn unwrap(file: &amp;'static str = file!(), line: u32 = line!(), column: u32 = column!()) -&gt; T {
+    panic!(&quot;{}:{}:{}: oh no&quot;, file, line, column);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Default arguments was a serious contender to the better-caller-location problem as this is usually
+how other languages solve it.</p>
+<table><thead><tr><th align="left">Language</th><th align="left">Syntax</th></tr></thead><tbody>
+<tr><td align="left"><a href="https://developer.apple.com/swift/blog/?id=15">Swift</a></td><td align="left"><code>func unwrap(file: String = #file, line: Int = #line) -&gt; T</code></td></tr>
+<tr><td align="left"><a href="https://dlang.org/spec/traits.html#specialkeywords">D</a></td><td align="left"><code>T unwrap(string file = __FILE__, size_t line = __LINE__)</code></td></tr>
+<tr><td align="left"><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/caller-information">C#</a> 5+</td><td align="left"><code>T Unwrap([CallerFilePath] string file = &quot;&lt;n/a&gt;&quot;, [CallerLineNumber] int line = 0)</code></td></tr>
+<tr><td align="left"><a href="https://ghc.haskell.org/trac/ghc/wiki/ExplicitCallStack/ImplicitLocations">Haskell</a> with GHC</td><td align="left"><code>unwrap :: (?callstack :: CallStack) =&gt; Maybe t -&gt; t</code></td></tr>
+<tr><td align="left"><a href="https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html#index-_005f_005fbuiltin_005fLINE">C++</a> with GCC 4.8+</td><td align="left"><code>T unwrap(const char* file = __builtin_FILE(), int line = __builtin_LINE())</code></td></tr>
+</tbody></table>
+<p>A naive solution will violate restriction 4 &quot;interface independence&quot;: adding the <code>file, line, column</code>
+arguments to <code>index()</code> will change its signature. This can be resolved if this is taken into
+account.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'a, K, Q, V&gt; Index&lt;&amp;'a Q&gt; for BTreeMap&lt;K, V&gt;
+where
+    K: Ord + Borrow&lt;Q&gt;,
+    Q: Ord + ?Sized,
+{
+    type Output = V;
+
+    // This should satisfy the trait even if the trait specifies
+    // `fn index(&amp;self, idx: Idx) -&gt; &amp;Self::Output`
+    #[inline]
+    fn index(&amp;self, key: &amp;Q, file: &amp;'static str = file!(), line: u32 = line!(), column: u32 = column!()) -&gt; &amp;V {
+        self.get(key).expect(&quot;no entry found for key&quot;, file, line, column)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This can be resolved if the future default argument proposal takes this into account. But again,
+this feature itself is going to be large and controversial.</p>
+<h3><a class="header" href="#semantic-inlining" id="semantic-inlining">Semantic inlining</a></h3>
+<p>Treat <code>#[track_caller]</code> as the same as a very forceful <code>#[inline(always)]</code>. This eliminates the
+procedural macro pass. This was the approach suggested in the first edition of this RFC, since the
+target functions (<code>unwrap</code>, <code>expect</code>, <code>index</code>) are just a few lines long. However, it experienced
+push-back from the community as:</p>
+<ol>
+<li>Inlining causes debugging to be difficult.</li>
+<li>It does not work with recursive functions.</li>
+<li>People do want to apply the attribute to long functions.</li>
+<li>The expected usage of &quot;semantic inlining&quot; and traditional inlining differ a lot, continue calling
+it inlining may confuse beginners.</li>
+</ol>
+<p>Therefore the RFC is changed to the current form, and the inlining pass is now described as just an
+implementation detail.</p>
+<h3><a class="header" href="#design-by-contract" id="design-by-contract">Design-by-contract</a></h3>
+<p>This is inspired when investigating the difference in
+<a href="#my-fault-vs-your-fault">&quot;my fault&quot; vs &quot;your fault&quot;</a>. We incorporate ideas from <a href="https://en.wikipedia.org/wiki/Design_by_contract">design-by-contract</a>
+(DbC) by specifying that &quot;your fault&quot; is a kind of contract violation. Preconditions are listed as
+part of the function signature, e.g.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// declaration
+extern {
+    #[precondition(fd &gt;= 0, &quot;invalid file descriptor {}&quot;, fd)]
+    fn close_fd(fd: c_int);
+}
+
+// declaration + defintion
+#[precondition(option.is_some(), &quot;Trying to unwrap None&quot;)]
+fn unwrap&lt;T&gt;(option: Option&lt;T&gt;) -&gt; T {
+    match option {
+        Some(t) =&gt; t,
+        None =&gt; unsafe { std::mem::unchecked_unreachable() },
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Code that appears in the <code>#[precondition]</code> attribute should be copied to caller site, so when the
+precondition is violated, they can get the caller's location.</p>
+<p>Specialization should be treated like subtyping, where preconditions can be <em>weakened</em>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    #[precondition(condition_1)]
+    fn foo();
+}
+
+impl&lt;T: Debug&gt; Foo for T {
+    #[precondition(condition_2a)]
+    #[precondition(condition_2b)]
+    default fn foo() { ... }
+}
+
+impl Foo for u32 {
+    #[precondition(condition_3)]
+    fn foo() { ... }
+}
+
+assert!(condition_3 || (condition_2a &amp;&amp; condition_2b) || condition_1);
+// ^ automatically inserted when the following is called...
+&lt;u32 as Foo&gt;::foo();
+<span class="boring">}
+</span></code></pre></pre>
+<p>Before Rust 1.0, there was the <a href="https://crates.io/crates/hoare"><code>hoare</code></a> compiler plugin which introduces DbC using the similar
+syntax. However, the conditions are expanded inside the function, so the assertions will not fail
+with the caller's location. A proper solution will be similar to what this RFC proposes.</p>
+<h2><a class="header" href="#non-viable-alternatives" id="non-viable-alternatives">Non-viable alternatives</a></h2>
+<p>Many alternatives have been proposed before but failed to satisfy the restrictions laid out in the
+<a href="#rationale">Rationale</a> subsection, thus should <em>not</em> be considered viable alternatives within this
+RFC, at least at the time being.</p>
+<h3><a class="header" href="#macros" id="macros">Macros</a></h3>
+<p>The <code>unwrap!()</code> macro introduced in <a href="https://github.com/rust-lang/rfcs/pull/1669">RFC 1669</a> allows the user to write <code>unwrap!(x)</code> instead of
+<code>x.unwrap()</code>.</p>
+<p>A similar solution is introducing a <code>loc!()</code> macro that expands to
+<code>concat!(file!(), &quot;:&quot;, line!(), &quot;:&quot;, column!())</code>, so user writes <code>x.expect(loc!())</code> instead of
+<code>x.unwrap()</code>.</p>
+<p>There is even the <a href="https://github.com/abonander/better_unwraps"><code>better_unwrap</code> crate</a> that
+automatically rewrites all <code>unwrap()</code> and <code>expect()</code> inside a module to provide the caller location
+through a procedural attribute.</p>
+<p>All of these are non-viable since they require the user to actively change their source code, thus
+violating restriction 2 &quot;source compatibility&quot;, <del>unless we are willing to drop the <code>!</code> from
+macros</del>.</p>
+<p>All pre-typeck rewrites are prone to false-positive failures affecting unrelated types that have an
+<code>unwrap()</code> method. Post-typeck rewrites are no different from this RFC.</p>
+<h3><a class="header" href="#backtrace" id="backtrace">Backtrace</a></h3>
+<p>When given debug information (DWARF section/file on Linux, <code>*.pdb</code> file on Windows, <code>*.dSYM</code> folder
+on macOS), the program is able to obtain the source code location for each address. This solution is
+often used in runtime-heavy languages like Python, Java and <a href="https://golang.org/pkg/runtime/#Caller">Go</a>.</p>
+<p>For Rust, however:</p>
+<ul>
+<li>
+<p>The debug information is usually not provided in release mode.</p>
+<p>In particular, <code>cargo</code> defaults to disabling debug symbols in release mode (this default can
+certainly be changed). <code>rustc</code> itself is tested in CI and distributed in release mode, so
+getting a usable location in release mode is a real concern (see also <a href="https://github.com/rust-lang/rfcs/issues/1417">RFC 1417</a> for why it was
+disabled in the official distribution in the first place).</p>
+<p>Even if this is generated, the debug symbols are generally not distributed to end-users, which
+means the error reports will only contain numerical addresses. This can be seen as a benefit, as
+the implementation detail won't be exposed, but how to submit/analyze an error report would be
+out-of-scope for this RFC.</p>
+</li>
+<li>
+<p>There are multiple issues preventing us from relying on debug info nowadays.</p>
+<p>Issues <a href="https://github.com/rust-lang/rust/issues/24346">24346</a>  (<em>Backtrace does not include file and line number on non-Linux platforms</em>) and
+<a href="https://github.com/rust-lang/rust/issues/42295">42295</a>  (<em>Slow backtrace on panic</em>) and are still not entirely fixed. Even after the debuginfo
+is properly handled, if we decide not to expose the whole the full stacktrace, we may still need
+to reopen pull request <a href="https://github.com/rust-lang/rust/issues/40264">40264</a>  (<em>Ignore more frames on backtrace unwinding</em>).</p>
+<p>These signal that debuginfo support is not reliable enough if we want to solve the unwrap/expect
+issue now.</p>
+</li>
+</ul>
+<p>These drawbacks are the main reason why restriction 3 &quot;debug-info independence&quot; is added to the
+motivation.</p>
+<p>(A debuginfo-based stack trace proposal can be found at <a href="https://github.com/rust-lang/rfcs/pull/2154">RFC 2154</a>.)</p>
+<h3><a class="header" href="#sourcecontext-generic-parameter" id="sourcecontext-generic-parameter"><code>SourceContext</code> generic parameter</a></h3>
+<p>Introduced as an <a href="https://github.com/rust-lang/rfcs/pull/1669#issuecomment-231896669">alternative in RFC 1669</a>, inspired by GHC's implicit parameter:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn unwrap&lt;C: SourceContext = CallerSourceContext&gt;(self) -&gt; T {
+    panic!(&quot;{}: oh no&quot;, C::default());
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>CallerSourceContext</code> lang item will instruct the compiler to create a new type implementing
+<code>SourceContext</code> whenever <code>unwrap()</code> is instantiated.</p>
+<p>Unfortunately this violates restriction 4 &quot;interface independence&quot;. This solution cannot apply to
+<code>HashMap::index</code> as this will require a change of the method signature of <code>index()</code> which has been
+stabilized. Methods applying this solution will also lose object-safety.</p>
+<p>The same drawback exists if we base the solution on <a href="https://github.com/rust-lang/rfcs/pull/2000">RFC 2000</a>  (<em>const generics</em>).</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<ul>
+<li>
+<p>If we want to support adding <code>#[track_caller]</code> to trait methods, the redirection
+pass/query/whatever should be placed after monomorphization, not before. Currently the RFC
+simply prohibit applying <code>#[track_caller]</code> to trait methods as a future-proofing measure.</p>
+</li>
+<li>
+<p>Diverging functions should be supported.</p>
+</li>
+<li>
+<p>The closure <code>foo::{{closure}}</code> should inherit most attributes applied to the function <code>foo</code>, in
+particular <code>#[inline]</code>, <code>#[cold]</code>, <code>#[naked]</code> and also the ABI. Currently a procedural macro
+won't see any of these, nor would there be anyway to apply these attributes to a closure.
+Therefore, <code>#[rustc_implicit_caller_location]</code> currently will reject <code>#[naked]</code> and ABI, and
+leaving <code>#[inline]</code> and <code>#[cold]</code> mean no-op. There is no semantic reason why these cannot be
+used though.</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2089-implied-bounds.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2093-infer-outlives.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2089-implied-bounds.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2093-infer-outlives.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

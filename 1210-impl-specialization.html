@@ -1,0 +1,2207 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>1210-impl-specialization - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html" class="active">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: specialization</li>
+<li>Start Date: 2015-06-17</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/1210">rust-lang/rfcs#1210</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/31844">rust-lang/rust#31844</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>This RFC proposes a design for <em>specialization</em>, which permits multiple <code>impl</code>
+blocks to apply to the same type/trait, so long as one of the blocks is clearly
+&quot;more specific&quot; than the other. The more specific <code>impl</code> block is used in a case
+of overlap. The design proposed here also supports refining default trait
+implementations based on specifics about the types involved.</p>
+<p>Altogether, this relatively small extension to the trait system yields benefits
+for performance and code reuse, and it lays the groundwork for an &quot;efficient
+inheritance&quot; scheme that is largely based on the trait system (described in a
+forthcoming companion RFC).</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>Specialization brings benefits along several different axes:</p>
+<ul>
+<li>
+<p><strong>Performance</strong>: specialization expands the scope of &quot;zero cost abstraction&quot;,
+because specialized impls can provide custom high-performance code for
+particular, concrete cases of an abstraction.</p>
+</li>
+<li>
+<p><strong>Reuse</strong>: the design proposed here also supports refining default (but
+incomplete) implementations of a trait, given details about the types
+involved.</p>
+</li>
+<li>
+<p><strong>Groundwork</strong>: the design lays the groundwork for supporting
+<a href="https://internals.rust-lang.org/t/summary-of-efficient-inheritance-rfcs/494">&quot;efficient inheritance&quot;</a>
+through the trait system.</p>
+</li>
+</ul>
+<p>The following subsections dive into each of these motivations in more detail.</p>
+<h2><a class="header" href="#performance" id="performance">Performance</a></h2>
+<p>The simplest and most longstanding motivation for specialization is
+performance.</p>
+<p>To take a very simple example, suppose we add a trait for overloading the <code>+=</code>
+operator:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait AddAssign&lt;Rhs=Self&gt; {
+    fn add_assign(&amp;mut self, rhs: Rhs);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>It's tempting to provide an impl for any type that you can both <code>Clone</code> and
+<code>Add</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;R, T: Add&lt;R&gt; + Clone&gt; AddAssign&lt;R&gt; for T {
+    fn add_assign(&amp;mut self, rhs: R) {
+        let tmp = self.clone() + rhs;
+        *self = tmp;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This impl is especially nice because it means that you frequently don't have to
+bound separately by <code>Add</code> and <code>AddAssign</code>; often <code>Add</code> is enough to give you
+both operators.</p>
+<p>However, in today's Rust, such an impl would rule out any more specialized
+implementation that, for example, avoids the call to <code>clone</code>. That means there's
+a tension between simple abstractions and code reuse on the one hand, and
+performance on the other. Specialization resolves this tension by allowing both
+the blanket impl, and more specific ones, to coexist, using the specialized ones
+whenever possible (and thereby guaranteeing maximal performance).</p>
+<p>More broadly, traits today can provide static dispatch in Rust, but they can
+still impose an abstraction tax. For example, consider the <code>Extend</code> trait:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Extend&lt;A&gt; {
+    fn extend&lt;T&gt;(&amp;mut self, iterable: T) where T: IntoIterator&lt;Item=A&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Collections that implement the trait are able to insert data from arbitrary
+iterators. Today, that means that the implementation can assume nothing about
+the argument <code>iterable</code> that it's given except that it can be transformed into
+an iterator. That means the code must work by repeatedly calling <code>next</code> and
+inserting elements one at a time.</p>
+<p>But in specific cases, like extending a vector with a slice, a much more
+efficient implementation is possible -- and the optimizer isn't always capable
+of producing it automatically. In such cases, specialization can be used to get
+the best of both worlds: retaining the abstraction of <code>extend</code> while providing
+custom code for specific cases.</p>
+<p>The design in this RFC relies on multiple, overlapping trait impls, so to take
+advantage for <code>Extend</code> we need to refactor a bit:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Extend&lt;A, T: IntoIterator&lt;Item=A&gt;&gt; {
+    fn extend(&amp;mut self, iterable: T);
+}
+
+// The generic implementation
+impl&lt;A, T&gt; Extend&lt;A, T&gt; for Vec&lt;A&gt; where T: IntoIterator&lt;Item=A&gt; {
+    // the `default` qualifier allows this method to be specialized below
+    default fn extend(&amp;mut self, iterable: T) {
+        ... // implementation using push (like today's extend)
+    }
+}
+
+// A specialized implementation for slices
+impl&lt;'a, A&gt; Extend&lt;A, &amp;'a [A]&gt; for Vec&lt;A&gt; {
+    fn extend(&amp;mut self, iterable: &amp;'a [A]) {
+        ... // implementation using ptr::write (like push_all)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Other kinds of specialization are possible, including using marker traits like:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>unsafe trait TrustedSizeHint {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>that can allow the optimization to apply to a broader set of types than slices,
+but are still more specific than <code>T: IntoIterator</code>.</p>
+<h2><a class="header" href="#reuse" id="reuse">Reuse</a></h2>
+<p>Today's default methods in traits are pretty limited: they can assume only the
+<code>where</code> clauses provided by the trait itself, and there is no way to provide
+conditional or refined defaults that rely on more specific type information.</p>
+<p>For example, consider a different design for overloading <code>+</code> and <code>+=</code>, such that
+they are always overloaded together:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Add&lt;Rhs=Self&gt; {
+    type Output;
+    fn add(self, rhs: Rhs) -&gt; Self::Output;
+    fn add_assign(&amp;mut self, rhs: Rhs);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this case, there's no natural way to provide a default implementation of
+<code>add_assign</code>, since we do not want to restrict the <code>Add</code> trait to <code>Clone</code> data.</p>
+<p>The specialization design in this RFC also allows for <em>default impls</em>,
+which can provide specialized defaults without actually providing a
+full trait implementation:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// the `default` qualifier here means (1) not all items are implied
+// and (2) those that are can be further specialized
+default impl&lt;T: Clone, Rhs&gt; Add&lt;Rhs&gt; for T {
+    fn add_assign(&amp;mut self, rhs: Rhs) {
+        let tmp = self.clone() + rhs;
+        *self = tmp;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This default impl does <em>not</em> mean that <code>Add</code> is implemented for all <code>Clone</code>
+data, but just that when you do impl <code>Add</code> and <code>Self: Clone</code>, you can leave off
+<code>add_assign</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Copy, Clone)]
+struct Complex {
+    // ...
+}
+
+impl Add&lt;Complex&gt; for Complex {
+    type Output = Complex;
+    fn add(self, rhs: Complex) {
+        // ...
+    }
+    // no fn add_assign necessary
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>A particularly nice case of refined defaults comes from trait hierarchies: you
+can sometimes use methods from subtraits to improve default supertrait
+methods. For example, consider the relationship between <code>size_hint</code> and
+<code>ExactSizeIterator</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>default impl&lt;T&gt; Iterator for T where T: ExactSizeIterator {
+    fn size_hint(&amp;self) -&gt; (usize, Option&lt;usize&gt;) {
+        (self.len(), Some(self.len()))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#supporting-efficient-inheritance" id="supporting-efficient-inheritance">Supporting efficient inheritance</a></h2>
+<p>Finally, specialization can be seen as a form of inheritance, since methods
+defined within a blanket impl can be overridden in a fine-grained way by a more
+specialized impl. As we will see, this analogy is a useful guide to the design
+of specialization. But it is more than that: the specialization design proposed
+here is specifically tailored to support &quot;efficient inheritance&quot; schemes (like
+those discussed
+<a href="https://internals.rust-lang.org/t/summary-of-efficient-inheritance-rfcs/494">here</a>)
+without adding an entirely separate inheritance mechanism.</p>
+<p>The key insight supporting this design is that virtual method definitions in
+languages like C++ and Java actually encompass two distinct mechanisms: virtual
+dispatch (also known as &quot;late binding&quot;) and implementation inheritance. These
+two mechanisms can be separated and addressed independently; this RFC
+encompasses an &quot;implementation inheritance&quot; mechanism distinct from virtual
+dispatch, and useful in a number of other circumstances. But it can be combined
+nicely with an orthogonal mechanism for virtual dispatch to give a complete
+story for the &quot;efficient inheritance&quot; goal that many previous RFCs targeted.</p>
+<p>The author is preparing a companion RFC showing how this can be done with a
+relatively small further extension to the language. But it should be said that
+the design in <em>this</em> RFC is fully motivated independently of its companion RFC.</p>
+<h1><a class="header" href="#detailed-design" id="detailed-design">Detailed design</a></h1>
+<p>There's a fair amount of material to cover, so we'll start with a basic overview
+of the design in intuitive terms, and then look more formally at a specification.</p>
+<p>At the simplest level, specialization is about allowing overlap between impl
+blocks, so long as there is always an unambiguous &quot;winner&quot; for any type falling
+into the overlap. For example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; Debug for T where T: Display {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        &lt;Self as Display&gt;::fmt(self, f)
+    }
+}
+
+impl Debug for String {
+    fn fmt(&amp;self, f: &amp;mut Formatter) -&gt; Result {
+        try!(write!(f, &quot;\&quot;&quot;));
+        for c in self.chars().flat_map(|c| c.escape_default()) {
+            try!(write!(f, &quot;{}&quot;, c));
+        }
+        write!(f, &quot;\&quot;&quot;)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The idea for this pair of impls is that you can rest assured that <em>any</em> type
+implementing <code>Display</code> will also implement <code>Debug</code> via a reasonable default, but
+go on to provide more specific <code>Debug</code> implementations when warranted. In
+particular, the intuition is that a <code>Self</code> type of <code>String</code> is somehow &quot;more
+specific&quot; or &quot;more concrete&quot; than <code>T where T: Display</code>.</p>
+<p>The bulk of the detailed design is aimed at making this intuition more
+precise. But first, we need to explore some problems that arise when you
+introduce specialization in any form.</p>
+<h2><a class="header" href="#hazard-interactions-with-type-checking" id="hazard-interactions-with-type-checking">Hazard: interactions with type checking</a></h2>
+<p>Consider the following, somewhat odd example of overlapping impls:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Example {
+    type Output;
+    fn generate(self) -&gt; Self::Output;
+}
+
+impl&lt;T&gt; Example for T {
+    type Output = Box&lt;T&gt;;
+    fn generate(self) -&gt; Box&lt;T&gt; { Box::new(self) }
+}
+
+impl Example for bool {
+    type Output = bool;
+    fn generate(self) -&gt; bool { self }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The key point to pay attention to here is the difference in associated types:
+the blanket impl uses <code>Box&lt;T&gt;</code>, while the impl for <code>bool</code> just uses <code>bool</code>.
+If we write some code that uses the above impls, we can get into trouble:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn trouble&lt;T&gt;(t: T) -&gt; Box&lt;T&gt; {
+    Example::generate(t)
+}
+
+fn weaponize() -&gt; bool {
+    let b: Box&lt;bool&gt; = trouble(true);
+    *b
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>What's going on? When type checking <code>trouble</code>, the compiler has a type <code>T</code> about
+which it knows nothing, and sees an attempt to employ the <code>Example</code> trait via
+<code>Example::generate(t)</code>. Because of the blanket impl, this use of <code>Example</code> is
+allowed -- but furthermore, the associated type found in the blanket impl is now
+directly usable, so that <code>&lt;T as Example&gt;::Output</code> is known within <code>trouble</code> to
+be <code>Box&lt;T&gt;</code>, allowing <code>trouble</code> to type check. But during <em>monomorphization</em>,
+<code>weaponize</code> will actually produce a version of the code that returns a boolean
+instead, and then attempt to dereference that boolean. In other words, things
+look different to the typechecker than they do to codegen. Oops.</p>
+<p>So what went wrong? It should be fine for the compiler to assume that <code>T: Example</code> for all <code>T</code>, given the blanket impl. But it's clearly problematic to
+<em>also</em> assume that the associated types will be the ones given by that blanket
+impl. Thus, the &quot;obvious&quot; solution is just to generate a type error in <code>trouble</code>
+by preventing it from assuming <code>&lt;T as Example&gt;::Output</code> is <code>Box&lt;T&gt;</code>.</p>
+<p>Unfortunately, this solution doesn't work. For one thing, it would be a breaking
+change, since the following code <em>does</em> compile today:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Example {
+    type Output;
+    fn generate(self) -&gt; Self::Output;
+}
+
+impl&lt;T&gt; Example for T {
+    type Output = Box&lt;T&gt;;
+    fn generate(self) -&gt; Box&lt;T&gt; { Box::new(self) }
+}
+
+fn trouble&lt;T&gt;(t: T) -&gt; Box&lt;T&gt; {
+    Example::generate(t)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>And there are definitely cases where this pattern is important. To pick just one
+example, consider the following impl for the slice iterator:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'a, T&gt; Iterator for Iter&lt;'a, T&gt; {
+    type Item = &amp;'a T;
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>It's essential that downstream code be able to assume that <code>&lt;Iter&lt;'a, T&gt; as Iterator&gt;::Item</code> is just <code>&amp;'a T</code>, no matter what <code>'a</code> and <code>T</code> happen to be.</p>
+<p>Furthermore, it doesn't work to say that the compiler can make this kind of
+assumption <em>unless</em> specialization is being used, since we want to allow
+downstream crates to add specialized impls. We need to know up front.</p>
+<p>Another possibility would be to simply disallow specialization of associated
+types. But the trouble described above isn't limited to associated types. Every
+function/method in a trait has an implicit associated type that implements the
+closure types, and similar bad assumptions about blanket impls can crop up
+there. It's not entirely clear whether they can be weaponized, however. (That
+said, it may be reasonable to stabilize only specialization of functions/methods
+to begin with, and wait for strong use cases of associated type specialization
+to emerge before stabilizing that.)</p>
+<p>The solution proposed in this RFC is instead to treat specialization of items in
+a trait as a per-item <em>opt in</em>, described in the next section.</p>
+<h2><a class="header" href="#the-default-keyword" id="the-default-keyword">The <code>default</code> keyword</a></h2>
+<p>Many statically-typed languages that allow refinement of behavior in some
+hierarchy also come with ways to signal whether or not this is allowed:</p>
+<ul>
+<li>
+<p>C++ requires the <code>virtual</code> keyword to permit a method to be overridden in
+subclasses. Modern C++ also supports <code>final</code> and <code>override</code> qualifiers.</p>
+</li>
+<li>
+<p>C# requires the <code>virtual</code> keyword at definition and <code>override</code> at point of
+overriding an existing method.</p>
+</li>
+<li>
+<p>Java makes things silently virtual, but supports <code>final</code> as an opt out.</p>
+</li>
+</ul>
+<p>Why have these qualifiers? Overriding implementations is, in a way, &quot;action at a
+distance&quot;. It means that the code that's actually being run isn't obvious when
+e.g. a class is defined; it can change in subclasses defined
+elsewhere. Requiring qualifiers is a way of signaling that this non-local change
+is happening, so that you know you need to look more globally to understand the
+actual behavior of the class.</p>
+<p>While impl specialization does not directly involve virtual dispatch, it's
+closely-related to inheritance, and it allows some amount of &quot;action at a
+distance&quot; (modulo, as we'll see, coherence rules). We can thus borrow directly
+from these previous designs.</p>
+<p>This RFC proposes a &quot;final-by-default&quot; semantics akin to C++ that is
+backwards-compatible with today's Rust, which means that the following
+overlapping impls are prohibited:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; Example for T {
+    type Output = Box&lt;T&gt;;
+    fn generate(self) -&gt; Box&lt;T&gt; { Box::new(self) }
+}
+
+impl Example for bool {
+    type Output = bool;
+    fn generate(self) -&gt; bool { self }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The error in these impls is that the first impl is implicitly defining &quot;final&quot;
+versions of its items, which are thus not allowed to be refined in further
+specializations.</p>
+<p>If you want to allow specialization of an item, you do so via the <code>default</code>
+qualifier <em>within the impl block</em>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; Example for T {
+    default type Output = Box&lt;T&gt;;
+    default fn generate(self) -&gt; Box&lt;T&gt; { Box::new(self) }
+}
+
+impl Example for bool {
+    type Output = bool;
+    fn generate(self) -&gt; bool { self }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Thus, when you're trying to understand what code is going to be executed, if you
+see an impl that applies to a type and the relevant item is <em>not</em> marked
+<code>default</code>, you know that the definition you're looking at is the one that will
+apply. If, on the other hand, the item is marked <code>default</code>, you need to scan for
+other impls that could apply to your type. The coherence rules, described below,
+help limit the scope of this search in practice.</p>
+<p>This design optimizes for fine-grained control over when specialization is
+permitted. It's worth pausing for a moment and considering some alternatives and
+questions about the design:</p>
+<ul>
+<li>
+<p><strong>Why mark <code>default</code> on impls rather than the trait?</strong> There are a few reasons
+to have <code>default</code> apply at the impl level. First of all, traits are
+fundamentally <em>interfaces</em>, while <code>default</code> is really about
+<em>implementations</em>. Second, as we'll see, it's useful to be able to &quot;seal off&quot;
+a certain avenue of specialization while leaving others open; doing it at the
+trait level is an all-or-nothing choice.</p>
+</li>
+<li>
+<p><strong>Why mark <code>default</code> on items rather than the entire impl?</strong> Again, this is
+largely about granularity; it's useful to be able to pin down part of an impl
+while leaving others open for specialization. Furthermore, while this RFC
+doesn't propose to do it, we could easily add a shorthand later on in which
+<code>default impl Trait for Type</code> is sugar for adding <code>default</code> to all items in
+the impl.</p>
+</li>
+<li>
+<p><strong>Won't <code>default</code> be confused with default methods?</strong> Yes! But usefully so: as
+we'll see, in this RFC's design today's default methods become sugar for
+tomorrow's specialization.</p>
+</li>
+</ul>
+<p>Finally, how does <code>default</code> help with the hazards described above? Easy: an
+associated type from a blanket impl must be treated &quot;opaquely&quot; if it's marked
+<code>default</code>. That is, if you write these impls:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; Example for T {
+    default type Output = Box&lt;T&gt;;
+    default fn generate(self) -&gt; Box&lt;T&gt; { Box::new(self) }
+}
+
+impl Example for bool {
+    type Output = bool;
+    fn generate(self) -&gt; bool { self }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>then the function <code>trouble</code> will fail to typecheck:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn trouble&lt;T&gt;(t: T) -&gt; Box&lt;T&gt; {
+    Example::generate(t)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The error is that <code>&lt;T as Example&gt;::Output</code> no longer normalizes to <code>Box&lt;T&gt;</code>,
+because the applicable blanket impl marks the type as <code>default</code>. The fact that
+<code>default</code> is an opt in makes this behavior backwards-compatible.</p>
+<p>The main drawbacks of this solution are:</p>
+<ul>
+<li>
+<p><strong>API evolution</strong>. Adding <code>default</code> to an associated type <em>takes away</em> some
+abilities, which makes it a breaking change to a public API. (In principle,
+this is probably true for functions/methods as well, but the breakage there is
+theoretical at most.) However, given the design constraints discussed so far,
+this seems like an inevitable aspect of any simple, backwards-compatible
+design.</p>
+</li>
+<li>
+<p><strong>Verbosity</strong>. It's possible that certain uses of the trait system will result
+in typing <code>default</code> quite a bit. This RFC takes a conservative approach of
+introducing the keyword at a fine-grained level, but leaving the door open to
+adding shorthands (like writing <code>default impl ...</code>) in the future, if need be.</p>
+</li>
+</ul>
+<h2><a class="header" href="#overlapping-impls-and-specialization" id="overlapping-impls-and-specialization">Overlapping impls and specialization</a></h2>
+<h3><a class="header" href="#what-is-overlap" id="what-is-overlap">What is overlap?</a></h3>
+<p>Rust today does not allow any &quot;overlap&quot; between impls. Intuitively, this means
+that you cannot write two trait impls that could apply to the same &quot;input&quot;
+types. (An input type is either <code>Self</code> or a type parameter of the trait). For
+overlap to occur, the input types must be able to &quot;unify&quot;, which means that
+there's some way of instantiating any type parameters involved so that the input
+types are the same. Here are some examples:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {}
+
+// No overlap: String and Vec&lt;u8&gt; cannot unify.
+impl Foo for String {}
+impl Foo for Vec&lt;u8&gt; {}
+
+// No overlap: Vec&lt;u16&gt; and Vec&lt;u8&gt; cannot unify because u16 and u8 cannot unify.
+impl Foo for Vec&lt;u16&gt; {}
+impl Foo for Vec&lt;u8&gt; {}
+
+// Overlap: T can be instantiated to String.
+impl&lt;T&gt; Foo for T {}
+impl Foo for String {}
+
+// Overlap: Vec&lt;T&gt; and Vec&lt;u8&gt; can unify because T can be instantiated to u8.
+impl&lt;T&gt; Foo for Vec&lt;T&gt; {}
+impl Foo for Vec&lt;u8&gt;
+
+// No overlap: String and Vec&lt;T&gt; cannot unify, no matter what T is.
+impl Foo for String {}
+impl&lt;T&gt; Foo for Vec&lt;T&gt; {}
+
+// Overlap: for any T that is Clone, both impls apply.
+impl&lt;T&gt; Foo for Vec&lt;T&gt; where T: Clone {}
+impl&lt;T&gt; Foo for Vec&lt;T&gt; {}
+
+// No overlap: implicitly, T: Sized, and since !Foo: Sized, you cannot instantiate T with it.
+impl&lt;T&gt; Foo for Box&lt;T&gt; {}
+impl Foo for Box&lt;Foo&gt; {}
+
+trait Trait1 {}
+trait Trait2 {}
+
+// Overlap: nothing prevents a T such that T: Trait1 + Trait2.
+impl&lt;T: Trait1&gt; Foo for T {}
+impl&lt;T: Trait2&gt; Foo for T {}
+
+trait Trait3 {}
+trait Trait4: Trait3 {}
+
+// Overlap: any T: Trait4 is covered by both impls.
+impl&lt;T: Trait3&gt; Foo for T {}
+impl&lt;T: Trait4&gt; Foo for T {}
+
+trait Bar&lt;T&gt; {}
+
+// No overlap: *all* input types must unify for overlap to happen.
+impl Bar&lt;u8&gt; for u8 {}
+impl Bar&lt;u16&gt; for u8 {}
+
+// No overlap: *all* input types must unify for overlap to happen.
+impl&lt;T&gt; Bar&lt;u8&gt; for T {}
+impl&lt;T&gt; Bar&lt;u16&gt; for T {}
+
+// No overlap: no way to instantiate T such that T == u8 and T == u16.
+impl&lt;T&gt; Bar&lt;T&gt; for T {}
+impl Bar&lt;u16&gt; for u8 {}
+
+// Overlap: instantiate U as T.
+impl&lt;T&gt; Bar&lt;T&gt; for T {}
+impl&lt;T, U&gt; Bar&lt;T&gt; for U {}
+
+// No overlap: no way to instantiate T such that T == &amp;'a T.
+impl&lt;T&gt; Bar&lt;T&gt; for T {}
+impl&lt;'a, T&gt; Bar&lt;&amp;'a T&gt; for T {}
+
+// Overlap: instantiate T = &amp;'a U.
+impl&lt;T&gt; Bar&lt;T&gt; for T {}
+impl&lt;'a, T, U&gt; Bar&lt;T&gt; for &amp;'a U where U: Bar&lt;T&gt; {}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#permitting-overlap" id="permitting-overlap">Permitting overlap</a></h3>
+<p>The goal of specialization is to allow overlapping impls, but it's not as simple
+as permitting <em>all</em> overlap. There has to be a way to decide which of two
+overlapping impls to actually use for a given set of input types. The simpler
+and more intuitive the rule for deciding, the easier it is to write and reason
+about code -- and since dispatch is already quite complicated, simplicity here
+is a high priority. On the other hand, the design should support as many of the
+motivating use cases as possible.</p>
+<p>The basic intuition we've been using for specialization is the idea that one
+impl is &quot;more specific&quot; than another it overlaps with. Before turning this
+intuition into a rule, let's go through the previous examples of overlap and
+decide which, if any, of the impls is intuitively more specific. <strong>Note that since
+we're leaving out the body of the impls, you won't see the <code>default</code> keyword
+that would be required in practice for the less specialized impls.</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {}
+
+// Overlap: T can be instantiated to String.
+impl&lt;T&gt; Foo for T {}
+impl Foo for String {}          // String is more specific than T
+
+// Overlap: Vec&lt;T&gt; and Vec&lt;u8&gt; can unify because T can be instantiated to u8.
+impl&lt;T&gt; Foo for Vec&lt;T&gt; {}
+impl Foo for Vec&lt;u8&gt;            // Vec&lt;u8&gt; is more specific than Vec&lt;T&gt;
+
+// Overlap: for any T that is Clone, both impls apply.
+impl&lt;T&gt; Foo for Vec&lt;T&gt;          // &quot;Vec&lt;T&gt; where T: Clone&quot; is more specific than &quot;Vec&lt;T&gt; for any T&quot;
+    where T: Clone {}
+impl&lt;T&gt; Foo for Vec&lt;T&gt; {}
+
+trait Trait1 {}
+trait Trait2 {}
+
+// Overlap: nothing prevents a T such that T: Trait1 + Trait2
+impl&lt;T: Trait1&gt; Foo for T {}    // Neither is more specific;
+impl&lt;T: Trait2&gt; Foo for T {}    // there's no relationship between the traits here
+
+trait Trait3 {}
+trait Trait4: Trait3 {}
+
+// Overlap: any T: Trait4 is covered by both impls.
+impl&lt;T: Trait3&gt; Foo for T {}
+impl&lt;T: Trait4&gt; Foo for T {}    // T: Trait4 is more specific than T: Trait3
+
+trait Bar&lt;T&gt; {}
+
+// Overlap: instantiate U as T.
+impl&lt;T&gt; Bar&lt;T&gt; for T {}         // More specific since both input types are identical
+impl&lt;T, U&gt; Bar&lt;T&gt; for U {}
+
+// Overlap: instantiate T = &amp;'a U.
+impl&lt;T&gt; Bar&lt;T&gt; for T {}         // Neither is more specific
+impl&lt;'a, T, U&gt; Bar&lt;T&gt; for &amp;'a U
+    where U: Bar&lt;T&gt; {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>What are the patterns here?</p>
+<ul>
+<li>Concrete types are more specific than type variables, e.g.:
+<ul>
+<li><code>String</code> is more specific than <code>T</code></li>
+<li><code>Vec&lt;u8&gt;</code> is more specific than <code>Vec&lt;T&gt;</code></li>
+</ul>
+</li>
+<li>More constraints lead to more specific impls, e.g.:
+<ul>
+<li><code>T: Clone</code> is more specific than <code>T</code></li>
+<li><code>Bar&lt;T&gt; for T</code> is more specific than <code>Bar&lt;T&gt; for U</code></li>
+</ul>
+</li>
+<li>Unrelated constraints don't contribute, e.g.:
+<ul>
+<li>Neither <code>T: Trait1</code> nor <code>T: Trait2</code> is more specific than the other.</li>
+</ul>
+</li>
+</ul>
+<p>For many purposes, the above simple patterns are sufficient for working with
+specialization. But to provide a spec, we need a more general, formal way of
+deciding precedence; we'll give one next.</p>
+<h3><a class="header" href="#defining-the-precedence-rules" id="defining-the-precedence-rules">Defining the precedence rules</a></h3>
+<p>An impl block <code>I</code> contains basically two pieces of information relevant to
+specialization:</p>
+<ul>
+<li>A set of type variables, like <code>T, U</code> in <code>impl&lt;T, U&gt; Bar&lt;T&gt; for U</code>.
+<ul>
+<li>We'll call this <code>I.vars</code>.</li>
+</ul>
+</li>
+<li>A set of where clauses, like <code>T: Clone</code> in <code>impl&lt;T: Clone&gt; Foo for Vec&lt;T&gt;</code>.
+<ul>
+<li>We'll call this <code>I.wc</code>.</li>
+</ul>
+</li>
+</ul>
+<p>We're going to define a <em>specialization relation</em> <code>&lt;=</code> between impl blocks, so
+that <code>I &lt;= J</code> means that impl block <code>I</code> is &quot;at least as specific as&quot; impl block
+<code>J</code>. (If you want to think of this in terms of &quot;size&quot;, you can imagine that the
+set of types <code>I</code> applies to is no bigger than those <code>J</code> applies to.)</p>
+<p>We'll say that <code>I &lt; J</code> if <code>I &lt;= J</code> and <code>!(J &lt;= I)</code>. In this case, <code>I</code> is <em>more
+specialized</em> than <code>J</code>.</p>
+<p>To ensure specialization is coherent, we will ensure that for any two impls <code>I</code>
+and <code>J</code> that overlap, we have either <code>I &lt; J</code> or <code>J &lt; I</code>.  That is, one must be
+truly more specific than the other. Specialization chooses the &quot;smallest&quot; impl
+in this order -- and the new overlap rule ensures there is a unique smallest
+impl among those that apply to a given set of input types.</p>
+<p>More broadly, while <code>&lt;=</code> is not a total order on <em>all</em> impls of a given trait,
+it will be a total order on any set of impls that all mutually overlap, which is
+all we need to determine which impl to use.</p>
+<p>One nice thing about this approach is that, if there is an overlap without there
+being an intersecting impl, the compiler can tell the programmer <em>precisely
+which impl needs to be written</em> to disambiguate the overlapping portion.</p>
+<p>We'll start with an abstract/high-level formulation, and then build up toward an
+algorithm for deciding specialization by introducing a number of building
+blocks.</p>
+<h4><a class="header" href="#abstract-formulation" id="abstract-formulation">Abstract formulation</a></h4>
+<p>Recall that the
+<a href="https://github.com/aturon/rfcs/blob/associated-items/active/0000-associated-items.md">input types</a>
+of a trait are the <code>Self</code> type and all trait type parameters. So the following
+impl has input types <code>bool</code>, <code>u8</code> and <code>String</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Baz&lt;X, Y&gt; { .. }
+// impl I
+impl Baz&lt;bool, u8&gt; for String { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>If you think of these input types as a tuple, <code>(bool, u8, String</code>) you can think
+of each trait impl <code>I</code> as determining a set <code>apply(I)</code> of input type tuples that
+obeys <code>I</code>'s where clauses. The impl above is just the singleton set <code>apply(I) = { (bool, u8, String) }</code>.  Here's a more interesting case:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// impl J
+impl&lt;T, U&gt; Baz&lt;T, u8&gt; for U where T: Clone { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>which gives the set <code>apply(J) = { (T, u8, U) | T: Clone }</code>.</p>
+<p>Two impls <code>I</code> and <code>J</code> overlap if <code>apply(I)</code> and <code>apply(J)</code> intersect.</p>
+<p><strong>We can now define the specialization order abstractly</strong>: <code>I &lt;= J</code> if
+<code>apply(I)</code> is a subset of <code>apply(J)</code>.</p>
+<p>This is true of the two sets above:</p>
+<pre><code>apply(I) = { (bool, u8, String) }
+  is a strict subset of
+apply(J) = { (T, u8, U) | T: Clone }
+</code></pre>
+<p>Here are a few more examples.</p>
+<p><strong>Via where clauses</strong>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// impl I
+// apply(I) = { T | T a type }
+impl&lt;T&gt; Foo for T {}
+
+// impl J
+// apply(J) = { T | T: Clone }
+impl&lt;T&gt; Foo for T where T: Clone {}
+
+// J &lt; I
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Via type structure</strong>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// impl I
+// apply(I) = { (T, U) | T, U types }
+impl&lt;T, U&gt; Bar&lt;T&gt; for U {}
+
+// impl J
+// apply(J) = { (T, T) | T a type }
+impl&lt;T&gt; Bar&lt;T&gt; for T {}
+
+// J &lt; I
+<span class="boring">}
+</span></code></pre></pre>
+<p>The same reasoning can be applied to all of the examples we saw earlier, and the
+reader is encouraged to do so. We'll look at one of the more subtle cases here:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// impl I
+// apply(I) = { (T, T) | T any type }
+impl&lt;T&gt; Bar&lt;T&gt; for T {}
+
+// impl J
+// apply(J) = { (T, &amp;'a U) | U: Bar&lt;T&gt;, 'a any lifetime }
+impl&lt;'a, T, U&gt; Bar&lt;T&gt; for &amp;'a U where U: Bar&lt;T&gt; {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The claim is that <code>apply(I)</code> and <code>apply(J)</code> intersect, but neither contains the
+other. Thus, these two impls are not permitted to coexist according to this
+RFC's design. (We'll revisit this limitation toward the end of the RFC.)</p>
+<h4><a class="header" href="#algorithmic-formulation" id="algorithmic-formulation">Algorithmic formulation</a></h4>
+<p>The goal in the remainder of this section is to turn the above abstract
+definition of <code>&lt;=</code> into something closer to an algorithm, connected to existing
+mechanisms in the Rust compiler. We'll start by reformulating <code>&lt;=</code> in a way that
+effectively &quot;inlines&quot; <code>apply</code>:</p>
+<p><code>I &lt;= J</code> if:</p>
+<ul>
+<li>
+<p>For any way of instantiating <code>I.vars</code>, there is some way of instantiating
+<code>J.vars</code> such that the <code>Self</code> type and trait type parameters match up.</p>
+</li>
+<li>
+<p>For this instantiation of <code>I.vars</code>, if you assume <code>I.wc</code> holds, you can prove
+<code>J.wc</code>.</p>
+</li>
+</ul>
+<p>It turns out that the compiler is already quite capable of answering these
+questions, via &quot;unification&quot; and &quot;skolemization&quot;, which we'll see next.</p>
+<h5><a class="header" href="#unification-solving-equations-on-types" id="unification-solving-equations-on-types">Unification: solving equations on types</a></h5>
+<p>Unification is the workhorse of type inference and many other mechanisms in the
+Rust compiler. You can think of it as a way of solving equations on types that
+contain variables. For example, consider the following situation:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn use_vec&lt;T&gt;(v: Vec&lt;T&gt;) { .. }
+
+fn caller() {
+    let v = vec![0u8, 1u8];
+    use_vec(v);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The compiler ultimately needs to infer what type to use for the <code>T</code> in <code>use_vec</code>
+within the call in <code>caller</code>, given that the actual argument has type
+<code>Vec&lt;u8&gt;</code>. You can frame this as a unification problem: solve the equation
+<code>Vec&lt;T&gt; = Vec&lt;u8&gt;</code>. Easy enough: <code>T = u8</code>!</p>
+<p>Some equations can't be solved. For example, if we wrote instead:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn caller() {
+    let s = &quot;hello&quot;;
+    use_vec(s);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>we would end up equating <code>Vec&lt;T&gt; = &amp;str</code>. There's no choice of <code>T</code> that makes
+that equation work out. Type error!</p>
+<p>Unification often involves solving a series of equations between types
+simultaneously, but it's not like high school algebra; the equations involved
+all have the limited form of <code>type1 = type2</code>.</p>
+<p>One immediate way in which unification is relevant to this RFC is in determining
+when two impls &quot;overlap&quot;: roughly speaking, they overlap if each pair of input 
+types can be unified simultaneously. For example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// No overlap: String and bool do not unify
+impl Foo for String { .. }
+impl Foo for bool { .. }
+
+// Overlap: String and T unify
+impl Foo for String { .. }
+impl&lt;T&gt; Foo for T { .. }
+
+// Overlap: T = U, T = V is trivially solvable
+impl&lt;T&gt; Bar&lt;T&gt; for T { .. }
+impl&lt;U, V&gt; Bar&lt;U&gt; for V { .. }
+
+// No overlap: T = u8, T = bool not solvable
+impl&lt;T&gt; Bar&lt;T&gt; for T { .. }
+impl Bar&lt;u8&gt; for bool { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>Note the difference in how <em>concrete types</em> and <em>type variables</em> work for
+unification. When <code>T</code>, <code>U</code> and <code>V</code> are variables, it's fine to say that <code>T = U</code>,
+<code>T = V</code> is solvable: we can make the impls overlap by instantiating all three
+variables with the same type. But asking for e.g. <code>String = bool</code> fails, because
+these are concrete types, not variables. (The same happens in algebra; consider
+that <code>2 = 3</code> cannot be solved, but <code>x = y</code> and <code>y = z</code> can be.)  This
+distinction may seem obvious, but we'll next see how to leverage it in a
+somewhat subtle way.</p>
+<h5><a class="header" href="#skolemization-asking-forallthere-exists-questions" id="skolemization-asking-forallthere-exists-questions">Skolemization: asking forall/there exists questions</a></h5>
+<p>We've already rephrased <code>&lt;=</code> to start with a &quot;for all, there exists&quot; problem:</p>
+<ul>
+<li>For any way of instantiating <code>I.vars</code>, there is some way of instantiating
+<code>J.vars</code> such that the <code>Self</code> type and trait type parameters match up.</li>
+</ul>
+<p>For example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// impl I
+impl&lt;T&gt; Bar&lt;T&gt; for T {}
+
+// impl J
+impl&lt;U,V&gt; Bar&lt;U&gt; for V {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>For any choice of <code>T</code>, it's possible to choose a <code>U</code> and <code>V</code> such that the two
+impls match -- just choose <code>U = T</code> and <code>V = T</code>. But the opposite isn't possible:
+if <code>U</code> and <code>V</code> are different (say, <code>String</code> and <code>bool</code>), then no choice of <code>T</code>
+will make the two impls match up.</p>
+<p>This feels similar to a unification problem, and it turns out we can solve it
+with unification using a scary-sounding trick known as &quot;skolemization&quot;.</p>
+<p>Basically, to &quot;skolemize&quot; a type variable is to treat it <em>as if it were a
+concrete type</em>. So if <code>U</code> and <code>V</code> are skolemized, then <code>U = V</code> is unsolvable, in
+the same way that <code>String = bool</code> is unsolvable. That's perfect for capturing
+the &quot;for any instantiation of I.vars&quot; part of what we want to formalize.</p>
+<p>With this tool in hand, we can further rephrase the &quot;for all, there exists&quot; part
+of <code>&lt;=</code> in the following way:</p>
+<ul>
+<li>After skolemizing <code>I.vars</code>, it's possible to unify <code>I</code> and <code>J</code>.</li>
+</ul>
+<p>Note that a successful unification through skolemization gives you the same
+answer as you'd get if you unified without skolemizing.</p>
+<h5><a class="header" href="#the-algorithmic-version" id="the-algorithmic-version">The algorithmic version</a></h5>
+<p>One outcome of running unification on two impls as above is that we can
+understand both impl headers in terms of a single set of type variables. For
+example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Before unification:
+impl&lt;T&gt; Bar&lt;T&gt; for T where T: Clone { .. }
+impl&lt;U, V&gt; Bar&lt;U&gt; for Vec&lt;V&gt; where V: Debug { .. }
+
+// After unification:
+// T = Vec&lt;W&gt;
+// U = Vec&lt;W&gt;
+// V = W
+impl&lt;W&gt; Bar&lt;Vec&lt;W&gt;&gt; for Vec&lt;W&gt; where Vec&lt;W&gt;: Clone { .. }
+impl&lt;W&gt; Bar&lt;Vec&lt;W&gt;&gt; for Vec&lt;W&gt; where W: Debug { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>By putting everything in terms of a single set of type params, it becomes
+possible to do things like compare the <code>where</code> clauses, which is the last piece
+we need for a final rephrasing of <code>&lt;=</code> that we can implement directly.</p>
+<p>Putting it all together, we'll say <code>I &lt;= J</code> if:</p>
+<ul>
+<li>After skolemizing <code>I.vars</code>, it's possible to unify <code>I</code> and <code>J</code>.</li>
+<li>Under the resulting unification, <code>I.wc</code> implies <code>J.wc</code></li>
+</ul>
+<p>Let's look at a couple more examples to see how this works:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Trait1 {}
+trait Trait2 {}
+
+// Overlap: nothing prevents a T such that T: Trait1 + Trait2
+impl&lt;T: Trait1&gt; Foo for T {}    // Neither is more specific;
+impl&lt;T: Trait2&gt; Foo for T {}    // there's no relationship between the traits here
+<span class="boring">}
+</span></code></pre></pre>
+<p>In comparing these two impls in either direction, we make it past unification
+and must try to prove that one where clause implies another. But <code>T: Trait1</code>
+does not imply <code>T: Trait2</code>, nor vice versa, so neither impl is more specific
+than the other. Since the impls do overlap, an ambiguity error is reported.</p>
+<p>On the other hand:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Trait3 {}
+trait Trait4: Trait3 {}
+
+// Overlap: any T: Trait4 is covered by both impls.
+impl&lt;T: Trait3&gt; Foo for T {}
+impl&lt;T: Trait4&gt; Foo for T {}    // T: Trait4 is more specific than T: Trait3
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here, since <code>T: Trait4</code> implies <code>T: Trait3</code> but not vice versa, we get</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T: Trait4&gt; Foo for T    &lt;    impl&lt;T: Trait3&gt; Foo for T
+<span class="boring">}
+</span></code></pre></pre>
+<h5><a class="header" href="#key-properties" id="key-properties">Key properties</a></h5>
+<p>Remember that for each pair of impls <code>I</code>, <code>J</code>, the compiler will check that
+exactly one of the following holds:</p>
+<ul>
+<li><code>I</code> and <code>J</code> do not overlap (a unification check), or else</li>
+<li><code>I &lt; J</code>, or else</li>
+<li><code>J &lt; I</code></li>
+</ul>
+<p>Recall also that if there is an overlap without there being an intersecting
+impl, the compiler can tell the programmer <em>precisely which impl needs to be
+written</em> to disambiguate the overlapping portion.</p>
+<p>Since <code>I &lt;= J</code> ultimately boils down to a subset relationship, we get a lot of
+nice properties for free (e.g., transitivity: if <code>I &lt;= J &lt;= K</code> then <code>I &lt;= K</code>).
+Together with the compiler check above, we know that at monomorphization time,
+after filtering to the impls that apply to some concrete input types, there will
+always be a unique, smallest impl in specialization order. (In particular, if
+multiple impls apply to concrete input types, those impls must overlap.)</p>
+<p>There are various implementation strategies that avoid having to recalculate the
+ordering during monomorphization, but we won't delve into those details in this
+RFC.</p>
+<h3><a class="header" href="#implications-for-coherence" id="implications-for-coherence">Implications for coherence</a></h3>
+<p>The coherence rules ensure that there is never an ambiguity about which impl to
+use when monomorphizing code. Today, the rules consist of the simple overlap
+check described earlier, and the &quot;orphan&quot; check which limits the crates in which
+impls are allowed to appear (&quot;orphan&quot; refers to an impl in a crate that defines
+neither the trait nor the types it applies to). The orphan check is needed, in
+particular, so that overlap cannot be created accidentally when linking crates
+together.</p>
+<p>The design in this RFC heavily revises the overlap check, as described above,
+but does not propose any changes to the orphan check (which is described in
+<a href="http://smallcultfollowing.com/babysteps/blog/2015/01/14/little-orphan-impls/">a blog post</a>). Basically,
+the change to the overlap check does not appear to change the cases in which
+orphan impls can cause trouble. And a moment's thought reveals why: if two
+sibling crates are unaware of each other, there's no way that they could each
+provide an impl overlapping with the other, yet be sure that one of those impls
+is more specific than the other in the overlapping region.</p>
+<h3><a class="header" href="#interaction-with-lifetimes" id="interaction-with-lifetimes">Interaction with lifetimes</a></h3>
+<p>A hard constraint in the design of the trait system is that <em>dispatch cannot
+depend on lifetime information</em>. In particular, we both cannot, and should not
+allow specialization based on lifetimes:</p>
+<ul>
+<li>
+<p>We can't, because when the compiler goes to actually generate code (&quot;trans&quot;),
+lifetime information has been erased -- so we'd have no idea what
+specializations would soundly apply.</p>
+</li>
+<li>
+<p>We shouldn't, because lifetime inference is subtle and would often lead to
+counterintuitive results. For example, you could easily fail to get <code>'static</code>
+even if it applies, because inference is choosing the smallest lifetime that
+matches the other constraints.</p>
+</li>
+</ul>
+<p>To be more concrete, here are some scenarios which should not be allowed:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Not allowed: trans doesn't know if T: 'static:
+trait Bad1 {}
+impl&lt;T&gt; Bad1 for T {}
+impl&lt;T: 'static&gt; Bad1 for T {}
+
+// Not allowed: trans doesn't know if two refs have equal lifetimes:
+trait Bad2&lt;U&gt; {}
+impl&lt;T, U&gt; Bad2&lt;U&gt; for T {}
+impl&lt;'a, T, U&gt; Bad2&lt;&amp;'b U&gt; for &amp;'a T {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>But simply <em>naming</em> a lifetime that must exist, without <em>constraining</em> it, is fine:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Allowed: specializes based on being *any* reference, regardless of lifetime
+trait Good {}
+impl&lt;T&gt; Good for T {}
+impl&lt;'a, T&gt; Good for &amp;'a T {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In addition, it's okay for lifetime constraints to show up as long as
+they aren't part of specialization:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Allowed: *all* impls impose the 'static requirement; the dispatch is happening
+// purely based on `Clone`
+trait MustBeStatic {}
+impl&lt;T: 'static&gt; MustBeStatic for T {}
+impl&lt;T: 'static + Clone&gt; MustBeStatic for T {}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#going-down-the-rabbit-hole" id="going-down-the-rabbit-hole">Going down the rabbit hole</a></h4>
+<p>Unfortunately, we cannot easily rule out the undesirable lifetime-dependent
+specializations, because they can be &quot;hidden&quot; behind innocent-looking trait
+bounds that can even cross crates:</p>
+<pre><pre class="playground"><code class="language-rust">////////////////////////////////////////////////////////////////////////////////
+// Crate marker
+////////////////////////////////////////////////////////////////////////////////
+
+trait Marker {}
+impl Marker for u32 {}
+
+////////////////////////////////////////////////////////////////////////////////
+// Crate foo
+////////////////////////////////////////////////////////////////////////////////
+
+extern crate marker;
+
+trait Foo {
+    fn foo(&amp;self);
+}
+
+impl&lt;T&gt; Foo for T {
+    default fn foo(&amp;self) {
+        println!(&quot;Default impl&quot;);
+    }
+}
+
+impl&lt;T: marker::Marker&gt; Foo for T {
+    fn foo(&amp;self) {
+        println!(&quot;Marker impl&quot;);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Crate bar
+////////////////////////////////////////////////////////////////////////////////
+
+extern crate marker;
+
+pub struct Bar&lt;T&gt;(T);
+impl&lt;T: 'static&gt; marker::Marker for Bar&lt;T&gt; {}
+
+////////////////////////////////////////////////////////////////////////////////
+// Crate client
+////////////////////////////////////////////////////////////////////////////////
+
+extern crate foo;
+extern crate bar;
+
+fn main() {
+    // prints: Marker impl
+    0u32.foo();
+
+    // prints: ???
+    // the relevant specialization depends on the 'static lifetime
+    bar::Bar(&quot;Activate the marker!&quot;).foo();
+}
+</code></pre></pre>
+<p>The problem here is that all of the crates in isolation look perfectly innocent.
+The code in <code>marker</code>, <code>bar</code> and <code>client</code> is accepted today. It's only when these
+crates are plugged together that a problem arises -- you end up with a
+specialization based on a <code>'static</code> lifetime. And the <code>client</code> crate may not
+even be aware of the existence of the <code>marker</code> crate.</p>
+<p>If we make this kind of situation a hard error, we could easily end up with a
+scenario in which plugging together otherwise-unrelated crates is <em>impossible</em>.</p>
+<h4><a class="header" href="#proposal-ask-forgiveness-rather-than-permission" id="proposal-ask-forgiveness-rather-than-permission">Proposal: ask forgiveness, rather than permission</a></h4>
+<p>So what do we do? There seem to be essentially two avenues:</p>
+<ol>
+<li>
+<p>Be maximally permissive in the impls you can write, and then just ignore
+lifetime information in dispatch. We can generate a warning when this is
+happening, though in cases like the above, it may be talking about traits
+that the client is not even aware of. The assumption here is that these
+&quot;missed specializations&quot; will be extremely rare, so better not to impose a
+burden on everyone to rule them out.</p>
+</li>
+<li>
+<p>Try, somehow, to prevent you from writing impls that appear to dispatch based
+on lifetimes. The most likely way of doing that is to somehow flag a trait as
+&quot;lifetime-dependent&quot;. If a trait is lifetime-dependent, it can have
+lifetime-sensitive impls (like ones that apply only to <code>'static</code> data), but
+it cannot be used when writing specialized impls of another trait.</p>
+</li>
+</ol>
+<p>The downside of (2) is that it's an additional knob that all trait authors have to
+think about. That approach is sketched in more detail in the Alternatives section.</p>
+<p>What this RFC proposes is to follow approach (1), at least during the initial
+experimentation phase. That's the easiest way to gain experience with
+specialization and see to what extent lifetime-dependent specializations
+accidentally arise in practice. If they are indeed rare, it seems much better to
+catch them via a lint then to force the entire world of traits to be explicitly
+split in half.</p>
+<p>To begin with, this lint should be an error by default; we want to get
+feedback as to how often this is happening before any
+stabilization.</p>
+<h5><a class="header" href="#what-this-means-for-the-programmer" id="what-this-means-for-the-programmer">What this means for the programmer</a></h5>
+<p>Ultimately, the goal of the &quot;just ignore lifetimes for specialization&quot; approach
+is to reduce the number of knobs in play. The programmer gets to use both
+lifetime bounds and specialization freely.</p>
+<p>The problem, of course, is that when using the two together you can get
+surprising dispatch results:</p>
+<pre><pre class="playground"><code class="language-rust">trait Foo {
+    fn foo(&amp;self);
+}
+
+impl&lt;T&gt; Foo for T {
+    default fn foo(&amp;self) {
+        println!(&quot;Default impl&quot;);
+    }
+}
+
+impl Foo for &amp;'static str {
+    fn foo(&amp;self) {
+        println!(&quot;Static string slice: {}&quot;, self);
+    }
+}
+
+fn main() {
+    // prints &quot;Default impl&quot;, but generates a lint saying that
+    // a specialization was missed due to lifetime dependence.
+    &quot;Hello, world!&quot;.foo();
+}
+</code></pre></pre>
+<p>Specialization is refusing to consider the second impl because it imposes
+lifetime constraints not present in the more general impl. We don't know whether
+these constraints hold when we need to generate the code, and we don't want to
+depend on them because of the subtleties of region inference. But we alert the
+programmer that this is happening via a lint.</p>
+<p>Sidenote: for such simple intracrate cases, we could consider treating the impls
+themselves more aggressively, catching that the <code>&amp;'static str</code> impl will never
+be used and refusing to compile it.</p>
+<p>In the more complicated multi-crate example we saw above, the line</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>bar::Bar(&quot;Activate the marker!&quot;).foo();
+<span class="boring">}
+</span></code></pre></pre>
+<p>would likewise print <code>Default impl</code> and generate a warning. In this case, the
+warning may be hard for the <code>client</code> crate author to understand, since the trait
+relevant for specialization -- <code>marker::Marker</code> -- belongs to a crate that
+hasn't even been imported in <code>client</code>. Nevertheless, this approach seems
+friendlier than the alternative (discussed in Alternatives).</p>
+<h4><a class="header" href="#an-algorithm-for-ignoring-lifetimes-in-dispatch" id="an-algorithm-for-ignoring-lifetimes-in-dispatch">An algorithm for ignoring lifetimes in dispatch</a></h4>
+<p>Although approach (1) may seem simple, there are some subtleties in handling
+cases like the following:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo { ... }
+impl&lt;T: 'static&gt; Foo for T { ... }
+impl&lt;T: 'static + Clone&gt; Foo for T { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this &quot;ignore lifetimes for specialization&quot; approach, we still want the above
+specialization to work, because <em>all</em> impls in the specialization family impose
+the same lifetime constraints. The dispatch here purely comes down to <code>T: Clone</code>
+or not. That's in contrast to something like this:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo { ... }
+impl&lt;T&gt; Foo for T { ... }
+impl&lt;T: 'static + Clone&gt; Foo for T { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>where the difference between the impls includes a nontrivial lifetime constraint
+(the <code>'static</code> bound on <code>T</code>). The second impl should effectively be dead code:
+we should never dispatch to it in favor of the first impl, because that depends
+on lifetime information that we don't have available in trans (and don't want to
+rely on in general, due to the way region inference works). We would instead
+lint against it (probably error by default).</p>
+<p>So, how do we tell these two scenarios apart?</p>
+<ul>
+<li>
+<p>First, we evaluate the impls normally, winnowing to a list of
+applicable impls.</p>
+</li>
+<li>
+<p>Then, we attempt to determine specialization. For any pair of applicable impls
+<code>Parent</code> and <code>Child</code> (where <code>Child</code> specializes <code>Parent</code>), we do the
+following:</p>
+<ul>
+<li>
+<p>Introduce as assumptions all of the where clauses of <code>Parent</code></p>
+</li>
+<li>
+<p>Attempt to prove that <code>Child</code> definitely applies, using these assumptions.
+<strong>Crucially</strong>, we do this test in a special mode: lifetime bounds are only
+considered to hold if they (1) follow from general well-formedness or (2) are
+directly assumed from <code>Parent</code>. That is, a constraint in <code>Child</code> that <code>T: 'static</code> has to follow either from some basic type assumption (like the type
+<code>&amp;'static T</code>) or from a similar clause in <code>Parent</code>.</p>
+</li>
+<li>
+<p>If the <code>Child</code> impl cannot be shown to hold under these more stringent
+conditions, then we have discovered a lifetime-sensitive specialization, and
+can trigger the lint.</p>
+</li>
+<li>
+<p>Otherwise, the specialization is valid.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Let's do this for the two examples above.</p>
+<p><strong>Example 1</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo { ... }
+impl&lt;T: 'static&gt; Foo for T { ... }
+impl&lt;T: 'static + Clone&gt; Foo for T { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here, if we think both impls apply, we'll start by assuming that <code>T: 'static</code>
+holds, and then we'll evaluate whether <code>T: 'static</code> and <code>T: Clone</code> hold. The
+first evaluation succeeds trivially from our assumption. The second depends on
+<code>T</code>, as you'd expect.</p>
+<p><strong>Example 2</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo { ... }
+impl&lt;T&gt; Foo for T { ... }
+impl&lt;T: 'static + Clone&gt; Foo for T { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here, if we think both impls apply, we start with no assumption, and then
+evaluate <code>T: 'static</code> and <code>T: Clone</code>. We'll fail to show the former, because
+it's a lifetime-dependent predicate, and we don't have any assumption that
+immediately yields it.</p>
+<p>This should scale to less obvious cases, e.g. using <code>T: Any</code> rather than <code>T: 'static</code> -- because when trying to prove <code>T: Any</code>, we'll find we need to prove
+<code>T: 'static</code>, and then we'll end up using the same logic as above. It also works
+for cases like the following:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait SometimesDep {}
+
+impl SometimesDep for i32 {}
+impl&lt;T: 'static&gt; SometimesDep for T {}
+
+trait Spec {}
+impl&lt;T&gt; Spec for T {}
+impl&lt;T: SometimesDep&gt; Spec for T {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Using <code>Spec</code> on <code>i32</code> will not trigger the lint, because the specialization is
+justified without any lifetime constraints.</p>
+<h2><a class="header" href="#default-impls" id="default-impls">Default impls</a></h2>
+<p>An interesting consequence of specialization is that impls need not (and in fact
+sometimes <em>cannot</em>) provide all of the items that a trait specifies. Of course,
+this is already the case with defaulted items in a trait -- but as we'll see,
+that mechanism can be seen as just a way of using specialization.</p>
+<p>Let's start with a simple example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait MyTrait {
+    fn foo(&amp;self);
+    fn bar(&amp;self);
+}
+
+impl&lt;T: Clone&gt; MyTrait for T {
+    default fn foo(&amp;self) { ... }
+    default fn bar(&amp;self) { ... }
+}
+
+impl MyTrait for String {
+    fn bar(&amp;self) { ... }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here, we're acknowledging that the blanket impl has already provided definitions
+for both methods, so the impl for <code>String</code> can opt to just re-use the earlier
+definition of <code>foo</code>. This is one reason for the choice of the keyword <code>default</code>.
+Viewed this way, items defined in a specialized impl are optional overrides of
+those in overlapping blanket impls.</p>
+<p>And, in fact, if we'd written the blanket impl differently, we could <em>force</em> the
+<code>String</code> impl to leave off <code>foo</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T: Clone&gt; MyTrait for T {
+    // now `foo` is &quot;final&quot;
+    fn foo(&amp;self) { ... }
+
+    default fn bar(&amp;self) { ... }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Being able to leave off items that are covered by blanket impls means that
+specialization is close to providing a finer-grained version of defaulted items
+in traits -- one in which the defaults can become ever more refined as more is
+known about the input types to the traits (as described in the Motivation
+section). But to fully realize this goal, we need one other ingredient: the
+ability for the <em>blanket</em> impl itself to leave off some items. We do this by
+using the <code>default</code> keyword at the <code>impl</code> level:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Add&lt;Rhs=Self&gt; {
+    type Output;
+    fn add(self, rhs: Rhs) -&gt; Self::Output;
+    fn add_assign(&amp;mut self, rhs: Rhs);
+}
+
+default impl&lt;T: Clone, Rhs&gt; Add&lt;Rhs&gt; for T {
+    fn add_assign(&amp;mut self, rhs: Rhs) {
+        let tmp = self.clone() + rhs;
+        *self = tmp;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>A subsequent overlapping impl of <code>Add</code> where <code>Self: Clone</code> can choose to leave
+off <code>add_assign</code>, &quot;inheriting&quot; it from the partial impl above.</p>
+<p>A key point here is that, as the keyword suggests, a <code>partial</code> impl may be
+incomplete: from the above code, you <em>cannot</em> assume that <code>T: Add&lt;T&gt;</code> for any
+<code>T: Clone</code>, because no such complete impl has been provided.</p>
+<p>Defaulted items in traits are just sugar for a default blanket impl:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Iterator {
+    type Item;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
+
+    fn size_hint(&amp;self) -&gt; (usize, Option&lt;usize&gt;) {
+        (0, None)
+    }
+    // ...
+}
+
+// desugars to:
+
+trait Iterator {
+    type Item;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
+    fn size_hint(&amp;self) -&gt; (usize, Option&lt;usize&gt;);
+    // ...
+}
+
+default impl&lt;T&gt; Iterator for T {
+    fn size_hint(&amp;self) -&gt; (usize, Option&lt;usize&gt;) {
+        (0, None)
+    }
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Default impls are somewhat akin to abstract base classes in object-oriented
+languages; they provide some, but not all, of the materials needed for a fully
+concrete implementation, and thus enable code reuse but cannot be used concretely.</p>
+<p>Note that the semantics of <code>default impls</code> and defaulted items in
+traits is that both are implicitly marked <code>default</code> -- that is, both
+are considered specializable. This choice gives a coherent mental
+model: when you choose <em>not</em> to employ a default, and instead provide
+your own definition, you are in effect overriding/specializing that
+code. (Put differently, you can think of default impls as abstract base classes).</p>
+<p>There are a few important details to nail down with the design. This RFC
+proposes starting with the conservative approach of applying the general overlap
+rule to default impls, same as with complete ones. That ensures that there is
+always a clear definition to use when providing subsequent complete impls.  It
+would be possible, though, to relax this constraint and allow <em>arbitrary</em>
+overlap between default impls, requiring then whenever a complete impl overlaps
+with them, <em>for each item</em>, there is either a unique &quot;most specific&quot; default
+impl that applies, or else the complete impl provides its own definition for
+that item. Such a relaxed approach is much more flexible, probably easier to
+work with, and can enable more code reuse -- but it's also more complicated, and
+backwards-compatible to add on top of the proposed conservative approach.</p>
+<h2><a class="header" href="#limitations" id="limitations">Limitations</a></h2>
+<p>One frequent motivation for specialization is broader &quot;expressiveness&quot;, in
+particular providing a larger set of trait implementations than is possible
+today.</p>
+<p>For example, the standard library currently includes an <code>AsRef</code> trait
+for &quot;as-style&quot; conversions:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait AsRef&lt;T&gt; where T: ?Sized {
+    fn as_ref(&amp;self) -&gt; &amp;T;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Currently, there is also a blanket implementation as follows:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'a, T: ?Sized, U: ?Sized&gt; AsRef&lt;U&gt; for &amp;'a T where T: AsRef&lt;U&gt; {
+    fn as_ref(&amp;self) -&gt; &amp;U {
+        &lt;T as AsRef&lt;U&gt;&gt;::as_ref(*self)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>which allows these conversions to &quot;lift&quot; over references, which is in turn
+important for making a number of standard library APIs ergonomic.</p>
+<p>On the other hand, we'd also like to provide the following very simple
+blanket implementation:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'a, T: ?Sized&gt; AsRef&lt;T&gt; for T {
+    fn as_ref(&amp;self) -&gt; &amp;T {
+        self
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The current coherence rules prevent having both impls, however,
+because they can in principle overlap:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>AsRef&lt;&amp;'a T&gt; for &amp;'a T where T: AsRef&lt;&amp;'a T&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Another examples comes from the <code>Option</code> type, which currently provides two
+methods for unwrapping while providing a default value for the <code>None</code> case:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; Option&lt;T&gt; {
+    fn unwrap_or(self, def: T) -&gt; T { ... }
+    fn unwrap_or_else&lt;F&gt;(self, f: F) -&gt; T where F: FnOnce() -&gt; T { .. }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>unwrap_or</code> method is more ergonomic but <code>unwrap_or_else</code> is more efficient
+in the case that the default is expensive to compute. The original
+<a href="https://github.com/rust-lang/rfcs/pull/235">collections reform RFC</a> proposed a
+<code>ByNeed</code> trait that was rendered unworkable after unboxed closures landed:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait ByNeed&lt;T&gt; {
+    fn compute(self) -&gt; T;
+}
+
+impl&lt;T&gt; ByNeed&lt;T&gt; for T {
+    fn compute(self) -&gt; T {
+        self
+    }
+}
+
+impl&lt;F, T&gt; ByNeed&lt;T&gt; for F where F: FnOnce() -&gt; T {
+    fn compute(self) -&gt; T {
+        self()
+    }
+}
+
+impl&lt;T&gt; Option&lt;T&gt; {
+    fn unwrap_or&lt;U&gt;(self, def: U) where U: ByNeed&lt;T&gt; { ... }
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The trait represents any value that can produce a <code>T</code> on demand. But the above
+impls fail to compile in today's Rust, because they overlap: consider <code>ByNeed&lt;F&gt; for F</code> where <code>F: FnOnce() -&gt; F</code>.</p>
+<p>There are also some trait hierarchies where a subtrait completely subsumes the
+functionality of a supertrait. For example, consider <code>PartialOrd</code> and <code>Ord</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait PartialOrd&lt;Rhs: ?Sized = Self&gt;: PartialEq&lt;Rhs&gt; {
+    fn partial_cmp(&amp;self, other: &amp;Rhs) -&gt; Option&lt;Ordering&gt;;
+}
+
+trait Ord: Eq + PartialOrd&lt;Self&gt; {
+    fn cmp(&amp;self, other: &amp;Self) -&gt; Ordering;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In cases like this, it's somewhat annoying to have to provide an impl for <em>both</em>
+<code>Ord</code> and <code>PartialOrd</code>, since the latter can be trivially derived from the
+former. So you might want an impl like this:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; PartialOrd&lt;T&gt; for T where T: Ord {
+    fn partial_cmp(&amp;self, other: &amp;T) -&gt; Option&lt;Ordering&gt; {
+        Some(self.cmp(other))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>But this blanket impl would conflict with a number of others that work to &quot;lift&quot;
+<code>PartialOrd</code> and <code>Ord</code> impls over various type constructors like references and
+tuples, e.g.:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'a, A: ?Sized&gt; Ord for &amp;'a A where A: Ord {
+    fn cmp(&amp;self, other: &amp; &amp;'a A) -&gt; Ordering { Ord::cmp(*self, *other) }
+}
+
+impl&lt;'a, 'b, A: ?Sized, B: ?Sized&gt; PartialOrd&lt;&amp;'b B&gt; for &amp;'a A where A: PartialOrd&lt;B&gt; {
+    fn partial_cmp(&amp;self, other: &amp;&amp;'b B) -&gt; Option&lt;Ordering&gt; {
+        PartialOrd::partial_cmp(*self, *other)
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>The case where they overlap boils down to:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>PartialOrd&lt;&amp;'a T&gt; for &amp;'a T where &amp;'a T: Ord
+PartialOrd&lt;&amp;'a T&gt; for &amp;'a T where T: PartialOrd
+<span class="boring">}
+</span></code></pre></pre>
+<p>and there is no implication between either of the where clauses.</p>
+<p>There are many other examples along these lines.</p>
+<p>Unfortunately, <em>none</em> of these examples are permitted by the revised overlap
+rule in this RFC, because in none of these cases is one of the impls fully a
+&quot;subset&quot; of the other; the overlap is always partial.</p>
+<p>It's a shame to not be able to address these cases, but the benefit is a
+specialization rule that is very intuitive and accepts only very clear-cut
+cases. The Alternatives section sketches some different rules that are less
+intuitive but do manage to handle cases like those above.</p>
+<p>If we allowed &quot;relaxed&quot; partial impls as described above, one could at least use
+that mechanism to avoid having to give a definition directly in most cases. (So
+if you had <code>T: Ord</code> you could write <code>impl PartialOrd for T {}</code>.)</p>
+<h2><a class="header" href="#possible-extensions" id="possible-extensions">Possible extensions</a></h2>
+<p>It's worth briefly mentioning a couple of mechanisms that one could consider
+adding on top of specialization.</p>
+<h3><a class="header" href="#inherent-impls" id="inherent-impls">Inherent impls</a></h3>
+<p>It has long been folklore that inherent impls can be thought of as special,
+anonymous traits that are:</p>
+<ul>
+<li>Automatically in scope;</li>
+<li>Given higher dispatch priority than normal traits.</li>
+</ul>
+<p>It is easiest to make this idea work out if you think of each inherent item as
+implicitly defining and implementing its own trait, so that you can account for
+examples like the following:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Foo&lt;T&gt; { .. }
+
+impl&lt;T&gt; Foo&lt;T&gt; {
+    fn foo(&amp;self) { .. }
+}
+
+impl&lt;T: Clone&gt; Foo&lt;T&gt; {
+    fn bar(&amp;self) { .. }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this example, the availability of each inherent item is dependent on a
+distinct <code>where</code> clause. A reasonable &quot;desugaring&quot; would be:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[inherent] // an imaginary attribute turning on the &quot;special&quot; treatment of inherent impls
+trait Foo_foo&lt;T&gt; {
+    fn foo(&amp;self);
+}
+
+#[inherent]
+trait Foo_bar&lt;T&gt; {
+    fn bar(&amp;self);
+}
+
+impl&lt;T&gt; Foo_foo&lt;T&gt; for Foo&lt;T&gt; {
+    fn foo(&amp;self) { .. }
+}
+
+impl&lt;T: Clone&gt; Foo_bar&lt;T&gt; for Foo&lt;T&gt; {
+    fn bar(&amp;self) { .. }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>With this idea in mind, it is natural to expect specialization to work for
+inherent impls, e.g.:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T, I&gt; Vec&lt;T&gt; where I: IntoIterator&lt;Item = T&gt; {
+    default fn extend(iter: I) { .. }
+}
+
+impl&lt;T&gt; Vec&lt;T&gt; {
+    fn extend(slice: &amp;[T]) { .. }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>We could permit such specialization at the inherent impl level. The
+semantics would be defined in terms of the folklore desugaring above.</p>
+<p>(Note: this example was chosen purposefully: it's possible to use specialization
+at the inherent impl level to avoid refactoring the <code>Extend</code> trait as described
+in the Motivation section.)</p>
+<p>There are more details about this idea in the appendix.</p>
+<h3><a class="header" href="#super" id="super">Super</a></h3>
+<p>Continuing the analogy between specialization and inheritance, one could imagine
+a mechanism like <code>super</code> to access and reuse less specialized implementations
+when defining more specialized ones. While there's not a strong need for this
+mechanism as part of this RFC, it's worth checking that the specialization
+approach is at least compatible with <code>super</code>.</p>
+<p>Fortunately, it is. If we take <code>super</code> to mean &quot;the most specific impl
+overlapping with this one&quot;, there is always a unique answer to that question,
+because all overlapping impls are totally ordered with respect to each other via
+specialization.</p>
+<h3><a class="header" href="#extending-hrtbs" id="extending-hrtbs">Extending HRTBs</a></h3>
+<p>In the Motivation we mentioned the need to refactor the <code>Extend</code> trait to take
+advantage of specialization. It's possible to work around that need by using
+specialization on inherent impls (and having the trait impl defer to the
+inherent one), but of course that's a bit awkward.</p>
+<p>For reference, here's the refactoring:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Current definition
+pub trait Extend&lt;A&gt; {
+    fn extend&lt;T&gt;(&amp;mut self, iterable: T) where T: IntoIterator&lt;Item=A&gt;;
+}
+
+// Refactored definition
+pub trait Extend&lt;A, T: IntoIterator&lt;Item=A&gt;&gt; {
+    fn extend(&amp;mut self, iterable: T);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>One problem with this kind of refactoring is that you <em>lose</em> the ability to say
+that a type <code>T</code> is extendable <em>by an arbitrary iterator</em>, because every use of
+the <code>Extend</code> trait has to say precisely what iterator is supported. But the
+whole point of this exercise is to have a blanket impl of <code>Extend</code> for any
+iterator that is then specialized later.</p>
+<p>This points to a longstanding limitation: the trait system makes it possible to
+ask for any number of specific impls to exist, but not to ask for a blanket impl
+to exist -- <em>except</em> in the limited case of lifetimes, where higher-ranked trait
+bounds allow you to do this:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Trait { .. }
+impl&lt;'a&gt; Trait for &amp;'a MyType { .. }
+
+fn use_all&lt;T&gt;(t: T) where for&lt;'a&gt; &amp;'a T: Trait { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>We could extend this mechanism to cover type parameters as well, so that you could write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn needs_extend_all&lt;T&gt;(t: T) where for&lt;I: IntoIterator&lt;Item=u8&gt;&gt; T: Extend&lt;u8, I&gt; { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>Such a mechanism is out of scope for this RFC.</p>
+<h3><a class="header" href="#refining-bounds-on-associated-types" id="refining-bounds-on-associated-types">Refining bounds on associated types</a></h3>
+<p>The design with <code>default</code> makes specialization of associated types an
+all-or-nothing affair, but it would occasionally be useful to say that
+all further specializations will at least guarantee some additional
+trait bound on the associated type. This is particularly relevant for
+the &quot;efficient inheritance&quot; use case. Such a mechanism can likely be
+added, if needed, later on.</p>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p>Many of the more minor tradeoffs have been discussed in detail throughout. We'll
+focus here on the big picture.</p>
+<p>As with many new language features, the most obvious drawback of this proposal
+is the increased complexity of the language -- especially given the existing
+complexity of the trait system. Partly for that reason, the RFC errs on the side
+of simplicity in the design wherever possible.</p>
+<p>One aspect of the design that mitigates its complexity somewhat is the fact that
+it is entirely opt in: you have to write <code>default</code> in an impl in order for
+specialization of that item to be possible. That means that all the ways we have
+of reasoning about existing code still hold good. When you do opt in to
+specialization, the &quot;obviousness&quot; of the specialization rule should mean that
+it's easy to tell at a glance which of two impls will be preferred.</p>
+<p>On the other hand, the simplicity of this design has its own drawbacks:</p>
+<ul>
+<li>
+<p>You have to lift out trait parameters to enable specialization, as
+in the <code>Extend</code> example above. Of course, this lifting can be hidden
+behind an additional trait, so that the end-user interface remains
+idiomatic.  The RFC mentions a few other extensions for dealing with
+this limitation -- either by employing inherent item specialization,
+or by eventually generalizing HRTBs.</p>
+</li>
+<li>
+<p>You can't use specialization to handle some of the more &quot;exotic&quot; cases of
+overlap, as described in the Limitations section above. This is a deliberate
+trade, favoring simple rules over maximal expressiveness.</p>
+</li>
+</ul>
+<p>Finally, if we take it as a given that we want to support some form of
+&quot;efficient inheritance&quot; as at least a programming pattern in Rust, the ability
+to use specialization to do so, while also getting all of its benefits, is a net
+simplifier. The full story there, of course, depends on the forthcoming companion RFC.</p>
+<h1><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h1>
+<h2><a class="header" href="#alternatives-to-specialization" id="alternatives-to-specialization">Alternatives to specialization</a></h2>
+<p>The main alternative to specialization in general is an approach based on
+negative bounds, such as the one outlined in an
+<a href="https://github.com/rust-lang/rfcs/pull/586">earlier RFC</a>. Negative bounds make
+it possible to handle many of the examples this proposal can't (the ones in the
+Limitations section). But negative bounds are also fundamentally <em>closed</em>: they
+make it possible to perform a certain amount of specialization up front when
+defining a trait, but don't easily support downstream crates further
+specializing the trait impls.</p>
+<h2><a class="header" href="#alternative-specialization-designs" id="alternative-specialization-designs">Alternative specialization designs</a></h2>
+<h3><a class="header" href="#the-lattice-rule" id="the-lattice-rule">The &quot;lattice&quot; rule</a></h3>
+<p>The rule proposed in this RFC essentially says that overlapping impls
+must form <em>chains</em>, in which each one is strictly more specific than
+the last.</p>
+<p>This approach can be generalized to <em>lattices</em>, in which partial
+overlap between impls is allowed, so long as there is an additional
+impl that covers precisely the area of overlap (the intersection).
+Such a generalization can support all of the examples mentioned in the
+Limitations section. Moving to the lattice rule is backwards compatible.</p>
+<p>Unfortunately, the lattice rule (or really, any generalization beyond
+the proposed chain rule) runs into a nasty problem with our lifetime
+strategy. Consider the following:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {}
+impl&lt;T, U&gt; Foo for (T, U) where T: 'static {}
+impl&lt;T, U&gt; Foo for (T, U) where U: 'static {}
+impl&lt;T, U&gt; Foo for (T, U) where T: 'static, U: 'static {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The problem is, if we allow this situation to go through typeck, by
+the time we actually generate code in trans, <em>there is no possible
+impl to choose</em>. That is, we do not have enough information to
+specialize, but we also don't know which of the (overlapping)
+unspecialized impls actually applies. We can address this problem by
+making the &quot;lifetime dependent specialization&quot; lint issue a hard error
+for such intersection impls, but that means that certain compositions
+will simply not be allowed (and, as mentioned before, these
+compositions might involve traits, types, and impls that the
+programmer is not even aware of).</p>
+<p>The limitations that the lattice rule addresses are fairly secondary
+to the main goals of specialization (as laid out in the Motivation),
+and so, since the lattice rule can be added later, the RFC sticks with
+the simple chain rule for now.</p>
+<h3><a class="header" href="#explicit-ordering" id="explicit-ordering">Explicit ordering</a></h3>
+<p>Another, perhaps more palatable alternative would be to take the specialization
+rule proposed in this RFC, but have some other way of specifying precedence when
+that rule can't resolve it -- perhaps by explicit priority numbering. That kind
+of mechanism is usually noncompositional, but due to the orphan rule, it's a
+least a crate-local concern. Like the alternative rule above, it could be added
+backwards compatibly if needed, since it only enables new cases.</p>
+<h3><a class="header" href="#singleton-non-default-wins" id="singleton-non-default-wins">Singleton non-default wins</a></h3>
+<p>@pnkfelix suggested the following rule, which allows overlap so long as there is
+a unique non-default item.</p>
+<blockquote>
+<p>For any given type-based lookup, either:</p>
+<ol start="0">
+<li>
+<p>There are no results (error)</p>
+</li>
+<li>
+<p>There is only one lookup result, in which case we're done (regardless of
+whether it is tagged as default or not),</p>
+</li>
+<li>
+<p>There is a non-empty set of results with defaults, where exactly one
+result is non-default -- and then that non-default result is the answer,
+<em>or</em></p>
+</li>
+<li>
+<p>There is a non-empty set of results with defaults, where 0 or &gt;1 results
+are non-default (and that is an error).</p>
+</li>
+</ol>
+</blockquote>
+<p>This rule is arguably simpler than the one proposed in this RFC, and can
+accommodate the examples we've presented throughout. It would also support some
+of the cases this RFC cannot, because the default/non-default distinction can be
+used to specify an ordering between impls when the subset ordering fails to do
+so. For that reason, it is not forward-compatible with the main proposal in this
+RFC.</p>
+<p>The downsides are:</p>
+<ul>
+<li>
+<p>Because actual dispatch occurs at monomorphization, errors are generated quite
+late, and only at use sites, not impl sites. That moves traits much more in
+the direction of C++ templates.</p>
+</li>
+<li>
+<p>It's less scalable/compositional: this alternative design forces the
+&quot;specialization hierarchy&quot; to be flat, in particular ruling out multiple
+levels of increasingly-specialized blanket impls.</p>
+</li>
+</ul>
+<h2><a class="header" href="#alternative-handling-of-lifetimes" id="alternative-handling-of-lifetimes">Alternative handling of lifetimes</a></h2>
+<p>This RFC proposes a <em>laissez faire</em> approach to lifetimes: we let you
+write whatever impls you like, then warn you if some of them are being
+ignored because the specialization is based purely on lifetimes.</p>
+<p>The main alternative approach is to make a more &quot;principled&quot;
+distinction between two kinds of traits: those that can be used as
+constraints in specialization, and those whose impls can be lifetime
+dependent. Concretely:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[lifetime_dependent]
+trait Foo {}
+
+// Only allowed to use 'static here because of the lifetime_dependent attribute
+impl Foo for &amp;'static str {}
+
+trait Bar { fn bar(&amp;self); }
+impl&lt;T&gt; Bar for T {
+    // Have to use `default` here to allow specialization
+    default fn bar(&amp;self) {}
+}
+
+// CANNOT write the following impl, because `Foo` is lifetime_dependent
+// and Bar is not.
+//
+// NOTE: this is what I mean by *using* a trait in specialization;
+// we are trying to say a specialization applies when T: Foo holds
+impl&lt;T: Foo&gt; Bar for T {
+    fn bar(&amp;self) { ... }
+}
+
+// CANNOT write the following impl, because `Bar` is not lifetime_dependent
+impl Bar for &amp;'static str {
+    fn bar(&amp;self) { ... }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>There are several downsides to this approach:</p>
+<ul>
+<li>
+<p>It forces trait authors to consider a rather subtle knob for every
+trait they write, choosing between two forms of expressiveness and
+dividing the world accordingly. The last thing the trait system
+needs is another knob.</p>
+</li>
+<li>
+<p>Worse still, changing the knob in either direction is a breaking change:</p>
+<ul>
+<li>
+<p>If a trait gains a <code>lifetime_dependent</code> attribute, any impl of a
+different trait that used it to specialize would become illegal.</p>
+</li>
+<li>
+<p>If a trait loses its <code>lifetime_dependent</code> attribute, any impl of
+that trait that was lifetime dependent would become illegal.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>It hobbles specialization for some existing traits in <code>std</code>.</p>
+</li>
+</ul>
+<p>For the last point, consider <code>From</code> (which is tied to <code>Into</code>). In
+<code>std</code>, we have the following important &quot;boxing&quot; impl:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'a, E: Error + 'a&gt; From&lt;E&gt; for Box&lt;Error + 'a&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>This impl would necessitate <code>From</code> (and therefore, <code>Into</code>) being
+marked <code>lifetime_dependent</code>. But these traits are very likely to be
+used to describe specializations (e.g., an impl that applies when <code>T: Into&lt;MyType&gt;</code>).</p>
+<p>There does not seem to be any way to consider such impls as
+lifetime-independent, either, because of examples like the following:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// If we consider this innocent...
+trait Tie {}
+impl&lt;'a, T: 'a&gt; Tie for (T, &amp;'a u8)
+
+// ... we get into trouble here
+trait Foo {}
+impl&lt;'a, T&gt; Foo for (T, &amp;'a u8)
+impl&lt;'a, T&gt; Foo for (T, &amp;'a u8) where (T, &amp;'a u8): Tie
+<span class="boring">}
+</span></code></pre></pre>
+<p>All told, the proposed <em>laissez faire</em> seems a much better bet in
+practice, but only experience with the feature can tell us for sure.</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<p>All questions from the RFC discussion and prototype have been resolved.</p>
+<h1><a class="header" href="#appendix" id="appendix">Appendix</a></h1>
+<h2><a class="header" href="#more-details-on-inherent-impls" id="more-details-on-inherent-impls">More details on inherent impls</a></h2>
+<p>One tricky aspect for specializing inherent impls is that, since there is no
+explicit trait definition, there is no general signature that each definition of
+an inherent item must match. Thinking about <code>Vec</code> above, for example, notice
+that the two signatures for <code>extend</code> look superficially different, although it's
+clear that the first impl is the more general of the two.</p>
+<p>It's workable to use a very simple-minded conceptual desugaring: each item
+desugars into a distinct trait, with type parameters for e.g. each argument and
+the return type. All concrete type information then emerges from desugaring into
+impl blocks. Thus, for example:</p>
+<pre><code>impl&lt;T, I&gt; Vec&lt;T&gt; where I: IntoIterator&lt;Item = T&gt; {
+    default fn extend(iter: I) { .. }
+}
+
+impl&lt;T&gt; Vec&lt;T&gt; {
+    fn extend(slice: &amp;[T]) { .. }
+}
+
+// Desugars to:
+
+trait Vec_extend&lt;Arg, Result&gt; {
+    fn extend(Arg) -&gt; Result;
+}
+
+impl&lt;T, I&gt; Vec_extend&lt;I, ()&gt; for Vec&lt;T&gt; where I: IntoIterator&lt;Item = T&gt; {
+    default fn extend(iter: I) { .. }
+}
+
+impl&lt;T&gt; Vec_extend&lt;&amp;[T], ()&gt; for Vec&lt;T&gt; {
+    fn extend(slice: &amp;[T]) { .. }
+}
+</code></pre>
+<p>All items of a given name must desugar to the same trait, which means that the
+number of arguments must be consistent across all impl blocks for a given <code>Self</code>
+type. In addition, we'd require that <em>all of the impl blocks overlap</em> (meaning
+that there is a single, most general impl). Without these constraints, we would
+implicitly be permitting full-blown overloading on both arity and type
+signatures. For the time being at least, we want to restrict overloading to
+explicit uses of the trait system, as it is today.</p>
+<p>This &quot;desugaring&quot; semantics has the benefits of allowing inherent item
+specialization, and also making it <em>actually</em> be the case that inherent impls
+are really just implicit traits -- unifying the two forms of dispatch. Note that
+this is a breaking change, since examples like the following are (surprisingly!)
+allowed today:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Foo&lt;A, B&gt;(A, B);
+
+impl&lt;A&gt; Foo&lt;A,A&gt; {
+    fn foo(&amp;self, _: u32) {}
+}
+
+impl&lt;A,B&gt; Foo&lt;A,B&gt; {
+    fn foo(&amp;self, _: bool) {}
+}
+
+fn use_foo&lt;A, B&gt;(f: Foo&lt;A,B&gt;) {
+    f.foo(true)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>As has been proposed
+<a href="https://internals.rust-lang.org/t/pre-rfc-adjust-default-object-bounds/2199/">elsewhere</a>,
+this &quot;breaking change&quot; could be made available through a feature flag that must
+be used even after stabilization (to opt in to specialization of inherent
+impls); the full details will depend on pending revisions to
+<a href="https://github.com/rust-lang/rfcs/pull/1122">RFC 1122</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="1201-naked-fns.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="1211-mir.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="1201-naked-fns.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="1211-mir.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

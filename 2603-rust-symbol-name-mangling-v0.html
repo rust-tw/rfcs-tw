@@ -1,0 +1,1303 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2603-rust-symbol-name-mangling-v0 - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html" class="active">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: N/A</li>
+<li>Start Date: 2018-11-27</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2603">rust-lang/rfcs#2603</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/60705">rust-lang/rust#60705</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>This RFC proposes a new mangling scheme that describes what the symbol
+names generated by the Rust compiler look like. This new scheme has a number of
+advantages over the existing one which has grown over time without a
+clear direction. The new scheme is consistent, depends less on
+compiler internals, and the information it stores in symbol names can
+be decoded again which provides an improved experience for users of
+external tools that work with Rust symbol names.</p>
+<p>Note that, at this point, the new mangling scheme would not be part of
+the language specification or the specification of a stable Rust ABI.
+In the future it <em>could</em> be part of both and it is designed to be
+stable and extensible; but for the time being it would still be an
+implementation detail of the Rust compiler.</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>Due to its ad-hoc nature, the compiler's current name mangling scheme
+has a number of drawbacks:</p>
+<ul>
+<li>
+<p>Information about generic parameters and other things is lost in the
+mangling process. One cannot extract the type arguments of a
+monomorphized function from its symbol name.</p>
+</li>
+<li>
+<p>The current scheme is inconsistent: most paths use
+<a href="http://refspecs.linuxbase.org/cxxabi-1.86.html#mangling">Itanium ABI</a> style encoding, but some don't.</p>
+</li>
+<li>
+<p>The symbol names it generates can contain <code>.</code> characters which is
+not generally supported on all platforms. [<a href="https://sourceware.org/binutils/docs/as/Symbol-Names.html#Symbol-Names">1</a>]
+[<a href="https://github.com/rust-lang/rust/issues/54190">2</a>] [<a href="https://github.com/rust-lang/rust/issues/53912">3</a>]</p>
+</li>
+<li>
+<p>It depends on compiler internals and its results cannot be replicated
+by another compiler implementation or external tool.</p>
+</li>
+</ul>
+<p>The proposed scheme solves these problems:</p>
+<ul>
+<li>It encodes information about generic parameters in a reversible way.</li>
+<li>It has a consistent definition that does not rely on pretty-printing
+certain language constructs.</li>
+<li>It generates symbols that only consist of the characters <code>A-Z</code>, <code>a-z</code>,
+<code>0-9</code>, and <code>_</code>.</li>
+<li>While the proposed scheme still contains things that are implementation
+defined it has a clearer path towards full name predictability in future.</li>
+</ul>
+<p>These properties should make it easier for third party tools to work
+with Rust binaries.</p>
+<h1><a class="header" href="#guide-level-explanation" id="guide-level-explanation">Guide-level explanation</a></h1>
+<p>The following section will lay out the requirements for a name mangling
+scheme and then introduce the actual scheme through a series of ever
+more complex examples.</p>
+<h2><a class="header" href="#requirements-for-a-symbol-mangling-scheme" id="requirements-for-a-symbol-mangling-scheme">Requirements for a Symbol Mangling Scheme</a></h2>
+<p>A symbol mangling scheme has a few goals, one of them essential,
+the rest of them desirable. The essential one is:</p>
+<ul>
+<li>The scheme must provide an unambiguous string encoding for
+everything that can end up in a binary's symbol table.</li>
+</ul>
+<p>&quot;Unambiguous&quot; means that no two distinct compiler-generated entities
+(that is, mostly object code for functions) must be mapped to the same
+symbol name. This disambiguation is the main purpose of the hash-suffix
+in the current, legacy mangling scheme. The scheme proposed here, on
+the other hand, achieves it in a way that allows to also satisfy a
+number of additional desirable properties of a mangling scheme:</p>
+<ul>
+<li>
+<p>A mangled symbol should be <em>decodable</em> to some degree. That is, it
+is desirable to be able to tell which exact concrete instance of e.g.
+a polymorphic function a given symbol identifies. This is true for
+external tools, backtraces, or just people only having the binary
+representation of some piece of code available to them. With the
+current scheme, this kind of information gets lost in the magical
+hash-suffix.</p>
+</li>
+<li>
+<p>A mangling scheme should be platform-independent. This is mainly
+achieved by restricting the character set to <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>,
+<code>_</code>. All other characters might have special meaning in some
+context (e.g. <code>.</code> for MSVC <code>DEF</code> files) or are simply not
+supported (e.g. Unicode).</p>
+</li>
+<li>
+<p>The scheme should be efficient, meaning that the symbols it
+produces are not unnecessarily long (because that takes up space
+in object files and means more work for the compiler and the linker).
+In addition, generating or demangling a symbol name should not be
+too computationally expensive.</p>
+</li>
+<li>
+<p>When used as part of a stable ABI, it should be possible to predict
+the symbol name for a given source-level construct. For example,
+given the definition <code>fn foo&lt;T&gt;() { ... }</code>, the scheme should allow
+to construct, by hand, the symbol names for e.g. <code>foo&lt;u32&gt;</code> or
+<code>foo&lt;extern fn(i32, &amp;mut SomeStruct&lt;(char, &amp;str)&gt;, ...) -&gt; !&gt;()</code>.
+Since the current scheme generates its hash from the values of
+various compiler internal data structures, an alternative compiler
+implementation could not predict the symbol name, even for
+simple cases. Note that the scheme proposed here does not fulfill
+this requirement either (yet) as some things are still left to
+the compiler implementation.</p>
+</li>
+</ul>
+<p>The RFC also has a couple of non-goals:</p>
+<ul>
+<li>
+<p>The mangling scheme does not try to be compatible with an existing
+(e.g. C++) mangling scheme. While it might sound tempting to encode Rust
+symbols with an existing scheme, it is the author's opinion that
+the actual benefits are small (C++ tools would not demangle to Rust
+syntax, demanglings would be hard to read) and at the same time
+supporting a Rust-specific scheme in existing tools seems quite
+feasible (many tools like GDB, LLDB, binutils, and valgrind already
+have specialized code paths for Rust symbols).</p>
+</li>
+<li>
+<p>The RFC does not try to define a standardized <em>demangled</em> form for
+symbol names. It defines the mangled form and makes sure it can be
+demangled in an efficient manner but different demanglers still
+have some degree of freedom regarding how symbol names are presented
+to the user.</p>
+</li>
+</ul>
+<h2><a class="header" href="#the-mangling-scheme-by-example" id="the-mangling-scheme-by-example">The Mangling Scheme by Example</a></h2>
+<p>This section will develop an overview of the mangling scheme by walking
+through a number of examples. We'll start with the simplest case -- and
+will see how that already involves things that might be surprising.</p>
+<h3><a class="header" href="#free-standing-functions-and-statics" id="free-standing-functions-and-statics">Free-standing Functions and Statics</a></h3>
+<p>A free-standing function is fully identified via its absolute path.
+For example, the following function</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod foo {
+  fn bar() {}
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>has the path <code>foo::bar</code> and <code>NN3foo3bar</code> is a possible mangling of that path
+that complies to the character set we are restricted to. Why this format with
+numbers embedded in it? It is a run-length encoding, similar to what the
+<a href="http://refspecs.linuxbase.org/cxxabi-1.86.html#mangling">Itanium C++ ABI</a> name mangling scheme uses for
+identifiers. The scheme proposed here will also use this
+format because it does not need termination tokens for identifiers
+(which are hard to come by with our limited character set).</p>
+<p>Note that each component in the path (i.e. <code>foo</code> and <code>bar</code>) also has an
+accompanying <em>start-tag</em> (here <code>N</code>) at the beginning. This start-tag is
+needed in order for the syntax to be able to represent complex, nested
+structures as we will see later.</p>
+<p>The symbol name above, unfortunately, does not unambiguously identify the
+function in every context. It is perfectly valid for another crate
+to also define <code>mod foo { fn bar() {} }</code> somewhere. So in order to
+avoid conflicts in such cases, the absolute path must always include
+the crate-id, as in <code>NNC7mycrate3foo3bar</code>. The crate-id has a <code>C</code>
+start-tag.</p>
+<p>There is another possible ambiguity that we have to take care of.
+Rust has two distinct namespaces: the type and the value namespace.
+This leads to a path of the form <code>crate_id::foo::bar</code> not uniquely
+identifying the item <code>bar</code> because the following snippet is legal
+Rust code:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo() {
+    fn bar() {}
+}
+
+mod foo {
+    fn bar() {}
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The function <code>foo</code> lives in the value namespace while the module <code>foo</code>
+lives in the type namespace. They don't interfere. In order to make the
+symbol names for the two distinct <code>bar</code> functions unique, we thus add a
+namespace identifier to the start-tag of components where necessary, as in
+<code>NvNvC7mycrate3foo3bar</code> for the first case and <code>NvNtC7mycrate3foo3bar</code>
+second case (notice the difference: <code>NvNv...</code> vs <code>NvNt...</code>).</p>
+<p>There is one final case of name ambiguity that we have to take care of.
+Because of macro hygiene, multiple items with the same name can appear in
+the same context. The compiler internally disambiguates such names by
+augmenting them with a numeric index. For example, the first occurrence
+of the name <code>foo</code> within its parent is actually treated as <code>foo'0</code>, the
+second occurrence would be <code>foo'1</code>, the next <code>foo'2</code>, and so one. The
+mangling scheme will adopt this setup by prepending a disambiguation
+prefix to each identifier with a non-zero index. So if macro expansion
+would result in the following code:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod foo {
+    fn bar'0() {}
+    // The second `bar` function was introduced by macro expansion.
+    fn bar'1() {}
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>then we would encode the two functions symbols as <code>NvNtC7mycrate3foo3bar</code>
+and <code>NvNtC7mycrate3foos_3bar</code> respectively (note the <code>s_</code> prefix in the
+second case). A very similar disambiguation is needed for avoiding
+conflicts between crates of the same name but different versions. The
+same syntactic prefix is thus used for crate-id where we encode the
+crate disambiguator as in <code>NtNvCs1234_7mycrate3foo3bar</code>. Details on
+the shape of this prefix are provided in the reference-level description.</p>
+<p>As opposed to C++ and other languages that support function overloading,
+we don't need to include function parameter types in the symbol name.
+Rust does not allow two functions of the same name but different arguments.</p>
+<p>The final symbol name for the function would also include the prefix
+<code>_R</code> that is common to all symbol names generated by this scheme:</p>
+<pre><code>  _RNvNtCs1234_7mycrate3foo3bar
+  &lt;&gt;^^^^^&lt;----&gt;&lt;------&gt;&lt;--&gt;&lt;--&gt;
+   ||||||   |      |     |   |
+   ||||||   |      |     |   +--- &quot;bar&quot; identifier
+   ||||||   |      |     +------- &quot;foo&quot; identifier
+   ||||||   |      +------------- &quot;mycrate&quot; identifier
+   ||||||   +-------------------- disambiguator for &quot;mycrate&quot;
+   |||||+------------------------ start-tag for &quot;mycrate&quot;
+   ||||+------------------------- namespace tag for &quot;foo&quot;
+   |||+-------------------------- start-tag for &quot;foo&quot;
+   ||+--------------------------- namespace tag for &quot;bar&quot;
+   |+---------------------------- start-tag for &quot;bar&quot;
+   +----------------------------- common Rust symbol prefix
+</code></pre>
+<h3><a class="header" href="#generic-functions" id="generic-functions">Generic Functions</a></h3>
+<p>Each monomorphization of a generic function has its own symbol name.
+The monomorphizations are disambiguated by the list of concrete generic
+arguments. These arguments are added to the symbol name by a pair of <code>I</code>
+start-tag at the beginning and a list of the actual arguments at the end.
+So the instance</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>std::mem::align_of::&lt;f64&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>would be mangled to</p>
+<pre><code>_RINvNtC3std3mem8align_ofdE
+  ^                      ^^
+  |                      ||
+  |                      |+--- end of argument list
+  |                      +--- f64
+  +--- start-tag
+</code></pre>
+<p>where <code>I</code> precedes the thing the arguments belong to, <code>d</code> designates <code>f64</code>
+and <code>E</code> ends the argument list. As we can see, we need to be able to
+represent all kinds of types that can be part of such an argument list.
+(In the future, when const generics get added to the language, we will
+also need to represent <em>values</em>) These kinds of types are:</p>
+<ul>
+<li>basic types (<code>char</code>, <code>()</code>, <code>str</code>, <code>!</code>, <code>i8</code>, <code>i16</code>, ...)</li>
+<li>reference and pointers types, shared, <code>mut</code> and <code>const</code></li>
+<li>tuples</li>
+<li>arrays, with and without fixed size (e.g. <code>[u8]</code>, <code>[u8; 17]</code>)</li>
+<li>structs, enums, closures, and other named types, possibly with their
+own set of type arguments</li>
+<li>function types such as <code>fn(&amp;i32) -&gt; u16</code></li>
+<li><code>dyn</code> traits</li>
+</ul>
+<p>Basic types are all encoded via a single lower-case letter, like in the
+Itanium scheme. Named types are encoded as their absolute path
+(including arguments) like is done for function symbols. Composites like
+references, tuples, and function types all follow a simple grammar given
+in the reference-level explanation below. Here are some example manglings
+to get a general feel of what they look like:</p>
+<ul>
+<li><code>std::mem::align_of::&lt;usize&gt;</code>: <code>_RINvNtC3std3mem8align_ofjE</code></li>
+<li><code>std::mem::align_of::&lt;&amp;char&gt;</code>: <code>_RINvNtC3std3mem8align_ofRcE</code></li>
+<li><code>std::mem::align_of::&lt;std::mem::Discriminant&gt;</code>:
+<code>_RINvNtC3std3mem8align_ofNtNtC3std3mem12DiscriminantE</code></li>
+<li><code>std::mem::align_of::&lt;&amp;mut (&amp;str,())&gt;</code>: <code>_RINvNtC3std3mem8align_ofQTReuEE</code></li>
+</ul>
+<p>There's one more thing we have to take into account for generic functions:
+The compiler may produce &quot;crate-local&quot; copies of a monomorphization.
+That is, if there is a function <code>foo&lt;T&gt;</code> which gets used as <code>foo&lt;u32&gt;</code>
+in two different crates, the compiler (depending on the optimization level)
+might generate two distinct functions at the LLVM IR level, each with it's
+own symbol. In order to support this without running into conflicts, symbol
+names for monomorphizations must include the id of the crate they are
+instantiated for. This scheme does this by appending an <code>&lt;crate-id&gt;</code> suffix
+to the symbol. So for example the mangling for <code>std::mem::align_of::&lt;usize&gt;</code>
+would actually look like this:</p>
+<pre><code>_RINvNtC3std3mem8align_ofjEC3foo (for crate &quot;foo&quot;)
+_RINvNtC3std3mem8align_ofjEC3bar (for crate &quot;bar&quot;)
+</code></pre>
+<h3><a class="header" href="#closures-and-closure-environments" id="closures-and-closure-environments">Closures and Closure Environments</a></h3>
+<p>The scheme needs to be able to generate symbol names for the function
+containing the code of a closure and it needs to be able to refer to
+the type of a closure if it occurs as a type argument. As closures
+don't have a name, we need to generate one. The scheme proposes to
+use the namespace and disambiguation mechanisms already introduced
+above for this purpose. Closures get their own &quot;namespace&quot; (i.e.
+they are neither in the type nor the value namespace), and each closure
+has an empty name with a disambiguation index (like for macro hygiene)
+identifying them within their parent. The full name of a closure is
+then constructed like for any other named item:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod foo {
+  fn bar(x: u32) {
+    let a = |x| { x + 1 }; // local name: NC&lt;...&gt;0
+    let b = |x| { x + 2 }; // local name: NC&lt;...&gt;s_0
+
+    a(b(x))
+  }
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>In the above example we have two closures, the one assigned to <code>a</code>
+and the one assigned to <code>b</code>. The first one would get the local name
+<code>NC&lt;...&gt;0</code> and the second one the name <code>NC&lt;...&gt;s_0</code>. The <code>0</code> signifies
+the length of their (empty) name. The <code>&lt;...&gt;</code> part is the path of the
+parent. The <code>C</code> is the namespace tag, analogous to the <code>v</code> tag for
+the value namespace. The <code>s_</code> for the second closure is the
+disambiguation index (index <code>0</code> is, again, encoded by not prepending
+a prefix). Their full names would then be <code>NCNvNtC7mycrate3foo3bar0</code>
+and <code>NCNvNtC7mycrate3foo3bars_0</code> respectively.</p>
+<h3><a class="header" href="#methods" id="methods">Methods</a></h3>
+<p>Methods are nested within <code>impl</code> or <code>trait</code> items. As such it would be
+possible to construct their symbol names as paths like
+<code>my_crate::foo::{{impl}}::some_method</code> where <code>{{impl}}</code> somehow identifies
+the the <code>impl</code> in question. Since <code>impl</code>s don't have names, we'd have to
+use an indexing scheme like the one used for closures (and indeed, this is
+what the compiler does internally). Adding in generic arguments to, this
+would lead to symbol names looking like
+<code>my_crate::foo::impl'17::&lt;u32, char&gt;::some_method</code>.</p>
+<p>However, in the opinion of the author these symbols are very hard to map
+back to the method they represent. Consider a module containing dozens of
+types, each with multiple <code>impl</code> blocks generated via <code>#[derive(...)]</code>.
+In order to find out which method a symbol maps to, one would have to count
+the number of handwritten <em>and</em> macro generated <code>impl</code> blocks in the module,
+and hope that one correctly guessed the number of <code>impl</code> blocks introduced
+by the given derive-macro (each macro invocation can introduce <code>0..n</code> such
+blocks). The name of the method might give a hint, but there are still
+likely to be dozens of methods named <code>clone</code>, <code>hash</code>, <code>eq</code>, et cetera.</p>
+<p>The RFC therefore proposes to keep symbol names close to how methods are
+represented in error messages, that is:</p>
+<ul>
+<li><code>&lt;Foo&lt;u32, char&gt;&gt;::some_method</code> for inherent methods, and</li>
+<li><code>&lt;Foo&lt;u32, char&gt; as SomeTrait&lt;Quux&gt;&gt;::some_method</code> for trait methods.</li>
+</ul>
+<p>This can be achieved by extending the definition of paths that we have
+used so far. Instead of the path root always being a crate-id, we now
+also allow a path to start with an <code>impl</code> production that contains the
+self-type and (for trait methods) the name of the trait being implemented.</p>
+<p>Thus, this extended form of paths would have the following syntax:</p>
+<pre><code>&lt;path&gt; = C &lt;identifier&gt;                      // crate-id root
+       | M &lt;type&gt;                            // inherent impl root
+       | X &lt;type&gt; &lt;path&gt;                     // trait impl root
+       | N &lt;namespace&gt; &lt;path&gt; &lt;identifier&gt;   // nested path
+       | I &lt;path&gt; {&lt;generic-arg&gt;} E          // generic arguments
+</code></pre>
+<p>Here are some examples for complete symbol names:</p>
+<pre><code>&lt;mycrate::Foo&lt;u32&gt;&gt;::foo =&gt; _RNvMINtC7mycrate3FoomE3foo
+&lt;u32 as mycrate::Foo&gt;::foo =&gt; _RNvXmNtC7mycrate3Foo3foo
+&lt;mycrate::Foo&lt;u32&gt; as mycrate::Bar&lt;u64&gt;&gt;::foo =&gt; _RNvXINtC7mycrate3FoomEINtC7mycrate3BaryE3foo
+</code></pre>
+<h3><a class="header" href="#items-within-generic-impls" id="items-within-generic-impls">Items Within Generic Impls</a></h3>
+<p>In Rust one can define items within generic items, e.g. functions or
+impls, like in the following example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Foo&lt;T&gt;(T);
+
+impl&lt;T&gt; From&lt;T&gt; for Foo&lt;T&gt; {
+  fn from(x: T) -&gt; Self {
+    static MSG: &amp;str = &quot;...&quot;;
+    panic!(&quot;{}&quot;, MSG)
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>MSG</code> here (or any other such nested definition) does not inherit
+the generic context from the <code>impl</code>. <code>MSG</code> is non-generic, and a
+function defined in its place would be too. The fully qualified name
+of <code>MSG</code>, according to our examples so far, is thus
+<code>&lt;mycrate::Foo&lt;_&gt; as std::convert::From&lt;_&gt;&gt;::from::MSG</code> and its symbol name:</p>
+<pre><code>_RNvNvXINtC7mycrate3FoopEINtNtC3std7convert4FrompE4from3MSG
+</code></pre>
+<p>However, with trait specialization, this symbol can be ambiguous.
+Consider the following piece of code:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Foo&lt;T&gt;(T);
+
+impl&lt;T&gt; From&lt;T&gt; for Foo&lt;T&gt; {
+  default fn from(x: T) -&gt; Self {
+    static MSG: &amp;str = &quot;...&quot;;
+    panic!(&quot;{}&quot;, MSG)
+  }
+}
+
+impl&lt;T: Default&gt; From&lt;T&gt; for Foo&lt;T&gt; {
+  fn from(x: T) -&gt; Self {
+    static MSG: &amp;str = &quot;123&quot;;
+    panic!(&quot;{}&quot;, MSG)
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Notice that both <code>MSG</code> statics have the path <code>&lt;Foo&lt;_&gt; as From&lt;_&gt;&gt;::foo::MSG</code>.
+We somehow have to disambiguate the <code>impls</code>. We do so by adding the path of
+the <code>impl</code> to the symbol name.</p>
+<pre><code>&lt;path&gt; = C &lt;identifier&gt;                      // crate-id root
+       | M &lt;impl-path&gt; &lt;type&gt;                // inherent impl root
+       | X &lt;impl-path&gt; &lt;type&gt; &lt;path&gt;         // trait impl root
+       | N &lt;namespace&gt; &lt;path&gt; &lt;identifier&gt;   // nested path
+       | I &lt;path&gt; {&lt;generic-arg&gt;} E          // generic arguments
+
+&lt;impl-path&gt; = [&lt;disambiguator&gt;] &lt;path&gt;
+</code></pre>
+<p>The two symbol names would then look something like:</p>
+<pre><code>_RNvNvXs2_C7mycrateINtC7mycrate3FoopEINtNtC3std7convert4FrompE4from3MSG
+_RNvNvXs3_C7mycrateINtC7mycrate3FoopEINtNtC3std7convert4FrompE4from3MSG
+       &lt;----------&gt;&lt;----------------&gt;&lt;-----------------------&gt;
+        impl-path      self-type            trait-name
+</code></pre>
+<p>Like other disambiguation information, this path would usually not actually
+be shown by demanglers.</p>
+<h3><a class="header" href="#unicode-identifiers" id="unicode-identifiers">Unicode Identifiers</a></h3>
+<p>Rust allows Unicode identifiers but our character set is restricted
+to ASCII alphanumerics, and <code>_</code>. In order to transcode the former to
+the latter, we use the same approach as Swift, which is: encode all
+non-ASCII identifiers via <a href="https://tools.ietf.org/html/rfc3492">Punycode</a>, a standardized and
+efficient encoding that keeps encoded strings in a rather
+human-readable format. So for example, the string</p>
+<pre><code>&quot;Gödel, Escher, Bach&quot;
+</code></pre>
+<p>is encoded as</p>
+<pre><code>&quot;Gdel, Escher, Bach-d3b&quot;
+</code></pre>
+<p>which, as opposed to something like <em>Base64</em>, still gives a pretty
+good idea of what the original string looked like.</p>
+<p>Each component of a name, i.e. anything that starts with the number
+of bytes to read in the examples above, is encoded individually.
+Components encoded this way are augmented with a <code>u</code> prefix so that
+demanglers know that the identifier needs further decoding. As an
+example, the function:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod gödel {
+  mod escher {
+    fn bach() {}
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>would be mangled as:</p>
+<pre><code>_RNvNtNtC7mycrateu8gdel_Fqa6escher4bach
+                 &lt;--------&gt;
+              Unicode component
+</code></pre>
+<h3><a class="header" href="#compressionsubstitution" id="compressionsubstitution">Compression/Substitution</a></h3>
+<p>The length of symbol names has an influence on how much work the compiler,
+linker, and loader have to perform. The shorter the names, the better.
+At the same time, Rust's generics can lead to rather long names (which
+are often not visible in the code because of type inference and
+<code>impl Trait</code>). For example, the return type of the following function:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn quux(s: Vec&lt;u32&gt;) -&gt; impl Iterator&lt;Item = (u32, usize)&gt; {
+    s.into_iter()
+     .map(|x| x + 1)
+     .filter(|&amp;x| x &gt; 10)
+     .zip(0..)
+     .chain(iter::once((0, 0)))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>is</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>std::iter::Chain&lt;
+  std::iter::Zip&lt;
+    std::iter::Filter&lt;
+      std::iter::Map&lt;
+        std::vec::IntoIter&lt;u32&gt;,
+        [closure@src/main.rs:16:11: 16:18]&gt;,
+      [closure@src/main.rs:17:14: 17:25]&gt;,
+    std::ops::RangeFrom&lt;usize&gt;&gt;,
+  std::iter::Once&lt;(u32, usize)&gt;&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>It would make for a long symbol name if this type is used (maybe
+repeatedly) as a generic argument somewhere. C++ has the same problem
+with its templates; which is why the Itanium mangling introduces the
+concept of compression. If a component of a definition occurs more than
+once, it will not be repeated and instead be emitted as a substitution
+marker that allows to reconstruct which component it refers to. The
+scheme proposed here will use the same approach (but with a simpler
+definition).</p>
+<p>The exact scheme will be described in detail in the reference level
+explanation below but it roughly works as follows: As a mangled symbol
+name is being built, we remember the position of every substitutable item
+in the output string, that is, we keep track of things a subsequent
+occurrence of which could be replaced by a back reference.</p>
+<p>The things that are eligible for substitution are (1) all prefixes of
+paths (including the entire path itself), (2) all types except for
+basic types, and (3) type-level constants (array lengths and values
+passed to const generic params).</p>
+<p>Here's an example in order to illustrate the concept. The name</p>
+<pre><code>std::iter::Chain&lt;std::iter::Zip&lt;std::vec::IntoIter&lt;u32&gt;, std::vec::IntoIter&lt;u32&gt;&gt;&gt;
+</code></pre>
+<p>is mangled to the following uncompressed string. The lines below show parts
+of the mangled string that already occurred before and can thus be replaced
+by a back reference. The number of at the beginning of each span given
+the 0-based byte position of where it occurred the first time.</p>
+<pre><code>  0         10        20        30        40        50        60        70        80        90
+_RINtNtC3std4iter5ChainINtNtC3std4iter3ZipINtNtC3std3vec8IntoItermEINtNtC3std3vec8IntoItermEEE
+                            5----              5----                    5----
+                          3-----------                                43---------
+                                                                    41--------------------
+                                                                   40-----------------------
+</code></pre>
+<p>The compiler is always supposed to use the longest replacement possible
+in order to achieve the best compression. The compressed symbol looks
+as follows:</p>
+<pre><code>_RINtNtC3std4iter5ChainINtB2_3ZipINtNtB4_3vec8IntoItermEBt_EE
+                          ^^^         ^^^               ^^^     back references
+</code></pre>
+<p>Back references have the form <code>B&lt;base-62-number&gt;_</code>.</p>
+<h1><a class="header" href="#reference-level-explanation" id="reference-level-explanation">Reference-level explanation</a></h1>
+<p>The reference-level explanation consists of three parts:</p>
+<ol>
+<li>A specification of the syntax mangled names conform to.</li>
+<li>A specification of the compression scheme.</li>
+<li>A mapping of Rust entities to the mangling syntax.</li>
+</ol>
+<p>For implementing a demangler, only the first two sections are of
+interest, that is, a demangler only needs to understand syntax and
+compression of names, but it does not have to care about how the
+compiler generates mangled names.</p>
+<h2><a class="header" href="#syntax-of-mangled-names" id="syntax-of-mangled-names">Syntax Of Mangled Names</a></h2>
+<p>The syntax of mangled names is given in extended Backus-Naur form:</p>
+<ul>
+<li>Non-terminals are within angle brackets (as in <code>&lt;name-prefix&gt;</code>)</li>
+<li>Terminals are within quotes (as in <code>&quot;_R&quot;</code>),</li>
+<li>Optional parts are in brackets (as in <code>[&lt;decimal&gt;]</code>),</li>
+<li>Repetition (zero or more times) is signified by curly braces (as in <code>{&lt;name-prefix&gt;}</code>)</li>
+<li>Comments are marked with <code>//</code>.</li>
+</ul>
+<p>Mangled names conform to the following grammar:</p>
+<pre><code>// The &lt;decimal-number&gt; specifies the encoding version.
+&lt;symbol-name&gt; = &quot;_R&quot; [&lt;decimal-number&gt;] &lt;path&gt; [&lt;instantiating-crate&gt;]
+
+&lt;path&gt; = &quot;C&quot; &lt;identifier&gt;               // crate root
+       | &quot;M&quot; &lt;impl-path&gt; &lt;type&gt;         // &lt;T&gt; (inherent impl)
+       | &quot;X&quot; &lt;impl-path&gt; &lt;type&gt; &lt;path&gt;  // &lt;T as Trait&gt; (trait impl)
+       | &quot;Y&quot; &lt;type&gt; &lt;path&gt;              // &lt;T as Trait&gt; (trait definition)
+       | &quot;N&quot; &lt;ns&gt; &lt;path&gt; &lt;identifier&gt;   // ...::ident (nested path)
+       | &quot;I&quot; &lt;path&gt; {&lt;generic-arg&gt;} &quot;E&quot; // ...&lt;T, U&gt; (generic args)
+       | &lt;backref&gt;
+
+// Path to an impl (without the Self type or the trait).
+// The &lt;path&gt; is the parent, while the &lt;disambiguator&gt; distinguishes
+// between impls in that same parent (e.g. multiple impls in a mod).
+// This exists as a simple way of ensure uniqueness, and demanglers
+// don't need to show it (unless the location of the impl is desired).
+&lt;impl-path&gt; = [&lt;disambiguator&gt;] &lt;path&gt;
+
+// The &lt;decimal-number&gt; is the length of the identifier in bytes.
+// &lt;bytes&gt; is the identifier itself and must not start with a decimal digit.
+// If the &quot;u&quot; is present then &lt;bytes&gt; is Punycode-encoded.
+&lt;identifier&gt; = [&lt;disambiguator&gt;] &lt;undisambiguated-identifier&gt;
+&lt;disambiguator&gt; = &quot;s&quot; &lt;base-62-number&gt;
+&lt;undisambiguated-identifier&gt; = [&quot;u&quot;] &lt;decimal-number&gt; &lt;bytes&gt;
+
+// Namespace of the identifier in a (nested) path.
+// It's an a-zA-Z character, with a-z reserved for implementation-internal
+// disambiguation categories (and demanglers should never show them), while
+// A-Z are used for special namespaces (e.g. closures), which the demangler
+// can show in a special way (e.g. `NC...` as `...::{closure}`), or just
+// default to showing the uppercase character.
+&lt;ns&gt; = &quot;C&quot;      // closure
+     | &quot;S&quot;      // shim
+     | &lt;A-Z&gt;    // other special namespaces
+     | &lt;a-z&gt;    // internal namespaces
+
+&lt;generic-arg&gt; = &lt;lifetime&gt;
+              | &lt;type&gt;
+              | &quot;K&quot; &lt;const&gt; // forward-compat for const generics
+
+// An anonymous (numbered) lifetime, either erased or higher-ranked.
+// Index 0 is always erased (can show as '_, if at all), while indices
+// starting from 1 refer (as de Bruijn indices) to a higher-ranked
+// lifetime bound by one of the enclosing &lt;binder&gt;s.
+&lt;lifetime&gt; = &quot;L&quot; &lt;base-62-number&gt;
+
+// Specify the number of higher-ranked (for&lt;...&gt;) lifetimes to bound.
+// &lt;lifetime&gt; can then later refer to them, with lowest indices for
+// innermost lifetimes, e.g. in `for&lt;'a, 'b&gt; fn(for&lt;'c&gt; fn(...))`,
+// any &lt;lifetime&gt;s in ... (but not inside more binders) will observe
+// the indices 1, 2, and 3 refer to 'c, 'b, and 'a, respectively.
+&lt;binder&gt; = &quot;G&quot; &lt;base-62-number&gt;
+
+&lt;type&gt; = &lt;basic-type&gt;
+       | &lt;path&gt;                      // named type
+       | &quot;A&quot; &lt;type&gt; &lt;const&gt;          // [T; N]
+       | &quot;S&quot; &lt;type&gt;                  // [T]
+       | &quot;T&quot; {&lt;type&gt;} &quot;E&quot;            // (T1, T2, T3, ...)
+       | &quot;R&quot; [&lt;lifetime&gt;] &lt;type&gt;     // &amp;T
+       | &quot;Q&quot; [&lt;lifetime&gt;] &lt;type&gt;     // &amp;mut T
+       | &quot;P&quot; &lt;type&gt;                  // *const T
+       | &quot;O&quot; &lt;type&gt;                  // *mut T
+       | &quot;F&quot; &lt;fn-sig&gt;                // fn(...) -&gt; ...
+       | &quot;D&quot; &lt;dyn-bounds&gt; &lt;lifetime&gt; // dyn Trait&lt;Assoc = X&gt; + Send + 'a
+       | &lt;backref&gt;
+
+&lt;basic-type&gt; = &quot;a&quot;      // i8
+             | &quot;b&quot;      // bool
+             | &quot;c&quot;      // char
+             | &quot;d&quot;      // f64
+             | &quot;e&quot;      // str
+             | &quot;f&quot;      // f32
+             | &quot;h&quot;      // u8
+             | &quot;i&quot;      // isize
+             | &quot;j&quot;      // usize
+             | &quot;l&quot;      // i32
+             | &quot;m&quot;      // u32
+             | &quot;n&quot;      // i128
+             | &quot;o&quot;      // u128
+             | &quot;s&quot;      // i16
+             | &quot;t&quot;      // u16
+             | &quot;u&quot;      // ()
+             | &quot;v&quot;      // ...
+             | &quot;x&quot;      // i64
+             | &quot;y&quot;      // u64
+             | &quot;z&quot;      // !
+             | &quot;p&quot;      // placeholder (e.g. for generic params), shown as _
+
+// If the &quot;U&quot; is present then the function is `unsafe`.
+// The return type is always present, but demanglers can
+// choose to omit the ` -&gt; ()` by special-casing &quot;u&quot;.
+&lt;fn-sig&gt; := &lt;binder&gt; [&quot;U&quot;] [&quot;K&quot; &lt;abi&gt;] {&lt;type&gt;} &quot;E&quot; &lt;type&gt;
+
+&lt;abi&gt; = &quot;C&quot;
+      | &lt;undisambiguated-identifier&gt;
+
+&lt;dyn-bounds&gt; = &lt;binder&gt; {&lt;dyn-trait&gt;} &quot;E&quot;
+&lt;dyn-trait&gt; = &lt;path&gt; {&lt;dyn-trait-assoc-binding&gt;}
+&lt;dyn-trait-assoc-binding&gt; = &quot;p&quot; &lt;undisambiguated-identifier&gt; &lt;type&gt;
+&lt;const&gt; = &lt;type&gt; &lt;const-data&gt;
+        | &lt;type&gt; &quot;p&quot; // placeholder (e.g. for polymorphic constants), shown as _: T
+        | &lt;backref&gt;
+
+// The encoding of a constant depends on its type, currently only
+// unsigned integers (mainly usize, for arrays) are supported, and they
+// use their value, in base 16 (0-9a-f), not their memory representation.
+&lt;const-data&gt; = {&lt;hex-digit&gt;} &quot;_&quot;
+
+// &lt;base-62-number&gt; uses 0-9-a-z-A-Z as digits, i.e. 'a' is decimal 10 and
+// 'Z' is decimal 61.
+// &quot;_&quot; with no digits indicates the value 0, while any other value is offset
+// by 1, e.g. &quot;0_&quot; is 1, &quot;Z_&quot; is 62, &quot;10_&quot; is 63, etc.
+&lt;base-62-number&gt; = {&lt;0-9a-zA-Z&gt;} &quot;_&quot;
+
+&lt;backref&gt; = &quot;B&quot; &lt;base-62-number&gt;
+
+// We use &lt;path&gt; here, so that we don't have to add a special rule for
+// compression. In practice, only a crate root is expected.
+&lt;instantiating-crate&gt; = &lt;path&gt;
+</code></pre>
+<h3><a class="header" href="#namespace-tags" id="namespace-tags">Namespace Tags</a></h3>
+<p>Namespaces are identified by an implementation defined single character tag
+(the <code>&lt;ns&gt;</code> production). Only closures (<code>C</code>) and shims (<code>S</code>) have a
+specific character assigned to them so that demanglers can reliable
+adjust their output accordingly. Other namespace tags have to be omitted
+or shown verbatim during demangling.</p>
+<p>This is a concession to the compiler's current implementation. While the
+language only knows two namespaces (the type and the value namespace), the
+compiler uses many more in some important data structures and disambiguation
+indices are assigned according to these internal data structures. So, in
+order not to force the compiler to waste processing time on re-constructing
+different disambiguation indices, the internal unspecified &quot;namespaces&quot; are
+used. This may change in the future.</p>
+<h3><a class="header" href="#type-level-constants" id="type-level-constants">Type-Level Constants</a></h3>
+<p>As described above, the grammar encodes constant values via the
+<code>&lt;const-data&gt; = {&lt;hex-digit&gt;} &quot;_&quot;</code> production, where <code>{&lt;hex-digit&gt;}</code> is
+the numeric value of the constant, not its representation as bytes. Using
+the numeric value is platform independent but does not easily scale to
+non-integer data types.</p>
+<p>In the future it is likely that Rust will support complex type-level
+constants (i.e. not just integers). This RFC suggests to develop a
+proper mangling for these as part of the future const-generics work,
+and, for now, only define a mangling for integer values.</p>
+<h3><a class="header" href="#punycode-identifiers" id="punycode-identifiers">Punycode Identifiers</a></h3>
+<p>Punycode generates strings of the form <code>([[:ascii:]]+-)?[[:alnum:]]+</code>.
+This is problematic for two reasons:</p>
+<ul>
+<li>Generated strings can contain a <code>-</code> character; which is not in the
+supported character set.</li>
+<li>Generated strings can start with a digit; which makes them clash
+with the byte-count prefix of the <code>&lt;identifier&gt;</code> production.</li>
+</ul>
+<p>For these reasons, vanilla Punycode string are further encoded during mangling:</p>
+<ul>
+<li>The <code>-</code> character is simply replaced by a <code>_</code> character.</li>
+<li>The part of the Punycode string that encodes the non-ASCII characters
+is a base-36 number, using <code>[a-z0-9]</code> as its &quot;digits&quot;. We want to get
+rid of the decimal digits in there, so we simply remap <code>0-9</code> to <code>A-J</code>.</li>
+</ul>
+<p>Here are some examples:</p>
+<table><thead><tr><th>Original</th><th>Punycode</th><th>Punycode + Encoding</th></tr></thead><tbody>
+<tr><td>føø</td><td>f-5gaa</td><td>f_Fgaa</td></tr>
+<tr><td>α_ω</td><td>_-ylb7e</td><td>__ylbHe</td></tr>
+<tr><td>铁锈</td><td>n84amf</td><td>nIEamf</td></tr>
+<tr><td>🤦</td><td>fq9h</td><td>fqJh</td></tr>
+<tr><td>ρυστ</td><td>2xaedc</td><td>Cxaedc</td></tr>
+</tbody></table>
+<p>With this post-processing in place the Punycode strings can be treated
+like regular identifiers and need no further special handling.</p>
+<h2><a class="header" href="#compression" id="compression">Compression</a></h2>
+<p>Symbol name compression works by substituting parts of the mangled
+name that have already been seen for a back reference. Compression
+is directly built into the mangling algorithm, as shown by the
+following piece of pseudocode:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn mangle(node, output_string, substitution_dictionary) {
+    if let Some(backref) = substitution_dictionary.get(node) {
+        // Emit the backref instead of the node's contents
+        mangle(backref, output_string)
+    } else {
+        // Remember where the current node starts in the output
+        let start_position = output_string.len()
+
+        // Do the actual mangling, including recursive mangling of child nodes
+
+        // Add the current node to the substitution dictionary
+        if node.is_substitutable() {
+            substitution_dictionary.insert(node, start_position)
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This algorithm automatically chooses the best compression because
+parent nodes (which are always larger) are visited before child
+nodes.</p>
+<p>Note that this kind of compression relies on the fact that all
+substitutable AST nodes have a self-terminating mangled form,
+that is, given the start position of the encoded node, the
+grammar guarantees that it is always unambiguous where the
+node ends. This is ensured by not allowing optional or
+repeating elements at the end of substitutable productions.</p>
+<h3><a class="header" href="#decompression" id="decompression">Decompression</a></h3>
+<p>Decompression too is built directly into demangling/parsing. When a back
+reference is encountered, we decode the referenced position and use a
+temporary demangler/parser to do the decoding of the node's actual content:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn demangle_at(&amp;mut pos, mangled, output_string) {
+  if is_backref(*pos, mangled) {
+    // Read the byte offset of the referenced node and
+    // advance `pos` past the backref.
+    let mut referenced_pos = decode(pos, mangled);
+    demangle_at(&amp;mut referenced_pos, mangled, output_string)
+  } else {
+    // do regular demangling
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Using byte offsets as backref keys (as this RFC does) instead of post-order
+traversal indices (as Itanium mangling does) has the advantage that the
+demangler does not need to duplicate the mangler's substitution indexing logic,
+something that can become quite complex (as demonstrated by the compression
+scheme proposed in the initial version of this RFC).</p>
+<h3><a class="header" href="#a-note-on-implementing-efficient-demanglers" id="a-note-on-implementing-efficient-demanglers">A Note On Implementing Efficient Demanglers</a></h3>
+<p>The mangling syntax is constructed in a way that allows for implementing
+efficient demanglers:</p>
+<ul>
+<li>
+<p>Mangled names contain information in the same order as unmangled
+names are expected to contain it. Therefore, a demangler can directly
+generate its output while parsing the mangled form. There is no need
+to explicitly instantiate the AST in memory.</p>
+</li>
+<li>
+<p>The same is true for decompression. Decompression can be done without
+allocating memory outside of the stack. Alternatively the demangler
+can keep a simple array that maps back-ref indices to ranges in the
+already generated output. When it encounters a <code>&lt;backref&gt;</code> in need
+of expansion, it can just look up corresponding range and do a
+simple <code>memcpy</code>.</p>
+</li>
+</ul>
+<p>Parsing, decompression, and demangling can thus be done in a single pass
+over the mangled name without the need for complex data structures, which
+is useful when having to implement <code>#[no_std]</code> or C demanglers. (Note that
+Punycode can complicate decoding slightly because it needs dynamic memory
+allocation in the general case but it can be implemented with an on-stack
+buffer for a reasonable maximum supported length).</p>
+<h2><a class="header" href="#mapping-rust-language-entities-to-symbol-names" id="mapping-rust-language-entities-to-symbol-names">Mapping Rust Language Entities to Symbol Names</a></h2>
+<p>This RFC suggests the following mapping of Rust entities to mangled names:</p>
+<ul>
+<li>
+<p>Named functions, methods, and statics shall be represented by a
+<code>&lt;path&gt;</code> production.</p>
+</li>
+<li>
+<p>Paths should be rooted at the inner-most entity that can act
+as a path root. Roots can be crate-ids, inherent impls, trait impls, and
+(for items within default methods) trait definitions.</p>
+</li>
+<li>
+<p>The compiler is free to choose disambiguation indices and namespace tags from
+the reserved ranges as long as it ascertains identifier unambiguity.</p>
+</li>
+<li>
+<p>Generic arguments that are equal to the default should not be encoded in
+order to save space.</p>
+</li>
+</ul>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p>Why should we <em>not</em> do this?</p>
+<ul>
+<li>The current/legacy scheme based on symbol-hashes is flexible in that
+hashes can be changed at will. That is, the unstable part of the
+current mangling scheme is nicely contained and does not keep breaking
+external tools. The danger of breakage is greater with the scheme
+proposed here because it exposes more information.</li>
+</ul>
+<h1><a class="header" href="#rationale-and-alternatives" id="rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>The alternatives considered are:</p>
+<ol>
+<li>
+<p>Keeping the current scheme. It does meet the minimum requirements
+after all. However, the general consensus seems to be that this
+leads to situations where people are unpleasantly surprised when
+they come across (demangled) symbol names in backtraces or profilers.</p>
+</li>
+<li>
+<p>Keeping the current scheme but cleaning it up by making the non-hash
+part more consistent and more expressive. Keep the hash part as a
+safeguard against symbol conflicts and the rest as something just
+for demangling. The downside of this is that the hash would still
+not be predictable, and symbols would get rather long if they should
+contain more human-readable information about generic arguments.</p>
+</li>
+<li>
+<p>Define a standardized pretty-printing format for things that end up
+as symbols, and then encode that via Punycode in order to meet the
+character set restrictions. This would be rather simple. Symbol names
+would remain somewhat human-readable (but not very, because all
+separators would be stripped out). But without some kind of additional
+compression, symbol names would become rather long.</p>
+</li>
+<li>
+<p>Use the scheme from the previous bullet point but apply the compression
+scheme described above. We could do this but it wouldn't really be less
+complex than the scheme proposed by the RFC.</p>
+</li>
+<li>
+<p>Define a standardized pretty-printing format for things that end up as
+symbols, compress with <code>zstd</code> (specially trained for Rust symbols) and
+encode the result as <code>base63</code>. This is rather simple but loses all
+human-readability. It's unclear how well this would compress. It would
+pull the <code>zstd</code> specification into the mangling scheme specification,
+as well as the pre-trained dictionary.</p>
+</li>
+</ol>
+<h1><a class="header" href="#prior-art" id="prior-art">Prior art</a></h1>
+<p>One of the major modern mangling schemes with a public specification is the
+<a href="http://refspecs.linuxbase.org/cxxabi-1.86.html#mangling">Itanium C++ ABI</a> scheme for C++ which is used by the GCC
+toolchain. An initial version of this RFC sticked closely to Itanium mangling,
+however, the latest version only retains the run-length encoding for
+identifiers and some literals for tagging things like basic types. The
+Itanium scheme has been criticized for being overly complex, due to its
+extensive grammar and two separate compression schemes.</p>
+<p>The idea of using <a href="https://tools.ietf.org/html/rfc3492">Punycode</a> for handling of unicode identifiers
+is taken from the <a href="https://github.com/apple/swift">Swift</a> programming language's
+<a href="https://github.com/apple/swift/blob/master/docs/ABI/Mangling.rst#identifiers">mangling scheme</a>.</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<h3><a class="header" href="#punycode-vs-utf-8" id="punycode-vs-utf-8">Punycode vs UTF-8</a></h3>
+<p>During the pre-RFC phase, it has been suggested that Unicode identifiers
+should be encoded as UTF-8 instead of Punycode on platforms that allow it.
+GCC, Clang, and MSVC seem to do this. The author of the RFC has a hard
+time making up their mind about this issue. Here are some interesting
+points that might influence the final decision:</p>
+<ul>
+<li>
+<p>Using UTF-8 instead of Punycode would make mangled strings containing
+non-ASCII identifiers a bit more human-readable. For demangled strings,
+there would be no difference.</p>
+</li>
+<li>
+<p>Punycode support is non-optional since some platforms only allow a very
+limited character set for symbol names. Thus, we would be using UTF-8 on
+some platforms and Punycode on others, making it harder to predict what a
+symbol name for a given item looks like.</p>
+</li>
+<li>
+<p>Punycode encoding and decoding is more runtime effort for the mangler
+and demangler.</p>
+</li>
+<li>
+<p>Once a demangler supports Punycode, it is not much effort to support
+both encodings. The <code>u</code> identifier prefix tells the demangler whether
+it is Punycode. Otherwise it can just assume UTF-8 which already
+subsumes ASCII.</p>
+</li>
+</ul>
+<p><strong>UPDATE</strong>: This RFC recommends that Punycode encoded identifiers must
+be supported by demanglers but that it is up to the compiler implementation
+(for now) to decide whether to use it for a given platform. This question
+will have to be revisited if Rust ever wants to define a stable ABI.</p>
+<h3><a class="header" href="#encoding-parameter-types-for-function-symbols" id="encoding-parameter-types-for-function-symbols">Encoding parameter types for function symbols</a></h3>
+<p>It has been suggested that parameter types for functions and methods should
+be encoded in mangled form too. This is not necessary for symbol name
+uniqueness but it would provide an additional safeguard against silent
+ABI-related errors where definition and callers of some function make
+different assumptions about what parameters a function takes. The RFC
+does not propose to do this because:</p>
+<ul>
+<li>Rust makes sure this cannot happen via crate metadata,</li>
+<li>it would make symbol names longer, and</li>
+<li>only some but not all ABI related errors are caught by the safeguard.</li>
+</ul>
+<p>However, a final decision on the topic has not been made yet.</p>
+<p><strong>UPDATE</strong>: This RFC suggests that parameter types are <em>not</em> encoded into
+function and method symbols. Symbol names will already get significantly
+longer due to encoding additional information and the additional
+safeguard provided against ABI mismatches is less relevant for Rust
+than it is for other languages that don't have a concept of
+library/crate metadata.</p>
+<h1><a class="header" href="#appendix-a---suggested-demangling" id="appendix-a---suggested-demangling">Appendix A - Suggested Demangling</a></h1>
+<p>This RFC suggests that names are demangled to a form that matches Rust
+syntax as it is used in source code, compiler error messages and <code>rustdoc</code>:</p>
+<ul>
+<li>
+<p>Path components should be separated by <code>::</code>.</p>
+</li>
+<li>
+<p>If the path root is a <code>&lt;crate-id&gt;</code> it should be printed as the crate name.
+If the context requires it for correctness, the crate disambiguator can be
+printed too, as in, for example, <code>std[a0b1c2d3]::collections::HashMap</code>.
+In this case <code>a0b1c2d3</code> would be the disambiguator. Usually, the
+disambiguator can be omitted for better readability.</p>
+</li>
+<li>
+<p>If the path root is an impl, it should be printed as <code>&lt;SelfType&gt;</code> (for
+inherent impls) or <code>&lt;SelfType as Trait&gt;</code> (for trait impls), like the
+compiler does in error messages. The <code>&lt;impl-path&gt;</code> also contained in the
+AST node should usually be omitted.</p>
+</li>
+<li>
+<p>The list of generic arguments should be demangled as <code>&lt;T1, T2, T3&gt;</code>.</p>
+</li>
+<li>
+<p>Identifiers can have a numeric disambiguator
+(the <code>&lt;disambiguator&gt;</code> production). The syntactic version of the numeric
+disambiguator maps to a numeric index. If the disambiguator is not
+present, this index is 0. If it is of the form <code>s_</code> then the index is 1.
+If it is of the form <code>s&lt;base-62-digit&gt;_</code> then the index is
+<code>&lt;base-62-digit&gt; + 2</code>. The suggested demangling of a disambiguator is
+<code>[&lt;index&gt;]</code>. However, for better readability, these disambiguators
+should usually be omitted in the demangling altogether. Disambiguators
+with index zero can <em>always</em> be omitted.</p>
+<p>The exception here are closures. Since these do not have a name, the
+disambiguator is the only thing identifying them. The suggested
+demangling for closures is thus <code>{closure}[&lt;index&gt;]</code>.</p>
+</li>
+</ul>
+<h1><a class="header" href="#appendix-b---examples" id="appendix-b---examples">Appendix B - Examples</a></h1>
+<p>We assume that all examples are defined in a crate named <code>mycrate[1234]</code>.</p>
+<h3><a class="header" href="#free-standing-item" id="free-standing-item">Free-standing Item</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod foo {
+  mod bar {
+    fn baz() {}
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>unmangled: <code>mycrate::foo::bar::baz</code></li>
+<li>mangled: <code>_RNvNtNtCs1234_7mycrate3foo3bar3baz</code></li>
+</ul>
+<h3><a class="header" href="#item-defined-in-inherent-method" id="item-defined-in-inherent-method">Item Defined In Inherent Method</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Foo&lt;T&gt;(T);
+
+impl&lt;T&gt; Foo&lt;T&gt; {
+  pub fn bar&lt;U&gt;(_: U) {
+    static QUUX: u32 = 0;
+    // ...
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>unmangled: <code>&lt;mycrate::Foo&lt;_&gt;&gt;::bar::QUUX</code></li>
+<li>mangled: <code>_RNvNvMCs1234_7mycrateINtCs1234_7mycrate3FoopE3bar4QUUX</code></li>
+</ul>
+<h3><a class="header" href="#item-defined-in-trait-method" id="item-defined-in-trait-method">Item Defined In Trait Method</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Foo&lt;T&gt;(T);
+
+impl&lt;T&gt; Clone for Foo&lt;T&gt; {
+  fn clone(&amp;self) -&gt; Self {
+    static QUUX: u32 = 0;
+    // ...
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>unmangled: <code>&lt;mycrate::Foo&lt;_&gt; as std::clone::Clone&gt;::clone::QUUX</code></li>
+<li>mangled: <code>_RNvNvXCs1234_7mycrateINtCs1234_7mycrate3FoopENtNtC3std5clone5Clone5clone4QUUX</code></li>
+</ul>
+<h3><a class="header" href="#item-defined-in-initializer-of-a-static" id="item-defined-in-initializer-of-a-static">Item Defined In Initializer Of A Static</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub static QUUX: u32 = {
+  static FOO: u32 = 1;
+  FOO + FOO
+};
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>unmangled: <code>mycrate::QUUX::FOO</code></li>
+<li>mangled: <code>_RNvNvCs1234_7mycrate4QUUX3FOO</code></li>
+</ul>
+<h3><a class="header" href="#compressed-prefix-constructed-from-prefix-that-contains-a-substitution-itself---todo" id="compressed-prefix-constructed-from-prefix-that-contains-a-substitution-itself---todo">Compressed Prefix Constructed From Prefix That Contains A Substitution Itself - TODO</a></h3>
+<ul>
+<li>unmangled: <code>mycrate::foo&lt;mycrate::bar,mycrate::bar::baz&gt;</code></li>
+<li>mangled: <code>_RINvCs1234_7mycrate3fooNvB4_3barNvBn_3bazE</code></li>
+</ul>
+<h3><a class="header" href="#progressive-type-compression" id="progressive-type-compression">Progressive type compression</a></h3>
+<ul>
+<li>unmangled: <code>std::foo&lt;(std::Bar,std::Bar),(std::Bar,std::Bar)&gt;</code></li>
+<li>mangled: <code>_RINxC3std3fooTNyB4_3BarBe_EBd_E</code></li>
+</ul>
+<h1><a class="header" href="#appendix-c---change-log" id="appendix-c---change-log">Appendix C - Change LOG</a></h1>
+<ul>
+<li>Removed mention of Itanium mangling in introduction.</li>
+<li>Weakened &quot;predictability&quot; goal.</li>
+<li>Removed non-goal of not providing a mangling for lifetimes.</li>
+<li>Added non-goal for not trying to standardize the demangled form.</li>
+<li>Updated specification and examples to new grammar as proposed by eddyb.</li>
+<li><code>impl</code> disambiguation strategy changed to using the impl path instead of param bounds.</li>
+<li>Updated prior art section to not say this RFC is an adaptation of Itanium mangling.</li>
+<li>Updated compiler's expected assignment of disambiguation indices and namespace tags.</li>
+<li>Removed &quot;complexity&quot; drawback since the scheme is not very complex anymore.</li>
+<li>Removed unresolved question &quot;Re-use <code>&lt;disambiguator&gt;</code> for crate disambiguator&quot;.</li>
+<li>Added note about default generic arguments to reference-level-explanation.</li>
+<li>Added note about Punycode making decoding more complicated.</li>
+<li>Resolve question of complex constant data.</li>
+<li>Add a recommended resolution for open question around Punycode identifiers.</li>
+<li>Add a recommended resolution for open question around encoding function parameter types.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2592-futures.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2627-raw-dylib-kind.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2592-futures.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2627-raw-dylib-kind.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

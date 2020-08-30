@@ -1,0 +1,2558 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2497-if-let-chains - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html" class="active">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: <code>let_chains_2</code></li>
+<li>Start Date: 2018-07-13</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2497">rust-lang/rfcs#2497</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/53667">rust-lang/rust#53667</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/53668">rust-lang/rust#53668</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Extends <code>if let</code> and <code>while let</code>-expressions with chaining, allowing you
+to combine multiple <code>let</code>s and <code>bool</code>-typed conditions together naturally.
+After implementing this RFC, you'll be able to write, among other things:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn param_env&lt;'a, 'tcx&gt;(tcx: TyCtxt&lt;'a, 'tcx, 'tcx&gt;, def_id: DefId) -&gt; ParamEnv&lt;'tcx&gt; {
+    if let Some(Def::Existential(_)) = tcx.describe_def(def_id)
+        &amp;&amp; let Some(node_id) = tcx.hir.as_local_node_id(def_id)
+        &amp;&amp; let hir::map::NodeItem(item) = tcx.hir.get(node_id)
+        &amp;&amp; let hir::ItemExistential(ref exist_ty) = item.node
+        &amp;&amp; let Some(parent) = exist_ty.impl_trait_fn
+    {
+        return param_env(tcx, parent);
+    }
+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>and with side effects:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>while let Ok(user) = read_user(::std::io::stdin())
+    &amp;&amp; user.name == &quot;Alan Turing&quot;
+    &amp;&amp; let Ok(hobby) = read_hobby_of(&amp;user)
+{
+    if hobby == &quot;Hacking Enigma&quot; {
+        println!(&quot;Yep, It's you.&quot;);
+        return Some(read_encrypted_stuff());
+    } else {
+        println!(&quot;You can't be Alan! &quot;);
+    }
+}
+
+return None;
+<span class="boring">}
+</span></code></pre></pre>
+<p>The main aim of this RFC is to decide that this is a problem worth solving
+as well as discussing a few available options. <strong>Most importantly, we want to
+make <code>if let PAT = EXPR &amp;&amp; ..</code> a possible option for Rust 2018.</strong></p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>The main motivation for this RFC is improving readability, ergonomics,
+and reducing paper cuts.</p>
+<h2><a class="header" href="#right-ward-drift" id="right-ward-drift">Right-ward drift</a></h2>
+<p>Today, each <code>if let</code> needs a brace, which means that you usually, to keep
+the code readable, indent once to the right each time. Thus, matching multiple
+things quickly leads to way too much indent that overflows the typical
+text editor or IDE horizontally. This is in particular bad for readers that
+can only fit around 80-100 characters per line in their editor. Keeping in
+mind that code is read more than written, it is important to improve readability
+where possible.</p>
+<h3><a class="header" href="#other-solution-tuples" id="other-solution-tuples">Other solution: Tuples</a></h3>
+<p>One solution is matching a tuple, but that is a poor solution when there are
+side effects or expensive computations involved, and doesn't necessarily work
+as <em>DSTs</em> and <em>lvalues</em> can't go in tuples.</p>
+<h3><a class="header" href="#other-solution-break-" id="other-solution-break-">Other solution: <code>break ...</code></a></h3>
+<p>Another solution to avoid right-ward drift is to create a new function for
+part of the indentation. When the inner scopes depend on a lot of variables
+and state from outer scopes, all of these variables have to be passed on to
+the newly created function, which may not even be a natural unit to abstract
+into a function. Creating a new function, especially one that feels artificial,
+can also inhibit local reasoning. A new level of function (or <a href="https://en.wikipedia.org/wiki/Immediately-invoked_function_expression">IIFE</a>) also
+changes the behaviour of <code>return</code>, <code>break</code>, <code>?</code>, and friends.</p>
+<p>A third solution involves using the expression form <code>break '&lt;label&gt;</code>.
+You may then rewrite the snippet from the <a href="#summary">summary</a> as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn param_env&lt;'a, 'tcx&gt;(tcx: TyCtxt&lt;'a, 'tcx, 'tcx&gt;, def_id: DefId) -&gt; ParamEnv&lt;'tcx&gt; {
+    'stop: {
+        if let Some(Def::Existential(_)) = tcx.describe_def(def_id) {
+        } else {
+            break 'stop;
+        };
+
+        let node_id = if let Some(node_id) = tcx.hir.as_local_node_id(def_id) {
+            node_id
+        } else {
+            break 'stop;
+        }
+
+        let item = if let hir::map::NodeItem(item) = tcx.hir.get(node_id) {
+            item
+        } else {
+            break 'stop;
+        };
+
+        let exists_ty = if let hir::ItemExistential(ref exist_ty) = item.node {
+            exists_ty
+        } else {
+            break 'stop;
+        }
+
+        if let Some(parent) = exist_ty.impl_trait_fn {
+            return param_env(tcx, parent);
+        }
+    }
+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>while right-ward drift has been reduced, a significant amount of line noise
+has been introduced. The user is also forced to track the label <code>'stop</code>.
+All in all, this alternative significantly reduces readability wherefore we
+discourage from this way of writing.</p>
+<h4><a class="header" href="#boiler-plate-reduction-using-macros" id="boiler-plate-reduction-using-macros">Boiler-plate reduction using macros</a></h4>
+<p>One way to reduce the noise from the above alternative solution is to refactor
+some commonalities into a macro. However, refactoring into a macro means that
+you need to understand the macro. In comparison, chained <code>if let</code>s constitute
+something simpler that all Rust programmers will understand, as opposed to a
+specialized macro.</p>
+<h2><a class="header" href="#mixing-conditions-and-pattern-matching" id="mixing-conditions-and-pattern-matching">Mixing conditions and pattern matching</a></h2>
+<p>A <code>match</code> expression can have <code>if</code> guards, but <code>if let</code> currently requires
+another level of conditionals.  This is particularly troublesome for cases
+that can't be matched, like <code>x.fract() == 0</code>, or error <code>enum</code>s that disallow
+matching, like <code>std::io::ErrorKind</code>.</p>
+<h2><a class="header" href="#duplicating-code-in-else-clauses" id="duplicating-code-in-else-clauses">Duplicating code in <code>else</code> clauses</a></h2>
+<p>In some cases, you may have written something like:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let A(x) = foo() {
+    if let B(y) = bar(x) {
+        do_stuff_with(x, y)
+    } else {
+        some_long_expression
+    }
+} else {
+    some_long_expression
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this example <code>foo()</code> and <code>bar(x)</code> have side effects, but more crucially,
+there is a dependency between matching on the result of <code>foo()</code> to execute
+<code>bar(x)</code>. Therefore, matching on <code>(foo(), bar(x))</code> is not possible in this
+case because there's no <code>x</code> in scope. So you have no choice but to write it
+in this way (or use <code>break 'label..</code>).</p>
+<p>However, now <code>some_long_expression</code> is repeated, and if more <code>let</code> bindings
+are added, more repetition ensues. To avoid repeating the long expression,
+you might encapsulate this in a new function, but that new function may feel
+like an artificial abstraction as discussed above.</p>
+<p>This is problematic even with a macro to simplify, as it results in more code
+emitted that LLVM commonly cannot simplify.</p>
+<h2><a class="header" href="#bringing-the-language-closer-to-the-mental-model" id="bringing-the-language-closer-to-the-mental-model">Bringing the language closer to the mental model</a></h2>
+<p>The readability of programs is often about the degree to which the code
+corresponds to the mental model the reader has of said program. Therefore,
+we should aim to bring the language closer to the mental model of the reader.
+With respect to <code>if let</code>-expressions, rather than saying (out loud):</p>
+<blockquote>
+<p>if A matches, and</p>
+<blockquote>
+<p>if x holds and</p>
+<blockquote>
+<p>if B matches</p>
+<blockquote>
+<p>do X, Y, and Z</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>..it is more common to say:</p>
+<blockquote>
+<p>If A matches, x holds, and B matches, do X, Y, and Z</p>
+</blockquote>
+<p>This RFC is more in line with the latter formulation and thus brings the
+language closer to the readers mental model.</p>
+<h2><a class="header" href="#instead-of-macros" id="instead-of-macros">Instead of macros</a></h2>
+<p>As we've previously touched upon, we may define and use a macro to reduce
+boilerplate. A macro like <a href="https://crates.io/crates/if_chain"><code>if_chain!</code></a> as a solution however has the problem
+of not being part of the language specification. Thus, it is not part of the
+common syntax that experienced Rust programmers are familiar with and is instead
+local to the project itself. The non-universality of syntax therefore hurts
+readability.</p>
+<h2><a class="header" href="#plenty-of-real-world-use-cases" id="plenty-of-real-world-use-cases">Plenty of Real-world use cases</a></h2>
+<p>We have already seen a real world example from the compiler in the <a href="#summary">summary</a>.
+By taking a look at the <a href="https://crates.io/crates/if_chain/reverse_dependencies">reverse dependencies</a> of <a href="https://crates.io/crates/if_chain"><code>if_chain!</code></a> we can find
+more real-world use cases that this RFC facilitates.</p>
+<p>As an example, <code>clippy</code> <a href="https://github.com/rust-lang-nursery/rust-clippy/blob/ed589761e62735ebb803510e01bfd8b278527fb9/clippy_lints/src/print.rs#L207-L219">defines a function</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Returns the slice of format string parts in an `Arguments::new_v1` call.
+fn get_argument_fmtstr_parts(expr: &amp;Expr) -&gt; Option&lt;(InternedString, usize)&gt; {
+    if_chain! {
+        if let ExprAddrOf(_, ref expr) = expr.node; // &amp;[&quot;…&quot;, &quot;…&quot;, …]
+        if let ExprArray(ref exprs) = expr.node;
+        if let Some(expr) = exprs.last();
+        if let ExprLit(ref lit) = expr.node;
+        if let LitKind::Str(ref lit, _) = lit.node;
+        then {
+            return Some((lit.as_str(), exprs.len()));
+        }
+    }
+    None
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>with this RFC, this would be written, without any external dependencies, as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Returns the slice of format string parts in an `Arguments::new_v1` call.
+fn get_argument_fmtstr_parts(expr: &amp;Expr) -&gt; Option&lt;(InternedString, usize)&gt; {
+    if let ExprAddrOf(_, ref expr) = expr.node // &amp;[&quot;…&quot;, &quot;…&quot;, …]
+        &amp;&amp; let ExprArray(ref exprs) = expr.node
+        &amp;&amp; let Some(expr) = exprs.last()
+        &amp;&amp; let ExprLit(ref lit) = expr.node
+        &amp;&amp; let LitKind::Str(ref lit, _) = lit.node
+    {
+        Some((lit.as_str(), exprs.len()))
+    } else {
+        None
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This kind of deep pattern matching is common for parsers and when dealing
+with ASTs. One place which deals with ASTs is the compiler itself as seen above.
+Thus, with this RFC, some compiler internals may be simplified.
+Another common place is when authoring with custom derive macros using the 
+<code>syn</code> crate.</p>
+<h2><a class="header" href="#an-expected-feature" id="an-expected-feature">An expected feature</a></h2>
+<p>As demonstrated in <a href="#appendix-b">Appendix B</a>, the syntax proposed in this RFC is already
+expected to be allowed in Rust by users today. Indeed, the author of this RFC
+made this assumption at some point.</p>
+<h2><a class="header" href="#unification" id="unification"><em>Unification</em></a></h2>
+<p>In today's Rust, there is both a grammatical and conceptual distinction between
+<code>if</code> and <code>if let</code> as well as <code>while</code> and <code>while let</code>. This RFC aims to erase
+the divide and unify concepts. Henceforth, there is just <code>if</code> and <code>while</code>.
+Thus <code>if let</code> is no longer the unit.</p>
+<h2><a class="header" href="#why-now" id="why-now">&quot;Why now?&quot;</a></h2>
+<p>A legitimate question to ask is:</p>
+<blockquote>
+<p>Why implement this now?</p>
+</blockquote>
+<p>In this case, the answer is simple: We can't wait.</p>
+<p>Because Rust takes stability seriously, we would like to avoid any breakage
+in-between editions even if the breakage is exceedingly (as in the case of this
+RFC) unlikely. Instead, we want to deal with the vanishingly tiny degree of
+breakage, as explained in the <a href="#reference-level-explanation">reference-level-explanation</a>, introduced by this
+RFC with the edition mechanism.</p>
+<p>As it happens, a new edition &quot;Rust 2018&quot; is in the works at the moment
+(as of 2018-07-12). This is an excellent opportunity to take advantage of,
+and that is precisely what we aim to do here.</p>
+<h1><a class="header" href="#guide-level-explanation" id="guide-level-explanation">Guide-level explanation</a></h1>
+<p>This section examines the features proposed by this RFC.</p>
+<h2><a class="header" href="#if-let-chains" id="if-let-chains"><code>if let</code>-chains</a></h2>
+<p>An <em><code>if let</code> chain</em>, refers to a chain of multiple <code>let</code> bindings,
+which may mixed with conditionals in an <code>if</code> expression.</p>
+<p>An example of such a chain is:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let A(x) = foo()
+    &amp;&amp; let B(y) = bar()
+{
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>It is important to note that this is <em>not</em> generally equivalent to the
+following expression:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let (A(x), B(y)) = (foo(), bar()) {
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Unlike the first example, there is no short circuiting logic in the example
+using tuples. Assuming that there are no panics, which is usually the case,
+both functions are always executed in the latter example.</p>
+<p>If we desugar the first example, we can clearly see the difference:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let A(x) = foo() {
+    if let B(y) = bar() {
+        computation_with(x, y)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>What is the practical difference, and why is short circuiting behaviour
+an important distinction? The call to <code>bar()</code> may be an expensive one.
+Avoiding useless work is beneficial to performance. There is however a more
+fundamental reason. Assuming that <code>bar()</code> has side effects, the meaning of
+the tuple example is different from the nested <code>if let</code> expressions because in
+the case of the former, the side effect of <code>bar()</code> always happens while it
+will not if <code>let A(x) = foo()</code> does not match.</p>
+<p>The difference between the tuple example and <code>if let</code>-chains become even
+greater if we also consider a dependence between <code>foo()</code> and <code>bar(..)</code>
+as in the following example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let A(x) = foo() {
+    if let B(y) = bar(x) {
+        computation_with(x, y)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Calling <code>bar(x)</code> is now dependent on having an <code>x</code> that is only available
+to us by first pattern matching on <code>foo()</code>. Therefore, there is no tuple-based
+equivalent to the above example. With this RFC implemented, you can more
+ergonomically write the same expression as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let A(x) = foo()
+    &amp;&amp; let B(y) = bar(x)
+{
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The new expression form introduced by this RFC is also not limited to simple
+<code>if let</code> expressions, you may of course also add <code>else</code> branches as seen in
+the example below.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let A(x) = foo()
+   &amp;&amp; let B(y) = bar()
+{
+    computation_with(x, y)
+} else {
+    alternative_computation()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>While the below snippet is not what the compiler would desugar the above one
+to, you can think of the former as semantically equivalent to it. The compiler
+is free to not actually emit two calls to <code>alternative_computation()</code> in your
+compiled binary. For details, please see the <a href="#reference-level-explanation">reference-level-explanation</a>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let A(x) = foo() {
+    if let B(y) = bar(x) {
+        computation_with(x, y)
+    } else {
+        alternative_computation()
+    }
+} else {
+    alternative_computation()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>As briefly explained above, the <code>if let</code>-chain expression form is also not
+limited to pattern matching. You can also mix in any number of conditionals
+in any place you like, as done in the example below:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if independent_condition
+   &amp;&amp; let A(x) = foo()
+   &amp;&amp; let B(y) = bar()
+   &amp;&amp; y.has_really_cool_property()
+{
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The above example example is semantically equivalent to:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if independent_condition {
+   if let A(x) = foo() {
+       if let B(y) = bar() {
+           if y.has_really_cool_property() {
+                computation_with(x, y)
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Naturally, inside an <code>if-let</code>-chain expression, a <code>let</code> binding must come
+before it is referred to. As such, the following snippet would be ill-formed
+since we haven't implemented time-travel (yet):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if y.has_really_cool_property() // &lt;-- y used before bound.
+   &amp;&amp; let B(y) = bar(x) // &lt;-- x used before bound.
+   &amp;&amp; let A(x) = foo()
+{
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#while-let-chains" id="while-let-chains"><code>while let</code>-chains</a></h2>
+<p>A <strong><code>while let</code>-chain</strong> is similar to an <code>if let</code>-chain but instead applies to
+<code>while let</code> expressions.</p>
+<p>Since we've already introduced the basic idea previously with <em><code>if let</code>-chains</em>,
+we will jump straight into a more complex example.</p>
+<p>The popular <a href="https://docs.rs/itertools/0.7.8/itertools/macro.izip.html"><code>itertools</code></a> crate has an <code>izip</code> macro that allows you to
+<em>&quot;Create an iterator running multiple iterators in lockstep&quot;</em>. An example
+of this, taken from the documentation of <code>izip</code> is:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[macro_use] extern crate itertools;
+
+// iterate over three sequences side-by-side
+let mut results = [0, 0, 0, 0];
+let inputs = [3, 7, 9, 6];
+
+for (r, index, input) in izip!(&amp;mut results, 0..10, &amp;inputs) {
+    *r = index * 10 + input;
+}
+
+assert_eq!(results, [0 + 3, 10 + 7, 29, 36]);
+<span class="boring">}
+</span></code></pre></pre>
+<p>With this RFC, we can write this, admittedly not as succinctly, as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut results = [0, 0, 0, 0];
+let inputs = [3, 7, 9, 6];
+
+let r_iter = results.iter_mut();
+let c_iter = 0..10;
+let i_iter = inputs.iter();
+
+while let Some(r) = r_iter.next()
+    &amp;&amp; let Some(index) = c_iter.next()
+    &amp;&amp; let Some(input) = i_iter.next()
+{
+    *r = index * 10 + input;
+}
+
+assert_eq!(results, [0 + 3, 10 + 7, 29, 36]);
+<span class="boring">}
+</span></code></pre></pre>
+<p>The loop in the above snippet is equivalent to:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>loop {
+    if let Some(r) = r_iter.next()
+        &amp;&amp; let Some(index) = c_iter.next()
+        &amp;&amp; let Some(input) = i_iter.next()
+    {
+        *r = index * 10 + input;
+        continue;
+    }
+    break;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Notice in particular here that just as we could rewrite <code>while let</code> in
+terms of <code>loop</code> + <code>if let</code>, so too can we rewrite <code>while let</code>-chains with
+<code>loop</code> + <code>if let</code>-chains.</p>
+<p>While these two first snippets are equivalent in this example, this does not
+generally hold. If <code>i_iter.next()</code> has side effects, then those will not
+happen when <code>Some(index)</code> does not match. This is important to keep in mind.
+Short-circuiting still applies to <code>while let</code>-chains as with <code>if let</code>-chains.</p>
+<h1><a class="header" href="#reference-level-explanation" id="reference-level-explanation">Reference-level explanation</a></h1>
+<p>This RFC introduces <code>if let</code>-chains and <code>while let</code>-chains in <em>Rust 2018</em>
+and makes some enabling preparation for such chains in Rust 2015.</p>
+<h2><a class="header" href="#grammar" id="grammar">Grammar</a></h2>
+<p>We replace the following productions:</p>
+<pre><code class="language-bnf">block_expr
+: expr_match
+| expr_if
+| expr_if_let
+| expr_while
+| expr_while_let
+| expr_loop
+| expr_for
+| UNSAFE block
+| path_expr &quot;!&quot; maybe_ident braces_delimited_token_trees
+;
+
+expr_if
+: IF expr_nostruct block
+| IF expr_nostruct block ELSE block_or_if
+;
+
+expr_if_let
+: IF LET pat &quot;=&quot; expr_nostruct block
+| IF LET pat &quot;=&quot; expr_nostruct block ELSE block_or_if
+;
+
+block_or_if : block | expr_if | expr_if_let ;
+
+expr_while : maybe_label WHILE expr_nostruct block ;
+expr_while_let : maybe_label WHILE LET pat &quot;=&quot; expr_nostruct block ;
+</code></pre>
+<p>with:</p>
+<pre><code class="language-bnf">block_expr
+: expr_match
+| expr_if
+| expr_while
+| expr_loop
+| expr_for
+| UNSAFE block
+| path_expr &quot;!&quot; maybe_ident braces_delimited_token_trees
+;
+
+expr_if
+: IF in_if_list block
+| IF in_if_list block ELSE block_or_if
+;
+
+block_or_if : block | expr_if ;
+
+expr_while : maybe_label WHILE in_if_list block ;
+
+in_if
+: &quot;let&quot; pat &quot;=&quot; expr_nostruct
+| expr_nostruct
+| &quot;(&quot; in_if &quot;)&quot;
+;
+
+in_if_list : in_if [ ANDAND in_if ]*
+</code></pre>
+<h3><a class="header" href="#dealing-with-ambiguity" id="dealing-with-ambiguity">Dealing with ambiguity</a></h3>
+<p>There exists an ambiguity in this new grammar in how to parse:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT = EXPR &amp;&amp; EXPR { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>It can either be parsed as (1):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT = (EXPR &amp;&amp; EXPR) { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>or instead as (2):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if (let PAT = EXPR) &amp;&amp; EXPR { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>In the interest of succinctness, we do not encode a grammar here that
+resolves this ambiguity. Nonetheless, interpretation (2) is <em>always</em>
+chosen.</p>
+<p>As specified in the reference in the section on <a href="https://github.com/rust-lang-nursery/reference/blob/master/src/expressions.md#expression-precedence">expression operator precedence</a>,
+the following operators all have a lower precedence than <code>&amp;&amp;</code>:</p>
+<ul>
+<li><code>||</code></li>
+<li><code>..</code> and <code>..=</code></li>
+<li><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&amp;=</code>, <code>|=</code>, <code>^=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code></li>
+<li><code>return</code>, <code>break</code></li>
+</ul>
+<p>To be precise, the changes in this RFC entail that <code>||</code> has the lowest
+precedence at the top level of <code>if STUFF { .. }</code>. The operator <code>&amp;&amp;</code>
+has then the 2nd lowest precedence and binds more tightly than <code>||</code>.
+If the user wants to disambiguate, they can write <code>(EXPR &amp;&amp; EXPR)</code> or
+<code>{ EXPR &amp;&amp; EXPR }</code> explicitly. The same applies to <code>while</code> expressions.</p>
+<h4><a class="header" href="#a-few-more-examples" id="a-few-more-examples">A few more examples</a></h4>
+<p>Given:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let Range { start: _, end: _ } = true..true &amp;&amp; false { ... }
+
+if let PAT = break true &amp;&amp; false { ... }
+
+if let PAT = F..|| false { ... }
+
+if let PAT = t..&amp;&amp;false { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>it is currently interpreted as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let Range { start: _, end: _ } = true..(true &amp;&amp; false) { ... }
+
+if let PAT = break (true &amp;&amp; false) { ... }
+
+if let PAT = F..(|| false) { ... }
+
+if let PAT = t..(&amp;&amp;false) { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>but will be interpreted as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if (let Range { start: _, end: _ } = true..true) &amp;&amp; false { ... }
+
+if (let PAT = break true) &amp;&amp; false { ... }
+
+if (let PAT = F..) || false { ... }
+
+if (let PAT = t..) &amp;&amp; false { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#rollout-plan-and-transitioning-to-rust-2018" id="rollout-plan-and-transitioning-to-rust-2018">Rollout Plan and Transitioning to Rust 2018</a></h3>
+<p>Everything in this section also applies to <code>while let</code> expressions.</p>
+<p>To enable the second interpretation in the previous section a warning must
+be emitted in Rust 2015 informing the user that:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT = EXPR &amp;&amp; EXPR ...? { .. }
+
+if let PAT = EXPR || EXPR ...? { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>will both become <em>hard errors</em>, in the first version of Rust where the 2018
+edition is stable, without the <code>let_chains</code> features having been stabilized.</p>
+<p>Note that this applies when there's at least one <code>&amp;&amp;</code> or <code>||</code> operator at the
+top level of the RHS. This means that it does <em>not</em> apply in, among others,
+the following cases:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT = ( EXPR &amp;&amp; EXPR ) { .. }
+
+if let PAT = { EXPR &amp;&amp; EXPR } { .. }
+
+if let PAT = ( EXPR || EXPR ) { .. }
+
+if let PAT = { EXPR || EXPR } { .. }
+<span class="boring">}
+</span></code></pre></pre>
+<p>since the user has disambiguated the intent explicitly.</p>
+<p>Pending the stabilization of the features in this RFC, to opt into the new
+semantics, users will need to use a nightly compiler and add the usual feature
+gate opt-in.</p>
+<h3><a class="header" href="#facilitating-for-macro-authors" id="facilitating-for-macro-authors">Facilitating for macro authors</a></h3>
+<p>To facilitate for macro authors, we permit the following:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if (let PAT = EXPR) &amp;&amp; ... { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#let-pat--expr-is-not-an-expression" id="let-pat--expr-is-not-an-expression"><code>let PAT = EXPR</code> is <em>not</em> an expression</a></h3>
+<p>Note that <code>let PAT = EXPR</code> does <em>not</em> become an expression (typed at <code>bool</code>)
+with this RFC. Thus, you may not write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let foo: bool = let Some(_) = None;
+let bar: bool = let Some(_) = Some(1);
+assert_eq!(foo, false);
+assert_eq!(bar, true);
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#semantics-of-if-let-chains" id="semantics-of-if-let-chains">Semantics of <code>if let</code>-chains</a></h2>
+<p>The semantics of <code>if let</code>-chains can be understood by an in-surface-language
+desugaring using only <a href="https://github.com/rust-lang/rfcs/pull/2046">RFC 2046</a> and <code>if let</code>.</p>
+<p>The following:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT_1 = EXPR_1
+    &amp;&amp; let PAT_2 = EXPR_2
+    &amp;&amp; EXPR_3
+    ...
+    &amp;&amp; let PAT_N = EXPR_N
+{
+    EXPR_IF
+} else {
+    EXPR_ELSE
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>desugars into:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>'FRESH_LABEL: {
+    if let PAT_1 = EXPR_1 {
+        if let PAT_2 = EXPR_2 {
+            if EXPR_3 {
+                ...
+                if let PAT_N = EXPR_N {
+                    break 'FRESH_LABEL { EXPR_IF }
+                }
+            }
+        }
+    }
+    { EXPR_ELSE }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This avoids any code duplication and requires no new semantics. The rules for
+borrowing and scoping are just those that result directly from the desugar.</p>
+<p>The <code>else if</code> branches:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT_1 = EXPR_1
+    &amp;&amp; let PAT_2 = EXPR_2
+{
+    EXPR_IF
+} else if let PAT_3 = EXPR_3
+    &amp;&amp; EXPR_4
+{
+    EXPR_ELSE_IF
+} else {
+    EXPR_ELSE
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>are defined by their desugaring to:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>'FRESH_LABEL: {
+    if let PAT_1 = EXPR_1 {
+        if let PAT_2 = EXPR_2 {
+            break 'FRESH_LABEL { EXPR_IF }
+        }
+    }
+
+    if let PAT_3 = EXPR_3 {
+        if EXPR_4 {
+            break 'FRESH_LABEL { EXPR_ELSE_IF }
+        }
+    }
+
+    { EXPR_ELSE }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Having an <code>else</code> branch is optional.
+The following example without an <code>else</code> branch:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT_1 = EXPR_1
+    &amp;&amp; let PAT_2 = EXPR_2
+{
+    EXPR_IF
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>is simply desugared into:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT_1 = EXPR_1 {
+    if let PAT_2 = EXPR_2 {
+        EXPR_IF
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>If we have an <code>else if</code> branch but no <code>else</code> branch, such as in this example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT_1 = EXPR_1
+    &amp;&amp; let PAT_2 = EXPR_2
+{
+    EXPR_IF
+} else if let PAT_3 = EXPR_3
+    &amp;&amp; EXPR_4
+{
+    EXPR_ELSE_IF
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>the semantics are defined by the following desugaring:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>'FRESH_LABEL: {
+    if let PAT_1 = EXPR_1 {
+        if let PAT_2 = EXPR_2 {
+            break 'FRESH_LABEL { EXPR_IF }
+        }
+    }
+
+    if let PAT_3 = EXPR_3 {
+        if EXPR_4 {
+            break 'FRESH_LABEL { EXPR_ELSE_IF }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#semantics-of-while-let-chains" id="semantics-of-while-let-chains">Semantics of <code>while let</code>-chains</a></h2>
+<p>The semantics of <code>while let</code>-chains can be understood by an in-surface-language
+desugaring using only <a href="https://github.com/rust-lang/rfcs/pull/2046">RFC 2046</a>, <code>loop</code> and <code>if let</code>.</p>
+<p>For example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>while EXPR_1
+    &amp;&amp; let PAT_2 = EXPR_2
+    &amp;&amp; let PAT_3 = EXPR_3
+    &amp;&amp; EXPR_4
+{
+    EXPR_WHILE
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>is defined by desugaring into:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>loop {
+    if EXPR_1
+        &amp;&amp; let PAT_2 = EXPR_2
+        &amp;&amp; let PAT_3 = EXPR_3
+        &amp;&amp; EXPR_4
+    {
+        { EXPR_WHILE }
+        continue;
+    }
+    break;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This desugaring relies on the previously discussed desugaring for <code>if let</code>-chains.</p>
+<p>More generally, we may desugar:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>while in_if_list {
+    EXPR_WHILE
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>into:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>loop {
+    if in_if_list {
+        { EXPR_WHILE }
+        continue;
+    }
+    break;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p>This RFC mandates additions to the grammar as well as adding syntax lowering
+passes. These are small additions, but nonetheless the language specification
+is possibly made more complex by it. While this complexity will be used by some
+and therefore, the RFC argues, motivates the added complexity, it will not be
+used all users of the language. However, as discussed in the <a href="#motivation">motivation</a>,
+by unifying constructs in the language conceptually and grammatically,
+we may also say that complexity is <em>reduced</em>.</p>
+<p>When it comes to <code>if let</code>-chains, the feature is already supported by the
+macro <code>if_chain!</code>. Some may feel that this is enough.</p>
+<p>It should also be taken into account that some breakage will occur as a result
+of this RFC. Sergio Benitez has however done some review of the crates.io
+ecosystem and found zero cases of actual breakage. At any rate, writing
+<code>let PAT = EXPR &amp;&amp; ..</code> as a user is a bad thing to do.</p>
+<p>Finally, some may argue, <a href="https://github.com/rust-lang/rfcs/pull/2260#issuecomment-353780537">as done by @petrochenkov</a>,
+that this is <em>&quot;a lot of ad-hoc syntax to deprecate when the proper solution
+solving all the listed problems is implemented&quot;</em>.</p>
+<h1><a class="header" href="#rationale-and-alternatives" id="rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>We will now discuss how and why this RFC came about in its current form.</p>
+<h2><a class="header" href="#the-impact-of-not-doing-this" id="the-impact-of-not-doing-this">The impact of not doing this</a></h2>
+<p>There are at least two sides to power in language expressivity:</p>
+<ol>
+<li>
+<p>The ability to express something in a language at all.</p>
+</li>
+<li>
+<p>The ability to express something with ease.</p>
+</li>
+</ol>
+<p>Nothing proposed in this RFC adds to point 1. While this is the case,
+it is not sufficient. The second point is important to make the language
+pleasurable to use and this is what this RFC is about. Not including the
+changes proposed here would keep some paper cuts around.</p>
+<h2><a class="header" href="#design-considerations" id="design-considerations">Design considerations</a></h2>
+<p>There are some design considerations on this feature. These are:</p>
+<ol>
+<li>
+<p>the syntax mixes well with normal <code>bool</code>ean conditionals.</p>
+</li>
+<li>
+<p>the additions be simple conceptually and build on what language<br />
+users already know.</p>
+</li>
+<li>
+<p>as little of the complexity budget as possible is used.</p>
+</li>
+<li>
+<p>the bindings bound in the pattern have a clear and consistent
+scope.</p>
+</li>
+<li>
+<p>the short-circuiting nature is clear.</p>
+</li>
+<li>
+<p>instead of a heap of special cases, the grammar should be simple.</p>
+</li>
+</ol>
+<p>With these considerations in mind, the RFC was developed.</p>
+<p>Note that these are considerations and have different levels of importance.
+Note also that it is likely impossible to meet all of them, but we'd like
+to tick as many boxers as possible.</p>
+<h2><a class="header" href="#keeping-the-door-open-for-if-let-or-expressions" id="keeping-the-door-open-for-if-let-or-expressions">Keeping the door open for <code>if-let-or</code>-expressions</a></h2>
+<p>Should a user be able to write something like the following snippet?</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let A(x) = e1
+    || let B(x) = e2 {
+    do_stuff_with(x)
+} else {
+    do_other_stuff()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>What does this expression even mean? It means that if one of the patterns
+match, then the first one of those will bind a value to <code>x</code> and the expression
+evaluates to <code>do_stuff_with(x)</code>. If no patterns match, the expression instead
+evaluates to <code>do_other_stuff()</code>.</p>
+<p>This RFC does not propose such a facility, but does not foreclose such
+a possibility, making the feature future proof and allowing discussion on such
+a facility in the future to continue. Alternatives should similarly try to
+retain this ability.</p>
+<h2><a class="header" href="#alternative-a-hrefhttpsgithubcomrust-langrfcspull2046rfc-2046a-label-break-value" id="alternative-a-hrefhttpsgithubcomrust-langrfcspull2046rfc-2046a-label-break-value">Alternative: <a href="https://github.com/rust-lang/rfcs/pull/2046">RFC 2046</a>, label break value</a></h2>
+<p><a href="https://github.com/rust-lang/rfcs/pull/2046">RFC 2046</a>, which has been merged but not stabilized,
+is a more general <em>control flow graph</em> (<a href="https://en.wikipedia.org/wiki/Control_flow_graph">CFG</a>) control feature.
+While it doesn't as straightforwardly solve the rightward drift or ergonomic
+issues as this RFC does, it allows <a href="https://github.com/rust-lang/rfcs/pull/2046#issuecomment-320483246">the macros to be improved</a> by removing
+duplication of <code>else</code> blocks. The closest syntax today for that is <code>loop-break</code>,
+but that doesn't work as <code>continue</code> is intentionally non-hygenic.</p>
+<p>RFC 2046 is also a bit orthogonal in the sense that it's fully compatible
+with this RFC. The general label break is useful and powerful, as seen in
+the <a href="#reference-level-explanation">reference-level-explanation</a> of this RFC and of <code>catch</code>'s, but is
+verbose and unfamiliar. Having a substantially more ergonomic feature for
+this particularly common case is valuable regardless. As such, we argue that
+this RFC is mostly complementary wrt. RFC 2046.</p>
+<p>Furthermore, as we've noted in the <a href="#motivation">motivation</a>, a macro based approach is
+not a construct that is universal among Rust programmers, which is an important
+property for control flow in particular to improve the legibility of programs.</p>
+<h2><a class="header" href="#the-main-alternatives" id="the-main-alternatives">The main alternatives</a></h2>
+<p>There are some alternatives to consider. Let's go through some of the
+main ones.</p>
+<p>First, there's the choice of a separator to use in-between <code>let</code>s and <code>bool</code>
+typed condition expressions. We consider 3 different separators:</p>
+<ol>
+<li>logical and (<code>&amp;&amp;</code>)</li>
+<li>comma (<code>,</code>)</li>
+<li><code>if</code></li>
+</ol>
+<p>We also consider two different ways to bind inside <code>if</code>:</p>
+<ol>
+<li><code>let PAT = EXPR</code></li>
+<li><code>EXPR is PAT</code></li>
+</ol>
+<p>Additionally, instead of the keyword <code>is</code>, we consider <code>match</code>.
+In total, we have 6 (or 9 if we count <code>match</code>) variants to pick from.
+These 6 alternatives are:</p>
+<p>In this RFC, we propose the combination of <code>&amp;&amp;</code> and <code>let PAT = EXPR</code>.</p>
+<h3><a class="header" href="#a-survey---method" id="a-survey---method">A survey - Method</a></h3>
+<p>To gain some data on what users of Rust think about the 6 different variants,
+a multi-answer survey was done using Google Forms. The survey ran from
+2017-12-31 06:25 to ~2018-01-06 ~14:00 and received 373 answers.
+Participants were also able to provide free-form motivation (&quot;comments&quot;)
+to their answers if they so wished.</p>
+<p>To decrease the risk of bias in favour of a particular alternative,
+the order of the answers as presented to survey participants were randomized.
+Furthermore, to make the survey more fair, all alternatives were syntax
+highlighted as a normal IDE would do.</p>
+<p>The survey answers had the following distribution in origin:</p>
+<ul>
+<li>Reddit, 68.4%</li>
+<li>internals.rust-lang.org, 16.6%</li>
+<li>users.rust-lang.org, 7.5%</li>
+<li>IRC, 5.1%</li>
+<li>The RFC, 2.4%</li>
+</ul>
+<h3><a class="header" href="#a-survey---data" id="a-survey---data">A survey - Data</a></h3>
+<p>For those interested in reading the survey answers you can do so by reading:
++ <a href="https://docs.google.com/forms/d/e/1FAIpQLScwG0Y3ynA9aJZ-iprOey_GyCNeFMO9MSDJR1kiskpjsjL1Mw/viewanalytics">A summary of the survey</a>
++ <a href="https://drive.google.com/file/d/1awyvryblSHFH9J77TPutW5BrRlKr0EKZ/view?usp=sharing">A CVS file of the survey</a>
++ <a href="https://drive.google.com/file/d/14ofF5on_Z_XLvhPr1I4dVgCfcybQO2GY/view?usp=sharing">A PDF for the survey</a></p>
+<p>The breakdown of preferences were:</p>
+<ol>
+<li>
+<p>Using <code>&amp;&amp;</code> and <code>let PAT = EXPR</code> - liked: 66.2%, disliked: 16.9%</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT = EXPR
+    &amp;&amp; let PAT = EXPR
+    &amp;&amp; EXPR
+{
+    ..
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Using <code>&amp;&amp;</code> and <code>EXPR is PAT</code> - liked: 24.9%, disliked: 48.5%</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if EXPR is PAT
+    &amp;&amp; EXPR is PAT
+    &amp;&amp; EXPR {
+    ..
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Using <code>,</code> and <code>let PAT = EXPR</code> - liked: 16.9%, disliked: 56.3%</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT = EXPR,
+   let PAT = EXPR,
+   EXPR {
+    ..
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Using <code>if</code> and <code>let PAT = EXPR</code> - liked: 12.3%, disliked: 66%</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let PAT = EXPR
+if let PAT = EXPR
+if EXPR {
+    ..
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Using <code>,</code> and <code>EXPR is PAT</code> - liked: 4.3%, disliked: 74.5%</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if EXPR is PAT,
+   EXPR is PAT,
+   EXPR {
+     ..
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Using <code>if</code> and <code>EXPR is PAT</code> - liked: 2.4%, disliked: 80.4%</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if EXPR is PAT
+if EXPR is PAT
+if EXPR {
+    ..
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+</ol>
+<p>Finally, 9.7% liked none of the options and 1.9% liked all of them.</p>
+<h3><a class="header" href="#a-survey---analysis-of-comments" id="a-survey---analysis-of-comments">A survey - Analysis of Comments</a></h3>
+<p>There are too many answers to include here, instead, we select some of
+the most interesting ones and highlight them.</p>
+<h4><a class="header" href="#tried-before" id="tried-before">Tried before</a></h4>
+<p>One participant, among 6 (see <a href="#appendix-b1">Appendix B.1</a>) others who all positively inclined,
+explicitly commented that they had tried the syntax proposed in this RFC before.</p>
+<blockquote>
+<p>The &quot;<code>if let .. &amp;&amp; let .. &amp;&amp; ..</code>&quot; feels like the intuitive way to do it if
+you don't think about the language syntax too much. It's definitely the way
+I tried doing it when I thought it was possible at the start of my Rust path.</p>
+</blockquote>
+<p>This substantiates the claim made in the <a href="#an-expected-feature">motivation</a>.</p>
+<h4><a class="header" href="#consistency" id="consistency">Consistency</a></h4>
+<p>An even greater number of people (48, see <a href="#appendix-b2">Appendix B.2</a>) commented that they
+thought that the proposed syntax was the <em>consistent</em> alternative. This was
+by far the most frequent comment made in the survey.</p>
+<blockquote>
+<p>So I like that using <code>&amp;&amp;</code> is how we currently use it in the language,
+and everyone is already used to using <code>let A(x) = foo()</code>.
+Honestly, the one I chose feels the most consistent with the language.</p>
+</blockquote>
+<h4><a class="header" href="#intuitiveness" id="intuitiveness">Intuitiveness</a></h4>
+<p>A lesser number (8, see <a href="#appendix-b3">Appendix B.3</a>) of participants said did not explicitly
+say that the proposed syntax was <em>consistent</em>, but that they found it
+<em>intuitive</em> nonetheless.</p>
+<blockquote>
+<p><code>&amp;&amp;</code> makes the logic relationship clearer, and using <code>let</code> for binding is the same. 
+Conjunction is more readable with <code>&amp;&amp;</code></p>
+</blockquote>
+<p>This, and in particular the consistency, goes a long way to satisfy points
+2-3 in the <a href="#design-considerations">design considerations</a>.</p>
+<h4><a class="header" href="#expectation-that-let-pat--expr--bool" id="expectation-that-let-pat--expr--bool">Expectation that <code>(let PAT = EXPR) : bool</code></a></h4>
+<p>A few participants (3, see <a href="#appendix-b4">Appendix B.4</a>) hinted at that using <code>&amp;&amp;</code> together
+with <code>let PAT = EXPR</code> set up the expectation that the latter is a <code>bool</code> typed
+expression.</p>
+<blockquote>
+<p>Using <code>&amp;&amp;</code> for conjunction with <code>let PATTERN = EXPR</code> feels consistent with
+the existing <code>if let</code> syntax, however it causes potentially some confusion
+about data types and its existing function as a <code>boolean</code> operator, so that
+leads me to considering <code>,</code> as the conjunction instead.
+However, if &quot;<code>let PATTERN = EXPR</code>&quot; is an expression returning a boolean as
+well as setting up the pattern bindings then there's no issue with <code>&amp;&amp;</code> at
+all, and it's then preferable to me provided it's available where you'd
+expect expressions to be available and not treated particularly specially.</p>
+</blockquote>
+<p>If that were the case you'd be able to write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let is_some: bool = let Some(_) = the_option;
+<span class="boring">}
+</span></code></pre></pre>
+<p>However, this is not the case in this proposal.</p>
+<p>We expect that this will be one of the most frequent misconceptions in relation
+to the proposed syntax. However, such misconceptions can be put to bed simply
+when the user tries to write a snippet like the one above. They will then get
+an error message that clears up that misconception. It should also be noted that
+<code>if let</code>, which exists in the language today, also suffers from this problem.
+That is, given <code>if let PAT = EXPR { .. }</code>, a user may get the impression that
+it is the composition of <code>if EXPR { .. }</code> and <code>let PAT = EXPR</code> while it is <em>not</em>.
+While the syntax changes in this RFC does enhance the risk of misconception
+somewhat, ultimately we do not feel that it poses a critical problem.</p>
+<h4><a class="header" href="#commas-and-if-as-separators---conjunction" id="commas-and-if-as-separators---conjunction">Commas and <code>if</code> as separators - conjunction?</a></h4>
+<p>There were many people (19, see <a href="#appendix-b5">Appendix B.5</a>) who felt that using <code>,</code> or <code>if</code>
+as the separator did not clearly enough signal conjunction and thought that
+the symbols may be mistaken for disjunction.</p>
+<blockquote>
+<p>Commas just aren't clear enough: on their own, to many people,
+they could easily be interpreted as logical ORs or logical ANDs.</p>
+</blockquote>
+<p>In most cases, these comments were directed towards <code>,</code>, but there were also
+some who thought this about <code>if</code>:</p>
+<blockquote>
+<p><code>if</code> after <code>if</code> with no logical operator? is this AND? is this OR?</p>
+</blockquote>
+<p>On the other hand, it could be argued that Rust already uses <code>if</code> for
+conjunction since you can use <code>PAT if EXPR =&gt; ..</code> inside <code>match</code> expressions.
+Indeed, a few people hinted at this:</p>
+<ol>
+<li>
+<blockquote>
+<p>Clear and unambiguous, and similar to existing guards in match statements,
+so it does not introduce completely new syntax.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>This is already basically how match arms work.</p>
+</blockquote>
+</li>
+</ol>
+<p>Our conclusion is that this at least presents a serious enough of a problem
+for <code>,</code> as the separator for conjunction to rule it out while also being
+problematic for <code>if</code>.</p>
+<h4><a class="header" href="#commas-and-short-circuiting" id="commas-and-short-circuiting">Commas and short-circuiting</a></h4>
+<p>A number of participants (5, see <a href="#appendix-b6">Appendix B.6</a>) noted that using <code>,</code> as the
+separator was not clearly enough indicating short-circuiting behaviour.</p>
+<blockquote>
+<p>On the other hand the comma'd version felt the least clear in meaning
+and execution order. I'm more used to things-separated-by-commas being
+roughly equivalent instead of being something that ends up short
+circuiting the evaluation.</p>
+</blockquote>
+<p>This is a further blow to <code>,</code> in terms of our <a href="#design-considerations">design considerations</a>.</p>
+<h4><a class="header" href="#if-as-separator-is-noisy" id="if-as-separator-is-noisy"><code>if</code> as separator is noisy</a></h4>
+<p>Some people argued that <code>if</code> as a separator felt noisy or that it felt like
+there were missing braces. One also noted that multiple <code>if</code>s on one line
+wouldn't work well on a single line. However, one respondent said that
+the &quot;eliding of braces&quot;-interpretation was a <em>good</em> thing.</p>
+<p>As an aside, we would like to note here that <code>if</code> as a separator would need
+to be matched with <code>while</code> as a separator as well. This makes the separator
+too context dependent in our view.</p>
+<h4><a class="header" href="#patterns-unexpectedly-on-the-rhs" id="patterns-unexpectedly-on-the-rhs">Patterns unexpectedly on the RHS</a></h4>
+<p>Some people (10, see <a href="#appendix-b8">Appendix B.8</a>) thought that bindings introduced on the
+RHS as in <code>EXPR is PAT</code> as opposed to <code>let PAT = EXPR</code> was backwards and weird.</p>
+<blockquote>
+<p><code>expr is pat</code> reverses the directionality for pattern bindings seen
+everywhere else in Rust;</p>
+</blockquote>
+<p>One could argue that bindings introduced in the arms of <code>match</code> expressions are
+to the right if one formats such expressions as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match EXPR { PAT =&gt; ... }
+   // LHS // RHS
+<span class="boring">}
+</span></code></pre></pre>
+<p>However, this is not the typical formatting of <code>match</code> expressions as they
+tend to include more than one arm. When using the normal formatting of
+such expressions, the match arms, and therefore the bindings, are introduced
+on the LHS.</p>
+<p>This inconsistency does not have to be an insurmountable problem as we believe
+that <code>EXPR is PAT</code> generally reads well. However, having the pattern
+consistently on LHS everywhere makes introductions of bindings more readily
+scannable, which is a valuable property when reading code quickly.</p>
+<h4><a class="header" href="#the-is-operator-introduces-bindings" id="the-is-operator-introduces-bindings">The <code>is</code> operator introduces bindings</a></h4>
+<p>However, a more serious problem that some survey participants
+(15, see <a href="#appendix-b9">Appendix B.9</a>) identified was that <code>EXPR is PAT</code>, according
+to the respondents, confusingly introduces a binding and that
+it could be misconstrued as an equality test of some sort.</p>
+<blockquote>
+<p><code>is</code> doesn't make any sense since we already have <code>if let PATTERN</code> and
+<code>is</code> in other languages is typically a reference equality check
+(e.g. Dart and Python).</p>
+</blockquote>
+<blockquote>
+<p>I dislike the <code>EXPR is PATTERN</code> syntax because while the word <code>let</code>
+indicates that there is some binding going on, I read the word <code>is</code> as
+passively checking whether the expression fits a pattern without binding.
+I also dislike <code>is</code> because it is new syntax that does the same thing as
+existing syntax.</p>
+</blockquote>
+<p>We believe this problem to be more serious. As an alternative to <code>EXPR is PAT</code>,
+some have proposed using the existing keyword <code>match</code> instead. You would then
+instead write the example in the <a href="#motivation">motivation</a> as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn param_env&lt;'a, 'tcx&gt;(tcx: TyCtxt&lt;'a, 'tcx, 'tcx&gt;, def_id: DefId) -&gt; ParamEnv&lt;'tcx&gt; {
+    if tcx.describe_def(def_id) match Some(Def::Existential(_))
+        &amp;&amp; tcx.hir.as_local_node_id(def_id) match Some(node_id)
+        &amp;&amp; tcx.hir.get(node_id) match hir::map::NodeItem(item)
+        &amp;&amp; item.node match hir::ItemExistential(ref exist_ty)
+        &amp;&amp; exist_ty.impl_trait_fn match Some(parent)
+    {
+        return param_env(tcx, parent);
+    }
+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>As previously noted, using <code>is</code> is less scannable. This also applies to <code>match</code>.</p>
+<p>As an aside, one survey participant confused <code>is</code> for <code>as</code>; This does seem like
+a mistake that is likely to happen due to the similarity of these two words.</p>
+<h2><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h2>
+<p>We believe that the case for <code>&amp;&amp;</code> and <code>let PAT = EXPR</code> is strong.
+As demonstrated by the survey, which we believe is statistically significant,
+it is both consistent and intuitive for most users. The syntax also satisfies
+most of the points in the <a href="#design-considerations">design considerations</a>.</p>
+<p>The only main drawbacks to this proposal is some tiny bit of breakage as
+well as an increase in implementation complexity.
+The breakage is considered OK, because writing <code>let true = p &amp;&amp; q</code> is
+at any rate a terrible style and because it is so infrequent.
+As for the increased grammar complexity, we believe this is less important
+in this case than making control flow more ergonomic and readable for users.</p>
+<p>Some may view the fact that <code>let PAT = EXPR</code> is not an expression typed at
+<code>bool</code> as an ad-hoc solution. However, we believe that we should live within
+our means wrt. the complexity budget and spend it on more important things.
+Furthermore, as evidenced in <a href="https://github.com/rust-lang/rfcs/pull/2260">RFC 2260</a>, making <code>EXPR is PAT</code>,
+which has other problems we've previously noted, an expression is also tricky
+due to the non-obvious scoping rules for bindings it entails.
+Mainly because of this, support for <code>EXPR is PAT</code> has been slow to develop.</p>
+<p>For the use case of having some pattern matching construct that is typed at
+<code>bool</code>, we could later introduce the form <code>EXPR is PAT</code> but prohibit  <code>PAT</code>
+from introducing bindings.</p>
+<h1><a class="header" href="#prior-art" id="prior-art">Prior art</a></h1>
+<h2><a class="header" href="#swift" id="swift">Swift</a></h2>
+<p>The expression form <code>if let PAT = EXPR { .. }</code> was introduced to Rust by
+accepting <a href="https://github.com/rust-lang/rfcs/pull/160">RFC 160</a>. That RFC noted that:</p>
+<blockquote>
+<p>The if let construct is based on the precedent set by Swift,
+which introduced its own if let statement.
+In Swift, <code>if let var = expr { ... }</code> is directly tied to the notion of
+optional values, and unwraps the optional value that <code>expr</code> evaluates to.
+In this proposal, the equivalent is <code>if let Some(var) = expr { ... }</code>.</p>
+</blockquote>
+<p>As the construct <code>if let</code> was inspired by Swift, it therefore makes sense
+to consult Swift to see how the language deals with multiple <code>let</code>s in
+<code>if</code>.</p>
+<p>It turns out that you can by writing:</p>
+<pre><code class="language-swift">if let g = greetings, let s = salutations {
+    print(g)
+    print(s)
+}
+</code></pre>
+<p>which with the syntax proposed in this RFC would be equivalent to:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let Some(g) = greetings
+    &amp;&amp; let Some(s) = salutations
+{
+    print(g)
+    print(s)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>You can also use <code>case let</code> for more general pattern matching:</p>
+<pre><code class="language-swift">if case let Media.movie(_, _, year) = m, year &lt; 1888 {
+    ...
+}
+</code></pre>
+<p>Previously in Swift, you would instead write:</p>
+<pre><code class="language-swift">if case let Media.movie(_, _, year) = m, where year &lt; 1888 {
+    ...
+}
+</code></pre>
+<p>but this was changed in favour of omitting <code>where</code> in <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0099-conditionclauses.md">SE-0099</a>.</p>
+<p>Interestingly, the separator token that Swift uses for conjunctive chaining
+in <code>if</code> is <code>,</code> (comma). <a href="https://github.com/rust-lang/rfcs/pull/2260">RFC 2260</a> proposed this, but this turned out not
+to be as intuitive for many users as <code>&amp;&amp;</code> is (see <a href="#rationale-and-alternatives">alternatives</a> for a discussion).</p>
+<h2><a class="header" href="#kotlin" id="kotlin">Kotlin</a></h2>
+<p>In <a href="https://github.com/rust-lang/rfcs/pull/2260">RFC 2260</a> <a href="https://github.com/matklad">@matklad</a> said that:</p>
+<blockquote>
+<p>It's interesting to compare it with Kotlin, which also uses is operator for the similar purpose: https://kotlinlang.org/docs/reference/typecasts.html#smart-casts.</p>
+<p>The differences is that instead of destructing, Kotlin's is supplies a flow-sensitive type information. The compiler indeed uses pretty smart control-flow analysis to check if every use of a variable is dominated by the is check.</p>
+<p>However, as long as the compiler does all the inference work for you, actually using this feature is easy: you don't have to replay the analysis in your head when reading or writing code, because the compiler catches all errors.</p>
+</blockquote>
+<h2><a class="header" href="#a-hrefhttpsgithubcomrust-langrfcspull160rfc-160a" id="a-hrefhttpsgithubcomrust-langrfcspull160rfc-160a"><a href="https://github.com/rust-lang/rfcs/pull/160">RFC 160</a></a></h2>
+<p>Interestingly, the <code>EXPR is PAT</code> idea was floated in the original RFC 160 that
+introduced <code>if let</code> expressions in the first place. There, the notion that an
+operator named <code>is</code>, which introduces bindings, is confusing was brought up.</p>
+<p>It was also mentioned by <a href="https://github.com/rust-lang/rfcs/pull/160#issuecomment-48515260">@kballard</a> that it would be appropriate
+if, and only if, it was limited to pattern matching, but not introducing any
+bindings. We make the same argument in this RFC. The issue of unintuitive
+scopes was also mentioned <a href="https://github.com/rust-lang/rfcs/pull/160#issuecomment-48551196">by @kballard</a> there.</p>
+<p>Even the idea of <code>if EXPR match PAT</code> was floated by <a href="https://github.com/rust-lang/rfcs/pull/160#issuecomment-49234092">@liigo</a> at the
+time but that idea was ultimately also rejected. <a href="https://github.com/rust-lang/rfcs/pull/160#issuecomment-49242255">@kballard</a> opined
+that using <code>match</code> as a binary operator would be <em>&quot;very confusing&quot;</em> but did not
+elaborate further at the time.</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<h2><a class="header" href="#the-final-syntax" id="the-final-syntax">The final syntax</a></h2>
+<p>The main goal of this RFC is threefold:</p>
+<ol>
+<li>
+<p>Decide that this is a problem that needs to be solved <em>somehow</em>.</p>
+</li>
+<li>
+<p>Make the proposed syntax in the RFC an option that is available in Rust 2018.</p>
+</li>
+<li>
+<p>Adopt the proposed syntax in the RFC.</p>
+</li>
+</ol>
+<p>Of these points, the 1st and the 2nd are the most important for the time being.
+The 3rd point is not unimportant, but it is not as time sensitive.
+Thus, one path ahead of least resistance is to adopt the syntax in the RFC and
+make it available in Rust 2018 while leaving the final syntax unresolved.
+We can then debate alternatives, in particular using <code>EXPR match PAT</code>,
+more rigorously post shipping Rust 2018. Finalizing the syntax and can
+then be decided in a tracking issue or another RFC.</p>
+<h2><a class="header" href="#irrefutable-let-bindings-after-the-first-refutable-binding" id="irrefutable-let-bindings-after-the-first-refutable-binding">Irrefutable let bindings after the first refutable binding</a></h2>
+<p>Should temporary and irrefutable <code>let</code>s without patterns be allowed as
+in the following example?</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let &amp;List(_, ref list) = meta
+    &amp;&amp; let mut iter = list.iter().filter_map(extract_word) // &lt;-- Irrefutable
+    &amp;&amp; let Some(ident) = iter.next()
+    &amp;&amp; let None = iter.next()
+{
+    *set = Some(syn::Ty::Path(None, ident.clone().into()));
+} else {
+    error::param_malformed();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>With normal <code>if let</code> expressions, this is an error as seen with the 
+following example:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    if let x = 1 { 2 } else { 3 };
+}
+</code></pre></pre>
+<p>Compiling the above ill-formed program results in:</p>
+<pre><code>error[E0162]: irrefutable if-let pattern
+</code></pre>
+<p>However, with the implementation of <a href="https://github.com/rust-lang/rfcs/pull/2086">RFC 2086</a>, this error will instead
+become a warning.  This is understandable - while the program could have
+perfectly well defined semantics, where the value of the expression is
+always 2, allowing the form would invite some developers to write in a
+non-obvious way. A warning is however a good middle ground.</p>
+<p>However, when let bindings in the middle are irrefutable, there is some value
+in not warning against the construct. In the case of the initial example in this
+subsection, it would be written as follows without irrefutable let bindings:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let &amp;List(_, ref list) = meta {
+   let mut iter = list.iter().filter_map(extract_word);
+    if let Some(ident) = iter.next()
+        &amp;&amp; let None = iter.next()
+    {
+        *set = Some(syn::Ty::Path(None, ident.clone().into()));
+    } else {
+        error::param_malformed();
+    }
+} else {
+    error::param_malformed();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>However, now we have introduced rightward drift and duplication again,
+which we wanted to avoid.</p>
+<p>On the other hand, allowing irrefutable patterns in the middle without a
+warning may give the impression that the irrefutable pattern is refutable,
+or cast doubt on it making semantics possibly harder to grasp quickly.</p>
+<p>This is a tricky question, which we leave open for consideration during
+the stabilization period or even after stabilization.</p>
+<h2><a class="header" href="#chained-if-lets-inside-match-arms" id="chained-if-lets-inside-match-arms">Chained <code>if let</code>s inside <code>match</code> arms</a></h2>
+<p>Would the following be accepted by a Rust compiler?</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match EXPR {
+    PAT if let PAT = EXPR &amp;&amp; EXPR &amp;&amp; ... =&gt; { .. }
+    _ =&gt; { .. }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The combination of the accepted, but yet to be stabilized, <a href="https://github.com/rust-lang/rfcs/pull/2294">RFC 2294</a>, and this
+RFC would entail that it would be accepted. However, at this point, and in the
+interest of time, we leave this for a future RFC or for pre-stabilization.</p>
+<h1><a class="header" href="#appendix-a---style-considerations" id="appendix-a---style-considerations">Appendix A - Style considerations</a></h1>
+<p>How should the features introduced in this RFC be formatted?
+This is not a make or break question but rather a style question for <code>rustfmt</code>.
+What you read here should not be taken as prescriptive but rather as discussion
+material and to generate ideas. Any eventual decision on style will be made by
+a separate style RFC.</p>
+<p>Here are a few variants on indentation to consider for <code>rustfmt</code> while
+may or may not be mutually compatible:</p>
+<h3><a class="header" href="#1--on-a-new-line-and-indented--open-brace-after-newline" id="1--on-a-new-line-and-indented--open-brace-after-newline">1. <code>&amp;&amp;</code> on a new line and indented + Open-brace after newline</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if independent_condition
+    &amp;&amp; let Alan(x) = turing()
+    &amp;&amp; let Alonzo(y) = church(x)
+    &amp;&amp; y.has_really_cool_property()
+{
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This style is maximally consistent with how conditions in <code>if</code> expressions are
+currently formatted.</p>
+<p>Moving the open brace down a line may help emphasize the split between
+a lengthy condition and the block body.</p>
+<h3><a class="header" href="#2--after-bindings" id="2--after-bindings">2. <code>&amp;&amp;</code> after bindings</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if independent_condition &amp;&amp;
+   let Haskell(x) = curry() &amp;&amp;
+   let Alonzo(y) = church(x) &amp;&amp;
+   y.has_really_cool_property() {
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This style is consistent with how separators, such as <code>,</code>, are currently
+formatted in Rust.</p>
+<h3><a class="header" href="#3--at-the-start-of-lines" id="3--at-the-start-of-lines">3. <code>&amp;&amp;</code> at the start of lines</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if independent_condition
+&amp;&amp; let Alan(x) = turing()
+&amp;&amp; let Alonzo(y) = church(x)
+&amp;&amp; y.has_really_cool_property() {
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This style of leading separators is inconsistent with current formatting.</p>
+<h3><a class="header" href="#4-aligning-the-equals-sign-together" id="4-aligning-the-equals-sign-together">4. Aligning the equals sign together</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if independent_condition &amp;&amp;
+   let Alan(x)   = turing() &amp;&amp;
+   let Alonzo(y) = church(x) &amp;&amp;
+   y.has_really_cool_property() {
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>While this might look visually pleasing, visual indent like this is
+against the <a href="https://github.com/rust-lang-nursery/fmt-rfcs/blob/master/guide/principles.md#overarching-guidelines">rustfmt guidelines</a>.</p>
+<h3><a class="header" href="#5-newline-after-else-if" id="5-newline-after-else-if">5. Newline after <code>else if</code></a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if independent_condition &amp;&amp;
+   let Conor(x) = mcbride() &amp;&amp;
+   let Euginia(y) = cheng(x) &amp;&amp;
+   y.has_really_cool_property() {
+    computation_with(x, y)
+} else if // &lt;-- Notice newline.
+    let Stephanie(x) = weirich() &amp;&amp;
+    let Thierry(y) = coquand() {
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this version we look at whether or not a newline should be
+inserted after an <code>else if</code> branch. The benefit of inserting a
+newline is that it aligns well with the <code>let</code> bindings in the
+<code>if</code> branch.</p>
+<h3><a class="header" href="#6-no-indent-at-all-just-a-list-of-conditions" id="6-no-indent-at-all-just-a-list-of-conditions">6. No indent at all, just a list of conditions</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if independent_condition &amp;&amp;
+let Alan(x)   = turing() &amp;&amp;
+let Alonzo(y) = church(x) &amp;&amp;
+y.has_really_cool_property() {
+    computation_with(x, y)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In this version, we do not indent the <code>let</code>s and the boolean side-conditions.
+But we do place the <code>&amp;&amp;</code> on the end of lines. One benefit here is that the
+body of the <code>if</code> expression more clearly stands out. However, a drawback
+is that the <code>if</code> token stands less out.</p>
+<p>There are of course more versions one can contemplate and the various
+combination of them, but in the interest of brevity, we keep to this list here.</p>
+<h1><a class="header" href="#appendix-b" id="appendix-b">Appendix B</a></h1>
+<p>This appendix groups some survey answers together for the purposes of analysis.
+Please note that this appendix is by no means complete and is only offered on
+a best-effort basis. The comments cited below have also been cleaned up to
+fix obvious spelling mistakes, etc.</p>
+<h2><a class="header" href="#appendix-b1" id="appendix-b1">Appendix B.1</a></h2>
+<p>Here are a number of participants in the survey commenting that they expected
+the proposed syntax in this RFC to work.</p>
+<ol>
+<li>
+<blockquote>
+<p>The &quot;<code>if let .. &amp;&amp; let .. &amp;&amp; ..</code>&quot; feels like the intuitive way to do it if you don't think about the language syntax too much. It's definitely the way I tried doing it when I thought it was possible at the start of my Rust path.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I tried to write this one and then realized it's not supported.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I've already tried to do this before and find it didn't work.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I was surprised to find that this syntax wasn't already supported.  Principle of least surprise for the win.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I would expect &quot;Using <code>&amp;&amp;</code> for conjunction and <code>let PATTERN = EXPR</code>&quot; to work already today</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I tried to used this specific syntax and I expected it to work already.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>let …</code> matches the current <code>if let</code>, and the <code>&amp;&amp;</code> matches the way I would write it. I've tried to write <code>if let Some(x) = foo &amp;&amp; x.bar() { … }</code> before.</p>
+</blockquote>
+</li>
+</ol>
+<h2><a class="header" href="#appendix-b2" id="appendix-b2">Appendix B.2</a></h2>
+<p>Many participants in the survey opined that the proposed syntax was consistent
+with current Rust. They though that this was positive.</p>
+<ol>
+<li>
+<blockquote>
+<p>It is the <em>only</em> option consistent with what we have today and expect once we learn about <code>let PATTERN = EXPR</code>.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Close to current Rust syntax</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Most similar to existing syntaxes, which increases orthogonality.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>This seems most consistent with existing Rust syntax.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>consistency with current Rust</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>consistency with current syntax</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Consistency with current syntax</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>It's the least surprising syntax. It's obvious.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Should be consistent and similar to how match patterns/existing
+<code>let A(x) = b</code> works.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Seems to most closely match existing syntax and style</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Seems consistent with existing syntax</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Consistent with current Rust syntax.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Consistency with the syntax we already have.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>compatibility with current syntax</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>It's feels consistent with the rest of the language.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Consistency with existing Rust constructs and familiarity with C and Swift
+syntax.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>consistent with already existing <code>if</code> and <code>let</code> patterns. intuitive</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>close to current rust syntax (same assign syntax as in <code>match</code> and <code>if let</code>)</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I chose &quot;Using <code>&amp;&amp;</code> for conjunction and <code>let PATTERN = EXPR</code>&quot; because it
+seems like the only choice that is consistent with Rust syntax as it is today.
+The rest are... strange.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>we already have while <code>let A(x) = foo()</code> and <code>&amp;&amp;</code> in <code>if</code> statements,
+I don't see how any other syntax makes sense</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Using <code>&amp;&amp;</code> unambiguously means conjunction and is, IMO, easier to read.
+<code>let PATTERN = EXPR</code> does not introduce a new form of pattern matching to
+the language.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The &quot;<code>let(x) = expr</code>&quot; is consistent with the current syntax, the &quot;<code>&amp;&amp;</code>&quot;
+makes it clear it's an AND (and in most languages it's short-circuited).</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>So I like that using <code>&amp;&amp;</code> is how we currently use it in the language,
+and everyone is already used to using <code>let A(x) = foo()</code>.
+Honestly, the one I chose feels the most consistent with the language.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>double <code>&amp;</code> is standard for logical AND, &quot;<code>if let foo(x) = bar</code>&quot; is just
+as good as the other syntax but is already standard in rust,
+so might as well keep it</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>using <code>&amp;&amp;</code> and <code>let PATTERN = EXPR</code> is more intuitive because you're
+checking a condition <em>and</em> whether a pattern matches.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>follows standard &quot;<code>&amp;&amp;</code>&quot; pattern and &quot;<code>if-let</code>&quot; pattern as well</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>uses existing syntax</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>It's what I already know in Rust</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>this is the most similar to rust's current <code>if let</code> syntax</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Uses already established keywords and operators in a semantically similar way.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>It just looks like normal rust we're all used to (<code>if let</code> destructuring
+syntactic sugar)</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The most natural extension of <code>let</code> expressions and <code>boolean</code> conditions</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The <code>&amp;&amp;</code> operator and &quot;<code>if let</code>&quot; are already in the language.
+No reason to pick something totally different.
+More on that on the next page.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I don't really like any of them. I prefer <code>;</code> for conjunction because
+that's more similar to how Go does it, though <code>&amp;&amp;</code> for conjunction and
+<code>let PATTERN = ...</code> is okay because it's intuitive given other language
+features in Rust.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Using <code>&amp;&amp;</code> for conjunction is consistent with other languages I know,
+using <code>let</code> for pattern matching is explicit about introducing new names.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Seems the most natural. If I knew <code>if let x = y</code> could be combined with
+other conditions, my first thought would be <code>&amp;&amp; z == z1</code></p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Smallest delta from current syntax. <code>&amp;&amp;</code> already exists,
+<code>let PATTERN = EXPR</code> exists, just allowing the two in composition.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The option I chose (<code>if expr &amp;&amp; let pat = expr &amp;&amp; let pat = expr &amp;&amp; expr { body }</code>)
+is the most consistent with existing Rust syntax. It's a fairly natural
+extension of the <code>if let</code> syntax since it uses <code>let pat = expr</code> in a
+place where you could otherwise use <code>expr</code>. Using <code>&amp;&amp;</code> as a conjunction
+most clearly expresses the intention IMO, and it also clearly follows
+short-circuit evaluation.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>EXPR is PATTERN</code> is introducing new alternative syntax which is useless
+when we already have the <code>let PATTERN = EXPR</code> syntax. <code>&amp;&amp;</code> is also
+clearly the best choice for joining conditions because that is what
+it is already used for!</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>&quot;<code>if let</code>&quot; is already a well-known thing in Rust, so keep it.
+Conjunction is already a well-known thing in Rust, so keep it.
+In short, make minimal changes to the language that make the example work.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Using <code>&amp;&amp;</code> for conjunction along with the existing syntax for <code>let</code>
+bindings is the most intuitive and feels the least like it's special-casing.
+I think this is less likely to confuse beginners, and makes it feel more cohesive.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Follows the standards of current syntax relatively closely without
+introducing new symbols, and builds on the existing understanding of
+<code>let</code>-deconstruction while clearing showing (through the use of <code>let</code>)
+that we have assigned <code>x</code> and <code>y</code>.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>This is the syntax that I would expect without reading the manual.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I feel that including <code>let</code> is important to make it clear that the
+pattern is exposing the variables <code>x</code> and <code>y</code> for use in the block body
+and <code>&amp;&amp;</code> is by far the most intuitive way to AND together test conditions.
+In fact, presenting alternatives to Rust's existing <code>&amp;&amp;</code> syntax for
+ANDing together terms made even the use of <code>&amp;&amp;</code> confusing because the
+claim that they were all equivalent meant that it &quot;couldn't possibly be&quot;
+the existing meaning of <code>&amp;&amp;</code>. I didn't know what was going on until I
+realized I'd glossed over tiny (ie. unimportant) text which actually
+explained the meaning in plain English... at which point, I realized that
+the syntaxes other than <code>&amp;&amp;</code> had set up a mistaken assumption that ruled
+out the actual proper interpretation.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I like Using <code>&amp;&amp;</code> for conjunction and <code>let PATTERN = EXPR</code>  because it,
+for me, has the least surprises syntactically. <code>&amp;&amp;</code> indicates conjunction
+of the predicate, and including <code>x</code> and <code>y</code> in subsequent scopes is
+something I wish existed, but if we're not clear about it, it could get messy. </p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>it does not introduce anything fancy new stuff</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I like the &quot;<code>let</code>&quot; syntax better than the <code>EXPR is PATTERN</code> syntax,
+since it's used in other places already.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<ol>
+<li><code>&amp;&amp;</code> is already a familiar concept for working with boolean expressions</li>
+<li><code>if let</code> is how we already achieve conditional binding</li>
+</ol>
+<p>The combination of &quot;<code>is</code>&quot; and <code>&amp;&amp;</code> is the only other choice I could
+consider, albeit begrudgingly. I'm kind of uncomfortable with giving
+up keyword real estate and having another way of doing <code>if let</code>.</p>
+<p>Other than that, I feel like the other choices alienate both new and old
+Rust programmers alike. We should be focusing on keeping things as simple
+and familiar as possible.</p>
+</blockquote>
+</li>
+</ol>
+<h2><a class="header" href="#appendix-b3" id="appendix-b3">Appendix B.3</a></h2>
+<p>Some survey participants did not explicitly say that the RFC's proposed syntax
+was <em>consistent</em>, but they did say, in some way, that it was <em>intuitive</em>.</p>
+<ol>
+<li>
+<blockquote>
+<p><code>&amp;&amp;</code> is the logical conjunction operator and <code>let A(x) = foo</code> clearly
+destructures for pattern matching</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The most intuitive</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>It is not surprising</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Looks like straightforward boolean logic, the rest seem like arcane syntax.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Reminiscent of boolean algebra</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>It fits with my mental model of how patterns and Boolean logic work</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>&amp;&amp;</code> makes the logic relationship clearer, and using <code>let</code> for binding is the same. 
+Conjunction is more readable with <code>&amp;&amp;</code></p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>We already have “<code>if let</code>” elsewhere. Don’t introduce a new “<code>is</code>” syntax
+here, it’s not any more intuitive.</p>
+</blockquote>
+</li>
+</ol>
+<h2><a class="header" href="#appendix-b4" id="appendix-b4">Appendix B.4</a></h2>
+<p>Some survey participants felt that the proposed syntax set up the expectation
+of <code>let PAT = EXPR</code> being an expression typed at <code>bool</code> as opposed to a
+statement which is currently the case.</p>
+<ol>
+<li>
+<blockquote>
+<p><code>&amp;&amp;</code> as separator would require boolean expressions.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>&amp;&amp;</code> is for boolean expressions, and won't work right in generic usage.
+<code>let</code> would have to return a boolean which is weird and probably a breaking change.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Using <code>&amp;&amp;</code> for conjunction with <code>let PATTERN = EXPR</code> feels consistent with
+the existing <code>if let</code> syntax, however it causes potentially some confusion
+about data types and its existing function as a <code>boolean</code> operator, so that
+leads me to considering <code>,</code> as the conjunction instead.
+However, if &quot;<code>let PATTERN = EXPR</code>&quot; is an expression returning a boolean as
+well as setting up the pattern bindings then there's no issue with <code>&amp;&amp;</code> at
+all, and it's then preferable to me provided it's available where you'd
+expect expressions to be available and not treated particularly specially.</p>
+</blockquote>
+</li>
+</ol>
+<h2><a class="header" href="#appendix-b5" id="appendix-b5">Appendix B.5</a></h2>
+<p>Another group of people opined that <code>,</code> and <code>if</code> did not clearly imply
+conjunction and that it could be construed as disjunction instead.
+The majority of these comments were directed towards <code>,</code> as opposed to <code>if</code>.</p>
+<ol>
+<li>
+<blockquote>
+<p>Commas do not feel like natural <code>and</code> separators.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>,</code> is bad because it already means &quot;separate things&quot;,
+and now it suddenly means &quot;join things&quot;.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>,</code> does not mean and to me</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Comma is not <code>&amp;&amp;</code>.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>&quot;<code>,</code>&quot; doesn't seem like a conjunction (usually means tuple)</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>,</code> as conjunction is ambiguous (could just as well be disjunction)</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>using a comma to mean conjunction is <em>very</em> unclear.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I find the comma ambiguous (is it AND or OR?).</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Commas just aren't clear enough: on their own, to many people,
+they could easily be interpreted as logical ORs or logical ANDs.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Although really the only reasonable interpretation of <code>,</code> is conjunction,
+it's still not immediately obvious that that is the case.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The tower of <code>if</code>s is quite ugly (although it seems less ambiguous than using commas, which to some people might be construed as disjunction).</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Ambiguous, are they 'or' or 'and'?</p>
+</blockquote>
+<p>note: this refers to <code>,</code> and not <code>if</code> as a separator.</p>
+</li>
+<li>
+<blockquote>
+<p>Commas don't imply conjunction to me and chained ifs just feel a bit
+unnatural too</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Using <code>,</code> is a bad idea because, with Rust already having a perfectly
+good <code>&amp;&amp;</code>, adding <code>,</code> is likely to evoke <em>&quot;OK, I know <code>&amp;&amp;</code>, so <code>.</code> must be OR&quot;</em>
+or <em>&quot;I know <code>&amp;&amp;</code> and <code>||</code>, so what the heck is <code>,</code>? I'm so confused.&quot;</em>
+...not to mention that it runs against the Rust design philosophy to
+needlessly introduce alternative syntax and I can't see any practical reason
+it would be necessary to distinguish between tests and pattern matches in
+this context which can't be handled by putting <code>let</code> before the matches.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>these syntaxes don't make it clear that there is an ‘and’ relationship between the conditions</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>if</code> after <code>if</code> with no logical operator? is this AND? is this OR?</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>They either imply 'or' or remind me of a switch fall through in other
+languages (and thus also 'or') </p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Stacking repeated uses of &quot;<code>if</code>&quot; at the top level feels very confusing to
+visually scan; it doesn't distinguish a conjunction very well.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>if</code> for conjunction is confusing</p>
+</blockquote>
+</li>
+</ol>
+<h2><a class="header" href="#appendix-b6" id="appendix-b6">Appendix B.6</a></h2>
+<p>Does <code>,</code> entail short-circuiting behaviour or not? Some survey participants
+did not think this was clear.</p>
+<ol>
+<li>
+<blockquote>
+<p>I would also expect the comma options to not follow short-circuit evaluation.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>For users coming from other languages, comma is unclear about whether
+short-circuiting will take place.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Syntax does not fit in with other usages of '<code>,</code>' in rust (especially tuples).
+It's non-obvious what the order of execution of sub-expressions are.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The commas are out of left field: they bear no relation to anything
+currently in Rust or any other language. The conditional looks like
+some sort of tupling expression.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>On the other hand the comma'd version felt the least clear in meaning
+and execution order. I'm more used to things-separated-by-commas being
+roughly equivalent instead of being something that ends up short
+circuiting the evaluation.</p>
+</blockquote>
+</li>
+</ol>
+<h2><a class="header" href="#appendix-b7" id="appendix-b7">Appendix B.7</a></h2>
+<p>A number of survey participants noted that separating with <code>if</code> is noisy
+and looks as if braces are missing.</p>
+<ol>
+<li>
+<blockquote>
+<p>Using multiple <code>if</code>s feels very weird (it looks like there are some
+missing braces and the indentation is wrong).</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Chaining <code>if</code> statements is unclear since in most languages you can leaves
+off the curly braces for an <code>if</code> with a single statement body. </p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>chaining &quot;if&quot; keywords without braces or separators doesn't convey
+the meaning of the statement well and seems out of place in rusts
+present syntax, even more so if contracted to a single line.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Using a bunch of <code>if</code> in a column within the same <code>if</code> statement should
+stoke uncertainty about the intended meaning in anyone who remembers that
+Rust is very forgiving about where you put your whitespace.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Too many <code>if</code>s making it noisy.</p>
+</blockquote>
+</li>
+</ol>
+<h2><a class="header" href="#appendix-b8" id="appendix-b8">Appendix B.8</a></h2>
+<p>A number of survey participants noted that bindings introduced in <code>EXPR is PAT</code>
+were unexpectedly on the RHS while they were used to it being on the LHS.</p>
+<ol>
+<li>
+<blockquote>
+<p>Don't like '<code>is</code>' since it puts variable binding on the right.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>is</code> seems backwards.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The '<code>is</code>' operator creates new variables, but the pattern is on the right,
+where variables are usually read from. </p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>foo() is A(x)</code> is backwards to binding in most other places. </p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>expr is pat</code> reverses the directionality for pattern bindings seen
+everywhere else in Rust;</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Very unreadable, swapped order of unpacking confusing</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The &quot;<code>is</code>&quot; formulation is backwards from current <code>if let</code>.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I really do no like how the <code>is</code> syntax has the left and right sides
+reversed from the <code>if let ... = ...</code> syntax. It seems very odd to have
+that sort of pattern matching written in opposite directions depending
+on the syntax you choose.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The &quot;<code>is</code>&quot;-destructuring/pattern matching looks really weird because
+normally names have to be located on the left side of a statement to
+be bound to a value. The right side is there to retrieve the value.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>extracting with a pattern match is confusing when the pattern match is to
+the right of the variable being matched. it looks like a statement of fact,
+not the introduction of a new identifier.</p>
+</blockquote>
+</li>
+</ol>
+<h2><a class="header" href="#appendix-b9" id="appendix-b9">Appendix B.9</a></h2>
+<p>Some survey participants opined that they found it surprising that an operator
+named <code>is</code> introduces bindings. Another group found that <code>is</code> could easily
+be confused for some sort of equality test (as in the operator <code>==</code>) as in
+Python.</p>
+<ol>
+<li>
+<blockquote>
+<p>using <code>is</code> to introduce new bindings is very surprising.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>is</code> is weird because it can bind variables.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The &quot;<code>is</code>&quot; syntax is confusing, since it does an implicit pattern binding.
+I think folks would get it wrong by trying to pass a bound variable there
+and being surprised to find that it's a pattern instead.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I dislike the <code>EXPR is PATTERN</code> syntax because while the word <code>let</code>
+indicates that there is some binding going on, I read the word <code>is</code> as
+passively checking whether the expression fits a pattern without binding.
+I also dislike <code>is</code> because it is new syntax that does the same thing as
+existing syntax.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Without <code>let</code> it isn't clear that we are declaring a new variable via <code>is</code>.
+Now we could introduce new keywords, but <code>is</code> still isn't clear about what
+it's doing. It seems odd to introduce <code>is</code> when <code>if let</code> does the same thing.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The 'is' keyword suggests a boolean operation but silently behaves like a '<code>let</code>'.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>If <code>expr is pattern</code> doesn't actually bind, and just pattern matches,
+then I like it. This should have been a language feature imo.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I don't like <code>is</code> because it doesn't look like a binding operator</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The &quot;<code>is A(x)</code>&quot; syntax looked nice on first sight, but it's backwards, as
+in this case it's an assignment (to <code>x</code> and <code>y</code>) and not just a comparison.
+Maybe it's ok as &quot;<code>if foo() is A</code>&quot; (like for &quot;<code>if foo().is_some()</code>&quot; but
+more generic) but not in this case.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>I don't like using &quot;<code>is</code>&quot; for assignment. It sounds like equality (<code>==</code>),
+but with an assignment as a side effect. &quot;<code>if let</code>&quot; is the established way
+of doing equality and assignment together, and I think we should stick
+with one way of doing it. I also think &quot;<code>if let</code>&quot; better highlights that
+both equality and assignment happens, even when it is nested inside the
+expression as here. </p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>is</code> doesn't make any sense since we already have <code>if let PATTERN</code> and
+<code>is</code> in other languages is typically a reference equality check
+(e.g. Dart and Python).</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>is</code> operator can be confusing (is the same as <code>==</code> or something else entirely?);</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p><code>is</code> I don't like because it looks too much like subclass testing and/or
+identity testing from other languages. <code>let</code> I like for uniformity with
+<code>if let</code> and <code>while let</code>, but it needs <em>something</em> to make clear that the
+<code>&amp;&amp;</code> isn't part of the thing being bound; maybe parens around the whole thing?
+Require parens around the whole RHS if there's an <code>&amp;&amp;</code> anywhere in there?
+I don't know how to resolve the ambiguity... use <code>match</code>, instead?</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>The &quot;<code>is</code>&quot; keyword is not in Rust yet (afaik) but if we wanted to use it,
+we should ponder that it means &quot;reference equality&quot; to Python people.
+I would thus be hesitant about using it for pattern matching expressions,
+especially given that we already have &quot;<code>let</code>&quot; for pattern matching.
+If possible, I would prefer making <code>let</code>-bindings an expression.</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>Rust already has meanings for <code>&amp;&amp;</code> and <code>let</code> which can be applied here.
+Replacing <code>let ...</code> with <code>... is ...</code> is too different from existing
+pattern syntax and too similar to Python's identity testing operator.</p>
+</blockquote>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2495-min-rust-version.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2500-needle.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2495-min-rust-version.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2500-needle.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

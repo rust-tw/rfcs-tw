@@ -1,0 +1,1825 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2532-associated-type-defaults - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html" class="active">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: <code>associated_type_defaults</code></li>
+<li>Start Date: 2018-08-27</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2532">rust-lang/rfcs#2532</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/29661">rust-lang/rust#29661</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p><a href="#changes-in-this-rfc">Resolve</a> the design of associated type defaults,
+first introduced in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a>,
+such that provided methods and other items may not assume type defaults.
+This applies equally to <code>default</code> with respect to specialization.
+Finally, <code>dyn Trait</code> will assume provided defaults and allow those to be elided.</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>As discussed in the <a href="#background-and-the-status-quo">background</a> and mentioned in the <a href="#summary">summary</a>,
+associated type defaults were introduced in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a>.
+These defaults are valuable for a few reasons:</p>
+<ol>
+<li>
+<p>You can already provide defaults for <code>const</code>s and <code>fn</code>s.
+Allowing <code>type</code>s to have defaults adds consistency and uniformity
+to the language, thereby reducing surprises for users.</p>
+</li>
+<li>
+<p>Associated <code>type</code> defaults in <code>trait</code>s simplify the grammar,
+allowing the grammar of <code>trait</code>s them to be more in line with
+the grammar of <code>impl</code>s. In addition, this brings <code>trait</code>s more in line
+with <code>type</code> aliases.</p>
+</li>
+</ol>
+<p>The following points were also noted in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a>, but we expand upon them here:</p>
+<ol start="3">
+<li>
+<p>Most notably, type defaults allow you to provide more ergonomic APIs.</p>
+<p>For example, we could change <a href="https://altsysrq.github.io/rustdoc/proptest/latest/proptest/arbitrary/trait.Arbitrary.html">proptest</a>'s API to be:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Arbitrary: Sized + fmt::Debug {
+    type Parameters: Default = ();
+
+    fn arbitrary_with(args: Self::Parameters) -&gt; Self::Strategy;
+
+    fn arbitrary() -&gt; Self::Strategy {
+        Self::arbitrary_with(Default::default())
+    }
+
+    type Strategy: Strategy&lt;Value = Self&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Being able to say that the default of <code>Parameters</code> is <code>()</code> means that users,
+who are not interested in this further detail, may simply ignore specifying
+<code>Parameters</code>.</p>
+<p>The inability of having defaults results in an inability to provide APIs
+that are both a) simple to use, and b) flexible / customizable.
+By allowing defaults, we can have our cake and eat it too,
+enabling both a) and b) concurrently.</p>
+</li>
+<li>
+<p>Type defaults also aid in API evolution.
+Consider a situation such as <code>Arbitrary</code> from above;
+The API might have originally been:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Arbitrary: Sized + fmt::Debug {
+    fn arbitrary() -&gt; Self::Strategy;
+
+    type Strategy: Strategy&lt;Value = Self&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>with an implementation:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Arbitrary for usize {
+    fn arbitrary() -&gt; Self::Strategy { 0..100 }
+
+    type Strategy = Range&lt;usize&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>By allowing defaults, we can transition to this more flexible API without
+breaking any consumers by simply saying:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Arbitrary: Sized + fmt::Debug {
+    type Parameters: Default = ();
+
+    fn arbitrary() -&gt; Self::Strategy {
+        Self::arbitrary_with(Default::default())
+    }
+
+    fn arbitrary_with(_: Self::Parameters) -&gt; Self::Strategy {
+        Self::arbitrary()
+        // This co-recursive definition will blow the stack.
+        // However; since we can assume that previous implementors
+        // actually provided a definition for `arbitrary` that
+        // can't possibly reference `arbitrary_with`, we are OK.
+        // You would only run into trouble for new implementations;
+        // but that can be dealt with in documentation.
+    }
+
+    type Strategy: Strategy&lt;Value = Self&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The implementation <code>Arbitrary for usize</code> <em>remains valid</em> even after the change.</p>
+</li>
+</ol>
+<h1><a class="header" href="#guide-level-explanation" id="guide-level-explanation">Guide-level explanation</a></h1>
+<h2><a class="header" href="#background-and-the-status-quo" id="background-and-the-status-quo">Background and The status quo</a></h2>
+<p>Let's consider a simple trait with an associated type and another item (1):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    type Bar;
+
+    const QUUX: Self::Bar;
+
+    fn wibble(x: Self::Bar) -&gt; u8;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Ever since <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a>,
+Rust has been capable of assigning default types to associated types as in (2):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![feature(associated_type_defaults)]
+
+<span class="boring">fn main() {
+</span>trait Foo {
+    type Bar = u8;
+
+    const QUUX: Self::Bar = 42u8;
+
+    fn wibble(x: Self::Bar) -&gt; u8 { x }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>However, unlike as specified in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a>, which would permit (2),
+the current implementation rejects (2) with the following error messages (3):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error[E0308]: mismatched types
+ --&gt; src/lib.rs:6:29
+  |
+6 |     const QUUX: Self::Bar = 42u8;
+  |                             ^^^^ expected associated type, found u8
+  |
+  = note: expected type `&lt;Self as Foo&gt;::Bar`
+             found type `u8`
+
+error[E0308]: mismatched types
+ --&gt; src/lib.rs:8:37
+  |
+8 |     fn wibble(x: Self::Bar) -&gt; u8 { x }
+  |                                --   ^ expected u8, found associated type
+  |                                |
+  |                                expected `u8` because of return type
+  |
+  = note: expected type `u8`
+             found type `&lt;Self as Foo&gt;::Bar`
+<span class="boring">}
+</span></code></pre></pre>
+<p>The compiler rejects snippet (2) to preserve the soundness of the type system.
+It must be rejected because a user might write (4):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Bar { ... }
+
+impl Foo for Bar {
+    type Bar = Vec&lt;u8&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Given snippet (4), <code>Self::Bar</code> will evaluate to <code>Vec&lt;u8&gt;</code>,
+which is therefore the type of <code>&lt;Bar as Foo&gt;::QUUX</code>.
+However, we have not given a different value for the constant,
+and so it must be <code>42u8</code>, which has the type <code>u8</code>.
+Therefore, we have reached an inconsistency in the type system:
+<code>&lt;Bar as Foo&gt;::QUUX</code> is of value <code>42u8</code>, but of type <code>Vec&lt;u8&gt;</code>.
+So we may accept either <code>impl Foo for Bar</code> as defined in (4),
+or the definition of <code>Foo</code> as in (2), but not <em>both</em>.</p>
+<p><a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a> solved this dilemma by rejecting the implementation
+and insisting that if you override <em>one</em> associated type,
+then you must override <em>all</em> other defaulted items.
+Or stated in its own words:</p>
+<blockquote>
+<ul>
+<li>If a trait implementor overrides any default associated types,
+they must also override all default functions and methods.</li>
+<li>Otherwise, a trait implementor can selectively override individual
+default methods/functions, as they can today.</li>
+</ul>
+</blockquote>
+<p>Meanwhile, as we saw in the error message above (3),
+the current implementation takes the alternative approach of accepting
+<code>impl Foo for Bar</code> (4) but not the definition of <code>Foo</code> as in (2).</p>
+<h2><a class="header" href="#changes-in-this-rfc" id="changes-in-this-rfc">Changes in this RFC</a></h2>
+<p>In this RFC, we change the approach in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a> to the currently implemented
+approach. Thus, you will continue to receive the error message above
+and you will be able to provide associated type defaults.</p>
+<p>With respect to <a href="https://github.com/rust-lang/rfcs/pull/1210">specialization</a>, the behaviour is the same.
+That is, if you write (5):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![feature(specialization)]
+
+<span class="boring">fn main() {
+</span>trait Foo {
+    type Bar;
+
+    fn quux(x: Self::Bar) -&gt; u8;
+}
+
+struct Wibble&lt;T&gt;;
+
+impl&lt;T&gt; Foo for Wibble&lt;T&gt; {
+    default type Bar = u8;
+
+    default fn quux(x: Self::Bar) -&gt; u8 { x }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The compiler will reject this because you are not allowed to assume,
+just like before, that <code>x: u8</code>. The reason why is much the same as
+we have previously discussed in the <a href="#background-and-the-status-quo">background</a>.</p>
+<p>One place where this proposal diverges from what is currently implemented
+is with respect to the <a href="https://play.rust-lang.org/?gist=30e01d77f7045359e30c7d3f3144e984&amp;version=nightly&amp;mode=debug&amp;edition=2015">following example</a> (6):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![feature(associated_type_defaults)]
+
+<span class="boring">fn main() {
+</span>trait Foo {
+    type Bar = usize;
+
+    fn baz(x: Self::Bar) -&gt; usize;
+}
+
+impl&lt;T&gt; Foo for Vec&lt;T&gt; {
+    fn baz(x: Self::Bar) -&gt; usize { x }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In the current implementation, (6) is rejected because the compiler will not
+let you assume that <code>x</code> is of type <code>usize</code>. But in this proposal, you would be
+allowed to assume this. To permit this is not a problem because <code>Foo for Vec&lt;T&gt;</code>
+is not further specializable since <code>Bar</code> in the implementation has not been
+marked as <code>default</code>.</p>
+<h3><a class="header" href="#trait-objects" id="trait-objects">Trait objects</a></h3>
+<p>Another divergence in this RFC as compared to the current implementation is
+with respect to trait objects. Currently, if you write (7):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    type Bar = u8;
+    fn method(&amp;self) -&gt; Self::Bar;
+}
+
+type Alpha = Box&lt;dyn Foo&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>the compiler will reject it with (8):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error[E0191]: the value of the associated type `Bar` (from the trait `Foo`) must be specified
+ --&gt; src/lib.rs:8:17
+  |
+4 |     type Bar = u8;
+  |     -------------- `Bar` defined here
+...
+8 | type Alpha = Box&lt;dyn Foo&gt;;
+  |                  ^^^^^^^ associated type `Bar` must be specified
+<span class="boring">}
+</span></code></pre></pre>
+<p>With this RFC however, the error in (8) will disappear and (7) will be <em>accepted</em>.
+That is, <code>Box&lt;dyn Foo&gt;</code> is taken as equivalent as <code>Box&lt;dyn Foo&lt;Bar = u8&gt;&gt;</code>.</p>
+<p>If we complicate the situation slightly and introduce another associated <code>type</code>
+<code>Baz</code> which refers to <code>Bar</code> in its default, the compiler will still let us
+elide specifying the defaults (9):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    type Bar = u8;
+    type Baz = Vec&lt;Self::Bar&gt;;
+
+    fn method(&amp;self) -&gt; (Self::Bar, Self::Baz);
+}
+
+type Alpha = Box&lt;dyn Foo&gt;;
+//               -------
+//               Same as: `dyn Foo&lt;Bar = u8, Baz = Vec&lt;u8&gt;&gt;`.
+
+type Beta = Box&lt;dyn Foo&lt;Bar = u16&gt;&gt;;
+//              ------------------
+//              Same as: `dyn Foo&lt;Bar = u16, Baz = Vec&lt;u16&gt;&gt;`.
+<span class="boring">}
+</span></code></pre></pre>
+<p>Note that in <code>Beta</code>, <code>Bar</code> was specified but <code>Baz</code> was not.
+The compiler can infer that <code>Baz</code> is <code>Vec&lt;u16&gt;</code> since <code>Self::Bar = u16</code> and
+<code>Baz = Vec&lt;Self::Bar&gt;</code>.</p>
+<p>With these changes,
+we consider the design of associated type defaults to be <em>finalized</em>.</p>
+<h1><a class="header" href="#reference-level-explanation" id="reference-level-explanation">Reference-level explanation</a></h1>
+<p>The proposal makes no changes to the dynamic semantics and the grammar of Rust.</p>
+<h2><a class="header" href="#static-semantics" id="static-semantics">Static semantics</a></h2>
+<p>This section supersedes <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a> with respect to associated type defaults.</p>
+<p>Associated types can be assigned a default type in a <code>trait</code> definition:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    type Bar = $default_type;
+
+    $other_items
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Any item in <code>$other_items</code>, which have any provided definitions,
+may only assume that the type of <code>Self::Bar</code> is <code>Self::Bar</code>.
+They may <em>not</em> assume that the underlying type of <code>Self::Bar</code> is <code>$default_type</code>.
+This property is essential for the soundness of the type system.</p>
+<p>When an associated type default exists in a <code>trait</code> definition,
+it need not be specified in the implementations of that <code>trait</code>.
+If implementations of that <code>trait</code> do not make that associated type
+available for specialization, the <code>$default_type</code> may be assumed
+in other items specified in the implementation.
+If an implementation does make the associated type available for
+further specialization, then other definitions in the implementation
+may not assume the given underlying specified type of the associated type
+and may only assume that it is <code>Self::TheAssociatedType</code>.</p>
+<p>This applies generally to any item inside a <code>trait</code>.
+You may only assume the signature of an item, but not any provided definition,
+in provided definitions of other items.
+For example, this means that you may not assume the value of an
+associated <code>const</code> item in other items with provided definition
+in a <code>trait</code> definition.</p>
+<h3><a class="header" href="#interaction-with-dyn-trait" id="interaction-with-dyn-trait">Interaction with <code>dyn Trait&lt;...&gt;</code></a></h3>
+<ul>
+<li>Let <code>σ</code> denote a well-formed type.</li>
+<li>Let <code>L</code> denote a well-formed lifetime.</li>
+<li>Let <code>X</code> refer to an object safe <code>trait</code>.
+<ul>
+<li>Let <code>k</code> denote the number of lifetime parameters in <code>X</code>.</li>
+<li>Let <code>l</code> denote the number of type parameters in <code>X</code>.</li>
+<li>Let <code>m</code> where <code>0 ≤ m ≤ l</code> denote the number of type parameters
+in <code>X</code> without specified defaults.</li>
+<li>Let <code>A</code> denote the set of associated types in <code>X</code>.</li>
+<li>Let <code>o = |A|</code>.</li>
+<li>Let <code>D</code> where <code>D ⊆ A</code> denote set of associated types in <code>X</code> with defaults.</li>
+<li>Let <code>E = A \ D</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Then, in a type of form (where <code>m ≤ n ≤ l</code>):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>dyn X&lt;
+  L0, .., Lk,
+  σ0, .. σn,
+  A0 = σ_{n + 1}, .., Ao = σ_{n + o}
+&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>the associated types in <code>E</code> must be bound in <code>A0, .., Ao</code>
+whereas those in <code>D</code> may be omitted selectively (i.e. omit zero, some, or all).</p>
+<p>When inferring the types of the omitted projections in <code>D</code>,
+projections in the assigned defaults of types in <code>D</code> will use the types in
+<code>A0, .., Ao</code> instead of the defaults specified in <code>D</code>. For example, if given:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait X {
+    type A0 = u8;
+    type A1 = Vec&lt;Self::A0&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>then the type <code>dyn X&lt;A0 = u16&gt;</code> is inferred to <code>dyn X&lt;A0 = u16, A1 = Vec&lt;u16&gt;&gt;</code>
+as opposed to <code>dyn X&lt;A0 = u16, A1 = Vec&lt;u8&gt;&gt;</code>.</p>
+<h3><a class="header" href="#interaction-with-existential-type" id="interaction-with-existential-type">Interaction with <code>existential type</code></a></h3>
+<p><a href="https://github.com/rust-lang/rfcs/blob/master/text/2071-impl-trait-existential-types.md#reference-existential-types">RFC 2071</a> defines a construct <code>existential type Foo: Bar;</code> which is permitted
+in associated types and results in an opaque type. This means that the nominal
+type identity is hidden from certain contexts and only <code>Bar</code> is extensionally
+known about the type wherefore only the operations of <code>Bar</code> is afforded.
+This construct is sometimes written as <code>type Foo = impl Bar;</code> in conversation
+instead.</p>
+<p>With respect to this RFC, the semantics of <code>type Assoc = impl Bar;</code>
+inside a trait definition, where <code>Assoc</code> is the name of the associated type,
+is understood as what it means in terms of <code>default impl ..</code> as discussed
+in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1210-impl-specialization.md#default-impls">RFC 1210</a>. What this means in concrete terms is that given:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    type Assoc = impl Bar;
+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>the underlying type of <code>Assoc</code> stays the same for all implementations which
+do not change the default of <code>Assoc</code>. The same applies to specializations.
+With respect to type opacity, it is the same as that of <code>existential type</code>.</p>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p>The main drawbacks of this proposal are that:</p>
+<ol>
+<li>
+<p>if you have implementations where you commonly would have needed to
+write <code>default { .. }</code> because you need to assume the type of an
+associated type default in a provided method, then the solution proposed
+in this RFC is less ergonomic.</p>
+<p>However, it is the contention of this RFC that such needs will be less common
+and that the nesting mechanism or other similar ideas will be sufficiently
+ergonomic for such cases. This is discussed below.</p>
+</li>
+</ol>
+<h1><a class="header" href="#rationale-and-alternatives" id="rationale-and-alternatives">Rationale and alternatives</a></h1>
+<h2><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h2>
+<p>The main alternative is to retain the behaviour in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a> such that
+you may assume the type of associated type defaults in provided methods.
+As noted in the <a href="#drawbacks">drawbacks</a> section,
+this would be useful for certain types of APIs.
+However, it is more likely than not that associated type defaults will
+be used as a mechanism for code reuse than for other constructs.
+As such, we consider the approach in this RFC to be more ergonomic.</p>
+<p>Another alternative to the mechanism proposed in this RFC is to somehow
+track which methods rely on which associated types as well as constants.
+However, we have historically had a strong bias toward being explicit
+in signatures about such things, avoiding to infer them.
+With respect to semantic versioning, such an approach may also cause
+surprises for crate authors and their dependents alike because it may
+be difficult at glance to decide what the dependencies are.
+This in turn reduces the maintainability and readability of code.</p>
+<h2><a class="header" href="#consistency-with-associated-consts" id="consistency-with-associated-consts">Consistency with associated <code>const</code>s</a></h2>
+<p>Consider the following valid example from stable Rust:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    const BAR: usize = 1;
+
+    fn baz() { println!(&quot;Hi I'm baz.&quot;); }
+}
+
+impl Foo for () {
+    fn baz() { println!(&quot;Hi I'm () baz.&quot;); }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>As we can see, you are permitted to override <code>baz</code> but leave <code>BAR</code> defaulted.
+This is consistent with the behaviour in this RFC in that it has the same
+property: <em>&quot;you don't need to override all items if you override one&quot;</em>.</p>
+<p>Consistency and uniformity of any programming language is vital to make
+its learning easy and to rid users of surprising corner cases and caveats.
+By staying consistent, as shown above, we can reduce the cost to our complexity
+budget that associated type defaults incur.</p>
+<h2><a class="header" href="#overriding-everything-is-less-ergonomic" id="overriding-everything-is-less-ergonomic">Overriding everything is less ergonomic</a></h2>
+<p>We have already discussed this to some extent.
+Another point to consider is that Rust code frequently sports traits such as
+<code>Iterator</code> and <code>Future</code> that have many provided methods and few associated types.
+While these particular traits may not benefit from associated type defaults,
+many other traits, such as <code>Arbitrary</code> defined in the <a href="#motivation">motivation</a>, would.</p>
+<h2><a class="header" href="#true-api-evolution-by-inferring-in-dyn-trait" id="true-api-evolution-by-inferring-in-dyn-trait">True API evolution by inferring in <code>dyn Trait</code></a></h2>
+<p>While <code>impl Trait</code> will not take associated type defaults into account,
+<code>dyn trait</code> will. This may seem inconsistent. However, it is justified by the
+inherent difference in semantics between these constructs and by the goal set
+out in the <a href="#motivation">motivation</a> to facilitate API evolution.</p>
+<p>As an illustration, consider <code>Iterator</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Iterator {
+    type Item;
+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Currently, you may write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo() -&gt; impl Iterator { 0..1 }
+<span class="boring">}
+</span></code></pre></pre>
+<p>and when <code>foo</code> is called, you will know nothing about <code>Item</code>.</p>
+<p>However, you cannot write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn bar() -&gt; Box&lt;dyn Iterator&gt; { Box::new(0..1) }
+<span class="boring">}
+</span></code></pre></pre>
+<p>since the associated type <code>Item</code> is not specified.</p>
+<p>In <code>bar</code>, the type of <code>Item</code> is unknown and so the compiler does not know how
+to generate the vtable. As a result, an error is emitted:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>L | fn bar() -&gt; Box&lt;dyn Iterator&gt; { Box::new(0..1) }
+    |                 ^^^^^^^^^^^^ missing associated type `Item` value
+<span class="boring">}
+</span></code></pre></pre>
+<p>If we introduced a default for <code>Item</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    type Item = ();
+<span class="boring">}
+</span></code></pre></pre>
+<p>then <code>bar</code> would become legal under this RFC and so strictly more code than
+today would be accepted.</p>
+<p>Meanwhile, if <code>impl Iterator</code> meant <code>impl Iterator&lt;Item = ()&gt;</code>,
+this would impose a stronger requirement on existing code where <code>impl Iterator</code>
+is used and thus it would be a breaking change to the users of <code>Iterator</code>.</p>
+<p>For <code>Iterator</code>, it would not be helpful to introduce a default for <code>Item</code>.
+However, for the purposes of API evolution, the value is not in assigning
+defaults to the existing associated types of a trait. Rather, the value comes
+from being able to add associated types without breaking dependent crates.</p>
+<p>Due to the possible breakage of <code>dyn Trait&lt;..&gt;</code> when adding an associated type
+to <code>Trait</code>, to truly achieve API evolution, defaults must be taken into account
+and be inferable for <code>dyn Trait</code>. The opposite is true for <code>impl Trait</code>.
+To facilitate API evolution, stronger requirements must not be placed on
+<code>impl Trait</code> and therefore defaults should not be taken into account.</p>
+<h1><a class="header" href="#prior-art" id="prior-art">Prior art</a></h1>
+<h2><a class="header" href="#haskell" id="haskell">Haskell</a></h2>
+<p>As Rust traits are a form of type classes,
+we naturally look for prior art from were they first were introduced.
+That language, being Haskell,
+permits a user to specify <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2005/01/at-syns.pdf">associated type defaults</a>.
+For example, we may write the following legal program:</p>
+<pre><code class="language-haskell">{-# LANGUAGE TypeFamilies #-}
+
+class Foo x where
+  type Bar x :: *
+  -- A default:
+  type Bar x = Int
+
+  -- Provided method:
+  baz :: x -&gt; Bar x -&gt; Int
+  baz _ _ = 0
+
+data Quux = Quux
+
+instance Foo Quux where
+  baz _ y = y
+</code></pre>
+<p>As in this proposal, we may assume that <code>y :: Int</code> in the above snippet.</p>
+<p>In this case, we are not assuming that <code>Bar x</code> unifies with <code>Int</code> in the <code>class</code>.
+Let's try to assume that now:</p>
+<pre><code class="language-haskell">{-# LANGUAGE TypeFamilies #-}
+
+class Foo x where
+  type Bar x :: *
+  -- A default:
+  type Bar x = Int
+
+  -- Provided method:
+  baz :: x -&gt; Bar x -&gt; Int
+  baz _ barX = barX
+</code></pre>
+<p>This snippet results in a type checking error (tested on GHC 8.0.1):</p>
+<pre><code>main.hs:11:16: error:
+    • Couldn't match expected type ‘Int’ with actual type ‘Bar x’
+    • In the expression: barX
+      In an equation for ‘baz’: baz _ barX = barX
+    • Relevant bindings include
+        barX :: Bar x (bound at main.hs:11:9)
+        baz :: x -&gt; Bar x -&gt; Int (bound at main.hs:11:3)
+&lt;interactive&gt;:3:1: error:
+</code></pre>
+<p>The thing to pay attention to here is:</p>
+<blockquote>
+<p>Couldn't match expected type ‘<code>Int</code>’ with actual type ‘<code>Bar x</code>’</p>
+</blockquote>
+<p>We can clearly see that the type checker is <em>not</em> allowing us to assume
+that <code>Int</code> and <code>Bar x</code> are the same type.
+This is consistent with the approach this RFC proposes.</p>
+<p>To our knowledge, Haskell does not have any means such as <code>default { .. }</code>
+to change this behaviour. Presumably, this is the case because Haskell
+preserves parametricity thus lacking specialization, wherefore <code>default { .. }</code>,
+as suggested in the <a href="#future-possibilities">future possibilities</a>,
+might not carry its weight.</p>
+<h2><a class="header" href="#idris" id="idris">Idris</a></h2>
+<p>Idris has a concept it calls <a href="http://docs.idris-lang.org/en/latest/tutorial/interfaces.html"><code>interface</code>s</a>.
+These resemble type classes in Haskell, and by extension traits in Rust.
+However, unlike Haskell and Rust, these <code>interface</code>s do not have the property
+of <a href="http://blog.ezyang.com/2014/07/type-classes-confluence-coherence-global-uniqueness/">coherence</a> and will permit multiple implementations of the same interface.</p>
+<p>Since Idris is language with full spectrum dependent types,
+it does not distinguish between terms and types, instead, types are terms.
+Therefore, there is really not a distinct concept called &quot;associated type&quot;.
+However, an <code>interface</code> may require certain definitions to be provided
+and this includes types. For example, we may write:</p>
+<pre><code class="language-idris">interface Iterator self where
+    item : Type
+    next : self -&gt; Maybe (self, item)
+
+implementation Iterator (List a) where
+    item = a
+    next [] = Nothing
+    next (x :: xs) = Just (xs, x)
+</code></pre>
+<p>Like in Haskell, in Idris, a function or value in an interface may be given a
+default definition. For example, the following is a valid program:</p>
+<pre><code class="language-idris">interface Foo x where
+    bar : Type
+    bar = Bool
+
+    baz : x -&gt; bar
+
+implementation Foo Int where
+    baz x = x == 0
+</code></pre>
+<p>However, if we provide a default for <code>baz</code> in the <code>interface</code> which assumes
+the default value <code>Bool</code> of <code>bar</code>, as with the following example:</p>
+<pre><code class="language-idris">interface Foo x where
+    bar : Type
+    bar = Bool
+
+    baz : x -&gt; bar
+    baz _ = True
+</code></pre>
+<p>then we run into an error:</p>
+<pre><code>Type checking .\foo.idr
+foo.idr:6:13-16:
+  |
+6 |     baz _ = True
+  |             ~~~~
+When checking right hand side of Main.default#baz with expected type
+        bar x _
+
+Type mismatch between
+        Bool (Type of True)
+and
+        bar x _ (Expected type)
+</code></pre>
+<p>The behaviour here is exactly as in Haskell and as proposed in this RFC.</p>
+<h2><a class="header" href="#c" id="c">C++</a></h2>
+<p>In C++, it is possible to provide associated types and specialize them as well.
+This is shown in the following example:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+template&lt;typename T&gt; struct wrap {};
+
+template&lt;typename T&gt; struct foo { // Unspecialized.
+    using bar = int;
+
+    bar make_a_bar() { return 0; };
+};
+
+template&lt;typename T&gt; struct foo&lt;wrap&lt;T&gt;&gt; { // Partial specialization.
+    using bar = std::string;
+
+    bar make_a_bar() { return std::string(&quot;hello world&quot;); };
+};
+
+int main() {
+    foo&lt;void&gt; a_foo;
+    std::cout &lt;&lt; a_foo.make_a_bar() &lt;&lt; std::endl;
+
+    foo&lt;wrap&lt;void&gt;&gt; b_foo;
+    std::cout &lt;&lt; b_foo.make_a_bar() &lt;&lt; std::endl;
+}
+</code></pre>
+<p>You will note that C++ allows us to assume in both the base template class,
+as well as the specialization, that <code>bar</code> is equal to the underlying type.
+This is because one cannot specialize any part of a class without specializing
+the whole of it. It's equivalent to one atomic <code>default { .. }</code> block.</p>
+<h2><a class="header" href="#swift" id="swift">Swift</a></h2>
+<p>One language which does have <a href="https://docs.swift.org/swift-book/LanguageGuide/Generics.html">associated types</a> and defaults but
+which does not have provided definitions for methods is Swift.
+As an example, we may write:</p>
+<pre><code class="language-swift">protocol Foo {
+    associatedtype Bar = Int
+
+    func append() -&gt; Bar
+}
+
+struct Quux: Foo {
+    func baz() -&gt; Bar {
+        return 1
+    }
+}
+</code></pre>
+<p>However, we may not write:</p>
+<pre><code class="language-swift">protocol Foo {
+    associatedtype Bar = Int
+
+    func append() -&gt; Bar { return 0 }
+}
+</code></pre>
+<p>This would result in:</p>
+<pre><code>main.swift:4:23: error: protocol methods may not have bodies
+    func baz() -&gt; Bar { return 0 }
+</code></pre>
+<h2><a class="header" href="#scala" id="scala">Scala</a></h2>
+<p>Another language which allows for these kinds of type projections and defaults
+for them is Scala. While Scala does not have type classes like Rust and Haskell
+does, it does have a concept of <code>trait</code> which can be likened to a sort of
+incoherent &quot;type class&quot; system. For example, we may write:</p>
+<pre><code class="language-scala">trait Foo {
+    type Bar = Int
+
+    def baz(x: Bar): Int = x
+}
+
+class Quux extends Foo {
+    override type Bar = Int
+    override def baz(x: Bar): Int = x
+}
+</code></pre>
+<p>There are a few interesting things to note here:</p>
+<ol>
+<li>
+<p>We are allowed to specify a default type <code>Int</code> for <code>Bar</code>.</p>
+</li>
+<li>
+<p>A default definition for <code>baz</code> may be provided.</p>
+</li>
+<li>
+<p>This default definition may assume the default given for <code>Bar</code>.</p>
+</li>
+<li>
+<p>However, we <em>must</em> explicitly state that we are overriding <code>baz</code>.</p>
+</li>
+<li>
+<p>If we change the definition of of <code>override type Bar</code> to <code>Double</code>,
+the Scala compiler will reject it.</p>
+</li>
+</ol>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<h2><a class="header" href="#1-when-do-suitability-of-defaults-need-to-be-proven" id="1-when-do-suitability-of-defaults-need-to-be-proven">1. When do suitability of defaults need to be proven?</a></h2>
+<p>Consider a trait <code>Foo&lt;T&gt;</code> defined as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo&lt;T&gt; {
+    type Bar: Clone = Vec&lt;T&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Let's also assume the following implementation of <code>Clone</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T: Clone&gt; Clone for Vec&lt;T&gt; { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>To prove that <code>Vec&lt;T&gt;: Clone</code>, we must prove that <code>T: Clone</code>.
+However, <code>Foo&lt;T&gt;</code> does not say that <code>T: Clone</code> so is its definition valid?
+If the suitability of <code>Vec&lt;T&gt;</code> is checked where <code>Foo&lt;T&gt;</code> is defined (1),
+then we don't know that <code>T: Clone</code> and so the definition must be rejected.
+To make the compiler admit <code>Foo&lt;T&gt;</code>, we would have to write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo&lt;T: Clone&gt; {
+    type Bar: Clone = Vec&lt;T&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Now it is provable that <code>T: Clone</code> so <code>Vec&lt;T&gt;: Clone</code> which is what was required.</p>
+<p>If instead the suitability of defaults are checked in <code>impl</code>ementations (2),
+then proving <code>Vec&lt;T&gt;: Clone</code> would not be required in <code>Foo&lt;T&gt;</code>'s definition and
+so then <code>Foo&lt;T&gt;</code> would type-check. As a result, it would be admissible to write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Copy, Clone)]
+struct A;
+
+struct B;
+
+impl Foo&lt;A&gt; for B {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>since <code>Vec&lt;A&gt;: Clone</code> holds.</p>
+<p>With condition (2), strictly more programs are accepted than with (1).
+It may be that useful programs are rejected if we enforce (1) rather than (2).
+However, it would also be the more conservative choice, allowing us to move
+towards (2) when necessary. As it is currently unclear what solution is best,
+this question is left unresolved.</p>
+<h2><a class="header" href="#2-where-are-cycles-checked" id="2-where-are-cycles-checked">2. Where are cycles checked?</a></h2>
+<p>Consider a program <em>(<a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2018&amp;gist=e823eea5e7ecba5da78cff225e0adaf9">playground</a>)</em>:</p>
+<pre><pre class="playground"><code class="language-rust">#![feature(associated_type_defaults)]
+
+trait A {
+    type B = Self::C; // B defaults to C,
+    type C = Self::B; // C defaults to B, and we have a cycle!
+}
+
+impl A for () {}
+
+fn _foo() {
+    let _x: &lt;() as A&gt;::B;
+}
+
+// Removing this function will make the example compile.
+fn main() {
+    let _x: &lt;() as A&gt;::B;
+}
+</code></pre></pre>
+<p>Currently, this results in a crash. This will need to be fixed.
+At the very latest, <code>impl A for () {}</code> should have been an error.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait A {
+    type B = Self::C;
+    type C = Self::B;
+}
+
+impl A for () {} // This OK but shouldn't be.
+<span class="boring">}
+</span></code></pre></pre>
+<p>If cycles are checked for in <code>impl A for ()</code>, then it would be valid to write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait A {
+    type B = Self::C;
+    type C = Self::B;
+}
+
+impl A for () {
+    type B = u8; // The cycle is broken!
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Alternatively, cycles could be checked for in <code>A</code>'s definition.
+This is similar to the previous question in (1).</p>
+<h1><a class="header" href="#future-possibilities" id="future-possibilities">Future possibilities</a></h1>
+<p>This section in the RFC used to be part of the proposal. To provide context
+for considerations made in the proposal, it is recorded here.</p>
+<h2><a class="header" href="#summary-1" id="summary-1">Summary</a></h2>
+<p><a href="#default-specialization-groups">Introduce</a> the concept of <code>default { .. }</code> groups in traits
+and their implementations which may be used to introduce atomic units of
+specialization (if anything in the group is specialized, everything must be).
+These groups may be nested and form a <a href="#nesting-and-a-tree-of-cliques">tree of cliques</a>.</p>
+<h2><a class="header" href="#motivation-1" id="motivation-1">Motivation</a></h2>
+<h3><a class="header" href="#for-default----groups" id="for-default----groups">For <code>default { .. }</code> groups</a></h3>
+<p>Finally, because we are making <a href="#changes-in-this-rfc">changes</a> to how associated type defaults work
+in this RFC, a new mechanism is required to regain the loss of expressive power
+due to these changes. This mechanism is described in the section on
+<a href="#default-specialization-groups"><code>default { .. }</code> groups</a> as alluded to in the summary.</p>
+<p>These groups not only retain the expressive power due to <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a> but extend
+power such that users get fine grained control over what things may and may not
+be overridden together. In addition, these groups allow users to assume the
+definition of type defaults in other items in a way that preserves soundness.</p>
+<p>Examples where it is useful for other items to assume the default of an
+associated type include:</p>
+<ol>
+<li>
+<p><a href="https://github.com/rust-lang/rust/issues/29661#issuecomment-174527854">A default method</a> whose
+<a href="https://github.com/rust-lang/rust/issues/29661#issuecomment-280944035">return type is an associated type:</a></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// &quot;Callbacks&quot; for a push-based parser
+trait Sink {
+    fn handle_foo(&amp;mut self, ...);
+
+    default {
+        type Output = Self;
+
+        // OK to assume what `Output` really is because any overriding
+        // must override both `Outout` and `finish`.
+        fn finish(self) -&gt; Self::Output { self }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>There are plenty of other examples in <a href="https://github.com/rust-lang/rust/issues/29661">rust-lang/rust#29661</a>.</p>
+</li>
+</ol>
+<ol start="3">
+<li>
+<p>Other examples where <code>default { .. }</code> would have been useful can be found
+in the <a href="https://github.com/rust-lang/rust/issues/31844">tracking issue</a> for <a href="https://github.com/rust-lang/rfcs/pull/1210">specialization</a>:</p>
+<ul>
+<li>
+<p><a href="https://github.com/rust-lang/rust/issues/31844#issuecomment-198853202">https://github.com/rust-lang/rust/issues/31844#issuecomment-198853202</a></p>
+<p>You can see <code>default { .. }</code> being used
+<a href="https://github.com/rust-lang/rust/issues/31844#issuecomment-249355377">here</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust/issues/31844#issuecomment-230093545">https://github.com/rust-lang/rust/issues/31844#issuecomment-230093545</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust/issues/31844#issuecomment-247867693">https://github.com/rust-lang/rust/issues/31844#issuecomment-247867693</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust/issues/31844#issuecomment-263175793">https://github.com/rust-lang/rust/issues/31844#issuecomment-263175793</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust/issues/31844#issuecomment-279350986">https://github.com/rust-lang/rust/issues/31844#issuecomment-279350986</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="4">
+<li>
+<p>Encoding a more powerful <a href="http://www.cplusplus.com/reference/type_traits/remove_reference/"><code>std::remove_reference</code></a></p>
+<p>We can encode a more powerful version of C++'s <code>remove_reference</code> construct,
+which allows you to get the base type of a reference type recursively.
+Without default groups, we can get access to the base type like so:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait RemoveRef {
+    type WithoutRef;
+}
+
+impl&lt;T&gt; RemoveRef for T {
+    default type WithoutRef = T;
+}
+
+impl&lt;'a, T: RemoveRef&gt; RemoveRef for &amp;'a T {
+    type WithoutRef = T::WithoutRef;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>However, we don't have any way to transitively dereference to
+<code>&amp;Self::WithoutRef</code>. With default groups we can gain that ability with:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait RemoveRef {
+    type WithoutRef;
+    fn single_ref(&amp;self) -&gt; &amp;Self::WithoutRef;
+}
+
+impl&lt;T&gt; RemoveRef for T {
+    default {
+        type WithoutRef = T;
+
+        fn single_ref(&amp;self) -&gt; &amp;Self::WithoutRef {
+            // We can assume that `T == Self::WithoutRef`.
+            self
+        }
+    }
+}
+
+impl&lt;'a, T: RemoveRef&gt; RemoveRef for &amp;'a T {
+    type WithoutRef = T::WithoutRef;
+
+    fn single_ref(&amp;self) -&gt; &amp;Self::WithoutRef {
+        // We can assume that `T::WithoutRef == Self::WithoutRef`.
+        T::single_ref(*self)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>We can then proceed to writing things such as:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn do_stuff(recv: impl RemoveRef&lt;WithoutRef: MyTrait&gt;) {
+    recv.single_ref().my_method();
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+</ol>
+<h2><a class="header" href="#guide-level-explanation-1" id="guide-level-explanation-1">Guide-level explanation</a></h2>
+<h3><a class="header" href="#default-specialization-groups" id="default-specialization-groups"><code>default</code> specialization groups</a></h3>
+<p>Note: Overlapping implementations, where one is more specific than the other,
+requires actual support for <a href="https://github.com/rust-lang/rfcs/pull/1210">specialization</a>.</p>
+<p>Now, you might be thinking: - <em>&quot;Well, what if I <strong>do</strong> need to assume that
+my defaulted associated type is what I said in a provided method,
+what do I do then?&quot;</em>. Don't worry; We've got you covered.</p>
+<p>To be able to assume that <code>Self::Bar</code> is truly <code>u8</code> in snippets (2) and (5),
+you may henceforth use <code>default { .. }</code> to group associated items into atomic
+units of specialization. This means that if one item in <code>default { .. }</code> is
+overridden in an implementation, then all all the items must be. An example (7):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Country(&amp;'static str);
+
+struct LangSec { papers: usize }
+struct CategoryTheory { papers: usize }
+
+trait ComputerScientist {
+    default {
+        type Details = Country;
+        const THE_DETAILS: Self::Details = Country(&quot;Scotland&quot;); // OK!
+        fn papers(details: Self::Details) -&gt; u8 { 19 } // OK!
+    }
+}
+
+// https://en.wikipedia.org/wiki/Emily_Riehl
+struct EmilyRiehl;
+
+// https://www.cis.upenn.edu/~sweirich/
+struct StephanieWeirich;
+
+// http://www.cse.chalmers.se/~andrei/
+struct AndreiSabelfeld;
+
+// https://en.wikipedia.org/wiki/Conor_McBride
+struct ConorMcBride;
+
+impl ComputerScientist for EmilyRiehl {
+    type Details = CategoryTheory;
+
+    // ERROR! You must override THE_DETAILS and papers.
+}
+
+impl ComputerScientist for StephanieWeirich {
+    const THE_DETAILS: Country = Country(&quot;USA&quot;);
+    fn papers(details: Self::Details) -&gt; u8 { 86 }
+
+    // ERROR! You must override Details.
+}
+
+impl ComputerScientist for AndreiSabelfeld {
+    type Details = LangSec;
+    const THE_DETAILS: Self::Details = LangSec { papers: 90 };
+    fn papers(details: Self::Details) -&gt; u8 { details.papers }
+
+    // OK! We have overridden all items in the group.
+}
+
+impl ComputerScientist for ConorMcBride {
+    // OK! We have not overridden anything in the group.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>You may also use <code>default { .. }</code> in implementations.
+When you do so, everything in the group is automatically overridable.
+For any items outside the group, you may assume their signatures,
+but not the default definitions given. An example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Fruit {
+    type Details;
+    fn foo();
+    fn bar();
+    fn baz();
+}
+
+struct Citrus&lt;S&gt; { species: S }
+struct Orange&lt;V&gt; { variety: V }
+struct Blood;
+struct Common;
+
+impl&lt;S&gt; Fruit for Citrus&lt;S&gt; {
+    default {
+        type Details = bool;
+        fn foo() {
+            let _: Self::Details = true; // OK!
+        }
+        fn bar() {
+            let _: Self::Details = true; // OK!
+        }
+    }
+
+    fn baz() { // Removing this item here causes an error.
+        let _: Self::Details = true;
+        // ERROR! You may not assume that `Self::Details == bool` here.
+    }
+}
+
+impl&lt;V&gt; Fruit for Citrus&lt;Orange&lt;V&gt;&gt; {
+    default {
+        type Details = u8;
+        fn foo() {
+            let _: Self::Details = 42u8; // OK!
+        }
+    }
+
+    fn bar() { // Removing this item here causes an error.
+        let _: Self::Details = true;
+        // ERROR! You may not assume that `Self::Details == bool` here,
+        // even tho we specified that in `Fruit for Citrus&lt;S&gt;`.
+        let _: Self::Details = 22u8;
+        // ERROR! Can't assume that it's u8 either!
+    }
+}
+
+impl Fruit for Citrus&lt;Orange&lt;Common&gt;&gt; {
+    default {
+        type Details = f32;
+        fn foo() {
+            let _: Self::Details = 1.0f32; // OK!
+        }
+    }
+}
+
+impl Fruit for Citrus&lt;Orange&lt;Blood&gt;&gt; {
+    default {
+        type Details = f32;
+    }
+
+    fn foo() {
+        let _: Self::Details = 1.0f32;
+        // ERROR! Can't assume it is f32.
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>So far our examples have always included an associated type.
+However, this is not a requirement.
+We can also group associated <code>const</code>s and <code>fn</code>s together or just <code>fn</code>s.
+An example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    default {
+        const BAR: usize = 3;
+
+        fn baz() -&gt; [u8; Self::BAR] {
+            [1, 2, 3]
+        }
+    }
+}
+
+trait Quux {
+    default {
+        fn wibble() {
+            ...
+        }
+
+        fn wobble() {
+            ...
+        }
+
+        // For whatever reason; The crate author has found it imperative
+        // that `wibble` and `wobble` always be defined together.
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#case-study" id="case-study">Case study</a></h4>
+<p>One instance where default groups could be useful to provide a more ergonomic
+API is to improve upon <a href="https://github.com/rust-lang/rfcs/pull/2500">RFC 2500</a>. The RFC proposes the following API:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Needle&lt;H: Haystack&gt;: Sized {
+    type Searcher: Searcher&lt;H::Target&gt;;
+    fn into_searcher(self) -&gt; Self::Searcher;
+
+    type Consumer: Consumer&lt;H::Target&gt;;
+    fn into_consumer(self) -&gt; Self::Consumer;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>However, it turns out that usually, <code>Consumer</code> and <code>Searcher</code> are
+the same underlying type. Therefore, we would like to save the user
+from some unnecessary work by letting them elide parts of the required
+definitions in implementations.</p>
+<p>One might imagine that we'd write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Needle&lt;H: Haystack&gt;: Sized {
+    type Searcher: Searcher&lt;H::Target&gt;;
+    fn into_searcher(self) -&gt; Self::Searcher;
+
+    default {
+        type Consumer: Consumer&lt;H::Target&gt; = Self::Searcher;
+        fn into_consumer(self) -&gt; Self::Consumer { self.into_searcher() }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>However, the associated type <code>Searcher</code> does not necessarily implement
+<code>Consumer&lt;H::Target&gt;</code>. Therefore, the above definition would not type check.</p>
+<p>However, we can encode the above construct by rewriting it slightly,
+using the concept of partial implementations from <a href="https://github.com/rust-lang/rfcs/blob/master/text/1210-impl-specialization.md#default-impls">RFC 1210</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>default impl&lt;H: Haystack&gt; Needle for T
+where Self::Searcher: Consumer&lt;H::Target&gt; {
+    default {
+        type Consumer = Self::Searcher;
+        fn into_consumer(self) -&gt; Self::Consumer { self.into_searcher() }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Now we have ensured that <code>Self::Searcher</code> is a <code>Consumer&lt;H::Target&gt;</code>
+and therefore, the above definition will type check.
+Having done this, the API has become more ergonomic because we can
+let users define instances of <code>Needle&lt;H&gt;</code> with half as many requirements.</p>
+<h4><a class="header" href="#default-fn-foo----is-syntactic-sugar" id="default-fn-foo----is-syntactic-sugar"><code>default fn foo() { .. }</code> is syntactic sugar</a></h4>
+<p>In the section of <a href="#changes-in-this-rfc">changes</a> to associated type defaults,
+snippet (5) actually indirectly introduced default groups of a special form,
+namely &quot;singleton groups&quot;. That is, when we wrote:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; Foo for Wibble&lt;T&gt; {
+    default type Bar = u8;
+
+    default fn quux(x: Self::Bar) -&gt; u8 { x }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>this was actually sugar for:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; Foo for Wibble&lt;T&gt; {
+    default {
+        type Bar = u8;
+    }
+
+    default {
+        fn quux(x: Self::Bar) -&gt; u8 { x }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>We can see that these are equivalent since in the <a href="https://github.com/rust-lang/rfcs/pull/1210">specialization</a> RFC,
+the semantics of <code>default fn</code> were that <code>fn</code> may be overridden in more
+specific implementations. With these singleton groups, you may assume
+the body of <code>Bar</code> in all other items in the same group; but it just
+happens to be the case that there are no other items in the group.</p>
+<h4><a class="header" href="#nesting-and-a-tree-of-cliques" id="nesting-and-a-tree-of-cliques">Nesting and a tree of cliques</a></h4>
+<p>In the summary, we alluded to the notion of groups being nested.
+However, thus far we have seen no examples of such nesting.
+This RFC does permit you do that. For example, you may write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    default {
+        type Bar = usize;
+
+        fn alpha() -&gt; Self::Bar {
+            0 // OK! In the same group, so we may assume `Self::Bar == usize`.
+        }
+
+        // OK; we can rely on `Self::Bar == usize`.
+        default const BETA: Self::Bar = 3;
+
+        default fn gamma() -&gt; [Self::Bar; 4] {
+            // OK; we can depend on the underlying type of `Self::Bar`.
+            [9usize, 8, 7, 6]
+        }
+
+        /// This is rejected:
+        default fn delta() -&gt; [Self::Bar; Self::BETA] {
+            // ERROR! we may not rely on not on `Self::BETA`'s value because
+            // `Self::BETA` is a sibling of `Self::gamma` which is not in the
+            // same group and is not an ancestor either.
+            [9usize, 8, 7]
+        }
+
+        // But this is accepted:
+        default fn delta() -&gt; [Self::Bar; 3] {
+            // OK; we can depend on `Self::Bar == usize`.
+            [9, 8, 7]
+        }
+
+        default {
+            // OK; we can still depend on `Self::Bar == usize`.
+            const EPSILON: Self::Bar = 2;
+
+            fn zeta() -&gt; [Self::Bar; Self::Epsilon] {
+                // OK; We can assume the value of `Self::EPSILON` because it
+                // is a sibling in the same group. We may also assume that
+                // `Self::Bar == usize` because it is an ancestor.
+                [42usize, 24]
+            }
+        }
+    }
+}
+
+struct Eta;
+struct Theta;
+struct Iota;
+
+impl Foo for Eta {
+    // We can override `gamma` without overriding anything else because
+    // `gamma` is the sole member of its sub-group. Note in particular
+    // that we don't have to override `alpha`.
+    fn gamma() -&gt; [Self::Bar; 4] {
+        [43, 42, 41, 40]
+    }
+}
+
+impl Bar for Theta {
+    // Since `EPSILON` and `zeta` are in the same group; we must override
+    // them together. However, we still don't have to override anything
+    // in ancestral groups.
+    const EPSILON: Self::Bar = 0;
+
+    fn zeta() -&gt; [Self::Bar; Self::Epsilon] {
+        []
+    }
+}
+
+impl Bar for Iota {
+    // We have overridden `Bar` which is in the root group.
+    // Since all other items are decendants of the same group as `Bar` is in,
+    // they are allowed to depend on what `Bar` is.
+    type Bar = u8;
+
+    ... // Definitions for all the other items elided for brevity.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In graph theory, a set of a vertices, in a graph, for which each distinct pair
+of vertices is connected by a unique edge is said to form a <a href="https://en.wikipedia.org/wiki/Clique_(graph_theory)">clique</a>.
+What the snippet above encodes is a tree of such cliques. In other words,
+we can visualize the snippet as:</p>
+<pre><code>                            ┏━━━━━━━━━━━━━━━━━┓
+                            ┃ + type Bar      ┃
+              ┏━━━━━━━━━━━━━┃ + fn alpha      ┃━━━━━━━━━━━━━━┓
+              ┃             ┗━━━━━━━━━━━━━━━━━┛              ┃
+              ┃               ┃             ┃                ┃
+              ┃               ┃             ┃                ┃
+              ▼               ▼             ▼                ▼
+┏━━━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━━━━━━━┓
+┃ + const Beta  ┃    ┃ + fn gamma  ┃    ┃ + fn delta  ┃    ┃ + const EPSILON ┃
+┗━━━━━━━━━━━━━━━┛    ┗━━━━━━━━━━━━━┛    ┗━━━━━━━━━━━━━┛    ┃ + fn zeta       ┃
+                                                           ┗━━━━━━━━━━━━━━━━━┛
+</code></pre>
+<p>Please pay extra attention to the fact that items in the same group may
+depend on each other's definitions as well as definitions of items that
+are ancestors (up the tree). The inverse implication holds for what you
+must override: if you override one item in a group, you must override
+all items in that groups and all items in sub-groups (recursively).
+As before, these limitations exist to preserve the soundness of the type system.</p>
+<p>Nested groups are intended primarily expected to be used when there is one
+associated type, for which you want to define a default, coupled with a bunch
+of functions which need to rely on the definition of the associated type.
+This is a good mechanism for API evolution in the sense that you can introduce
+a new associated type, rely on it in provided methods, but still perform
+no breaking change.</p>
+<h2><a class="header" href="#reference-level-explanation-1" id="reference-level-explanation-1">Reference-level explanation</a></h2>
+<h3><a class="header" href="#grammar" id="grammar">Grammar</a></h3>
+<p>Productions in this section which are not defined here are taken from
+<a href="https://github.com/rust-lang/rust/blob/master/src/grammar/parser-lalr.y">parser-lalr.y</a>.</p>
+<p>Given:</p>
+<pre><code>trait_item : maybe_outer_attrs trait_item_leaf ;
+
+trait_item_leaf
+: trait_const
+| trait_type
+| trait_method
+| item_macro
+;
+
+trait_const
+: CONST ident maybe_ty_ascription maybe_const_default ';'
+;
+
+trait_type : TYPE ty_param ';' ;
+
+trait_method : method_prefix method_common ';' | method_prefix method_provided ;
+method_prefix : maybe_unsafe | CONST maybe_unsafe | maybe_unsafe EXTERN maybe_abi ;
+method_provided : method_common inner_attrs_and_block ;
+method_common
+: FN ident generic_params fn_decl_with_self_allow_anon_params maybe_where_clause
+;
+</code></pre>
+<p>The production <code>trait_item</code> is changed into:</p>
+<pre><code>trait_item : maybe_outer_attrs trait_item_def ;
+
+trait_item_def
+: trait_default_group
+| trait_default_singleton
+| trait_const
+| trait_type
+| trait_method
+| item_macro
+;
+
+trait_default_singleton : DEFAULT trait_item ;
+trait_default_group : DEFAULT '{' trait_item* '}' ;
+
+trait_type : TYPE ty_param ('=' ty_sum)? ';' ;
+</code></pre>
+<p>Given:</p>
+<pre><code>impl_item : attrs_and_vis impl_item_leaf ;
+impl_item_leaf
+: item_macro
+| maybe_default impl_method
+| maybe_default impl_const
+| maybe_default impl_type
+;
+
+impl_const : item_const ;
+impl_type : TYPE ident generic_params '=' ty_sum ';' ;
+impl_method : method_prefix method_common ;
+
+method_common
+: FN ident generic_params fn_decl_with_self maybe_where_clause inner_attrs_and_block
+;
+</code></pre>
+<p>The production <code>impl_item</code> is changed into:</p>
+<pre><code>impl_item : attrs_and_vis impl_item_def ;
+impl_item_def
+: impl_default_singleton
+| impl_default_group
+| item_macro
+| impl_method
+| impl_const
+| impl_type
+;
+
+impl_default_singleton : DEFAULT impl_item ;
+impl_default_group : DEFAULT '{' impl_item* '}' ;
+</code></pre>
+<p>Note that associated type defaults are already in the grammar due to <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md#defaults">RFC 192</a>
+but we have specified them in the grammar here nonetheless.</p>
+<p>Note also that <code>default default fn ..</code> as well as <code>default default { .. }</code> are
+intentionally recognized by the grammar to make life easier for macro authors
+even though writing <code>default default ..</code> should never be written directly.</p>
+<h3><a class="header" href="#desugaring" id="desugaring">Desugaring</a></h3>
+<p>After macro expansion, wherever the production <code>trait_default_singleton</code> occurs,
+it is treated in all respects as, except for error reporting -- which is left up
+to implementations of Rust, and is desugared to <code>DEFAULT '{' trait_item '}'</code>.
+The same applies to <code>impl_default_singleton</code>.
+In other words: <code>default fn f() {}</code> is desugared to <code>default { fn f() {} }</code>.</p>
+<h3><a class="header" href="#semantics-and-type-checking" id="semantics-and-type-checking">Semantics and type checking</a></h3>
+<h4><a class="header" href="#semantic-restrictions-on-the-syntax" id="semantic-restrictions-on-the-syntax">Semantic restrictions on the syntax</a></h4>
+<p>According to the <a href="#grammar">grammar</a>, the parser will accept items inside <code>default { .. }</code>
+without a body. However, such an item will later be rejected during type checking.
+The parser will also accept visibility modifiers on <code>default { .. }</code>
+(e.g. <code>pub default { .. }</code>). However, such a visibility modifier will also be
+rejected by the type checker.</p>
+<h4><a class="header" href="#specialization-groups" id="specialization-groups">Specialization groups</a></h4>
+<p>Implementations of a <code>trait</code> as well as <code>trait</code>s themselves may now
+contain <em>&quot;specialization default groups&quot;</em> (henceforth: <em>&quot;group(s)&quot;</em>)
+as defined by the <a href="#grammar">grammar</a>.</p>
+<p>A group forms a <a href="https://en.wikipedia.org/wiki/Clique_(graph_theory)">clique</a> and is considered an <em>atomic unit of specialization</em>
+wherein each item can be specialized / overridden.</p>
+<p>Groups may contain other groups - such groups are referred to as
+<em>&quot;nested groups&quot;</em> and may be nested arbitrarily deeply.
+Items which are not in any group are referred to as <em><code>0</code>-deep</em>.
+An item directly defined in a group which occurs at the top level of a
+<code>trait</code> or an <code>impl</code> definition is referred to as being <em><code>1</code>-deep</em>.
+An item in a group which is contained in a <em><code>1</code>-deep</em> group is <em><code>2</code>-deep</em>.
+If an item is nested in <code>k</code> groups it is <em><code>k</code>-deep</em>.</p>
+<p>A group and its sub-groups form a <em>tree of cliques</em>.
+Given a group <code>$g</code> with items <code>$x_1, .. $x_n</code>, an item <code>$x_j</code> in <code>$g</code>
+can assume the definitions of <code>$x_i, ∀ i ∈ { 1..n }</code> as well as any
+definitions of items in <code>$f</code> where <code>$f</code> is an ancestor of <code>$g</code> (up the tree).
+Conversely, items in <code>$g</code> may not assume the definitions of items in
+descendant groups <code>$h_i</code> of <code>$g</code> as well as items which are grouped at all
+or which are in groups which are not ancestors of <code>$g</code>.</p>
+<p>If an <code>impl</code> block overrides one item <code>$x_j</code> in <code>$g</code>,
+it also has to override all <code>$x_i</code> in <code>$g</code> where <code>i ≠ j</code> as well as
+all items in groups <code>$h_i</code> which are descendants of <code>$g</code> (down the tree).
+Otherwise, items do not need to be overridden.</p>
+<p>For example, you may write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Foo {
+    default {
+        type Bar = u8;
+        fn baz() {
+            let _: Self::Bar = 1u8;
+        }
+
+        default {
+            const SIZE: usize = 3;
+            fn quux() {
+                let_: [Self::Bar; Self::SIZE] = [1u8, 2u8, 3u8];
+            }
+        }
+    }
+}
+
+impl Foo for () {
+    type Bar = Vec&lt;u8&gt;;
+    fn baz() {}
+    const SIZE: usize = 5;
+    fn quux() {}
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#linting-redundant-defaults" id="linting-redundant-defaults">Linting redundant <code>default</code>s</a></h3>
+<p>When in source code (but not as a consequence of macro expansion),
+any of the following occurs, a warn-by-default lint (<code>redundant_default</code>)
+will be emitted:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    default default $item
+//  ^^^^^^^ warning: Redundant `default`
+//          hint: remove `default`.
+
+    default default {
+//  ^^^^^^^ warning: Redundant `default`
+//          hint: remove `default`.
+        ...
+    }
+
+    default {
+        ...
+
+        default $item
+//      ^^^^^^^ warning: Redundant `default`
+//              hint: remove `default`.
+
+        ...
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#drawbacks-1" id="drawbacks-1">Drawbacks</a></h2>
+<p>The main drawbacks of this proposal are that:</p>
+<ol>
+<li>
+<p><code>default { .. }</code> is introduced, adding to the complexity of the language.</p>
+<p>However, it should be noted that token <code>default</code> is already accepted for
+use by specialization and for <code>default impl</code>.
+Therefore, the syntax is only partially new.</p>
+</li>
+</ol>
+<h2><a class="header" href="#rationale-and-alternatives-1" id="rationale-and-alternatives-1">Rationale and alternatives</a></h2>
+<h3><a class="header" href="#alternatives-1" id="alternatives-1">Alternatives</a></h3>
+<p>One may consider mechanisms such as <code>default(Bar, BAZ) { .. }</code> to give
+more freedom as to which dependency graphs may be encoded.
+However, in practice, we believe that the <em>tree of cliques</em> approach proposed
+in this RFC should be more than enough for practical applications.</p>
+<h3><a class="header" href="#default----is-syntactically-light-weight" id="default----is-syntactically-light-weight"><code>default { .. }</code> is syntactically light-weight</a></h3>
+<p>When you actually do need to assume the underlying default of an associated type
+in a provided method, <code>default { .. }</code> provides a syntax that is comparatively
+not <em>that</em> heavy weight.</p>
+<p>In addition, when you want to say that multiple items are overridable,
+<code>default { .. }</code> provides less repetition than specifying <code>default</code> on
+each item would. Thus, we believe the syntax is ergonomic.</p>
+<p>Finally, <code>default { .. }</code> works well and allows the user a good deal of control
+over what can and can't be assumed and what must be specialized together.
+The grouping mechanism also composes well as seen in
+<a href="#default-specialization-groups">the section where it is discussed</a>.</p>
+<h3><a class="header" href="#tree-of-cliques-is-familiar" id="tree-of-cliques-is-familiar">Tree of cliques is familiar</a></h3>
+<p>The <em>&quot;can depend on&quot;</em> rule is similar to the rule used to determine whether a
+non-<code>pub</code> item in a module tree is accessible or not.
+Familiarity is a good tool to limit complexity costs.</p>
+<h3><a class="header" href="#non-special-treatment-for-methods" id="non-special-treatment-for-methods">Non-special treatment for methods</a></h3>
+<p>In this RFC we haven't given methods any special treatment.
+We could do so by allowing methods to assume the underlying type
+of an associated type and still be overridable without having to override
+the type. However, this might lead to <em>semantic breakage</em> in the sense that
+the details of an <code>fn</code> may be tied to the definition of an associated type.
+When those details change, it may also be prudent to change the associated type.
+Default groups give users a mechanism to enforce such decisions.</p>
+<h2><a class="header" href="#future-work" id="future-work">Future work</a></h2>
+<h3><a class="header" href="#where-clauses-on-default----groups" id="where-clauses-on-default----groups"><code>where</code> clauses on <code>default { .. }</code> groups</a></h3>
+<p>From our <a href="#case-study">case study</a>, we noticed that we had to depart from our <code>trait</code>
+definition into a separate <code>default impl..</code> to handle the conditionality
+of <code>Self::Searcher: Consumer&lt;H::Target&gt;</code>. However, one method to regain
+the locality provided by having <code>default { .. }</code> inside the <code>trait</code> definition
+is to realize that we could attach an optional <code>where</code> clause to the group.
+This would allow us to write:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Needle&lt;H: Haystack&gt;: Sized {
+    type Searcher: Searcher&lt;H::Target&gt;;
+    fn into_searcher(self) -&gt; Self::Searcher;
+
+    default where
+        Self::Searcher: Consume&lt;H::Target&gt;
+    {
+        type Consumer: Consumer&lt;H::Target&gt; = Self::Searcher;
+        fn into_consumer(self) -&gt; Self::Consumer { self.into_searcher() }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The defaults in this snippet would then be equivalent to the <code>default impl..</code>
+snippet noted in the <a href="#case-study">case study</a>.</p>
+<p>This <code>default where $bounds</code> construct should be able to
+subsume common cases where you only have a single <code>default impl..</code>
+but provide comparatively better local reasoning.</p>
+<p>However, we do not propose this at this stage because it is unclear how
+common <code>default impl..</code> will be in practice.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="2526-const-wildcard.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="2535-or-patterns.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="2526-const-wildcard.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2535-or-patterns.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

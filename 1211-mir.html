@@ -1,0 +1,971 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>1211-mir - The Rust RFC Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-private-fields.html">0001-private-fields</a></li><li class="chapter-item expanded "><a href="0002-rfc-process.html">0002-rfc-process</a></li><li class="chapter-item expanded "><a href="0003-attribute-usage.html">0003-attribute-usage</a></li><li class="chapter-item expanded "><a href="0008-new-intrinsics.html">0008-new-intrinsics</a></li><li class="chapter-item expanded "><a href="0016-more-attributes.html">0016-more-attributes</a></li><li class="chapter-item expanded "><a href="0019-opt-in-builtin-traits.html">0019-opt-in-builtin-traits</a></li><li class="chapter-item expanded "><a href="0026-remove-priv.html">0026-remove-priv</a></li><li class="chapter-item expanded "><a href="0034-bounded-type-parameters.html">0034-bounded-type-parameters</a></li><li class="chapter-item expanded "><a href="0040-libstd-facade.html">0040-libstd-facade</a></li><li class="chapter-item expanded "><a href="0042-regexps.html">0042-regexps</a></li><li class="chapter-item expanded "><a href="0048-traits.html">0048-traits</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0050-assert.html">0050-assert</a></li><li class="chapter-item expanded "><a href="0059-remove-tilde.html">0059-remove-tilde</a></li><li class="chapter-item expanded "><a href="0060-rename-strbuf.html">0060-rename-strbuf</a></li><li class="chapter-item expanded "><a href="0063-module-file-system-hierarchy.html">0063-module-file-system-hierarchy</a></li><li class="chapter-item expanded "><a href="0066-better-temporary-lifetimes.html">0066-better-temporary-lifetimes</a></li><li class="chapter-item expanded "><a href="0068-const-unsafe-pointers.html">0068-const-unsafe-pointers</a></li><li class="chapter-item expanded "><a href="0069-ascii-literals.html">0069-ascii-literals</a></li><li class="chapter-item expanded "><a href="0071-const-block-expr.html">0071-const-block-expr</a></li><li class="chapter-item expanded "><a href="0079-undefined-struct-layout.html">0079-undefined-struct-layout</a></li><li class="chapter-item expanded "><a href="0085-pattern-macros.html">0085-pattern-macros</a></li><li class="chapter-item expanded "><a href="0086-plugin-registrar.html">0086-plugin-registrar</a></li><li class="chapter-item expanded "><a href="0087-trait-bounds-with-plus.html">0087-trait-bounds-with-plus</a></li><li class="chapter-item expanded "><a href="0089-loadable-lints.html">0089-loadable-lints</a></li><li class="chapter-item expanded "><a href="0090-lexical-syntax-simplification.html">0090-lexical-syntax-simplification</a></li><li class="chapter-item expanded "><a href="0092-struct-grammar.html">0092-struct-grammar</a></li><li class="chapter-item expanded "><a href="0093-remove-format-intl.html">0093-remove-format-intl</a></li><li class="chapter-item expanded "><a href="0100-partial-cmp.html">0100-partial-cmp</a></li><li class="chapter-item expanded "><a href="0107-pattern-guards-with-bind-by-move.html">0107-pattern-guards-with-bind-by-move</a></li><li class="chapter-item expanded "><a href="0109-remove-crate-id.html">0109-remove-crate-id</a></li><li class="chapter-item expanded "><a href="0111-index-traits.html">0111-index-traits</a></li><li class="chapter-item expanded "><a href="0112-remove-cross-borrowing.html">0112-remove-cross-borrowing</a></li><li class="chapter-item expanded "><a href="0114-closures.html">0114-closures</a></li><li class="chapter-item expanded "><a href="0115-rm-integer-fallback.html">0115-rm-integer-fallback</a></li><li class="chapter-item expanded "><a href="0116-no-module-shadowing.html">0116-no-module-shadowing</a></li><li class="chapter-item expanded "><a href="0123-share-to-threadsafe.html">0123-share-to-threadsafe</a></li><li class="chapter-item expanded "><a href="0130-box-not-special.html">0130-box-not-special</a></li><li class="chapter-item expanded "><a href="0131-target-specification.html">0131-target-specification</a></li><li class="chapter-item expanded "><a href="0132-ufcs.html">0132-ufcs</a></li><li class="chapter-item expanded "><a href="0135-where.html">0135-where</a></li><li class="chapter-item expanded "><a href="0136-no-privates-in-public.html">0136-no-privates-in-public</a></li><li class="chapter-item expanded "><a href="0139-remove-cross-borrowing-entirely.html">0139-remove-cross-borrowing-entirely</a></li><li class="chapter-item expanded "><a href="0141-lifetime-elision.html">0141-lifetime-elision</a></li><li class="chapter-item expanded "><a href="0151-capture-by-value.html">0151-capture-by-value</a></li><li class="chapter-item expanded "><a href="0155-anonymous-impl-only-in-same-module.html">0155-anonymous-impl-only-in-same-module</a></li><li class="chapter-item expanded "><a href="0160-if-let.html">0160-if-let</a></li><li class="chapter-item expanded "><a href="0164-feature-gate-slice-pats.html">0164-feature-gate-slice-pats</a></li><li class="chapter-item expanded "><a href="0168-mod.html">0168-mod</a></li><li class="chapter-item expanded "><a href="0169-use-path-as-id.html">0169-use-path-as-id</a></li><li class="chapter-item expanded "><a href="0179-and-mut-patterns.html">0179-and-mut-patterns</a></li><li class="chapter-item expanded "><a href="0184-tuple-accessors.html">0184-tuple-accessors</a></li><li class="chapter-item expanded "><a href="0192-bounds-on-object-and-generic-types.html">0192-bounds-on-object-and-generic-types</a></li><li class="chapter-item expanded "><a href="0194-cfg-syntax.html">0194-cfg-syntax</a></li><li class="chapter-item expanded "><a href="0195-associated-items.html">0195-associated-items</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="0199-ownership-variants.html">0199-ownership-variants</a></li><li class="chapter-item expanded "><a href="0201-error-chaining.html">0201-error-chaining</a></li><li class="chapter-item expanded "><a href="0202-subslice-syntax-change.html">0202-subslice-syntax-change</a></li><li class="chapter-item expanded "><a href="0212-restore-int-fallback.html">0212-restore-int-fallback</a></li><li class="chapter-item expanded "><a href="0213-defaulted-type-params.html">0213-defaulted-type-params</a></li><li class="chapter-item expanded "><a href="0214-while-let.html">0214-while-let</a></li><li class="chapter-item expanded "><a href="0216-collection-views.html">0216-collection-views</a></li><li class="chapter-item expanded "><a href="0218-empty-struct-with-braces.html">0218-empty-struct-with-braces</a></li><li class="chapter-item expanded "><a href="0221-panic.html">0221-panic</a></li><li class="chapter-item expanded "><a href="0230-remove-runtime.html">0230-remove-runtime</a></li><li class="chapter-item expanded "><a href="0231-upvar-capture-inference.html">0231-upvar-capture-inference</a></li><li class="chapter-item expanded "><a href="0234-variants-namespace.html">0234-variants-namespace</a></li><li class="chapter-item expanded "><a href="0235-collections-conventions.html">0235-collections-conventions</a></li><li class="chapter-item expanded "><a href="0236-error-conventions.html">0236-error-conventions</a></li><li class="chapter-item expanded "><a href="0240-unsafe-api-location.html">0240-unsafe-api-location</a></li><li class="chapter-item expanded "><a href="0241-deref-conversions.html">0241-deref-conversions</a></li><li class="chapter-item expanded "><a href="0243-trait-based-exception-handling.html">0243-trait-based-exception-handling</a></li><li class="chapter-item expanded "><a href="0246-const-vs-static.html">0246-const-vs-static</a></li><li class="chapter-item expanded "><a href="0255-object-safety.html">0255-object-safety</a></li><li class="chapter-item expanded "><a href="0256-remove-refcounting-gc-of-t.html">0256-remove-refcounting-gc-of-t</a></li><li class="chapter-item expanded "><a href="0320-nonzeroing-dynamic-drop.html">0320-nonzeroing-dynamic-drop</a></li><li class="chapter-item expanded "><a href="0326-restrict-xXX-to-ascii.html">0326-restrict-xXX-to-ascii</a></li><li class="chapter-item expanded "><a href="0339-statically-sized-literals.html">0339-statically-sized-literals</a></li><li class="chapter-item expanded "><a href="0341-remove-virtual-structs.html">0341-remove-virtual-structs</a></li><li class="chapter-item expanded "><a href="0342-keywords.html">0342-keywords</a></li><li class="chapter-item expanded "><a href="0344-conventions-galore.html">0344-conventions-galore</a></li><li class="chapter-item expanded "><a href="0356-no-module-prefixes.html">0356-no-module-prefixes</a></li><li class="chapter-item expanded "><a href="0369-num-reform.html">0369-num-reform</a></li><li class="chapter-item expanded "><a href="0378-expr-macros.html">0378-expr-macros</a></li><li class="chapter-item expanded "><a href="0379-remove-reflection.html">0379-remove-reflection</a></li><li class="chapter-item expanded "><a href="0380-stabilize-std-fmt.html">0380-stabilize-std-fmt</a></li><li class="chapter-item expanded "><a href="0385-module-system-cleanup.html">0385-module-system-cleanup</a></li><li class="chapter-item expanded "><a href="0387-higher-ranked-trait-bounds.html">0387-higher-ranked-trait-bounds</a></li><li class="chapter-item expanded "><a href="0390-enum-namespacing.html">0390-enum-namespacing</a></li><li class="chapter-item expanded "><a href="0401-coercions.html">0401-coercions</a></li><li class="chapter-item expanded "><a href="0403-cargo-build-command.html">0403-cargo-build-command</a></li><li class="chapter-item expanded "><a href="0404-change-prefer-dynamic.html">0404-change-prefer-dynamic</a></li><li class="chapter-item expanded "><a href="0418-struct-variants.html">0418-struct-variants</a></li><li class="chapter-item expanded "><a href="0430-finalizing-naming-conventions.html">0430-finalizing-naming-conventions</a></li><li class="chapter-item expanded "><a href="0438-precedence-of-plus.html">0438-precedence-of-plus</a></li><li class="chapter-item expanded "><a href="0439-cmp-ops-reform.html">0439-cmp-ops-reform</a></li><li class="chapter-item expanded "><a href="0445-extension-trait-conventions.html">0445-extension-trait-conventions</a></li><li class="chapter-item expanded "><a href="0446-es6-unicode-escapes.html">0446-es6-unicode-escapes</a></li><li class="chapter-item expanded "><a href="0447-no-unused-impl-parameters.html">0447-no-unused-impl-parameters</a></li><li class="chapter-item expanded "><a href="0450-un-feature-gate-some-more-gates.html">0450-un-feature-gate-some-more-gates</a></li><li class="chapter-item expanded "><a href="0453-macro-reform.html">0453-macro-reform</a></li><li class="chapter-item expanded "><a href="0458-send-improvements.html">0458-send-improvements</a></li><li class="chapter-item expanded "><a href="0459-disallow-shadowing.html">0459-disallow-shadowing</a></li><li class="chapter-item expanded "><a href="0461-tls-overhaul.html">0461-tls-overhaul</a></li><li class="chapter-item expanded "><a href="0463-future-proof-literal-suffixes.html">0463-future-proof-literal-suffixes</a></li><li class="chapter-item expanded "><a href="0469-feature-gate-box-patterns.html">0469-feature-gate-box-patterns</a></li><li class="chapter-item expanded "><a href="0474-path-reform.html">0474-path-reform</a></li><li class="chapter-item expanded "><a href="0486-std-ascii-reform.html">0486-std-ascii-reform</a></li><li class="chapter-item expanded "><a href="0490-dst-syntax.html">0490-dst-syntax</a></li><li class="chapter-item expanded "><a href="0494-c_str-and-c_vec-stability.html">0494-c_str-and-c_vec-stability</a></li><li class="chapter-item expanded "><a href="0495-array-pattern-changes.html">0495-array-pattern-changes</a></li><li class="chapter-item expanded "><a href="0501-consistent_no_prelude_attributes.html">0501-consistent_no_prelude_attributes</a></li><li class="chapter-item expanded "><a href="0503-prelude-stabilization.html">0503-prelude-stabilization</a></li><li class="chapter-item expanded "><a href="0504-show-stabilization.html">0504-show-stabilization</a></li><li class="chapter-item expanded "><a href="0505-api-comment-conventions.html">0505-api-comment-conventions</a></li><li class="chapter-item expanded "><a href="0507-release-channels.html">0507-release-channels</a></li><li class="chapter-item expanded "><a href="0509-collections-reform-part-2.html">0509-collections-reform-part-2</a></li><li class="chapter-item expanded "><a href="0517-io-os-reform.html">0517-io-os-reform</a></li><li class="chapter-item expanded "><a href="0520-new-array-repeat-syntax.html">0520-new-array-repeat-syntax</a></li><li class="chapter-item expanded "><a href="0522-self-impl.html">0522-self-impl</a></li><li class="chapter-item expanded "><a href="0526-fmt-text-writer.html">0526-fmt-text-writer</a></li><li class="chapter-item expanded "><a href="0528-string-patterns.html">0528-string-patterns</a></li><li class="chapter-item expanded "><a href="0529-conversion-traits.html">0529-conversion-traits</a></li><li class="chapter-item expanded "><a href="0531-define-rfc-scope.html">0531-define-rfc-scope</a></li><li class="chapter-item expanded "><a href="0532-self-in-use.html">0532-self-in-use</a></li><li class="chapter-item expanded "><a href="0533-no-array-elem-moves.html">0533-no-array-elem-moves</a></li><li class="chapter-item expanded "><a href="0534-deriving2derive.html">0534-deriving2derive</a></li><li class="chapter-item expanded "><a href="0544-rename-int-uint.html">0544-rename-int-uint</a></li><li class="chapter-item expanded "><a href="0546-Self-not-sized-by-default.html">0546-Self-not-sized-by-default</a></li><li class="chapter-item expanded "><a href="0550-macro-future-proofing.html">0550-macro-future-proofing</a></li><li class="chapter-item expanded "><a href="0556-raw-lifetime.html">0556-raw-lifetime</a></li><li class="chapter-item expanded "><a href="0558-require-parentheses-for-chained-comparisons.html">0558-require-parentheses-for-chained-comparisons</a></li><li class="chapter-item expanded "><a href="0560-integer-overflow.html">0560-integer-overflow</a></li><li class="chapter-item expanded "><a href="0563-remove-ndebug.html">0563-remove-ndebug</a></li><li class="chapter-item expanded "><a href="0565-show-string-guidelines.html">0565-show-string-guidelines</a></li><li class="chapter-item expanded "><a href="0572-rustc-attribute.html">0572-rustc-attribute</a></li><li class="chapter-item expanded "><a href="0574-drain-range.html">0574-drain-range</a></li><li class="chapter-item expanded "><a href="0580-rename-collections.html">0580-rename-collections</a></li><li class="chapter-item expanded "><a href="0587-fn-return-should-be-an-associated-type.html">0587-fn-return-should-be-an-associated-type</a></li><li class="chapter-item expanded "><a href="0592-c-str-deref.html">0592-c-str-deref</a></li><li class="chapter-item expanded "><a href="0593-forbid-Self-definitions.html">0593-forbid-Self-definitions</a></li><li class="chapter-item expanded "><a href="0599-default-object-bound.html">0599-default-object-bound</a></li><li class="chapter-item expanded "><a href="0601-replace-be-with-become.html">0601-replace-be-with-become</a></li><li class="chapter-item expanded "><a href="0639-discriminant-intrinsic.html">0639-discriminant-intrinsic</a></li><li class="chapter-item expanded "><a href="0640-debug-improvements.html">0640-debug-improvements</a></li><li class="chapter-item expanded "><a href="0702-rangefull-expression.html">0702-rangefull-expression</a></li><li class="chapter-item expanded "><a href="0735-allow-inherent-impls-anywhere.html">0735-allow-inherent-impls-anywhere</a></li><li class="chapter-item expanded "><a href="0736-privacy-respecting-fru.html">0736-privacy-respecting-fru</a></li><li class="chapter-item expanded "><a href="0738-variance.html">0738-variance</a></li><li class="chapter-item expanded "><a href="0769-sound-generic-drop.html">0769-sound-generic-drop</a></li><li class="chapter-item expanded "><a href="0771-std-iter-once.html">0771-std-iter-once</a></li><li class="chapter-item expanded "><a href="0803-type-ascription.html">0803-type-ascription</a></li><li class="chapter-item expanded "><a href="0809-box-and-in-for-stdlib.html">0809-box-and-in-for-stdlib</a></li><li class="chapter-item expanded "><a href="0823-hash-simplification.html">0823-hash-simplification</a></li><li class="chapter-item expanded "><a href="0832-from-elem-with-love.html">0832-from-elem-with-love</a></li><li class="chapter-item expanded "><a href="0839-embrace-extend-extinguish.html">0839-embrace-extend-extinguish</a></li><li class="chapter-item expanded "><a href="0840-no-panic-in-c-string.html">0840-no-panic-in-c-string</a></li><li class="chapter-item expanded "><a href="0873-type-macros.html">0873-type-macros</a></li><li class="chapter-item expanded "><a href="0879-small-base-lexing.html">0879-small-base-lexing</a></li><li class="chapter-item expanded "><a href="0888-compiler-fence-intrinsics.html">0888-compiler-fence-intrinsics</a></li><li class="chapter-item expanded "><a href="0909-move-thread-local-to-std-thread.html">0909-move-thread-local-to-std-thread</a></li><li class="chapter-item expanded "><a href="0911-const-fn.html">0911-const-fn</a></li><li class="chapter-item expanded "><a href="0921-entry_v3.html">0921-entry_v3</a></li><li class="chapter-item expanded "><a href="0940-hyphens-considered-harmful.html">0940-hyphens-considered-harmful</a></li><li class="chapter-item expanded "><a href="0953-op-assign.html">0953-op-assign</a></li><li class="chapter-item expanded "><a href="0968-closure-return-type-syntax.html">0968-closure-return-type-syntax</a></li><li class="chapter-item expanded "><a href="0979-align-splitn-with-other-languages.html">0979-align-splitn-with-other-languages</a></li><li class="chapter-item expanded "><a href="0980-read-exact.html">0980-read-exact</a></li><li class="chapter-item expanded "><a href="0982-dst-coercion.html">0982-dst-coercion</a></li><li class="chapter-item expanded "><a href="1011-process.exit.html">1011-process.exit</a></li><li class="chapter-item expanded "><a href="1014-stdout-existential-crisis.html">1014-stdout-existential-crisis</a></li><li class="chapter-item expanded "><a href="1023-rebalancing-coherence.html">1023-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="1030-prelude-additions.html">1030-prelude-additions</a></li><li class="chapter-item expanded "><a href="1040-duration-reform.html">1040-duration-reform</a></li><li class="chapter-item expanded "><a href="1044-io-fs-2.1.html">1044-io-fs-2.1</a></li><li class="chapter-item expanded "><a href="1047-socket-timeouts.html">1047-socket-timeouts</a></li><li class="chapter-item expanded "><a href="1048-rename-soft-link-to-symlink.html">1048-rename-soft-link-to-symlink</a></li><li class="chapter-item expanded "><a href="1054-str-words.html">1054-str-words</a></li><li class="chapter-item expanded "><a href="1057-io-error-sync.html">1057-io-error-sync</a></li><li class="chapter-item expanded "><a href="1058-slice-tail-redesign.html">1058-slice-tail-redesign</a></li><li class="chapter-item expanded "><a href="1066-safe-mem-forget.html">1066-safe-mem-forget</a></li><li class="chapter-item expanded "><a href="1068-rust-governance.html">1068-rust-governance</a></li><li class="chapter-item expanded "><a href="1096-remove-static-assert.html">1096-remove-static-assert</a></li><li class="chapter-item expanded "><a href="1102-rename-connect-to-join.html">1102-rename-connect-to-join</a></li><li class="chapter-item expanded "><a href="1105-api-evolution.html">1105-api-evolution</a></li><li class="chapter-item expanded "><a href="1119-result-expect.html">1119-result-expect</a></li><li class="chapter-item expanded "><a href="1122-language-semver.html">1122-language-semver</a></li><li class="chapter-item expanded "><a href="1123-str-split-at.html">1123-str-split-at</a></li><li class="chapter-item expanded "><a href="1131-likely-intrinsic.html">1131-likely-intrinsic</a></li><li class="chapter-item expanded "><a href="1135-raw-pointer-comparisons.html">1135-raw-pointer-comparisons</a></li><li class="chapter-item expanded "><a href="1152-slice-string-symmetry.html">1152-slice-string-symmetry</a></li><li class="chapter-item expanded "><a href="1156-adjust-default-object-bounds.html">1156-adjust-default-object-bounds</a></li><li class="chapter-item expanded "><a href="1174-into-raw-fd-socket-handle-traits.html">1174-into-raw-fd-socket-handle-traits</a></li><li class="chapter-item expanded "><a href="1183-swap-out-jemalloc.html">1183-swap-out-jemalloc</a></li><li class="chapter-item expanded "><a href="1184-stabilize-no_std.html">1184-stabilize-no_std</a></li><li class="chapter-item expanded "><a href="1191-hir.html">1191-hir</a></li><li class="chapter-item expanded "><a href="1192-inclusive-ranges.html">1192-inclusive-ranges</a></li><li class="chapter-item expanded "><a href="1193-cap-lints.html">1193-cap-lints</a></li><li class="chapter-item expanded "><a href="1194-set-recovery.html">1194-set-recovery</a></li><li class="chapter-item expanded "><a href="1199-simd-infrastructure.html">1199-simd-infrastructure</a></li><li class="chapter-item expanded "><a href="1200-cargo-install.html">1200-cargo-install</a></li><li class="chapter-item expanded "><a href="1201-naked-fns.html">1201-naked-fns</a></li><li class="chapter-item expanded "><a href="1210-impl-specialization.html">1210-impl-specialization</a></li><li class="chapter-item expanded "><a href="1211-mir.html" class="active">1211-mir</a></li><li class="chapter-item expanded "><a href="1212-line-endings.html">1212-line-endings</a></li><li class="chapter-item expanded "><a href="1214-projections-lifetimes-and-wf.html">1214-projections-lifetimes-and-wf</a></li><li class="chapter-item expanded "><a href="1216-bang-type.html">1216-bang-type</a></li><li class="chapter-item expanded "><a href="1219-use-group-as.html">1219-use-group-as</a></li><li class="chapter-item expanded "><a href="1228-placement-left-arrow.html">1228-placement-left-arrow</a></li><li class="chapter-item expanded "><a href="1229-compile-time-asserts.html">1229-compile-time-asserts</a></li><li class="chapter-item expanded "><a href="1236-stabilize-catch-panic.html">1236-stabilize-catch-panic</a></li><li class="chapter-item expanded "><a href="1238-nonparametric-dropck.html">1238-nonparametric-dropck</a></li><li class="chapter-item expanded "><a href="1240-repr-packed-unsafe-ref.html">1240-repr-packed-unsafe-ref</a></li><li class="chapter-item expanded "><a href="1241-no-wildcard-deps.html">1241-no-wildcard-deps</a></li><li class="chapter-item expanded "><a href="1242-rust-lang-crates.html">1242-rust-lang-crates</a></li><li class="chapter-item expanded "><a href="1252-open-options.html">1252-open-options</a></li><li class="chapter-item expanded "><a href="1257-drain-range-2.html">1257-drain-range-2</a></li><li class="chapter-item expanded "><a href="1260-main-reexport.html">1260-main-reexport</a></li><li class="chapter-item expanded "><a href="1268-allow-overlapping-impls-on-marker-traits.html">1268-allow-overlapping-impls-on-marker-traits</a></li><li class="chapter-item expanded "><a href="1270-deprecation.html">1270-deprecation</a></li><li class="chapter-item expanded "><a href="1288-time-improvements.html">1288-time-improvements</a></li><li class="chapter-item expanded "><a href="1291-promote-libc.html">1291-promote-libc</a></li><li class="chapter-item expanded "><a href="1298-incremental-compilation.html">1298-incremental-compilation</a></li><li class="chapter-item expanded "><a href="1300-intrinsic-semantics.html">1300-intrinsic-semantics</a></li><li class="chapter-item expanded "><a href="1307-osstring-methods.html">1307-osstring-methods</a></li><li class="chapter-item expanded "><a href="1317-ide.html">1317-ide</a></li><li class="chapter-item expanded "><a href="1327-dropck-param-eyepatch.html">1327-dropck-param-eyepatch</a></li><li class="chapter-item expanded "><a href="1328-global-panic-handler.html">1328-global-panic-handler</a></li><li class="chapter-item expanded "><a href="1331-grammar-is-canonical.html">1331-grammar-is-canonical</a></li><li class="chapter-item expanded "><a href="1358-repr-align.html">1358-repr-align</a></li><li class="chapter-item expanded "><a href="1359-process-ext-unix.html">1359-process-ext-unix</a></li><li class="chapter-item expanded "><a href="1361-cargo-cfg-dependencies.html">1361-cargo-cfg-dependencies</a></li><li class="chapter-item expanded "><a href="1398-kinds-of-allocators.html">1398-kinds-of-allocators</a></li><li class="chapter-item expanded "><a href="1399-repr-pack.html">1399-repr-pack</a></li><li class="chapter-item expanded "><a href="1414-rvalue_static_promotion.html">1414-rvalue_static_promotion</a></li><li class="chapter-item expanded "><a href="1415-trim-std-os.html">1415-trim-std-os</a></li><li class="chapter-item expanded "><a href="1419-slice-copy.html">1419-slice-copy</a></li><li class="chapter-item expanded "><a href="1422-pub-restricted.html">1422-pub-restricted</a></li><li class="chapter-item expanded "><a href="1432-replace-slice.html">1432-replace-slice</a></li><li class="chapter-item expanded "><a href="1434-contains-method-for-ranges.html">1434-contains-method-for-ranges</a></li><li class="chapter-item expanded "><a href="1440-drop-types-in-const.html">1440-drop-types-in-const</a></li><li class="chapter-item expanded "><a href="1443-extended-compare-and-swap.html">1443-extended-compare-and-swap</a></li><li class="chapter-item expanded "><a href="1444-union.html">1444-union</a></li><li class="chapter-item expanded "><a href="1445-restrict-constants-in-patterns.html">1445-restrict-constants-in-patterns</a></li><li class="chapter-item expanded "><a href="1461-net2-mutators.html">1461-net2-mutators</a></li><li class="chapter-item expanded "><a href="1467-volatile.html">1467-volatile</a></li><li class="chapter-item expanded "><a href="1479-unix-socket.html">1479-unix-socket</a></li><li class="chapter-item expanded "><a href="1492-dotdot-in-patterns.html">1492-dotdot-in-patterns</a></li><li class="chapter-item expanded "><a href="1498-ipv6addr-octets.html">1498-ipv6addr-octets</a></li><li class="chapter-item expanded "><a href="1504-int128.html">1504-int128</a></li><li class="chapter-item expanded "><a href="1506-adt-kinds.html">1506-adt-kinds</a></li><li class="chapter-item expanded "><a href="1510-cdylib.html">1510-cdylib</a></li><li class="chapter-item expanded "><a href="1513-less-unwinding.html">1513-less-unwinding</a></li><li class="chapter-item expanded "><a href="1521-copy-clone-semantics.html">1521-copy-clone-semantics</a></li><li class="chapter-item expanded "><a href="1522-conservative-impl-trait.html">1522-conservative-impl-trait</a></li><li class="chapter-item expanded "><a href="1525-cargo-workspace.html">1525-cargo-workspace</a></li><li class="chapter-item expanded "><a href="1535-stable-overflow-checks.html">1535-stable-overflow-checks</a></li><li class="chapter-item expanded "><a href="1542-try-from.html">1542-try-from</a></li><li class="chapter-item expanded "><a href="1543-integer_atomics.html">1543-integer_atomics</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1552-contains-method-for-various-collections.html">1552-contains-method-for-various-collections</a></li><li class="chapter-item expanded "><a href="1558-closure-to-fn-coercion.html">1558-closure-to-fn-coercion</a></li><li class="chapter-item expanded "><a href="1559-attributes-with-literals.html">1559-attributes-with-literals</a></li><li class="chapter-item expanded "><a href="1560-name-resolution.html">1560-name-resolution</a></li><li class="chapter-item expanded "><a href="1561-macro-naming.html">1561-macro-naming</a></li><li class="chapter-item expanded "><a href="1566-proc-macros.html">1566-proc-macros</a></li><li class="chapter-item expanded "><a href="1567-long-error-codes-explanation-normalization.html">1567-long-error-codes-explanation-normalization</a></li><li class="chapter-item expanded "><a href="1574-more-api-documentation-conventions.html">1574-more-api-documentation-conventions</a></li><li class="chapter-item expanded "><a href="1576-macros-literal-matcher.html">1576-macros-literal-matcher</a></li><li class="chapter-item expanded "><a href="1581-fused-iterator.html">1581-fused-iterator</a></li><li class="chapter-item expanded "><a href="1584-macros.html">1584-macros</a></li><li class="chapter-item expanded "><a href="1589-rustc-bug-fix-procedure.html">1589-rustc-bug-fix-procedure</a></li><li class="chapter-item expanded "><a href="1590-macro-lifetimes.html">1590-macro-lifetimes</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="1607-style-rfcs.html">1607-style-rfcs</a></li><li class="chapter-item expanded "><a href="1618-ergonomic-format-args.html">1618-ergonomic-format-args</a></li><li class="chapter-item expanded "><a href="1620-regex-1.0.html">1620-regex-1.0</a></li><li class="chapter-item expanded "><a href="1623-static.html">1623-static</a></li><li class="chapter-item expanded "><a href="1624-loop-break-value.html">1624-loop-break-value</a></li><li class="chapter-item expanded "><a href="1636-document_all_features.html">1636-document_all_features</a></li><li class="chapter-item expanded "><a href="1640-duration-checked-sub.html">1640-duration-checked-sub</a></li><li class="chapter-item expanded "><a href="1643-memory-model-strike-team.html">1643-memory-model-strike-team</a></li><li class="chapter-item expanded "><a href="1644-default-and-expanded-rustc-errors.html">1644-default-and-expanded-rustc-errors</a></li><li class="chapter-item expanded "><a href="1647-allow-self-in-where-clauses.html">1647-allow-self-in-where-clauses</a></li><li class="chapter-item expanded "><a href="1649-atomic-access.html">1649-atomic-access</a></li><li class="chapter-item expanded "><a href="1651-movecell.html">1651-movecell</a></li><li class="chapter-item expanded "><a href="1653-assert_ne.html">1653-assert_ne</a></li><li class="chapter-item expanded "><a href="1660-try-borrow.html">1660-try-borrow</a></li><li class="chapter-item expanded "><a href="1665-windows-subsystem.html">1665-windows-subsystem</a></li><li class="chapter-item expanded "><a href="1679-panic-safe-slicing.html">1679-panic-safe-slicing</a></li><li class="chapter-item expanded "><a href="1681-macros-1.1.html">1681-macros-1.1</a></li><li class="chapter-item expanded "><a href="1682-field-init-shorthand.html">1682-field-init-shorthand</a></li><li class="chapter-item expanded "><a href="1683-docs-team.html">1683-docs-team</a></li><li class="chapter-item expanded "><a href="1685-deprecate-anonymous-parameters.html">1685-deprecate-anonymous-parameters</a></li><li class="chapter-item expanded "><a href="1695-add-error-macro.html">1695-add-error-macro</a></li><li class="chapter-item expanded "><a href="1696-discriminant.html">1696-discriminant</a></li><li class="chapter-item expanded "><a href="1717-dllimport.html">1717-dllimport</a></li><li class="chapter-item expanded "><a href="1721-crt-static.html">1721-crt-static</a></li><li class="chapter-item expanded "><a href="1725-unaligned-access.html">1725-unaligned-access</a></li><li class="chapter-item expanded "><a href="1728-north-star.html">1728-north-star</a></li><li class="chapter-item expanded "><a href="1733-trait-alias.html">1733-trait-alias</a></li><li class="chapter-item expanded "><a href="1758-repr-transparent.html">1758-repr-transparent</a></li><li class="chapter-item expanded "><a href="1774-roadmap-2017.html">1774-roadmap-2017</a></li><li class="chapter-item expanded "><a href="1789-as-cell.html">1789-as-cell</a></li><li class="chapter-item expanded "><a href="1824-crates.io-default-ranking.html">1824-crates.io-default-ranking</a></li><li class="chapter-item expanded "><a href="1826-change-doc-default-urls.html">1826-change-doc-default-urls</a></li><li class="chapter-item expanded "><a href="1828-rust-bookshelf.html">1828-rust-bookshelf</a></li><li class="chapter-item expanded "><a href="1845-shared-from-slice.html">1845-shared-from-slice</a></li><li class="chapter-item expanded "><a href="1849-non-static-type-id.html">1849-non-static-type-id</a></li><li class="chapter-item expanded "><a href="1857-stabilize-drop-order.html">1857-stabilize-drop-order</a></li><li class="chapter-item expanded "><a href="1859-try-trait.html">1859-try-trait</a></li><li class="chapter-item expanded "><a href="1860-manually-drop.html">1860-manually-drop</a></li><li class="chapter-item expanded "><a href="1861-extern-types.html">1861-extern-types</a></li><li class="chapter-item expanded "><a href="1866-more-readable-assert-eq.html">1866-more-readable-assert-eq</a></li><li class="chapter-item expanded "><a href="1868-portability-lint.html">1868-portability-lint</a></li><li class="chapter-item expanded "><a href="1869-eprintln.html">1869-eprintln</a></li><li class="chapter-item expanded "><a href="1884-unstable-sort.html">1884-unstable-sort</a></li><li class="chapter-item expanded "><a href="1892-uninitialized-uninhabited.html">1892-uninitialized-uninhabited</a></li><li class="chapter-item expanded "><a href="1909-unsized-rvalues.html">1909-unsized-rvalues</a></li><li class="chapter-item expanded "><a href="1925-optional-match-vert.html">1925-optional-match-vert</a></li><li class="chapter-item expanded "><a href="1937-ques-in-main.html">1937-ques-in-main</a></li><li class="chapter-item expanded "><a href="1940-must-use-functions.html">1940-must-use-functions</a></li><li class="chapter-item expanded "><a href="1946-intra-rustdoc-links.html">1946-intra-rustdoc-links</a></li><li class="chapter-item expanded "><a href="1951-expand-impl-trait.html">1951-expand-impl-trait</a></li><li class="chapter-item expanded "><a href="1961-clamp.html">1961-clamp</a></li><li class="chapter-item expanded "><a href="1966-unsafe-pointer-reform.html">1966-unsafe-pointer-reform</a></li><li class="chapter-item expanded "><a href="1969-cargo-prepublish.html">1969-cargo-prepublish</a></li><li class="chapter-item expanded "><a href="1974-global-allocators.html">1974-global-allocators</a></li><li class="chapter-item expanded "><a href="1977-public-private-dependencies.html">1977-public-private-dependencies</a></li><li class="chapter-item expanded "><a href="1983-nursery-deprecation.html">1983-nursery-deprecation</a></li><li class="chapter-item expanded "><a href="1985-tiered-browser-support.html">1985-tiered-browser-support</a></li><li class="chapter-item expanded "><a href="1990-external-doc-attribute.html">1990-external-doc-attribute</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2005-match-ergonomics.html">2005-match-ergonomics</a></li><li class="chapter-item expanded "><a href="2008-non-exhaustive.html">2008-non-exhaustive</a></li><li class="chapter-item expanded "><a href="2011-generic-assert.html">2011-generic-assert</a></li><li class="chapter-item expanded "><a href="2025-nested-method-calls.html">2025-nested-method-calls</a></li><li class="chapter-item expanded "><a href="2027-object_safe_for_dispatch.html">2027-object_safe_for_dispatch</a></li><li class="chapter-item expanded "><a href="2033-experimental-coroutines.html">2033-experimental-coroutines</a></li><li class="chapter-item expanded "><a href="2043-is-aligned-intrinsic.html">2043-is-aligned-intrinsic</a></li><li class="chapter-item expanded "><a href="2044-license-rfcs.html">2044-license-rfcs</a></li><li class="chapter-item expanded "><a href="2045-target-feature.html">2045-target-feature</a></li><li class="chapter-item expanded "><a href="2046-label-break-value.html">2046-label-break-value</a></li><li class="chapter-item expanded "><a href="2052-epochs.html">2052-epochs</a></li><li class="chapter-item expanded "><a href="2056-allow-trivial-where-clause-constraints.html">2056-allow-trivial-where-clause-constraints</a></li><li class="chapter-item expanded "><a href="2057-refcell-replace.html">2057-refcell-replace</a></li><li class="chapter-item expanded "><a href="2070-panic-implementation.html">2070-panic-implementation</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-existential-types.html">2071-impl-trait-existential-types</a></li><li class="chapter-item expanded "><a href="2071-impl-trait-type-alias.html">2071-impl-trait-type-alias</a></li><li class="chapter-item expanded "><a href="2086-allow-if-let-irrefutables.html">2086-allow-if-let-irrefutables</a></li><li class="chapter-item expanded "><a href="2089-implied-bounds.html">2089-implied-bounds</a></li><li class="chapter-item expanded "><a href="2091-inline-semantic.html">2091-inline-semantic</a></li><li class="chapter-item expanded "><a href="2093-infer-outlives.html">2093-infer-outlives</a></li><li class="chapter-item expanded "><a href="2094-nll.html">2094-nll</a></li><li class="chapter-item expanded "><a href="2102-unnamed-fields.html">2102-unnamed-fields</a></li><li class="chapter-item expanded "><a href="2103-tool-attributes.html">2103-tool-attributes</a></li><li class="chapter-item expanded "><a href="2113-dyn-trait-syntax.html">2113-dyn-trait-syntax</a></li><li class="chapter-item expanded "><a href="2115-argument-lifetimes.html">2115-argument-lifetimes</a></li><li class="chapter-item expanded "><a href="2116-alloc-me-maybe.html">2116-alloc-me-maybe</a></li><li class="chapter-item expanded "><a href="2124-option-filter.html">2124-option-filter</a></li><li class="chapter-item expanded "><a href="2126-path-clarity.html">2126-path-clarity</a></li><li class="chapter-item expanded "><a href="2128-use-nested-groups.html">2128-use-nested-groups</a></li><li class="chapter-item expanded "><a href="2132-copy-closures.html">2132-copy-closures</a></li><li class="chapter-item expanded "><a href="2133-all-the-clones.html">2133-all-the-clones</a></li><li class="chapter-item expanded "><a href="2136-build-systems.html">2136-build-systems</a></li><li class="chapter-item expanded "><a href="2137-variadic.html">2137-variadic</a></li><li class="chapter-item expanded "><a href="2141-alternative-registries.html">2141-alternative-registries</a></li><li class="chapter-item expanded "><a href="2145-type-privacy.html">2145-type-privacy</a></li><li class="chapter-item expanded "><a href="2151-raw-identifiers.html">2151-raw-identifiers</a></li><li class="chapter-item expanded "><a href="2166-impl-only-use.html">2166-impl-only-use</a></li><li class="chapter-item expanded "><a href="2169-euclidean-modulo.html">2169-euclidean-modulo</a></li><li class="chapter-item expanded "><a href="2175-if-while-or-patterns.html">2175-if-while-or-patterns</a></li><li class="chapter-item expanded "><a href="2195-really-tagged-unions.html">2195-really-tagged-unions</a></li><li class="chapter-item expanded "><a href="2196-metabuild.html">2196-metabuild</a></li><li class="chapter-item expanded "><a href="2203-const-repeat-expr.html">2203-const-repeat-expr</a></li><li class="chapter-item expanded "><a href="2226-fmt-debug-hex.html">2226-fmt-debug-hex</a></li><li class="chapter-item expanded "><a href="2229-capture-disjoint-fields.html">2229-capture-disjoint-fields</a></li><li class="chapter-item expanded "><a href="2230-bury-description.html">2230-bury-description</a></li><li class="chapter-item expanded "><a href="2235-libc-struct-traits.html">2235-libc-struct-traits</a></li><li class="chapter-item expanded "><a href="2250-finalize-impl-dyn-syntax.html">2250-finalize-impl-dyn-syntax</a></li><li class="chapter-item expanded "><a href="2282-profile-dependencies.html">2282-profile-dependencies</a></li><li class="chapter-item expanded "><a href="2289-associated-type-bounds.html">2289-associated-type-bounds</a></li><li class="chapter-item expanded "><a href="2294-if-let-guard.html">2294-if-let-guard</a></li><li class="chapter-item expanded "><a href="2295-os-str-pattern.html">2295-os-str-pattern</a></li><li class="chapter-item expanded "><a href="2296-option-replace.html">2296-option-replace</a></li><li class="chapter-item expanded "><a href="2298-macro-at-most-once-rep.html">2298-macro-at-most-once-rep</a></li><li class="chapter-item expanded "><a href="2300-self-in-typedefs.html">2300-self-in-typedefs</a></li><li class="chapter-item expanded "><a href="2302-tuple-struct-self-ctor.html">2302-tuple-struct-self-ctor</a></li><li class="chapter-item expanded "><a href="2306-convert-id.html">2306-convert-id</a></li><li class="chapter-item expanded "><a href="2307-concrete-nonzero-types.html">2307-concrete-nonzero-types</a></li><li class="chapter-item expanded "><a href="2314-roadmap-2018.html">2314-roadmap-2018</a></li><li class="chapter-item expanded "><a href="2318-custom-test-frameworks.html">2318-custom-test-frameworks</a></li><li class="chapter-item expanded "><a href="2325-stable-simd.html">2325-stable-simd</a></li><li class="chapter-item expanded "><a href="2333-prior-art.html">2333-prior-art</a></li><li class="chapter-item expanded "><a href="2338-type-alias-enum-variants.html">2338-type-alias-enum-variants</a></li><li class="chapter-item expanded "><a href="2341-const-locals.html">2341-const-locals</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2344-const-looping.html">2344-const-looping</a></li><li class="chapter-item expanded "><a href="2345-const-panic.html">2345-const-panic</a></li><li class="chapter-item expanded "><a href="2349-pin.html">2349-pin</a></li><li class="chapter-item expanded "><a href="2351-is-sorted.html">2351-is-sorted</a></li><li class="chapter-item expanded "><a href="2359-subslice-pattern-syntax.html">2359-subslice-pattern-syntax</a></li><li class="chapter-item expanded "><a href="2360-bench-black-box.html">2360-bench-black-box</a></li><li class="chapter-item expanded "><a href="2361-dbg-macro.html">2361-dbg-macro</a></li><li class="chapter-item expanded "><a href="2363-arbitrary-enum-discriminant.html">2363-arbitrary-enum-discriminant</a></li><li class="chapter-item expanded "><a href="2383-lint-reasons.html">2383-lint-reasons</a></li><li class="chapter-item expanded "><a href="2386-used.html">2386-used</a></li><li class="chapter-item expanded "><a href="2388-try-expr.html">2388-try-expr</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2396-target-feature-1.1.html">2396-target-feature-1.1</a></li><li class="chapter-item expanded "><a href="2397-do-not-recommend.html">2397-do-not-recommend</a></li><li class="chapter-item expanded "><a href="2412-optimize-attr.html">2412-optimize-attr</a></li><li class="chapter-item expanded "><a href="2420-unreserve-proc.html">2420-unreserve-proc</a></li><li class="chapter-item expanded "><a href="2421-unreservations-2018.html">2421-unreservations-2018</a></li><li class="chapter-item expanded "><a href="2436-style-guide.html">2436-style-guide</a></li><li class="chapter-item expanded "><a href="2437-rustfmt-stability.html">2437-rustfmt-stability</a></li><li class="chapter-item expanded "><a href="2438-deny-integer-literal-overflow-lint.html">2438-deny-integer-literal-overflow-lint</a></li><li class="chapter-item expanded "><a href="2451-re-rebalancing-coherence.html">2451-re-rebalancing-coherence</a></li><li class="chapter-item expanded "><a href="2457-non-ascii-idents.html">2457-non-ascii-idents</a></li><li class="chapter-item expanded "><a href="2471-lint-test-inner-function.html">2471-lint-test-inner-function</a></li><li class="chapter-item expanded "><a href="2476-clippy-uno.html">2476-clippy-uno</a></li><li class="chapter-item expanded "><a href="2480-liballoc.html">2480-liballoc</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2497-if-let-chains.html">2497-if-let-chains</a></li><li class="chapter-item expanded "><a href="2500-needle.html">2500-needle</a></li><li class="chapter-item expanded "><a href="2504-fix-error.html">2504-fix-error</a></li><li class="chapter-item expanded "><a href="2514-union-initialization-and-drop.html">2514-union-initialization-and-drop</a></li><li class="chapter-item expanded "><a href="2515-type_alias_impl_trait.html">2515-type_alias_impl_trait</a></li><li class="chapter-item expanded "><a href="2521-c_void-reunification.html">2521-c_void-reunification</a></li><li class="chapter-item expanded "><a href="2523-cfg-path-version.html">2523-cfg-path-version</a></li><li class="chapter-item expanded "><a href="2526-const-wildcard.html">2526-const-wildcard</a></li><li class="chapter-item expanded "><a href="2532-associated-type-defaults.html">2532-associated-type-defaults</a></li><li class="chapter-item expanded "><a href="2535-or-patterns.html">2535-or-patterns</a></li><li class="chapter-item expanded "><a href="2539-cfg_attr-multiple-attrs.html">2539-cfg_attr-multiple-attrs</a></li><li class="chapter-item expanded "><a href="2561-future-possibilities.html">2561-future-possibilities</a></li><li class="chapter-item expanded "><a href="2565-formal-function-parameter-attributes.html">2565-formal-function-parameter-attributes</a></li><li class="chapter-item expanded "><a href="2570-linked-list-cursors.html">2570-linked-list-cursors</a></li><li class="chapter-item expanded "><a href="2574-simd-ffi.html">2574-simd-ffi</a></li><li class="chapter-item expanded "><a href="2582-raw-reference-mir-operator.html">2582-raw-reference-mir-operator</a></li><li class="chapter-item expanded "><a href="2585-unsafe-block-in-unsafe-fn.html">2585-unsafe-block-in-unsafe-fn</a></li><li class="chapter-item expanded "><a href="2591-exhaustive-integer-pattern-matching.html">2591-exhaustive-integer-pattern-matching</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2603-rust-symbol-name-mangling-v0.html">2603-rust-symbol-name-mangling-v0</a></li><li class="chapter-item expanded "><a href="2627-raw-dylib-kind.html">2627-raw-dylib-kind</a></li><li class="chapter-item expanded "><a href="2645-transparent-unions.html">2645-transparent-unions</a></li><li class="chapter-item expanded "><a href="2657-roadmap-2019.html">2657-roadmap-2019</a></li><li class="chapter-item expanded "><a href="2678-named-custom-cargo-profiles.html">2678-named-custom-cargo-profiles</a></li><li class="chapter-item expanded "><a href="2689-compiler-team-contributors.html">2689-compiler-team-contributors</a></li><li class="chapter-item expanded "><a href="2696-debug-map-key-value.html">2696-debug-map-key-value</a></li><li class="chapter-item expanded "><a href="2700-associated-constants-on-ints.html">2700-associated-constants-on-ints</a></li><li class="chapter-item expanded "><a href="2707-dotdot-patterns.html">2707-dotdot-patterns</a></li><li class="chapter-item expanded "><a href="2795-format-args-implicit-identifiers.html">2795-format-args-implicit-identifiers</a></li><li class="chapter-item expanded "><a href="2797-project-ffi-unwind.html">2797-project-ffi-unwind</a></li><li class="chapter-item expanded "><a href="2834-cargo-report-future-incompat.html">2834-cargo-report-future-incompat</a></li><li class="chapter-item expanded "><a href="2835-project-safe-transmute.html">2835-project-safe-transmute</a></li><li class="chapter-item expanded "><a href="2836-project-asm.html">2836-project-asm</a></li><li class="chapter-item expanded "><a href="2837-demote-apple-32bit.html">2837-demote-apple-32bit</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="2856-project-groups.html">2856-project-groups</a></li><li class="chapter-item expanded "><a href="2857-roadmap-2020.html">2857-roadmap-2020</a></li><li class="chapter-item expanded "><a href="2867-isa-attribute.html">2867-isa-attribute</a></li><li class="chapter-item expanded "><a href="2873-inline-asm.html">2873-inline-asm</a></li><li class="chapter-item expanded "><a href="2904-compiler-major-change-process.html">2904-compiler-major-change-process</a></li><li class="chapter-item expanded "><a href="2906-cargo-workspace-deduplicate.html">2906-cargo-workspace-deduplicate</a></li><li class="chapter-item expanded "><a href="2912-rust-analyzer.html">2912-rust-analyzer</a></li><li class="chapter-item expanded "><a href="2920-inline-const.html">2920-inline-const</a></li><li class="chapter-item expanded "><a href="2945-c-unwind-abi.html">2945-c-unwind-abi</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: N/A</li>
+<li>Start Date: (fill me in with today's date, YYYY-MM-DD)</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/1211">rust-lang/rfcs#1211</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/27840">rust-lang/rust#27840</a></li>
+</ul>
+<h1><a class="header" href="#summary" id="summary">Summary</a></h1>
+<p>Introduce a &quot;mid-level IR&quot; (MIR) into the compiler. The MIR desugars
+most of Rust's surface representation, leaving a simpler form that is
+well-suited to type-checking and translation.</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>The current compiler uses a single AST from the initial parse all the
+way to the final generation of LLVM. While this has some advantages,
+there are also a number of distinct downsides. </p>
+<ol>
+<li>
+<p>The complexity of the compiler is increased because all passes must
+be written against the full Rust language, rather than being able
+to consider a reduced subset. The MIR proposed here is <em>radically</em>
+simpler than the surface Rust syntax -- for example, it contains no
+&quot;match&quot; statements, and converts both <code>ref</code> bindings and <code>&amp;</code>
+expresions into a single form.</p>
+<p>a. There are numerous examples of &quot;desugaring&quot; in Rust. In
+principle, desugaring one language feature into another should
+make the compiler <em>simpler</em>, but in our current implementation,
+it tends to make things more complex, because every phase must
+simulate the desugaring anew. The most prominent example are
+closure expressions (<code>|| ...</code>), which desugar to a fresh struct
+instance, but other examples abound: <code>for</code> loops, <code>if let</code> and
+<code>while let</code>, <code>box</code> expressions, overloaded operators (which
+desugar to method calls), method calls (which desugar to UFCS
+notation).</p>
+<p>b. There are a number of features which are almost infeasible to
+implement today but which should be much easier given a MIR
+representation. Examples include box patterns and non-lexical
+lifetimes.</p>
+</li>
+<li>
+<p>Reasoning about fine-grained control-flow in an AST is rather
+difficult.  The right tool for this job is a control-flow graph
+(CFG). We currently construct a CFG that lives &quot;on top&quot; of the AST,
+which allows the borrow checking code to be flow sensitive, but it
+is awkward to work with. Worse, because this CFG is not used by
+trans, it is not necessarily the case that the control-flow as seen
+by the analyses corresponds to the code that will be generated.
+The MIR is based on a CFG, resolving this situation.</p>
+</li>
+<li>
+<p>The reliability of safety analyses is reduced because the gap
+between what is being analyzed (the AST) and what is being executed
+(LLVM bitcode) is very wide. The MIR is very low-level and hence the
+translation to LLVM should be straightforward.</p>
+</li>
+<li>
+<p>The reliability of safety proofs, when we have some, would be
+reduced because the formal language we are modeling is so far from
+the full compiler AST. The MIR is simple enough that it should be
+possible to (eventually) make safety proofs based on the MIR
+itself.</p>
+</li>
+<li>
+<p>Rust-specific optimizations, and optimizing trans output, are very
+challenging. There are numerous cases where it would be nice to be
+able to do optimizations <em>before</em> translating to LLVM bitcode, or
+to take advantage of Rust-specific knowledge of which LLVM is
+unaware. Currently, we are forced to do these optimizations as part
+of lowering to bitcode, which can get quite complex. Having an
+intermediate form improves the situation because:</p>
+<p>a. In some cases, we can do the optimizations in the MIR itself before translation.</p>
+<p>b. In other cases, we can do analyses on the MIR to easily determine when the optimization
+would be safe.</p>
+<p>c. In all cases, whatever we can do on the MIR will be helpful for other
+targets beyond LLVM (see next bullet).</p>
+</li>
+<li>
+<p>Migrating away from LLVM is nearly impossible. In the future, it
+may be advantageous to provide a choice of backends beyond
+LLVM. Currently though this is infeasible, since so much of the
+semantics of Rust itself are embedded in the <code>trans</code> step which
+converts to LLVM IR. Under the MIR design, those semantics are
+instead described in the translation from AST to MIR, and the LLVM
+step itself simply applies optimizations.</p>
+</li>
+</ol>
+<p>Given the numerous benefits of a MIR, you may wonder why we have not
+taken steps in this direction earlier. In fact, we have a number of
+structures in the compiler that simulate the effect of a MIR:</p>
+<ol>
+<li>Adjustments. Every expression can have various adjustments, like
+autoderefs and so forth. These are computed by the type-checker
+and then read by later analyses. This is a form of MIR, but not a particularly
+convenient one.</li>
+<li>The CFG. The CFG tries to model the flow of execution as a graph
+rather than a tree, to help analyses in dealing with complex
+control-flow formed by things like loops, <code>break</code>, <code>continue</code>, etc.
+This CFG is however inferior to the MIR in that it is only an
+approximation of control-flow and does not include all the
+information one would need to actually execute the program (for
+example, for an <code>if</code> expression, the CFG would indicate that two
+branches are possible, but would not contain enough information to
+decide which branch to take).</li>
+<li><code>ExprUseVisitor</code>. The <code>ExprUseVisitor</code> is designed to work in
+conjunction with the CFG. It walks the AST and highlights actions
+of interest to later analyses, such as borrows or moves. For each
+such action, the analysis gets a callback indicating the point in
+the CFG where the action occurred along with what
+happened. Overloaded operators, method calls, and so forth are
+&quot;desugared&quot; into their more primitive operations. This is
+effectively a kind of MIR, but it is not complete enough to do
+translation, since it focuses purely on borrows, moves, and other
+things of interest to the safety checker.</li>
+</ol>
+<p>Each of these things were added in order to try and cope with the
+complexity of working directly on the AST. The CFG for example
+consolidates knowledge about control-flow into one piece of code,
+producing a data structure that can be easily interpreted. Similarly,
+the <code>ExprUseVisitor</code> consolidates knowledge of how to walk and
+interpret the current compiler representation.</p>
+<h3><a class="header" href="#goals" id="goals">Goals</a></h3>
+<p>It is useful to think about what &quot;knowledge&quot; the MIR should
+encapsulate. Here is a listing of the kinds of things that should be
+explicit in the MIR and thus that downstream code won't have to
+re-encode in the form of repeated logic:</p>
+<ul>
+<li><strong>Precise ordering of control-flow.</strong> The CFG makes this very explicit,
+and the individual statements and nodes in the MIR are very small
+and detailed and hence nothing &quot;interesting&quot; happens in the middle
+of an individual node with respect to control-flow.</li>
+<li><strong>What needs to be dropped and when.</strong> The set of data that needs to
+be dropped and when is a fairly complex thing to calculate: you have
+to know what's in scope, including temporary values and so forth.
+In the MIR, all drops are explicit, including those that result from
+panics and unwinding.</li>
+<li><strong>How matches are desugared.</strong> Reasoning about matches has been a
+traditional source of complexity. Matches combine traversing types
+with borrows, moves, and all sorts of other things, depending on the
+precise patterns in use. This is all vastly simplified and explicit
+in MIR.</li>
+</ul>
+<p>One thing the current MIR does not make explicit as explicit as it
+could is when something is <em>moved</em>. For by-value uses of a value, the
+code must still consult the type of the value to decide if that is a
+move or not. This could be made more explicit in the IR.</p>
+<h3><a class="header" href="#which-analyses-are-well-suited-to-the-mir" id="which-analyses-are-well-suited-to-the-mir">Which analyses are well-suited to the MIR?</a></h3>
+<p>Some analyses are better suited to the AST than to a MIR. The
+following is a list of work the compiler does that would benefit from
+using a MIR:</p>
+<ul>
+<li><strong>liveness checking</strong>: this is used to issue warnings about unused assignments
+and the like. The MIR is perfect for this sort of data-flow analysis.</li>
+<li><strong>borrow and move checking</strong>: the borrow checker already uses a
+combination of the CFG and <code>ExprUseVisitor</code> to try and achieve a
+similarly low-level of detail.</li>
+<li><strong>translation to LLVM IR</strong>: the MIR is much closer than the AST to
+the desired end-product.</li>
+</ul>
+<p>Some other passes would probably work equally well on the MIR or an
+AST, but they will likely find the MIR somewhat easier to work with
+than the current AST simply because it is, well, simpler:</p>
+<ul>
+<li><strong>rvalue checking</strong>, which checks that things are <code>Sized</code> which need to be.</li>
+<li><strong>reachability</strong> and <strong>death checking</strong>.</li>
+</ul>
+<p>These items are likely ill-suited to the MIR as designed:</p>
+<ul>
+<li><strong>privacy checking</strong>, since it relies on explicit knowledge of paths that is not
+necessarily present in the MIR.</li>
+<li><strong>lint checking</strong>, since it is often dependent on the sort of surface details
+we are seeking to obscure.</li>
+</ul>
+<p>For some passes, the impact is not entirely clear. In particular,
+<strong>match exhaustiveness checking</strong> could easily be subsumed by the MIR
+construction process, which must do a similar analysis during the
+lowering process. However, once the MIR is built, the match is
+completely desugared into more primitive switches and so forth, so we
+will need to leave some markers in order to know where to check for
+exhaustiveness and to reconstruct counter examples.</p>
+<h1><a class="header" href="#detailed-design" id="detailed-design">Detailed design</a></h1>
+<h3><a class="header" href="#what-is-really-being-proposed-here" id="what-is-really-being-proposed-here">What is <em>really</em> being proposed here?</a></h3>
+<p>The rest of this section goes into detail on a particular MIR design.
+However, the true purpose of this RFC is not to nail down every detail
+of the MIR -- which are expected to evolve and change over time anyway
+-- but rather to establish some high-level principles which drive the
+rest of the design:</p>
+<ol>
+<li>We should indeed lower the representation from an AST to something
+else that will drive later analyses, and this representation should
+be based on a CFG, not a tree.</li>
+<li>This representation should be explicitly minimal and not attempt to retain
+the original syntactic structure, though it should be possible to recover enough
+of it to make quality error messages.</li>
+<li>This representation should encode drops, panics, and other
+scope-dependent items explicitly.</li>
+<li>This representation does not have to be well-typed Rust, though it
+should be possible to type-check it using a tweaked variant on the
+Rust type system.</li>
+</ol>
+<h3><a class="header" href="#prototype" id="prototype">Prototype</a></h3>
+<p>The MIR design being described can be found <a href="https://github.com/rust-lang/rust/tree/2532ad7d0b2edac1909ef0ef346230331200790b/src/librustc/mir">here</a>. In
+particular, <a href="https://github.com/rust-lang/rust/blob/2532ad7d0b2edac1909ef0ef346230331200790b/src/librustc/mir/mod.rs">this module</a> defines the MIR representation,
+and <a href="https://github.com/rust-lang/rust/tree/fc04eaacc5bd5760e98cd3aa390dcc3ae795d12f/src/librustc_mir/build">this <code>build</code> module</a> contains the code to create a MIR
+representation from an AST-like form.</p>
+<p>For increased flexibility, as well as to make the code simpler, the
+prototype is not coded directly against the compiler's AST, but rather
+against an idealized representation defined by <a href="https://github.com/rust-lang/rust/tree/fc04eaacc5bd5760e98cd3aa390dcc3ae795d12f/src/librustc_mir/hair">the <code>HAIR</code> trait</a>.
+Note that this HAIR trait is entirely independent from the HIR discussed by
+nrc in <a href="https://github.com/rust-lang/rfcs/pull/1191">RFC 1191</a> -- you can think of it as an abstract trait
+that any high-level Rust IR could implement, including our current
+AST. Moreover, it's just an implementation detail and not part of the
+MIR being proposed here per se. Still, if you want to read the code,
+you have to understand its design.</p>
+<p>The <code>HAIR</code> trait contains a number of opaque associated types for the
+various aspects of the compiler. For example, the type <code>H::Expr</code>
+represents an expression. In order to find out what kind of expression
+it is, the <code>mirror</code> method is called, which converts an <code>H::Expr</code> into
+an <code>Expr&lt;H&gt;</code> mirror. This mirror then contains embedded <code>ExprRef&lt;H&gt;</code>
+nodes to refer to further subexpressions; these may either be mirrors
+themselves, or else they may be additional <code>H::Expr</code> nodes. This
+allows the tree that is exported to differ in small ways from the
+actual tree within the compiler; the primary intention is to use this
+to model &quot;adjustments&quot; like autoderef. The code to convert from our
+current AST to the HAIR is not yet complete, but it can be found
+<a href="https://github.com/rust-lang/rust/blob/21c61336bb9e327b90f4cb8e87a948be40eeafe5/src/librustc_mir/hair/mod.rs">here</a>.</p>
+<p>Note that the HAIR mirroring system is an experiment and not really
+part of the MIR itself. It does however present an interesting option
+for (eventually) stabilizing access to the compiler's internals.</p>
+<h3><a class="header" href="#overview-of-the-mir" id="overview-of-the-mir">Overview of the MIR</a></h3>
+<p>The proposed MIR always describes the execution of a single fn.  At
+the highest level it consists of a series of declarations regarding
+the stack storage that will be required and then a set of basic
+blocks:</p>
+<pre><code>MIR = fn({TYPE}) -&gt; TYPE {
+    {let [mut] B: TYPE;}  // user-declared bindings and their types
+    {let TEMP: TYPE;}     // compiler-introduced temporary
+    {BASIC_BLOCK}         // control-flow graph
+};
+</code></pre>
+<p>The storage declarations are broken into two categories. User-declared
+bindings have a 1-to-1 relationship with the variables specified in
+the program. Temporaries are introduced by the compiler in various
+cases. For example, borrowing an lvalue (e.g., <code>&amp;foo()</code>) will
+introduce a temporary to store the result of <code>foo()</code>. Similarly,
+discarding a value <code>foo();</code> is translated to something like <code>let tmp = foo(); drop(tmp);</code>).  Temporaries are single-assignment, but because
+they can be borrowed they may be mutated after this assignment and
+hence they differ somewhat from variables in a pure SSA
+representation.</p>
+<p>The proposed MIR takes the form of a graph where each node is a <em>basic
+block</em>. A basic block is a standard compiler term for a continuous
+sequence of instructions with a single entry point.  All interesting
+control-flow happens between basic blocks. Each basic block has an id
+<code>BB</code> and consists of a sequence of statements and a terminator:</p>
+<pre><code>BASIC_BLOCK = BB: {STATEMENT} TERMINATOR
+</code></pre>
+<p>A <code>STATEMENT</code> can have one of three forms:</p>
+<pre><code>STATEMENT = LVALUE &quot;=&quot; RVALUE        // assign rvalue into lvalue
+          | Drop(DROP_KIND, LVALUE)  // drop value if needed
+DROP_KIND = SHALLOW                  // (see discussion below)
+          | DEEP
+</code></pre>
+<p>The following sections dives into these various kinds of statements in
+more detail.</p>
+<p>The <code>TERMINATOR</code> for a basic block describes how it connects to
+subsequent blocks:</p>
+<pre><code>TERMINATOR = GOTO(BB)              // normal control-flow
+           | PANIC(BB)             // initiate unwinding, branching to BB for cleanup
+           | IF(LVALUE, BB0, BB1)  // test LVALUE and branch to BB0 if true, else BB1
+           | SWITCH(LVALUE, BB...) // load discriminant from LVALUE (which must be an enum),
+                                   // and branch to BB... depending on which variant it is
+           | CALL(LVALUE0 = LVALUE1(LVALUE2...), BB0, BB1)
+                                   // call LVALUE1 with LVALUE2... as arguments. Write
+                                   // result into LVALUE0. Branch to BB0 if it returns
+                                   // normally, BB1 if it is unwinding.
+           | DIVERGE               // return to caller, unwinding
+           | RETURN                // return to caller normally
+</code></pre>
+<p>Most of the terminators should be fairly obvious. The most interesting
+part is the handling of unwinding. This aligns fairly close with how
+LLVM works: there is one terminator, PANIC, that initiates unwinding.
+It immediately branches to a handler (BB) which will perform cleanup
+and (eventually) reach a block that has a DIVERGE terminator. DIVERGE
+causes unwinding to continue up the stack.</p>
+<p>Because calls to other functions can always (or almost always) panic,
+calls are themselves a kind of terminator. If we can determine that
+some function we are calling cannot unwind, we can always modify the
+IR to make the second basic block optional. (We could also add an
+<code>RVALUE</code> to represent calls, but it's probably easiest to keep the
+call as a terminator unless the memory savings of consolidating basic
+blocks are found to be worthwhile.)</p>
+<p>It's worth pointing out that basic blocks are just a kind of
+compile-time and memory-use optimization; there is no semantic
+difference between a single block and two blocks joined by a GOTO
+terminator.</p>
+<h3><a class="header" href="#assignments-values-and-rvalues" id="assignments-values-and-rvalues">Assignments, values, and rvalues</a></h3>
+<p>The primary kind of statement is an assignent:</p>
+<pre><code>LVALUE &quot;=&quot; RVALUE
+</code></pre>
+<p>The semantics of this operation are to first evaluate the RVALUE and
+then store it into the LVALUE (which must represent a memory location
+of suitable type). </p>
+<p>An <code>LVALUE</code> represents a path to a memory location. This is the basic
+&quot;unit&quot; analyzed by the borrow checker. It is always possible to
+evaluate an <code>LVALUE</code> without triggering any side-effects (modulo
+derefences of unsafe pointers, which naturally can trigger arbitrary
+behavior if the pointer is not valid).</p>
+<pre><code>LVALUE = B                   // reference to a user-declared binding
+       | TEMP                // a temporary introduced by the compiler
+       | ARG                 // a formal argument of the fn
+       | STATIC              // a reference to a static or static mut
+       | RETURN              // the return pointer of the fn
+       | LVALUE.f            // project a field or tuple field, like x.f or x.0
+       | *LVALUE             // dereference a pointer
+       | LVALUE[LVALUE]      // index into an array (see disc. below about bounds checks)
+       | (LVALUE as VARIANT) // downcast to a specific variant of an enum,
+                             // see the section on desugaring matches below
+</code></pre>
+<p>An <code>RVALUE</code> represents a computation that yields a result. This result
+must be stored in memory somewhere to be accessible. The MIR does not
+contain any kind of nested expressions: everything is flattened out,
+going through lvalues as intermediaries.</p>
+<pre><code>RVALUE = Use(LVALUE)                // just read an lvalue
+       | [LVALUE; LVALUE]
+       | &amp;'REGION LVALUE
+       | &amp;'REGION mut LVALUE
+       | LVALUE as TYPE
+       | LVALUE &lt;BINOP&gt; LVALUE
+       | &lt;UNOP&gt; LVALUE
+       | Struct { f: LVALUE0, ... } // aggregates, see section below
+       | (LVALUE...LVALUE)
+       | [LVALUE...LVALUE]
+       | CONSTANT
+       | LEN(LVALUE)                // load length from a slice, see section below
+       | BOX                        // malloc for builtin box, see section below
+BINOP = + | - | * | / | ...         // excluding &amp;&amp; and ||
+UNOP = ! | -                        // note: no `*`, as that is part of LVALUE
+</code></pre>
+<p>One thing worth pointing out is that the binary and unary operators
+are only the <em>builtin</em> form, operating on scalar values. Overloaded
+operators will be desugared to trait calls. Moreover, all method calls
+are desugared into normal calls via UFCS form.</p>
+<h3><a class="header" href="#constants" id="constants">Constants</a></h3>
+<p>Constants are a subset of rvalues that can be evaluated at compilation
+time:</p>
+<pre><code>CONSTANT = INT
+         | UINT
+         | FLOAT
+         | BOOL
+         | BYTES
+         | STATIC_STRING
+         | ITEM&lt;SUBSTS&gt;                 // reference to an item or constant etc
+         | &lt;P0 as TRAIT&lt;P1...Pn&gt;&gt;       // projection
+         | CONSTANT(CONSTANT...)        // 
+         | CAST(CONSTANT, TY)           // foo as bar
+         | Struct { (f: CONSTANT)... }  // aggregates...
+         | (CONSTANT...)                //
+         | [CONSTANT...]                //
+</code></pre>
+<h3><a class="header" href="#aggregates-and-further-lowering" id="aggregates-and-further-lowering">Aggregates and further lowering</a></h3>
+<p>The set of rvalues includes &quot;aggregate&quot; expressions like <code>(x, y)</code> or
+<code>Foo { f: x, g: y }</code>. This is a place where the MIR (somewhat) departs
+from what will be generated compilation time, since (often) an
+expression like <code>f = (x, y, z)</code> will wind up desugared into a series
+of piecewise assignments like:</p>
+<pre><code>f.0 = x;
+f.1 = y;
+f.2 = z;
+</code></pre>
+<p>However, there are good reasons to include aggregates as first-class
+rvalues. For one thing, if we break down each aggregate into the
+specific assignments that would be used to construct the value, then
+zero-sized types are <em>never</em> assigned, since there is no data to
+actually move around at runtime. This means that the compiler couldn't
+distinguish uninitialized variables from initialized ones. That is,
+code like this:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x: (); // note: never initialized
+use(x)
+<span class="boring">}
+</span></code></pre></pre>
+<p>and this:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x: () = ();
+use(x);
+<span class="boring">}
+</span></code></pre></pre>
+<p>would desugar to the same MIR. That is a problem, particularly with
+respect to destructors: imagine that instead of the type <code>()</code>, we used
+a type like <code>struct Foo;</code> where <code>Foo</code> implements <code>Drop</code>.</p>
+<p>Another advantage is that building aggregates in a two-step way
+assures the proper execution order when unwinding occurs before the
+complete value is constructed. In particular, we want to drop the
+intermediate results in the order that they appear in the source, not
+in the order in which the fields are specified in the struct
+definition.</p>
+<p>A final reason to include aggregates is that, at runtime, the
+representation of an aggregate may indeed fit within a single word, in
+which case making a temporary and writing the fields piecemeal may in
+fact not be the correct representation.</p>
+<p>In any case, after the move and correctness checking is done, it is
+easy enough to remove these aggregate rvalues and replace them with
+assignments. This could potentially be done during LLVM lowering, or
+as a pre-pass that transforms MIR statements like:</p>
+<pre><code>x = ...x;
+y = ...y;
+z = ...z;
+f = (x, y, z)
+</code></pre>
+<p>to:</p>
+<pre><code>x = ...x;
+y = ...y;
+z = ...z;
+f.0 = x;
+f.1 = y;
+f.2 = z;
+</code></pre>
+<p>combined with another pass that removes temporaries that are only used
+within a single assignment (and nowhere else):</p>
+<pre><code>f.0 = ...x;
+f.1 = ...y;
+f.2 = ...z;
+</code></pre>
+<p>Going further, once type-checking is done, it is plausible to do
+further lowering within the MIR purely for optimization purposes. For
+example, we could introduce intermediate references to cache the
+results of common lvalue computations and so forth. This may well be
+better left to LLVM (or at least to the lowering pass).</p>
+<h3><a class="header" href="#bounds-checking" id="bounds-checking">Bounds checking</a></h3>
+<p>Because bounds checks are fallible, it's important to encode them in
+the MIR whenever we do indexing. Otherwise the trans code would have
+to figure out on its own how to do unwinding at that point. Because
+the MIR doesn't &quot;desugar&quot; fat pointers, we include a special rvalue
+<code>LEN</code> that extracts the length from an array value whose type matches
+<code>[T]</code> or <code>[T;n]</code> (in the latter case, it yields a constant). Using
+this, we desugar an array reference like <code>y = arr[x]</code> as follows:</p>
+<pre><code>let len: usize;
+let idx: usize;
+let lt: bool;
+
+B0: {
+  len = len(arr);
+  idx = x;
+  lt = idx &lt; len;
+  if lt { B1 } else { B2 }
+}
+
+B1: {
+  y = arr[idx]
+  ...
+}
+
+B2: {
+  &lt;panic&gt;
+}
+</code></pre>
+<p>The key point here is that we create a temporary (<code>idx</code>) capturing the
+value that we bounds checked and we ensure that there is a comparison
+against the length.</p>
+<h3><a class="header" href="#overflow-checking" id="overflow-checking">Overflow checking</a></h3>
+<p>Similarly, since overflow checks can trigger a panic, they ought to be
+exposed in the MIR as well. This is handled by having distinct binary
+operators for &quot;add with overflow&quot; and so forth, analogous to the LLVM
+intrinsics. These operators yield a tuple of (result, overflow), so
+<code>result = left + right</code> might be translated like:</p>
+<pre><code>let tmp: (u32, bool);
+
+B0: {
+  tmp = left + right;
+  if(tmp.1, B2, B1)
+}
+
+B1: {
+  result = tmp.0
+  ...
+}
+
+B2: {
+  &lt;panic&gt;
+}
+</code></pre>
+<h3><a class="header" href="#matches" id="matches">Matches</a></h3>
+<p>One of the goals of the MIR is to desugar matches into something much
+more primitive, so that we are freed from reasoning about their
+complexity. This is primarily achieved through a combination of SWITCH
+terminators and downcasts. To get the idea, consider this simple match
+statement:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match foo() {
+    Some(ref v) =&gt; ...0,
+    None =&gt; ...1
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This would be converted into MIR as follows (leaving out the unwinding support):</p>
+<pre><code>BB0 {
+    call(tmp = foo(), BB1, ...);
+}
+
+BB1 {
+    switch(tmp, BB2, BB3) // two branches, corresponding to the Some and None variants resp.
+}
+
+BB2 {
+    v = &amp;(tmp as Option::Some).0;
+    ...0
+}
+
+BB3 {
+    ...1
+}
+</code></pre>
+<p>There are some interesting cases that arise from matches that are
+worth examining.</p>
+<p><strong>Vector patterns.</strong> Currently, (unstable) Rust supports vector
+patterns which permit borrows that would not otherwise be legal:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut vec = [1, 2];
+match vec {
+    [ref mut p, ref mut q] =&gt; { ... }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>If this code were written using <code>p = &amp;mut vec[0], q = &amp;mut vec[1]</code>,
+the borrow checker would complain. This is because it does not attempt
+to reason about indices being disjoint, even if they are constant
+(this is a limitation we may wish to consider lifting at some point in
+the future, however).</p>
+<p>To accommodate these, we plan to desugar such matches into lvalues
+using the special &quot;constant index&quot; form. The borrow checker would be
+able to reason that two constant indices are disjoint but it could
+consider &quot;variable indices&quot; to be (potentially) overlapping with all
+constant indices. This is a fairly straightforward thing to do (and in
+fact the borrow checker already includes similar logic, since the
+<code>ExprUseVisitor</code> encounters a similar dilemna trying to resolve
+borrows).</p>
+<h3><a class="header" href="#drops" id="drops">Drops</a></h3>
+<p>The <code>Drop(DROP_KIND, LVALUE)</code> instruction is intended to represent
+&quot;automatic&quot; compiler-inserted drops. The semantics of a <code>Drop</code> is that
+it drops &quot;if needed&quot;. This means that the compiler can insert it
+everywhere that a <code>Drop</code> would make sense (due to scoping), and assume
+that instrumentation will be done as needed to prevent double
+drops. Currently, this signaling is done by zeroing out memory at
+runtime, but we are in the process of introducing stack flags for this
+purpose: the MIR offers the opportunity to reify those flags if we
+wanted, and rewrite drops to be more narrow (versus leaving that work
+for LLVM).</p>
+<p>To illustrate how drop works, let's work through a simple
+example. Imagine that we have a snippet of code like:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>{
+  let x = Box::new(22);
+  send(x);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The compiler would generate a drop for <code>x</code> at the end of the block,
+but the value <code>x</code> would also be moved as part of the call to <code>send</code>.
+A later analysis could easily strip out this <code>Drop</code> since it is evident
+that the value is always used on all paths that lead to <code>Drop</code>.</p>
+<h3><a class="header" href="#shallow-drops-and-box" id="shallow-drops-and-box">Shallow drops and Box</a></h3>
+<p>The MIR includes the distinction between &quot;shallow&quot; and &quot;deep&quot;
+drop. Deep drop is the normal thing, but shallow drop is used when
+partially initializing boxes. This is tied to the <code>box</code> keyword.
+For example, an assignment like the following:</p>
+<pre><code>let x = box Foo::new();
+</code></pre>
+<p>would be translated to something like the following:</p>
+<pre><code>let tmp: Box&lt;Foo&gt;;
+
+B0: {
+  tmp = BOX;
+  f = Foo::new; // constant reference
+  call(*tmp, f, B1, B2);
+} 
+
+B1: { // successful return of the call
+  x = use(tmp); // move of tmp
+  ...
+}
+
+B2: { // calling Foo::new() panic'd
+  drop(Shallow, tmp);
+  diverge;
+}
+</code></pre>
+<p>The interesting part here is the block B2, which indicates the case
+that <code>Foo::new()</code> invoked unwinding. In that case, we have to free the
+box that we allocated, but we only want to free the box itself, not
+its contents (it is not yet initialized).</p>
+<p>Note that having this kind of builtin box code is a legacy thing. The
+more generalized protocol that <a href="https://github.com/rust-lang/rfcs/blob/master/text/0809-box-and-in-for-stdlib.md">RFC 809</a> specifies works in
+more-or-less exactly the same way: when that is adopted uniformly, the
+need for shallow drop and the Box rvalue will go away.</p>
+<h3><a class="header" href="#phasing" id="phasing">Phasing</a></h3>
+<p>Ideally, the translation to MIR would be done during type checking,
+but before &quot;region checking&quot;. This is because we would like to
+implement non-lexical lifetimes eventually, and doing that well would
+requires access to a control-flow graph. Given that we do very limited
+reasoning about regions at present, this should not be a problem.</p>
+<h3><a class="header" href="#representing-scopes" id="representing-scopes">Representing scopes</a></h3>
+<p>Lexical scopes in Rust play a large role in terms of when destructors
+run and how the reasoning about lifetimes works. However, they are
+completely erased by the graph format. For the most part, this is not
+an issue, since drops are encoded explicitly into the control-flow
+where needed. However, one place that we still need to reason about
+scopes (at least in the short term) is in region checking, because
+currently regions are encoded in terms of scopes, and we have to be
+able to map that to a region in the graph. The MIR therefore includes
+extra information mapping every scope to a SEME region (single-entry,
+multiple-exit). If/when we move to non-lexical lifetimes, regions
+would be defined in terms of the graph itself, and the need to retain
+scoping information should go away.</p>
+<h3><a class="header" href="#monomorphization" id="monomorphization">Monomorphization</a></h3>
+<p>Currently, we do monomorphization at LLVM translation time. If we ever
+chose to do it at a MIR level, that would be fine, but one thing to be
+careful of is that we may be able to elide <code>Drop</code> nodes based on the
+specific types.</p>
+<h3><a class="header" href="#unchecked-assertions" id="unchecked-assertions">Unchecked assertions</a></h3>
+<p>There are various bits of the MIR that are not trivially type-checked.
+In general, these are properties which are assured in Rust by
+construction in the high-level syntax, and thus we must be careful not
+to do any transformation that would endanger them after the fact.</p>
+<ul>
+<li><strong>Bounds-checking.</strong> We introduce explicit bounds checks into the IR
+that guard all indexing lvalues, but there is no explicit connection
+between this check and the later accesses.</li>
+<li><strong>Downcasts to a specific variant.</strong> We test variants with a SWITCH
+opcode but there is no explicit connection between this test and
+later downcasts.</li>
+</ul>
+<p>This need for unchecked operations results form trying to lower and
+simplify the representation as much as possible, as well as trying to
+represent all panics explicitly. We believe the tradeoff to be
+worthwhile, particularly since:</p>
+<ol>
+<li>the existing analyses can continue to generally assume that these
+properties hold (e.g., that all indices are in bounds and all
+downcasts are safe); and,</li>
+<li>it would be trivial to implement a static dataflow analysis
+checking that bounds and downcasts only occur downstream of a relevant
+check.</li>
+</ol>
+<h1><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h1>
+<p><strong>Converting from AST to a MIR will take some compilation time.</strong>
+Expectations are that constructing the MIR will be quite fast, and
+that follow-on code (such as trans and borowck) will execute faster,
+because they will operate over a simpler and more compact
+representation. However, this needs to be measured.</p>
+<p><strong>More effort is required to make quality error messages.</strong> Because
+the representation the compiler is working with is now quite different
+from what the user typed, we have to put in extra effort to make sure
+that we bridge this gap when reporting errors. We have some precedent
+for dealing with this, however. For example, the <code>ExprUseVisitor</code> (and
+<code>mem_categorization</code>) includes extra annotations and hints to tell the
+borrow checker when a reference was introduced as part of a closure
+versus being explicit in the source code. The current prototype
+doesn't have much in this direction, but it should be relatively
+straightforward to add. Hints like those, in addition to spans, should
+be enough to bridge the error message gap.</p>
+<h1><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h1>
+<p><strong>Use SSA.</strong> In the proposed MIR, temporaries are single-assignment
+but can be borrowed, making them more analogous to allocas than SSA
+values. This is helpful to analyses like the borrow checker, because
+it means that the program operates directly on paths through memory,
+versus having the stack modeled as allocas. The current model is also
+helpful for generating debuginfo.</p>
+<p>SSA representation can be helpful for more sophisticated backend
+optimizations. However, we tend to leave those optimizations to LLVM,
+and hence it makes more sense to have the MIR be based on lvalues
+instead. There are some cases where it might make sense to do analyses
+on the MIR that would benefit from SSA, such as bounds check elision.
+In those cases, we could either quickly identify those temporaries
+that are not mutably borrowed (and which therefore act like SSA
+variables); or, further lower into a LIR, (which would be an SSA
+form); or else simply perform the analyses on the MIR using standard
+techniques like def-use chains. (CSE and so forth are straightforward
+both with and without SSA, honestly.)</p>
+<p><strong>Exclude unwinding.</strong> Excluding unwinding from the MIR would allow us
+to elide annoying details like bounds and overflow checking. These are
+not particularly interesting to borrowck, so that is somewhat
+appealing. But that would mean that consumers of MIR would have to
+reconstruct the order of drops and so forth on unwinding paths, which
+would require them reasoning about scopes and other rather complex
+bits of information. Moreover, having all drops fully exposed in the
+MIR is likely helpful for better handling of dynamic drop and also for
+the rules collectively known as dropck, though all details there have
+not been worked out.</p>
+<p><strong>Expand the set of operands.</strong> The proposed MIR forces all rvalue operands
+to be lvalues. This means that integer constants and other &quot;simple&quot; things
+will wind up introducing a temporary. For example, translating <code>x = 2+2</code>
+will generate code like:</p>
+<pre><code>tmp0 = 2
+tmp1 = 2
+x = tmp0 + tmp1
+</code></pre>
+<p>A more common case will be calls to statically known functions like <code>x = foo(3)</code>,
+which desugars to a temporary and a constant reference:</p>
+<pre><code>tmp0 = foo;
+tmp1 = 3
+x = tmp0(tmp1)
+</code></pre>
+<p>There is no particular <em>harm</em> in such constants: it would be very easy
+to optimize them away when reducing to LLVM bitcode, and if we do not
+do so, LLVM will do it. However, we could also expand the scope of
+operands to include both lvalues and some simple rvalues like
+constants. The main advantage of this is that it would reduce the
+total number of statements and hence might help with memory
+consumption.</p>
+<p><strong>Totally safe MIR.</strong> This MIR includes operations whose safety is not
+trivially type-checked (see the section on <em>unchecked assertions</em>
+above). We might design a higher-level MIR where those properties held
+by construction, or modify the MIR to thread &quot;evidence&quot; of some form
+that makes it easier to check that the properties hold. The former
+would make downstream code accommodate more complexity. The latter
+remains an option in the future but doesn't seem to offer much
+practical advantage.</p>
+<h1><a class="header" href="#unresolved-questions" id="unresolved-questions">Unresolved questions</a></h1>
+<p><strong>What additional info is needed to provide for good error messages?</strong>
+Currently the implementation only has spans on statements, not lvalues
+or rvalues. We'll have to experiment here. I expect we will probably
+wind up placing &quot;debug info&quot; on all lvalues, which includes not only a
+span but also a &quot;translation&quot; into terms the user understands. For
+example, in a closure, a reference to an by-reference upvar <code>foo</code> will
+be translated to something like <code>*self.foo</code>, and we would like that to
+be displayed to the user as just <code>foo</code>.</p>
+<p><strong>What additional info is needed for debuginfo?</strong> It may be that to
+generate good debuginfo we want to include additional information
+about control-flow or scoping.</p>
+<p><strong>Unsafe blocks.</strong> Should we layer unsafe in the MIR so that effect
+checking can be done on the CFG? It's not the most natural way to do
+it, <em>but</em> it would make it fairly easy to support (e.g.) autoderef on
+unsafe pointers, since all the implicit operations are made explicit
+in the MIR. My hunch is that we can improve our HIR instead.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="1210-impl-specialization.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="1212-line-endings.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="1210-impl-specialization.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="1212-line-endings.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
