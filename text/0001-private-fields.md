@@ -7,6 +7,7 @@
 This is an RFC to make all struct fields private by default. This includes both
 tuple structs and structural structs.
 
+just a test
 # Motivation
 
 Reasons for default private visibility
