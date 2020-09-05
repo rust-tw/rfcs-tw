@@ -3,23 +3,24 @@
 - RFC PR: [rust-lang/rfcs#2342](https://github.com/rust-lang/rfcs/pull/2342)
 - Rust Issue: [rust-lang/rust#49146](https://github.com/rust-lang/rust/issues/49146)
 
-# Summary
-[summary]: #summary
+- translators: [CYBAI <cyb.ai.815@gmail.com>]
+- commit: [The commit link this page based on](https://github.com/rust-lang/rfcs/blob/dfe697106478a52bddc000477e8cd0621bcc1a20/text/2342-const-control-flow.md)
+- updated: 2020-09-05
 
-Enable `if` and `match` during const evaluation and make them evaluate lazily.
-In short, this will allow `if x < y { y - x } else { x - y }` even though the
-else branch would emit an overflow error for unsigned types if `x < y`.
+# 總結
+[總結]: #總結
 
-# Motivation
-[motivation]: #motivation
+透過此功能，可以在常數求值（const evaluation）中使用 `if` 及 `match` 並使他們被延遲求值。簡單來說，這項功能允許我們寫 `if x < y { y - x } else { x - y }`；即使當使用非負型別時在 `x < y` 的 `else` 分支會報溢位錯誤 (overflow error)。
 
-Conditions in constants are important for making functions like `NonZero::new`
-const fn and interpreting assertions.
+# 動機
+[動機]: #動機
 
-# Guide-level explanation
-[guide-level-explanation]: #guide-level-explanation
+在常數宣告中使用條件式對於建立像是 `NonZero::new` 的 `const fn` 及 直譯判定（interpreting assertions）來說很重要。
 
-If you write
+# 教學式解說
+[教學式解說]: #教學式解說
+
+如果你寫
 
 ```rust
 let x: u32 = ...;
@@ -33,9 +34,7 @@ if x > y {
 }
 ```
 
-The program will always panic (except if both `x` and `y` are `0`) because
-either `x - y` will overflow or `y - x` will. To resolve this one must move the
-`let a` and `let b` into the `if` and `else` branch respectively.
+這支程式永遠都會 panic（除非 `x` 和 `y` 同時是 `0`）因為不管是 `x - y` 或是 `y - x` 都會造成溢位。為了解決此問題，我們必須把 `let a` 及 `let b` 個別搬進 `if` 及 `else` 中。
 
 ```rust
 let x: u32 = ...;
@@ -49,7 +48,7 @@ if x > y {
 }
 ```
 
-When constants are involved, new issues arise:
+當改用常數時，上面的寫法就會出現新問題：
 
 ```rust
 const X: u32 = ...;
@@ -63,12 +62,9 @@ const FOO: SomeType = if X > Y {
 };
 ```
 
-`A` and `B` are evaluated before `FOO`, since constants are by definition
-constant, so their order of evaluation should not matter. This assumption breaks
-in the presence of errors, because errors are side effects, and thus not pure.
+`A` 和 `B` 會比 `FOO` 先被求值，因為常數在定義上就是「常數」，所以不應被求值順序影響。這項假設在有錯誤的情況下並不成立，因為錯誤屬於副作用（side effects），因此不純（pure）。
 
-To resolve this issue, one needs to eliminate the intermediate constants and
-directly evaluate `X - Y` and `Y - X`.
+為了解決此問題，我們必須把中介常數消掉並改為直接對 `X - Y` 及 `Y - X` 求值。
 
 ```rust
 const X: u32 = ...;
@@ -82,33 +78,24 @@ const FOO: SomeType = if X > Y {
 };
 ```
 
-# Reference-level explanation
-[reference-level-explanation]: #reference-level-explanation
+# 技術文件式解說
+[技術文件式解說]: #技術文件式解說
 
-`match` on enums whose variants have no fields or `if` is translated during HIR
--> MIR lowering to a `switchInt` terminator. Mir interpretation will now have to
-evaluate those terminators (which it already can).
+`if` 或是在 variant 沒有欄位的 enums 上做 `match` 會在 HIR -> MIR 階段時，被轉譯成 `switchInt` 終止器（terminator）。Mir 直譯器現在將會針對那些終止器求值（之前就可以了）。
 
-`match` on enums with variants which have fields is translated to `switch`,
-which will check either the discriminant or compute the discriminant in the case
-of packed enums like `Option<&T>` (which has no special memory location for the
-discriminant, but encodes `None` as all zeros and treats everything else as a
-`Some`). When entering a `match` arm's branch, the matched on value is
-essentially transmuted to the enum variant's type, allowing further code to
-access its fields.
+在 variant 沒有欄位的 enums 上做 `match` 會被轉譯成 `switch`，表示他會被檢查 discriminant 或是在 packed enums（例如 `Option<&T>`）的情況會運算 discriminant（這個情況 discriminant 沒有特別的記憶體位址，但他會把所有的零視為 `None`，並把其他的值都當作 `Some`）。當進入 `match` 的分支時，匹配上的值基本上會被 transmute 成 enum 的 variant 型別，如此一來可以允許其他程式碼來存取該 enum 的欄位。
 
-# Drawbacks
-[drawbacks]: #drawbacks
+# 缺點
+[缺點]: #缺點
 
-This makes it easier to fail compilation on random "constant" values like
-`size_of::<T>()` or other platform specific constants.
+這項功能容易造成任意「常數」值（如：`size_of::<T>()` 或是特定的平台常數）編譯失敗。
 
-# Rationale and alternatives
-[alternatives]: #alternatives
+# 原理及替代方案
+[原理及替代方案]: #原理及替代方案
 
-## Require intermediate const fns to break the eager const evaluation
+## 利用中介 const fns 來破壞立即常數求值（eager const evaluation）
 
-Instead of writing
+如果寫成
 
 ```rust
 const X: u32 = ...;
@@ -120,7 +107,7 @@ const AB: u32 = if X > Y {
 };
 ```
 
-where either `X - Y` or `Y - X` would emit an error, add an intermediate const fn
+`X - Y` 或是 `Y - X` 其中一方有可能會報錯，這時必須加入中介 const fn
 
 ```rust
 const X: u32 = ...;
@@ -135,9 +122,7 @@ const fn foo(x: u32, y: u32) -> u32 {
 const AB: u32 = foo(X, Y);
 ```
 
-Since the const fn's `x` and `y` arguments are unknown, they cannot be const
-evaluated. When the const fn is evaluated with given arguments, only the taken
-branch is evaluated.
+const fn 的 `x` 和 `y` 參數未知，無法做常數求值（const evaluate）。當提供此 const fn 參數並求值時，只會對相應的分支求值。
 
-# Unresolved questions
-[unresolved]: #unresolved-questions
+# 未解決問題
+[unresolved]: #未解決問題
