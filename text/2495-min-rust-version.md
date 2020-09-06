@@ -2,12 +2,15 @@
 - Start Date: 2018-06-28
 - RFC PR: [rust-lang/rfcs#2495](https://github.com/rust-lang/rfcs/pull/2495)
 - Rust Issue: [rust-lang/rust#65262](https://github.com/rust-lang/rust/issues/65262)
+- Translators: [[@weihanglo](https://github.com/weihanglo)]
+- Commit: [The commit link this page based on](https://github.com/rust-lang/rfcs/blob/3071138d4ed510d6dfc1f8e1d7e9d4b099ea12e8/text/2495-min-rust-version.md)
+- Updated: 2020-09-07
 
-# Summary
-[summary]: #summary
+# 總結
+[總結]: #總結
 
-Add `rust` field to the package section of `Cargo.toml` which will be used to
-specify crate's Minimum Supported Rust Version (MSRV):
+在 `Cargo.toml` 的 package 區塊加入 `rust` 欄位，用於指定 crate 的最低支援 Rust 版本（Minimum Supported Rust Version，MSRV）。
+
 ```toml
 [package]
 name = "foo"
@@ -15,98 +18,57 @@ version = "0.1.0"
 rust = "1.30"
 ```
 
-# Motivation
-[motivation]: #motivation
+# 動機
+[動機]: #動機
 
-Currently crates have no way to formally specify MSRV. As a result users can't
-check if crate can be built on their toolchain without building it. It also
-leads to the debate on how to handle crate version change on bumping MSRV,
-conservative approach is to consider such changes as breaking ones, which can
-hinder adoption of new features across ecosystem or result in version number
-inflation, which makes it harder to keep downstream crates up-to-date. More
-relaxed approach on another hand can result in broken crates for user of older
-compiler versions.
+當前 crate 無任何正式方法指定 MSRV，導致使用者無法在不建構該 crate 的情況下得知 crate 是否可透過他們的工具鏈（toolchain）建構。這也帶來有關如何在提升 MSRV 時管理 crate 版本的爭論，保守的作法是將之視為破壞性改動，這種作法會阻礙整個生態採納新功能，或使得版本號通膨式提升，進而讓下游的 crate 很難跟上。另一方面，若作法稍微寬鬆些，則導致採用較舊編譯器版本的使用者弄壞它們的 crate。
 
-# Guide-level explanation
-[guide-level-explanation]: #guide-level-explanation
+# 教學式解說
+[教學式解說]: #教學式解說
 
-If you target a specific MSRV add a `rust` field to the `[package]` section of
-your `Cargo.toml` with a value equal to the targeted Rust version. If you build
-a crate with a dependency which has MSRV higher than the current version of your
-toolchain, `cargo` will return a compilation error stating the dependency and
-its MSRV. This behavior can be disabled by using `--no-msrv-check` flag.
+若你想指定一個特定 MSRV 版本，請在 `Cargo.toml` 的 `[package]` 區塊中的 `rust` 欄位設定指定的 Rust 版本。如果你建構一個 crate 時有任一依賴要求的 MSRV 比你當前工具鏈更高，會返回一個編譯錯誤，指明該依賴與它的 MSRV。這個行為可以透過 `--no-msrv-check` 旗標來停用。
 
-# Reference-level explanation
-[reference-level-explanation]: #reference-level-explanation
+# 技術文件式解說
+[技術文件式解說]: #技術文件式解說
 
-During build process (including `run`, `test`, `benchmark`, `verify` and `publish`
-sub-commands) `cargo` will check MSRV requirements of all crates in a dependency
-tree scheduled to be built or checked. Crates which are part of the dependency
-tree, but will not be built are excluded from this check (e.g. target-dependent
-or optional crates).
+在建構過程（包含 `run`、`test`、`benchmark`、`verify` 與 `publish` 子指令），`cargo` 會以依賴樹（dependency tree）的形式，檢查所有將要建構或檢查的所有 crate 之 MSRV 要求。在依賴樹內但不會被構建的 crate 不會執行此此項檢查（例如特定目標平台或可選的 crate）。
 
-`rust` field should respect the following minimal requirements:
-- Value should be a version in semver format **without** range operators. Note
-that "1.50" is a valid value and implies "1.50.0".
-- Version can not be bigger than a current stable toolchain (it will be checked
-by crates.io during crate upload).
-- Version can not be smaller than 1.27 (version in which  `package.rust` field
-became a warning instead of an error).
-- Version can not be smaller than release version of a used edition, i.e.
-combination of `rust = "1.27"` and `edition = "2018"` is an invalid one.
+`rust` 欄位應至少遵循下列要求：
 
-# Future work and extensions
-[future-work]: #future-work
+- 其值需遵守語意化版號且不能有範圍運算子。注意，「1.50」是合法的值，代表「1.50.0」。
+- 版本不能比當前 stable 工具鏈高（上傳 crate 時 crates.io 會檢查）。
+- 版本不能低於 1.27（此版本將 `package.rust` 欄位從錯誤改為警告）。
+- 版本不能比選用的 edition 釋出的版本低，舉例來說，同時出現 `rust = "1.27"` 與 `edition = 2018` 是非法的。
 
-## Influencing version resolution
+# 未來展望與延伸
+[未來展望與延伸]: #未來展望與延伸
 
-The value of `rust` field (explicit or automatically selected by `cargo`) will
-be used to select appropriate dependency versions.
+## 對版本解析之影響
 
-For example, let's imagine that your crate depends on crate `foo` with 10 published
-versions from `0.1.0` to `0.1.9`, in versions from `0.1.0` to `0.1.5` `rust`
-field in the `Cargo.toml` sent to crates.io equals to "1.30" and for others to
-"1.40". Now if you'll build your project with e.g. Rust 1.33, `cargo` will select
-`foo v0.1.5`. `foo v0.1.9` will be selected only if you'll build your project with
-Rust 1.40 or higher. But if you'll try to build your project with Rust 1.29 cargo
-will issue an error.
+`rust` 欄位之值（手動設定或 `cargo` 自動選擇）會用於選擇合適的依賴版本。
 
-`rust` field value will be checked as well. During crate build `cargo` will check
-if all upstream dependencies can be built with the specified MSRV. (i.e. it will
-check if there is exists solution for given crates and Rust versions constraints)
-Yanked crates will be ignored in this process.
+舉例來說，想像你的 crate 相依 crate `foo`，一個發佈了從 `0.1.0` 到 `0.1.9` 十個版本的 crate，其中 `0.1.0` 到 `0.1.5` 版在 crates.io 上 `Cargo.toml` 的 `rust` 欄位為「1.30」，其他版本則為「1.40」。現在，你建構一個專案用了例如 Rust 1.33 版，`cargo` 會選用 `foo v0.1.5`。`foo v0.1.9` 只會在你用 Rust 1.40 或更高版本建構專案時選用。倘若你嘗試使用 Rust 1.29 建構專案，cargo 會回報錯誤。
 
-Implementing this functionality hopefully will allow us to close the long-standing
-debate regarding whether MSRV bump is a breaking change or not and will allow
-crate authors to feel less restrictive about bumping their crate's MSRV. (though
-it may be a useful convention for post-1.0 crates to bump minor version on MSRV
-bump to allow publishing backports which fix serious issues using patch version)
+`rust` 欄位值也會被檢核。在 crate 建構過程，`cargo` 將檢查所有上游相依是否可以在指定 MSRV 下建構。（例如，檢查給定的 crate 與 Rust 版本限制條件下是否存在解）已除去（yank）的 crate 會略過這個檢查步驟。
 
-Note that described MSRV constraints and checks for dependency versions resolution
-can be disabled with the `--no-msrv-check` option.
+期望實作這項功能得以替長久以來對 MSRV 提升是否為破壞性改動的爭論劃下休止符，並讓 crate 作者提升 crate 的 MSRV 不再如此綁手綁腳。（儘管對於已 1.0 的 crate 來說，透過提升修訂號（patch version）來提升 MSRV 次版號，以接納修復嚴重問題的 backport，可能是個有用的慣例）
 
-## Checking MSRV during publishing
+注意，上述 MSRV 限制與依賴版本解析檢查，可以透過 `--no-msrv-check` 選項停用。
 
-`cargo publish` will check that upload is done with a toolchain version specified
-in the `rust` field. If toolchain version is different, `cargo` will refuse to
-upload the crate. It will be a failsafe to prevent uses of incorrect `rust` values
-due to unintended MSRV bumps. This check can be disabled by using the existing
-`--no-verify` option.
+## 發佈時檢查 MSRV
 
-## Making `rust` field mandatory
+`cargo publish` 將檢查上傳是以 `rust` 欄位指定的工具鏈版本完成，若工具鏈版本有異，`cargo` 會拒絕上傳該 crate。此確保機制避免因為未預期的 MSRV 提升導致錯誤的 `rust` 欄位值。這項檢查可透過既有的 `--no-verify` 選項停用。
 
-In future (probably in a next edition) we could make `rust` field mandatory for
-a newly uploaded crates. MSRV for older crates will be determined by the `edition`
-field. In other words `edition = "2018"` will imply `rust = "1.31"` and
-`edition = "2015"` will imply `rust = "1.0"`.
+## 將 `rust` 欄位設為必填
 
-`cargo init` would use the version of the toolchain used.
+未來（可能是下一個 edition），我們可以設定新上傳的 crate 的 `rust` 欄位為必填。既有 crate 的 MSRV 會透過 `edition` 決定。換句話說 `edition = 2018` 必然是 `rust = "1.31"`，而 `edition = "2015"` 則代表 `rust = "1.0"`。
 
-## `cfg`-based MSRVs
+`cargo init` 將會使用當前工具鏈使用的版本。
 
-Some crates can have different MSRVs depending on target architecture or enabled
-features. In such cases it can be useful to describe how MSRV depends on them,
-e.g. in the following way:
+## 基於 `cfg` 的 MSRV
+
+部分 crate 會根據不同目標架構平台或啟用的功能而有不同的 MSRV。可透過以下方式有效指定 MSRV 如何依賴這些配置：
+
 ```toml
 [package]
 rust = "1.30"
@@ -118,62 +80,51 @@ rust = "1.35"
 rust = "1.33"
 ```
 
-All `rust` values in the `target` sections should be equal or bigger to a `rust` value
-specified in the `package` section.
+在 `target` 區塊中所有 `rust` 值應等於或高於在 `package` 區塊的 `rust` 值。
 
-If target condition is true, then `cargo ` will use `rust` value from this section.
-If several target section conditions are true, then maximum value will be used.
+若目標的條件為真，`cargo` 會取用該區塊的 `rust` 值。若多個 target 區塊的條件為真，則取用最大值。
 
-## Nightly and stable versions
+## Nightly 與 stable 版本
 
-Some crates may prefer to target only the most recent stable or nightly toolchain.
-In addition to the versions we could allow `stable` and `nightly` values to declare
-that maintainers do not track MSRV for the crate.
+部分 crate 可能偏好在最新 stable 或 nighly 工具鏈，除了指定版本之外，我們可允許宣告 `stable` 或 `nightly` 值，讓維護者不需追蹤該 crate 的 MSRV 。
 
-For some bleeding-edge crates which experience frequent breaks on Nightly updates
-(e.g. `rocket`) it can be useful to specify exact Nightly version(s) on which
-crate can be built. One way to achieve this is by using the following syntax:
-- auto-select: "nightly" This variant will behave in the same way as "stable", i.e.
-it will take a current nightly version and will use it in a "more or equal" constraint.
-- single version: "nightly: 2018-01-01" (the main variant)
-- enumeration: "nightly: 2018-01-01, 2018-01-15"
-- semver-like conditions: "nightly: >=2018-01-01", "nightly: >=2018-01-01, <=2018-01-15",
-"nightly: >=2018-01-01, <=2018-01-15, 2018-01-20". (the latter is interpreted as
-"(version >= 2018-01-01 && version <= 2018-01-20) || version == 2018-01-20")
+對於某些超前沿的 crate 常常因為 Nightly 更新就壞，將可指定特定可成功建構的 Nightly 版本。透過下列語法來達成：
 
-Such restrictions can be quite severe, but hopefully this functionality will be
-used only by handful of crates.
+- 自動選擇：`nightly` 此寫法與寫 `stable` 的行為一致，將使用等於當前或更高的 nightly 版本。
+- 單一版本：`nightly: 2018-01-01` （主要寫法）
+- 列舉：`nightly: 2018-01-01, 2018-01-15`
+- 類語意化版本條件：`nightly: >=2018-01-01`、`nightly: >=2018-01-01, <=2018-01-15`、`nightly: >=2018-01-01, <=2018-01-15, 2018-01-20`。（後者會解讀為 「(version >= 2018-01-01 && version <= 2018-01-20) || version == 2018-01-20」）
 
-# Drawbacks
-[drawbacks]: #drawbacks
+這些條件或許很嚴苛，盼使用這功能的 crate 一隻手數得出來。
 
-- Declaration of MSRV, even with the checks, does not guarantee that crate
-will work correctly on the specified MSRV, only appropriate CI testing can do that.
-- More complex dependency versions resolution algorithm.
-- MSRV selected by `cargo publish` with `rust = "stable"` can be too
-conservative.
+# 缺點
+[缺點]: #缺點
 
-# Alternatives
-[alternatives]: #alternatives
+- 即使宣告了 MSRV 且檢查過，並無法保持 crate 能夠正確在指定 MSRV 下正確執行，只有合理配置的 CI 能做到此事。
+- 更複雜的依賴版本解析演算法。
+- 使用 `cargo publish` 配合 MSRV `rust = "stable"` 恐過於保守。
 
-- Automatically calculate MSRV.
-- Do nothing and rely on [LTS releases](https://github.com/rust-lang/rfcs/pull/2483)
-for bumping crate MSRVs.
-- Allow version and path based `cfg` attributes as proposed in [RFC 2523](https://github.com/rust-lang/rfcs/pull/2523).
+# 替代方案
+[替代方案]: #替代方案
 
-# Prior art
-[prior-art]: #prior-art
+- 自動計算 MSRV。
+- 不做，依靠 [LTS 發行](https://github.com/rust-lang/rfcs/pull/2483) 的 crate MSRV 提升。
+- 允許在 [RFC 2523](https://github.com/rust-lang/rfcs/pull/2523) 中提出基於版本與路徑的 `cfg` 屬性（attribute）
 
-Previous proposals:
+# 先前技術
+[先前技術]: #先前技術
+
+早先的提案：
+
 - [RFC 1707](https://github.com/rust-lang/rfcs/pull/1707)
 - [RFC 1709](https://github.com/rust-lang/rfcs/pull/1709)
 - [RFC 1953](https://github.com/rust-lang/rfcs/pull/1953)
-- [RFC 2182](https://github.com/rust-lang/rfcs/pull/2182) (arguably this one got off-track)
+- [RFC 2182](https://github.com/rust-lang/rfcs/pull/2182)（這個非常有爭議的離題了）
 
-# Unresolved questions
-[unresolved]: #unresolved-questions
+# 未解決問題
+[未解決問題]: #未解決問題
 
-- Name bike-shedding: `rust` vs `rustc` vs `min-rust-version`
-- Additional checks?
-- Better description of versions resolution algorithm.
-- How nightly versions will work with "cfg based MSRV"?
+- 單車棚式的命名問題：`rust` 或 `rustc` 還是 `min-rust-version`
+- 額外的檢查？
+- 更優質地說明版本解析演算法
+- nightly 版本如何與 "cfg based MSRV" 互動？
