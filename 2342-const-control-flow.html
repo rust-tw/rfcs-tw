@@ -160,27 +160,13 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>
-<p>Feature Name: <code>const-control-flow</code></p>
-</li>
-<li>
-<p>Start Date: 2018-01-11</p>
-</li>
-<li>
-<p>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2342">rust-lang/rfcs#2342</a></p>
-</li>
-<li>
-<p>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/49146">rust-lang/rust#49146</a></p>
-</li>
-<li>
-<p>translators: [CYBAI <a href="mailto:cyb.ai.815@gmail.com">cyb.ai.815@gmail.com</a>]</p>
-</li>
-<li>
-<p>commit: <a href="https://github.com/rust-lang/rfcs/blob/dfe697106478a52bddc000477e8cd0621bcc1a20/text/2342-const-control-flow.md">The commit link this page based on</a></p>
-</li>
-<li>
-<p>updated: 2020-09-05</p>
-</li>
+<li>Feature Name: <code>const-control-flow</code></li>
+<li>Start Date: 2018-01-11</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2342">rust-lang/rfcs#2342</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/49146">rust-lang/rust#49146</a></li>
+<li>Translators: [<a href="https://github.com/CYBAI">@CYBAI</a>]</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/dfe697106478a52bddc000477e8cd0621bcc1a20/text/2342-const-control-flow.md">The commit link this page based on</a></li>
+<li>Updated: 2020-09-05</li>
 </ul>
 <h1><a class="header" href="#總結" id="總結">總結</a></h1>
 <p>透過此功能，可以在常數求值（const evaluation）中使用 <code>if</code> 及 <code>match</code> 並使他們被延遲求值。簡單來說，這項功能允許我們寫 <code>if x &lt; y { y - x } else { x - y }</code>；即使當使用非負型別時在 <code>x &lt; y</code> 的 <code>else</code> 分支會報溢位錯誤 (overflow error)。</p>
