@@ -2,10 +2,9 @@
 - Start Date: 2018-01-11
 - RFC PR: [rust-lang/rfcs#2342](https://github.com/rust-lang/rfcs/pull/2342)
 - Rust Issue: [rust-lang/rust#49146](https://github.com/rust-lang/rust/issues/49146)
-
-- translators: [CYBAI <cyb.ai.815@gmail.com>]
-- commit: [The commit link this page based on](https://github.com/rust-lang/rfcs/blob/dfe697106478a52bddc000477e8cd0621bcc1a20/text/2342-const-control-flow.md)
-- updated: 2020-09-05
+- Translators: [[@CYBAI](https://github.com/CYBAI)]
+- Commit: [The commit link this page based on](https://github.com/rust-lang/rfcs/blob/dfe697106478a52bddc000477e8cd0621bcc1a20/text/2342-const-control-flow.md)
+- Updated: 2020-09-05
 
 # 總結
 [總結]: #總結
