@@ -111,8 +111,8 @@ rust = "1.33"
 - 不做任何事，依靠 [LTS 發行](https://github.com/rust-lang/rfcs/pull/2483) 的 crate MSRV 提升。
 - 允許在 [RFC 2523](https://github.com/rust-lang/rfcs/pull/2523) 中提出基於版本與路徑的 `cfg` 屬性（attribute）
 
-# 先前技術
-[先前技術]: #先前技術
+# 先驅技術
+[先驅技術]: #先驅技術
 
 早先的提案：
 
