@@ -124,4 +124,4 @@ const AB: u32 = foo(X, Y);
 const fn 的 `x` 和 `y` 參數未知，無法做常數求值（const evaluate）。當提供此 const fn 參數並求值時，只會對相應的分支求值。
 
 # 未解決問題
-[unresolved]: #未解決問題
+[未解決問題]: #未解決問題
