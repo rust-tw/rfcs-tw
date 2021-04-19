@@ -4,7 +4,7 @@
 
 **注意**：這是官方 rust rfcs 的 fork。如果你有興趣協助翻譯的話，歡迎前往 [CONTRIBUTING.md](CONTRIBUTING.md) 瞭解更多細節。
 
-**Note**: This is a for of official rust rfcs. If you are interested in help translating, please have a look at [CONTRIBUTING.md](CONTRIBUTING.md).
+**Note**: This is a fork of official rust rfcs. If you are interested in help translating, please have a look at [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Many changes, including bug fixes and documentation improvements can be
 implemented and reviewed via the normal GitHub pull request workflow.
