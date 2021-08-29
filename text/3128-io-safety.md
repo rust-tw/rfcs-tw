@@ -88,7 +88,7 @@ Rust 標準函式庫也有高階型別如 [`File`] 和 [`TcpStream`] 來提供�
 
 ## `OwnedFd` 與 `BorrowedFd<'fd>`
 
-這兩個型別概念上將取代 `RawFd`，並分別表示擁有和借用的 handle 值。`OwnedFd` 擁有一個檔案描述子，當 `OwnedFd` drop 時就會關閉其檔案描述子。`BorrowedFd` 的生命週期標示該檔案描述子被借用多久。這些型別皆會自動實施其輸入輸出安全性不變的規則。
+這兩個型別概念上將取代 `RawFd`，並分別表示擁有和借用的 handle 值。`OwnedFd` 擁有一個檔案描述子，當 `OwnedFd` 釋放時就會關閉其檔案描述子。`BorrowedFd` 的生命週期標示該檔案描述子被借用多久。這些型別皆會自動實施其輸入輸出安全性不變的規則。
 
 至於在 Windows 上，會以 `Handle` 和 `Socket` 形式呈現相應的型別。
 
@@ -108,7 +108,7 @@ Rust 標準函式庫也有高階型別如 [`File`] 和 [`TcpStream`] 來提供�
 
 這三個型別概念上，在大多數用例中分別取代 `AsRawFd::as_raw_fd`、`IntoRawFd::into_raw_fd`，以及 `FromRawFd::from_raw_fd`。它們依據 `OwnedFd` 及 `BorrowedFd` 來運作，所以也會自動實施其輸入輸出安全性不變的規則。
 
-使用這些型別後，就能避免在[動機]一節的 `do_some_io` 範例中提及的問題。由於只有合理擁有或借用檔案描述子的型別能實作 `AsFd`，所以這個版本的 `do_some_io` 不需要擔心偽造或迷失（dangling）的檔案描述子傳入。
+使用這些型別後，就能避免在[動機]一節的 `do_some_io` 範例中提及的問題。由於只有合理擁有或借用檔案描述子的型別能實作 `AsFd`，所以這個版本的 `do_some_io` 不需要擔心偽造或迷途（dangling）的檔案描述子傳入。
 
 ```rust
 pub fn do_some_io<FD: AsFd>(input: &FD) -> io::Result<()> {
@@ -176,7 +176,7 @@ Rust 有個慣例：`unsafe` 只適用於標示記憶體安全性。舉個有名
 - （若作業系統存在 `mmap` 相關 API）在安全封裝的 `mmap` 中，輸入輸出安全性的錯誤仍會導致記憶體安全性的錯誤。
 - 輸入輸出安全性之錯誤也意味著一段程式碼可以在沒有通知或被授予任何引用的情形下，讀寫或刪除程式其他部分正在使用的資料。這使得在無法通曉一個 crate 鏈結到的其他 crate 的所有實作細節下，非常難以限制這個 crate 可以做什麼。
 
-原始 handle 更像指向單獨的位址空間（address space）的原始指標，它們可能迷失（dangle）或造假。輸入輸出安全性近似於記憶體安全性，兩者皆竭力杜絕遠處來的詭異行為（spooky-action-at-a-distance），且對兩者來說，所有權都可作為建立穩健抽象化的主要根基，所以自然而然共用了相似的安全性概念。
+原始 handle 更像指向單獨的位址空間（address space）的原始指標，它們可能迷途（dangle）或造假。輸入輸出安全性近似於記憶體安全性，兩者皆竭力杜絕遠處來的詭異行為（spooky-action-at-a-distance），且對兩者來說，所有權都可作為建立穩健抽象化的主要根基，所以自然而然共用了相似的安全性概念。
 
 [`std::mem::forget`]: https://doc.rust-lang.org/std/mem/fn.forget.html
 [被改為安全]: https://rust-lang.github.io/rfcs/1066-safe-mem-forget.html
