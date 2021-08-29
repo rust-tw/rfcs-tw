@@ -48,11 +48,11 @@ pub fn do_some_io<FD: AsRawFd>(input: &FD) -> io::Result<()> {
 
 Rust 標準函式庫提供了低階型別，以表示原始的作業系統資源 handle：類 Unix 平台的 [`RawFd`] 和 Windows 上的 [`RawHandle`] 與 [`RawSocket`]。然而，它們並沒有提供任何自身的行為，而是僅作為一個標識符（identifier），並在低階的作業系統 API 間傳遞。
 
-這些原始 handle 可以視為原始指標（raw pointer），具有相同的危險性。雖然**取得**一個原始指標是安全的，但當該原始指標是非法指標，或是比其指向記憶體之處活得更久是，對原始指標**取值**（dereference）可能引發未定義行為（undefined behavior）。無獨有偶，透過 [`AsRawFd::as_raw_fd`] 或類似方法**取得**一個原始 handle 是安全的，但當它並非合法 handle 或在關閉之後才拿來用時，用該 handle 來執行輸入輸出恐導致損毀的輸出結果，或遺失或洩漏輸入資料，或違反封裝的邊界。在這兩個案例中，影響不僅限於本地，也會影響程式的其他部分。保護原始指標免於危險稱作記憶體安全性，所以保護原始 handle 免於危險我們叫它**輸入輸出安全性**。
+這些原始 handle 可以視為原始指標（raw pointer）且具有相同的危險性。雖然**取得**一個原始指標是安全的，但當該原始指標是非法指標，或是比其指向記憶體之處活得更久時，對原始指標**取值**（dereference）都可能引發未定義行為（undefined behavior）。無獨有偶，透過 [`AsRawFd::as_raw_fd`] 或類似方法**取得**一個原始 handle 是安全的，但當它並非合法 handle 或在關閉之後才拿來用時，用該 handle 來執行輸入輸出恐導致「損毀的輸出結果」、「遺失或洩漏輸入資料」或「違反封裝的邊界」。在這兩個案例中，影響不僅限於本地，也會影響程式的其他部分。保護原始指標免於危險稱作記憶體安全性，所以保護原始 handle 免於危險我們叫它**輸入輸出安全性**。
 
 Rust 標準函式庫也有高階型別如 [`File`] 和 [`TcpStream`] 來提供高階的作業系統 API 界面，這些型別包裝了原始 handle。
 
-這些高階型別同時實作了在類 Unix 平台的 [`FromRawFd`] 特徵，以及 Windows 上的 [`FromRawHandle`]/[`FromRawSocket`] 。這些特徵提供許多函式，會封裝底層的值來產生高階的值。由於這些函式無法確保輸入輸出的安全性，因此標示為不安全。型別系統並不會限制這些型別傳入：
+這些高階型別同時實作了在類 Unix 平台的 [`FromRawFd`] 特徵，以及 Windows 上的 [`FromRawHandle`]/[`FromRawSocket`] 。這些特徵提供許多函式將底層的值封裝產生出高階的值。由於這些函式無法確保輸入輸出的安全性，因此標示為不安全。型別系統並不會限制這些型別傳入：
 
 ```rust
     use std::fs::File;
@@ -202,7 +202,7 @@ Rust 有個慣例：`unsafe` 只適用於標示記憶體安全性。舉個有名
 
 在 crates.io 上有好幾個 crate 封裝了擁有或借用的檔案描述子。[io-lifetimes 的 README.md 中 Prior Art 一節]詳細描述了其與其他既有 crate 的同異。從高層次角度來看，既有的 crate 都與 io-lifetimes 共享相同的基本概念。這些 crate 都圍繞著 Rust 生命週期與所有權概念打造，而這恰恰說明這些概念非常適合這個問題。
 
-Android 有特殊的 API 會偵測不恰當的 `close`，詳見 rust-lang/rust#74860。這些 API 的動機就是一種輸入輸出安全性的應用。Android 的特殊 API 用了動態檢查，讓它們可以在跨來源語言的邊界實施這些規則。本 RFC 提議的輸入輸出安全性的型別和特徵只專注在 Rust 程式碼本身實施這些規則，所以它們可在編譯期間利用 Rust 的型別系統實施這些規則，而非延遲到執行期間。
+Android 有特殊的 API 會偵測不恰當的 `close`，詳見 [rust-lang/rust#74860](https://github.com/rust-lang/rust/pull/74680)。這些 API 的動機就是一種輸入輸出安全性的應用。Android 的特殊 API 用了動態檢查，讓它們可以在跨來源語言的邊界實施這些規則。本 RFC 提議的輸入輸出安全性的型別和特徵只專注在 Rust 程式碼本身實施這些規則，所以它們可在編譯期間利用 Rust 的型別系統實施這些規則，而非延遲到執行期間。
 
 [io-lifetimes 的 README.md 中 Prior Art 一節]: https://github.com/sunfishcode/io-lifetimes#prior-art
 [C#]: https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=net-5.0
