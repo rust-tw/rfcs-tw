@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2789-sparse-index - The Rust RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html" class="active">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: sparse_index</li>
+<li>Start Date: 2019-10-18</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2789">rust-lang/rfcs#2789</a></li>
+<li>Tracking Issue: <a href="https://github.com/rust-lang/cargo/issues/9069">rust-lang/rust#9069</a></li>
+<li>Translators: [<a href="https://github.com/weihanglo">@weihanglo</a>]</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/3fec7e2e44884cff1a8f6c4a278bd6896ce04227/text/2789-sparse-index.md">The commit link this page based on</a></li>
+<li>Updated: 2022-04-02</li>
+</ul>
+<h1 id="總結"><a class="header" href="#總結">總結</a></h1>
+<p>可透過 HTTP 選擇性下載 crates-io 索引，類於 Ruby 的 Bundler 的作法。傳輸方式從預先（ahead-of-time）Git clone 改變為 HTTP 按需下載。既有的索引結構和內容維持不變。重要的是，此提案可與靜態檔案協同運作，而不需客製化的伺服器端 API。</p>
+<h1 id="動機"><a class="header" href="#動機">動機</a></h1>
+<p>完整的 crate 索引相對龐大且下載慢。它還會隨著 crates.io 增長而增長，讓情況每況愈下。需要下載完整索引這件事拖累了首次使用 Cargo 的速度。尤其是在無狀態的 CI 環境下更是緩慢又浪費且只使用完整索引的非常小一部分，剩下全都給拋棄。快取索引在 CI 環境可謂困難重重（<code>.cargo</code> 目錄很巨）又經常低效（如：在 Travis Ci 上傳下載大型快取幾乎和下載新鮮索引一樣慢）。</p>
+<p>目前索引的儲存資料格式和 git 協定搭配起來並不是很舒服。未壓縮的索引內容 tarball（截止 eb037b4863）佔 176MiB，<code>gzip -1</code> 需要 16MiB，而 <code>xz -6</code> 壓縮則要 10MiB。然 Git clone 卻回報下載了 215 MiB，比未壓縮的最新索引內容還大，且是壓縮後 tarball 的 <strong>二十倍之多</strong>。</p>
+<p>將 git 歷史記錄 shallow clone 或 squash 只是暫時解。且不論事實上 <a href="http://blog.cocoapods.org/Master-Spec-Repo-Rate-Limiting-Post-Mortem/">GitHub 指出它們不想支援大型儲存庫的 shallow clone</a>，也不論 libgit2 尚未支援 shallow clone，實際上這作法仍未解決客戶端必須下載包含所有 crate 的整包索引。</p>
+<h1 id="教學式解說"><a class="header" href="#教學式解說">教學式解說</a></h1>
+<p>將索引作為純文字檔案，透過 HTTP 開放出來。開放既有的索引佈局排列也夠用（就像從 raw.githubusercontent.com 看到的長相），不過以 HTTP 來說 URL scheme 可能可以簡化。</p>
+<p>欲了解 crate 資訊和解析依賴，Cargo（或其他客戶端）可對每個依賴建立請求，並送往已知的 URL 以取得需要的資訊，例如：<code>https://index.example.com/se/rd/serde</code>。對各個依賴來說，客戶端也會繼續請求其依賴資訊， 遞迴循環，直到取得所有依賴（並快取）到本機端。</p>
+<p>請求依賴檔案是有辦法平行化運作的，所以依賴解析最差情況下的延遲會限制在依賴樹的最大深度。實務上最差情況非常少見，因為依賴通常會多次出現在樹中，因此可以提前發現並增加平行化機會。且，若已有 lock 檔案，所有列在其中的依賴也都可平行化核對處理，</p>
+<h2 id="離線支援"><a class="header" href="#離線支援">離線支援</a></h2>
+<p>此提議的解法完全保留了 Cargo 離線工作的功能。（連線的情況下）欲取得 crate 必然要下載足夠的索引來使用，之後所有資料會快取留作離線使用。</p>
+<h2 id="減少頻寬使用"><a class="header" href="#減少頻寬使用">減少頻寬使用</a></h2>
+<p>Cargo 支援 HTTP/2，可有效率地處理多個相似的請求。</p>
+<p>所有已獲取的依賴檔案可被快取，並透過條件式 HTTP 請求（<code>Etag</code> 或 <code>If-Modified-Since</code> 標頭）來避免重複下載未改變的檔案。</p>
+<p>依賴的檔案易於壓縮，目前 <code>rustc-ap-rustc_data_structures</code> 內最大的檔案可用 Brotli 從 1MiB 壓縮到 26KiB。許多伺服器支援透明地提供預壓縮檔案（例如：可從帶有適當內容編碼標頭的 <code>rustc-ap-rustc_data_structures.gz</code> 提供 <code>/rustc-ap-rustc_data_structures</code> 的請求處理），因此索引可以保有高壓縮率但不必花費過多 CPU 以提供這些檔案。</p>
+<p>就算是最糟的完整索引一個檔案一個檔案的下載狀況，比起 git clone 仍然使用更少頻寬（所有檔案分別壓縮加起來大小 39MiB）。</p>
+<p>提供「增量式變更記錄」檔（在「未來展望」詳述）可以避免過多的條件式請求。</p>
+<h2 id="處理移除的-crate"><a class="header" href="#處理移除的-crate">處理移除的 crate</a></h2>
+<p>有需要的話，本提議的解法可支援 crate 移除。當客戶端欲檢查一個已移除的 crate 的新鮮度，會向伺服器請求並獲得 404/410/451 HTTP 狀態。客戶端可以根據情況處理，並清理本機端的資料（甚至是 tarball 和原始碼已簽出的情況下）。 </p>
+<p>若客戶端對該移除 crate 不感興趣，就不會檢查之，但極大機率從來不會這樣做，也不會下載它。若主動清除已移除的 crate 快取資訊非常重要，則可以延伸「增量式變更記錄」來通知該移除。</p>
+<h1 id="缺點"><a class="header" href="#缺點">缺點</a></h1>
+<ul>
+<li>crates-io 計畫替索引加上加密簽章，作為 HTTP 上額外一層保護。對 git 索引來說加密驗證非常直觀，不過簽署鬆散的 HTTP 索引可能蠻有挑戰性的。</li>
+<li>在還沒有增量式變更記錄前，一個基本的實作，需要許多請求來更新索引。和 git fetch 相比會有更高的延遲。然而，在一些早期的效能比較下，若 CDN 支援足夠（&gt;60）多的平行請求，會比 git fetch 更快。對 Github 上的索引來說，Cargo 有一個捷徑會檢查 master 分支是否改變。若有增量式變更記錄檔，同樣的捷徑可以透過條件式 HTTP 請求該變更記錄檔來達成（例如，檢查 <code>ETag</code> 或 <code>Last-Modified</code>）。</li>
+<li>此解法高效與否仰賴於建立多個平行小請求。支援 HTTP/2 的伺服器上做檢查是 HTTP/1.1 的兩倍快，但其實速度超越 HTTP/1.1 很合理。</li>
+<li>替代 registry 的功能目前已穩定，代表基於 git 索引協定也穩定且無法移除了。</li>
+<li>發送模糊搜尋索引的工具（例如 <code>cargo add</code>）可能需要發送數個請求，或是改用其他方法。URL 已全數正規化到小寫，所以不分大小寫的不需要額外的請求。</li>
+</ul>
+<h1 id="原理及替代方案"><a class="header" href="#原理及替代方案">原理及替代方案</a></h1>
+<h2 id="查詢-api"><a class="header" href="#查詢-api">查詢 API</a></h2>
+<p>顯而易見的替代方案是建立可供查詢依賴解析的伺服器端 API（例如提供依賴清單就回傳一個 lockfile 或類似的東西）。然而，這會需要在伺服器端跑依賴解析。維護這種至關重要的動態 API 給幾乎所有 Rust 使用者每天使用，比其靜態檔案更難花費更高。</p>
+<p>本提議之解法並不需要伺服器端任何邏輯。索引可以放在靜態檔案 CDN 上，且非常容易快取或鏡像。不需要修改索引如何取出。標準版本的索引可以繼續以 git 儲存庫形式維持完整的歷史記錄。這能保持與過往 Cargo 版本的相容性，並且第三方工具可以使用當前的索引格式。</p>
+<h2 id="從-rustup-提供初始索引"><a class="header" href="#從-rustup-提供初始索引">從 rustup 提供初始索引</a></h2>
+<p>Rust／Cargo 的安裝可以打包初始版本的索引，這樣當 Cargo 運作時，就不需要從 git 下載整份索引檔，只需要做與種子版本差異更新。這個索引需要 rustup 更聰明地分別處理，避免在安裝或更新不同版本的 Cargo 時，造成重複下載索引多次。這會讓索引的下載和壓縮更好，讓做法可使目前的實作撐更久，但仍沒辦法解決索引不斷增長的問題。</p>
+<p>本提議之解法更是伸縮自如，因為 Cargo 只要下載和快取「需要用到」的索引，未使用／棄用／垃圾 crate 不會造成任何花費。</p>
+<h2 id="rsync"><a class="header" href="#rsync">Rsync</a></h2>
+<p>rsync 協定需要掃描並校驗原始碼與目標檔案的檢查碼異同，這需要許多不必要的 I/O，且需要 SSH 或在伺服器上運行的客製化系統服務（daemon），這限制了架設索引的選項。</p>
+<h1 id="先驅技術"><a class="header" href="#先驅技術">先驅技術</a></h1>
+<p>https://andre.arko.net/2014/03/28/the-new-rubygems-index-format/</p>
+<p>Bundler 曾經是預先下載完整索引，和 Cargo 一樣，直到它變得太大太大。然後它改用中心化的查詢 API，直到問題多到難以支援。然後就切換到增量式下載偏平檔案索引格式，和本提議解法相似。</p>
+<h1 id="未解決問題"><a class="header" href="#未解決問題">未解決問題</a></h1>
+<ul>
+<li>如何設定索引（包含替代 registry）該從 git 或新的 HTTP 下載？目前的語法使用 <code>https://</code> URL 當作 git-over-HTTP。</li>
+<li>我們如何確保切換到 HTTP registry 不會導致 lock 檔案出現巨大差異？</li>
+<li>如何改寫當前的解析器，開啟平行取得索引檔案的功能？目前所有索引需要同時都可用，這杜絕了平行化的可能性。</li>
+</ul>
+<h1 id="實作可行性"><a class="header" href="#實作可行性">實作可行性</a></h1>
+<p>目前已有一個經過測試的實作，是以簡單「貪婪」演算法來取得索引檔案，在 https://github.com/rust-lang/cargo/pull/8890 ，並且證實了不錯的效能，尤其是全新的建構。該實驗性實作的 PR 建議一個修改解析器的做法，以移除不必要的貪婪取得階段。</p>
+<h1 id="未來展望"><a class="header" href="#未來展望">未來展望</a></h1>
+<h2 id="增量式的-crate-檔案"><a class="header" href="#增量式的-crate-檔案">增量式的 crate 檔案</a></h2>
+<p>Bundler 替每個獨立的依賴檔案使用僅允許附加（append-only）格式，以盡可能只增量下載新版本資訊。Cargo 的格式幾乎就是 append-only（除了 yank），所以如果單一檔案成長到是個問題，應該要版本修復它。然而，當前最大的 crate <code>rustc-ap-rustc_data_structures</code> 天天發佈新版本，每個版本增加 44 位元組（壓縮後），所以就算十年後它也才 190KB（壓縮後），看起來並沒有駭人到需要解決。</p>
+<h2 id="增量式變更記錄"><a class="header" href="#增量式變更記錄">增量式變更記錄</a></h2>
+<p>截至目前，本方案在每次更新索引時，都必須重驗證每個索引檔案的新鮮度，即使許多檔案根本沒變。執行 <code>cargo update</code> 會導致索引更新，不過也有其他時機會導致更新，例如專案缺少 lockfile，或是添加了新的依賴。雖然 HTTP/2 pipeline 和條件式 GET 請求使得請求多個未改變檔案<a href="https://github.com/rust-lang/cargo/pull/8890#issuecomment-737472043">不錯有效率</a>，但如果我們能避免那些無謂的請求，只請求有更改的檔案會更好。</p>
+<p>一個解決方案是提供一個索引的概覽，讓客戶端可以快速確認本機端的索引檔是否過期。為了避免客戶端無謂的請求完整引樹快照，索引可以維護一個僅允許附加（append-only）的變更記錄。當改變發生（crate 版本發佈或 yank），記錄檔會附加新的一條記錄：epoch number（下面解釋之）、最後修改時間戳記、變更的 crate 名稱，未來需要也可添加其他額外資訊。</p>
+<p>因為這個記錄檔只允許附加，所以客戶端可以利用 <code>Range</code> HTTP 請求漸增地更新它。客戶端不必下載完整的記錄檔來用，下載從任意一點到檔案結束這段即可，這用 <code>Range</code> 請求來達成簡單易懂。當在記錄裡（從最末端開始）找到一個 crate，並且其更動時間和本機快取一致，如此客戶端就不需要額外對該檔案發送 HTTP 請求。
+當記錄檔成長過大，epoch number 遞增，記錄檔就可以重設到空白。即使在客戶端對該新記錄檔的 <code>Range</code> 請求合法的狀況下，epoch number 仍可讓客戶端有辦法偵測記錄檔是否有重設。</p>
+<p>最終，這個 RFC 並沒有建議此方案，因為記錄檔恐導致<a href="https://github.com/rust-lang/cargo/commit/bda120ad837e6e71edb334a44e64533119402dee">程式碼變得十分複雜</a>，且<a href="https://github.com/rust-lang/cargo/pull/8890#issuecomment-738316828">比起簡單的下載正面效益不大</a>。若索引快照跟著 registry signing 一起實作了，此 RFC 的實作就可利用該快照機制當作變更記錄。</p>
+<h2 id="應付不一致的-http-快取"><a class="header" href="#應付不一致的-http-快取">應付不一致的 HTTP 快取</a></h2>
+<p>索引並不需要將所有檔案合併產生一個快照。索引是一次更新一個檔案，並且只需保留部分更新排序。從 Cargo 的角度來看，各個依賴可允許獨立更新。</p>
+<p>過期的快取僅在於新版本的 crate 使用了最新版本且剛發佈的依賴時，且該 crate 的快取失效得比其依賴早，才可能產生問題。Cargo 要求依賴需在可見的索引上有充分版本資訊，並且不會發佈任何「毀損」的 crate。</p>
+<p>然而，CDN 快取總是有機會過期或失效的順序不一致。若 Cargo 偵測到索引的快取過期了（例如一個 crate 的依賴尚未出現在索引中），它可從該狀況復原，附加「快取破壞者」（如當前時間戳記）在 URL 上，以重新向索引請求檔案。就算 CDN 並不理會請求中的 <code>cache-control: no-cache</code>，這還是可靠能繞過過期快取的方法。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="2495-min-rust-version.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="3128-io-safety.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="2495-min-rust-version.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="3128-io-safety.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
