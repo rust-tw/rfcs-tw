@@ -30,9 +30,6 @@ pub enum SslMethod {
 }
 ```
 
-However, all `match`s can only mention `Sslv2` when the `cfg` is
-active, i.e. the following is invalid:
-
 然而，所有的 `match` 只能在 `cfg` 是有效的時候提起 `Sslv2`，例如下面內容是無效的：
 
 ```rust
