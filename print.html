@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -433,6 +433,130 @@ consensus and community norms, not impose more structure than necessary.</p>
 <h1 id="未解決的問題"><a class="header" href="#未解決的問題">未解決的問題</a></h1>
 <p>無</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: 2014-09-11</li>
+<li>RFC PR #: <a href="https://github.com/rust-lang/rfcs/pull/198">rust-lang/rfcs#198</a></li>
+<li>Rust Issue #: <a href="https://github.com/rust-lang/rust/issues/17177">rust-lang/rust#17177</a></li>
+<li>Translators: [<a href="https://github.com/FizzyElt">@FizzyElt</a>]</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/4009b546172c558a1cfa0f39dd81c896312f73d5/text/0198-slice-notation.md">The commit link this page based on</a></li>
+<li>Updated: 2022-05-27</li>
+</ul>
+<h1 id="概要-1"><a class="header" href="#概要-1">概要</a></h1>
+<p>此 RFC 增加了<em>多載切片符號</em>：</p>
+<ul>
+<li><code>foo[]</code> 對應 <code>foo.as_slice()</code></li>
+<li><code>foo[n..m]</code> 對應 <code>foo.slice(n, m)</code></li>
+<li><code>foo[n..]</code> 對應 <code>foo.slice_from(n)</code></li>
+<li><code>foo[..m]</code> 對應 <code>foo.slice_to(m)</code></li>
+<li>以上所有的 <code>mut</code> 變體</li>
+</ul>
+<p>透過<code>Slice</code> 跟 <code>SliceMut</code> 兩個新特徵（trait）。</p>
+<p>它還將 範圍<code>配對</code>模式的符號改為 <code>...</code>，以表示它們是包含的，而 <code>..</code> 在切片中是不包含的。</p>
+<h1 id="動機-1"><a class="header" href="#動機-1">動機</a></h1>
+<p>引入此功能有兩個主要動機。</p>
+<h3 id="人因工程"><a class="header" href="#人因工程">人因工程</a></h3>
+<p>在處理 vector 或其他類型的容器時，切片操作（特別是 <code>as_slice</code>）是相當常見的基本操作。我們已經有了透過 <code>Index</code> 特徵進行索引的語法，此 RFC 本質上是這特徵的延續。</p>
+<p><code>as_slice</code> 運算子尤其重要，自從我們已經擺脫以強迫的方式自動切片，明確地呼叫 <code>as_slice</code> 變得非常普遍，這也是語言中<a href="https://github.com/rust-lang/rust/issues/14983">人因工程優先/第一印象</a>的問題之一。還有一些其他方法可以解決這個特定問題，但這些替代方法具有下方討論的一些缺點（參閱「替代方案」）。</p>
+<h3 id="錯誤處理協定"><a class="header" href="#錯誤處理協定">錯誤處理協定</a></h3>
+<p>我們正在逐漸走向一個類似 Python 的世界，像是當 <code>n</code> 超出範圍時，<code>foo[n]</code> 會呼叫 <code>fail!</code>，而相應的方法像是 <code>get</code> 則返回 <code>Option</code> 而不是失敗。透過為切片提供類似的符號，我們打開了在整個 vector-like APIs 中遵循相同協定的大門。</p>
+<h1 id="詳細設計-1"><a class="header" href="#詳細設計-1">詳細設計</a></h1>
+<p>此設計是對 <code>Index</code> 特徵設計的直接延續。我們引入了兩個新特徵（trait），用於不可變與可變切片：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Slice&lt;Idx, S&gt; {
+    fn as_slice&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a S;
+    fn slice_from(&amp;'a self, from: Idx) -&gt; &amp;'a S;
+    fn slice_to(&amp;'a self, to: Idx) -&gt; &amp;'a S;
+    fn slice(&amp;'a self, from: Idx, to: Idx) -&gt; &amp;'a S;
+}
+
+trait SliceMut&lt;Idx, S&gt; {
+    fn as_mut_slice&lt;'a&gt;(&amp;'a mut self) -&gt; &amp;'a mut S;
+    fn slice_from_mut(&amp;'a mut self, from: Idx) -&gt; &amp;'a mut S;
+    fn slice_to_mut(&amp;'a mut self, to: Idx) -&gt; &amp;'a mut S;
+    fn slice_mut(&amp;'a mut self, from: Idx, to: Idx) -&gt; &amp;'a mut S;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>（請注意，此處的可變名稱是命名規則可能更改的一部分，將在單獨的 RFC 中描述）。</p>
+<p>這些特徵將在解釋以下符號時使用：</p>
+<p><em>不可變切片</em></p>
+<ul>
+<li><code>foo[]</code> 對應 <code>foo.as_slice()</code></li>
+<li><code>foo[n..m]</code> 對應 <code>foo.slice(n, m)</code></li>
+<li><code>foo[n..]</code> 對應 <code>foo.slice_from(n)</code></li>
+<li><code>foo[..m]</code> 對應 <code>foo.slice_to(m)</code></li>
+</ul>
+<p><em>可變切片</em></p>
+<ul>
+<li><code>foo[mut]</code> 對應 <code>foo.as_mut_slice()</code></li>
+<li><code>foo[mut n..m]</code> 對應 <code>foo.slice_mut(n, m)</code></li>
+<li><code>foo[mut n..]</code> 對應 <code>foo.slice_from_mut(n)</code></li>
+<li><code>foo[mut ..m]</code> 對應 <code>foo.slice_to_mut(m)</code></li>
+</ul>
+<p>像 <code>Index</code> 一樣，這種表示法的使用將自動取值，就如同對應的方法調用一樣。因此，如果 <code>T</code> 實現了 <code>Slice&lt;uint, [U]&gt;</code> 和 <code>s: Smaht&lt;T&gt;</code>，那麼 <code>s[]</code> 就可以編譯並具有 <code>&amp;[U]</code> 類型。</p>
+<p>請注意，切片是「不包含」（因此 <code>[n..m]</code> 是等於 <code>n &lt;= x &lt; m</code>），而模式配對中的 <code>..</code> 是「包含」。為了避免混淆，我們建議將配對符號更改為 <code>...</code> 來做出區別。更改符號而不是解釋的原因是，「不包含」（分別「包含」）解釋是切片（相較於「配對」）的正確默認值。</p>
+<h2 id="使用此語法的基本理由"><a class="header" href="#使用此語法的基本理由">使用此語法的基本理由</a></h2>
+<p>用於切片的方括號的選擇很簡單：它與我們的索引表示法契合，並且切片和索引密切相關。</p>
+<p>其他一些語言（如 Python 和 Go 和 Fortran）在切片表示法中使用 <code>:</code> 而不是 <code>..</code>。在 Rust 中，<code>..</code> 的選擇受到 Rust 本身其他地方的使用影響，例如固定長度陣列類型 <code>[T, ..n]</code>。用於切片的 <code>..</code> 在 Perl 和 D 中有先例。</p>
+<p>有關程式語言中切片表示法歷史的更多資訊，請參閱 <a href="http://en.wikipedia.org/wiki/Array_slicing">維基百科</a>。</p>
+<h3 id="mut-限定符"><a class="header" href="#mut-限定符"><code>mut</code> 限定符</a></h3>
+<p>可能令人驚訝的是，<code>mut</code> 在建議的切片表示法中作為限定符，而不是用於索引表示法。原因是索引包含隱式取消引用。假如 <code>v: Vec&lt;Foo&gt;</code> 則 <code>v[n]</code> 的類型為 <code>Foo</code>，而不是 <code>&amp;Foo</code> 或 <code>&amp;mut Foo</code>。因此，如果你想透過索引取得可變引用，你可以寫成 <code>&amp;mut v[n]</code>。更廣泛地說，這允許我們在解決可變性之前進行解析/類型檢查。</p>
+<p>這種對 <code>Index</code> 的處理符合 C 的傳統，並允許我們寫成 <code>v[0] = foo</code>，而不是 <code>*v[0] = foo</code>。</p>
+<p>另一方面，這種方法對於切片是有問題的，因為一般來說，他會產生一個 unsized 類型（在 DST 中），當然，切片是為了給你一個指向切片大小的胖指標，我們不希望立即取消引用。但是，這樣的結果是，我們需要預先知道切片的可變性，因為它決定了表達式的類型。</p>
+<h1 id="缺點"><a class="header" href="#缺點">缺點</a></h1>
+<p>主要的缺點是增加了語言語法的複雜度。這看起來微不足道，尤其是因為這裡的符號本質上是 &quot;完成&quot; 以 <code>Index</code> 特徵開始的內容。</p>
+<h2 id="設計上的限制"><a class="header" href="#設計上的限制">設計上的限制</a></h2>
+<p>與 <code>Index</code> 特徵一樣，這迫使結果透過 <code>＆</code> 成為一個引用，這可能會排除切片的普遍化。</p>
+<p>解決此問題的一個方法是切片方法使用 <code>self</code> （依值) 而不是 <code>&amp;self</code>，反過來在 <code>&amp;T</code> 而不是 <code>T</code> 上實現特徵。這個方法是否長期可行將取決於方法解析和自動引用的最終規則。</p>
+<p>一般來說，當特徵可以應用於類型 <code>T</code> 而不是借用類型 <code>&amp;T</code> 時，特徵系統運作的最好。最終，如果 Rust 獲得了更高的類型（HKT），我們可以將特徵中的切片類型 <code>S</code> 更改為更高的類型，這樣他就是一個由生命週期索引的類型<em>家族</em>。然後，我們可以用 <code>S&lt;'a&gt;</code> 來代替返回值中的 <code>&amp;'a S</code>。在未來，我們應該可以從當前的 <code>Index</code> 和 <code>Slice</code> 特徵設計轉換到一個 HKT 版本，而不會破壞相後的兼容性，方法是對實現舊特徵的類型使用新特徵的全面實現（例如 <code>IndexHKT</code>）。</p>
+<h1 id="替代方案-1"><a class="header" href="#替代方案-1">替代方案</a></h1>
+<p>對於改善 <code>as_slice</code> 的易用性，有兩個主要替代方案。</p>
+<h2 id="強制-自動切片"><a class="header" href="#強制-自動切片">強制: 自動切片</a></h2>
+<p>一種可能性是重新引入某種自動切片的強制。我們曾經有一個從（用現今的話來說）<code>Vec&lt;T&gt;</code> 到 <code>&amp;[T]</code> 的強制轉換。由於我們不再強制擁有借來的值，我們現在可能想要一個強制 <code>&amp;Vec&lt;T&gt;</code> 到 <code>&amp;[T]</code> 的轉換：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn use_slice(t: &amp;[u8]) { ... }
+
+let v = vec!(0u8, 1, 2);
+use_slice(&amp;v)           // automatically coerce here
+use_slice(v.as_slice()) // equivalent
+<span class="boring">}
+</span></code></pre></pre>
+<p>不幸的是，添加這樣的強制需要在以下選項中進行選擇：</p>
+<ul>
+<li>
+<p>將強制與 <code>Vec</code> 和 <code>String</code> 連繫起來，這將重新引入對這些原本純粹的函式庫類型的特殊處理，並且意味著其他支援切片的函數庫類型不會受益（違背了一些 DST 的目的）。</p>
+</li>
+<li>
+<p>透過特徵使強制可擴展。然而這是在打開潘朵拉的盒子：這個機制很可能被用來在強制的過程中運行任意的程式碼，所以任何呼叫 <code>foo(a, b, c)</code> 都可能涉及運行程式碼來預處理每個參數。雖然我們最終可能想要這種使用者可擴展的強制機制，但在理解程式碼時，這是一個很<strong>大</strong>的步驟，有很多潛在的不利因素，所以我們應該先追求更保守的解決方案。</p>
+</li>
+</ul>
+<h2 id="解引用"><a class="header" href="#解引用">解引用</a></h2>
+<p>另一種可能是讓 <code>String</code> 實現 <code>Deref&lt;str&gt;</code> 和 <code>Vec&lt;T&gt;</code> 實現 <code>Deref&lt;[T]&gt;</code> 一旦 DST 登陸。這樣做將允許顯式的強制機制，例如：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn use_slice(t: &amp;[u8]) { ... }
+
+let v = vec!(0u8, 1, 2);
+use_slice(&amp;*v)          // take advantage of deref
+use_slice(v.as_slice()) // equivalent
+<span class="boring">}
+</span></code></pre></pre>
+<p>但是，這樣做至少有兩個缺點：</p>
+<ul>
+<li>
+<p>目前不清楚方法解析規則最終將如何與 <code>Deref</code> 互動。特別是，一個領先的提議是，對於一個智慧指標 <code>s: Smaht&lt;T&gt;</code> ，當你呼叫 <code>s.m(...)</code> 時，對於 <code>Smaht&lt;T&gt;</code> 只有 <em>內置</em> 方法 <code>m</code> 被考慮到；僅考慮最大引用值 <code>*s</code> 的特徵方法。</p>
+<p>使用這樣的解析策略，為 <code>Vec</code> 實現 <code>Deref</code> 將使得我們無法在 <code>Vec</code> 類型上使用特徵方法 ，除非透過 UFCS，這嚴重限制了程式設計師為 <code>Vec</code> 有效地實現新特徵的能力。</p>
+</li>
+<li>
+<p>將 <code>Vec</code> 作為一個圍繞切片的智慧指標的想法，以及如上所述的 <code>&amp;*v</code> 的使用，有點違反直覺，特別是對於這樣的基本類型。</p>
+</li>
+</ul>
+<p>追根究底，無論如何，切片的符號本身似乎是可取的，如果它能消除對 <code>Vec</code> 和 <code>String</code> 實現 <code>Deref</code> 的需要，那就更好了。</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Feature Name: <code>const_generics</code></li>
 <li>Start Date: 2017-05-01</li>
 <li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2000">rust-lang/rfcs#2000</a></li>
@@ -443,7 +567,7 @@ consensus and community norms, not impose more structure than necessary.</p>
 </ul>
 <h1 id="總結"><a class="header" href="#總結">總結</a></h1>
 <p>允許所有型別（type）以作為常數值（constant values）的形式成為泛型（generic），這能讓使用者用 <code>impl</code> 寫出所有陣列型別（array types）。</p>
-<h1 id="動機-1"><a class="header" href="#動機-1">動機</a></h1>
+<h1 id="動機-2"><a class="header" href="#動機-2">動機</a></h1>
 <p>現在的 Rust 有一種將常數參數化（parametric）型別︰內建的陣列型別 <code>[T; LEN]</code>。然而，常數泛型（const generics）並非第一級別的功能，使用者無法自己定義將常數值作爲泛型的型別，且不能對所有的陣列實作特徵（traits）。</p>
 <p>在此限制下，標準庫僅包含長度最多到 32 的陣列實作，而陣列也因此被視爲語言的第二級別的功能。即使在長度可靜態已知的情形下，也大多調配於堆（heap）上成為向量（vector）而非使用陣列型別，因而造成一定程度上的效能取捨。</p>
 <p>常數參數也能讓使用者更自然地指定一個泛型變體（variant）, 且相比於型別更能確切地反應其值。舉例來說，基於某些因素有個型別用一個名稱來作為參數的話，使用 <code>&amp;'static str</code> 來提供其名稱會比（藉由相關的常數或是函式提供的）單元型別（unit type）的形式還來的合理，這能簡化 API。</p>
@@ -570,10 +694,10 @@ fn foo&lt;const N: usize&gt;() -&gt; Foo&lt;N&gt; {
 <h1 id="我們如何教導這個"><a class="header" href="#我們如何教導這個">我們如何教導這個</a></h1>
 <p>常數泛型是一個很龐大的功能，將需要大量的教育資源，這將會需要寫在在書本跟參考文件中，且可能會在書中有獨立的章節。常數泛型的文件化過程本質上將會是一個大工程。</p>
 <p>然而，常數泛型應該被視為進階功能，並且在使用 Rust 的初期，我們應該不會向新手介紹這些內容。</p>
-<h1 id="缺點"><a class="header" href="#缺點">缺點</a></h1>
+<h1 id="缺點-1"><a class="header" href="#缺點-1">缺點</a></h1>
 <p>此功能由於允許型別由常數決定，將為型別系統增加了大量的複雜性。它需要抽象變數相等性的確定規則，這出現了很多令人意外的的特殊情況。它增加了 Rust 的很多語法。如果我們不要採用此功能，Rust 肯定會更簡單。</p>
 <p>然而，我們已經引入了一種由常數確定的型別（數組型別）。泛型化的功能似乎是必然的，甚至是不可避免的，鑑於此，我們應該盡早決定。</p>
-<h1 id="替代方案-1"><a class="header" href="#替代方案-1">替代方案</a></h1>
+<h1 id="替代方案-2"><a class="header" href="#替代方案-2">替代方案</a></h1>
 <p>除了暫緩執行或不執行外，並沒有真的替代方案。</p>
 <p>我們可以限制常數泛型為 <code>usize</code> 型別，但這不會讓實作更為簡單。</p>
 <p>我們可以對常數相對性的複雜概念更積極地發展，但這會使實作比上述說明得更加複雜。</p>
@@ -595,7 +719,7 @@ fn foo&lt;const N: usize&gt;() -&gt; Foo&lt;N&gt; {
 </ul>
 <h1 id="總結-1"><a class="header" href="#總結-1">總結</a></h1>
 <p>透過此功能，可以在常數求值（const evaluation）中使用 <code>if</code> 及 <code>match</code> 並使他們被延遲求值。簡單來說，這項功能允許我們寫 <code>if x &lt; y { y - x } else { x - y }</code>；即使當使用非負型別時在 <code>x &lt; y</code> 的 <code>else</code> 分支會報溢位錯誤 (overflow error)。</p>
-<h1 id="動機-2"><a class="header" href="#動機-2">動機</a></h1>
+<h1 id="動機-3"><a class="header" href="#動機-3">動機</a></h1>
 <p>在常數宣告中使用條件式對於建立像是 <code>NonZero::new</code> 的 <code>const fn</code> 及 直譯判定（interpreting assertions）來說很重要。</p>
 <h1 id="教學式解說"><a class="header" href="#教學式解說">教學式解說</a></h1>
 <p>如果你寫</p>
@@ -662,7 +786,7 @@ const FOO: SomeType = if X &gt; Y {
 <h1 id="技術文件式解說"><a class="header" href="#技術文件式解說">技術文件式解說</a></h1>
 <p><code>if</code> 或是在 variant 沒有欄位的 enums 上做 <code>match</code> 會在 HIR -&gt; MIR 階段時，被轉譯成 <code>switchInt</code> 終止器（terminator）。Mir 直譯器現在將會針對那些終止器求值（之前就可以了）。</p>
 <p>在 variant 沒有欄位的 enums 上做 <code>match</code> 會被轉譯成 <code>switch</code>，表示他會被檢查 discriminant 或是在 packed enums（例如 <code>Option&lt;&amp;T&gt;</code>）的情況會運算 discriminant（這個情況 discriminant 沒有特別的記憶體位址，但他會把所有的零視為 <code>None</code>，並把其他的值都當作 <code>Some</code>）。當進入 <code>match</code> 的分支時，匹配上的值基本上會被 transmute 成 enum 的 variant 型別，如此一來可以允許其他程式碼來存取該 enum 的欄位。</p>
-<h1 id="缺點-1"><a class="header" href="#缺點-1">缺點</a></h1>
+<h1 id="缺點-2"><a class="header" href="#缺點-2">缺點</a></h1>
 <p>這項功能容易造成任意「常數」值（如：<code>size_of::&lt;T&gt;()</code> 或是特定的平台常數）編譯失敗。</p>
 <h1 id="原理及替代方案"><a class="header" href="#原理及替代方案">原理及替代方案</a></h1>
 <h2 id="利用中介-const-fns-來破壞立即常數求值eager-const-evaluation"><a class="header" href="#利用中介-const-fns-來破壞立即常數求值eager-const-evaluation">利用中介 const fns 來破壞立即常數求值（eager const evaluation）</a></h2>
@@ -713,7 +837,7 @@ name = &quot;foo&quot;
 version = &quot;0.1.0&quot;
 rust = &quot;1.30&quot;
 </code></pre>
-<h1 id="動機-3"><a class="header" href="#動機-3">動機</a></h1>
+<h1 id="動機-4"><a class="header" href="#動機-4">動機</a></h1>
 <p>當前 crate 無任何正式方法指定 MSRV，導致使用者無法在不建構該 crate 的情況下得知 crate 是否可透過他們的工具鏈（toolchain）建構。這也帶來有關如何在提升 MSRV 時管理 crate 版本的爭論，保守的作法是將之視為破壞性改動，這種作法會阻礙整個生態採納新功能，或使得版本號通膨式提升，進而讓下游的 crate 很難跟上。另一方面，若作法稍微寬鬆些，則導致採用較舊編譯器版本的使用者無法成功編譯它們的 crate。</p>
 <h1 id="教學式解說-1"><a class="header" href="#教學式解說-1">教學式解說</a></h1>
 <p>若你想指定一個特定 MSRV 版本，請在 <code>Cargo.toml</code> 的 <code>[package]</code> 區塊中的 <code>rust</code> 欄位設定指定的 Rust 版本。如果你建構一個 crate 時有任一依賴要求的 MSRV 比你當前工具鏈更高，會導致編譯錯誤，指明該依賴與它的 MSRV。這個行為可以透過 <code>--no-msrv-check</code> 選項來停用。</p>
@@ -761,13 +885,13 @@ rust = &quot;1.33&quot;
 <li>類語意化版本條件：<code>nightly: &gt;=2018-01-01</code>、<code>nightly: &gt;=2018-01-01, &lt;=2018-01-15</code>、<code>nightly: &gt;=2018-01-01, &lt;=2018-01-15, 2018-01-20</code>。（後者會解讀為 「(version &gt;= 2018-01-01 &amp;&amp; version &lt;= 2018-01-20) || version == 2018-01-20」）</li>
 </ul>
 <p>這些條件或許很嚴苛，盼使用這功能的 crate 一隻手數得出來。</p>
-<h1 id="缺點-2"><a class="header" href="#缺點-2">缺點</a></h1>
+<h1 id="缺點-3"><a class="header" href="#缺點-3">缺點</a></h1>
 <ul>
 <li>即使宣告了 MSRV 且檢查過，並無法保持 crate 能夠正確在指定 MSRV 下正確執行，只有合理配置的 CI 能做到此事。</li>
 <li>更複雜的依賴版本解析演算法。</li>
 <li>使用 <code>cargo publish</code> 配合 MSRV <code>rust = &quot;stable&quot;</code> 恐過於保守。</li>
 </ul>
-<h1 id="替代方案-2"><a class="header" href="#替代方案-2">替代方案</a></h1>
+<h1 id="替代方案-3"><a class="header" href="#替代方案-3">替代方案</a></h1>
 <ul>
 <li>自動計算 MSRV。</li>
 <li>不做任何事，依靠 <a href="https://github.com/rust-lang/rfcs/pull/2483">LTS 發行</a> 的 crate MSRV 提升。</li>
@@ -799,7 +923,7 @@ rust = &quot;1.33&quot;
 </ul>
 <h1 id="總結-3"><a class="header" href="#總結-3">總結</a></h1>
 <p>可透過 HTTP 選擇性下載 crates-io 索引，類於 Ruby 的 Bundler 的作法。傳輸方式從預先（ahead-of-time）Git clone 改變為 HTTP 按需下載。既有的索引結構和內容維持不變。重要的是，此提案可與靜態檔案協同運作，而不需客製化的伺服器端 API。</p>
-<h1 id="動機-4"><a class="header" href="#動機-4">動機</a></h1>
+<h1 id="動機-5"><a class="header" href="#動機-5">動機</a></h1>
 <p>完整的 crate 索引相對龐大且下載慢。它還會隨著 crates.io 增長而增長，讓情況每況愈下。需要下載完整索引這件事拖累了首次使用 Cargo 的速度。尤其是在無狀態的 CI 環境下更是緩慢又浪費且只使用完整索引的非常小一部分，剩下全都給拋棄。快取索引在 CI 環境可謂困難重重（<code>.cargo</code> 目錄很巨）又經常低效（如：在 Travis Ci 上傳下載大型快取幾乎和下載新鮮索引一樣慢）。</p>
 <p>目前索引的儲存資料格式和 git 協定搭配起來並不是很舒服。未壓縮的索引內容 tarball（截止 eb037b4863）佔 176MiB，<code>gzip -1</code> 需要 16MiB，而 <code>xz -6</code> 壓縮則要 10MiB。然 Git clone 卻回報下載了 215 MiB，比未壓縮的最新索引內容還大，且是壓縮後 tarball 的 <strong>二十倍之多</strong>。</p>
 <p>將 git 歷史記錄 shallow clone 或 squash 只是暫時解。且不論事實上 <a href="http://blog.cocoapods.org/Master-Spec-Repo-Rate-Limiting-Post-Mortem/">GitHub 指出它們不想支援大型儲存庫的 shallow clone</a>，也不論 libgit2 尚未支援 shallow clone，實際上這作法仍未解決客戶端必須下載包含所有 crate 的整包索引。</p>
@@ -818,7 +942,7 @@ rust = &quot;1.33&quot;
 <h2 id="處理移除的-crate"><a class="header" href="#處理移除的-crate">處理移除的 crate</a></h2>
 <p>有需要的話，本提議的解法可支援 crate 移除。當客戶端欲檢查一個已移除的 crate 的新鮮度，會向伺服器請求並獲得 404/410/451 HTTP 狀態。客戶端可以根據情況處理，並清理本機端的資料（甚至是 tarball 和原始碼已簽出的情況下）。 </p>
 <p>若客戶端對該移除 crate 不感興趣，就不會檢查之，但極大機率從來不會這樣做，也不會下載它。若主動清除已移除的 crate 快取資訊非常重要，則可以延伸「增量式變更記錄」來通知該移除。</p>
-<h1 id="缺點-3"><a class="header" href="#缺點-3">缺點</a></h1>
+<h1 id="缺點-4"><a class="header" href="#缺點-4">缺點</a></h1>
 <ul>
 <li>crates-io 計畫替索引加上加密簽章，作為 HTTP 上額外一層保護。對 git 索引來說加密驗證非常直觀，不過簽署鬆散的 HTTP 索引可能蠻有挑戰性的。</li>
 <li>在還沒有增量式變更記錄前，一個基本的實作，需要許多請求來更新索引。和 git fetch 相比會有更高的延遲。然而，在一些早期的效能比較下，若 CDN 支援足夠（&gt;60）多的平行請求，會比 git fetch 更快。對 Github 上的索引來說，Cargo 有一個捷徑會檢查 master 分支是否改變。若有增量式變更記錄檔，同樣的捷徑可以透過條件式 HTTP 請求該變更記錄檔來達成（例如，檢查 <code>ETag</code> 或 <code>Last-Modified</code>）。</li>
@@ -870,7 +994,7 @@ rust = &quot;1.33&quot;
 </ul>
 <h1 id="總結-4"><a class="header" href="#總結-4">總結</a></h1>
 <p>透過引進<strong>輸入輸出安全性</strong>（I/O safety）之概念與一系列新型別與特徵，保障 <code>AsRaw</code> 及相關特徵的使用者對原始資源 handle （raw resource handle）之使用，以彌補 Rust 封裝邊界的漏洞。</p>
-<h1 id="動機-5"><a class="header" href="#動機-5">動機</a></h1>
+<h1 id="動機-6"><a class="header" href="#動機-6">動機</a></h1>
 <p>Rust 標準函式庫幾乎算是已經提供了<strong>輸入輸出安全性</strong>，保證程式的一部分若私自持有一個原始 handle （raw handle），其他部分就無法存取。例如 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html#tymethod.from_raw_fd"><code>FromRawFd::from_raw_fd</code></a> 標示為不安全，它不允許使用者在 safe Rust 之下執行如 <code>File::from_raw_fd(7)</code> 等操作，或是在程式各處私自持有檔案描述子（file descriptor）來執行輸入輸出。</p>
 <p>不過仍有漏網之魚。許多函式庫的 API 透過接受 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html"><code>AsRawFd</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.IntoRawFd.html"><code>IntoRawFd</code></a> 來執行輸入輸出操作：</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -971,7 +1095,7 @@ rust = &quot;1.33&quot;
 <p>上述所有原型放在：</p>
 <p><a href="https://github.com/sunfishcode/io-lifetimes">https://github.com/sunfishcode/io-lifetimes</a></p>
 <p>README.md 有文件鏈結、範例、和當前提供類似功能的 crate 之調查研究。</p>
-<h1 id="缺點-4"><a class="header" href="#缺點-4">缺點</a></h1>
+<h1 id="缺點-5"><a class="header" href="#缺點-5">缺點</a></h1>
 <p>Crate 若用到檔案描述子，如 <a href="https://crates.io/crates/nix"><code>nix</code></a> 或 <a href="https://crates.io/crates/mio"><code>mio</code></a>，將需要遷移到有實作 <code>AsFd</code> 的型別，或將這類函式標示為不安全。</p>
 <p>crates 若用 <code>AsRawFd</code> 或 <code>IntoRawFd</code> 來接收任何「類檔案」或「類 socket」型別，如 <a href="https://crates.io/crates/socket2"><code>socket2</code></a> 的 <a href="https://docs.rs/socket2/0.4.0/socket2/struct.SockRef.html#method.from"><code>SockRef::from</code></a>，將需換成 <code>AsFd</code> 或 <code>Into&lt;OwnedFd&gt;</code>，或將這類函式標示為不安全。</p>
 <h1 id="原理及替代方案-2"><a class="header" href="#原理及替代方案-2">原理及替代方案</a></h1>
