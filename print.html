@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1035,6 +1035,41 @@ rust = &quot;1.33&quot;
 <p>過期的快取僅在於新版本的 crate 使用了最新版本且剛發佈的依賴時，且該 crate 的快取失效得比其依賴早，才可能產生問題。Cargo 要求依賴需在可見的索引上有充分版本資訊，並且不會發佈任何「毀損」的 crate。</p>
 <p>然而，CDN 快取總是有機會過期或失效的順序不一致。若 Cargo 偵測到索引的快取過期了（例如一個 crate 的依賴尚未出現在索引中），它可從該狀況復原，附加「快取破壞者」（如當前時間戳記）在 URL 上，以重新向索引請求檔案。就算 CDN 並不理會請求中的 <code>cache-control: no-cache</code>，這還是可靠能繞過過期快取的方法。</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Feature Name: <code>llvm_asm</code></li>
+<li>Start Date: 2019-12-31</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2843">rust-lang/rfcs#2843</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/70173">rust-lang/rust#70173</a></li>
+<li>Translators: [<a href="https://github.com/TSOTSI1">@TSOTSI1</a>]</li>
+<li>Commit: <a href="https://github.com/Amanieu/rfcs/blob/9911615f81471229684b0ab704409c9fcae55ede/text/2843-llvm-asm.md">The commit link this page based on</a></li>
+<li>Updated: 2022-06-29</li>
+</ul>
+<h1 id="總結-5"><a class="header" href="#總結-5">總結</a></h1>
+<p>棄用現有的 <code>asm!</code> 巨集（macro），並提供一個名為 <code>llvm_asm!</code> 的相同巨集（macro）。功能開關也從 <code>asm</code> 重新命名為 <code>llvm_asm</code> 。
+與 <code>asm!</code> 不同的是， <code>llvm_asm!</code> 不打算成為穩定版。</p>
+<h1 id="動機-7"><a class="header" href="#動機-7">動機</a></h1>
+<p>這個變更將 <code>asm!</code> 巨集（macro）釋放了，使它可用於內嵌組合語言項目組新設計的 <code>asm!</code> 巨集（macro），
+同時為現在使用 <code>asm!</code> 的用戶提供一個簡單的方法來保持代碼的正常運作。</p>
+<p>對尚未支援新的 <code>asm!</code> 巨集（macro）的架構，在（nightly 版本）上執行內嵌組合語言可能會有用。</p>
+<h1 id="教學式解說-3"><a class="header" href="#教學式解說-3">教學式解說</a></h1>
+<p>Rust 團隊目前正在重新設計 <code>asm!</code> 巨集（macro）。您應該將所有使用 <code>asm!</code> 的代碼都替換為 <code>llvm_asm!</code> ，以避免代碼在實施新的 <code>asm!</code> 巨集（macro）時毀壞。</p>
+<h1 id="技術文件式解說-2"><a class="header" href="#技術文件式解說-2">技術文件式解說</a></h1>
+<p>編譯器內所有對 <code>asm!</code> 的參考都將改參考 <code>llvm_asm!</code> 。
+<code>asm!</code> 將變成一個單純（已棄用）的 <code>macro_rules!</code> ，它會重新導到<code>llvm_asm!</code>。
+棄用警告將告知使用者 <code>asm!</code> 將來的語義會作改變，並邀請他們使用 <code>llvm_asm!</code> 來替代。<code>llvm_asm!</code> 巨集（macro）將由 <code>llvm_asm</code> 功能開關來把控。</p>
+<h1 id="缺點-6"><a class="header" href="#缺點-6">缺點</a></h1>
+<p>此變更可能需要人為變更兩次代碼：首先變更為 <code>llvm_asm!</code> ，然後再實施新的 <code>asm!</code> 巨集（macro）。</p>
+<h1 id="原理及替代方案-2"><a class="header" href="#原理及替代方案-2">原理及替代方案</a></h1>
+<p>我們可以跳過棄用期，並同時執行重新命名新的 <code>asm!</code> 巨集（macro）。
+總之用 Rust（nightly 版本）保證能一次破壞大量代碼，就無需任何過渡期。</p>
+<h1 id="先驅技術-2"><a class="header" href="#先驅技術-2">先驅技術</a></h1>
+<p>D 語言也支援兩種形式的內嵌組合語言。<a href="https://dlang.org/spec/iasm.html">first one</a> 提供用於內嵌組合語言的嵌入式 DSL，它可以在不用 Clobber 情況下直接存取範圍內的變量，但只能在x86和x86_64的架構上使用。
+<a href="https://wiki.dlang.org/LDC_inline_assembly_expressions">second one</a> 是 LLVM 內部內嵌組合語言句法的 RAM 接口，但它只適用於 DSL 的後端架構。</p>
+<h1 id="未解決問題-5"><a class="header" href="#未解決問題-5">未解決問題</a></h1>
+<p>無</p>
+<h1 id="未來展望-1"><a class="header" href="#未來展望-1">未來展望</a></h1>
+<p>當下執行的會在 <a href="https://github.com/rust-lang/rfcs/pull/2873">new <code>asm!</code> macro</a> 被執行後替換掉，這會破壞那些尚未轉換 <code>llvm_asm!</code> 的代碼。
+由於運算元分隔符將從 <code>:</code> 更改為 <code>,</code> ，所以不會有靜默的錯誤編譯，新的 <code>asm!</code> 巨集（macro）會出現語法錯誤，來保證現有 <code>asm!</code> 的任何呼叫都會失敗，</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Feature Name: <code>io_safety</code></li>
 <li>Start Date: 2021-05-24</li>
 <li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/3128">rust-lang/rfcs#3128</a></li>
@@ -1043,9 +1078,9 @@ rust = &quot;1.33&quot;
 <li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/88b30e7a0b7ac5b0f52370a58b70c165a9a252af/text/3128-io-safety.md">The commit link this page based on</a></li>
 <li>Updated: 2021-08-2o</li>
 </ul>
-<h1 id="總結-5"><a class="header" href="#總結-5">總結</a></h1>
+<h1 id="總結-6"><a class="header" href="#總結-6">總結</a></h1>
 <p>透過引進<strong>輸入輸出安全性</strong>（I/O safety）之概念與一系列新型別與特徵，保障 <code>AsRaw</code> 及相關特徵的使用者對原始資源 handle （raw resource handle）之使用，以彌補 Rust 封裝邊界的漏洞。</p>
-<h1 id="動機-7"><a class="header" href="#動機-7">動機</a></h1>
+<h1 id="動機-8"><a class="header" href="#動機-8">動機</a></h1>
 <p>Rust 標準函式庫幾乎算是已經提供了<strong>輸入輸出安全性</strong>，保證程式的一部分若私自持有一個原始 handle （raw handle），其他部分就無法存取。例如 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html#tymethod.from_raw_fd"><code>FromRawFd::from_raw_fd</code></a> 標示為不安全，它不允許使用者在 safe Rust 之下執行如 <code>File::from_raw_fd(7)</code> 等操作，或是在程式各處私自持有檔案描述子（file descriptor）來執行輸入輸出。</p>
 <p>不過仍有漏網之魚。許多函式庫的 API 透過接受 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html"><code>AsRawFd</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.IntoRawFd.html"><code>IntoRawFd</code></a> 來執行輸入輸出操作：</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -1065,7 +1100,7 @@ rust = &quot;1.33&quot;
 <li>一系列全新的型別與特徵。</li>
 <li>替 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html#tymethod.from_raw_fd"><code>from_raw_fd</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.FromRawHandle.html#tymethod.from_raw_handle"><code>from_raw_handle</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.FromRawSocket.html#tymethod.from_raw_socket"><code>from_raw_socket</code></a> 撰寫新文件，解釋就輸入輸出安全性而言，它們為何不安全，順便解決出現好<a href="https://github.com/rust-lang/rust/issues/72175">幾</a><a href="https://users.rust-lang.org/t/why-is-fromrawfd-unsafe/39670">次</a>的相同問題。</li>
 </ul>
-<h1 id="教學式解說-3"><a class="header" href="#教學式解說-3">教學式解說</a></h1>
+<h1 id="教學式解說-4"><a class="header" href="#教學式解說-4">教學式解說</a></h1>
 <h2 id="輸入輸出安全性概念"><a class="header" href="#輸入輸出安全性概念">輸入輸出安全性概念</a></h2>
 <p>Rust 標準函式庫提供了低階型別，以表示原始的作業系統資源 handle：類 Unix 平台的 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html"><code>RawFd</code></a> 和 Windows 上的 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawHandle.html"><code>RawHandle</code></a> 與 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawSocket.html"><code>RawSocket</code></a>。然而，它們並沒有提供任何自身的行為，而是僅作為一個標識符（identifier），並在低階的作業系統 API 間傳遞。</p>
 <p>這些原始 handle 可以視為原始指標（raw pointer）且具有相同的危險性。雖然<strong>取得</strong>一個原始指標是安全的，但當該原始指標是非法指標，或是比其指向記憶體之處活得更久時，對原始指標<strong>取值</strong>（dereference）都可能引發未定義行為（undefined behavior）。無獨有偶，透過 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html#tymethod.as_raw_fd"><code>AsRawFd::as_raw_fd</code></a> 或類似方法<strong>取得</strong>一個原始 handle 是安全的，但當它並非合法 handle 或在關閉之後才拿來用時，用該 handle 來執行輸入輸出恐導致「損毀的輸出結果」、「遺失或洩漏輸入資料」或「違反封裝的邊界」。在這兩個案例中，影響不僅限於本地，也會影響程式的其他部分。保護原始指標免於危險稱作記憶體安全性，所以保護原始 handle 免於危險我們叫它<strong>輸入輸出安全性</strong>。</p>
@@ -1132,7 +1167,7 @@ rust = &quot;1.33&quot;
 <li>在此之後，crate 可以開始用這些新型別，並替 crate 自己的型別實作這些新特徵。這些改變相對小，而且符合語意化版號相容性，不需其他特殊處理。</li>
 <li>當標準函式庫和夠多的熱門 crate 實作這些新特徵後，其他 crate 可按照它們的開發步調，將這些新特徵作為泛型引數的限定條件（bound)。雖然這些改變不符合語意化版號的相容性，不過多數 API 使用者改用新特徵時並不需改變程式碼。</li>
 </ul>
-<h1 id="技術文件式解說-2"><a class="header" href="#技術文件式解說-2">技術文件式解說</a></h1>
+<h1 id="技術文件式解說-3"><a class="header" href="#技術文件式解說-3">技術文件式解說</a></h1>
 <h2 id="輸入輸出安全性概念-1"><a class="header" href="#輸入輸出安全性概念-1">輸入輸出安全性概念</a></h2>
 <p>Rust 語言除了有記憶體安全性之外，Rust 標準函式庫同時提供了對輸入輸出安全性的保證。一個合法的輸入輸出操作，其所操作的原始 handle（<a href="https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html"><code>RawFd</code></a>、 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawHandle.html"><code>RawHandle</code></a>、<a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawSocket.html"><code>RawSocket</code></a>）必為明確從作業系統回傳之值，且這些操作僅發生在與作業系統關聯之生命週期內。當一段 Rust 程式碼宣稱輸入輸出安全性，代表該程式碼不可能導致非法的輸入輸出操作。</p>
 <p>雖然有些作業系統的文件中說明其檔案描述子的配置演算法，但從這些演算法旁敲側擊出來的 handle 值並不會視為「明確從作業系統回傳之值」。</p>
@@ -1146,10 +1181,10 @@ rust = &quot;1.33&quot;
 <p>上述所有原型放在：</p>
 <p><a href="https://github.com/sunfishcode/io-lifetimes">https://github.com/sunfishcode/io-lifetimes</a></p>
 <p>README.md 有文件鏈結、範例、和當前提供類似功能的 crate 之調查研究。</p>
-<h1 id="缺點-6"><a class="header" href="#缺點-6">缺點</a></h1>
+<h1 id="缺點-7"><a class="header" href="#缺點-7">缺點</a></h1>
 <p>Crate 若用到檔案描述子，如 <a href="https://crates.io/crates/nix"><code>nix</code></a> 或 <a href="https://crates.io/crates/mio"><code>mio</code></a>，將需要遷移到有實作 <code>AsFd</code> 的型別，或將這類函式標示為不安全。</p>
 <p>crates 若用 <code>AsRawFd</code> 或 <code>IntoRawFd</code> 來接收任何「類檔案」或「類 socket」型別，如 <a href="https://crates.io/crates/socket2"><code>socket2</code></a> 的 <a href="https://docs.rs/socket2/0.4.0/socket2/struct.SockRef.html#method.from"><code>SockRef::from</code></a>，將需換成 <code>AsFd</code> 或 <code>Into&lt;OwnedFd&gt;</code>，或將這類函式標示為不安全。</p>
-<h1 id="原理及替代方案-2"><a class="header" href="#原理及替代方案-2">原理及替代方案</a></h1>
+<h1 id="原理及替代方案-3"><a class="header" href="#原理及替代方案-3">原理及替代方案</a></h1>
 <h2 id="有關unsafe-僅為了記憶體安全性"><a class="header" href="#有關unsafe-僅為了記憶體安全性">有關「unsafe 僅為了記憶體安全性」</a></h2>
 <p>Rust 有個慣例：<code>unsafe</code> 只適用於標示記憶體安全性。舉個有名的案例， <a href="https://doc.rust-lang.org/std/mem/fn.forget.html"><code>std::mem::forget</code></a> 曾標示為不安全，但後來<a href="https://rust-lang.github.io/rfcs/1066-safe-mem-forget.html">被改為安全</a>，且其結論指出 unsafe 僅該用作標示記憶體安全性，而不該用來標示可能作繭自縛的情況或恫嚇應避免使用的 API 上。</p>
 <p>記憶體安全性造成的危害比其他程式設計面向更甚，它不僅要避免意外行為發生，且仍需避免無法限制一段程式碼能做什麼。</p>
@@ -1166,15 +1201,15 @@ rust = &quot;1.33&quot;
 <h2 id="iosafe-特徵與它的前身-ownsraw"><a class="header" href="#iosafe-特徵與它的前身-ownsraw"><code>IoSafe</code> 特徵（與它的前身 <code>OwnsRaw</code>）</a></h2>
 <p>這個 RFC 在早先幾個版本提議過一個 <code>IoSafe</code> 特徵，這個特徵會帶來小程度但具侵入性的修復。來自該 RFC 的回饋促使一系列新型別與特徵的開發。這個開發牽扯更廣的 API 範圍，也意味著需要更多設計和審核。並且隨著時間推移，整個 crate 生態系需要更大規模的改動。然而，早期跡象指出，本 RFC 引入的新型別與特徵更易理解，使用上更順手且安全，所以長期來說有更穩健的基礎。</p>
 <p><code>IoSafe</code> 早期叫做 <code>OwnsRaw</code>。我們很難替這個特徵找到恰到好處的名字，這也許是個訊號，表示它並非良好設計的特徵。</p>
-<h1 id="先驅技術-2"><a class="header" href="#先驅技術-2">先驅技術</a></h1>
+<h1 id="先驅技術-3"><a class="header" href="#先驅技術-3">先驅技術</a></h1>
 <p>大部分記憶體安全的程式語言都對原始 handle 做了安全的抽象層。多數情況下，它們僅是簡單地避免暴露原始 handle，例如 <a href="https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=net-5.0">C#</a>、<a href="https://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true">Java</a> 等。若將透過原始 handle 執行輸入輸出標示為不安全，可讓 safe Rust 與這些程式語言達到相同程度的安全保證。</p>
 <p>在 crates.io 上有好幾個 crate 封裝了擁有或借用的檔案描述子。<a href="https://github.com/sunfishcode/io-lifetimes#prior-art">io-lifetimes 的 README.md 中 Prior Art 一節</a>詳細描述了其與其他既有 crate 的同異。從高層次角度來看，既有的 crate 都與 io-lifetimes 共享相同的基本概念。這些 crate 都圍繞著 Rust 生命週期與所有權概念打造，而這恰恰說明這些概念非常適合這個問題。</p>
 <p>Android 有特殊的 API 會偵測不恰當的 <code>close</code>，詳見 <a href="https://github.com/rust-lang/rust/pull/74680">rust-lang/rust#74860</a>。這些 API 的動機就是一種輸入輸出安全性的應用。Android 的特殊 API 用了動態檢查，讓它們可以在跨來源語言的邊界實施這些規則。本 RFC 提議的輸入輸出安全性的型別和特徵只專注在 Rust 程式碼本身實施這些規則，所以它們可在編譯期間利用 Rust 的型別系統實施這些規則，而非延遲到執行期間。</p>
-<h1 id="未解決問題-5"><a class="header" href="#未解決問題-5">未解決問題</a></h1>
+<h1 id="未解決問題-6"><a class="header" href="#未解決問題-6">未解決問題</a></h1>
 <h2 id="形式化所有權"><a class="header" href="#形式化所有權">形式化所有權</a></h2>
 <p>此 RFC 並沒有為原始 handle 的所有權和生命週期定義一個形式化模型（formal model）。這 RFC 對原始 handle 規範之定位尚不明朗。當 handle 只是整數型別時，與其關聯資源之生命週期意義為何？所有具有相同值的整數型別會共享該關連嗎？</p>
 <p>Rust <a href="https://doc.rust-lang.org/reference/behavior-considered-undefined.html">參考手冊</a>根據 <a href="http://llvm.org/docs/LangRef.html#pointer-aliasing-rules">LLVM 的指標別名規則</a>定義了記憶體的未定義行為；輸入輸出可能需要類似的 handle 別名規則。這對目前的實際需求而言似非必要，但未來可對此進行探索。</p>
-<h1 id="未來展望-1"><a class="header" href="#未來展望-1">未來展望</a></h1>
+<h1 id="未來展望-2"><a class="header" href="#未來展望-2">未來展望</a></h1>
 <p>以下包含一些從此 RFC 延伸的可能想法：</p>
 <ul>
 <li>
