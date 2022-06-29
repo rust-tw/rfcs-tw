@@ -9,7 +9,7 @@
 # 總結
 [總結]: #總結
 
-此 RFC 通過添加 `global_asm!` 巨集（macro）公開了 LLVM 對 [module-level inline assembly](http://llvm.org/docs/LangRef.html#module-level-inline-assembly) 的支持。語法非常簡單：它只需要一個包含組合語言代碼的字符串文字。
+此 RFC 透過添加 `global_asm!` 巨集（macro）公開了 LLVM 對 [module-level inline assembly](http://llvm.org/docs/LangRef.html#module-level-inline-assembly) 的支援。語法非常簡單：它只需要一個包含組合語言代碼的字串字面值。
 
 範例:
 ```rust
@@ -35,7 +35,7 @@ extern {
 global_asm!(include_str!("my_asm_file.s"));
 ```
 
-組合語言檔案也可以由 `build.rs` 預處理或產生（例如使用c預處理器），這將在 cargo 輸出目錄中產生輸出檔案：
+組合語言檔案也可以由 `build.rs` 預處理或產生（例如使用 C 預處理器），這將在 Cargo 輸出目錄中產生輸出檔案：
 
 ```rust
 global_asm!(include_str!(concat!(env!("OUT_DIR"), "/preprocessed_asm.s")));
