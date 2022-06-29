@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>0049-match-arm-attributes - The Rust RFC Book</title>
+        <title>1548-global-asm - The Rust RFC Book</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html" class="active">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html" class="active">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,91 +143,66 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Start Date: 2014-03-20</li>
-<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/49">rust-lang/rfcs#49</a></li>
-<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/12812">rust-lang/rust#12812</a></li>
-<li>Translators: [<a href="https://github.com/FizzyElt">@FizzyElt</a>]</li>
-<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/0e2baed56a1d31a65f58f4cb615eedfaad59c2e3/text/0049-match-arm-attributes.md">The commit link this page based on</a></li>
-<li>Updated: 2022-05-17</li>
+<li>Feature Name: global_asm</li>
+<li>Start Date: 2016-03-18</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/1548">rust-lang/rfcs#1548</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/35119">rust-lang/rust#35119</a></li>
+<li>Translators: [<a href="https://github.com/TSOTSI1">@TSOTSI1</a>]</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/f4b8b61a414298ba0f76d9b786d58ccdc34a44bb/text/1548-global-asm.md">The commit link this page based on</a></li>
+<li>Updated: 2022-06-29</li>
 </ul>
-<h1 id="概要"><a class="header" href="#概要">概要</a></h1>
-<p>允許屬性在配對分支上</p>
+<h1 id="總結"><a class="header" href="#總結">總結</a></h1>
+<p>此 RFC 透過添加 <code>global_asm!</code> 巨集（macro）公開了 LLVM 對 <a href="http://llvm.org/docs/LangRef.html#module-level-inline-assembly">module-level inline assembly</a> 的支援。語法非常簡單：它只需要一個包含組合語言代碼的字串字面值。</p>
+<p>範例:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>global_asm!(r#&quot;
+.globl my_asm_func
+my_asm_func:
+    ret
+&quot;#);
+
+extern {
+    fn my_asm_func();
+}
+<span class="boring">}
+</span></code></pre></pre>
 <h1 id="動機"><a class="header" href="#動機">動機</a></h1>
-<p>有時希望使用屬性來注釋配對語句的分支，例如條件編譯 <code>#[cfg]</code> 或是分支權重（後者為最重要的用途）。</p>
-<p>對於條件編譯，暫時得解決辦法是使用 <code>#[cfg]</code> 來重複宣告相同函式來處理不同的案例。一個案例研究是 <a href="https://github.com/sfackler/rust-openssl">sfackler 的 bindings to OpenSSL</a>，在多數的發行版本中移除了 SSLv2 支持，因此 Rust bindings 部分需要被條件禁用。支援各種不同 SSL 版本最顯而易見的方法是使用枚舉。</p>
+<p>此功能有兩個主要使用案例。首先，它允許完全在組合語言中寫入函式，這大大消除了對 <code>naked</code> 屬性的需要。這主要適用於使用自訂呼叫規則（如中斷處置器）的函式。</p>
+<p>另一個重要的使用案例是，它允許外部組合語言檔案在 Rust 模組中使用，而無需駭入編譯系統。</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>pub enum SslMethod {
-    #[cfg(sslv2)]
-    /// Only support the SSLv2 protocol
-    Sslv2,
-    /// Only support the SSLv3 protocol
-    Sslv3,
-    /// Only support the TLSv1 protocol
-    Tlsv1,
-    /// Support the SSLv2, SSLv3 and TLSv1 protocols
-    Sslv23,
-}
+</span>global_asm!(include_str!(&quot;my_asm_file.s&quot;));
 <span class="boring">}
 </span></code></pre></pre>
-<p>然而，所有的 <code>match</code> 只能在 <code>cfg</code> 啟用時使用 <code>Sslv2</code>，例如下面內容是無效的：</p>
+<p>組合語言檔案也可以由 <code>build.rs</code> 預處理或產生（例如使用 C 預處理器），這將在 Cargo 輸出目錄中產生輸出檔案：</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>fn name(method: SslMethod) -&gt; &amp;'static str {
-    match method {
-        Sslv2 =&gt; &quot;SSLv2&quot;,
-        Sslv3 =&gt; &quot;SSLv3&quot;,
-        _ =&gt; &quot;...&quot;
-    }
-}
-<span class="boring">}
-</span></code></pre></pre>
-<p>一個有效的方法則必須有兩個定義：<code>#[cfg(sslv2)] fn name(...)</code> 和 <code>#[cfg(not(sslv2)] fn name(...)</code>
-。前者有 <code>Sslv2</code> 的分支，後者沒有。顯然，對於枚舉中每個額外的 <code>cfg</code> 變體，這都會以指數型的方式爆炸。</p>
-<p>分支權重將允許仔細的微優化器（micro-optimiser）通知編譯器，例如，鮮少採取某個配對分支：</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>match foo {
-    Common =&gt; {}
-    #[cold]
-    Rare =&gt; {}
-}
+</span>global_asm!(include_str!(concat!(env!(&quot;OUT_DIR&quot;), &quot;/preprocessed_asm.s&quot;)));
 <span class="boring">}
 </span></code></pre></pre>
 <h1 id="詳細設計"><a class="header" href="#詳細設計">詳細設計</a></h1>
-<p>一般的屬性語法，應用於整個配對分支。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>match x {
-    #[attr]
-    Thing =&gt; {}
-
-    #[attr]
-    Foo | Bar =&gt; {}
-
-    #[attr]
-    _ =&gt; {}
-}
-<span class="boring">}
-</span></code></pre></pre>
+<p>見上文所述，沒有要多補充的。巨集（macro）會直接映射到 LLVM 的 <code>module asm</code>。</p>
+<h1 id="缺點"><a class="header" href="#缺點">缺點</a></h1>
+<p>像<code>asm!</code>一樣，這個功能取決於 LLVM 的集成組合語言</p>
 <h1 id="替代方案"><a class="header" href="#替代方案">替代方案</a></h1>
-<p>實際上沒有通用的替代方案; 人們也許可以用一些巨集（macro）和輔助函數來解決條件枚舉變體的配對問題; 但一般來說，這起不了任何作用。</p>
-<h1 id="未解決的問題"><a class="header" href="#未解決的問題">未解決的問題</a></h1>
+<p>包含外部組合語言的現有方式是使用 <code>build.rs</code> 中的 gcc 編譯組合語言檔案，並將其連結到 Rust 程式中作為靜態庫。</p>
+<p>對於完全以組合語言寫入的函式的替代方案是添加一個 <a href="https://github.com/rust-lang/rfcs/pull/1201"><code>#[naked]</code> function attribute</a>.</p>
+<h1 id="未解決問題"><a class="header" href="#未解決問題">未解決問題</a></h1>
 <p>無</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="0198-slice-notation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="0198-slice-notation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="2000-const-generics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -237,11 +212,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="0198-slice-notation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="0198-slice-notation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="2000-const-generics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

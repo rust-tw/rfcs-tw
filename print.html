@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -557,6 +557,57 @@ use_slice(v.as_slice()) // equivalent
 </ul>
 <p>追根究底，無論如何，切片的符號本身似乎是可取的，如果它能消除對 <code>Vec</code> 和 <code>String</code> 實現 <code>Deref</code> 的需要，那就更好了。</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Feature Name: global_asm</li>
+<li>Start Date: 2016-03-18</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/1548">rust-lang/rfcs#1548</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/35119">rust-lang/rust#35119</a></li>
+<li>Translators: [<a href="https://github.com/TSOTSI1">@TSOTSI1</a>]</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/f4b8b61a414298ba0f76d9b786d58ccdc34a44bb/text/1548-global-asm.md">The commit link this page based on</a></li>
+<li>Updated: 2022-06-29</li>
+</ul>
+<h1 id="總結"><a class="header" href="#總結">總結</a></h1>
+<p>此 RFC 透過添加 <code>global_asm!</code> 巨集（macro）公開了 LLVM 對 <a href="http://llvm.org/docs/LangRef.html#module-level-inline-assembly">module-level inline assembly</a> 的支援。語法非常簡單：它只需要一個包含組合語言代碼的字串字面值。</p>
+<p>範例:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>global_asm!(r#&quot;
+.globl my_asm_func
+my_asm_func:
+    ret
+&quot;#);
+
+extern {
+    fn my_asm_func();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h1 id="動機-2"><a class="header" href="#動機-2">動機</a></h1>
+<p>此功能有兩個主要使用案例。首先，它允許完全在組合語言中寫入函式，這大大消除了對 <code>naked</code> 屬性的需要。這主要適用於使用自訂呼叫規則（如中斷處置器）的函式。</p>
+<p>另一個重要的使用案例是，它允許外部組合語言檔案在 Rust 模組中使用，而無需駭入編譯系統。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>global_asm!(include_str!(&quot;my_asm_file.s&quot;));
+<span class="boring">}
+</span></code></pre></pre>
+<p>組合語言檔案也可以由 <code>build.rs</code> 預處理或產生（例如使用 C 預處理器），這將在 Cargo 輸出目錄中產生輸出檔案：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>global_asm!(include_str!(concat!(env!(&quot;OUT_DIR&quot;), &quot;/preprocessed_asm.s&quot;)));
+<span class="boring">}
+</span></code></pre></pre>
+<h1 id="詳細設計-2"><a class="header" href="#詳細設計-2">詳細設計</a></h1>
+<p>見上文所述，沒有要多補充的。巨集（macro）會直接映射到 LLVM 的 <code>module asm</code>。</p>
+<h1 id="缺點-1"><a class="header" href="#缺點-1">缺點</a></h1>
+<p>像<code>asm!</code>一樣，這個功能取決於 LLVM 的集成組合語言</p>
+<h1 id="替代方案-2"><a class="header" href="#替代方案-2">替代方案</a></h1>
+<p>包含外部組合語言的現有方式是使用 <code>build.rs</code> 中的 gcc 編譯組合語言檔案，並將其連結到 Rust 程式中作為靜態庫。</p>
+<p>對於完全以組合語言寫入的函式的替代方案是添加一個 <a href="https://github.com/rust-lang/rfcs/pull/1201"><code>#[naked]</code> function attribute</a>.</p>
+<h1 id="未解決問題"><a class="header" href="#未解決問題">未解決問題</a></h1>
+<p>無</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Feature Name: <code>const_generics</code></li>
 <li>Start Date: 2017-05-01</li>
 <li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2000">rust-lang/rfcs#2000</a></li>
@@ -565,9 +616,9 @@ use_slice(v.as_slice()) // equivalent
 <li>Commit: <a href="https://github.com/rust-tw/rfcs-tw/blob/725bf172f383a21cf74189feb5073705778d2206/text/2000-const-generics.md">The commit link this page based on</a></li>
 <li>Updated: 2021-03-26</li>
 </ul>
-<h1 id="總結"><a class="header" href="#總結">總結</a></h1>
+<h1 id="總結-1"><a class="header" href="#總結-1">總結</a></h1>
 <p>允許所有型別（type）以作為常數值（constant values）的形式成為泛型（generic），這能讓使用者用 <code>impl</code> 寫出所有陣列型別（array types）。</p>
-<h1 id="動機-2"><a class="header" href="#動機-2">動機</a></h1>
+<h1 id="動機-3"><a class="header" href="#動機-3">動機</a></h1>
 <p>現在的 Rust 有一種將常數參數化（parametric）型別︰內建的陣列型別 <code>[T; LEN]</code>。然而，常數泛型（const generics）並非第一級別的功能，使用者無法自己定義將常數值作爲泛型的型別，且不能對所有的陣列實作特徵（traits）。</p>
 <p>在此限制下，標準庫僅包含長度最多到 32 的陣列實作，而陣列也因此被視爲語言的第二級別的功能。即使在長度可靜態已知的情形下，也大多調配於堆（heap）上成為向量（vector）而非使用陣列型別，因而造成一定程度上的效能取捨。</p>
 <p>常數參數也能讓使用者更自然地指定一個泛型變體（variant）, 且相比於型別更能確切地反應其值。舉例來說，基於某些因素有個型別用一個名稱來作為參數的話，使用 <code>&amp;'static str</code> 來提供其名稱會比（藉由相關的常數或是函式提供的）單元型別（unit type）的形式還來的合理，這能簡化 API。</p>
@@ -694,15 +745,15 @@ fn foo&lt;const N: usize&gt;() -&gt; Foo&lt;N&gt; {
 <h1 id="我們如何教導這個"><a class="header" href="#我們如何教導這個">我們如何教導這個</a></h1>
 <p>常數泛型是一個很龐大的功能，將需要大量的教育資源，這將會需要寫在在書本跟參考文件中，且可能會在書中有獨立的章節。常數泛型的文件化過程本質上將會是一個大工程。</p>
 <p>然而，常數泛型應該被視為進階功能，並且在使用 Rust 的初期，我們應該不會向新手介紹這些內容。</p>
-<h1 id="缺點-1"><a class="header" href="#缺點-1">缺點</a></h1>
+<h1 id="缺點-2"><a class="header" href="#缺點-2">缺點</a></h1>
 <p>此功能由於允許型別由常數決定，將為型別系統增加了大量的複雜性。它需要抽象變數相等性的確定規則，這出現了很多令人意外的的特殊情況。它增加了 Rust 的很多語法。如果我們不要採用此功能，Rust 肯定會更簡單。</p>
 <p>然而，我們已經引入了一種由常數確定的型別（數組型別）。泛型化的功能似乎是必然的，甚至是不可避免的，鑑於此，我們應該盡早決定。</p>
-<h1 id="替代方案-2"><a class="header" href="#替代方案-2">替代方案</a></h1>
+<h1 id="替代方案-3"><a class="header" href="#替代方案-3">替代方案</a></h1>
 <p>除了暫緩執行或不執行外，並沒有真的替代方案。</p>
 <p>我們可以限制常數泛型為 <code>usize</code> 型別，但這不會讓實作更為簡單。</p>
 <p>我們可以對常數相對性的複雜概念更積極地發展，但這會使實作比上述說明得更加複雜。</p>
 <p>我們可以選擇稍微不同的語法，例如將在常數跟型別間加上分號。</p>
-<h1 id="未解決問題"><a class="header" href="#未解決問題">未解決問題</a></h1>
+<h1 id="未解決問題-1"><a class="header" href="#未解決問題-1">未解決問題</a></h1>
 <ul>
 <li><b>一致的抽象常數表達式︰</b>本 RFC 盡可能最大限度地減少抽象常數表達式的統合性上的處理，從本質上來說，並沒有使其一致。這可能造成無法接受的使用者體驗的不穩定，而我們想要實作一些更進些的統合性之前穩定此功能。</li>
 <li><b>常數表達式之正確格式︰</b>只有在單態化過程中，程式不會恐慌（panic）的情況下，此型別才能視爲正確格式。這對於溢出和超出範圍的陣列存取來說很棘手。然而，我們實際上只能確保在函式的簽章中表達式常數的格式進行正確性約束。目前尚不清楚有關在函式中抽象常數表達式之格式正確性的處理方式，也因此使實作推遲。</li>
@@ -717,9 +768,9 @@ fn foo&lt;const N: usize&gt;() -&gt; Foo&lt;N&gt; {
 <li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/dfe697106478a52bddc000477e8cd0621bcc1a20/text/2342-const-control-flow.md">The commit link this page based on</a></li>
 <li>Updated: 2020-09-05</li>
 </ul>
-<h1 id="總結-1"><a class="header" href="#總結-1">總結</a></h1>
+<h1 id="總結-2"><a class="header" href="#總結-2">總結</a></h1>
 <p>透過此功能，可以在常數求值（const evaluation）中使用 <code>if</code> 及 <code>match</code> 並使他們被延遲求值。簡單來說，這項功能允許我們寫 <code>if x &lt; y { y - x } else { x - y }</code>；即使當使用非負型別時在 <code>x &lt; y</code> 的 <code>else</code> 分支會報溢位錯誤 (overflow error)。</p>
-<h1 id="動機-3"><a class="header" href="#動機-3">動機</a></h1>
+<h1 id="動機-4"><a class="header" href="#動機-4">動機</a></h1>
 <p>在常數宣告中使用條件式對於建立像是 <code>NonZero::new</code> 的 <code>const fn</code> 及 直譯判定（interpreting assertions）來說很重要。</p>
 <h1 id="教學式解說"><a class="header" href="#教學式解說">教學式解說</a></h1>
 <p>如果你寫</p>
@@ -786,7 +837,7 @@ const FOO: SomeType = if X &gt; Y {
 <h1 id="技術文件式解說"><a class="header" href="#技術文件式解說">技術文件式解說</a></h1>
 <p><code>if</code> 或是在 variant 沒有欄位的 enums 上做 <code>match</code> 會在 HIR -&gt; MIR 階段時，被轉譯成 <code>switchInt</code> 終止器（terminator）。Mir 直譯器現在將會針對那些終止器求值（之前就可以了）。</p>
 <p>在 variant 沒有欄位的 enums 上做 <code>match</code> 會被轉譯成 <code>switch</code>，表示他會被檢查 discriminant 或是在 packed enums（例如 <code>Option&lt;&amp;T&gt;</code>）的情況會運算 discriminant（這個情況 discriminant 沒有特別的記憶體位址，但他會把所有的零視為 <code>None</code>，並把其他的值都當作 <code>Some</code>）。當進入 <code>match</code> 的分支時，匹配上的值基本上會被 transmute 成 enum 的 variant 型別，如此一來可以允許其他程式碼來存取該 enum 的欄位。</p>
-<h1 id="缺點-2"><a class="header" href="#缺點-2">缺點</a></h1>
+<h1 id="缺點-3"><a class="header" href="#缺點-3">缺點</a></h1>
 <p>這項功能容易造成任意「常數」值（如：<code>size_of::&lt;T&gt;()</code> 或是特定的平台常數）編譯失敗。</p>
 <h1 id="原理及替代方案"><a class="header" href="#原理及替代方案">原理及替代方案</a></h1>
 <h2 id="利用中介-const-fns-來破壞立即常數求值eager-const-evaluation"><a class="header" href="#利用中介-const-fns-來破壞立即常數求值eager-const-evaluation">利用中介 const fns 來破壞立即常數求值（eager const evaluation）</a></h2>
@@ -820,7 +871,7 @@ const AB: u32 = foo(X, Y);
 <span class="boring">}
 </span></code></pre></pre>
 <p>const fn 的 <code>x</code> 和 <code>y</code> 參數未知，無法做常數求值（const evaluate）。當提供此 const fn 參數並求值時，只會對相應的分支求值。</p>
-<h1 id="未解決問題-1"><a class="header" href="#未解決問題-1">未解決問題</a></h1>
+<h1 id="未解決問題-2"><a class="header" href="#未解決問題-2">未解決問題</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Feature Name: <code>min_rust_version</code></li>
 <li>Start Date: 2018-06-28</li>
@@ -830,14 +881,14 @@ const AB: u32 = foo(X, Y);
 <li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/3071138d4ed510d6dfc1f8e1d7e9d4b099ea12e8/text/2495-min-rust-version.md">The commit link this page based on</a></li>
 <li>Updated: 2020-09-07</li>
 </ul>
-<h1 id="總結-2"><a class="header" href="#總結-2">總結</a></h1>
+<h1 id="總結-3"><a class="header" href="#總結-3">總結</a></h1>
 <p>在 <code>Cargo.toml</code> 的 package 區塊加入 <code>rust</code> 欄位，用於指定 crate 的最低支援 Rust 版本（Minimum Supported Rust Version，MSRV）。</p>
 <pre><code class="language-toml">[package]
 name = &quot;foo&quot;
 version = &quot;0.1.0&quot;
 rust = &quot;1.30&quot;
 </code></pre>
-<h1 id="動機-4"><a class="header" href="#動機-4">動機</a></h1>
+<h1 id="動機-5"><a class="header" href="#動機-5">動機</a></h1>
 <p>當前 crate 無任何正式方法指定 MSRV，導致使用者無法在不建構該 crate 的情況下得知 crate 是否可透過他們的工具鏈（toolchain）建構。這也帶來有關如何在提升 MSRV 時管理 crate 版本的爭論，保守的作法是將之視為破壞性改動，這種作法會阻礙整個生態採納新功能，或使得版本號通膨式提升，進而讓下游的 crate 很難跟上。另一方面，若作法稍微寬鬆些，則導致採用較舊編譯器版本的使用者無法成功編譯它們的 crate。</p>
 <h1 id="教學式解說-1"><a class="header" href="#教學式解說-1">教學式解說</a></h1>
 <p>若你想指定一個特定 MSRV 版本，請在 <code>Cargo.toml</code> 的 <code>[package]</code> 區塊中的 <code>rust</code> 欄位設定指定的 Rust 版本。如果你建構一個 crate 時有任一依賴要求的 MSRV 比你當前工具鏈更高，會導致編譯錯誤，指明該依賴與它的 MSRV。這個行為可以透過 <code>--no-msrv-check</code> 選項來停用。</p>
@@ -885,13 +936,13 @@ rust = &quot;1.33&quot;
 <li>類語意化版本條件：<code>nightly: &gt;=2018-01-01</code>、<code>nightly: &gt;=2018-01-01, &lt;=2018-01-15</code>、<code>nightly: &gt;=2018-01-01, &lt;=2018-01-15, 2018-01-20</code>。（後者會解讀為 「(version &gt;= 2018-01-01 &amp;&amp; version &lt;= 2018-01-20) || version == 2018-01-20」）</li>
 </ul>
 <p>這些條件或許很嚴苛，盼使用這功能的 crate 一隻手數得出來。</p>
-<h1 id="缺點-3"><a class="header" href="#缺點-3">缺點</a></h1>
+<h1 id="缺點-4"><a class="header" href="#缺點-4">缺點</a></h1>
 <ul>
 <li>即使宣告了 MSRV 且檢查過，並無法保持 crate 能夠正確在指定 MSRV 下正確執行，只有合理配置的 CI 能做到此事。</li>
 <li>更複雜的依賴版本解析演算法。</li>
 <li>使用 <code>cargo publish</code> 配合 MSRV <code>rust = &quot;stable&quot;</code> 恐過於保守。</li>
 </ul>
-<h1 id="替代方案-3"><a class="header" href="#替代方案-3">替代方案</a></h1>
+<h1 id="替代方案-4"><a class="header" href="#替代方案-4">替代方案</a></h1>
 <ul>
 <li>自動計算 MSRV。</li>
 <li>不做任何事，依靠 <a href="https://github.com/rust-lang/rfcs/pull/2483">LTS 發行</a> 的 crate MSRV 提升。</li>
@@ -905,7 +956,7 @@ rust = &quot;1.33&quot;
 <li><a href="https://github.com/rust-lang/rfcs/pull/1953">RFC 1953</a></li>
 <li><a href="https://github.com/rust-lang/rfcs/pull/2182">RFC 2182</a>（這個非常有爭議的離題了）</li>
 </ul>
-<h1 id="未解決問題-2"><a class="header" href="#未解決問題-2">未解決問題</a></h1>
+<h1 id="未解決問題-3"><a class="header" href="#未解決問題-3">未解決問題</a></h1>
 <ul>
 <li>瑣碎的命名問題：<code>rust</code> 或 <code>rustc</code> 還是 <code>min-rust-version</code></li>
 <li>額外的檢查？</li>
@@ -921,9 +972,9 @@ rust = &quot;1.33&quot;
 <li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/3fec7e2e44884cff1a8f6c4a278bd6896ce04227/text/2789-sparse-index.md">The commit link this page based on</a></li>
 <li>Updated: 2022-04-02</li>
 </ul>
-<h1 id="總結-3"><a class="header" href="#總結-3">總結</a></h1>
+<h1 id="總結-4"><a class="header" href="#總結-4">總結</a></h1>
 <p>可透過 HTTP 選擇性下載 crates-io 索引，類於 Ruby 的 Bundler 的作法。傳輸方式從預先（ahead-of-time）Git clone 改變為 HTTP 按需下載。既有的索引結構和內容維持不變。重要的是，此提案可與靜態檔案協同運作，而不需客製化的伺服器端 API。</p>
-<h1 id="動機-5"><a class="header" href="#動機-5">動機</a></h1>
+<h1 id="動機-6"><a class="header" href="#動機-6">動機</a></h1>
 <p>完整的 crate 索引相對龐大且下載慢。它還會隨著 crates.io 增長而增長，讓情況每況愈下。需要下載完整索引這件事拖累了首次使用 Cargo 的速度。尤其是在無狀態的 CI 環境下更是緩慢又浪費且只使用完整索引的非常小一部分，剩下全都給拋棄。快取索引在 CI 環境可謂困難重重（<code>.cargo</code> 目錄很巨）又經常低效（如：在 Travis Ci 上傳下載大型快取幾乎和下載新鮮索引一樣慢）。</p>
 <p>目前索引的儲存資料格式和 git 協定搭配起來並不是很舒服。未壓縮的索引內容 tarball（截止 eb037b4863）佔 176MiB，<code>gzip -1</code> 需要 16MiB，而 <code>xz -6</code> 壓縮則要 10MiB。然 Git clone 卻回報下載了 215 MiB，比未壓縮的最新索引內容還大，且是壓縮後 tarball 的 <strong>二十倍之多</strong>。</p>
 <p>將 git 歷史記錄 shallow clone 或 squash 只是暫時解。且不論事實上 <a href="http://blog.cocoapods.org/Master-Spec-Repo-Rate-Limiting-Post-Mortem/">GitHub 指出它們不想支援大型儲存庫的 shallow clone</a>，也不論 libgit2 尚未支援 shallow clone，實際上這作法仍未解決客戶端必須下載包含所有 crate 的整包索引。</p>
@@ -942,7 +993,7 @@ rust = &quot;1.33&quot;
 <h2 id="處理移除的-crate"><a class="header" href="#處理移除的-crate">處理移除的 crate</a></h2>
 <p>有需要的話，本提議的解法可支援 crate 移除。當客戶端欲檢查一個已移除的 crate 的新鮮度，會向伺服器請求並獲得 404/410/451 HTTP 狀態。客戶端可以根據情況處理，並清理本機端的資料（甚至是 tarball 和原始碼已簽出的情況下）。 </p>
 <p>若客戶端對該移除 crate 不感興趣，就不會檢查之，但極大機率從來不會這樣做，也不會下載它。若主動清除已移除的 crate 快取資訊非常重要，則可以延伸「增量式變更記錄」來通知該移除。</p>
-<h1 id="缺點-4"><a class="header" href="#缺點-4">缺點</a></h1>
+<h1 id="缺點-5"><a class="header" href="#缺點-5">缺點</a></h1>
 <ul>
 <li>crates-io 計畫替索引加上加密簽章，作為 HTTP 上額外一層保護。對 git 索引來說加密驗證非常直觀，不過簽署鬆散的 HTTP 索引可能蠻有挑戰性的。</li>
 <li>在還沒有增量式變更記錄前，一個基本的實作，需要許多請求來更新索引。和 git fetch 相比會有更高的延遲。然而，在一些早期的效能比較下，若 CDN 支援足夠（&gt;60）多的平行請求，會比 git fetch 更快。對 Github 上的索引來說，Cargo 有一個捷徑會檢查 master 分支是否改變。若有增量式變更記錄檔，同樣的捷徑可以透過條件式 HTTP 請求該變更記錄檔來達成（例如，檢查 <code>ETag</code> 或 <code>Last-Modified</code>）。</li>
@@ -962,7 +1013,7 @@ rust = &quot;1.33&quot;
 <h1 id="先驅技術-1"><a class="header" href="#先驅技術-1">先驅技術</a></h1>
 <p>https://andre.arko.net/2014/03/28/the-new-rubygems-index-format/</p>
 <p>Bundler 曾經是預先下載完整索引，和 Cargo 一樣，直到它變得太大太大。然後它改用中心化的查詢 API，直到問題多到難以支援。然後就切換到增量式下載偏平檔案索引格式，和本提議解法相似。</p>
-<h1 id="未解決問題-3"><a class="header" href="#未解決問題-3">未解決問題</a></h1>
+<h1 id="未解決問題-4"><a class="header" href="#未解決問題-4">未解決問題</a></h1>
 <ul>
 <li>如何設定索引（包含替代 registry）該從 git 或新的 HTTP 下載？目前的語法使用 <code>https://</code> URL 當作 git-over-HTTP。</li>
 <li>我們如何確保切換到 HTTP registry 不會導致 lock 檔案出現巨大差異？</li>
@@ -992,9 +1043,9 @@ rust = &quot;1.33&quot;
 <li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/88b30e7a0b7ac5b0f52370a58b70c165a9a252af/text/3128-io-safety.md">The commit link this page based on</a></li>
 <li>Updated: 2021-08-2o</li>
 </ul>
-<h1 id="總結-4"><a class="header" href="#總結-4">總結</a></h1>
+<h1 id="總結-5"><a class="header" href="#總結-5">總結</a></h1>
 <p>透過引進<strong>輸入輸出安全性</strong>（I/O safety）之概念與一系列新型別與特徵，保障 <code>AsRaw</code> 及相關特徵的使用者對原始資源 handle （raw resource handle）之使用，以彌補 Rust 封裝邊界的漏洞。</p>
-<h1 id="動機-6"><a class="header" href="#動機-6">動機</a></h1>
+<h1 id="動機-7"><a class="header" href="#動機-7">動機</a></h1>
 <p>Rust 標準函式庫幾乎算是已經提供了<strong>輸入輸出安全性</strong>，保證程式的一部分若私自持有一個原始 handle （raw handle），其他部分就無法存取。例如 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html#tymethod.from_raw_fd"><code>FromRawFd::from_raw_fd</code></a> 標示為不安全，它不允許使用者在 safe Rust 之下執行如 <code>File::from_raw_fd(7)</code> 等操作，或是在程式各處私自持有檔案描述子（file descriptor）來執行輸入輸出。</p>
 <p>不過仍有漏網之魚。許多函式庫的 API 透過接受 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html"><code>AsRawFd</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.IntoRawFd.html"><code>IntoRawFd</code></a> 來執行輸入輸出操作：</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -1095,7 +1146,7 @@ rust = &quot;1.33&quot;
 <p>上述所有原型放在：</p>
 <p><a href="https://github.com/sunfishcode/io-lifetimes">https://github.com/sunfishcode/io-lifetimes</a></p>
 <p>README.md 有文件鏈結、範例、和當前提供類似功能的 crate 之調查研究。</p>
-<h1 id="缺點-5"><a class="header" href="#缺點-5">缺點</a></h1>
+<h1 id="缺點-6"><a class="header" href="#缺點-6">缺點</a></h1>
 <p>Crate 若用到檔案描述子，如 <a href="https://crates.io/crates/nix"><code>nix</code></a> 或 <a href="https://crates.io/crates/mio"><code>mio</code></a>，將需要遷移到有實作 <code>AsFd</code> 的型別，或將這類函式標示為不安全。</p>
 <p>crates 若用 <code>AsRawFd</code> 或 <code>IntoRawFd</code> 來接收任何「類檔案」或「類 socket」型別，如 <a href="https://crates.io/crates/socket2"><code>socket2</code></a> 的 <a href="https://docs.rs/socket2/0.4.0/socket2/struct.SockRef.html#method.from"><code>SockRef::from</code></a>，將需換成 <code>AsFd</code> 或 <code>Into&lt;OwnedFd&gt;</code>，或將這類函式標示為不安全。</p>
 <h1 id="原理及替代方案-2"><a class="header" href="#原理及替代方案-2">原理及替代方案</a></h1>
@@ -1119,7 +1170,7 @@ rust = &quot;1.33&quot;
 <p>大部分記憶體安全的程式語言都對原始 handle 做了安全的抽象層。多數情況下，它們僅是簡單地避免暴露原始 handle，例如 <a href="https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=net-5.0">C#</a>、<a href="https://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true">Java</a> 等。若將透過原始 handle 執行輸入輸出標示為不安全，可讓 safe Rust 與這些程式語言達到相同程度的安全保證。</p>
 <p>在 crates.io 上有好幾個 crate 封裝了擁有或借用的檔案描述子。<a href="https://github.com/sunfishcode/io-lifetimes#prior-art">io-lifetimes 的 README.md 中 Prior Art 一節</a>詳細描述了其與其他既有 crate 的同異。從高層次角度來看，既有的 crate 都與 io-lifetimes 共享相同的基本概念。這些 crate 都圍繞著 Rust 生命週期與所有權概念打造，而這恰恰說明這些概念非常適合這個問題。</p>
 <p>Android 有特殊的 API 會偵測不恰當的 <code>close</code>，詳見 <a href="https://github.com/rust-lang/rust/pull/74680">rust-lang/rust#74860</a>。這些 API 的動機就是一種輸入輸出安全性的應用。Android 的特殊 API 用了動態檢查，讓它們可以在跨來源語言的邊界實施這些規則。本 RFC 提議的輸入輸出安全性的型別和特徵只專注在 Rust 程式碼本身實施這些規則，所以它們可在編譯期間利用 Rust 的型別系統實施這些規則，而非延遲到執行期間。</p>
-<h1 id="未解決問題-4"><a class="header" href="#未解決問題-4">未解決問題</a></h1>
+<h1 id="未解決問題-5"><a class="header" href="#未解決問題-5">未解決問題</a></h1>
 <h2 id="形式化所有權"><a class="header" href="#形式化所有權">形式化所有權</a></h2>
 <p>此 RFC 並沒有為原始 handle 的所有權和生命週期定義一個形式化模型（formal model）。這 RFC 對原始 handle 規範之定位尚不明朗。當 handle 只是整數型別時，與其關聯資源之生命週期意義為何？所有具有相同值的整數型別會共享該關連嗎？</p>
 <p>Rust <a href="https://doc.rust-lang.org/reference/behavior-considered-undefined.html">參考手冊</a>根據 <a href="http://llvm.org/docs/LangRef.html#pointer-aliasing-rules">LLVM 的指標別名規則</a>定義了記憶體的未定義行為；輸入輸出可能需要類似的 handle 別名規則。這對目前的實際需求而言似非必要，但未來可對此進行探索。</p>
