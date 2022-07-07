@@ -224,7 +224,7 @@ Crossbeam 的作用域執行緒有兩種設計。舊的是在 `thread::scoped()`
 
 4. `ScopedJoinHandle` 在 `'scope` 上進行了參數化，以防止它逃離作用域。
 
-Rayon 也有作用域，但它們在不同的抽象級別上工作——Rayon 產生任務而不是線執行緒。它的 API 與本 RFC 中提出的 API 相同。
+Rayon 也有作用域，但它們在不同的抽象級別上工作——Rayon 產生任務而不是執行緒。它的 API 與本 RFC 中提出的 API 相同。
 
 # 未解決的問題
 [未解決的問題]: #unresolved-questions
