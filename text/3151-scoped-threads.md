@@ -3,13 +3,13 @@
 - RFC PR: [rust-lang/rfcs#3151](https://github.com/rust-lang/rfcs/pull/3151)
 - Rust Issue: [rust-lang/rust#93203](https://github.com/rust-lang/rust/issues/93203)
 - Translators: [[@FizzyElt](https://github.com/FizzyElt)]
-- Commit: []()
+- Commit: [The commit link this page based on](https://github.com/rust-lang/rfcs/blob/6de9eb35193852dd910c38f5c2c41e6f3e2a8ed4/text/3151-scoped-threads.md)
 - Updated: 2022-07-05
 
 # 概要
 [概要]: #summary
 
-在標準函式庫中新增作用域執行緒，其允許借用父線程的變數來產生線程。
+在標準函式庫中新增作用域執行緒，其允許借用父執行續的變數來產生執行緒。
 
 範例:
 
@@ -27,7 +27,7 @@ thread::scope(|s| {
 
 在 Rust 1.0 發布之前，我們有與作用域執行續相同作用的 [`thread::scoped()`](https://docs.rs/thread-scoped/1.0.2/thread_scoped/)，但後來發現一個健全性的問題，可能導致 use-after-frees，所以它已被移除。這一歷史事件稱為[洩密事件](http://cglab.ca/~abeinges/blah/everyone-poops/)。
 
-幸運的是，舊的作用域執行緒可以透過依靠閉包而不是守護來確保生成的線程被自動加入。但我們對在 Rust 1.0 中加入的作用域執行緒並不放心，所以我們決定將其放在外部 crates 之中，並有可能在未來的某個時刻回到標準函式庫中。四年過去了，那個未來就是現在。
+幸運的是，舊的作用域執行緒可以透過依靠 closure 而不是守護來確保生成的執行緒被自動加入。但我們對在 Rust 1.0 中加入的作用域執行緒並不放心，所以我們決定將其放在外部 crates 之中，並有可能在未來的某個時刻回到標準函式庫中。四年過去了，那個未來就是現在。
 
 作用域執行緒在 [Crossbeam](https://docs.rs/crossbeam/0.7.1/crossbeam/thread/index.html) 中經過多年的經驗累積，我們的設計已經趨於成熟，足以被推廣到標準函式庫中。
 
