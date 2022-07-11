@@ -33,8 +33,8 @@ thread::scope(|s| {
 
 更多內容請看[基本理由及替代方案](#rationale-and-alternatives)部分。
 
-# 指導級解釋
-[指導級解釋]: #guide-level-explanation
+# 教學式解說
+[教學式解說]: #guide-level-explanation
 
 執行緒生成的 "hello world" 可能如下所示：
 
@@ -119,8 +119,8 @@ thread::scope(|s| {
 });
 ```
 
-# 參考級解釋
-[參考級解釋]: #reference-level-explanation
+# 技術文件式解說
+[技術文件式解說]: #reference-level-explanation
 
 我們在 `std::thread` 模組中新增兩個新的型別：
 
