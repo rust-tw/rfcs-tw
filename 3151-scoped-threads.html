@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>3151-scoped-threads - The Rust RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html" class="active">3151-scoped-threads</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: scoped_threads</li>
+<li>Start Date: 2019-02-26</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/3151">rust-lang/rfcs#3151</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/93203">rust-lang/rust#93203</a></li>
+<li>Translators: [<a href="https://github.com/FizzyElt">@FizzyElt</a>]</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/6de9eb35193852dd910c38f5c2c41e6f3e2a8ed4/text/3151-scoped-threads.md">The commit link this page based on</a></li>
+<li>Updated: 2022-07-05</li>
+</ul>
+<h1 id="概要"><a class="header" href="#概要">概要</a></h1>
+<p>在標準函式庫中新增作用域執行緒，其允許產生可借用父執行緒之變數的執行緒。</p>
+<p>範例:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let var = String::from(&quot;foo&quot;);
+
+thread::scope(|s| {
+    s.spawn(|_| println!(&quot;borrowed from thread #1: {}&quot;, var));
+    s.spawn(|_| println!(&quot;borrowed from thread #2: {}&quot;, var));
+});
+<span class="boring">}
+</span></code></pre></pre>
+<h1 id="動機"><a class="header" href="#動機">動機</a></h1>
+<p>在 Rust 1.0 發布之前，我們有與作用域執行續相同作用的 <a href="https://docs.rs/thread-scoped/1.0.2/thread_scoped/"><code>thread::scoped()</code></a>，但後來發現一個健全性的問題，可能導致 use-after-frees，所以它已被移除。這一歷史事件稱為<a href="http://cglab.ca/%7Eabeinges/blah/everyone-poops/">洩密事件</a>。</p>
+<p>幸運的是，舊的作用域執行緒可被修復，透過閉包（closure）而非守護（guard)，來確保生成的執行緒會自動會合（join）。但我們對在 Rust 1.0 中加入的作用域執行緒並不放心，所以我們決定將其放在外部 crates 之中，並有可能在未來的某個時刻回到標準函式庫中。四年過去了，那個未來就是現在。</p>
+<p>作用域執行緒在 <a href="https://docs.rs/crossbeam/0.7.1/crossbeam/thread/index.html">Crossbeam</a> 中經過多年的經驗累積，我們的設計已經趨於成熟，足以被推廣到標準函式庫中。</p>
+<p>更多內容請看<a href="#rationale-and-alternatives">基本理由及替代方案</a>部分。</p>
+<h1 id="教學式解說"><a class="header" href="#教學式解說">教學式解說</a></h1>
+<p>執行緒生成的 &quot;hello world&quot; 可能如下所示：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let greeting = String::from(&quot;Hello world!&quot;);
+
+let handle = thread::spawn(move || {
+    println!(&quot;thread #1 says: {}&quot;, greeting);
+});
+
+handle.join().unwrap();
+<span class="boring">}
+</span></code></pre></pre>
+<p>現在讓我們嘗試生成兩個使用相同 greeting 的執行緒。不幸的是，我們必須克隆它，因為 <a href="https://doc.rust-lang.org/std/thread/fn.spawn.html"><code>thread::spawn()</code></a> 有 <code>F: 'static</code> 要求，這意味著執行緒不能借用局部變數：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let greeting = String::from(&quot;Hello world!&quot;);
+
+let handle1 = thread::spawn({
+    let greeting = greeting.clone();
+    move || {
+        println!(&quot;thread #1 says: {}&quot;, greeting);
+    }
+});
+
+let handle2 = thread::spawn(move || {
+    println!(&quot;thread #2 says: {}&quot;, greeting);
+});
+
+handle1.join().unwrap();
+handle2.join().unwrap();
+<span class="boring">}
+</span></code></pre></pre>
+<p>作用域執行緒來解決！透過打開一個新的 <code>thread::scope()</code> 區塊，我們可以向編譯器證明在這作用域內產生的所有執行緒也會在這個作用域內結束生命。</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let greeting = String::from(&quot;Hello world!&quot;);
+
+thread::scope(|s| {
+    let handle1 = s.spawn(|_| {
+        println!(&quot;thread #1 says: {}&quot;, greeting);
+    });
+
+    let handle2 = s.spawn(|_| {
+        println!(&quot;thread #2 says: {}&quot;, greeting);
+    });
+
+    handle1.join().unwrap();
+    handle2.join().unwrap();
+});
+<span class="boring">}
+</span></code></pre></pre>
+<p>這意味著可以毫無顧忌地借用作用域之外的變數！</p>
+<p>現在我們不必再手動會合執行緒，因為所有未會合的執行緒將在作用域結束時自動會合：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let greeting = String::from(&quot;Hello world!&quot;);
+
+thread::scope(|s| {
+    s.spawn(|_| {
+        println!(&quot;thread #1 says: {}&quot;, greeting);
+    });
+
+    s.spawn(|_| {
+        println!(&quot;thread #2 says: {}&quot;, greeting);
+    });
+});
+<span class="boring">}
+</span></code></pre></pre>
+<p>當以這種方式利用自動會合時，請注意，如果任何自動會合的執行緒出現恐慌，<code>thread::scope()</code> 將出現恐慌。</p>
+<p>你可能已經注意到作用域執行緒現在只接受一個參數，它只是對 <code>s</code> 的另一個引用。由於 <code>s</code> 存在於作用域內，我們不能直接借用它。使用傳遞的參數來生成巢狀執行緒：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>thread::scope(|s| {
+    s.spawn(|s| {
+        s.spawn(|_| {
+            println!(&quot;I belong to the same `thread::scope()` as my parent thread&quot;)
+        });
+    });
+});
+<span class="boring">}
+</span></code></pre></pre>
+<h1 id="技術文件式解說"><a class="header" href="#技術文件式解說">技術文件式解說</a></h1>
+<p>我們在 <code>std::thread</code> 模組中新增兩個新的型別：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Scope&lt;'env&gt; {}
+struct ScopedJoinHandle&lt;'scope, T&gt; {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>生命週期 <code>'env</code> 代表作用域外的環境，而 <code>'scope</code> 代表作用域本身。更準確地說，作用域外的所有內容都比 <code>'env</code> 和 <code>'scope</code> 內的所有內容都長。生命週期的關係是：</p>
+<pre><code>'variables_outside: 'env: 'scope: 'variables_inside
+</code></pre>
+<p>接下來，我們需要 <code>scoped()</code> 跟 <code>spawn()</code> 函式：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn scope&lt;'env, F, T&gt;(f: F) -&gt; T
+where
+    F: FnOnce(&amp;Scope&lt;'env&gt;) -&gt; T;
+
+impl&lt;'env&gt; Scope&lt;'env&gt; {
+    fn spawn&lt;'scope, F, T&gt;(&amp;'scope self, f: F) -&gt; ScopedJoinHandle&lt;'scope, T&gt;
+    where
+        F: FnOnce(&amp;Scope&lt;'env&gt;) -&gt; T + Send + 'env,
+        T: Send + 'env;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>這就是作用域執行緒的要點，真的。</p>
+<p>現在我們只需要再做兩件事來使 API 完整。首先，<code>ScopedJoinHandle</code> 等同於 <code>JoinHandle</code>，但與 <code>'scope</code> 生命週期掛勾，所以它將有同樣的方法。第二，執行緒生成器需要能夠在一個作用域内生成執行緒。</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'scope, T&gt; ScopedJoinHandle&lt;'scope, T&gt; {
+    fn join(self) -&gt; Result&lt;T&gt;;
+    fn thread(&amp;self) -&gt; &amp;Thread;
+}
+
+impl Builder {
+    fn spawn_scoped&lt;'scope, 'env, F, T&gt;(
+        self,
+        &amp;'scope Scope&lt;'env&gt;,
+        f: F,
+    ) -&gt; io::Result&lt;ScopedJoinHandle&lt;'scope, T&gt;&gt;
+    where
+        F: FnOnce(&amp;Scope&lt;'env&gt;) -&gt; T + Send + 'env,
+        T: Send + 'env;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h1 id="缺點"><a class="header" href="#缺點">缺點</a></h1>
+<p>作用域執行緒的主要缺點是使標準函式庫有點大。</p>
+<h1 id="基本原理和替代方案"><a class="header" href="#基本原理和替代方案">基本原理和替代方案</a></h1>
+<ul>
+<li>
+<p>將作用域執行緒保留在外部 crates 之中。</p>
+<p>將他們放在標準函式庫有幾個優點：</p>
+<ul>
+<li>
+<p>這是一個非常常見和實用的工具，非常適合學習、測試和探索性程式設計。每個學習 Rust 的人都會在某個時候遇到借用和執行緒的互動。有一個非常重要的教訓是執行緒實際上<strong>可以</strong>借用局部變數，但標準函式庫並沒有反映這一點。</p>
+</li>
+<li>
+<p>有些人可能會爭辯說我們應該完全不鼓勵使用執行緒，而是將人們指向像 Rayon 和 Tokio 這樣的執行器。但是，<code>thread::spawn()</code> 需要 F: <code>F: 'static</code> 並且無法繞過它，這感覺就像是標準函式庫中缺少的部分。</p>
+</li>
+<li>
+<p>實現作用域執行緒非常難處理，因此最好有標準函式庫提供一個可靠的解決方案。</p>
+</li>
+<li>
+<p>官方文檔和書籍中有許多範例可以透過作用域執行緒進行簡化。</p>
+</li>
+<li>
+<p>作用域執行緒通常是比 <code>thread::spawn()</code> 更好的預設值，因為它們確保生成的執行緒被連接並且不會意外 「洩漏」。這有時是單元測試中的一個問題，如果單元測試產生執行緒並忘記會合它們，「迷途」 的執行緒可能會積累。</p>
+</li>
+<li>
+<p>使用者一直在 IRC 和論壇上詢問作用域執行緒。將它們作為 <code>std::thread</code> 中的「祝福」模式對每個人都有好處。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>從 <code>scope</code> 回傳一個 <code>Result</code>，包括所有捕獲的恐慌。</p>
+<ul>
+<li>這很快變得複雜，因為多個執行緒可能已經恐慌。回傳 <code>Vec</code> 或其他恐慌的集合並不總是最有用的介面，而且通常是不必要的。如果使用者想要處理它們，在 <code>ScopedJoinHandle</code> 上顯式使用 <code>.join()</code> 來處理恐慌是最靈活且最有效的方法。</li>
+</ul>
+</li>
+<li>
+<p>不要將 <code>&amp;Scope</code> 參數傳遞給執行緒。</p>
+<ul>
+<li>假如使用 <code>scope.spawn(|| ..)</code> 而不是 <code>scope.spawn(|scope| ..)</code>，則需要 <code>move</code> 關鍵字 (<code>scope.spawn(move || ..)</code>)，如果你想在 closure 內使用作用域，將變得不符合人因工程。</li>
+</ul>
+</li>
+</ul>
+<h1 id="現有技術"><a class="header" href="#現有技術">現有技術</a></h1>
+<p>自 Rust 1.0 以來，Crossbeam 就有了<a href="https://docs.rs/crossbeam/0.7.1/crossbeam/thread/index.html">作用域執行緒</a>。</p>
+<p>Crossbeam 的作用域執行緒有兩種設計。舊的是在 <code>thread::scoped()</code> 被刪除後，我們想在 Rust 1.0 時代有一個合理的替代方案。新的則是在去年的大改版之中。</p>
+<ul>
+<li>舊: https://docs.rs/crossbeam/0.2.12/crossbeam/fn.scope.html</li>
+<li>新: https://docs.rs/crossbeam/0.7.1/crossbeam/fn.scope.html</li>
+</ul>
+<p>新舊作用域執行緒之間存在一些差異：</p>
+<ol>
+<li>
+<p><code>scope()</code> 現在從子執行緒傳播未處理的恐慌。在舊的設計中，恐慌被默默地忽略了。使用者仍然可以透過手動操作 <code>ScopedJoinHandle</code> 來處理恐慌。</p>
+</li>
+<li>
+<p>傳遞給 <code>Scope::spawn()</code> 的 closure 現在需要一個 <code>&amp;Scope&lt;'env&gt;</code> 參數，該參數允許生成巢狀執行緒，這在舊設計中是不可能的。 Rayon 類似地傳遞了對子任務的引用。</p>
+</li>
+<li>
+<p>我們刪除了 <code>Scope::defer()</code>，因為它不是真的有用，有錯誤，並且有不明顯的行為。</p>
+</li>
+<li>
+<p><code>ScopedJoinHandle</code> 在 <code>'scope</code> 上進行了參數化，以防止它逃離作用域。</p>
+</li>
+</ol>
+<p>Rayon 也有作用域，但它們在不同的抽象級別上工作——Rayon 產生任務而不是執行緒。它的 API 與本 RFC 中提出的 API 相同。</p>
+<h1 id="未解決的問題"><a class="header" href="#未解決的問題">未解決的問題</a></h1>
+<p>這個概念可以延伸到非同步嗎？會有任何行為或 API 差異嗎？</p>
+<h1 id="未來的可能性"><a class="header" href="#未來的可能性">未來的可能性</a></h1>
+<p>在未来，我們也可以有一個像 Rayon 那樣的執行緒池，可以生成作用域内的任務。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="3128-io-safety.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="3128-io-safety.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

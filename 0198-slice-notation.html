@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html" class="active">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html" class="active">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -170,8 +170,7 @@
 <p>我們正在逐漸走向一個類似 Python 的世界，像是當 <code>n</code> 超出範圍時，<code>foo[n]</code> 會呼叫 <code>fail!</code>，而相應的方法像是 <code>get</code> 則返回 <code>Option</code> 而不是失敗。透過為切片提供類似的符號，我們打開了在整個 vector-like APIs 中遵循相同協定的大門。</p>
 <h1 id="詳細設計"><a class="header" href="#詳細設計">詳細設計</a></h1>
 <p>此設計是對 <code>Index</code> 特徵設計的直接延續。我們引入了兩個新特徵（trait），用於不可變與可變切片：</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>trait Slice&lt;Idx, S&gt; {
     fn as_slice&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a S;
@@ -224,8 +223,7 @@ trait SliceMut&lt;Idx, S&gt; {
 <p>對於改善 <code>as_slice</code> 的易用性，有兩個主要替代方案。</p>
 <h2 id="強制-自動切片"><a class="header" href="#強制-自動切片">強制: 自動切片</a></h2>
 <p>一種可能性是重新引入某種自動切片的強制。我們曾經有一個從（用現今的話來說）<code>Vec&lt;T&gt;</code> 到 <code>&amp;[T]</code> 的強制轉換。由於我們不再強制擁有借來的值，我們現在可能想要一個強制 <code>&amp;Vec&lt;T&gt;</code> 到 <code>&amp;[T]</code> 的轉換：</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn use_slice(t: &amp;[u8]) { ... }
 
@@ -245,8 +243,7 @@ use_slice(v.as_slice()) // equivalent
 </ul>
 <h2 id="解引用"><a class="header" href="#解引用">解引用</a></h2>
 <p>另一種可能是讓 <code>String</code> 實現 <code>Deref&lt;str&gt;</code> 和 <code>Vec&lt;T&gt;</code> 實現 <code>Deref&lt;[T]&gt;</code> 一旦 DST 登陸。這樣做將允許顯式的強制機制，例如：</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn use_slice(t: &amp;[u8]) { ... }
 

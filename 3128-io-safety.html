@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html" class="active">3128-io-safety</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html" class="active">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -156,8 +156,7 @@
 <h1 id="動機"><a class="header" href="#動機">動機</a></h1>
 <p>Rust 標準函式庫幾乎算是已經提供了<strong>輸入輸出安全性</strong>，保證程式的一部分若私自持有一個原始 handle （raw handle），其他部分就無法存取。例如 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html#tymethod.from_raw_fd"><code>FromRawFd::from_raw_fd</code></a> 標示為不安全，它不允許使用者在 safe Rust 之下執行如 <code>File::from_raw_fd(7)</code> 等操作，或是在程式各處私自持有檔案描述子（file descriptor）來執行輸入輸出。</p>
 <p>不過仍有漏網之魚。許多函式庫的 API 透過接受 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html"><code>AsRawFd</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.IntoRawFd.html"><code>IntoRawFd</code></a> 來執行輸入輸出操作：</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub fn do_some_io&lt;FD: AsRawFd&gt;(input: &amp;FD) -&gt; io::Result&lt;()&gt; {
     some_syscall(input.as_raw_fd())
@@ -179,8 +178,7 @@
 <p>這些原始 handle 可以視為原始指標（raw pointer）且具有相同的危險性。雖然<strong>取得</strong>一個原始指標是安全的，但當該原始指標是非法指標，或是比其指向記憶體之處活得更久時，對原始指標<strong>取值</strong>（dereference）都可能引發未定義行為（undefined behavior）。無獨有偶，透過 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html#tymethod.as_raw_fd"><code>AsRawFd::as_raw_fd</code></a> 或類似方法<strong>取得</strong>一個原始 handle 是安全的，但當它並非合法 handle 或在關閉之後才拿來用時，用該 handle 來執行輸入輸出恐導致「損毀的輸出結果」、「遺失或洩漏輸入資料」或「違反封裝的邊界」。在這兩個案例中，影響不僅限於本地，也會影響程式的其他部分。保護原始指標免於危險稱作記憶體安全性，所以保護原始 handle 免於危險我們叫它<strong>輸入輸出安全性</strong>。</p>
 <p>Rust 標準函式庫也有高階型別如 <a href="https://doc.rust-lang.org/stable/std/fs/struct.File.html"><code>File</code></a> 和 <a href="https://doc.rust-lang.org/stable/std/net/struct.TcpStream.html"><code>TcpStream</code></a> 來提供高階的作業系統 API 界面，這些型別包裝了原始 handle。</p>
 <p>這些高階型別同時實作了在類 Unix 平台的 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html"><code>FromRawFd</code></a> 特徵，以及 Windows 上的 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.FromRawHandle.html"><code>FromRawHandle</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.FromRawSocket.html"><code>FromRawSocket</code></a> 。這些特徵提供許多函式將底層的值封裝產生出高階的值。由於這些函式無法確保輸入輸出的安全性，因此標示為不安全。型別系統並不會限制這些型別傳入：</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    use std::fs::File;
     use std::os::unix::io::FromRawFd;
@@ -215,17 +213,17 @@
 <p>這兩個型別概念上將取代 <code>RawFd</code>，並分別表示擁有和借用的 handle 值。<code>OwnedFd</code> 擁有一個檔案描述子，當 <code>OwnedFd</code> 釋放時就會關閉其檔案描述子。<code>BorrowedFd</code> 的生命週期標示該檔案描述子被借用多久。這些型別皆會自動實施其輸入輸出安全性不變的規則。</p>
 <p>至於在 Windows 上，會以 <code>Handle</code> 和 <code>Socket</code> 形式呈現相應的型別。</p>
 <p>這些型別在輸入輸出扮演的角色可類比 Rust 既有的記憶體管理相關型別：</p>
-<table><thead><tr><th>型別</th><th>類似於</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>型別</th><th>類似於</th></tr></thead><tbody>
 <tr><td><code>OwnedFd</code></td><td><code>Box&lt;_&gt;</code></td></tr>
 <tr><td><code>BorrowedFd&lt;'a&gt;</code></td><td><code>&amp;'a _</code></td></tr>
 <tr><td><code>RawFd</code></td><td><code>*const _</code></td></tr>
 </tbody></table>
+</div>
 <p>不過兩者還是有差，輸入輸出安全性並不區分可不可變。在 Rust 的掌控之外，作業系統資源能以各種形式共享，所以輸入輸出可以視為使用了<a href="https://doc.rust-lang.org/reference/interior-mutability.html">內部可變性</a>。</p>
 <h2 id="asfdintoownedfd-與-fromownedfd"><a class="header" href="#asfdintoownedfd-與-fromownedfd"><code>AsFd</code>、<code>Into&lt;OwnedFd&gt;</code> 與 <code>From&lt;OwnedFd&gt;</code></a></h2>
 <p>這三個型別概念上，在大多數用例中分別取代 <code>AsRawFd::as_raw_fd</code>、<code>IntoRawFd::into_raw_fd</code>，以及 <code>FromRawFd::from_raw_fd</code>。它們依據 <code>OwnedFd</code> 及 <code>BorrowedFd</code> 來運作，所以也會自動實施其輸入輸出安全性不變的規則。</p>
 <p>使用這些型別後，就能避免在<a href="#%E5%8B%95%E6%A9%9F">動機</a>一節的 <code>do_some_io</code> 範例中提及的問題。由於只有合理擁有或借用檔案描述子的型別能實作 <code>AsFd</code>，所以這個版本的 <code>do_some_io</code> 不需要擔心偽造或迷途（dangling）的檔案描述子傳入。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub fn do_some_io&lt;FD: AsFd&gt;(input: &amp;FD) -&gt; io::Result&lt;()&gt; {
     some_syscall(input.as_fd())
@@ -317,6 +315,9 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next" href="3151-scoped-threads.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -328,6 +329,9 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next" href="3151-scoped-threads.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>

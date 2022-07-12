@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html" class="active">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html" class="active">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -157,8 +157,7 @@
 <p>在常數宣告中使用條件式對於建立像是 <code>NonZero::new</code> 的 <code>const fn</code> 及 直譯判定（interpreting assertions）來說很重要。</p>
 <h1 id="教學式解說"><a class="header" href="#教學式解說">教學式解說</a></h1>
 <p>如果你寫</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x: u32 = ...;
 let y: u32 = ...;
@@ -172,8 +171,7 @@ if x &gt; y {
 <span class="boring">}
 </span></code></pre></pre>
 <p>這支程式永遠都會 panic（除非 <code>x</code> 和 <code>y</code> 同時是 <code>0</code>）因為不管是 <code>x - y</code> 或是 <code>y - x</code> 都會造成溢位。為了解決此問題，我們必須把 <code>let a</code> 及 <code>let b</code> 個別搬進 <code>if</code> 及 <code>else</code> 中。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x: u32 = ...;
 let y: u32 = ...;
@@ -187,8 +185,7 @@ if x &gt; y {
 <span class="boring">}
 </span></code></pre></pre>
 <p>當改用常數時，上面的寫法就會出現新問題：</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const X: u32 = ...;
 const Y: u32 = ...;
@@ -203,8 +200,7 @@ const FOO: SomeType = if X &gt; Y {
 </span></code></pre></pre>
 <p><code>A</code> 和 <code>B</code> 會比 <code>FOO</code> 先被求值，因為常數在定義上就是「常數」，所以不應被求值順序影響。這項假設在有錯誤的情況下並不成立，因為錯誤屬於副作用（side effects），因此不純（pure）。</p>
 <p>為了解決此問題，我們必須把中介常數消掉並改為直接對 <code>X - Y</code> 及 <code>Y - X</code> 求值。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const X: u32 = ...;
 const Y: u32 = ...;
@@ -225,8 +221,7 @@ const FOO: SomeType = if X &gt; Y {
 <h1 id="原理及替代方案"><a class="header" href="#原理及替代方案">原理及替代方案</a></h1>
 <h2 id="利用中介-const-fns-來破壞立即常數求值eager-const-evaluation"><a class="header" href="#利用中介-const-fns-來破壞立即常數求值eager-const-evaluation">利用中介 const fns 來破壞立即常數求值（eager const evaluation）</a></h2>
 <p>如果寫成</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const X: u32 = ...;
 const Y: u32 = ...;
@@ -238,8 +233,7 @@ const AB: u32 = if X &gt; Y {
 <span class="boring">}
 </span></code></pre></pre>
 <p><code>X - Y</code> 或是 <code>Y - X</code> 其中一方有可能會報錯，這時必須加入中介 const fn</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const X: u32 = ...;
 const Y: u32 = ...;
