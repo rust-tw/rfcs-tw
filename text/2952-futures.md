@@ -9,7 +9,7 @@
 # 概要
 [概要]: #summary
 
-該 RFC 建議為一級的 `async`/`await` 穩定相關函式庫組件。特別是，它將穩定：
+此 RFC 提議替一等公民語法 `async`/`await` 穩定相關函式庫組件。特別是，它將穩定：
 
 - `std` 中任務系統所有的 API，例如 `std::task::*`。
 - 核心 `Future` API，例如 `core::future::Future` 和 `std::future::Future`。
