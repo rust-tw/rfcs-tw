@@ -9,14 +9,14 @@
 # 概要
 [概要]: #summary
 
-該 RFC 建議為一級的 `async`/`await` 語法穩定函式庫組件。特別是，它將穩定：
+該 RFC 建議為一級的 `async`/`await` 穩定相關函式庫組件。特別是，它將穩定：
 
-- `std`級別任務系統所有的 API，例如 `std::task::*`。
+- `std` 中任務系統所有的 API，例如 `std::task::*`。
 - 核心 `Future` API，例如 `core::future::Future` 和 `std::future::Future`。
 
-它*不建議*穩定任何 `async`/`await` 語法本身，這將在單獨的步驟中提出。它也不包括已在[別處](https://github.com/rust-lang/rust/issues/55766)提出的 `Pin` API 的穩定性。
+它**不提議**穩定任何 `async`/`await` 語法本身，該語法自有另外的提議。它也不包括已在[別處](https://github.com/rust-lang/rust/issues/55766)提出的 `Pin` API 的穩定性。
 
-這是早期 [futures RFC](https://github.com/rust-lang/rfcs/pull/2418) 的修訂和精簡版本，該版本被推延到 nightly 版本獲得更多經驗之後。
+這是早期 [futures RFC](https://github.com/rust-lang/rfcs/pull/2418) 的修訂和精簡版本，該 RFC 已暫緩，直到 nightly 版本獲得更多經驗之後。
 
 [pin]: https://github.com/rust-lang/rfcs/pull/2349
 [companion RFC]: https://github.com/rust-lang/rfcs/pull/2394
@@ -26,9 +26,9 @@
 
 ## 為何 `Future` 要在 `std` 之中？
 
-此 RFC 的核心動機是穩定 `async`/`await` 語法的支援機制。語法本身是在（已經合併的）配套 [RFC](https://github.com/rust-lang/rfcs/pull/2394) 中提出的，並且有一篇[部落格文章](https://aturon.github.io/tech/2018/04/24/async-borrowing/)更詳細地介紹了它的重要性。
+此 RFC 的核心動機是穩定 `async`/`await` 語法的支援機制。語法本身是在（已經合併的）[配套 RFC](https://github.com/rust-lang/rfcs/pull/2394) 中提出的，並且有一篇[部落格文章](https://aturon.github.io/tech/2018/04/24/async-borrowing/)更詳細介紹它的重要性。
 
-與 closures 一樣，`async` 語法涉及到生成一個匿名型別，且實現一個關鍵特徵：`Future`。因為 `async`/`await` 需要語言級別的支援，所以底層特徵也必須是標準函式庫的一部分。因此，這個 RFC 的目標是穩定這個 `Future` 特徵和它所依賴的型別。這是我們能夠穩定 `async`/`await` 本身之前所需的最後一步。
+與 closures 一樣，`async` 語法涉及到生成一個匿名型別，該型別實作一個關鍵特徵：`Future`。因為 `async`/`await` 需要語言層級的支援，所以底層特徵也必須是標準函式庫的一部分。因此，這個 RFC 的目標是穩定這個 `Future` 特徵和它所依賴的型別。這是我們能夠穩定 `async`/`await` 本身之前所需的最後一步。
 
 ## 這一步是如何融入更大的藍圖之中？
 
@@ -39,23 +39,23 @@
 
 # 歷史背景
 
-為穩定而提議的 API 有著悠久的歷史：
+這些被提議要穩定的 API 有著悠久的歷史：
 
-- `Future` 特徵從 crate 開始； [0.1 於 2016 年 8 月發布](https://aturon.github.io/tech/2016/08/11/futures/)。該版本確立了 任務/輪詢 模型的核心思想，以及此處保留的 API 的許多其他方面。 0.1 系列持續在整個 Rust 生態系統和生產系統中大量使用。
+- `Future` 特徵從 futures crate 開始； [0.1 於 2016 年 8 月發布](https://aturon.github.io/tech/2016/08/11/futures/)。該版本確立了「任務/輪詢」模型的核心思想，以及此處保留的 API 的許多其他方面。 0.1 系列持續在整個 Rust 生態系和正式系統中大量使用。
 
-- 2018 年初，隨著 `async`/`await` 的工作開始，futures 團隊建立了一個 RFC 流程並編寫了幾個 [RFC](https://github.com/rust-lang-nursery/futures-rfcs/pulls?q=is%3Apr+is%3Aclosed)，以根據長期的社區回饋對核心 API 進行修訂。這些 RFC 最終產生了 [0.2le](https://aturon.github.io/tech/2018/02/27/futures-0-2-RC/) 版本，並於 4 月[釋出](https://aturon.github.io/tech/2018/04/06/futures2/)。
+- 2018 年初，隨著 `async`/`await` 的工作開始，futures 團隊建立了一個 RFC 流程並編寫了幾個 [RFC](https://github.com/rust-lang-nursery/futures-rfcs/pulls?q=is%3Apr+is%3Aclosed)，以根據長期的社群回饋對核心 API 進行修訂。這些 RFC 最終產生了 [0.2le](https://aturon.github.io/tech/2018/02/27/futures-0-2-RC/) 版本，並於 4 月[釋出](https://aturon.github.io/tech/2018/04/06/futures2/)。
 
 - 在同一時期，@withoutboats 在支援 `async` 區塊內借用的 pinning API 上的工作已經[完成](https://boats.gitlab.io/blog/post/2018-04-06-async-await-final/)。[pinning API](https://github.com/rust-lang/rfcs/pull/2349) 改變了遊戲規則，使得支援 borrowing-across-yield 而不會使 future 的核心 API 變得不安全。
 
-- 2018 年 4 月，一對 RFC 正式提出了 `async`/`await` 語法以及 futures API 的進一步修訂（以利用 pinning API 的優勢）；後者經歷了許多修訂，包括一個新的 [RFC](https://github.com/rust-lang/rfcs/pull/2418)。最終，語法 [RFC](https://github.com/rust-lang/rfcs/pull/2394#issuecomment-387550523) 在 5 月被合併，而 API RFC 被關閉，進一步的設計疊代將在 nightly 版本進行，隨後是一個穩定的 RFC：這個！
+- 2018 年 4 月，一對 RFC 正式提出了 `async`/`await` 語法以及 futures API 的進一步修訂（以利用 pinning API 帶來的好處）；後者經歷了許多修訂，包括一個新的 [RFC](https://github.com/rust-lang/rfcs/pull/2418)。最終，語法 [RFC](https://github.com/rust-lang/rfcs/pull/2394#issuecomment-387550523) 在 5 月被合併，而 API RFC 被關閉，進一步的設計疊代將在 nightly 版本進行，隨後是一個穩定的 RFC：這個！
 
 - 這些 API 在 5 月底[降臨到 `std`](https://github.com/rust-lang/rust/pull/51263)。
 
 - 從那時起，隨著我們從 API 獲得的經驗，語法、`std` API 和 futures 0.3 crate 都在同步發展。這種體驗的主要驅動者是 Google 的 Fuchsia 專案，該專案在作業系統設置中大規模使用所有這些功能。
 
-- 最近的修訂是在 8 月，其中涉及一些關於如何使 `Pin` API 有更清晰的[見解](https://boats.gitlab.io/blog/post/rethinking-pin/)。這些 API 已被[提議用於穩定化](https://github.com/rust-lang/rust/issues/55766)，以及它們作為 [`self` 型別的用途](https://github.com/rust-lang/rust/issues/55786)。
+- 最近的修訂是在 8 月，其中涉及一些關於如何使 `Pin` API 有更清晰的[見解](https://boats.gitlab.io/blog/post/rethinking-pin/)。這些 API 已被[提議要穩定](https://github.com/rust-lang/rust/issues/55766)，以及它們作為 [`self` 型別的用途](https://github.com/rust-lang/rust/issues/55786)。
 
-- 有多個兼容層可以同時使用 futures 0.1 和 0.3。這很重要，因為它允許現有生產程式碼的*增量*遷移。
+- 有多個相容層可以同時使用 futures 0.1 和 0.3。這很重要，因為它允許現有生產程式碼的**增量**遷移。
 
 自從最初的 futures 0.3 發布以來，除了上面提到的改進之外，核心 `Future` 特徵和任務系統的變化相對較小。實際的 `Future` 特徵基本上與 4 月時相同。
 
