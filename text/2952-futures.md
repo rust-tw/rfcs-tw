@@ -33,7 +33,7 @@
 ## 這一步是如何融入更大的藍圖之中？
 
 
-`async`/`await` 語法是 Rust 中最渴求的特性之一，它將對整個生態系產生重大影響。以及此處描述的 API 已在 nightly 版本可用，並於 2018 年 5 月下旬開始投入使用。
+`async`/`await` 語法是 Rust 中最渴求的特性之一，它將對整個生態系產生重大影響。自 2018 年 5 月下旬以來，該語法及此處描述的 API 已可於 nightly 版本使用，並被大量採用。
 
 穩定此設計的 futures API 部分使函式庫更容易在穩定的 Rust 上工作並無縫支援在 nightly 版本使用 `async`/`await`。它還允許我們完成關於 API 部分的設計討論，並專注於在 `async` 語法穩定之前剩下的幾個問題。
 
@@ -45,11 +45,11 @@
 
 - 2018 年初，隨著 `async`/`await` 的工作開始，futures 團隊建立了一個 RFC 流程並編寫了幾個 [RFC](https://github.com/rust-lang-nursery/futures-rfcs/pulls?q=is%3Apr+is%3Aclosed)，以根據長期的社群回饋對核心 API 進行修訂。這些 RFC 最終產生了 [0.2le](https://aturon.github.io/tech/2018/02/27/futures-0-2-RC/) 版本，並於 4 月[釋出](https://aturon.github.io/tech/2018/04/06/futures2/)。
 
-- 在同一時期，@withoutboats 在支援 `async` 區塊內借用的 pinning API 上的工作已經[完成](https://boats.gitlab.io/blog/post/2018-04-06-async-await-final/)。[pinning API](https://github.com/rust-lang/rfcs/pull/2349) 改變了遊戲規則，使得支援 borrowing-across-yield 而不會使 future 的核心 API 變得不安全。
+- 在同一時期，@withoutboats 在支援 `async` 區塊內借用的 pinning API 上的工作已經[完成](https://boats.gitlab.io/blog/post/2018-04-06-async-await-final/)。[pinning API](https://github.com/rust-lang/rfcs/pull/2349) 顛覆了過往一切，可在不使 future 的核心 API 成為 unsafe 前提下，支援 borrowing-across-yield。
 
 - 2018 年 4 月，一對 RFC 正式提出了 `async`/`await` 語法以及 futures API 的進一步修訂（以利用 pinning API 帶來的好處）；後者經歷了許多修訂，包括一個新的 [RFC](https://github.com/rust-lang/rfcs/pull/2418)。最終，語法 [RFC](https://github.com/rust-lang/rfcs/pull/2394#issuecomment-387550523) 在 5 月被合併，而 API RFC 被關閉，進一步的設計疊代將在 nightly 版本進行，隨後是一個穩定的 RFC：這個！
 
-- 這些 API 在 5 月底[降臨到 `std`](https://github.com/rust-lang/rust/pull/51263)。
+- 這些 API 在 5 月底[加入到 `std`](https://github.com/rust-lang/rust/pull/51263)。
 
 - 從那時起，隨著我們從 API 獲得的經驗，語法、`std` API 和 futures 0.3 crate 都在同步發展。這種體驗的主要驅動者是 Google 的 Fuchsia 專案，該專案在作業系統設置中大規模使用所有這些功能。
 
