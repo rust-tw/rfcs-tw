@@ -59,15 +59,12 @@
 
 自從最初的 futures 0.3 發布以來，除了上面提到的改進之外，核心 `Future` 特徵和任務系統的變化相對較小。實際的 `Future` 特徵基本上與 4 月時相同。
 
-# Guide-level explanation
-[guide-level-explanation]: #guide-level-explanation
+# 教學式解說
+[教學式解說]: #guide-level-explanation
 
-The `Future` trait represents an *asynchronous* and lazy computation that may
-eventually produce a final value, but doesn't have to block the current thread
-to do so.
+`Future` 特徵代表了一個非同步和惰性計算，它最終可能會產生一個最終值，但不以阻塞當前執行緒為前提來達成。
 
-Futures can be constructed through `async` blocks or `async` functions, e.g.,
-
+Future 可以通過 `async` 區塊或 `async` 函式來創建，例如
 ```rust
 async fn read_frame(socket: &TcpStream) -> Result<Frame, io::Error> { ... }
 ```
@@ -75,36 +72,22 @@ async fn read_frame(socket: &TcpStream) -> Result<Frame, io::Error> { ... }
 This `async` function, when invoked, produces a future that represents the
 completion of reading a frame from the given socket. The function signature
 is equivalent to:
+這個 `async` 函式，當被呼叫時，產生一個 future，代表從给定的 socket 中讀取一個幀的完成。函式簽名等同於：
 
 ```rust
 fn read_frame<'sock>(socket: &'sock TcpStream)
     -> impl Future<Output = Result<Frame, io::Error>> + 'sock;
 ```
 
-Other async functions can *await* this future; see the [companion
-RFC] for full details.
+其他非同步函數可以 **await** 這個 future; 有關完整詳細信息，請參閱[隨附的 RFC](https://github.com/rust-lang/rfcs/pull/2394)。
 
-In addition to `async fn` definitions, futures can be built using adapters, much
-like with `Iterator`s. Initially these adapters will be provided entirely "out
-of tree", but eventually they will make their way into the standard library.
+除了 `async fn` 定義，future 還可以使用適配器來創建，就像 `Iterator` 一樣。最初，這些適配器將完全由「out of tree」提供，但最终它們將帶入標準函式庫。
 
-Ultimately asynchronous computations are executed in the form of *tasks*,
-which are comparable to lightweight threads. *executor*s provide the ability to
-create tasks from `()`-producing `Future`s. The executor will pin the `Future`
-and `poll` it until completion inside the task that it creates for it.
+最終非同步計算以**任務**的形式執行，相當於輕量級執行緒。 **executor** 提供了從 `()` 生成的 `Future` 創建任務的能力。執行器將固定 `Future` 並對其進行 `poll`，直到為其創建的任務完成。
 
-The implementation of an executor schedules the tasks it owns in a cooperative
-fashion. It is up to the implementation of an executor whether one or more
-operation system threads are used for this, as well as how many tasks can be
-spawned on it in parallel. Some executor implementations may only be able to
-drive a single `Future` to completion, while others can provide the ability to
-dynamically accept new `Future`s that are driven to completion inside tasks.
+executor 的實作以合作的方式調度它擁有的任務。是否使用一個或多個作業系統執行緒以及可以在其之上並行生成多少任務取決於 executor 的實作。一些 executor 的實作可能只能驅動單個 `Future` 完成，而另一些則可以提供動態接受新 `Future` 的能力，這些 Future 是在任務中被驅動完成。
 
-This RFC does not include any definition of an executor. It merely defines the
-interaction between executors, tasks and `Future`s, in the form of APIs
-that allow tasks to request getting scheduled again.
-The `task` module provides these APIs, which are required when manually implementing
-`Future`s or executors.
+該 RFC 不包含任何 executor 的定義。它僅以 API 的形式定義了 executors、tasks 和 `Future` 之間的整合，允許任務請求再次被調度。 `task` 模組提供了這些 API，在手動實作 `Future` 或 executor 時需要這些 API。
 
 # Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
