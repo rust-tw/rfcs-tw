@@ -89,24 +89,16 @@ executor 的實作以合作的方式調度它擁有的任務。是否使用一�
 
 該 RFC 不包含任何 executor 的定義。它僅以 API 的形式定義了 executors、tasks 和 `Future` 之間的整合，允許任務請求再次被調度。 `task` 模組提供了這些 API，在手動實作 `Future` 或 executor 時需要這些 API。
 
-# Reference-level explanation
-[reference-level-explanation]: #reference-level-explanation
+# 技術文件式解說
+[技術文件式解說]: #reference-level-explanation
 
-## `core::task` module
+## `core::task` 模組
 
-The fundamental mechanism for asynchronous computation in Rust is *tasks*, which
-are lightweight threads of execution; many tasks can be cooperatively scheduled
-onto a single operating system thread.
+Rust 中非同步運算的基本機制是**任務**，它們是輕量級的執行緒；許多任務可以協同調度到單個作業系統執行緒上。
 
-To perform this cooperative scheduling we use a technique sometimes referred to
-as a "trampoline". When a task would otherwise need to block waiting for some
-event, instead it saves an object that allows it to get scheduled again later
-and *returns* to the executor running it, which can then run another task.
-Subsequent wakeups place the task back on the executors queue of ready tasks,
-much like a thread scheduler in an operating system.
+為了執行這種協作調度，我們使用了一種有時被稱為「[trampoline](https://en.wikipedia.org/wiki/Trampoline_(computing))」的技術。當一個任務需要阻塞等待某個事件時，它會保存一個物件，允許它稍後再次被調度並**返回**到運行它的執行器，然後它可以執行另一個任務。隨後的喚醒將任務放回就緒任務的執行者隊列中，就像作業系統中的執行緒調度程序一樣。
 
-Attempting to complete a task (or async value within it) is called *polling*,
-and always yields a `Poll` value back:
+嘗試完成一個任務（或其中的非同步值）稱為**輪詢**，並且總是返回一個 `Poll` 值：
 
 ```rust
 /// Indicates whether a value is available, or if the current task has been
@@ -125,52 +117,28 @@ pub enum Poll<T> {
 }
 ```
 
-When a task returns `Poll::Ready`, the executor knows the task has completed and
-can be dropped.
+當一個任務返回 `Poll::Ready` 時，執行器知道該任務已經完成並且可以被刪除。
 
-### Waking up
+### 喚醒
 
-If a future cannot be directly fulfilled during execution and returns `Pending`,
-it needs a way to later on inform the executor that it needs to get polled again
-to make progress.
+如果 future 在執行期間無法直接完成並返回 `Pending`，則它需要一種方法來稍後通知執行器它需要再次輪詢以取得進展。
 
-This functionality is provided through a set of `Waker` types.
+此功能是透過一組 `Waker` 型別提供的。
 
-`Waker`s are objects which are passed as a parameter to the `Future::poll` call,
-and which can be stored by the implementation of those `Futures`s. Whenever a
-`Future` has the need to get polled again, it can use the `wake` method of the
-waker in order to inform the executor that the task which owns the `Future`
-should get scheduled and executed again.
+`Waker` 是作為參數傳遞給 `Future::poll` 調用的物件，並且可以透過這些 `Futures` 的實現來儲存。每當一個 `Future` 需要再次被輪詢時，它可以使用喚醒器的 `wake` 方法來通知執行器擁有 `Future` 的任務應該被再次調度和執行。
 
-The RFC defines a concrete `Waker` type with which implementors of `Futures`
-and asynchronous functions will interact. This type defines a `wake(&self)`
-method which is used to schedule the task that is associated to the `Waker`
-to be polled again.
+RFC 定義了一個具體的 `Waker` 型別，`Futures` 和非同步函式的實作者將與之互動。此型別定義了一個 `wake(&self)` 方法，用於安排與 `Waker` 關聯的任務再次輪詢。
 
-The mechanism through which tasks get scheduled again depends on the executor
-which is driving the task.
-Possible ways of waking up an executor include:
-- If the executor is blocked on a condition variable, the condition variable
-  needs to get notified.
-- If the executor is blocked on a system call like `select`, it might need
-  to get woken up by a syscall like `write` to a pipe.
-- If the executor's thread is parked, the wakeup call needs to unpark it.
+再次調度任務的機制取決於驅動任務的執行器。喚醒執行器的可能方法包含：
+- 如果執行器在條件變數上被阻塞，則需要通知條件變數。
+- 如果執行器在諸如 `select` 之類的系統調用上被阻塞，它可能需要被諸如 `write` 管道之類的系統調用喚醒。
+- 如果執行器的執行緒被放置，喚醒呼叫需要將其取消放置。
 
-To allow executors to implement custom wakeup behavior, the `Waker` type
-contains a type called `RawWaker`, which consists of a  pointer
-to a custom wakeable object and a reference to a virtual function
-pointer table (vtable) which provides functions to `clone`, `wake`, and
-`drop` the underlying wakeable object.
+為了讓執行器實現自定義喚醒行為，`Waker` 型別包含一個稱作 `RawWaker` 的型別，它由指向自定義可喚醒物件的指針和對其提供 `clone`、`wake` 和 `drop` 函式的虛擬函數指針表 (vtable) 的引用組成底層可喚醒物件。
 
-This mechanism is chosen in favor of trait objects since it allows for more
-flexible memory management schemes. `RawWaker` can be implemented purely in
-terms of global functions and state, on top of reference counted objects, or
-in other ways. This strategy also makes it easier to provide different vtable
-functions that will perform different behaviors despite referencing the same
-underlying wakeable object type.
+選擇這種機制有利於特徵物件，因為它允許更靈活的記憶體管理方案。 `RawWaker` 可以單純根據全域函式和狀態、在引用計數物件之上或以其他方式實現。這種策略還可以更容易地提供不同的 vtable 函式，這些函式將執行不同的行為，儘管引用了相同底層可喚醒的物件型別。
 
-The relation between those `Waker` types is outlined in the following definitions:
-
+這些 `Waker` 型別之間的關係在以下定義中進行了概述：
 ```rust
 /// A `RawWaker` allows the implementor of a task executor to create a `Waker`
 /// which provides customized wakeup behavior.
@@ -273,23 +241,17 @@ impl Drop for Waker {
 }
 ```
 
-`Waker`s must fulfill the following requirements:
-- They must be cloneable.
-- If all instances of a `Waker` have been dropped and their associated task had
-  been driven to completion, all resources which had been allocated for the task
-  must have been released.
-- It must be safe to call `wake()` on a `Waker` even if the associated task has
-  already been driven to completion.
-- `Waker::wake()` must wake up an executor even if it is called from an arbitrary
-  thread.
+`Waker` 必須滿足以下要求：
+- 它們必須是可以克隆的。
+- 如果 `Waker` 的所有實體都已被刪除，並且它們的關聯任務已被驅動完成，則必須釋放為該任務分配的所有資源。
+- 即使關聯的任務已經被驅動完成，在 `Waker` 上調用 `wake()` 也必須是安全的。
+- `Waker::wake()` 必須喚醒執行器，即使它是從任意執行緒調用的。
 
-An executor that instantiates a `RawWaker` must therefore make sure that all
-these requirements are fulfilled.
+因此，實例化 `RawWaker` 的執行程器必須確保滿足這些要求。
 
-## `core::future` module
+## `core::future` 模組
 
-With all of the above task infrastructure in place, defining `Future` is
-straightforward:
+有了上述所有任務的基礎設施，定義 `Future` 就很簡單了：
 
 ```rust
 pub trait Future {
@@ -357,42 +319,20 @@ pub trait Future {
 }
 ```
 
-Most of the explanation here follows what we've already said about the task
-system. The one twist is the use of `Pin`, which makes it possible to keep data
-borrowed across separate calls to `poll` (i.e., "borrowing over yield
-points"). The mechanics of pinning are explained
-in [the RFC that introduced it](https://github.com/rust-lang/rfcs/pull/2349)
-and the [blog post about t he latest revisions](https://boats.gitlab.io/blog/post/rethinking-pin/).
+這裡的大部分解釋都遵循我們已經說過的關於任務系統的內容。一個轉折是 `Pin` 的使用，這使得可以在不同的 `poll` 調用中保留借用資訊（即「borrowing over yield
+points」）。固定機制在介紹它的 [RFC](https://github.com/rust-lang/rfcs/pull/2349) 和有關最新修訂的[部落格文章](https://boats.gitlab.io/blog/post/rethinking-pin/)中進行了解釋。
 
-## Relation to futures 0.1
+## 與 futures 0.1 的關係
 
-The various discussions outlined in the historical context section above cover the
-path to these APIs from futures 0.1. But, in a nutshell, there are three major shifts:
+上面歷史背景部分概述的各種討論涵蓋了從 futures 0.1 到這些 API 的演進。但是，簡而言之，有三個主要轉變：
 
-- The use of `Pin<&mut self>` rather than just `&mut self`, which is necessary
-to support borrowing withing `async` blocks. The `Unpin` marker trait can be used
-to restore ergonomics and safety similar to futures 0.1 when writing futures by hand.
+- 使用 `Pin<&mut self>` 而不單純是 `&mut self`，這是支援借用 `async` 區塊所必需的。 `Unpin` 標記特徵可用於在手動撰寫 futures 時恢復類似於 futures 0.1 的人因工程和安全性。
 
-- Dropping *built in* errors from `Future`, in favor of futures returning a `Result`
-when they can fail. The futures 0.3 crate provides a `TryFuture` trait that bakes
-in the `Result` to provide better ergonomics when working with `Result`-producing futures.
-Dropping the error type has been discussed in previous threads, but the most
-important rationale is to provide an orthogonal, compositional semantics for `async fn`
-that mirrors normal `fn`, rather than *also* baking in a particular style of
-error handling.
+- 從 `Future` 中刪除**內置**錯誤，以支援 `Future` 在可能失敗時返回 `Result`。 futures 0.3 crate 提供了一個 `TryFuture` 特徵，該特徵在 `Result` 中處理，以便在使用 `Result`-producer futures 時提供更好的人因工程。刪除錯誤型別已在之前的執行緒中討論過，但最重要的理由是為 `async fn` 提供一個正交的、組合性的語義，以反映正常的 `fn`，而不是採用特定的錯誤處理風格。
 
-- Passing a `Waker` explicitly, rather than stashing it in thread-local storage.
-This has been a hotly debated issue since futures 0.1 was released, and this
-RFC does not seek to relitigate it, but to summarize, the major advantages are (1)
-when working with manual futures (as opposed to `async` blocks) it's much easier to
-tell where an ambient task is required, and (2) `no_std` compatibility is
-significantly smoother.
+- 顯式傳遞 `Waker`，而不是將其儲存在執行緒本地存儲中。自 futures 0.1 發布以來，這一直是一個備受爭議的問題，該 RFC 並不打算重新討論這個問題，但總而言之，主要優點是 (1) 在使用手動 futures（與 `async` 區塊相反）時，它更容易分辨哪裡需要環境任務，並且 (2) `no_std` 相容性明顯更好。
 
-To bridge the gap between futures 0.1 and 0.3, there are several compatibility shims,
-including one built into the futures crate itself, where you can shift between the two
-simply by using a `.compat()` combinator. These compatibility layers make it possible
-to use the existing ecosystem smoothly with the new futures APIs, and make it possible
-to transition large code bases incrementally.
+為了彌補 futures 0.1 和 0.3 之間的差距，有幾個相容性鋪墊，包括一個內置於 futures crate 本身的，您可以簡單地透過使用 `.compat()` 組合器在兩者之間切換。這些相容層使現有生態系可以順利地使用新的 futures API，並使大型程式的漸進式轉換成為可能。
 
 # Rationale, drawbacks, and alternatives
 
