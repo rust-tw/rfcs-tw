@@ -65,13 +65,11 @@
 `Future` 特徵代表了一個非同步和惰性計算，它最終可能會產生一個最終值，但不以阻塞當前執行緒為前提來達成。
 
 Future 可以通過 `async` 區塊或 `async` 函式來創建，例如
+
 ```rust
 async fn read_frame(socket: &TcpStream) -> Result<Frame, io::Error> { ... }
 ```
 
-This `async` function, when invoked, produces a future that represents the
-completion of reading a frame from the given socket. The function signature
-is equivalent to:
 這個 `async` 函式，當被呼叫時，產生一個 future，代表從给定的 socket 中讀取一個幀的完成。函式簽名等同於：
 
 ```rust
@@ -81,13 +79,13 @@ fn read_frame<'sock>(socket: &'sock TcpStream)
 
 其他非同步函數可以 **await** 這個 future; 有關完整詳細信息，請參閱[隨附的 RFC](https://github.com/rust-lang/rfcs/pull/2394)。
 
-除了 `async fn` 定義，future 還可以使用適配器來創建，就像 `Iterator` 一樣。最初，這些適配器將完全由「out of tree」提供，但最终它們將帶入標準函式庫。
+除了 `async fn` 定義，future 還可以使用轉接器（adapter）來創建，就像 `Iterator` 一樣。最初，這些轉接器將完全由樹之外所提供，但最终它們將帶入標準函式庫。
 
 最終非同步計算以**任務**的形式執行，相當於輕量級執行緒。 **executor** 提供了從 `()` 生成的 `Future` 創建任務的能力。執行器將固定 `Future` 並對其進行 `poll`，直到為其創建的任務完成。
 
-executor 的實作以合作的方式調度它擁有的任務。是否使用一個或多個作業系統執行緒以及可以在其之上並行生成多少任務取決於 executor 的實作。一些 executor 的實作可能只能驅動單個 `Future` 完成，而另一些則可以提供動態接受新 `Future` 的能力，這些 Future 是在任務中被驅動完成。
+executor 的實作以協同式地（cooperative）排程它的任務。是否使用一個或多個作業系統執行緒以及可以在其之上平行生成多少任務取決於 executor 的實作。一些 executor 的實作可能只能驅動單個 `Future` 完成，而另一些則可以提供動態接受新 `Future` 的能力，這些 Future 是在任務中被驅動完成。
 
-該 RFC 不包含任何 executor 的定義。它僅以 API 的形式定義了 executors、tasks 和 `Future` 之間的整合，允許任務請求再次被調度。 `task` 模組提供了這些 API，在手動實作 `Future` 或 executor 時需要這些 API。
+該 RFC 不包含任何 executor 的定義。它僅以 API 的形式定義了 executors、tasks 和 `Future` 之間的交互關係，這些 API 允許任務請求再次進行排程。 這些 API 由 `task` 模組提供，在手動實作 `Future` 或 executor 時需要這些 API。
 
 # 技術文件式解說
 [技術文件式解說]: #reference-level-explanation
