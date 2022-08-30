@@ -79,7 +79,7 @@ fn read_frame<'sock>(socket: &'sock TcpStream)
 
 其他非同步函數可以 **await** 這個 future; 有關完整詳細信息，請參閱[隨附的 RFC](https://github.com/rust-lang/rfcs/pull/2394)。
 
-除了 `async fn` 定義，future 還可以使用轉接器（adapter）來創建，就像 `Iterator` 一樣。最初，這些轉接器將完全由樹之外所提供，但最终它們將帶入標準函式庫。
+除了 `async fn` 定義，future 還可以使用轉接器（adapter）來創建，就像 `Iterator` 一樣。最初，這些轉接器將完全由其他 crate 所提供，但最终它們將帶入標準函式庫。
 
 最終非同步計算以**任務**的形式執行，相當於輕量級執行緒。 **executor** 提供了從 `()` 生成的 `Future` 創建任務的能力。執行器將固定 `Future` 並對其進行 `poll`，直到為其創建的任務完成。
 
@@ -332,139 +332,68 @@ points」）。固定機制在介紹它的 [RFC](https://github.com/rust-lang/rf
 
 為了彌補 futures 0.1 和 0.3 之間的差距，有幾個相容性鋪墊，包括一個內置於 futures crate 本身的，您可以簡單地透過使用 `.compat()` 組合器在兩者之間切換。這些相容層使現有生態系可以順利地使用新的 futures API，並使大型程式的漸進式轉換成為可能。
 
-# Rationale, drawbacks, and alternatives
+# 基礎原理、缺點和替代方案
 
-This RFC is one of the most substantial additions to `std` proposed since
-1.0. It commits us to including a particular task and polling model in the
-standard library, and ties us to `Pin`.
+該 RFC 是自 1.0 以來對 `std` 提出的最重要的補充之一。它讓我們在標準函式庫中包含一個特定的任務和輪詢模型，並將其與 `Pin` 聯繫起來。
 
-So far we've been able to push the task/polling model into virtually every niche
-Rust wishes to occupy, and the main downside has been, in essence, the lack of
-async/await syntax (and
-the
-[borrowing it supports](https://aturon.github.io/tech/2018/04/24/async-borrowing/)).
+到目前為止，我們已經能夠將「任務/輪詢」模型推向幾乎所有 Rust 希望佔據的利基點，而主要的缺點是缺乏 async/await 語法（以及它[支持的借用](https://aturon.github.io/tech/2018/04/24/async-borrowing/)）。
 
-This RFC does not attempt to provide a complete introduction to the task model
-that originated with the futures crate. A fuller account of the design rationale
-and alternatives can be found in the following two blog posts:
+該 RFC 並未嘗試提供對源自 futures crate 任務模型的完整介紹。可以在以下兩篇部落格文章中找到有關設計原理和替代方案的更完整說明：
 
 - [Zero-cost futures in Rust](https://aturon.github.io/tech/2016/08/11/futures/)
 - [Designing futures for Rust](https://aturon.github.io/tech/2016/09/07/futures-design/)
 
-To summarize, the main alternative model for futures is a callback-based approach,
-which was attempted for several months before the current approach was discovered.
-In our experience, the callback approach suffered from several drawbacks in Rust:
+總而言之，futures 的主要替代模型是 callback-base 的方法，在發現當前方法之前嘗試了 callback-base 幾個月。根據我們的經驗，callback 方法在 Rust 中有幾個缺點：
 
-- It forced allocation almost everywhere, and hence was not compatible with no_std.
-- It made cancellation *extremely* difficult to get right, whereas with the
-  proposed model it's just "drop".
-- Subjectively, the combinator code was quite hairy, while with the task-based model
-  things fell into place quickly and easily.
+- 它幾乎在所有地方都被強制分配，因此與 no_std 不相容。
+- 它使取消變得**非常**困難，而對於提議的模型，它只是「刪除」。
+- 主觀上，組合器程式碼非常繁瑣，而基於任務的模型則可以輕鬆且快速的達成。
 
-Some additional context and rationale for the overall async/await project is
-available in the [companion RFC].
+附帶的 [RFC](https://github.com/rust-lang/rfcs/pull/2394) 中提供了整個 async/await 專案的一些其他先備知識和基本原理。
 
-For the remainder of this section, we'll dive into specific API design questions
-where this RFC differs from futures 0.2.
+在本節的其餘部分，我們將深入探討特定的 API 設計問題，其中該 RFC 與 futures 0.2 不同。
 
-## Rationale, drawbacks and alternatives for removing built-in errors
+## 移除內嵌錯誤的基本原理、缺點和替代方法
 
-There are an assortment of reasons to drop the built-in error type in the main
-trait:
+在主要特徵中刪除內嵌（build-in）錯誤型別有多種原因：
 
-- **Improved type checking and inference**. The error type is one of the biggest
-  pain points when working with futures combinators today, both in trying to get
-  different types to match up, and in inference failures that result when a
-  piece of code cannot produce an error. To be clear, many of these problems
-  will become less pronounced when `async` syntax is available.
+- **改進的類型檢查和推斷**。錯誤型別是當今使用 futures 組合器時最大的痛點之一，無論是試圖讓不同的型別配對，還是在一段代碼無法產生錯誤時導致推理失敗。需要清楚的是，當 `async` 語法可用時，這些問題將變得不那麼明顯。
 
-- **Async functions**. If we retain a built-in error type, it's much less clear
-  how `async fn` should work: should it always require the return type to be a
-  `Result`? If not, what happens when a non-`Result` type is returned?
+- **非同步函式**。如果我們保留一個內嵌的錯誤型別，那麼 `async fn` 應該如何工作就不太清楚了：它是否應該總是要求返回的型別是一個 `Result`？如果不是，當返回非 `Result` 型別時會發生什麼？
 
-- **Combinator clarity**. Splitting up the combinators by whether they rely on
-  errors or not clarifies the semantics. This is *especially* true for streams,
-  where error handling is a common source of confusion.
+- **組合器清晰度**。透過它們是否依賴錯誤來拆分組合器可以闡明語義。尤其對於 stream 來說更是如此，其中錯誤處理是常見的混淆來源。
 
-- **Orthogonality**. In general, producing and handling errors is separable from
-  the core polling mechanism, so all things being equal, it seems good to follow
-  Rust's general design principles and treat errors by *composing* with `Result`.
+- **正交性**。一般來說，產生和處理錯誤與核心輪詢機制是分開的，所以在同等條件的情況下，遵循 Rust 的一般設計原則，透過與 `Result` **組合**來處理錯誤似乎很好。
 
-All of that said, there are real downsides for error-heavy code, even with
-`TryFuture`:
+綜上所述，即使使用 `TryFuture`，錯誤嚴重的程式碼也有真正的缺點：
 
-- An extra import is needed (obviated if code imports the futures prelude, which
-  we could perhaps more vocally encourage).
+- 需要額外的引入（如果程式碼引入 future prelude，則可以避免，我們也許可以更直接地鼓勵你這麼做）。
 
-- It can be confusing for code to *bound* by one trait but *implement* another.
+- 對於程式來說，受一個特徵的**約束**而**實作**另一個特徵可能會令人困惑。
 
-The error handling piece of this RFC is separable from the other pieces, so the
-main alternative would be to retain the built-in error type.
+該 RFC 的錯誤處理部分與其他部分是分開的，因此主要的替代方案是保留內嵌的錯誤型別。
 
-## Rationale, drawbacks and alternatives to the core trait design (wrt `Pin`)
+## 核心特徵設計的基本原理、缺點和替代方案 (wrt `Pin`)
 
-Putting aside error handling, which is orthogonal and discussed above, the
-primary other big item in this RFC is the move to `Pin` for the core polling
-method, and how it relates to `Unpin`/manually-written futures. Over the course
-of RFC discussions, we've identified essentially three main approaches to this
-question:
+撇開上面討論過的正交錯誤處理不談，這個 RFC 中主要的另一個重要項目是核心輪詢方法的 `Pin` 轉移，以及它與 `Unpin`/手動撰寫的 futures 之間的關係。在 RFC 討論過程中，我們基本上確定了解決這個問題的三種主要方法：
 
-- **One core trait**. That's the approach taken in the main RFC text: there's
-  just a single core `Future` trait, which works on `Pin<&mut Self>`. Separately
-  there's a `poll_unpin` helper for working with `Unpin` futures in manual
-  implementations.
+- **一個核心特徵**。這就是主要 RFC 文本中採用的方法：只有一個核心 `Future` 特徵，它適用於 `Pin<&mut Self>`。另外還有一個 `poll_unpin` 輔助器，用於在手動實現中使用 `Unpin` futures。
 
-- **Two core traits**. We can provide two traits, for example `MoveFuture` and
-  `Future`, where one operates on `&mut self` and the other on `Pin<&mut Self>`.
-  This makes it possible to continue writing code in the futures 0.2 style,
-  i.e. without importing `Pin`/`Unpin` or otherwise talking about pins. A
-  critical requirement is the need for interoperation, so that a `MoveFuture`
-  can be used anywhere a `Future` is required. There are at least two ways to
-  achieve such interop:
+- **兩個核心特徵**。我們可以提供兩個特徵，例如 `MoveFuture` 和 `Future`，其中一個在 `&mut self` 上運行，另一個在 `Pin<&mut Self>` 上運行。這使得我們可以繼續以 futures 0.2 的風格編寫程式，即無需引入 `Pin`/`Unpin` 或以其他方式談論 pin。一個關鍵要求是需要互操作性（interoperation），以便可以在任何需要 `Future` 的地方使用 `MoveFuture`。至少有兩種方法可以實現這種互操作：
 
-  - Via a blanket impl of `Future` for `T: MoveFuture`. This approach currently
-    blocks some *other* desired impls (around `Box` and `&mut` specifically),
-    but the problem doesn't appear to be fundamental.
+  - 透過對 `T: MoveFuture` 的 `Future` 全面實現（blanket implementation）。這種方法目前阻止了一些**其他**所需的實現（特別圍繞在 `Box` 和 `&mut`），但這似乎不是問題的根本。
 
-  - Via a subtrait relationship, so that `T: Future` is defined essentially as
-    an alias for `for<'a> Pin<&mut 'a T>: MoveFuture`. Unfortunately, such
-    "higher ranked" trait relationships don't currently work well in the trait
-    system, and this approach also makes things more convoluted when
-    implementing `Future` by hand, for relatively little gain.
+  - 透過子特徵的關係，使得 `T: Future` 本質上被定義為 `for<'a> Pin<&mut 'a T>: MoveFuture` 的別名。不幸的是，這種「更高等級」的特徵關係目前在特徵系統中效果不佳，而且這種方法在手動實現 `Future` 時也使事情變得更加複雜，收益相對較小。
 
-The drawback of the "one core trait" approach taken by this RFC is its ergonomic
-hit when writing moveable futures by hand: you now need to import `Pin` and
-`Unpin`, invoke `poll_unpin`, and impl `Unpin` for your types. This is all
-pretty mechanical, but it's a pain. It's possible that improvements in `Pin`
-ergonomics will obviate some of these issues, but there are a lot of open
-questions there still.
+該 RFC 採用的「一個核心特徵」方法的缺點是，它在手動編寫可移動 future 時與人因工程相衝突：您現在需要為您的型別引入 `Pin` 和 `Unpin`、調用 `poll_unpin` 和實現 `Unpin`。這一切都很機械化，但這是痛苦的。而 `Pin` 的人因工程學的改進可能會消除其中一些問題，但仍存在許多未解決的問題。
 
-On the other hand, a two-trait approach has downsides as well. If we *also*
-remove the error type, there's a combinatorial explosion, since we end up
-needing `Try` variants of each trait (and this extends to related traits, like
-`Stream`, as well). More broadly, with the one-trait approach, `Unpin` acts as a
-kind of "independent knob" that can be applied orthogonally from other concerns;
-with the two-trait approach, it's "mixed in". And both of the two-trait
-approaches run up against compiler limitations at the moment, though of course
-that shouldn't be taken as a deciding factor.
+另一方面，雙特徵方法也有缺點。如果我們**還**刪除錯誤型別，則會出現組合爆炸，因為我們最終需要每個特徵的 `Try` 變體（這也延伸到相關的特徵，例如 `Stream`）。更廣泛地說，使用單一特徵方法，`Unpin` 充當一種「獨立旋鈕」，可以與其他關注點作正交應用；使用雙特徵方法，它是「混合的」。目前這兩種雙特徵方法都受到了編譯器的限制，儘管這不應該被視為決定因素。
 
-**The primary reason this RFC opts for the one-trait approach is that it's the
-conservative, forward-compatible option, and has proven itself in practice**.
-It's possible to add `MoveFuture`, together with a blanket impl, at any point in the future.
-Thus, starting with just the single `Future` trait as proposed in this RFC keeps our options
-maximally open while we gain experience.
+**該 RFC 選擇單一特徵方法的主要原因是它是保守的、前向相容的選擇，並且已經在實際中證明了自己**。可以在未來的任何時候添加 `MoveFuture` 以及一個全面實現。因此，從本 RFC 中提出的單一 `Future` 特徵開始，在我們獲得經驗的同時，我們的選項也保持最大限度的開放。
 
-## Rationale, drawbacks and alternatives to the wakeup design (`Waker`)
+## 喚醒設計 (Waker) 的基本原理、缺點和替代方案
 
-Previous iterations of this proposal included a separate wakeup type,
-`LocalWaker`, which was `!Send + !Sync` and could be used to implement
-optimized executor behavior without requiring atomic reference counting
-or atomic wakeups. However, in practice, these same optimizations are
-available through the use of thread-local wakeup queues, carrying IDs
-rather than pointers to wakeup objects, and tracking an executor ID or
-thread ID to perform a runtime assertion that a `Waker` wasn't sent across
-threads. For a simple example, a single thread-locked executor with zero
-atomics can be implemented as follows:
+該提議的先前疊代包括一個單獨的喚醒型別 `LocalWaker`，它是 `!Send + !Sync` 並且可用於實現優化的執行器行為，而無需原子引用計數或原子喚醒。然而，實際上，這些相同的優化可以透過使用執行緒本地喚醒隊列來實現，攜帶 ID 而不是指向喚醒物件的指標，並跟蹤執行程序 ID 或線程 ID 以執行未發送 `Waker` 的 runtime 斷言執行緒。舉個簡單的例子，零原子的單執行緒鎖定執行器可以如下實現：
 
 ```rust
 struct Executor {
@@ -485,36 +414,18 @@ static VTABLE: &RawWakerVTable = &RawWakerVTable {
 };
 ```
 
-While this solution gives inferior error messages to the `LocalWaker` approach
-(since it can't panic until `wake` occurs on the wrong thread, rather than
-panicking when `LocalWaker` is transformed into a `Waker`), it dramatically
-simplifies the user-facing API by de-duplicating the `LocalWaker` and `Waker`
-types.
+雖然此解決方案向 `LocalWaker` 方法提供了較差的錯誤消息（因為在錯誤的執行緒上發生 `wake` 之前，它不会恐慌，而不是在 `LocalWaker` 轉換為 `Waker` 時發生恐慌），它極大地透過去除 `LocalWaker` 和 `Waker` 型別的重複，簡化了面向用戶的 API 。
 
-In practice, it's also likely that the most common executors in the Rust
-ecosystem will continue to be multithreaded-compatible (as they are today),
-so optimizing for the ergonomics of this case is prioritized over better
-error messages in the more heavily specialized case.
+在實際中，Rust 生態系統中最常見的執行程序也很可能繼續與多執行緒相容（就像現在一樣），因此在更專業的情況下，針對這種情況的人因工程學進行優化優先於更好的錯誤訊息。
 
-# Prior art
-[prior-art]: #prior-art
+# 現有技術
+[現有技術]: #prior-art
 
-There is substantial prior art both with async/await notation and with futures
-(aka promises) as a basis. The proposed futures API was influenced by Scala's
-futures in particular, and is broadly similar to APIs in a variety of other
-languages (in terms of the adapters provided).
+以 async/await 語法和以 future（又名 promise）為基礎的大量現有技術。提議的 futures API 是受到 Scala 的 futures 的影響，並且與各種其他語言的 API 大體相似（就以提供的轉接器而言）。
 
-What's more unique about the model in this RFC is the use of tasks, rather than
-callbacks. The RFC author is not aware of other *futures* libraries using this
-technique, but it is a fairly well-known technique more generally in functional
-programming. For a recent example,
-see
-[this paper](https://www.microsoft.com/en-us/research/wp-content/uploads/2011/01/monad-par.pdf) on
-parallelism in Haskell. What seems to be perhaps new with this RFC is the idea
-of melding the "trampoline" technique with an explicit, open-ended task/wakeup
-model.
+此 RFC 中模型的獨特之處在於使用了任務，而不是 callback。RFC 的作者不知道其他 *future* 函式庫是否使用這種技術，但它是 functional programming 中一種相當知名且更普遍的技術。有關於最近的範例，請參閱這篇關於 Haskell 並行的[論文](https://www.microsoft.com/en-us/research/wp-content/uploads/2011/01/monad-par.pdf)。這個 RFC 似乎是一个將 「trampoline」 技術語明確的、開放式的任務/換醒模型结合起来的新想法。
 
-# Unresolved questions
-[unresolved]: #unresolved-questions
+# 未解決的問題
+[未解決的問題]: #unresolved-questions
 
-None at the moment.
+暫時沒有。
