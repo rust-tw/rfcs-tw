@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1235,7 +1235,7 @@ thread::scope(|s| {
 <span class="boring">}
 </span></code></pre></pre>
 <h1 id="動機-9"><a class="header" href="#動機-9">動機</a></h1>
-<p>在 Rust 1.0 發布之前，我們有與作用域執行續相同作用的 <a href="https://docs.rs/thread-scoped/1.0.2/thread_scoped/"><code>thread::scoped()</code></a>，但後來發現一個健全性的問題，可能導致 use-after-frees，所以它已被移除。這一歷史事件稱為<a href="http://cglab.ca/%7Eabeinges/blah/everyone-poops/">洩密事件</a>。</p>
+<p>在 Rust 1.0 發布之前，我們有與作用域執行續相同作用的 <a href="https://docs.rs/thread-scoped/1.0.2/thread_scoped/"><code>thread::scoped()</code></a>，但後來發現一個健全性的問題，可能導致 use-after-frees，所以它已被移除。這一歷史事件稱為<a href="http://cglab.ca/~abeinges/blah/everyone-poops/">洩密事件</a>。</p>
 <p>幸運的是，舊的作用域執行緒可被修復，透過閉包（closure）而非守護（guard)，來確保生成的執行緒會自動會合（join）。但我們對在 Rust 1.0 中加入的作用域執行緒並不放心，所以我們決定將其放在外部 crates 之中，並有可能在未來的某個時刻回到標準函式庫中。四年過去了，那個未來就是現在。</p>
 <p>作用域執行緒在 <a href="https://docs.rs/crossbeam/0.7.1/crossbeam/thread/index.html">Crossbeam</a> 中經過多年的經驗累積，我們的設計已經趨於成熟，足以被推廣到標準函式庫中。</p>
 <p>更多內容請看<a href="3151-scoped-threads.html#rationale-and-alternatives">基本理由及替代方案</a>部分。</p>
@@ -1436,6 +1436,18 @@ impl Builder {
 <p>這個概念可以延伸到非同步嗎？會有任何行為或 API 差異嗎？</p>
 <h1 id="未來的可能性"><a class="header" href="#未來的可能性">未來的可能性</a></h1>
 <p>在未来，我們也可以有一個像 Rayon 那樣的執行緒池，可以生成作用域内的任務。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contributing"><a class="header" href="#contributing">Contributing</a></h1>
+<p>我們歡迎任何協助，非常感謝你願意一起支援這個社群！</p>
+<h2 id="授權條款"><a class="header" href="#授權條款">授權條款</a></h2>
+<p>此專案的授權條款和其他 Rust 專案一樣都是 MIT/Apache2。你可以在 <code>LICENSE-*</code> 檔案中閱讀條款全文</p>
+<h2 id="行為準則"><a class="header" href="#行為準則">行為準則</a></h2>
+<p>Rust 專案有一個 <a href="http://rust-lang.org/policies/code-of-conduct">行為準則</a>會囊括其下專案，這當然包含此專案。請遵守這些準則！</p>
+<h2 id="翻譯流程"><a class="header" href="#翻譯流程">翻譯流程</a></h2>
+<p>我們的 <a href="https://github.com/rust-lang.tw/rfcs/pulls">open pull requests</a> 接受任何翻譯或修正文章的 PR。在想開始翻譯一篇 RFC 前請先開一個 issue，如果你有希望被翻譯的也一樣歡迎開。翻譯完文章後請在每一篇文底加上以下以下資訊：</p>
+<pre><code>translators: [Firstname Lastname &lt;email@address.tld&gt;]
+commit: [The commit link this page based on](https://github.com/rust-lang/rfcs/...)
+updated: YYYY-MMM-DD
+</code></pre>
 
                     </main>
 
