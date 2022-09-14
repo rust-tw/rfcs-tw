@@ -70,7 +70,7 @@ Future 可以通過 `async` 區塊或 `async` 函式來創建，例如
 async fn read_frame(socket: &TcpStream) -> Result<Frame, io::Error> { ... }
 ```
 
-這個 `async` 函式，當被呼叫時，產生一個 future，代表從给定的 socket 中讀取一個幀的完成。函式簽名等同於：
+當呼叫這個 `async` 函式，會產生一個 future，代表完成了從给定的 socket 中讀取一個框（frame）。函式簽名等同於：
 
 ```rust
 fn read_frame<'sock>(socket: &'sock TcpStream)
@@ -361,7 +361,7 @@ points」）。固定機制在介紹它的 [RFC](https://github.com/rust-lang/rf
 
 - **非同步函式**。如果我們保留一個內嵌的錯誤型別，那麼 `async fn` 應該如何工作就不太清楚了：它是否應該總是要求回傳型別是一個 `Result`？如果不是，當回傳非 `Result` 型別時會發生什麼？
 
-- **組合器清晰度**。透過它們是否依賴錯誤來拆分組合器可以闡明語義。尤其對於 stream 來說更是如此，其中錯誤處理是常見的混淆來源。
+- **組合器清晰度**。按照組合器依賴錯誤與否來將其拆分，可闡明其語義。尤其對於 stream 來說更是如此，其中錯誤處理是常見的混淆來源。
 
 - **[正交性（orthogonality）](https://en.wikipedia.org/wiki/Orthogonality_(programming))**。一般來說，產生和處理錯誤與核心輪詢機制是分開的，所以在同等條件的情況下，遵循 Rust 的一般設計原則，藉由**組合** `Result` 來處理錯誤似乎更好。
 
@@ -379,7 +379,7 @@ points」）。固定機制在介紹它的 [RFC](https://github.com/rust-lang/rf
 
 - **一個核心特徵**。這就是主要 RFC 文本中採用的方法：只有一個核心 `Future` 特徵，它適用於 `Pin<&mut Self>`。另外還有一個 `poll_unpin` 輔助器，用於在手動實現中使用 `Unpin` futures。
 
-- **兩個核心特徵**。我們可以提供兩個特徵，例如 `MoveFuture` 和 `Future`，其中一個在 `&mut self` 上運行，另一個在 `Pin<&mut Self>` 上運行。這使得我們可以繼續以 futures 0.2 的風格編寫程式，即無需引入 `Pin`/`Unpin` 或以其他方式談論 pin。一個關鍵要求是需要互操作性（interoperation），以便可以在任何需要 `Future` 的地方使用 `MoveFuture`。至少有兩種方法可以實現這種互操作：
+- **兩個核心特徵**。我們可以提供兩個特徵，例如 `MoveFuture` 和 `Future`，其中一個在 `&mut self` 上運行，另一個在 `Pin<&mut Self>` 上運行。這使得我們可以繼續以 futures 0.2 的風格編寫程式，即無需引入 `Pin`/`Unpin` 或以其他方式談論 pin。一個關鍵要求是需要可交互運作性（interoperation），以便可以在任何需要 `Future` 的地方使用 `MoveFuture`。至少有兩種方法可以實現這種互操作：
 
   - 透過對 `T: MoveFuture` 的 `Future` 全面實作（blanket implementation）。這種方法目前阻止了一些**其他**所需的實作（特別圍繞在 `Box` 和 `&mut`），但這似乎不是問題的根本。
 
