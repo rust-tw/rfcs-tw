@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -943,6 +943,405 @@ rust = &quot;1.33&quot;
 <li>nightly 版本如何與「基於 cfg 的 MSRV」運作？</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Feature Name: <code>futures_api</code></li>
+<li>Start Date: 2018-11-09</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2592">rust-lang/rfcs#2592</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/59113">rust-lang/rust#59113</a></li>
+<li>Translators: [<a href="https://github.com/FizzyElt">@FizzyElt</a>]</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/a31e5941133de5935b97b5d3e09b921b6e796abb/text/2592-futures.md">The commit link this page based on</a></li>
+<li>Updated 2022-08-13</li>
+</ul>
+<h1 id="概要-2"><a class="header" href="#概要-2">概要</a></h1>
+<p>此 RFC 提議替一等公民語法 <code>async</code>/<code>await</code> 穩定相關函式庫組件。特別是，它將穩定：</p>
+<ul>
+<li><code>std</code> 中任務系統所有的 API，例如 <code>std::task::*</code>。</li>
+<li>核心 <code>Future</code> API，例如 <code>core::future::Future</code> 和 <code>std::future::Future</code>。</li>
+</ul>
+<p>它<strong>不提議</strong>穩定任何 <code>async</code>/<code>await</code> 語法本身，該語法自有另外的提議。它也不包括已在<a href="https://github.com/rust-lang/rust/issues/55766">別處</a>提出的 <code>Pin</code> API 的穩定性。</p>
+<p>這是早期 <a href="https://github.com/rust-lang/rfcs/pull/2418">futures RFC</a> 的修訂和精簡版本，該 RFC 已暫緩，直到 nightly 版本獲得更多經驗之後。</p>
+<h1 id="動機-6"><a class="header" href="#動機-6">動機</a></h1>
+<h2 id="為何-future-要在-std-之中"><a class="header" href="#為何-future-要在-std-之中">為何 <code>Future</code> 要在 <code>std</code> 之中？</a></h2>
+<p>此 RFC 的核心動機是穩定 <code>async</code>/<code>await</code> 語法的支援機制。語法本身是在（已經合併的）<a href="https://github.com/rust-lang/rfcs/pull/2394">配套 RFC</a> 中提出的，並且有一篇<a href="https://aturon.github.io/tech/2018/04/24/async-borrowing/">部落格文章</a>更詳細介紹它的重要性。</p>
+<p>與 closures 一樣，<code>async</code> 語法涉及到生成一個匿名型別，該型別實作一個關鍵特徵：<code>Future</code>。因為 <code>async</code>/<code>await</code> 需要語言層級的支援，所以底層特徵也必須是標準函式庫的一部分。因此，這個 RFC 的目標是穩定這個 <code>Future</code> 特徵和它所依賴的型別。這是我們能夠穩定 <code>async</code>/<code>await</code> 本身之前所需的最後一步。</p>
+<h2 id="這一步是如何融入更大的藍圖之中"><a class="header" href="#這一步是如何融入更大的藍圖之中">這一步是如何融入更大的藍圖之中？</a></h2>
+<p><code>async</code>/<code>await</code> 語法是 Rust 中最渴求的特性之一，它將對整個生態系產生重大影響。自 2018 年 5 月下旬以來，該語法及此處描述的 API 已可於 nightly 版本使用，並被大量採用。</p>
+<p>穩定此設計的 futures API 部分使函式庫更容易在穩定的 Rust 上工作並無縫支援在 nightly 版本使用 <code>async</code>/<code>await</code>。它還允許我們完成關於 API 部分的設計討論，並專注於在 <code>async</code> 語法穩定之前剩下的幾個問題。</p>
+<h1 id="歷史背景"><a class="header" href="#歷史背景">歷史背景</a></h1>
+<p>這些被提議要穩定的 API 有著悠久的歷史：</p>
+<ul>
+<li>
+<p><code>Future</code> 特徵從 futures crate 開始； <a href="https://aturon.github.io/tech/2016/08/11/futures/">0.1 於 2016 年 8 月發布</a>。該版本確立了「任務/輪詢」模型的核心思想，以及此處保留的 API 的許多其他方面。 0.1 系列持續在整個 Rust 生態系和正式系統中大量使用。</p>
+</li>
+<li>
+<p>2018 年初，隨著 <code>async</code>/<code>await</code> 的工作開始，futures 團隊建立了一個 RFC 流程並編寫了幾個 <a href="https://github.com/rust-lang-nursery/futures-rfcs/pulls?q=is%3Apr+is%3Aclosed">RFC</a>，以根據長期的社群回饋對核心 API 進行修訂。這些 RFC 最終產生了 <a href="https://aturon.github.io/tech/2018/02/27/futures-0-2-RC/">0.2le</a> 版本，並於 4 月<a href="https://aturon.github.io/tech/2018/04/06/futures2/">釋出</a>。</p>
+</li>
+<li>
+<p>在同一時期，@withoutboats 在支援 <code>async</code> 區塊內借用的 pinning API 上的工作已經<a href="https://boats.gitlab.io/blog/post/2018-04-06-async-await-final/">完成</a>。<a href="https://github.com/rust-lang/rfcs/pull/2349">pinning API</a> 顛覆了過往一切，可在不使 future 的核心 API 成為 unsafe 前提下，支援 borrowing-across-yield。</p>
+</li>
+<li>
+<p>2018 年 4 月，一對 RFC 正式提出了 <code>async</code>/<code>await</code> 語法以及 futures API 的進一步修訂（以利用 pinning API 帶來的好處）；後者經歷了許多修訂，包括一個新的 <a href="https://github.com/rust-lang/rfcs/pull/2418">RFC</a>。最終，語法 <a href="https://github.com/rust-lang/rfcs/pull/2394#issuecomment-387550523">RFC</a> 在 5 月被合併，而 API RFC 被關閉，進一步的設計疊代將在 nightly 版本進行，隨後是一個穩定的 RFC：這個！</p>
+</li>
+<li>
+<p>這些 API 在 5 月底<a href="https://github.com/rust-lang/rust/pull/51263">加入到 <code>std</code></a>。</p>
+</li>
+<li>
+<p>從那時起，隨著我們從 API 獲得的經驗，語法、<code>std</code> API 和 futures 0.3 crate 都在同步發展。這種體驗的主要驅動者是 Google 的 Fuchsia 專案，該專案在作業系統設置中大規模使用所有這些功能。</p>
+</li>
+<li>
+<p>最近的修訂是在 8 月，其中涉及一些關於如何使 <code>Pin</code> API 有更清晰的<a href="https://boats.gitlab.io/blog/post/rethinking-pin/">見解</a>。這些 API 已被<a href="https://github.com/rust-lang/rust/issues/55766">提議要穩定</a>，以及它們作為 <a href="https://github.com/rust-lang/rust/issues/55786"><code>self</code> 型別的用途</a>。</p>
+</li>
+<li>
+<p>有多個相容層可以同時使用 futures 0.1 和 0.3。這很重要，因為它允許現有生產程式碼的<strong>增量</strong>遷移。</p>
+</li>
+</ul>
+<p>自從最初的 futures 0.3 發布以來，除了上面提到的改進之外，核心 <code>Future</code> 特徵和任務系統的變化相對較小。實際的 <code>Future</code> 特徵基本上與 4 月時相同。</p>
+<h1 id="教學式解說-2"><a class="header" href="#教學式解說-2">教學式解說</a></h1>
+<p><code>Future</code> 特徵代表了一個非同步和惰性計算，它最終可能會產生一個最終值，但不以阻塞當前執行緒為前提來達成。</p>
+<p>Future 可以通過 <code>async</code> 區塊或 <code>async</code> 函式來創建，例如</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn read_frame(socket: &amp;TcpStream) -&gt; Result&lt;Frame, io::Error&gt; { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>當呼叫這個 <code>async</code> 函式，會產生一個 future，代表完成了從给定的 socket 中讀取一個框（frame）。函式簽名等同於：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn read_frame&lt;'sock&gt;(socket: &amp;'sock TcpStream)
+    -&gt; impl Future&lt;Output = Result&lt;Frame, io::Error&gt;&gt; + 'sock;
+<span class="boring">}
+</span></code></pre></pre>
+<p>其他非同步函數可以 <strong>await</strong> 這個 future; 有關完整詳細信息，請參閱<a href="https://github.com/rust-lang/rfcs/pull/2394">隨附的 RFC</a>。</p>
+<p>除了 <code>async fn</code> 定義，future 還可以使用轉接器（adapter）來創建，就像 <code>Iterator</code> 一樣。最初，這些轉接器將完全由其他 crate 所提供，但最终它們將帶入標準函式庫。</p>
+<p>最終非同步計算以<strong>任務</strong>的形式執行，相當於輕量級執行緒。 <strong>executor</strong> 提供了從 <code>()</code> 生成的 <code>Future</code> 創建任務的能力。執行器將固定 <code>Future</code> 並對其進行 <code>poll</code>，直到為其創建的任務完成。</p>
+<p>executor 的實作以協同式地（cooperative）排程它的任務。是否使用一個或多個作業系統執行緒以及可以在其之上平行生成多少任務取決於 executor 的實作。一些 executor 的實作可能只能驅動單個 <code>Future</code> 完成，而另一些則可以提供動態接受新 <code>Future</code> 的能力，這些 Future 是在任務中被驅動完成。</p>
+<p>該 RFC 不包含任何 executor 的定義。它僅以 API 的形式定義了 executors、tasks 和 <code>Future</code> 之間的交互關係，這些 API 允許任務請求再次進行排程。 這些 API 由 <code>task</code> 模組提供，在手動實作 <code>Future</code> 或 executor 時需要這些 API。</p>
+<h1 id="技術文件式解說-2"><a class="header" href="#技術文件式解說-2">技術文件式解說</a></h1>
+<h2 id="coretask-模組"><a class="header" href="#coretask-模組"><code>core::task</code> 模組</a></h2>
+<p>Rust 中非同步運算的基本機制是<strong>任務</strong>，它們是輕量級的執行緒；許多任務可以協同調度到單個作業系統執行緒上。</p>
+<p>為了執行這種協作調度，我們使用了一種有時被稱為「<a href="https://en.wikipedia.org/wiki/Trampoline_(computing)">trampoline</a>」的技術。當一個任務需要阻塞等待某個事件時，它會保存一個物件，允許它稍後再次被調度並<strong>返回</strong>到運行它的執行器，然後它可以執行另一個任務。隨後的喚醒將任務放回就緒任務的執行者隊列中，就像作業系統中的執行緒調度程序一樣。</p>
+<p>嘗試完成一個任務（或其中的非同步值）稱為<strong>輪詢</strong>，並且總是返回一個 <code>Poll</code> 值：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Indicates whether a value is available, or if the current task has been
+/// scheduled for later wake-up instead.
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub enum Poll&lt;T&gt; {
+    /// Represents that a value is immediately ready.
+    Ready(T),
+
+    /// Represents that a value is not ready yet.
+    ///
+    /// When a function returns `Pending`, the function *must* also
+    /// ensure that the current task is scheduled to be awoken when
+    /// progress can be made.
+    Pending,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>當一個任務返回 <code>Poll::Ready</code> 時，執行器知道該任務已經完成並且可以被刪除。</p>
+<h3 id="喚醒"><a class="header" href="#喚醒">喚醒</a></h3>
+<p>如果 future 在執行期間無法直接完成並返回 <code>Pending</code>，則它需要一種方法來稍後通知執行器它需要再次輪詢以取得進展。</p>
+<p>此功能是透過一組 <code>Waker</code> 型別提供的。</p>
+<p><code>Waker</code> 是作為參數傳遞給 <code>Future::poll</code> 調用的物件，並且可以透過這些 <code>Futures</code> 的實現來儲存。每當一個 <code>Future</code> 需要再次被輪詢時，它可以使用喚醒器的 <code>wake</code> 方法來通知執行器擁有 <code>Future</code> 的任務應該被再次調度和執行。</p>
+<p>RFC 定義了一個具體的 <code>Waker</code> 型別，<code>Futures</code> 和非同步函式的實作者將與之互動。此型別定義了一個 <code>wake(&amp;self)</code> 方法，用於安排與 <code>Waker</code> 關聯的任務再次輪詢。</p>
+<p>再次調度任務的機制取決於驅動任務的執行器。喚醒執行器的可能方法包含：</p>
+<ul>
+<li>如果執行器在條件變數上被阻塞，則需要通知條件變數。</li>
+<li>如果執行器在諸如 <code>select</code> 之類的系統調用上被阻塞，它可能需要被諸如 <code>write</code> 管道之類的系統調用喚醒。</li>
+<li>如果執行器的執行緒被放置，喚醒呼叫需要將其取消放置。</li>
+</ul>
+<p>為了讓執行器實現自定義喚醒行為，<code>Waker</code> 型別包含一個稱作 <code>RawWaker</code> 的型別，它由指向自定義可喚醒物件的指針和對其提供 <code>clone</code>、<code>wake</code> 和 <code>drop</code> 函式的虛擬函數指針表 (vtable) 的引用組成底層可喚醒物件。</p>
+<p>選擇這種機制有利於特徵物件，因為它允許更靈活的記憶體管理方案。 <code>RawWaker</code> 可以單純根據全域函式和狀態、在引用計數物件之上或以其他方式實現。這種策略還可以更容易地提供不同的 vtable 函式，這些函式將執行不同的行為，儘管引用了相同底層可喚醒的物件型別。</p>
+<p>這些 <code>Waker</code> 型別之間的關係在以下定義中進行了概述：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// A `RawWaker` allows the implementor of a task executor to create a `Waker`
+/// which provides customized wakeup behavior.
+///
+/// It consists of a data pointer and a virtual function pointer table (vtable) that
+/// customizes the behavior of the `RawWaker`.
+#[derive(PartialEq)]
+pub struct RawWaker {
+    /// A data pointer, which can be used to store arbitrary data as required
+    /// by the executor. This could be e.g. a type-erased pointer to an `Arc`
+    /// that is associated with the task.
+    /// The value of this field gets passed to all functions that are part of
+    /// the vtable as first parameter.
+    pub data: *const (),
+    /// Virtual function pointer table that customizes the behavior of this waker.
+    pub vtable: &amp;'static RawWakerVTable,
+}
+
+/// A virtual function pointer table (vtable) that specifies the behavior
+/// of a `RawWaker`.
+///
+/// The pointer passed to all functions inside the vtable is the `data` pointer
+/// from the enclosing `RawWaker` object.
+#[derive(PartialEq, Copy, Clone)]
+pub struct RawWakerVTable {
+    /// This function will be called when the `RawWaker` gets cloned, e.g. when
+    /// the `Waker` in which the `RawWaker` is stored gets cloned.
+    ///
+    /// The implementation of this function must retain all resources that are
+    /// required for this additional instance of a `RawWaker` and associated
+    /// task. Calling `wake` on the resulting `RawWaker` should result in a wakeup
+    /// of the same task that would have been awoken by the original `RawWaker`.
+    pub clone: unsafe fn(*const ()) -&gt; RawWaker,
+
+    /// This function will be called when `wake` is called on the `Waker`.
+    /// It must wake up the task associated with this `RawWaker`.
+    pub wake: unsafe fn(*const ()),
+
+    /// This function gets called when a `RawWaker` gets dropped.
+    ///
+    /// The implementation of this function must make sure to release any
+    /// resources that are associated with this instance of a `RawWaker` and
+    /// associated task.
+    pub drop_fn: unsafe fn(*const ()),
+}
+
+/// A `Waker` is a handle for waking up a task by notifying its executor that it
+/// is ready to be run.
+///
+/// This handle encapsulates a `RawWaker` instance, which defines the
+/// executor-specific wakeup behavior.
+///
+/// Implements `Clone`, `Send`, and `Sync`.
+pub struct Waker {
+    waker: RawWaker,
+}
+
+impl Waker {
+    /// Wake up the task associated with this `Waker`.
+    pub fn wake(&amp;self) {
+        // The actual wakeup call is delegated through a virtual function call
+        // to the implementation which is defined by the executor.
+        unsafe { (self.waker.vtable.wake)(self.waker.data) }
+    }
+
+    /// Returns whether or not this `Waker` and other `Waker` have awaken the same task.
+    ///
+    /// This function works on a best-effort basis, and may return false even
+    /// when the `Waker`s would awaken the same task. However, if this function
+    /// returns `true`, it is guaranteed that the `Waker`s will awaken the same task.
+    ///
+    /// This function is primarily used for optimization purposes.
+    pub fn will_wake(&amp;self, other: &amp;Waker) -&gt; bool {
+        self.waker == other.waker
+    }
+
+    /// Creates a new `Waker` from `RawWaker`.
+    ///
+    /// The method cannot check whether `RawWaker` fulfills the required API
+    /// contract to make it usable for `Waker` and is therefore unsafe.
+    pub unsafe fn new_unchecked(waker: RawWaker) -&gt; Waker {
+        Waker {
+            waker: waker,
+        }
+    }
+}
+
+impl Clone for Waker {
+    fn clone(&amp;self) -&gt; Self {
+        Waker {
+            waker: unsafe { (self.waker.vtable.clone)(self.waker.data) },
+        }
+    }
+}
+
+impl Drop for Waker {
+    fn drop(&amp;mut self) {
+        unsafe { (self.waker.vtable.drop_fn)(self.waker.data) }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Waker</code> 必須滿足以下要求：</p>
+<ul>
+<li>它們必須是可以克隆的。</li>
+<li>如果 <code>Waker</code> 的所有實體都已被刪除，並且它們的關聯任務已被驅動完成，則必須釋放為該任務分配的所有資源。</li>
+<li>即使關聯的任務已經被驅動完成，在 <code>Waker</code> 上調用 <code>wake()</code> 也必須是安全的。</li>
+<li><code>Waker::wake()</code> 必須喚醒執行器，即使它是從任意執行緒調用的。</li>
+</ul>
+<p>因此，實例化 <code>RawWaker</code> 的執行程器必須確保滿足這些要求。</p>
+<h2 id="corefuture-模組"><a class="header" href="#corefuture-模組"><code>core::future</code> 模組</a></h2>
+<p>有了上述所有任務的基礎設施，定義 <code>Future</code> 就很簡單了：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Future {
+    /// The type of value produced on completion.
+    type Output;
+
+    /// Attempt to resolve the future to a final value, registering
+    /// the current task for wakeup if the value is not yet available.
+    ///
+    /// # Return value
+    ///
+    /// This function returns:
+    ///
+    /// - [`Poll::Pending`] if the future is not ready yet
+    /// - [`Poll::Ready(val)`] with the result `val` of this future if it
+    ///   finished successfully.
+    ///
+    /// Once a future has finished, clients should not `poll` it again.
+    ///
+    /// When a future is not ready yet, `poll` returns `Poll::Pending` and
+    /// stores a clone of the [`Waker`] to be woken once the future can
+    /// make progress. For example, a future waiting for a socket to become
+    /// readable would call `.clone()` on the [`Waker`] and store it.
+    /// When a signal arrives elsewhere indicating that the socket is readable,
+    /// `[Waker::wake]` is called and the socket future's task is awoken.
+    /// Once a task has been woken up, it should attempt to `poll` the future
+    /// again, which may or may not produce a final value.
+    ///
+    /// Note that on multiple calls to `poll`, only the most recent
+    /// [`Waker`] passed to `poll` should be scheduled to receive a
+    /// wakeup.
+    ///
+    /// # Runtime characteristics
+    ///
+    /// Futures alone are *inert*; they must be *actively* `poll`ed to make
+    /// progress, meaning that each time the current task is woken up, it should
+    /// actively re-`poll` pending futures that it still has an interest in.
+    ///
+    /// The `poll` function is not called repeatedly in a tight loop-- instead,
+    /// it should only be called when the future indicates that it is ready to
+    /// make progress (by calling `wake()`). If you're familiar with the
+    /// `poll(2)` or `select(2)` syscalls on Unix it's worth noting that futures
+    /// typically do *not* suffer the same problems of &quot;all wakeups must poll
+    /// all events&quot;; they are more like `epoll(4)`.
+    ///
+    /// An implementation of `poll` should strive to return quickly, and must
+    /// *never* block. Returning quickly prevents unnecessarily clogging up
+    /// threads or event loops. If it is known ahead of time that a call to
+    /// `poll` may end up taking awhile, the work should be offloaded to a
+    /// thread pool (or something similar) to ensure that `poll` can return
+    /// quickly.
+    ///
+    /// # Panics
+    ///
+    /// Once a future has completed (returned `Ready` from `poll`),
+    /// then any future calls to `poll` may panic, block forever, or otherwise
+    /// cause bad behavior. The `Future` trait itself provides no guarantees
+    /// about the behavior of `poll` after a future has completed.
+    ///
+    /// [`Poll::Pending`]: ../task/enum.Poll.html#variant.Pending
+    /// [`Poll::Ready(val)`]: ../task/enum.Poll.html#variant.Ready
+    /// [`Waker`]: ../task/struct.Waker.html
+    /// [`Waker::wake`]: ../task/struct.Waker.html#method.wake
+    fn poll(self: Pin&lt;&amp;mut Self&gt;, waker: &amp;Waker) -&gt; Poll&lt;Self::Output&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>這裡的大部分解釋都遵循我們已經說過的關於任務系統的內容。一個轉折是 <code>Pin</code> 的使用，這使得可以在不同的 <code>poll</code> 調用中保留借用資訊（即「borrowing over yield
+points」）。固定機制在介紹它的 <a href="https://github.com/rust-lang/rfcs/pull/2349">RFC</a> 和有關最新修訂的<a href="https://boats.gitlab.io/blog/post/rethinking-pin/">部落格文章</a>中進行了解釋。</p>
+<h2 id="與-futures-01-的關係"><a class="header" href="#與-futures-01-的關係">與 futures 0.1 的關係</a></h2>
+<p>上面歷史背景部分概述的各種討論涵蓋了從 futures 0.1 到這些 API 的演進。但是，簡而言之，有三個主要轉變：</p>
+<ul>
+<li>
+<p>使用 <code>Pin&lt;&amp;mut self&gt;</code> 而不單純是 <code>&amp;mut self</code>，這是支援借用 <code>async</code> 區塊所必需的。 <code>Unpin</code> 標記特徵可用於在手動撰寫 futures 時恢復類似於 futures 0.1 的人因工程和安全性。</p>
+</li>
+<li>
+<p>從 <code>Future</code> 中刪除<strong>內置</strong>錯誤，以支援 <code>Future</code> 在可能失敗時返回 <code>Result</code>。 futures 0.3 crate 提供了一個 <code>TryFuture</code> 特徵，該特徵在 <code>Result</code> 中處理，以便在使用 <code>Result</code>-producer futures 時提供更好的人因工程。刪除錯誤型別已在之前的執行緒中討論過，但最重要的理由是為 <code>async fn</code> 提供一個正交的、組合性的語義，以反映正常的 <code>fn</code>，而不是採用特定的錯誤處理風格。</p>
+</li>
+<li>
+<p>顯式傳遞 <code>Waker</code>，而不是將其儲存在執行緒本地存儲中。自 futures 0.1 發布以來，這一直是一個備受爭議的問題，該 RFC 並不打算重新討論這個問題，但總而言之，主要優點是 (1) 在使用手動 futures（與 <code>async</code> 區塊相反）時，它更容易分辨哪裡需要環境任務，並且 (2) <code>no_std</code> 相容性明顯更好。</p>
+</li>
+</ul>
+<p>為了彌補 futures 0.1 和 0.3 之間的差距，有幾個相容性鋪墊，包括一個內置於 futures crate 本身的，您可以簡單地透過使用 <code>.compat()</code> 組合器在兩者之間切換。這些相容層使現有生態系可以順利地使用新的 futures API，並使大型程式的漸進式轉換成為可能。</p>
+<h1 id="原理缺點和替代方案"><a class="header" href="#原理缺點和替代方案">原理、缺點和替代方案</a></h1>
+<p>該 RFC 是自 1.0 以來對 <code>std</code> 提出的最重要的補充之一。它讓我們在標準函式庫中包含一個特定的任務和輪詢模型，並將其與 <code>Pin</code> 聯繫起來。</p>
+<p>到目前為止，我們已經能夠將「任務/輪詢」模型推向幾乎所有 Rust 希望佔據的利基點，而主要的缺點是缺乏 async/await 語法（以及它<a href="https://aturon.github.io/tech/2018/04/24/async-borrowing/">支援的借用</a>）。</p>
+<p>該 RFC 並未嘗試提供對源自 futures crate 任務模型的完整介紹。可以在以下兩篇部落格文章中找到有關設計原理和替代方案的更完整說明：</p>
+<ul>
+<li><a href="https://aturon.github.io/tech/2016/08/11/futures/">Zero-cost futures in Rust</a></li>
+<li><a href="https://aturon.github.io/tech/2016/09/07/futures-design/">Designing futures for Rust</a></li>
+</ul>
+<p>總而言之，futures 的主要替代模型是 callback-base 的方法，在發現當前方法之前嘗試了 callback-base 幾個月。根據我們的經驗，callback 方法在 Rust 中有幾個缺點：</p>
+<ul>
+<li>它幾乎在所有地方都強制分配（allocation），因此與 no_std 不相容。</li>
+<li>它使取消變得<strong>非常</strong>困難，而對於提議的模型，刪除只是「drop」。</li>
+<li>主觀上，組合器程式碼非常繁瑣，而基於任務的模型則可以輕鬆且快速達成。</li>
+</ul>
+<p>附帶的 <a href="https://github.com/rust-lang/rfcs/pull/2394">RFC</a> 中提供了整個 async/await 專案的一些其他先備知識和基本原理。</p>
+<p>在本節的其餘部分，我們將深入探討特定的 API 設計問題，其中該 RFC 與 futures 0.2 不同。</p>
+<h2 id="移除內嵌錯誤的基本原理缺點和替代方法"><a class="header" href="#移除內嵌錯誤的基本原理缺點和替代方法">移除內嵌錯誤的基本原理、缺點和替代方法</a></h2>
+<p>在主要特徵中移除內嵌（built-in）錯誤型別有多種原因：</p>
+<ul>
+<li>
+<p><strong>改進的型別檢查和推斷</strong>。錯誤型別是當今使用 futures 組合器時最大的痛點之一，無論是試圖讓不同的型別配對，還是在一段程式碼無法產生錯誤時導致推理失敗。更明確地說，當 <code>async</code> 語法可用時，這些問題將不再那麼明顯。</p>
+</li>
+<li>
+<p><strong>非同步函式</strong>。如果我們保留一個內嵌的錯誤型別，那麼 <code>async fn</code> 應該如何工作就不太清楚了：它是否應該總是要求回傳型別是一個 <code>Result</code>？如果不是，當回傳非 <code>Result</code> 型別時會發生什麼？</p>
+</li>
+<li>
+<p><strong>組合器清晰度</strong>。按照組合器依賴錯誤與否來將其拆分，可闡明其語義。尤其對於 stream 來說更是如此，其中錯誤處理是常見的混淆來源。</p>
+</li>
+<li>
+<p><strong><a href="https://en.wikipedia.org/wiki/Orthogonality_(programming)">正交性（orthogonality）</a></strong>。一般來說，產生和處理錯誤與核心輪詢機制是分開的，所以在同等條件的情況下，遵循 Rust 的一般設計原則，藉由<strong>組合</strong> <code>Result</code> 來處理錯誤似乎更好。</p>
+</li>
+</ul>
+<p>綜上所述，即使使用 <code>TryFuture</code>，對大量涉及錯誤處理的程式碼來說，仍有真正的缺點：</p>
+<ul>
+<li>
+<p>需要額外的引入（如果程式碼引入 future prelude，則可以避免，我們也許可以更直接地鼓勵這麼做）。</p>
+</li>
+<li>
+<p>從程式碼角度來說，受一個特徵的<strong>約束</strong>卻<strong>實作</strong>另一個特徵可能會令人困惑。</p>
+</li>
+</ul>
+<p>該 RFC 的錯誤處理部分與其他部分是分開的，因此主要的替代方案是保留內嵌的錯誤型別。</p>
+<h2 id="核心特徵設計的基本原理缺點和替代方案-wrt-pin"><a class="header" href="#核心特徵設計的基本原理缺點和替代方案-wrt-pin">核心特徵設計的基本原理、缺點和替代方案 (wrt <code>Pin</code>)</a></h2>
+<p>撇開上面討論過的錯誤處理之正交性不談，這個 RFC 中的另一主要項目是核心輪詢方法向 <code>Pin</code> 轉移，以及它與 <code>Unpin</code>/手動撰寫的 futures 之間的關係。在 RFC 討論過程中，我們基本上確定了解決這個問題的三種主要方法：</p>
+<ul>
+<li>
+<p><strong>一個核心特徵</strong>。這就是主要 RFC 文本中採用的方法：只有一個核心 <code>Future</code> 特徵，它適用於 <code>Pin&lt;&amp;mut Self&gt;</code>。另外還有一個 <code>poll_unpin</code> 輔助器，用於在手動實現中使用 <code>Unpin</code> futures。</p>
+</li>
+<li>
+<p><strong>兩個核心特徵</strong>。我們可以提供兩個特徵，例如 <code>MoveFuture</code> 和 <code>Future</code>，其中一個在 <code>&amp;mut self</code> 上運行，另一個在 <code>Pin&lt;&amp;mut Self&gt;</code> 上運行。這使得我們可以繼續以 futures 0.2 的風格編寫程式，即無需引入 <code>Pin</code>/<code>Unpin</code> 或以其他方式談論 pin。一個關鍵要求是需要可交互運作性（interoperation），以便可以在任何需要 <code>Future</code> 的地方使用 <code>MoveFuture</code>。至少有兩種方法可以實現這種互操作：</p>
+<ul>
+<li>
+<p>透過對 <code>T: MoveFuture</code> 的 <code>Future</code> 全面實作（blanket implementation）。這種方法目前阻止了一些<strong>其他</strong>所需的實作（特別圍繞在 <code>Box</code> 和 <code>&amp;mut</code>），但這似乎不是問題的根本。</p>
+</li>
+<li>
+<p>透過子特徵的關係，使得 <code>T: Future</code> 本質上被定義為 <code>for&lt;'a&gt; Pin&lt;&amp;mut 'a T&gt;: MoveFuture</code> 的別名。不幸的是，這種「更高等級」的特徵關係目前在特徵系統中效果不佳，而且這種方法在手動實現 <code>Future</code> 時也使事情變得更加複雜，收益相對較小。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>該 RFC 採用的「一個核心特徵」方法的缺點是，它在手動編寫可移動 future 時與人因工程相衝突：您現在需要為您的型別引入 <code>Pin</code> 和 <code>Unpin</code>、調用 <code>poll_unpin</code> 和實現 <code>Unpin</code>。這一切都很機械化，但這是痛苦的。而 <code>Pin</code> 的人因工程學的改進可能會消除其中一些問題，但仍存在許多未解決的問題。</p>
+<p>另一方面，雙特徵方法也有缺點。如果我們<strong>還</strong>移除錯誤型別，則會出現組合爆炸，因為我們最終需要每個特徵的 <code>Try</code> 變體（這也延伸到相關的特徵，例如 <code>Stream</code>）。更廣泛地說，使用單一特徵方法，<code>Unpin</code> 充當一種「獨立旋鈕」，可以與其他關注點作正交應用；使用雙特徵方法，它是「混合的」。目前這兩種雙特徵方法都受到了編譯器的限制，儘管這不應該被視為決定因素。</p>
+<p><strong>該 RFC 選擇單一特徵方法的主要原因是它是保守的、前向相容（forward-compatible）的選擇，並且已經在實際中證明了自己</strong>。可以在未來的任何時候添加 <code>MoveFuture</code> 以及一個全面實作。因此，從本 RFC 中提出的單一 <code>Future</code> 特徵開始，在我們獲得經驗的同時，我們的選項也保持最大限度的開放。</p>
+<h2 id="喚醒設計-waker-的基本原理缺點和替代方案"><a class="header" href="#喚醒設計-waker-的基本原理缺點和替代方案">喚醒設計 (Waker) 的基本原理、缺點和替代方案</a></h2>
+<p>該提議的先前疊代包括一個單獨的喚醒型別 <code>LocalWaker</code>，它是 <code>!Send + !Sync</code> 並且可用於實作最佳化的執行器行為，而無需原子引用計數或原子喚醒。然而，實際上，這些相同的最佳化可以使用執行緒本地喚醒佇列（queue）來實作，攜帶 ID 而不是指向喚醒物件的指標，並追蹤執行程序 ID 或執行緒 ID 以執行未發送 <code>Waker</code> 的 runtime 斷言執行緒。舉個簡單的例子，零原子的單執行緒鎖定執行器可以如下實現：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Executor {
+    // map from task id (usize) to task
+    tasks: Slab&lt;Task&gt;,
+    // list of woken tasks to poll
+    work_queue: VecDeque&lt;usize&gt;,
+}
+
+thread_local! {
+  pub static EXECUTOR: RefCell&lt;Option&lt;Executor&gt;&gt; = ...;
+}
+
+static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
+    clone: |data: *const ()| RawWaker { data, vtable: VTABLE, },
+    wake: |data: *const ()| EXECUTOR.borrow_mut().as_mut().expect(...).work_queue.push(data as usize),
+    drop,
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>雖然此解決方案向 <code>LocalWaker</code> 方法提供了較差的錯誤訊息（因為在錯誤的執行緒上發生 <code>wake</code> 之前，它不会恐慌，而不是在 <code>LocalWaker</code> 轉換為 <code>Waker</code> 時發生恐慌），它極大地透過去除 <code>LocalWaker</code> 和 <code>Waker</code> 型別的重複，簡化了給使用者的 API 。</p>
+<p>在實際情況下，非常可能 Rust 生態系統中最常見的執行器繼續與多執行緒相容（就像現在一樣），因此在更特化的情況，針對這種情況最佳化其人因工程學，優先於更好的錯誤訊息。</p>
+<h1 id="現有技術"><a class="header" href="#現有技術">現有技術</a></h1>
+<p>以 async/await 語法和以 future（又名 promise）為基礎的大量現有技術。提議的 futures API 是受到 Scala 的 futures 的影響，並且與各種其他語言的 API 大體相似（就以提供的轉接器而言）。</p>
+<p>此 RFC 中模型的獨特之處在於使用了任務，而不是 callback。RFC 的作者不知道其他 <em>future</em> 函式庫是否使用這種技術，但它是 functional programming 中一種相當知名且更普遍的技術。有關於最近的範例，請參閱這篇關於 Haskell 平行的<a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2011/01/monad-par.pdf">論文</a>。這個 RFC 似乎是一个將 「trampoline」 技術與明確的、開放式的任務/喚醒模型结合起来的新想法。</p>
+<h1 id="未解決的問題-1"><a class="header" href="#未解決的問題-1">未解決的問題</a></h1>
+<p>暫時沒有。</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Feature Name: sparse_index</li>
 <li>Start Date: 2019-10-18</li>
 <li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2789">rust-lang/rfcs#2789</a></li>
@@ -953,11 +1352,11 @@ rust = &quot;1.33&quot;
 </ul>
 <h1 id="總結-4"><a class="header" href="#總結-4">總結</a></h1>
 <p>可透過 HTTP 選擇性下載 crates-io 索引，類於 Ruby 的 Bundler 的作法。傳輸方式從預先（ahead-of-time）Git clone 改變為 HTTP 按需下載。既有的索引結構和內容維持不變。重要的是，此提案可與靜態檔案協同運作，而不需客製化的伺服器端 API。</p>
-<h1 id="動機-6"><a class="header" href="#動機-6">動機</a></h1>
+<h1 id="動機-7"><a class="header" href="#動機-7">動機</a></h1>
 <p>完整的 crate 索引相對龐大且下載慢。它還會隨著 crates.io 增長而增長，讓情況每況愈下。需要下載完整索引這件事拖累了首次使用 Cargo 的速度。尤其是在無狀態的 CI 環境下更是緩慢又浪費且只使用完整索引的非常小一部分，剩下全都給拋棄。快取索引在 CI 環境可謂困難重重（<code>.cargo</code> 目錄很巨）又經常低效（如：在 Travis Ci 上傳下載大型快取幾乎和下載新鮮索引一樣慢）。</p>
 <p>目前索引的儲存資料格式和 git 協定搭配起來並不是很舒服。未壓縮的索引內容 tarball（截止 eb037b4863）佔 176MiB，<code>gzip -1</code> 需要 16MiB，而 <code>xz -6</code> 壓縮則要 10MiB。然 Git clone 卻回報下載了 215 MiB，比未壓縮的最新索引內容還大，且是壓縮後 tarball 的 <strong>二十倍之多</strong>。</p>
 <p>將 git 歷史記錄 shallow clone 或 squash 只是暫時解。且不論事實上 <a href="http://blog.cocoapods.org/Master-Spec-Repo-Rate-Limiting-Post-Mortem/">GitHub 指出它們不想支援大型儲存庫的 shallow clone</a>，也不論 libgit2 尚未支援 shallow clone，實際上這作法仍未解決客戶端必須下載包含所有 crate 的整包索引。</p>
-<h1 id="教學式解說-2"><a class="header" href="#教學式解說-2">教學式解說</a></h1>
+<h1 id="教學式解說-3"><a class="header" href="#教學式解說-3">教學式解說</a></h1>
 <p>將索引作為純文字檔案，透過 HTTP 開放出來。開放既有的索引佈局排列也夠用（就像從 raw.githubusercontent.com 看到的長相），不過以 HTTP 來說 URL scheme 可能可以簡化。</p>
 <p>欲了解 crate 資訊和解析依賴，Cargo（或其他客戶端）可對每個依賴建立請求，並送往已知的 URL 以取得需要的資訊，例如：<code>https://index.example.com/se/rd/serde</code>。對各個依賴來說，客戶端也會繼續請求其依賴資訊， 遞迴循環，直到取得所有依賴（並快取）到本機端。</p>
 <p>請求依賴檔案是有辦法平行化運作的，所以依賴解析最差情況下的延遲會限制在依賴樹的最大深度。實務上最差情況非常少見，因為依賴通常會多次出現在樹中，因此可以提前發現並增加平行化機會。且，若已有 lock 檔案，所有列在其中的依賴也都可平行化核對處理，</p>
@@ -1025,13 +1424,13 @@ rust = &quot;1.33&quot;
 <h1 id="總結-5"><a class="header" href="#總結-5">總結</a></h1>
 <p>棄用現有的 <code>asm!</code> 巨集（macro），並提供一個名為 <code>llvm_asm!</code> 的相同巨集（macro）。功能開關也從 <code>asm</code> 重新命名為 <code>llvm_asm</code> 。
 與 <code>asm!</code> 不同的是， <code>llvm_asm!</code> 不打算成為穩定版。</p>
-<h1 id="動機-7"><a class="header" href="#動機-7">動機</a></h1>
+<h1 id="動機-8"><a class="header" href="#動機-8">動機</a></h1>
 <p>這個變更將 <code>asm!</code> 巨集（macro）釋放了，使它可用於內嵌組合語言項目組新設計的 <code>asm!</code> 巨集（macro），
 同時為現在使用 <code>asm!</code> 的用戶提供一個簡單的方法來保持代碼的正常運作。</p>
 <p>對尚未支援新的 <code>asm!</code> 巨集（macro）的架構，在（nightly 版本）上執行內嵌組合語言可能會有用。</p>
-<h1 id="教學式解說-3"><a class="header" href="#教學式解說-3">教學式解說</a></h1>
+<h1 id="教學式解說-4"><a class="header" href="#教學式解說-4">教學式解說</a></h1>
 <p>Rust 團隊目前正在重新設計 <code>asm!</code> 巨集（macro）。您應該將所有使用 <code>asm!</code> 的代碼都替換為 <code>llvm_asm!</code> ，以避免代碼在實施新的 <code>asm!</code> 巨集（macro）時毀壞。</p>
-<h1 id="技術文件式解說-2"><a class="header" href="#技術文件式解說-2">技術文件式解說</a></h1>
+<h1 id="技術文件式解說-3"><a class="header" href="#技術文件式解說-3">技術文件式解說</a></h1>
 <p>編譯器內所有對 <code>asm!</code> 的參考都將改參考 <code>llvm_asm!</code> 。
 <code>asm!</code> 將變成一個單純（已棄用）的 <code>macro_rules!</code> ，它會重新導到<code>llvm_asm!</code>。
 棄用警告將告知使用者 <code>asm!</code> 將來的語義會作改變，並邀請他們使用 <code>llvm_asm!</code> 來替代。<code>llvm_asm!</code> 巨集（macro）將由 <code>llvm_asm</code> 功能開關來把控。</p>
@@ -1059,7 +1458,7 @@ rust = &quot;1.33&quot;
 </ul>
 <h1 id="總結-6"><a class="header" href="#總結-6">總結</a></h1>
 <p>透過引進<strong>輸入輸出安全性</strong>（I/O safety）之概念與一系列新型別與特徵，保障 <code>AsRaw</code> 及相關特徵的使用者對原始資源 handle （raw resource handle）之使用，以彌補 Rust 封裝邊界的漏洞。</p>
-<h1 id="動機-8"><a class="header" href="#動機-8">動機</a></h1>
+<h1 id="動機-9"><a class="header" href="#動機-9">動機</a></h1>
 <p>Rust 標準函式庫幾乎算是已經提供了<strong>輸入輸出安全性</strong>，保證程式的一部分若私自持有一個原始 handle （raw handle），其他部分就無法存取。例如 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html#tymethod.from_raw_fd"><code>FromRawFd::from_raw_fd</code></a> 標示為不安全，它不允許使用者在 safe Rust 之下執行如 <code>File::from_raw_fd(7)</code> 等操作，或是在程式各處私自持有檔案描述子（file descriptor）來執行輸入輸出。</p>
 <p>不過仍有漏網之魚。許多函式庫的 API 透過接受 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html"><code>AsRawFd</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.IntoRawFd.html"><code>IntoRawFd</code></a> 來執行輸入輸出操作：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -1078,7 +1477,7 @@ rust = &quot;1.33&quot;
 <li>一系列全新的型別與特徵。</li>
 <li>替 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html#tymethod.from_raw_fd"><code>from_raw_fd</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.FromRawHandle.html#tymethod.from_raw_handle"><code>from_raw_handle</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.FromRawSocket.html#tymethod.from_raw_socket"><code>from_raw_socket</code></a> 撰寫新文件，解釋就輸入輸出安全性而言，它們為何不安全，順便解決出現好<a href="https://github.com/rust-lang/rust/issues/72175">幾</a><a href="https://users.rust-lang.org/t/why-is-fromrawfd-unsafe/39670">次</a>的相同問題。</li>
 </ul>
-<h1 id="教學式解說-4"><a class="header" href="#教學式解說-4">教學式解說</a></h1>
+<h1 id="教學式解說-5"><a class="header" href="#教學式解說-5">教學式解說</a></h1>
 <h2 id="輸入輸出安全性概念"><a class="header" href="#輸入輸出安全性概念">輸入輸出安全性概念</a></h2>
 <p>Rust 標準函式庫提供了低階型別，以表示原始的作業系統資源 handle：類 Unix 平台的 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html"><code>RawFd</code></a> 和 Windows 上的 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawHandle.html"><code>RawHandle</code></a> 與 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawSocket.html"><code>RawSocket</code></a>。然而，它們並沒有提供任何自身的行為，而是僅作為一個標識符（identifier），並在低階的作業系統 API 間傳遞。</p>
 <p>這些原始 handle 可以視為原始指標（raw pointer）且具有相同的危險性。雖然<strong>取得</strong>一個原始指標是安全的，但當該原始指標是非法指標，或是比其指向記憶體之處活得更久時，對原始指標<strong>取值</strong>（dereference）都可能引發未定義行為（undefined behavior）。無獨有偶，透過 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html#tymethod.as_raw_fd"><code>AsRawFd::as_raw_fd</code></a> 或類似方法<strong>取得</strong>一個原始 handle 是安全的，但當它並非合法 handle 或在關閉之後才拿來用時，用該 handle 來執行輸入輸出恐導致「損毀的輸出結果」、「遺失或洩漏輸入資料」或「違反封裝的邊界」。在這兩個案例中，影響不僅限於本地，也會影響程式的其他部分。保護原始指標免於危險稱作記憶體安全性，所以保護原始 handle 免於危險我們叫它<strong>輸入輸出安全性</strong>。</p>
@@ -1144,7 +1543,7 @@ rust = &quot;1.33&quot;
 <li>在此之後，crate 可以開始用這些新型別，並替 crate 自己的型別實作這些新特徵。這些改變相對小，而且符合語意化版號相容性，不需其他特殊處理。</li>
 <li>當標準函式庫和夠多的熱門 crate 實作這些新特徵後，其他 crate 可按照它們的開發步調，將這些新特徵作為泛型引數的限定條件（bound)。雖然這些改變不符合語意化版號的相容性，不過多數 API 使用者改用新特徵時並不需改變程式碼。</li>
 </ul>
-<h1 id="技術文件式解說-3"><a class="header" href="#技術文件式解說-3">技術文件式解說</a></h1>
+<h1 id="技術文件式解說-4"><a class="header" href="#技術文件式解說-4">技術文件式解說</a></h1>
 <h2 id="輸入輸出安全性概念-1"><a class="header" href="#輸入輸出安全性概念-1">輸入輸出安全性概念</a></h2>
 <p>Rust 語言除了有記憶體安全性之外，Rust 標準函式庫同時提供了對輸入輸出安全性的保證。一個合法的輸入輸出操作，其所操作的原始 handle（<a href="https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html"><code>RawFd</code></a>、 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawHandle.html"><code>RawHandle</code></a>、<a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawSocket.html"><code>RawSocket</code></a>）必為明確從作業系統回傳之值，且這些操作僅發生在與作業系統關聯之生命週期內。當一段 Rust 程式碼宣稱輸入輸出安全性，代表該程式碼不可能導致非法的輸入輸出操作。</p>
 <p>雖然有些作業系統的文件中說明其檔案描述子的配置演算法，但從這些演算法旁敲側擊出來的 handle 值並不會視為「明確從作業系統回傳之值」。</p>
@@ -1221,7 +1620,7 @@ rust = &quot;1.33&quot;
 <li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/6de9eb35193852dd910c38f5c2c41e6f3e2a8ed4/text/3151-scoped-threads.md">The commit link this page based on</a></li>
 <li>Updated: 2022-07-05</li>
 </ul>
-<h1 id="概要-2"><a class="header" href="#概要-2">概要</a></h1>
+<h1 id="概要-3"><a class="header" href="#概要-3">概要</a></h1>
 <p>在標準函式庫中新增作用域執行緒，其允許產生可借用父執行緒之變數的執行緒。</p>
 <p>範例:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -1234,12 +1633,12 @@ thread::scope(|s| {
 });
 <span class="boring">}
 </span></code></pre></pre>
-<h1 id="動機-9"><a class="header" href="#動機-9">動機</a></h1>
+<h1 id="動機-10"><a class="header" href="#動機-10">動機</a></h1>
 <p>在 Rust 1.0 發布之前，我們有與作用域執行續相同作用的 <a href="https://docs.rs/thread-scoped/1.0.2/thread_scoped/"><code>thread::scoped()</code></a>，但後來發現一個健全性的問題，可能導致 use-after-frees，所以它已被移除。這一歷史事件稱為<a href="http://cglab.ca/~abeinges/blah/everyone-poops/">洩密事件</a>。</p>
 <p>幸運的是，舊的作用域執行緒可被修復，透過閉包（closure）而非守護（guard)，來確保生成的執行緒會自動會合（join）。但我們對在 Rust 1.0 中加入的作用域執行緒並不放心，所以我們決定將其放在外部 crates 之中，並有可能在未來的某個時刻回到標準函式庫中。四年過去了，那個未來就是現在。</p>
 <p>作用域執行緒在 <a href="https://docs.rs/crossbeam/0.7.1/crossbeam/thread/index.html">Crossbeam</a> 中經過多年的經驗累積，我們的設計已經趨於成熟，足以被推廣到標準函式庫中。</p>
 <p>更多內容請看<a href="3151-scoped-threads.html#rationale-and-alternatives">基本理由及替代方案</a>部分。</p>
-<h1 id="教學式解說-5"><a class="header" href="#教學式解說-5">教學式解說</a></h1>
+<h1 id="教學式解說-6"><a class="header" href="#教學式解說-6">教學式解說</a></h1>
 <p>執行緒生成的 &quot;hello world&quot; 可能如下所示：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1321,7 +1720,7 @@ thread::scope(|s| {
 });
 <span class="boring">}
 </span></code></pre></pre>
-<h1 id="技術文件式解說-4"><a class="header" href="#技術文件式解說-4">技術文件式解說</a></h1>
+<h1 id="技術文件式解說-5"><a class="header" href="#技術文件式解說-5">技術文件式解說</a></h1>
 <p>我們在 <code>std::thread</code> 模組中新增兩個新的型別：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1409,7 +1808,7 @@ impl Builder {
 </ul>
 </li>
 </ul>
-<h1 id="現有技術"><a class="header" href="#現有技術">現有技術</a></h1>
+<h1 id="現有技術-1"><a class="header" href="#現有技術-1">現有技術</a></h1>
 <p>自 Rust 1.0 以來，Crossbeam 就有了<a href="https://docs.rs/crossbeam/0.7.1/crossbeam/thread/index.html">作用域執行緒</a>。</p>
 <p>Crossbeam 的作用域執行緒有兩種設計。舊的是在 <code>thread::scoped()</code> 被刪除後，我們想在 Rust 1.0 時代有一個合理的替代方案。新的則是在去年的大改版之中。</p>
 <ul>
@@ -1432,7 +1831,7 @@ impl Builder {
 </li>
 </ol>
 <p>Rayon 也有作用域，但它們在不同的抽象級別上工作——Rayon 產生任務而不是執行緒。它的 API 與本 RFC 中提出的 API 相同。</p>
-<h1 id="未解決的問題-1"><a class="header" href="#未解決的問題-1">未解決的問題</a></h1>
+<h1 id="未解決的問題-2"><a class="header" href="#未解決的問題-2">未解決的問題</a></h1>
 <p>這個概念可以延伸到非同步嗎？會有任何行為或 API 差異嗎？</p>
 <h1 id="未來的可能性"><a class="header" href="#未來的可能性">未來的可能性</a></h1>
 <p>在未来，我們也可以有一個像 Rayon 那樣的執行緒池，可以生成作用域内的任務。</p>
