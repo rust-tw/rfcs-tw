@@ -11,54 +11,21 @@
 # 概要
 [概要]: #summary
 
-Add async & await syntaxes to make it more ergonomic to write code manipulating
-futures.
+新增 async 和 await 語法，使撰寫程式碼操作 futures 更符合人因工程學。
 
-This has [a companion RFC](2592-futures.md) to add a small futures API to libstd and libcore.
-
+這有一個[配套的 RFC](2592-futures.md)，用於向 libstd 和 libcore 新增一個小型 futures API。
 # 動機
 [動機]: #motivation
 
-High performance network services frequently use asynchronous IO, rather than
-blocking IO, because it can be easier to get optimal performance when handling
-many concurrent connections. Rust has seen some adoption in the network
-services space, and we wish to continue to enable those users - and to enable
-adoption by other users - by making it more ergonomic to write asynchronous
-network services in Rust.
+高性能網絡服務經常使用非同步 IO，而不是阻塞 IO，因為在處理許多並行連接時更容易獲得最佳效能。 Rust 已經在網絡服務領域得到了一些採用，我們希望透過使 Rust 中撰寫非同步網路服更符合人因工程學，繼續支援這些使用者 - 並支援其他使用者採用。
 
-The development of asynchronous IO in Rust has gone through multiple phases.
-Prior to 1.0, we experimented with having a green-threading runtime built into
-the language. However, this proved too opinionated - because it impacted every
-program written in Rust - and it was removed shortly before 1.0. After 1.0,
-asynchronous IO initially focused around the mio library, which provided a
-cross-platform abstraction over the async IO primitives of Linux, Mac OS, and
-Windows. In mid-2016, the introduction of the futures crate had a major impact
-by providing a convenient, shared abstraction for asynchronous operations. The
-tokio library provided a mio-based event loop that could execute code
-implemented using the futures interfaces.
+Rust 中非同步 IO 的發展經歷了多個階段。在 1.0 之前，我們嘗試在語言中內嵌綠色執行緒（green-threading） runtime。然而，事實證明這太自以為是了——因為它影響了每個用 Rust 撰寫的程式——並且在 1.0 之前不久就被刪除了。在 1.0 之後，非同步 IO 最初專注於 mio 函式庫，它為 Linux、Mac OS 和 Windows 的非同步 IO 基元（primitive）提供了一個跨平台抽象。 2016 年年中，future crate 的引入產生了重大影響，它為非同步操作提供了一個方便、共享的抽象。 tokio 函式庫提供了一個基於 mio 的事件循環，可以執行使用 future 介面實作的程式碼。
 
-After gaining experience & user feedback with the futures-based ecosystem, we
-discovered certain ergonomics challenges. Using state which needs to be shared
-across await points was extremely unergonomic - requiring either Arcs or join
-chaining - and while combinators were often more ergonomic than manually
-writing a future, they still often led to messy sets of nested and chained
-callbacks.
+在獲得基於 future 的生態系統的經驗和使用者的回饋後，我們發現了某些人因工程學挑戰。使用需要在等待點（await point）之間共享的狀態是非常不符合人因工程學的——需要 Arc 或 join chaining —— 雖然組合器通常比手動撰寫 future 更符合人因工程學，但它們仍然經常導致混亂的嵌套和 chained callbacks。
 
-Fortunately, the Future abstraction is well suited to use with a syntactic
-sugar which has become common in many languages with async IO - the async and
-await keywords. In brief, an asynchronous function returns a future, rather
-than evaluating immediately when it is called. Inside the function, other
-futures can be awaited using an await expression, which causes them to yield
-control while the future is being polled. From a user's perspective, they can
-use async/await as if it were synchronous code, and only need to annotate their
-functions and calls.
+幸運的是，Future 抽象非常適合與一種語法糖一起使用，該語法糖在許多具有非同步 IO 的語言中變得很常見 - async 和 await 關鍵字。簡而言之，非同步函式返回一個 future，而不是在調用它時立即執行。在函式內部，可以使用 await 表達式等待其他 future，這使它們在輪詢 future 時讓出控制權。從使用者的角度來看，他們可以像使用同步程式碼一樣使用 async/await，並且只需要注釋他們的函式和調用。
 
-Async/await & futures can be a powerful abstraction for asynchronicity and
-concurrency in general, and likely has applications outside of the asynchronous
-IO space. The use cases we've experience with today are generally tied to async
-IO, but by introducing first class syntax and libstd support we believe more
-use cases for async & await will also flourish, that are not tied directly to
-asynchronous IO.
+Async/await 和 futures 通常是非同步和並行的強大抽象，並且可能在非同步 IO 空間之外有其他應用。我們今天遇到的案例通常與非同步 IO 相關，但透過引入一等公民語法和 libstd 的支援，我們相信更多的 async 和 await 案例也會蓬勃發展，而這些案例不直接與非同步 IO 相關。
 
 # 教學式解說
 [教學式解說]: #guide-level-explanation
