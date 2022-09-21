@@ -8,16 +8,16 @@
 - Commit: [The commit link this page based on](https://github.com/rust-lang/rfcs/blob/6041dd9ff2ed97eff4e054117cc1581b8c45d8c1/text/2394-async_await.md)
 - Updated 2022-09-21
 
-# Summary
-[summary]: #summary
+# 概要
+[概要]: #summary
 
 Add async & await syntaxes to make it more ergonomic to write code manipulating
 futures.
 
 This has [a companion RFC](2592-futures.md) to add a small futures API to libstd and libcore.
 
-# Motivation
-[motivation]: #motivation
+# 動機
+[動機]: #motivation
 
 High performance network services frequently use asynchronous IO, rather than
 blocking IO, because it can be easier to get optimal performance when handling
@@ -60,8 +60,8 @@ IO, but by introducing first class syntax and libstd support we believe more
 use cases for async & await will also flourish, that are not tied directly to
 asynchronous IO.
 
-# Guide-level explanation
-[guide-level-explanation]: #guide-level-explanation
+# 教學式解說
+[教學式解說]: #guide-level-explanation
 
 ## Async functions
 
@@ -179,8 +179,8 @@ Using it outside of that context is an error.
 (`await!` is a compiler built-in to leave space for deciding its exact syntax
 later. See more information in the unresolved questions section.)
 
-# Reference-level explanation
-[reference-level-explanation]: #reference-level-explanation
+# 技術文件式解說
+[技術文件式解說]: #reference-level-explanation
 
 ## Keywords
 
@@ -286,8 +286,8 @@ async move {
 }
 ```
 
-# Drawbacks
-[drawbacks]: #drawbacks
+# 缺點
+[缺點]: #drawbacks
 
 Adding async & await syntax to Rust is a major change to the language - easily
 one of the most significant additions since 1.0. Though we have started with
@@ -314,7 +314,7 @@ functions in which they are evaluated immediately up to the first await point.
 The decisions we made on each of these questions are justified in the
 appropriate section of the RFC.
 
-# Rationale and alternatives
+# 原理和替代方案
 [alternatives]: #alternatives
 
 This section contains alternative design decisions which this RFC rejects (as
@@ -510,8 +510,8 @@ The RFC proposes to include both constructs up front, since it seems inevitable
 that we will want both of them, but we can always reconsider this question
 before stabilization.
 
-# Prior art
-[prior-art]: #prior-art
+# 現有技術
+[現有技術]: #prior-art
 
 There is a lot of precedence from other languages for async/await syntax as a
 way of handling asynchronous operation - notable examples include C#,
@@ -537,8 +537,8 @@ type, rather than the outer return type. As discussed in the alternatives
 section, Rust's specific context (lifetime elision, the lack of a need for
 return type polymorphism here) make this deviation well-motivated.
 
-# Unresolved questions
-[unresolved]: #unresolved-questions
+# 未解決的問題
+[未解決的問題]: #unresolved-questions
 
 This section contains design extensions which have been postponed & not
 included in this initial RFC.
