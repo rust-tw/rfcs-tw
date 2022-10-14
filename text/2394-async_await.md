@@ -106,7 +106,7 @@ async { /* body */ }
 
 ## 編譯器內嵌的 `await!`
 
-一個名為 `await!` 的內嵌函式被添加到編譯器。`await!` 可用於「暫停」future 的計算，將控制權交還給呼叫者。`await!` 接受任何實作 `IntoFuture` 的表達式，並計算為此 future 所具有的項目型別的值。
+一個名為 `await!` 的內嵌函式被添加到編譯器。`await!` 可用於「暫停」future 的計算，將控制權交還給呼叫者。`await!` 接受任何實作 `IntoFuture` 的表達式，並計算為此 future 所傳入的泛型型別（如下面範例的 `Output`）之值。
 
 ```rust
 // future: impl Future<Output = usize>
