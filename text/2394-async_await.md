@@ -62,7 +62,7 @@ fn main() {
 
 ### `async ||` closures
 
-除了函式，非同步也可以應用於 closure。與非同步函式一樣，非同步 closure 的返回行別為 `impl Future<Output = T>`，而不是 `T`。當您呼叫該 closure 時，它會立即返回一個 future 而不執行任何內容（就像非同步函式一樣）。
+除了函式，非同步也可以應用於 closure。與非同步函式一樣，非同步 closure 的返回型別為 `impl Future<Output = T>`，而不是 `T`。當您呼叫該 closure 時，它會立即返回一個 future 而不執行任何內容（就像非同步函式一樣）。
 
 ```rust
 fn main() {
@@ -207,11 +207,13 @@ one of the most significant additions since 1.0. Though we have started with
 the smallest beachhead of features, in the long term the set of features it
 implies will grow as well (see the unresolved questions section). Such a
 significant addition mustn't be taken lightly, and only with strong motivation.
+在 Rust 中添加 async 和 await 語法是對語言的重大更改 - 這是自 1.0 以來最重要的新增功能之一。雖然我們從最小的功能開始，但從長遠來看，它所隱含的功能集也會增長（請參閱未解決的問題部分）。對於這樣一個重要的新增功能，我們絕不能掉以輕心，只有在強烈的動機下才能進行。
 
 We believe that an ergonomic asynchronous IO solution is essential to Rust's
 success as a language for writing high performance network services, one of our
 goals for 2018. Async & await syntax based on the Future trait is the most
 expedient & low risk path to achieving that goal in the near future.
+我們相信，一個符合人因工程學的非同步 IO 解決方案對於 Rust 作為撰寫高性能網路服務的語言的成功至關重要，這是我們 2018 年的目標之一。基於 Future trait 的非同步和等待語法是在不久的將來實現這一目標最便捷和低風險的途徑。
 
 This RFC, along with its companion lib RFC, makes a much firmer commitment to
 futures & async/await than we have previously as a project. If we decide to
@@ -219,6 +221,7 @@ reverse course after stabilizing these features, it will be quite costly.
 Adding an alternative mechanism for asynchronous programming would be more
 costly because this exists. However, given our experience with futures, we are
 confident that this is the correct path forward.
+這個 RFC，連同其配套的 lib RFC，對 future 和 async/await 做出了比我們過往的專案更堅定的承諾。如果我們在穩定了這些特性之后而決定反其道而行，那將是相當大的代價。增加非同步程式的替代機制，因位這個的存在，成本會更高，。然而，鑑於我們在 future 方面的經驗，我們相信這是正確的前進道路。
 
 There are drawbacks to several of the smaller decisions we have made as well.
 There is a trade off between using the "inner" return type and the "outer"
@@ -226,31 +229,36 @@ return type, for example. We could have a different evaluation model for async
 functions in which they are evaluated immediately up to the first await point.
 The decisions we made on each of these questions are justified in the
 appropriate section of the RFC.
+我們所做的幾個小決定也有缺點。例如，在使用「内部」返回型別和「外部」返回型別之間有一個權衡。我們可以為非同步函式建立一個不同的評估模型，即在第一個等待點之前立即對其進行評估。我們在這些問題上做出的决定在 RFC 的相應部分都有說明。
 
 # 原理和替代方案
 [alternatives]: #alternatives
 
 This section contains alternative design decisions which this RFC rejects (as
 opposed to those it merely postpones).
+本節包含了本 RFC 拒絕的替代性設計決定（相對於那些只是推遲的設計）。
 
-## The return type (`T` instead of `impl Future<Output = T>`)
+## 返回型別（使用 `T` 而不是 `impl Future<Output = T>`）
 
 The return type of an asynchronous function is a sort of complicated question.
 There are two different perspectives on the return type of an async fn: the
 "interior" return type - the type that you return with the `return` keyword,
 and the "exterior" return type - the type that the function returns when you
 call it.
+非同步函式的返回型別是一個有點複雜的問題。對於非同步 fn 的返回型別，有兩個不同的觀點：「内部」返回型別--你用 `return` 關鍵字返回的型別，以及「外部」返回型別--當你呼叫函式時返回的型別。
 
 Most statically typed languages with async fns display the "outer" return type
 in the function signature. This RFC proposes instead to display the "inner"
 return type in the function signature. This has both advantages and
 disadvantages.
+大多數帶有非同步函式的靜態型別語言在函式簽名中顯示 「外部」返回型別。本 RFC 建議在函式簽名中顯示「内部」返回型別。這既有優點也有缺點。
 
-### The lifetime elision problem
+### 生命週期消除問題
 
 As alluded to previously, the returned future captures all input lifetimes. By
 default, `impl Trait` does not capture any lifetimes. To accurately reflect the
 outer return type, it would become necessary to eliminate lifetime elision:
+正如前面所提到的，返回的 future 捕獲了所有輸入的生命週期。默認情況下，`impl Trait` 不捕獲任何生命週期。為了準確地反應外部返回型別，有必要消除生命週期的省略：
 
 ```rust
 async fn foo<'ret, 'a: 'ret, 'b: 'ret>(x: &'a i32, y: &'b i32) -> impl Future<Output = i32> + 'ret {
@@ -261,10 +269,12 @@ async fn foo<'ret, 'a: 'ret, 'b: 'ret>(x: &'a i32, y: &'b i32) -> impl Future<Ou
 This would be very unergonomic and make async both much less pleasant to use
 and much less easy to learn. This issue weighs heavily in the decision to
 prefer returning the interior type.
+這將是非常不符合人因工程學的，並且使非同步的使用變得更不愉快，更不容易學習。這個問題在決定返回內部型別時佔很大比重。
 
 We could have it return `impl Future` but have lifetime capture work
 differently for the return type of `async fn` than other functions; this seems
 worse than showing the interior type.
+我們可以讓它返回 `impl Future`，但對於 `async fn` 的返回型別，生命週期捕獲的工作方式與其他函式不同;這似乎比顯示內部型別更糟糕。
 
 ### Polymorphic return (a non-factor for us)
 
