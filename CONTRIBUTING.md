@@ -20,4 +20,4 @@ commit: [The commit link this page based on](https://github.com/rust-lang/rfcs/.
 updated: YYYY-MMM-DD
 ```
 
-[pulls]: https://github.com/rust-lang.tw/rfcs/pulls
+[pulls]: https://github.com/rust-tw/rfcs/pulls
