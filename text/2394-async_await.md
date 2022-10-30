@@ -13,26 +13,26 @@
 
 新增 async 和 await 語法，使撰寫程式碼操作 futures 更符合人因工程學。
 
-這有一個[配套的 RFC](2592-futures.md)，用於向 libstd 和 libcore 新增一個小型 futures API。
+另有一個[配套 RFC](2592-futures.md)，用於向 libstd 和 libcore 新增一個小型 futures API。
 # 動機
 [動機]: #motivation
 
-高效能網路服務經常使用非同步 IO，而不是阻塞 IO，因為在處理許多並行連接時更容易獲得最佳效能。 Rust 已經在網路服務領域得到了一些採用，我們希望透過使 Rust 中撰寫非同步網路服務更符合人因工程學，繼續支援這些使用者 - 並支援其他使用者採用。
+高效能網路服務經常使用非同步 IO，而不是阻塞 IO，這樣在處理許多並行連接時更容易獲得更好的效能表現。 Rust 已經在網路服務領域得到了一些採用，我們希望透過使 Rust 中撰寫非同步網路服務更符合人因工程學，繼續支援這些使用者 - 並支援其他使用者採用。
 
-Rust 中非同步 IO 的發展經歷了多個階段。在 1.0 之前，我們嘗試在語言中內嵌綠色執行緒（green-threading） runtime。然而，事實證明這太自以為是了——因為它影響了每個用 Rust 撰寫的程式——並且在 1.0 之前不久就被刪除了。在 1.0 之後，非同步 IO 最初專注於 mio 函式庫，它為 Linux、Mac OS 和 Windows 的非同步 IO 基元（primitive）提供了一個跨平台抽象。 2016 年年中，future crate 的引入產生了重大影響，它為非同步操作提供了一個方便、共享的抽象。 tokio 函式庫提供了一個基於 mio 的事件循環，可以執行使用 future 介面實作的程式碼。
+Rust 中非同步 IO 的發展經歷了多個階段。在 1.0 之前，我們嘗試在語言中內嵌綠色執行緒（green-threading） runtime。然而，事實證明這太過武斷了——因為它影響了每個用 Rust 撰寫的程式——並且在 1.0 之前不久就被刪除了。在 1.0 之後，非同步 IO 最初的重點是 mio 函式庫，它為 Linux、Mac OS 和 Windows 的非同步 IO 基元（primitive）提供了一個跨平台抽象。 2016 年年中，future crate 的引入產生了重大影響，它為非同步操作提供了一個方便且可共享的抽象。 tokio 函式庫提供了一個基於 mio 的事件循環，可以執行使用 future 介面實作的程式碼。
 
-在獲得基於 future 的生態系統的經驗和使用者的回饋後，我們發現了某些人因工程學挑戰。使用需要在等待點（await point）之間共享的狀態是非常不符合人因工程學的——需要 Arc 或 join chaining —— 雖然組合器通常比手動撰寫 future 更符合人因工程學，但它們仍然經常導致混亂的嵌套和 chained callbacks。
+在獲得基於 future 的生態系統的經驗和使用者的回饋後，我們發現了某些人因工程學挑戰。使用需要在等待點（await point）之間共享的狀態，是非常不符合人因工程學的（需要 Arc 或 join chaining）雖然組合器通常比手動撰寫 future 更符合人因工程學，但它們仍然經常導致混亂的嵌套和 chained callbacks。
 
-幸運的是，Future 抽象非常適合與一種語法糖一起使用，該語法糖在許多具有非同步 IO 的語言中變得很常見 - async 和 await 關鍵字。簡而言之，非同步函式返回一個 future，而不是在呼叫它時立即執行。在函式內部，可以使用 await 表達式等待其他 future，這使它們在輪詢 future 時讓出控制權。從使用者的角度來看，他們可以像使用同步程式碼一樣使用 async/await，並且只需要注釋他們的函式和調用。
+幸運的是，Future 抽象非常適合與一種語法糖一起使用——這個語法糖在許多具有非同步 IO 的語言中愈來愈常見：async 和 await 關鍵字。簡而言之，非同步函式回傳一個 future，而不是在呼叫時立即執行。在函式內部，可以使用 await 表達式等待其他 future，這使它們在輪詢 future 時讓出控制權。從使用者的角度來看，他們可以像在使用同步程式碼一樣使用 async/await，並且只需要標注其函式和調用。
 
-Async/await 和 futures 通常是非同步和並行的強大抽象，並且可能在非同步 IO 空間之外有其他應用。我們今天遇到的案例通常與非同步 IO 相關，但透過引入一等公民語法和 libstd 的支援，我們相信更多的 async 和 await 案例也會蓬勃發展，而這些案例不直接與非同步 IO 相關。
+Async/await 和 futures 通常是非同步和並行的強大抽象，並且可能可以應用在非同步 I/O 空間以外的地方。我們今天遇到的案例通常與非同步 IO 相關，但透過引入一等公民語法和 libstd 的支援，我們相信更多不直接與非同步 IO 相關的 async 和 await 案例也會蓬勃發展。
 
 # 教學式解說
 [教學式解說]: #guide-level-explanation
 
 ## 非同步函式
 
-函式可以添加 `async` 關鍵字，使它們成為「非同步函式」：
+對函式加上 `async` 關鍵字，使它們成為「非同步函式」：
 
 ```rust
 async fn function(argument: &str) -> usize {
@@ -40,9 +40,9 @@ async fn function(argument: &str) -> usize {
 }
 ```
 
-非同步函式的工作方式與普通函式不同。呼叫非同步函式時，它不會立即進入主體。相反，它執行實作 `Future` 特徵的匿名型別。當輪詢該 future 時，該函式被執行到它內部的下一個 `await` 或返回點（請參閱接下來 await 語法部分）。
+非同步函式的工作方式與普通函式不同。呼叫非同步函式時，它不會立即進入主體。相反，它執行實作 `Future` 特徵的匿名型別。當輪詢該 future 時，該函式被執行到它內部的下一個 `await` 或回傳點（請參閱接下來 await 語法部分）。
 
-非同步函式是延遲計算的一種 - 在您開始輪詢函式返回的 future 之前，函式本體中沒有任何內容被實際執行。例如：
+非同步函式是延遲計算的一種 - 在您開始輪詢函式回傳的 future 之前，函式本體中沒有任何內容被實際執行。例如：
 
 ```rust
 async fn print_async() {
@@ -62,7 +62,7 @@ fn main() {
 
 ### `async ||` closures
 
-除了函式，非同步也可以應用於 closure。與非同步函式一樣，非同步 closure 的返回型別為 `impl Future<Output = T>`，而不是 `T`。當您呼叫該 closure 時，它會立即返回一個 future 而不執行任何內容（就像非同步函式一樣）。
+除了函式，非同步也可以應用在 closure 上面。。與非同步函式一樣，非同步 closure 的返回型別為 `impl Future<Output = T>`，而不是 `T`。當您呼叫該 closure 時，它會立即回傳一個 future，且不會執行任何程式碼（就像非同步函式一樣）。
 
 ```rust
 fn main() {
@@ -78,11 +78,11 @@ fn main() {
 
 這將在印出 `"Hello from async closure."` 之前印出兩個 `"Hello from main"`。
 
-`async` closure 可以用 `move` 來捕獲它們包覆在 closure 內的變數的所有權。
+`async` closure 可以用 `move` 來捕捉它們包覆在 closure 內的變數的所有權。
 
 ## `async` 區塊
 
-您可以使用 `async` 區塊直接將 future 創建為表達式：
+您可以使用 `async` 區塊直接將 future 建立為表達式：
 
 ```rust
 let my_future = async {
@@ -100,24 +100,24 @@ async { /* body */ }
 (async || { /* body */ })()
 ```
 
-除了像 `return`、`break` 和 `continue` 這樣的控制流結構不允許在 `body` 中使用（除非它們出現在一個新的控制流上下文中，比如 closure 或 loop）。 `?`-operator 和 early return 如何在非同步區塊中工作尚未確定（請參閱未解決的問題）。
+除了像 `return`、`break` 和 `continue` 這樣的控制流程結構不允許在 `body` 中使用（除非它們出現在一個新的控制流上下文中，比如 closure 或 loop）。 尚未確定 `?` 運算子和提早回傳（early return）在非同步區塊運作的方式（請參閱未解決的問題）。
 
-與 `async` closure 一樣，`async` 區塊可以添加 `move`，以捕獲區塊內所包覆的變數的所有權。
+與 `async` closure 一樣，`async` 區塊可以加入 `move`，以捕捉區塊內所包覆的變數的所有權。
 
 ## 編譯器內嵌的 `await!`
 
-一個名為 `await!` 的內嵌函式被添加到編譯器。`await!` 可用於「暫停」future 的計算，將控制權交還給呼叫者。`await!` 接受任何實作 `IntoFuture` 的表達式，並計算為此 future 所傳入的泛型型別（如下面範例的 `Output`）之值。
+編譯器加入了一個名為 `await!` 的內建函式。`await!` 可用於「暫停」future 的計算，將控制權交還給呼叫者。`await!` 接受任何實作 `IntoFuture` 的表達式，並計算為此 future 所傳入的泛型型別（如下面範例的 `Output`）之值。
 
 ```rust
 // future: impl Future<Output = usize>
 let n = await!(future);
 ```
 
-await 的擴展在它接收到的 future 上重複呼叫 `poll`，當它返回 `Poll::Pending` 時產生對函式的控制，並最終在它返回 `Poll::Ready` 時獲取該項目值。
+await 展開的程式碼，會重複在接收到的 future 上呼叫 `poll`：`poll` 回傳 `Poll::Pending` 時讓出 (yield) 函式的控制權，並在最終回傳 `Poll::Ready` 時取得項目的值。
 
-`await!` 只能在非同步函式、closure 或區塊內使用。在該上下文之外使用它是一個錯誤。
+`await!` 只能在非同步函式、closure 或區塊內使用，除此之外使用它都是錯誤的。
 
-（`await!` 是一個內嵌編譯器，為以後確定其確切語法留出空間。可在未解決的問題部分中查看更多訊息。）
+（`await!` 是編譯器的內建方法，為以後確定其確切語法保留彈性空間。詳細資訊請參閱〈未解決的問題〉部分。）
 
 # 技術文件式解說
 [技術文件式解說]: #reference-level-explanation
@@ -128,15 +128,15 @@ await 的擴展在它接收到的 future 上重複呼叫 `poll`，當它返回 `
 
 ## `async` 函式、closure、區塊的回傳型別
 
-非同步函式的回傳型別是編譯器生成的唯一匿名型別，類似於 closure 的型別。你可以把這種型別想像成一個枚舉，函式的每個「yield point」都有一個變體 —— 它的開頭、await 表達式和每個回傳。每個變體都儲存需要儲存的狀態，以便從該 yield point 恢復控制。
+非同步函式的回傳型別是編譯器生成的唯一匿名型別，和 closure 的型別類似。你可以把這種型別想像成一個枚舉，函式的每個「yield point」都是一個變體——開頭、await 表達式和每一次的回傳。每個變體都會儲存需要保存的狀態，以便從該 yield point 恢復控制。
 
 呼叫函式時，此匿名型別以其初始狀態返回，其中包含此函式的所有引數。
 
 ### 特徵綁定
 
-匿名回傳型別實作 `Future`，`Item` 為它的回傳型別。輪詢它會推進函數的狀態，當它到達 `await` 時返回 `Pending` ，當它到達 `return` 時返回 `Ready` 。任何在它已經回傳 `Ready` 一次後對其嘗試進行輪詢都會造成恐慌。
+匿名回傳型別實作 `Future`，`Item` 為它的回傳型別。輪詢它會推進函數的狀態，當它到達 `await` 時返回 `Pending` ，當它到達 `return` 時返回 `Ready` 。任何在它已經回傳 `Ready` 一次後對其嘗試進行輪詢都將造成恐慌。
 
-匿名回傳型別對 `Unpin` 特徵有一個相反的實作 - 即 `impl !Unpin`。這是因為未來可能有內部引用，這意味著它永遠不需要被移動。
+匿名回傳型別對 `Unpin` 特徵有一個相反的實作，即 `impl !Unpin`。這是因為 future 可能有內部引用，這意味著它永遠不需要被移動。
 
 ## 匿名 future 的生命週期捕捉
 
@@ -152,13 +152,13 @@ async fn foo(arg: &str) -> usize { ... }
 fn foo<'a>(arg: &'a str) -> impl Future<Output = usize> + 'a { ... }
 ```
 
-這與 `impl Trait` 的預設值不同，它不捕獲生命週期。這就是為什麼回傳類型是 `T` 而不是 `impl Future<Output = T>` 的一個重要部分。
+這與 `impl Trait` 的預設值不同，它不捕捉生命週期。這就是為什麼回傳類型是 `T` 而不是 `impl Future<Output = T>` 的一個重要部分。
 
 ### 「初始化」模式
 
-有時會出現的一種模式是 future 有一個「初始化」步驟，應該在其創建期間執行。這在處理資料轉換和臨時借用時很有用。因為 async 函式在您輪詢它之前不會開始計算，並且它會捕獲其引數的生命週期，因此這種模式不能直接用 `async fn` 表示。
+有時會出現的一種模式是 future 有一個「初始化」步驟，應該在其建立期間執行。這在處理資料轉換和臨時借用時很有用。因為 async 函式在您輪詢它之前不會開始計算，並且它會捕捉其引數的生命週期，因此這種模式不能直接用 `async fn` 表示。
 
-一種選擇是撰寫一個函式，該函式使用立即計算的 closure 返回 `impl Future`：
+其中一個解決辦法，是撰寫一個回傳 `impl Future` 的函式，而回傳值是會立即估算 (evaluate) 的 closure：
 
 ```rust
 // only arg1's lifetime is captured in the returned future
@@ -172,9 +172,9 @@ fn foo<'a>(arg1: &'a str, arg2: &str) -> impl Future<Output = usize> + 'a {
 }
 ```
 
-## await 的擴展
+## await 展開後的程式碼
 
-內嵌的 `await!` 大致上是這樣擴展的：
+內嵌的 await! 展開結果大致如下：
 
 ```rust
 let mut future = IntoFuture::into_future($expression);
@@ -187,11 +187,11 @@ loop {
 }
 ```
 
-這不是字面上的擴展，因為 `yield` 概念不能用 `async` 函式中的表面語法來表達。這就是為什麼 `await!` 是實作在編譯器內部，而不是實際的巨集。
+這不是真正意義上的『展開』，因為 `yield` 概念不能用 `async` 函式中的表層語法來表達。這就是為什麼 `await!` 是實作在編譯器內部，而不是實際的巨集。
 
 ## `async` 和 `move` 的順序
 
-非同步 closure 和區塊可以用 `move` 註釋來捕獲它們包覆的變數的所有權。關鍵字的順序固定為 `async move`。只允許一種排序可以避免對其是否有重要意義的混淆。
+非同步 closure 和區塊可以用 `move` 註釋來捕捉它們包覆的變數的所有權。關鍵字的順序固定為 `async move`。只允許一種順序，可以避免語義上「是否有重要意義」的混淆。
 
 ```rust
 async move {
