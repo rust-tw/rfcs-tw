@@ -9,7 +9,7 @@
 # 總結
 [summary]: #總結
 
-讓型別建構子（type constructor）能與特徵（trait）相互關聯。在 Rust 使用者最想要的功能中，有個通常稱為「嗨爾卡因斗太普（higher-kinded types）」的功能，而這是達成這項目標的其中一步。關聯型別建構仔（associated type constructors）這項特定的功能可以解決嗨爾卡因斗其中一項最普遍的使用情境，比起其他形式的嗨爾卡因斗多型（polymorphism）更容易擴充至原有的型別系統，而且能兼容未來可能所導入的更複雜形式的嗨爾卡因斗多型。
+讓型別建構子（type constructor）能與特徵（trait）相互關聯。在 Rust 使用者最想要的功能中，有個通常稱為「嗨爾卡因斗太普（higher-kinded types）」的功能，而這是達成這項目標的其中一步。關聯型別建構子（associated type constructors）這項特定的功能可以解決嗨爾卡因斗其中一項最普遍的使用情境，比起其他形式的嗨爾卡因斗多型（polymorphism）更容易擴充至原有的型別系統，而且能兼容未來可能所導入的更複雜形式的嗨爾卡因斗多型。
 
 # 動機
 [motivation]: #動機
@@ -223,119 +223,74 @@ trait Foo {
 
 每次呼叫 `<T as Foo>::Assoc` 時都需要證明 `T: Sized`，就像其他場合需要證明有符合 impl 的界限一樣。
 
-(@nikomatsakis believes that where clauses will be needed on associated type
-constructors specifically to handle lifetime well formedness in some cases.
-The exact details are left out of this RFC because they will emerge more fully
-during implementation.)
+(@nikomatsakis 相信在某些場合的 where 會需要關聯型別建構子指明處理生命週期。實際細節將不會包含在本 RFC，因為這在實際實作時才會更清楚。)
 
-## Benefits of implementing only this feature before other higher-kinded polymorphisms
+## 在其他嗨爾卡因斗多型之前只實作此功能的優點
 
-This feature is not full-blown higher-kinded polymorphism, and does not allow
-for the forms of abstraction that are so popular in Haskell, but it does
-provide most of the unique-to-Rust use cases for higher-kinded polymorphism,
-such as streaming iterators and collection traits. It is probably also the
-most accessible feature for most users, being somewhat easy to understand
-intuitively without understanding higher-kindedness.
+此功能並非完整的嗨爾卡因斗多型，也無法允許那些在 Haskell 中熱門的抽象形式，但它能提供 Rust 獨一無二的嗨爾卡因斗多型使用情境。像是 `StreamingIterator` 與各式集合的特徵。這很可能也會是許多使用者最需要用到的功能，讓還不知道嗨爾卡因斗的人也能輕易直觀地使用。
 
-This feature has several tricky implementation challenges, but avoids all of
-these features that other kinds of higher-kinded polymorphism require:
+此功能會有些麻煩的實作挑戰，但也避免了其他所有嗨爾卡因斗多型所需的功能像是：
 
-* Defining higher-kinded traits
-* Implementing higher-kinded traits for type operators
-* Higher order type operators
-* Type operator parameters bound by higher-kinded traits
-* Type operator parameters applied to a given type or type parameter
+* 定義嗨爾卡因斗特徵
+* 對型別運算子實作嗨爾卡因斗
+* 高階型別運算子
+* 嗨爾卡因斗特徵綁定的型別運算子參數
+* 型別運算子參數套用至一個給予的型別或型別參數
 
-## Advantages of proposed syntax
+## 建議語法的優點
 
-The advantage of the proposed syntax is that it leverages syntax that already
-exists. Type constructors can already be aliased in Rust using the same syntax
-that this used, and while type aliases play no polymorphic role in type
-resolution, to users they seem very similar to associated types. A goal of this
-syntax is that many users will be able to use types which have assocaited type
-constructors without even being aware that this has something to do with a type
-system feature called higher-kindedness.
+建議語法的優點在於它建立在已經存在的語法上，型別建構子已經能在 Rust 中使用相同的語法建立別名。雖然型別別名在型別解析上沒有多型的意義，對於使用者來說他們非常類似於關聯型別。此語法的目標就是要讓許多使用者能夠輕易使用具有關聯型別建構子的型別，就算他們沒有察覺到這和嗨爾卡因斗有關。
 
-# How We Teach This
-[how-we-teach-this]: #how-we-teach-this
+# 我們如何教導這個
+[how-we-teach-this]: #我們如何教導這個
 
-This RFC uses the terminology "associated type constructor," which has become
-the standard way to talk about this feature in the Rust community. This is not
-a very accessible framing of this concept; in particular the term "type
-constructor" is an obscure piece of jargon from type theory which most users
-cannot be expected to be familiar with.
+在本 RFC 我們使用「關聯型別建構子」，這是因為這在 Rust 社群中已經很常拿來使用作為此功能的討論了。但這並沒有很輕易地表達此概念，尤其光是型別理論中的「型別建構子」就已經足以讓人望之卻步了，多數使用者可能並不熟悉這樣的詞彙。
 
-Upon accepting this RFC, we should begin (with haste) refering to this concept
-as simply "generic associated types." Today, associated types cannot be
-generic; after this RFC, this will be possible. Rather than teaching this as
-a separate feature, it will be taught as an advanced use case for associated
-types.
+在接受本 RFC 後，我們應該開始稱呼此概念為「泛型關聯型別（generic associated types）」就好，現在的關聯型別還無法使用泛型。在此 RFC 後，這就化為可能了。與其教導這是一個不同的功能，不如介紹說這會是關聯型別的進階使用情境。
 
-Patterns like "family traits" should also be taught in some way, possible in
-the book or possibly just through supplemental forms of documentation like
-blog posts.
+像是「Family」特徵的模式也需要同時教導，我們可能會寫進書裡或是某種形式的文件就好，像是網誌文章等。
 
-This will also likely increase the frequency with which users have to employ
-higher rank trait bounds; we will want to put additional effort into teaching
-and making teachable HRTBs.
+這也可能會增加使用者使用高階特徵界限的頻率，我們可能會需要挹注更多資源在高階特徵界限上。
 
-# Drawbacks
-[drawbacks]: #drawbacks
+# 缺點
+[drawbacks]: #缺點
 
-## Adding language complexity
+## 增加語言複雜度
 
-This would add a somewhat complex feature to the language, being able to
-polymorphically resolve type constructors, and requires several extensions to
-the type system which make the implementation more complicated.
+這會對語言增加一定的複雜度，型別建構子將能夠多型產生，而且型別系統也需要幾個擴充，這都讓實作更加複雜。
 
-Additionally, though the syntax is designed to make this feature easy to learn,
-it also makes it more plausible that a user may accidentally use it when they
-mean something else, similar to the confusion between `impl .. for Trait` and
-`impl<T> .. for T where T: Trait`. For example:
+除此之外，雖然語法設計旨在易於學習此功能，但它更有可能產生模糊空間讓使用者意外使用到，而不是他們原本想寫的，這就像 `impl .. for Trait` 和 `impl<T> .. for T where T: Trait` 之間產生的混淆。舉例來說：
 
 ```rust
-// The user means this
+// 使用者其實想寫這樣
 trait Foo<'a> {
     type Bar: 'a;
 }
 
-// But they write this
+// 但他們寫成這樣
 trait Foo<'a> {
     type Bar<'a>;
 }
 ```
 
-## Not full "higher-kinded types"
+## 並非完整的「嗨爾卡因斗太普」
 
-This does not add all of the features people want when they talk about higher-
-kinded types. For example, it does not enable traits like `Monad`. Some people
-may prefer to implement all of these features together at once. However, this
-feature is forward compatible with other kinds of higher-kinded polymorphism,
-and doesn't preclude implementing them in any way. In fact, it paves the way
-by solving some implementation details that will impact other kinds of higher-
-kindedness as well, such as partial application.
+本 RFC 並沒有加入當大家講到嗨爾卡因斗太普時的所有功能。舉例來說，它並沒有辦法提供特徵像是 `Monad`。有些人傾向於一次實作完所有這些功能。然而，此功能是能夠兼容於其他形式的嗨爾卡因斗多型的，且並沒有將他們的可能性排除掉。事實上，它還解決了一些會影響其他嗨爾卡因斗形式的實作細節，為它們開拓了可能的路徑，像是 Partial Application。
 
-## Syntax isn't like other forms of higher-kinded polymorphism
+## 語法與其他形式的嗨爾卡因斗多型都不一樣
 
-Though the proposed syntax is very similar to the syntax for associated types
-and type aliases, it is probably not possible for other forms of higher-kinded
-polymorphism to use a syntax along the same lines. For this reason, the syntax
-used to define an associated type constructor will probably be very different
-from the syntax used to e.g. implement a trait for a type constructor.
+雖然建議的語法非常近似於關聯型別與型別別名的語法，其他形式的嗨爾卡因斗多型可能無法使用相同的語法來表達。基於此原因，定義關聯型別建構子的語法可能會與，舉例來說，對特徵實作型別建構子的語法不同。
 
-However, the syntax used for these other forms of higher-kinded polymorphism
-will depend on exactly what features they enable. It would be hard to design
-a syntax which is consistent with unknown features.
+不過這些其他形式的嗨爾卡因斗多型也將會依到它們實際的功能來決定語法。要設計一個未知功能的語法是非常困難的。
 
-# Alternatives
-[alternatives]: #alternatives
+# 替代方案
+[alternatives]: #替代方案
 
-## Push HRTBs harder without associated type constructors
+## 進一步強化高階特徵界限而不是關聯型別建構子
 
-An alternative is to push harder on HRTBs, possibly introducing some elision
-that would make them easier to use.
+其中一種替代方案是強化高階特徵界限，有可能是加入一些省略規則，讓它們更容易使用。
 
-Currently, an approximation of `StreamingIterator` can be defined like this:
+目前可能的 `StreamingIterator` 也許能被定義成這樣：
 
 ```rust
 trait StreamingIterator<'a> {
@@ -344,60 +299,34 @@ trait StreamingIterator<'a> {
 }
 ```
 
-You can then bound types as `T: for<'a> StreamingIterator<'a>` to avoid the
-lifetime parameter infecting everything `StreamingIterator` appears.
+這樣你就可以綁定型別成 `T: for<'a> StreamingIterator<'a>` 來避免每次出現 `StreamingIterator` 時都會被生命週期感染。
 
-However, this only partially prevents the infectiveness of `StreamingIterator`,
-only allows for some of the types that associated type constructors can
-express, and is in generally a hacky attempt to work around the limitation
-rather than an equivalent alternative.
+然而這樣僅避免了 `StreamingIterator` 的傳染性，只能用在一些關聯型別建構子能夠表達的型別，而且這更像是針對限制下的權變措施，而非等價的替代方案。
 
-## Impose restrictions on ATCs
+## 對關聯型別建構子施加限制
 
-What is often called "full higher kinded polymorphism" is allowing the use of
-type constructors as input parameters to other type constructors - higher order
-type constructors, in other words. Without any restrictions, multiparameter
-higher order type constructors present serious problems for type inference.
+我們常稱呼的「完整嗨爾卡因斗多型」能允許使用型別建構子作為其他型別建構子的輸入參數，換句話說就是高階型別建構子。在沒有任何限制的情況下，多重參數的高階型別建構子會對型別介面帶來嚴重的問題。
 
-For example, if you are attempting to infer types, and you know you have a
-constructor of the form `type, type -> Result<(), io::Error>`, without any
-restrictions it is difficult to determine if this constructor is
-`(), io::Error -> Result<(), io::Error>` or `io::Error, () -> Result<(), io::Error>`.
+舉例來說，當你嘗試推導型別時，而且你知道你有個建構子的形式為 `type, type -> Result<(), io::Error>`，如果沒有任何限制的話，我們很難判斷此建構子到底是 `(), io::Error -> Result<(), io::Error>` 還是 `io::Error, () -> Result<(), io::Error>`。
 
-Because of this, languages with first class higher kinded polymorphism tend to
-impose restrictions on these higher kinded terms, such as Haskell's currying
-rules.
+有鑑於此，將嗨爾卡因斗多型視為第一公民的語言通常都會對這些嗨爾卡因斗施加限制，像是 Haskell 的柯里（currying）規則。
 
-If Rust were to adopt higher order type constructors, it would need to impose
-similar restrictions on the kinds of type constructors they can receive. But
-associated type constructors, being a kind of alias, inherently mask the actual
-structure of the concrete type constructor. In other words, if we want to be
-able to use ATCs as arguments to higher order type constructors, we would need
-to impose those restrictions on *all* ATCs.
+如果 Rust 也要採納高階型別建構子的話，我們需要對型別建構子可以接收的卡因斗施加類似的限制。但關聯型別建構子已經是一種別名，其自然就囊括了實際型別建構子的結構。換句話說，如果我們想要使用關聯型別建構子作為高階型別建構子的引數，我們需要將那些限制施加於**所有**的關聯結構建構子。
 
-We have a list of restrictions we believe are necessary and sufficient; more
-background can be found in [this blog post](http://smallcultfollowing.com/babysteps/blog/2016/11/09/associated-type-constructors-part-4-unifying-atc-and-hkt/)
-by nmatsakis:
+我們已經有一份我們認為必要且足夠的限制清單，更多細節可以在 nmatsakis 的[網誌文章](http://smallcultfollowing.com/babysteps/blog/2016/11/09/associated-type-constructors-part-4-unifying-atc-and-hkt/)找到：
 
-* Each argument to the ATC must be applied
-* They must be applied in the same order they appear in the ATC
-* They must be applied exactly once
-* They must be the left-most arguments of the constructor
+* 關聯型別建構子的每個引數都必須被套用到
+* 它們必須以它們在關聯型別建構子出現的相同順序來套用
+* 它們必須套用恰好一次而已
+* 它們必須是建構子的最左引數
 
-These restrictions are quite constrictive; there are several applications of
-ATCs that we already know about that would be frustrated by this, such as the
-definition of `Iterable` for `HashMap` (for which the item `(&'a K, &'a V)`,
-applying the lifetime twice).
+這些限制已經非常有建設性了，我們已經知道有一些關聯型別建構子的應用會被受限於此，像是 `Iterable` 給 `HashMap` 的定義（項目 `(&'a K, &'a V)` 要套用兩次生命週期）。
 
-For this reason we have decided **not** to apply these restrictions to all
-ATCs. This will mean that if higher order type constructors are ever added to
-the language, they will not be able to take an abstract ATC as an argument.
-However, this can be maneuvered around using newtypes which do meet the
-restrictions, for example:
+有鑑於此，我們決定**不要**對所有關聯型別建構子施加這些限制。這代表如果到時候有高階型別建構子加入語言中的話，它們將無法將關聯型別建構子作為引數。然而，這其實能透過新型別（newtypes）來滿足限制，舉例來說：
 
 ```rust
 struct IterItem<'a, I: Iterable>(I::Item<'a>);
 ```
 
-# Unresolved questions
-[unresolved]: #unresolved-questions
+# 未解決問題
+[unresolved]: #未解決問題
