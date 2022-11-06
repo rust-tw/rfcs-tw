@@ -276,31 +276,36 @@ differently for the return type of `async fn` than other functions; this seems
 worse than showing the interior type.
 我們可以讓它返回 `impl Future`，但對於 `async fn` 的返回型別，生命週期捕獲的工作方式與其他函式不同;這似乎比顯示內部型別更糟糕。
 
-### Polymorphic return (a non-factor for us)
+### 多型的回傳（對我們來說並非是一個因素）
 
 According to the C# developers, one of the major factors in returning `Task<T>`
 (their "outer type") was that they wanted to have async functions which could
 return types other than `Task`. We do not have a compelling use case for this:
+根據 C# 開發者的說法，回傳 `Task<T>`（他們的 "外部型別"）的主要因素之一是，他們希望有可以回傳 `Task` 以外型別的非同步函式。我們對此沒有一個可以令人信服的實例。
 
 1. In the 0.2 branch of futures, there is a distinction between `Future` and
    `StableFuture`. However, this distinction is artificial and only because
    object-safe custom self-types are not available on stable yet.
+   在 future 的 0.2 分支中，`Future` 和 `StableFuture` 之間是有區別的。然而，這種區分是人為的，單純是因為物件安全（object-safe）的自定義自型別（self-types）在穩定版本上還不能使用。
 2. The current `#[async]` macro has a `(boxed)` variant. We would prefer to
    have async functions always be unboxed and only box them explicitly at the
    call site. The motivation for the attribute variant was to support async
    methods in object-safe traits. This is a special case of supporting `impl
    Trait` in object-safe traits (probably by boxing the return type in the
    object case), a feature we want separately from async fn.
+   目前的 `#[async]` 巨集有一個 `(boxed) `變體。我們更傾向於讓非同步函式盡可能的不包裝，只在調用處明確包裝。屬性變體的動機是為了支援物件安全特徵中的非同步方法。這是在物件安全特徵中支援 `impl Trait` 的一個特例（可能是透過在物件情况下對回傳型別進行包裝），我們希望這個特性與 async fn 分開。
 3. It has been proposed that we support `async fn` which return streams.
    However, this mean that the semantics of the internal function would differ
    significantly between those which return futures and streams. As discussed
    in the unresolved questions section, a solution based on generators and
    async generators seems more promising.
+   有人建議我們支援回傳串流（stream）的 `async fn`。然而，這意味著内部函式的語意在回傳 future 和串流的函式之間會有顯著的不同。正如在未解决的問題部分所討論的，基於生成器和非同步生成器的解決方案似乎更有機會。
 
 For these reasons, we don't think there's a strong argument from polymorphism
 to return the outer type.
+基於這些原因，我們認為從多型的角度來看，回傳外部型別的論點並不強烈。
 
-### Learnability / documentation trade off
+### 可學習性/文件的權衡
 
 There are arguments from learnability in favor of both the outer and inner
 return type. One of the most compelling arguments in favor of the outer return
@@ -309,6 +314,7 @@ definitely see what you get as the caller. In contrast, it can be easier to
 understand how to write an async function using the inner return type, because
 of the correspondence between the return type and the type of the expressions
 you `return`.
+從可學習性的角度來看，支援外部和内部回傳型別的論點都有。支援外部回傳型別最有說服力的論據之一是文件：當你閱讀自動產生的 API 文件時，你肯定會看到你作為呼叫者得到的東西。相較之下，由於回傳型別和你 `return` 的表達式的型別之間的對應關係，可以更容易理解如何使用内部回傳型別撰寫非同步函式。
 
 Rustdoc can handle async functions using the inner return type in a couple of
 ways to make them easier to understand. At minimum we should make sure to
@@ -317,12 +323,14 @@ understand async notation know that the function will return a future. We can
 also perform other transformations, possibly optionally, to display the outer
 signature of the function. Exactly how to handle API documentation for async
 functions is left as an unresolved question.
+Rustdoc 可以透過幾種方式處理使用内部回傳型別的非同步函式，使其更容易理解。我們至少應該確保在文件中包含 `async` 註解，這樣了解 async 符號的使用者就知道此函式將回傳一個 future。我們還可以進行其他轉換，可能是可選的，以顯示函式的外部簽名。如何確切處理非同步函式的 API 文件是一個尚未解决的問題。
 
-## Built-in syntax instead of using macros in generators
+## 內嵌語法，而不是在生成器中使用巨集
 
 Another alternative is to focus on stabilizing procedural macros and
 generators, rather than introducing built-in syntax for async functions. An
 async function can be modeled as a generator which yields `()`.
+另一個選擇是專注於穩定程序性巨集（procedural macro）和生成器，而不是為非同步函式引入內嵌語法。一個非同步函式可以被建模為一個生成器，它將產生 `()`。
 
 In the long run, we believe we will want dedicated syntax for async functions,
 because it is more ergonomic & the use case is compelling and significant
@@ -331,6 +339,7 @@ if statements rather than having macros which compile to loops and match
 statements). Given that, the only question is whether or not we could have a
 more expedited stability by using generators for the time being than by
 introducing async functions now.
+從長遠來看，我們相信我們會希望有專門的語法來處理非同步函式，因為它更符合人因工程學原理，而且使用情境也足夠令人信服和重要，可以證明這一點（類似於 --例如-- 有内嵌的 for 迴圈和 if 判斷式，而不是有編譯成迴圈和配對判斷式的巨集）。鑑於此，唯一的問題是，我們是否可以透過暫時使用生成器來獲得比現在引入非同步函式更好的穩定性。
 
 It seems unlikely that using macros which expand to generators will result in a
 faster stabilization. Generators can express a wider range of possibilities,
@@ -339,6 +348,7 @@ does not even address the open questions of stabilizing more procedural macros.
 For this reason, we believe it is more expedient to stabilize the minimal
 built-in async/await functionality than to attempt to stabilize generators and
 proc macros.
+使用展開到生成器的巨集似乎不太可能使其更快的穩定。生成器可以表達更多的可能性，並且有更多的開放性問題--包括句法和語意。這甚至沒有解決穩定更多程序性巨集的開放問題。出於這個原因，我們認為穩定最小的内嵌 async/await 功能比試圖穩定生成器和 proc 巨集更有效益。
 
 ## `async` based on generators alone
 
