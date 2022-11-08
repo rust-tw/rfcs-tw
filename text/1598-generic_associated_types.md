@@ -2,7 +2,7 @@
 - Start Date: 2016-04-29
 - RFC PR: [rust-lang/rfcs#1598](https://github.com/rust-lang/rfcs/pull/1598)
 - Rust Issue: [rust-lang/rust#44265](https://github.com/rust-lang/rust/issues/44265)
-- Translators: [@wusyong](/ltc0FXDLS5S95FIi_AwVUg)
+- Translators: [@wusyong](https://github.com/wusyong)
 - Commit: [a7cd910](https://github.com/rust-lang/rfcs/commit/a7cd91048eea3d7ae83bec20446e62bad0c45381)
 - Updated: 2022-11-02
 
@@ -30,9 +30,9 @@ trait StreamingIterator {
 # 設計細節
 [design]: #設計細節
 
-## 背景：什麼是種類？
+## 背景：什麼是種類（Kind）？
 
-「高階種類型別」算是比較攏統的詞彙，容易與其他語言功能混淆，而造成我們想表達的概念不精確。所以本 RFC 將簡單介紹種類的概念。種類通常被稱為「型別的型別」，但這樣的解釋對於想理解的人幫助並不大，反而對已經了解這些概念的人才說得通。所以讓我們嘗試用型別比喻來了解種類。
+「高階種類型別」算是比較籠統的詞彙，容易與其他語言功能混淆，而造成我們想表達的概念不精確。所以本 RFC 將簡單介紹種類的概念。種類通常被稱為「型別的型別」，但這樣的解釋對於想理解的人幫助並不大，反而對已經了解這些概念的人才說得通。所以讓我們嘗試用型別比喻來了解種類。
 
 在型別完善的語言中，每個表達式（expression）都有個型別。許多表達式都有所謂的「基本型別」，也就是語言中的原生型別而且無法用其他型別表達。在 Rust 中，`bool`、`i64`、`usize` 與 `char` 都是基本型別的明顯例子。另一方面，也就會有型別會是由其他型別組成，函式就是屬於這樣的例子。讓我們看看下面這個簡單的函式：
 
@@ -68,7 +68,7 @@ trait StreamingIterator {
 
 這樣能清楚表達關聯項目 `Item` 是一個型別建構子，而非只是個型別，因為它有個型別參數附加在旁。
 
-與關聯型別一樣，關聯型別建構子可以被綁定：
+與關聯型別一樣，關聯型別建構子可以用在界限內：
 
 ```rust
 trait Iterable {
@@ -79,13 +79,13 @@ trait Iterable {
 }
 ```
 
-此界限套用到了型別建構子的「輸出」，然後參數會被視為高階參數。也就是說上述的界限幾乎等於對特徵加上這樣的界限：
+此界限套用到型別建構子的「輸出」，然後參數會被視為高階參數。也就是說上述的界限幾乎等於對特徵加上這樣的界限：
 
 ```rust
 for<'a> Self::Iter<'a>: Iterator<Item = Self::Item<'a>>
 ```
 
-在 impl 中賦值給關聯型別建構子的語法與賦值給關聯型別的非常接近：
+在 `impl` 中賦值給關聯型別建構子的語法與賦值給關聯型別的非常接近：
 
 ```rust
 impl<T> StreamingIterator for StreamIterMut<T> {
@@ -96,7 +96,7 @@ impl<T> StreamingIterator for StreamIterMut<T> {
 
 ### 使用關聯型別建構子建立型別
 
-一旦特徵擁有關聯型別建構子時，它就能套用在任何參數或作用域中的表達項目。這能同時用在特徵的本體內與本體外，使用的語法就與使用關聯型別類似。以下是一些範例：
+一旦特徵擁有關聯型別建構子時，它就能套用在作用域中的任何參數或表達項目。這能同時用在特徵的本體內與本體外，使用的語法就與使用關聯型別類似。以下是一些範例：
 
 ```rust
 trait StreamingIterator {
