@@ -350,10 +350,11 @@ built-in async/await functionality than to attempt to stabilize generators and
 proc macros.
 使用展開到生成器的巨集似乎不太可能使其更快的穩定。生成器可以表達更多的可能性，並且有更多的開放性問題--包括句法和語意。這甚至沒有解決穩定更多程序性巨集的開放問題。出於這個原因，我們認為穩定最小的内嵌 async/await 功能比試圖穩定生成器和 proc 巨集更有效益。
 
-## `async` based on generators alone
+## 單純基於生成器的 `async`
 
 Another alternative design would be to have async functions *be* the syntax for
 creating generators. In this design, we would write a generator like this:
+另一種設計是將非同步函式作為建立生成器的語法。在这這種設計中，我們可以寫一個這樣的生成器。
 
 ```rust
 async fn foo(arg: Arg) -> Return yield Yield
@@ -362,6 +363,7 @@ async fn foo(arg: Arg) -> Return yield Yield
 Both return and yield would be optional, default to `()`. An async fn that
 yields `()` would implement `Future`, using a blanket impl. An async fn that
 returns `()` would implement `Iterator`.
+return 和 yield 都是可選的，預設為 `()`。一個產生 `()` 的非同步函式將使用全面實現（blanket impl）來實作 `Future`。一個回傳 `()` 的非同步函式將實作 `Iterator`。
 
 The problem with this approach is that does not ergonomically handle `Stream`s,
 which need to yield `Poll<Option<T>>`. It's unclear how `await` inside of an
@@ -369,6 +371,7 @@ async fn yielding something other than `()` (which would include streams) would
 work.  For this reason, the "matrix" approach in which we have independent
 syntax for generator functions, async functions, and async generator functions,
 seems like a more promising approach.
+此方法的問題是，它不能從人因工程學的角度處理 `Stream`，Stream 需要產生 `Poll<Option<T>>`。目前還不清楚在一個產生 `()` 以外的東西（包括 Stream）的非同步函式裡的 `await` 如何運作。由於這個原因，「矩陣」方法，即我們對生成器函式、非同步函式和非同步生成器函式有獨立的語法，似乎是一個更可行的方法。
 
 ## "Hot async functions"
 
@@ -376,6 +379,7 @@ As proposed by this RFC, all async functions return immediately, without
 evaluating their bodies at all. As discussed above, this is not convenient for
 use cases in which you have an immediate "initialization" step - those use
 cases need to use a terminal async block, for example.
+正如本 RFC 所建議的，所有的非同步函式都會立即回傳，根本不需要評估其主體。如上所述，這對於需要立即進行「初始化」步驟的情境來說並不方便--例如，這些情境需要使用一個終端非同步區塊。
 
 An alternative would be to have async functions immediately evaluate up until
 their first `await`, preserving their state until then. The implementation of
@@ -383,6 +387,7 @@ this would be quite complicated - they would need to have an additional yield
 point within the `await`, prior to polling the future being awaited,
 conditional on whether or not the await is the first await in the body of the
 future.
+另一種方法是讓非同步函式立即評估，直到它們的第一個 `await`，在那之前保留它們的狀態。這將是一個相當複雜的實現--它們需要在 `await` 中擁有一个額外的 yield point，在輪詢被 await 的 future 之前，條件是 await 是否是 future 主體中的第一個 await。
 
 A fundamental difference between Rust's futures and those from other languages
 is that Rust's futures do not do anything unless polled. The whole system is
@@ -392,6 +397,7 @@ spins up a future that starts executing immediately. This difference carries
 over to `async fn` and `async` blocks as well, where it's vital that the
 resulting future be *actively polled* to make progress. Allowing for partial,
 eager execution is likely to lead to significant confusion and bugs.
+Rust 的 future 與其它語言的 future 的一个根本區別是，Rust 的 future 除非被輪詢，某則不會做任何事情。整个系统都是圍繞這一點建立的：例如，取消正是因為這個原因而捨棄了 future。相反，在其它語言中，呼叫一個非同步函數會產生一個立即開始執行的 future。這種差異也延續到了 `async fn` 和 `async` 區塊中，其中至關重要的是，產生的 future 要**主動輪詢**以取得進展。允許部分、急迫的執行很可能會引發嚴重的混亂和錯誤。
 
 This is also complicated from a user perspective - when a portion of the body
 is evaluated depends on whether or not it appears before all `await`
@@ -399,6 +405,7 @@ statements (which could possibly be macro generated). The use of a terminal
 async block provide a clearer mechanism for distinguishing between the
 immediately evaluated and asynchronously evaluated portions of a future with an
 initialization step.
+從使用者的角度來看，这也很複雜--主體的一部分何時被評估取決於它是否出現在所有 `await` 語句（可能是巨集生成的）之前。使用终端 async 區塊提供了一個更清晰的機制来區分帶有初始化步驟的 future 的立即評估部分和非同步評估部分。
 
 ## Using async/await instead of alternative asynchronicity systems
 
