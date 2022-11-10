@@ -397,7 +397,7 @@ spins up a future that starts executing immediately. This difference carries
 over to `async fn` and `async` blocks as well, where it's vital that the
 resulting future be *actively polled* to make progress. Allowing for partial,
 eager execution is likely to lead to significant confusion and bugs.
-Rust 的 future 與其它語言的 future 的一个根本區別是，Rust 的 future 除非被輪詢，某則不會做任何事情。整个系统都是圍繞這一點建立的：例如，取消正是因為這個原因而捨棄了 future。相反，在其它語言中，呼叫一個非同步函數會產生一個立即開始執行的 future。這種差異也延續到了 `async fn` 和 `async` 區塊中，其中至關重要的是，產生的 future 要**主動輪詢**以取得進展。允許部分、急迫的執行很可能會引發嚴重的混亂和錯誤。
+Rust 的 future 與其它語言的 future 的一個根本區別是，Rust 的 future 除非被輪詢，否則不會做任何事情。整個系统都是圍繞這一點建立的：例如，取消正是因為這個原因而捨棄了 future。相反，在其它語言中，呼叫一個非同步函數會產生一個立即開始執行的 future。這種差異也延續到了 `async fn` 和 `async` 區塊中，其中至關重要的是，產生的 future 要**主動輪詢**以取得進展。允許部分、急迫的執行很可能會引發嚴重的混亂和錯誤。
 
 This is also complicated from a user perspective - when a portion of the body
 is evaluated depends on whether or not it appears before all `await`
@@ -405,14 +405,15 @@ statements (which could possibly be macro generated). The use of a terminal
 async block provide a clearer mechanism for distinguishing between the
 immediately evaluated and asynchronously evaluated portions of a future with an
 initialization step.
-從使用者的角度來看，这也很複雜--主體的一部分何時被評估取決於它是否出現在所有 `await` 語句（可能是巨集生成的）之前。使用终端 async 區塊提供了一個更清晰的機制来區分帶有初始化步驟的 future 的立即評估部分和非同步評估部分。
+從使用者的角度來看，這也很複雜--主體的一部分何時被評估取決於它是否出現在所有 `await` 語句（可能是巨集生成的）之前。使用终端 async 區塊提供了一個更清晰的機制來區分帶有初始化步驟的 future 的立即評估部分和非同步評估部分。
 
-## Using async/await instead of alternative asynchronicity systems
+## 使用 async/await 而不是其他的非同步性系統
 
 A final - and extreme - alternative would be to abandon futures and async/await
 as the mechanism for async/await in Rust and to adopt a different paradigm.
 Among those suggested are a generalized effects system, monads & do notation,
 green-threading, and stack-full coroutines.
+最后，一個極端的選擇是放棄 future 和 async/await 作為 Rust 中 async/await 的機制，而採用不同的泛式。在這些建議中，有一個常見的效果系统、monad 和 do 符號、綠色執行緒和滿堆疊（stack-full）的協程。
 
 While it is hypothetically plausible that some generalization beyond
 async/await could be supported by Rust, there has not enough research in this
@@ -420,6 +421,7 @@ area to support it in the near-term. Given our goals for 2018 - which emphasize
 shipping - async/await syntax (a concept available widely in many languages
 which interacts well with our existing async IO libraries) is the most logical
 thing to implement at this stage in Rust's evolution.
+從理論上來說，Rust 可以支援超越 async/await 的一些泛化，但在這個領域的研究還不足以在短期内支援它。考慮到我們 2018 年的目標 - 強調 - async/await 語法（一個在許多語言中廣泛存在的概念，與我們現有的 async IO 函式庫運作良好）是在 Rust 發展的這個階段最合理的實作。
 
 ## Async blocks vs async closures
 
