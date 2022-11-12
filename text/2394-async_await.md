@@ -202,63 +202,28 @@ async move {
 # 缺點
 [缺點]: #drawbacks
 
-Adding async & await syntax to Rust is a major change to the language - easily
-one of the most significant additions since 1.0. Though we have started with
-the smallest beachhead of features, in the long term the set of features it
-implies will grow as well (see the unresolved questions section). Such a
-significant addition mustn't be taken lightly, and only with strong motivation.
 在 Rust 中添加 async 和 await 語法是對語言的重大更改 - 這是自 1.0 以來最重要的新增功能之一。雖然我們從最小的功能開始，但從長遠來看，它所隱含的功能集也會增長（請參閱未解決的問題部分）。對於這樣一個重要的新增功能，我們絕不能掉以輕心，只有在強烈的動機下才能進行。
 
-We believe that an ergonomic asynchronous IO solution is essential to Rust's
-success as a language for writing high performance network services, one of our
-goals for 2018. Async & await syntax based on the Future trait is the most
-expedient & low risk path to achieving that goal in the near future.
 我們相信，一個符合人因工程學的非同步 IO 解決方案對於 Rust 作為撰寫高性能網路服務的語言的成功至關重要，這是我們 2018 年的目標之一。基於 Future trait 的非同步和等待語法是在不久的將來實現這一目標最便捷和低風險的途徑。
 
-This RFC, along with its companion lib RFC, makes a much firmer commitment to
-futures & async/await than we have previously as a project. If we decide to
-reverse course after stabilizing these features, it will be quite costly.
-Adding an alternative mechanism for asynchronous programming would be more
-costly because this exists. However, given our experience with futures, we are
-confident that this is the correct path forward.
-這個 RFC，連同其配套的 lib RFC，對 future 和 async/await 做出了比我們過往的專案更堅定的承諾。如果我們在穩定了這些特性之后而決定反其道而行，那將是相當大的代價。增加非同步程式的替代機制，因位這個的存在，成本會更高，。然而，鑑於我們在 future 方面的經驗，我們相信這是正確的前進道路。
+這個 RFC，連同其配套的 lib RFC，對 future 和 async/await 做出了比我們過往的專案更堅定的承諾。如果我們在穩定了這些特性之后而決定反其道而行，那將是相當大的代價。增加非同步程式的替代機制，因為這個的存在，成本會更高。然而，有鑑於我們在 future 方面的經驗，我們相信這是正確的發展方向。
 
-There are drawbacks to several of the smaller decisions we have made as well.
-There is a trade off between using the "inner" return type and the "outer"
-return type, for example. We could have a different evaluation model for async
-functions in which they are evaluated immediately up to the first await point.
-The decisions we made on each of these questions are justified in the
-appropriate section of the RFC.
 我們所做的幾個小決定也有缺點。例如，在使用「内部」返回型別和「外部」返回型別之間有一個權衡。我們可以為非同步函式建立一個不同的評估模型，即在第一個等待點之前立即對其進行評估。我們在這些問題上做出的决定在 RFC 的相應部分都有說明。
 
 # 原理和替代方案
 [alternatives]: #alternatives
 
-This section contains alternative design decisions which this RFC rejects (as
-opposed to those it merely postpones).
 本節包含了本 RFC 拒絕的替代性設計決定（相對於那些只是推遲的設計）。
 
 ## 返回型別（使用 `T` 而不是 `impl Future<Output = T>`）
 
-The return type of an asynchronous function is a sort of complicated question.
-There are two different perspectives on the return type of an async fn: the
-"interior" return type - the type that you return with the `return` keyword,
-and the "exterior" return type - the type that the function returns when you
-call it.
-非同步函式的返回型別是一個有點複雜的問題。對於非同步 fn 的返回型別，有兩個不同的觀點：「内部」返回型別--你用 `return` 關鍵字返回的型別，以及「外部」返回型別--當你呼叫函式時返回的型別。
+非同步函式的返回型別是一個有點複雜的問題。對於非同步函式的返回型別，有兩個不同的觀點：「内部」返回型別 - 你用 `return` 關鍵字返回的型別，以及「外部」返回型別 - 當你呼叫函式時返回的型別。
 
-Most statically typed languages with async fns display the "outer" return type
-in the function signature. This RFC proposes instead to display the "inner"
-return type in the function signature. This has both advantages and
-disadvantages.
-大多數帶有非同步函式的靜態型別語言在函式簽名中顯示 「外部」返回型別。本 RFC 建議在函式簽名中顯示「内部」返回型別。這既有優點也有缺點。
+大多數帶有非同步函式的靜態型別語言在函式簽名中顯示「外部」返回型別。本 RFC 建議在函式簽名中顯示「内部」返回型別。這既有優點也有缺點。
 
 ### 生命週期消除問題
 
-As alluded to previously, the returned future captures all input lifetimes. By
-default, `impl Trait` does not capture any lifetimes. To accurately reflect the
-outer return type, it would become necessary to eliminate lifetime elision:
-正如前面所提到的，返回的 future 捕獲了所有輸入的生命週期。默認情況下，`impl Trait` 不捕獲任何生命週期。為了準確地反應外部返回型別，有必要消除生命週期的省略：
+正如前面所提到的，返回的 future 捕捉了所有輸入的生命週期。默認情況下，`impl Trait` 不捕捉任何生命週期。為了準確地反應外部返回型別，有必要消除生命週期的省略：
 
 ```rust
 async fn foo<'ret, 'a: 'ret, 'b: 'ret>(x: &'a i32, y: &'b i32) -> impl Future<Output = i32> + 'ret {
@@ -266,167 +231,65 @@ async fn foo<'ret, 'a: 'ret, 'b: 'ret>(x: &'a i32, y: &'b i32) -> impl Future<Ou
 }
 ```
 
-This would be very unergonomic and make async both much less pleasant to use
-and much less easy to learn. This issue weighs heavily in the decision to
-prefer returning the interior type.
-這將是非常不符合人因工程學的，並且使非同步的使用變得更不愉快，更不容易學習。這個問題在決定返回內部型別時佔很大比重。
+這將是非常不符合人因工程學的，並且使非同步的使用變得更不愉快，更不易於學習。這個問題在決定返回內部型別時佔很大比重。
 
-We could have it return `impl Future` but have lifetime capture work
-differently for the return type of `async fn` than other functions; this seems
-worse than showing the interior type.
-我們可以讓它返回 `impl Future`，但對於 `async fn` 的返回型別，生命週期捕獲的工作方式與其他函式不同;這似乎比顯示內部型別更糟糕。
+我們可以讓它返回 `impl Future`，但對於 `async fn` 的返回型別，生命週期捕捉的工作方式與其他函式不同，這似乎比顯示內部型別更糟糕。
 
 ### 多型的回傳（對我們來說並非是一個因素）
 
-According to the C# developers, one of the major factors in returning `Task<T>`
-(their "outer type") was that they wanted to have async functions which could
-return types other than `Task`. We do not have a compelling use case for this:
 根據 C# 開發者的說法，回傳 `Task<T>`（他們的 "外部型別"）的主要因素之一是，他們希望有可以回傳 `Task` 以外型別的非同步函式。我們對此沒有一個可以令人信服的實例。
 
-1. In the 0.2 branch of futures, there is a distinction between `Future` and
-   `StableFuture`. However, this distinction is artificial and only because
-   object-safe custom self-types are not available on stable yet.
-   在 future 的 0.2 分支中，`Future` 和 `StableFuture` 之間是有區別的。然而，這種區分是人為的，單純是因為物件安全（object-safe）的自定義自型別（self-types）在穩定版本上還不能使用。
-2. The current `#[async]` macro has a `(boxed)` variant. We would prefer to
-   have async functions always be unboxed and only box them explicitly at the
-   call site. The motivation for the attribute variant was to support async
-   methods in object-safe traits. This is a special case of supporting `impl
-   Trait` in object-safe traits (probably by boxing the return type in the
-   object case), a feature we want separately from async fn.
-   目前的 `#[async]` 巨集有一個 `(boxed) `變體。我們更傾向於讓非同步函式盡可能的不包裝，只在調用處明確包裝。屬性變體的動機是為了支援物件安全特徵中的非同步方法。這是在物件安全特徵中支援 `impl Trait` 的一個特例（可能是透過在物件情况下對回傳型別進行包裝），我們希望這個特性與 async fn 分開。
-3. It has been proposed that we support `async fn` which return streams.
-   However, this mean that the semantics of the internal function would differ
-   significantly between those which return futures and streams. As discussed
-   in the unresolved questions section, a solution based on generators and
-   async generators seems more promising.
-   有人建議我們支援回傳串流（stream）的 `async fn`。然而，這意味著内部函式的語意在回傳 future 和串流的函式之間會有顯著的不同。正如在未解决的問題部分所討論的，基於生成器和非同步生成器的解決方案似乎更有機會。
+1. 在 future 的 0.2 分支中，`Future` 和 `StableFuture` 之間是有區別的。然而，這種區分是人為的，單純是因為物件安全（object-safe）的自定義自型別（self-types）在穩定版本上還不能使用。
+2. 目前的 `#[async]` 巨集有一個 `(boxed)` 變體。我們更傾向於讓非同步函式盡可能的不包裝，只在呼叫處明確包裝。屬性變體的動機是為了支援物件安全特徵中的非同步方法。這是在物件安全特徵中支援 `impl Trait` 的一個特例（可能是透過在物件情况下對回傳型別進行包裝），我們希望這個特性與非同步函式分開。
+3. 有人建議我們支援回傳串流（stream）的 `async fn`。然而，這意味著内部函式的語意在回傳 future 和串流的函式之間會有顯著的不同。正如在未解决的問題部分所討論的，基於生成器和非同步生成器的解決方案似乎更有機會。
 
-For these reasons, we don't think there's a strong argument from polymorphism
-to return the outer type.
 基於這些原因，我們認為從多型的角度來看，回傳外部型別的論點並不強烈。
 
 ### 可學習性/文件的權衡
 
-There are arguments from learnability in favor of both the outer and inner
-return type. One of the most compelling arguments in favor of the outer return
-type is documentation: when you read automatically generated API docs, you will
-definitely see what you get as the caller. In contrast, it can be easier to
-understand how to write an async function using the inner return type, because
-of the correspondence between the return type and the type of the expressions
-you `return`.
 從可學習性的角度來看，支援外部和内部回傳型別的論點都有。支援外部回傳型別最有說服力的論據之一是文件：當你閱讀自動產生的 API 文件時，你肯定會看到你作為呼叫者得到的東西。相較之下，由於回傳型別和你 `return` 的表達式的型別之間的對應關係，可以更容易理解如何使用内部回傳型別撰寫非同步函式。
 
-Rustdoc can handle async functions using the inner return type in a couple of
-ways to make them easier to understand. At minimum we should make sure to
-include the `async` annotation in the documentation, so that users who
-understand async notation know that the function will return a future. We can
-also perform other transformations, possibly optionally, to display the outer
-signature of the function. Exactly how to handle API documentation for async
-functions is left as an unresolved question.
 Rustdoc 可以透過幾種方式處理使用内部回傳型別的非同步函式，使其更容易理解。我們至少應該確保在文件中包含 `async` 註解，這樣了解 async 符號的使用者就知道此函式將回傳一個 future。我們還可以進行其他轉換，可能是可選的，以顯示函式的外部簽名。如何確切處理非同步函式的 API 文件是一個尚未解决的問題。
 
 ## 內嵌語法，而不是在生成器中使用巨集
 
-Another alternative is to focus on stabilizing procedural macros and
-generators, rather than introducing built-in syntax for async functions. An
-async function can be modeled as a generator which yields `()`.
 另一個選擇是專注於穩定程序性巨集（procedural macro）和生成器，而不是為非同步函式引入內嵌語法。一個非同步函式可以被建模為一個生成器，它將產生 `()`。
 
-In the long run, we believe we will want dedicated syntax for async functions,
-because it is more ergonomic & the use case is compelling and significant
-enough to justify it (similar to - for example - having built in for loops and
-if statements rather than having macros which compile to loops and match
-statements). Given that, the only question is whether or not we could have a
-more expedited stability by using generators for the time being than by
-introducing async functions now.
-從長遠來看，我們相信我們會希望有專門的語法來處理非同步函式，因為它更符合人因工程學原理，而且使用情境也足夠令人信服和重要，可以證明這一點（類似於 --例如-- 有内嵌的 for 迴圈和 if 判斷式，而不是有編譯成迴圈和配對判斷式的巨集）。鑑於此，唯一的問題是，我們是否可以透過暫時使用生成器來獲得比現在引入非同步函式更好的穩定性。
+從長遠來看，我們相信我們會希望有專門的語法來處理非同步函式，因為它更符合人因工程學原理，而且使用情境也足夠令人信服和重要，可以證明這一點（類似於 - 例如 - 有内嵌的 for 迴圈和 if 判斷式，而不是有編譯成迴圈和配對判斷式的巨集）。鑑於此，唯一的問題是，我們是否可以透過暫時使用生成器來獲得比現在引入非同步函式更好的穩定性。
 
-It seems unlikely that using macros which expand to generators will result in a
-faster stabilization. Generators can express a wider range of possibilities,
-and have a wider range of open questions - both syntactic and semantic. This
-does not even address the open questions of stabilizing more procedural macros.
-For this reason, we believe it is more expedient to stabilize the minimal
-built-in async/await functionality than to attempt to stabilize generators and
-proc macros.
-使用展開到生成器的巨集似乎不太可能使其更快的穩定。生成器可以表達更多的可能性，並且有更多的開放性問題--包括句法和語意。這甚至沒有解決穩定更多程序性巨集的開放問題。出於這個原因，我們認為穩定最小的内嵌 async/await 功能比試圖穩定生成器和 proc 巨集更有效益。
+使用展開到生成器的巨集似乎不太可能使其更快的穩定。生成器可以表現更多的可能性，並且有更多的開放性問題 - 包括句法和語意。這甚至沒有解決穩定更多程序性巨集的開放問題。出於這個原因，我們認為穩定最小的内嵌 async/await 功能比試圖穩定生成器和 proc 巨集更有效益。
 
 ## 單純基於生成器的 `async`
 
-Another alternative design would be to have async functions *be* the syntax for
-creating generators. In this design, we would write a generator like this:
-另一種設計是將非同步函式作為建立生成器的語法。在这這種設計中，我們可以寫一個這樣的生成器。
+另一種設計是將非同步函式作為建立生成器的語法。在這種設計中，我們可以寫一個這樣的生成器。
 
 ```rust
 async fn foo(arg: Arg) -> Return yield Yield
 ```
 
-Both return and yield would be optional, default to `()`. An async fn that
-yields `()` would implement `Future`, using a blanket impl. An async fn that
-returns `()` would implement `Iterator`.
 return 和 yield 都是可選的，預設為 `()`。一個產生 `()` 的非同步函式將使用全面實現（blanket impl）來實作 `Future`。一個回傳 `()` 的非同步函式將實作 `Iterator`。
 
-The problem with this approach is that does not ergonomically handle `Stream`s,
-which need to yield `Poll<Option<T>>`. It's unclear how `await` inside of an
-async fn yielding something other than `()` (which would include streams) would
-work.  For this reason, the "matrix" approach in which we have independent
-syntax for generator functions, async functions, and async generator functions,
-seems like a more promising approach.
 此方法的問題是，它不能從人因工程學的角度處理 `Stream`，Stream 需要產生 `Poll<Option<T>>`。目前還不清楚在一個產生 `()` 以外的東西（包括 Stream）的非同步函式裡的 `await` 如何運作。由於這個原因，「矩陣」方法，即我們對生成器函式、非同步函式和非同步生成器函式有獨立的語法，似乎是一個更可行的方法。
 
 ## "Hot async functions"
 
-As proposed by this RFC, all async functions return immediately, without
-evaluating their bodies at all. As discussed above, this is not convenient for
-use cases in which you have an immediate "initialization" step - those use
-cases need to use a terminal async block, for example.
-正如本 RFC 所建議的，所有的非同步函式都會立即回傳，根本不需要評估其主體。如上所述，這對於需要立即進行「初始化」步驟的情境來說並不方便--例如，這些情境需要使用一個終端非同步區塊。
+正如本 RFC 所建議的，所有的非同步函式都會立即回傳，根本不需要評估其主體。如上所述，這對於需要立即進行「初始化」步驟的情境來說並不方便 - 例如，這些情境需要使用一個終端非同步區塊。
 
-An alternative would be to have async functions immediately evaluate up until
-their first `await`, preserving their state until then. The implementation of
-this would be quite complicated - they would need to have an additional yield
-point within the `await`, prior to polling the future being awaited,
-conditional on whether or not the await is the first await in the body of the
-future.
-另一種方法是讓非同步函式立即評估，直到它們的第一個 `await`，在那之前保留它們的狀態。這將是一個相當複雜的實現--它們需要在 `await` 中擁有一个額外的 yield point，在輪詢被 await 的 future 之前，條件是 await 是否是 future 主體中的第一個 await。
+另一種方法是讓非同步函式立即評估，直到它們的第一個 `await`，在那之前保留它們的狀態。這將是一個相當複雜的實現 - 它們需要在 `await` 中擁有一个額外的 yield point，在輪詢被 await 的 future 之前，條件是 await 是否是 future 主體中的第一個 await。
 
-A fundamental difference between Rust's futures and those from other languages
-is that Rust's futures do not do anything unless polled. The whole system is
-built around this: for example, cancellation is dropping the future for
-precisely this reason. In contrast, in other languages, calling an async fn
-spins up a future that starts executing immediately. This difference carries
-over to `async fn` and `async` blocks as well, where it's vital that the
-resulting future be *actively polled* to make progress. Allowing for partial,
-eager execution is likely to lead to significant confusion and bugs.
-Rust 的 future 與其它語言的 future 的一個根本區別是，Rust 的 future 除非被輪詢，否則不會做任何事情。整個系统都是圍繞這一點建立的：例如，取消正是因為這個原因而捨棄了 future。相反，在其它語言中，呼叫一個非同步函數會產生一個立即開始執行的 future。這種差異也延續到了 `async fn` 和 `async` 區塊中，其中至關重要的是，產生的 future 要**主動輪詢**以取得進展。允許部分、急迫的執行很可能會引發嚴重的混亂和錯誤。
+Rust 的 future 與其它語言的 future 的一個根本區別是，Rust 的 future 除非被輪詢，否則不會做任何事情。整個系统都是圍繞這一點建立的：例如，取消正是因為這個原因而捨棄了 future。相反，在其它語言中，呼叫一個非同步函式會產生一個立即開始執行的 future。這種差異也延續到了 `async fn` 和 `async` 區塊中，其中至關重要的是，產生的 future 要**主動輪詢**以取得進展。允許部分、急迫的執行很可能會引發嚴重的混亂和錯誤。
 
-This is also complicated from a user perspective - when a portion of the body
-is evaluated depends on whether or not it appears before all `await`
-statements (which could possibly be macro generated). The use of a terminal
-async block provide a clearer mechanism for distinguishing between the
-immediately evaluated and asynchronously evaluated portions of a future with an
-initialization step.
-從使用者的角度來看，這也很複雜--主體的一部分何時被評估取決於它是否出現在所有 `await` 語句（可能是巨集生成的）之前。使用终端 async 區塊提供了一個更清晰的機制來區分帶有初始化步驟的 future 的立即評估部分和非同步評估部分。
+從使用者的角度來看，這也很複雜 - 主體的一部分何時被評估取決於它是否出現在所有 `await` 語句（可能是巨集生成的）之前。使用终端 async 區塊提供了一個更清晰的機制來區分帶有初始化步驟的 future 中立即評估部分和非同步評估部分。
 
 ## 使用 async/await 而不是其他的非同步性系統
 
-A final - and extreme - alternative would be to abandon futures and async/await
-as the mechanism for async/await in Rust and to adopt a different paradigm.
-Among those suggested are a generalized effects system, monads & do notation,
-green-threading, and stack-full coroutines.
-最后，一個極端的選擇是放棄 future 和 async/await 作為 Rust 中 async/await 的機制，而採用不同的泛式。在這些建議中，有一個常見的效果系统、monad 和 do 符號、綠色執行緒和滿堆疊（stack-full）的協程。
+最后，一個極端的選擇是放棄 future 和 async/await 作為 Rust 中 async/await 的機制，而採用不同的泛式。在這些建議中，有一個常見的效果系统，monad 和 do 符號、綠色執行緒和滿堆疊（stack-full）的協程。
 
-While it is hypothetically plausible that some generalization beyond
-async/await could be supported by Rust, there has not enough research in this
-area to support it in the near-term. Given our goals for 2018 - which emphasize
-shipping - async/await syntax (a concept available widely in many languages
-which interacts well with our existing async IO libraries) is the most logical
-thing to implement at this stage in Rust's evolution.
 從理論上來說，Rust 可以支援超越 async/await 的一些泛化，但在這個領域的研究還不足以在短期内支援它。考慮到我們 2018 年的目標 - 強調 - async/await 語法（一個在許多語言中廣泛存在的概念，與我們現有的 async IO 函式庫運作良好）是在 Rust 發展的這個階段最合理的實作。
 
-## Async blocks vs async closures
+## 非同步區塊與非同步 closure
 
-As noted in the main text, `async` blocks and `async` closures are closely
-related, and are roughly inter-expressible:
+正如文中所指出的，非同步區塊和非同步 closure 是密切相關的，而且大致上是可以相互表達的：
 
 ```rust
 // almost equivalent
@@ -438,19 +301,13 @@ async |..| { ... }
 |..| async { ... }
 ```
 
-We could consider having only one of the two constructs. However:
+我們可以考慮只採用兩個結構中的其中一個。然而：
 
-- There's a strong reason to have `async ||` for consistency with `async fn`;
-  such closures are often useful for higher-order constructs like constructing a
-  service.
+- 為了與 `async fn` 保持一致，我們有充分的理由使用 `async ||`；這樣的 closure 對於像創建服務這樣的高階結構往往很有用。
 
-- There's a strong reason to have `async` blocks: The initialization pattern
-  mentioned in the RFC text, and the fact that it provides a more
-  direct/primitive way of constructing futures.
+- 有一個強而有力的理由讓我們採用非同步區塊。RFC 文件中提到的初始化模式，以及事實上它提供了一種更直接、更原始的方式創建 future。
 
-The RFC proposes to include both constructs up front, since it seems inevitable
-that we will want both of them, but we can always reconsider this question
-before stabilization.
+RFC 提議在前面就包含這兩個構造，因為我們似乎不可避免地需要這兩者，但我們總是可以在穩定之前重新思考這個問題。
 
 # 現有技術
 [現有技術]: #prior-art
