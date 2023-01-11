@@ -312,91 +312,45 @@ RFC 提議在前面就包含這兩個構造，因為我們似乎不可避免地�
 # 現有技術
 [現有技術]: #prior-art
 
-There is a lot of precedence from other languages for async/await syntax as a
-way of handling asynchronous operation - notable examples include C#,
-JavaScript, and Python.
-在其他語言中，有很多關於 async/await 語法的先例，作為處理非同步操作的一種方式，值得注意的例子包括 C#、JavaScript 和 Python。
+在其他語言中，包含 C#、JavaScript 和 Python，有很多關於使用 async/await 語法作為處理非同步操作的一種方式的先例。
 
-There are three paradigms for asynchronous programming which are dominant
-today:
 目前主流的非同步程式設計有以下三種泛式：
 
-- Async and await notation.
-async 和 await 符號。
-- An implicit concurrent runtime, often called "green-threading," such as
-  communicating sequential processes (e.g. Go) or an actor model (e.g. Erlang).
-  隱式並行運行時間（runtime），通常稱為「綠色執行緒」，例如通信順序進程（例如 Go）或參與者模型（例如 Erlang）。
-- Monadic transformations on lazily evaluated code, such as do notation (e.g.
-  Haskell).
-  延遲執行程式的單元（Monadic）轉換，例如 do 符號（例如 Haskell）。
+- async 和 await 符號。
+- 隱式並行運行時間（runtime），通常稱為「綠色執行緒」，例如通信順序進程（例如 Go）或參與者模型（例如 Erlang）。
+- 延遲執行程式的單元（Monadic）轉換，例如 do 符號（例如 Haskell）。
 
-Async/await is the most compelling model for Rust because it interacts
-favorably with ownership and borrowing (unlike systems based on monads) and it
-enables us to have an entirely library-based asynchronicity model (unlike
-green-threading).
 async/await 是 Rust 最引人注目的模型，因為它與所有權和借用有良好的互動關係（不像基於單元的系统），而且它使我們能夠擁有一個完全基於函式庫的非同步模型（不像綠色執行緒）。
 
-One way in which our handling of async/await differs from most other statically
-typed languages (such as C#) is that we have chosen to show the "inner" return
-type, rather than the outer return type. As discussed in the alternatives
-section, Rust's specific context (lifetime elision, the lack of a need for
-return type polymorphism here) make this deviation well-motivated.
 我們對 async/await 的處理不同於大多數其他靜態型別語言（例如 C#）的一種方式是我們選擇顯示「內部」返回型別，而不是外部返回型別。正如在替代方案部分中討論的那樣，Rust 的特定上下文（生命週期省略，這裡不需要返回型別多型）使這種偏差有了充分的動機。
 
 # 未解決的問題
 [未解決的問題]: #unresolved-questions
 
-This section contains design extensions which have been postponed & not
-included in this initial RFC.
-本節包含已推延且未包含在此初始 RFC 中的設計延伸。
+本節包含已推延且未包含在此初始 RFC 中設計的延伸。
 
 ## `await` 表達式的最終語法
 
-Though this RFC proposes that `await` be a built-in macro, we'd prefer that
-some day it be a normal control flow construct. The unresolved question about
-this is how to handle its precedence & whether or not to require delimiters of
-some kind.
 儘管此 RFC 建議 `await` 是一個內建的巨集，但我們希望有一天它成為一個正常的控制流結構。未解決的問題是如何處理它的優先級以及是否需要某種分隔符。
 
-In particular, `await` has an interesting interaction with `?`. It is very
-common to have a future which will evaluate to a `Result`, which the user will
-then want to apply `?` to. This implies that await should have a tighter
-precedence than `?`, so that the pattern will work how users wish it to.
-However, because it introduces a space, it doesn't look like this is the
-precedence you would get:
-特別是是， `await` 與 `?` 有一個有趣的互動。很常見的情況是有一個 future，它將被執行為一個 `Result`，然后使用者會想把這個结果應用到 `?` 這意味著 await 應該比 `?` 有更高的優先權，這樣該模式就能按照使用者的意願工作。然而，由於它引入了一個空格，看起來這並不是你要得到的優先權：
+特別是， `await` 與 `?` 有一個有趣的互動。很常見的情況是有一個 future，它將被執行為一個 `Result`，然後使用者會想把這個结果應用到 `?` 這意味著 await 應該比 `?` 有更高的優先權，這樣該模式就能按照使用者的意願工作。然而，由於它引入了一個空格，看起來這並不是你要得到的優先權：
 
 ```
 await future?
 ```
 
-There are a couple of possible solutions:
 以下有幾種可能的解決方案：
 
-1. Require delimiters of some kind, maybe braces or parens or either, so that
-   it will look more like how you expect - `await { future }?` - this is rather
-   noisy.
-   需要某種型別的定界符，可能是大括號或括號或兩者之一，這樣它看起來更像您期望的那樣 - await {future}？ - 這很煩躁。
-2. Define the precedence as the obvious, if inconvenient precedence, requiring
-   users to write `(await future)?` - this seems very surprising for users.
-   將優先級定義為顯而易見的，如果優先權不符使用者本意，需要使用者編寫 `(await future)?` - 這對使用者來說似乎非常令人驚訝。
-3. Define the precedence as the inconvenient precedence - this seems equally
-   surprising as the other precedence.
-   將優先級定義為不方便的優先級 —— 這似乎與其他優先級一樣令人驚訝。
-4. Introduce a special syntax to handle the multiple applications, such as
-   `await? future` - this seems very unusual in its own way.
-   引入一種特殊的語法來處理多個應用程式，例如 `await? future` - 這似乎是很不尋常的方式。
+1. 需要某種型別的定界符，可能是大括號或括號或兩者之一，這樣它看起來更像您期望的那樣 - await {future}？ - 這很煩躁。
+2. 將優先級定義為顯而易見的，如果優先權不符使用者本意，需要使用者編寫 `(await future)?` - 這對使用者來說似乎非常令人驚訝。
+3. 將優先級定義為不方便的優先級 —— 這似乎與其他優先級一樣令人驚訝。
+4. 引入一種特殊的語法來處理多個應用程式，例如 `await? future` - 這似乎是很不尋常的方式。
 
-This is left as an unresolved question to find another solution or decide which
-of these is least bad.
 這是一個未解決的問題，可以找到另一個解決方案或決定其中一個最不糟糕的方案。
 
 ## `for await` 和處理串流
 
-Another extension left out of the RFC for now is the ability to process streams
-using a for loop. One could imagine a construct like `for await`, which takes
-an `IntoStream` instead of an `IntoIterator`:
-RFC 目前遺漏的另一個延伸是使用 for 循環處理流的能力。可以想像像 `for await` 這樣的結構，它採用 `IntoStream` 而不是 `IntoIterator`：
+RFC 目前遺漏的另一個延伸是使用 for 循環處理流的能力。可以想像 `for await` 這樣的結構，它採用 `IntoStream` 而不是 `IntoIterator`：
 
 ```rust
 for await value in stream {
@@ -404,20 +358,12 @@ for await value in stream {
 }
 ```
 
-This is left out of the initial RFC to avoid having to stabilize a definition
-of `Stream` in the standard library (to keep the companion RFC to this one as
-small as possible).
 這被排除在最初的 RFC 之外，以避免必須在標準庫中穩定 `Stream` 的定義（以使與此相關的 RFC 盡可能小）。
 
 ## 生成器和串流
 
-In the future, we may also want to be able to define async functions that
-evaluate to streams, rather than evaluating to futures. We propose to handle
-this use case by way of generators. Generators can evaluate to a kind of
-iterator, while async generators can evaluate to a kind of stream.
-將來，我們可能還希望能夠定義對串流求值非同步函式，而不是對 future 求值。我們建議透過生成器來處理這個案例。生成器可以計算為一種迭代器，而非同步生成器可以計算為一種流。
+將來，我們可能還希望能夠定義對串流求值非同步函式，而不是對 future 求值。我們建議透過生成器來處理這個案例。生成器可以轉換為一種迭代器，而非同步生成器可以轉換為一種流。
 
-For example (using syntax which could change);
 例如（使用的語法可能會改變）；
 
 ```rust
@@ -439,24 +385,14 @@ async fn foo(io: &AsyncRead) yield i32 {
 
 ## 實現 `Unpin` 的非同步函式
 
-As proposed in this RFC, all async functions do not implement `Unpin`, making
-it unsafe to move them out of a `Pin`. This allows them to contain references
-across yield points.
-如本 RFC 中所提議，所有非同步函式均未實現 `Unpin`，因此將它們從 `Pin` 中移出是不安全的。這允許它們包含跨屈服點(yield point)的引用。
+如本 RFC 中所提議，所有非同步函式均未實現 `Unpin`，因此將它們從 `Pin` 中移出是不安全的。這允許它們包含跨屈服點（yield point）的引用。
 
-We could also, with an annotation, typecheck an async function to confirm that it
-does not contain any references across yield points, allowing it to implement
-`Unpin`. The annotation to enable this is left unspecified for the time being.
 我們還可以透過註釋對非同步函式進行型別檢查，以確認它不包含任何跨屈服點的引用，從而允許它實現 `Unpin`。啟用此功能的註釋暫時未指定。
 ## 異步區塊中的 `?` 運算子和控制流構造
 
-This RFC does not propose how the `?`-operator and control-flow constructs like
-`return`, `break` and `continue` should work inside async blocks.
-這個 RFC 沒有提出 `?`-operator 和控制流結構如 `return`、`break` 和 `continue` 應該如何在異步區塊中工作。
+這個 RFC 沒有提出 `?`-operator 和控制流結構如 `return`、`break` 和 `continue` 應該如何在非同步區塊中工作。
 
-It was discussed that async blocks should act as a boundary for the
-`?`-operator. This would make them suitable for fallible IO:
-討論過異步區塊應該充當 ? 運算子的邊界。這將使它們適用於易出錯的 IO：
+討論過非同步區塊應該充當 `?` 運算子的邊界。這將使它們適用於易出錯的 IO：
 
 ```rust
 let reader: AsyncRead = ...;
@@ -466,8 +402,7 @@ async {
 }: impl Future<Output = io::Result<u32>>
 ```
 
-Also, it was discussed to allow the use of `break` to return early from
-an async block:
+此外，還討論了允許使用 break 從非同步區塊中提前返回：
 
 ```rust
 async {
@@ -475,8 +410,4 @@ async {
 }
 ```
 
-The use of the `break` keyword instead of `return` could be beneficial to
-indicate that it applies to the async block and not its surrounding function. On
-the other hand this would introduce a difference to closures and async closures
-which make use the `return` keyword.
 使用 `break` 關鍵字而不是 `return` 可能有助於表明它適用於非同步區塊而不是其周圍的函式。另一方面，這會給使用 `return` 關鍵字的 closure 和非同步 closure 帶來區別。
