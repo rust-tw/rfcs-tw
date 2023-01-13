@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -34,13 +33,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -56,7 +55,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -68,7 +67,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -81,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html" class="active">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html" class="active">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -99,7 +98,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -132,7 +131,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -161,8 +160,7 @@
 </span>pub fn do_some_io&lt;FD: AsRawFd&gt;(input: &amp;FD) -&gt; io::Result&lt;()&gt; {
     some_syscall(input.as_raw_fd())
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p><code>AsRawFd</code> 並無限制 <code>as_raw_fd</code> 的回傳值，所以 <code>do_some_io</code> 最終會對任意 <code>RawRd</code> 的值執行輸入輸出。由於 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html"><code>RawFd</code></a> 本身實作了 <code>AsRawFd</code>，甚至可以寫出 <code>do_some_io(&amp;7)</code>。</p>
 <p>這會使得程式<a href="https://cwe.mitre.org/data/definitions/910.html">存取錯誤的資源</a>，更甚者為其他地方私有的原始 handle 建立多個別名（alias），從而打破封裝的邊界，造成<a href="https://en.wikipedia.org/wiki/Action_at_a_distance_(computer_programming)">遠處來的詭異行為</a>。</p>
 <p>而在特殊情況下，違反輸入輸出安全性恐導致違反記憶體安全性。舉例來說，理論上替透過 Linux <a href="https://man7.org/linux/man-pages/man2/memfd_create.2.html"><code>memfd_create</code></a> 系統呼叫建立出來的檔案描述子打造  <code>mmap</code> 的安全封裝，並將之傳給 safe Rust 是可行的，畢竟它就是匿名的被開啟的檔案（anonymous open file），表示其他行程（process）無法存取之。然而，在沒有輸入輸出安全性且沒有永久封閉該檔案的情況下，該程式中其他程式碼恐意外地對該檔案描述子呼叫 <code>write</code> 或 <code>ftruncate</code>，進而打破記憶體安全性 <code>&amp;[u8]</code> 不變的規則。</p>
@@ -205,8 +203,7 @@
     // 實例，例如 `another`。因此，一個 `unsafe` 區塊告知呼叫者對此有責任，需使
     // 其免於這些風險。
     let dangling = unsafe { File::from_raw_fd(raw_fd) };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>呼叫端必須確保傳入 <code>from_raw_fd</code> 的值一定是從作業系統回傳所得，並且 <code>from_raw_fd</code> 的回傳值的生命週期不會長於和作業系統關聯的 handle。</p>
 <p>雖然將輸入輸出安全性作為明確的概念是個新作法，但其實它也反映出許多常見的實踐。除了引入一些新型別與特徵及其實作外，Rust <code>std</code> 並不需改變已經穩定的界面。在推行之初，並不需讓整個 Rust 生態系馬上支援輸入輸出安全性，而是可以漸進式地採用之。</p>
 <h2 id="ownedfd-與-borrowedfdfd"><a class="header" href="#ownedfd-與-borrowedfdfd"><code>OwnedFd</code> 與 <code>BorrowedFd&lt;'fd&gt;</code></a></h2>
@@ -228,8 +225,7 @@
 </span>pub fn do_some_io&lt;FD: AsFd&gt;(input: &amp;FD) -&gt; io::Result&lt;()&gt; {
     some_syscall(input.as_fd())
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>至於在 Windows 上，會以 <code>Handle</code> 和 <code>Socket</code> 形式呈現相應的型別。</p>
 <h2 id="漸進式採用"><a class="header" href="#漸進式採用">漸進式採用</a></h2>
 <p>輸入輸出安全性及其新型別與新特徵並不需要一次性全面導入，而是能夠分階段漸進採用：</p>
@@ -339,18 +335,18 @@
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 

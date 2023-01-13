@@ -1,0 +1,488 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2394-async_await - The Rust RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html" class="active">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Feature Name: async_await</li>
+<li>Start Date: 2018-03-30</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2394">rust-lang/rfcs#2394</a></li>
+<li>Rust Issues: 
+<ul>
+<li><a href="https://github.com/rust-lang/rust/issues/50547">rust-lang/rust#50547</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/62290">rust-lang/rust#62290</a> - #!feature(async_closure)</li>
+</ul>
+</li>
+<li>Translators:[<a href="https://github.com/FizzyElt">@FizzyElt</a>]</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/6041dd9ff2ed97eff4e054117cc1581b8c45d8c1/text/2394-async_await.md">The commit link this page based on</a></li>
+<li>Updated 2022-09-21</li>
+</ul>
+<h1 id="概要"><a class="header" href="#概要">概要</a></h1>
+<p>新增 async 和 await 語法，使撰寫程式碼操作 futures 更符合人因工程學。</p>
+<p>另有一個<a href="2592-futures.html">配套 RFC</a>，用於向 libstd 和 libcore 新增一個小型 futures API。</p>
+<h1 id="動機"><a class="header" href="#動機">動機</a></h1>
+<p>高效能網路服務經常使用非同步 IO，而不是阻塞式 IO，這樣在處理許多並行連線時更容易獲得更好的效能表現。 Rust 已經在網路服務領域得到了一些採用，我們希望透過使 Rust 中撰寫非同步網路服務更符合人因工程學，繼續支援這些使用者 - 並支援其他使用者採用。</p>
+<p>Rust 中非同步 IO 的發展經歷了多個階段。在 1.0 之前，我們嘗試在語言中內嵌綠色執行緒（green-threading） runtime。然而，事實證明這太過武斷了——因為它影響了每個用 Rust 撰寫的程式——並且在 1.0 之前不久就被刪除了。在 1.0 之後，非同步 IO 最初的重點是 mio 函式庫，它為 Linux、Mac OS 和 Windows 的非同步 IO 基元（primitive）提供了一個跨平台抽象。 2016 年年中，future crate 的引入產生了重大影響，它為非同步操作提供了一個方便且可共享的抽象。 tokio 函式庫提供了一個基於 mio 的事件循環，可以執行使用 future 介面實作的程式碼。</p>
+<p>在獲得基於 future 的生態系統的經驗和使用者的回饋後，我們發現了某些人因工程學挑戰。使用需要在等待點（await point）之間共享的狀態，是非常不符合人因工程學的（需要 Arc 或 join chaining）雖然組合器通常比手動撰寫 future 更符合人因工程學，但它們仍然經常導致混亂的嵌套和 chained callbacks。</p>
+<p>幸運的是，Future 抽象非常適合與一種語法糖一起使用——這個語法糖在許多具有非同步 IO 的語言中愈來愈常見：async 和 await 關鍵字。簡而言之，非同步函式回傳一個 future，而不是在呼叫時立即執行。在函式內部，可以使用 await 表達式等待其他 future，這使它們在輪詢 future 時讓出控制權。從使用者的角度來看，他們可以像在使用同步程式碼一樣使用 async/await，並且只需要標注其函式和調用。</p>
+<p>Async/await 和 futures 通常是非同步和並行的強大抽象，並且可能可以應用在非同步 I/O 空間以外的地方。我們今天遇到的案例通常與非同步 IO 相關，但透過引入一等公民語法和 libstd 的支援，我們相信更多不直接與非同步 IO 相關的 async 和 await 案例也會蓬勃發展。</p>
+<h1 id="教學式解說"><a class="header" href="#教學式解說">教學式解說</a></h1>
+<h2 id="非同步函式"><a class="header" href="#非同步函式">非同步函式</a></h2>
+<p>對函式加上 <code>async</code> 關鍵字，使它們成為「非同步函式」：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn function(argument: &amp;str) -&gt; usize {
+     // ...
+}
+<span class="boring">}</span></code></pre></pre>
+<p>非同步函式的工作方式與普通函式不同。呼叫非同步函式時，它不會立即進入主體。相反，它執行實作 <code>Future</code> 特徵的匿名型別。當輪詢該 future 時，該函式被執行到它內部的下一個 <code>await</code> 或回傳點（請參閱接下來 await 語法部分）。</p>
+<p>非同步函式是延遲計算的一種 - 在您開始輪詢函式回傳的 future 之前，函式本體中沒有任何內容被實際執行。例如：</p>
+<pre><pre class="playground"><code class="language-rust">async fn print_async() {
+     println!(&quot;Hello from print_async&quot;)
+}
+
+fn main() {
+     let future = print_async();
+     println!(&quot;Hello from main&quot;);
+     futures::executor::block_on(future);
+}</code></pre></pre>
+<p>這將在印出 <code>&quot;Hello from main&quot;</code> 之前印出 <code>&quot;Hello from print_async&quot;</code>。</p>
+<p><code>async fn foo(args..) -&gt; T</code> 是 <code>fn(args..) -&gt; impl Future&lt;Output = T&gt;</code> 型別的函式。回傳型別是編譯器產生的匿名型別。</p>
+<h3 id="async--closures"><a class="header" href="#async--closures"><code>async ||</code> closures</a></h3>
+<p>除了函式，非同步也可以應用在 closure 上面。與非同步函式一樣，非同步 closure 的回傳型別為 <code>impl Future&lt;Output = T&gt;</code>，而不是 <code>T</code>。當您呼叫該 closure 時，它會立即回傳一個 future，且不會執行任何程式碼（就像非同步函式一樣）。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let closure = async || {
+         println!(&quot;Hello from async closure.&quot;);
+    };
+    println!(&quot;Hello from main&quot;);
+    let future = closure();
+    println!(&quot;Hello from main again&quot;);
+    futures::block_on(future);
+}</code></pre></pre>
+<p>這將在印出 <code>&quot;Hello from async closure.&quot;</code> 之前印出兩個 <code>&quot;Hello from main&quot;</code>。</p>
+<p><code>async</code> closure 可以用 <code>move</code> 來捕捉它們包覆在 closure 內的變數的所有權。</p>
+<h2 id="async-區塊"><a class="header" href="#async-區塊"><code>async</code> 區塊</a></h2>
+<p>您可以使用 <code>async</code> 區塊直接將 future 建立為表達式：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let my_future = async {
+    println!(&quot;Hello from an async block&quot;);
+};
+<span class="boring">}</span></code></pre></pre>
+<p>這種形式幾乎等同於立即呼叫的 <code>async</code> closure。即是：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async { /* body */ }
+
+// is equivalent to
+
+(async || { /* body */ })()
+<span class="boring">}</span></code></pre></pre>
+<p>除了像 <code>return</code>、<code>break</code> 和 <code>continue</code> 這樣的控制流程結構不允許在 <code>body</code> 中使用（除非它們出現在一個新的控制流上下文中，比如 closure 或 loop）。 尚未確定 <code>?</code> 運算子和提早回傳（early return）在非同步區塊運作的方式（請參閱未解決的問題）。</p>
+<p>與 <code>async</code> closure 一樣，<code>async</code> 區塊可以加入 <code>move</code>，以捕捉區塊內所包覆的變數的所有權。</p>
+<h2 id="編譯器內嵌的-await"><a class="header" href="#編譯器內嵌的-await">編譯器內嵌的 <code>await!</code></a></h2>
+<p>編譯器加入了一個名為 <code>await!</code> 的內建函式。<code>await!</code> 可用於「暫停」future 的計算，將控制權交還給呼叫者。<code>await!</code> 接受任何實作 <code>IntoFuture</code> 的表達式，並計算為此 future 所傳入的泛型型別（如下面範例的 <code>Output</code>）之值。</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// future: impl Future&lt;Output = usize&gt;
+let n = await!(future);
+<span class="boring">}</span></code></pre></pre>
+<p>await 展開的程式碼，會重複在接收到的 future 上呼叫 <code>poll</code>：<code>poll</code> 回傳 <code>Poll::Pending</code> 時讓出 (yield) 函式的控制權，並在最終回傳 <code>Poll::Ready</code> 時取得項目的值。</p>
+<p><code>await!</code> 只能在非同步函式、closure 或區塊內使用，除此之外使用它都是錯誤的。</p>
+<p>（<code>await!</code> 是編譯器的內建函式，為以後確定其確切語法保留彈性空間。詳細資訊請參閱〈未解決的問題〉部分。）</p>
+<h1 id="技術文件式解說"><a class="header" href="#技術文件式解說">技術文件式解說</a></h1>
+<h2 id="關鍵字"><a class="header" href="#關鍵字">關鍵字</a></h2>
+<p><code>async</code> 和 <code>await</code> 在 2018 版本中都成為關鍵字。</p>
+<h2 id="async-函式closure區塊的回傳型別"><a class="header" href="#async-函式closure區塊的回傳型別"><code>async</code> 函式、closure、區塊的回傳型別</a></h2>
+<p>非同步函式的回傳型別是編譯器生成的唯一匿名型別，和 closure 的型別類似。你可以把這種型別想像成一個枚舉，函式的每個「yield point」都是一個變體——開頭、await 表達式和每一次的回傳。每個變體都會儲存需要保存的狀態，以便從該 yield point 恢復控制。</p>
+<p>呼叫函式時，此匿名型別以其初始狀態回傳，其中包含此函式的所有引數。</p>
+<h3 id="特徵綁定"><a class="header" href="#特徵綁定">特徵綁定</a></h3>
+<p>匿名回傳型別實作 <code>Future</code>，<code>Item</code> 為它的回傳型別。輪詢它會推進函數的狀態，當它在 <code>await</code> 狀態時會返回 <code>Pending</code>；當它在 <code>return</code> 狀態時則返回 <code>Ready</code>。任何在它已經回傳 <code>Ready</code> 一次後對其嘗試進行輪詢都將造成恐慌。</p>
+<p>匿名回傳型別對 <code>Unpin</code> 特徵有一個相反的實作，即 <code>impl !Unpin</code>。這是因為 future 可能有內部引用，這意味著它永遠不需要被移動。</p>
+<h2 id="匿名-future-的生命週期捕捉"><a class="header" href="#匿名-future-的生命週期捕捉">匿名 future 的生命週期捕捉</a></h2>
+<p>該函式的所有輸入生命週期都在非同步函式回傳的 future 捕捉，因為它將函式的所有引數儲存在其初始狀態（可能還有以後的狀態）。也就是說，給定這樣的函數：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn foo(arg: &amp;str) -&gt; usize { ... }
+<span class="boring">}</span></code></pre></pre>
+<p>它具有與此等效的類型簽名：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo&lt;'a&gt;(arg: &amp;'a str) -&gt; impl Future&lt;Output = usize&gt; + 'a { ... }
+<span class="boring">}</span></code></pre></pre>
+<p>這與 <code>impl Trait</code> 的預設值不同，它不捕捉生命週期。這就是為什麼回傳類型是 <code>T</code> 而不是 <code>impl Future&lt;Output = T&gt;</code> 的一個重要部分。</p>
+<h3 id="初始化模式"><a class="header" href="#初始化模式">「初始化」模式</a></h3>
+<p>有時會出現的一種模式是 future 有一個「初始化」步驟，應該在其建立期間被執行。這在處理資料轉換和臨時借用時很有用。因為 async 函式在您輪詢它之前不會開始計算，並且它會捕捉其引數的生命週期，因此這種模式不能直接用 <code>async fn</code> 表示。</p>
+<p>其中一個解決辦法，是撰寫一個回傳 <code>impl Future</code> 的函式，而回傳值是會立即計算 (evaluate) 的 closure：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// only arg1's lifetime is captured in the returned future
+fn foo&lt;'a&gt;(arg1: &amp;'a str, arg2: &amp;str) -&gt; impl Future&lt;Output = usize&gt; + 'a {
+    // do some initialization using arg2
+
+    // closure which is evaluated immediately
+    async move {
+         // asynchronous portion of the function
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h2 id="await-展開後的程式碼"><a class="header" href="#await-展開後的程式碼">await 展開後的程式碼</a></h2>
+<p>內嵌的  <code>await!</code> 展開結果大致如下：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut future = IntoFuture::into_future($expression);
+let mut pin = unsafe { Pin::new_unchecked(&amp;mut future) };
+loop {
+    match Future::poll(Pin::borrow(&amp;mut pin), &amp;mut ctx) {
+          Poll::Ready(item) =&gt; break item,
+          Poll::Pending     =&gt; yield,
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>這不是真正意義上的『展開』，因為 <code>yield</code> 概念不能用 <code>async</code> 函式中的表層語法來表達。這就是為什麼 <code>await!</code> 是一個內建編譯器函式，而不是實際的巨集。</p>
+<h2 id="async-和-move-的順序"><a class="header" href="#async-和-move-的順序"><code>async</code> 和 <code>move</code> 的順序</a></h2>
+<p>非同步 closure 和區塊可以用 <code>move</code> 註釋來捕捉它們包覆的變數的所有權。關鍵字的順序固定為 <code>async move</code>。只允許一種順序，可以避免語義上「是否有重要意義」的混淆。</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async move {
+    // body
+}
+<span class="boring">}</span></code></pre></pre>
+<h1 id="缺點"><a class="header" href="#缺點">缺點</a></h1>
+<p>在 Rust 中新增 async 和 await 語法是對語言的重大更改 - 這是自 1.0 以來最重要的新增功能之一。雖然我們從最小的功能開始，但從長遠來看，它所隱含的功能集也會增長（請參閱未解決的問題部分）。對於這樣一個重要的新增功能，我們絕不能掉以輕心，只有在強烈的動機下才能進行。</p>
+<p>我們相信，一個符合人因工程學的非同步 IO 解決方案對於 Rust 作為撰寫高效能網路服務的語言的成功至關重要，這是我們 2018 年的目標之一。基於 Future trait 的 async &amp; await 語法是在不久的將來實現這一目標最便捷和低風險的途徑。</p>
+<p>這個 RFC，連同其配套的 lib RFC，對 future 和 async/await 做出比我們過往的專案更堅定的承諾。如果我們在穩定這些特性之後決定反其道而行，那將付出相當大的代價。因為這個 RFC 的存在，增加非同步程式的替代機制的成本會更高。然而，有鑑於我們在 future 方面的經驗，我們相信這是正確的發展方向。</p>
+<p>我們所做的幾個小決定也有缺點。例如，在使用「内部」回傳型別和「外部」回傳型別之間有一個權衡。我們可以為非同步函式建立一個不同的求值模型，即在第一個等待（await point）點之前立即對其進行求值。我們在這些問題上做出的决定在 RFC 的相應部分都有說明。</p>
+<h1 id="原理和替代方案"><a class="header" href="#原理和替代方案">原理和替代方案</a></h1>
+<p>本節包含了本 RFC 拒絕的替代性設計決定（相對於那些只是推遲的設計）。</p>
+<h2 id="回傳型別使用-t-而不是-impl-futureoutput--t"><a class="header" href="#回傳型別使用-t-而不是-impl-futureoutput--t">回傳型別（使用 <code>T</code> 而不是 <code>impl Future&lt;Output = T&gt;</code>）</a></h2>
+<p>非同步函式的回傳型別是一個有點複雜的問題。對於非同步函式的回傳型別，有兩個不同的觀點：「内部」回傳型別 - 你用 <code>return</code> 關鍵字回傳的型別，以及「外部」回傳型別 - 當你呼叫函式時回傳的型別。</p>
+<p>大多數帶有非同步函式的靜態型別語言在函式簽名中顯示「外部」回傳型別。本 RFC 建議在函式簽名中顯示「内部」回傳型別。這既有優點也有缺點。</p>
+<h3 id="生命週期消除問題"><a class="header" href="#生命週期消除問題">生命週期消除問題</a></h3>
+<p>正如前面所提到的，回傳的 future 捕捉了所有傳入的生命週期。預設情況下，<code>impl Trait</code> 不捕捉任何生命週期。為了準確反應外部回傳型別，有必要消除生命週期的省略：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn foo&lt;'ret, 'a: 'ret, 'b: 'ret&gt;(x: &amp;'a i32, y: &amp;'b i32) -&gt; impl Future&lt;Output = i32&gt; + 'ret {
+     *x + *y
+}
+<span class="boring">}</span></code></pre></pre>
+<p>這將是非常不符合人因工程學的，並且使非同步的使用變得更不愉快，更不易於學習。這個問題在決定回傳內部型別時佔很大比重。</p>
+<p>我們可以讓它回傳 <code>impl Future</code>，但對於 <code>async fn</code> 的回傳型別，生命週期捕捉的運作方式與其他函式不同，這似乎比顯示內部型別更糟糕。</p>
+<h3 id="多型的回傳對我們來說並非是一個因素"><a class="header" href="#多型的回傳對我們來說並非是一個因素">多型的回傳（對我們來說並非是一個因素）</a></h3>
+<p>根據 C# 開發者的說法，回傳 <code>Task&lt;T&gt;</code>（他們的「外部型別」）的主要因素之一是，他們希望有可以回傳 <code>Task</code> 以外型別的非同步函式。我們對此沒有一個可以令人信服的實例。</p>
+<ol>
+<li>在 future 的 0.2 分支中，<code>Future</code> 和 <code>StableFuture</code> 之間是有區別的。然而，這種區分是人為的，單純是因為物件安全（object-safe）的自定義自型別（self-types）在穩定版本上還不能使用。</li>
+<li>目前的 <code>#[async]</code> 巨集有一個 <code>(boxed)</code> 變體。我們更傾向於讓非同步函式盡可能的不包裝，只在呼叫處明確包裝。屬性變體的動機是為了支援物件安全特徵中的非同步方法。這是在物件安全特徵中支援 <code>impl Trait</code> 的一個特例（可能是透過在物件情况下對回傳型別進行包裝），我們希望這個特性與非同步函式分開。</li>
+<li>有人建議我們支援回傳串流（stream）的 <code>async fn</code>。然而，這意味著内部函式的語意在回傳 future 和串流的函式之間會有顯著的不同。正如在未解决的問題部分所討論的，基於生成器和非同步生成器的解決方案似乎更有機會。</li>
+</ol>
+<p>基於這些原因，我們認為從多型的角度來看，回傳外部型別的論點並不強烈。</p>
+<h3 id="可學習性文件的權衡"><a class="header" href="#可學習性文件的權衡">可學習性/文件的權衡</a></h3>
+<p>從可學習性的角度來看，支援外部和内部回傳型別的論點都有。支援外部回傳型別最有說服力的論據之一是文件：當你閱讀自動產生的 API 文件時，你肯定會看到你作為呼叫者得到的東西。相較之下，由於回傳型別和你 <code>return</code> 的表達式的型別之間的對應關係，可以更容易理解如何使用内部回傳型別撰寫非同步函式。</p>
+<p>Rustdoc 可以透過幾種方式處理使用内部回傳型別的非同步函式，使其更容易理解。我們至少應該確保在文件中包含 <code>async</code> 註解，這樣了解 async 符號的使用者就知道此函式將回傳一個 future。我們還可以進行其他轉換，可能是可選的，以顯示函式的外部簽名。如何確切處理非同步函式的 API 文件是一個尚未解决的問題。</p>
+<h2 id="內嵌語法而不是在生成器中使用巨集"><a class="header" href="#內嵌語法而不是在生成器中使用巨集">內嵌語法，而不是在生成器中使用巨集</a></h2>
+<p>另一個選擇是專注於穩定程序性巨集（procedural macro）和生成器，而不是為非同步函式引入內嵌語法。一個非同步函式可以被建模為一個生成器，它將產生 <code>()</code>。</p>
+<p>從長遠來看，我們相信我們會希望有專門的語法來處理非同步函式，因為它更符合人因工程學原理，而且使用情境也足夠令人信服和重要，可以證明這一點（類似於 - 例如 - 有内嵌的 for 迴圈和 if 判斷式，而不是有編譯成迴圈和配對判斷式的巨集）。鑑於此，唯一的問題是，我們是否可以透過暫時使用生成器來獲得比現在引入非同步函式更好的穩定性。</p>
+<p>使用展開到生成器的巨集似乎不太可能使其更快的穩定。生成器可以表現更多的可能性，並且有更多的開放性問題 - 包括語法和語意。這甚至沒有解決穩定更多程序性巨集的開放問題。出於這個原因，我們認為穩定最小的内嵌 async/await 功能比試圖穩定生成器和 proc 巨集更有效益。</p>
+<h2 id="單純基於生成器的-async"><a class="header" href="#單純基於生成器的-async">單純基於生成器的 <code>async</code></a></h2>
+<p>另一種設計是將非同步函式作為建立生成器的語法。在這種設計中，我們可以寫一個這樣的生成器：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn foo(arg: Arg) -&gt; Return yield Yield
+<span class="boring">}</span></code></pre></pre>
+<p>return 和 yield 都是可選的，預設為 <code>()</code>。一個產生 <code>()</code> 的非同步函式將使用全面實作（blanket impl）來實作 <code>Future</code>。一個回傳 <code>()</code> 的非同步函式將實作 <code>Iterator</code>。</p>
+<p>此方法的問題是，它不能從人因工程學的角度處理 <code>Stream</code>，Stream 需要產生 <code>Poll&lt;Option&lt;T&gt;&gt;</code>。目前還不清楚在一個產生 <code>()</code> 以外的東西（包括 Stream）的非同步函式裡的 <code>await</code> 如何運作。由於這個原因，「矩陣」方法，即我們對生成器函式、非同步函式和非同步生成器函式有獨立的語法，似乎是一個更可行的方法。</p>
+<h2 id="hot-async-functions"><a class="header" href="#hot-async-functions">&quot;Hot async functions&quot;</a></h2>
+<p>正如本 RFC 所建議的，所有的非同步函式都會立即回傳，根本不需要執行其主體。如上所述，這對於需要立即進行「初始化」步驟的情境來說並不方便 - 例如，這些情境需要使用一個終端非同步區塊。</p>
+<p>另一種方法是讓非同步函式立即求值，直到它們的第一個 <code>await</code>，在那之前保留它們的狀態。這將是一個相當複雜的實現 - 它們需要在 <code>await</code> 中擁有一个額外的 yield point，在輪詢被 await 的 future 之前，條件是 await 是否是 future 主體中的第一個 await。</p>
+<p>Rust 的 future 與其它語言的 future 的一個根本區別是，Rust 的 future 除非被輪詢，否則不會做任何事情。整個系统都是圍繞這一點建立的：例如，取消正是因為這個原因而捨棄了 future。相反，在其它語言中，呼叫一個非同步函式會產生一個立即開始執行的 future。這種差異也延續到了 <code>async fn</code> 和 <code>async</code> 區塊中，其中至關重要的是，產生的 future 要<strong>主動輪詢</strong>以取得進展。允許部分、急迫的執行很可能會引發嚴重的混亂和錯誤。</p>
+<p>從使用者的角度來看，這也很複雜 - 主體的一部分何時被執行取決於它是否出現在所有 <code>await</code> 語句（可能是巨集生成的）之前。使用终端 async 區塊提供了一個更清晰的機制來區分帶有初始化步驟的 future 中立即執行部分和非同步執行部分。</p>
+<h2 id="使用-asyncawait-而不是其他的非同步性系統"><a class="header" href="#使用-asyncawait-而不是其他的非同步性系統">使用 async/await 而不是其他的非同步性系統</a></h2>
+<p>最後，一個極端的選擇是放棄 future 和 async/await 作為 Rust 中 async/await 的機制，而採用不同的典範。在這些建議中，有一個常見的效果系统，monad 和 do 語法（do notation）、綠色執行緒和滿堆疊（stack-full）的協程。</p>
+<p>假設性上來說，Rust 可以透過 async/await 語法來達成一些泛化（generalization），但在這個領域的研究還不足以在短期内支援它。考慮到我們 2018 年的目標 - 強調 - async/await 語法（一個在許多語言中廣泛存在的概念，與我們現有的 async IO 函式庫運作良好）是在 Rust 發展的這個階段最合理的實作。</p>
+<h2 id="非同步區塊與非同步-closure"><a class="header" href="#非同步區塊與非同步-closure">非同步區塊與非同步 closure</a></h2>
+<p>正如文中所指出的，非同步區塊和非同步 closure 是密切相關的，而且大致上是可以相互表達的：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// almost equivalent
+async { ... }
+(async || { ... })()
+
+// almost equivalent
+async |..| { ... }
+|..| async { ... }
+<span class="boring">}</span></code></pre></pre>
+<p>我們可以考慮只採用兩個結構中的其中一個。然而：</p>
+<ul>
+<li>
+<p>為了與 <code>async fn</code> 保持一致，我們有充分的理由使用 <code>async ||</code>；這樣的 closure 通常對建構一個服務這樣的高階構造很有用。</p>
+</li>
+<li>
+<p>有一個強而有力的理由讓我們採用非同步區塊。RFC 文件中提到的初始化模式，以及事實上它提供了一種更直接、更原始的方式建立 future。</p>
+</li>
+</ul>
+<p>RFC 提議在前面就包含這兩個構造，因為我們似乎不可避免地需要這兩者，但我們總是可以在穩定之前重新思考這個問題。</p>
+<h1 id="現有技術"><a class="header" href="#現有技術">現有技術</a></h1>
+<p>在其他語言中，包含 C#、JavaScript 和 Python，有很多關於使用 async/await 語法作為處理非同步操作的一種方式的先例。</p>
+<p>目前主流的非同步程式設計有以下三種範式：</p>
+<ul>
+<li>async 和 await 符號。</li>
+<li>隱式並行的執行階段程式庫（implicit concurrent runtime），通常稱為「綠色執行緒」，例如通信順序行程（例如 Go）或參與者模型（例如 Erlang）。</li>
+<li>延遲執行程式中的 Monadic 轉換，例如：Haskell 的 do 語法（do notation）。</li>
+</ul>
+<p>async/await 是 Rust 最引人注目的模型，因為它與所有權和借用互動良好（不像基於 Monadic 的系统），而且它使我們能夠擁有一個完全基於函式庫的非同步模型（不像綠色執行緒）。</p>
+<p>我們對 async/await 的處理不同於大多數其他靜態型別語言（例如 C#），我們選擇顯示「內部」回傳型別，而不是外部回傳型別。正如在替代方案部分中討論的那樣，在 Rust 定義的特定脈絡下（生命週期省略，不需要回傳型別多型），這種偏差的動機充分。</p>
+<h1 id="未解決的問題"><a class="header" href="#未解決的問題">未解決的問題</a></h1>
+<p>本節包含已推延且未包含在此初始 RFC 中設計的延伸。</p>
+<h2 id="await-表達式的最終語法"><a class="header" href="#await-表達式的最終語法"><code>await</code> 表達式的最終語法</a></h2>
+<p>儘管此 RFC 建議 <code>await</code> 是一個內建的巨集，但我們希望有一天它成為一個正常的控制流結構。如何處理它的運算子優先順序，以及是否需要某種分隔符號則尚待解決。</p>
+<p>特別是， <code>await</code> 與 <code>?</code> 有一個有趣的互動。很常見的情況是有一個 future，它將被執行為一個 <code>Result</code>，然後使用者會想把這個结果應用到 <code>?</code> 這意味著 await 應該比 <code>?</code> 有更高的優先順序，這樣該模式就能按照使用者的意願運作。然而，由於它引入了一個空格，看起來這並不是你要得到的優先順序：</p>
+<pre><code>await future?
+</code></pre>
+<p>以下有幾種可能的解決方案：</p>
+<ol>
+<li>需要某種的分隔符號，可能是大括號或括號或兩者之一，讓它看起來更符合期望的那樣 - await {future}？ - 這很煩躁。</li>
+<li>將優先順序定義為，如果優先順序不符使用者本意，需要使用者明確指出 <code>(await future)?</code> - 對使用者來說非常令人驚訝。</li>
+<li>將其定義為不方便的優先順序 —— 這似乎與其他優先順序一樣令人驚訝。</li>
+<li>引入一種特殊的語法來處理多個應用程式，例如 <code>await? future</code> - 這似乎是很不尋常的方式。</li>
+</ol>
+<p>這個問題留給未來找尋另一種解決方案，或是從上述方案中選擇最不糟糕的一個。</p>
+<h2 id="for-await-和處理串流"><a class="header" href="#for-await-和處理串流"><code>for await</code> 和處理串流</a></h2>
+<p>RFC 目前遺漏的另一個延伸是使用 for 迴圈處理串流的能力。可以想像 <code>for await</code> 這樣的結構，它採用 <code>IntoStream</code> 而不是 <code>IntoIterator</code>：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for await value in stream {
+    println!(&quot;{}&quot;, value);
+}
+<span class="boring">}</span></code></pre></pre>
+<p>這被排除在最初的 RFC 之外，以避免必須在標準庫中穩定 <code>Stream</code> 的定義（以使與此相關的 RFC 盡可能小）。</p>
+<h2 id="生成器和串流"><a class="header" href="#生成器和串流">生成器和串流</a></h2>
+<p>將來，我們可能還希望能夠定義對串流求值非同步函式，而不是對 future 求值。我們建議透過生成器來處理這個案例。生成器可以轉換為一種迭代器，而非同步生成器可以轉換為一種串流。</p>
+<p>例如（使用的語法可能會改變）；</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Returns an iterator of i32
+fn foo(mut x: i32) yield i32 {
+     while x &gt; 0 {
+          yield x;
+          x -= 2;
+     }
+}
+
+// Returns a stream of i32
+async fn foo(io: &amp;AsyncRead) yield i32 {
+    async for line in io.lines() {
+        yield line.unwrap().parse().unwrap();
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h2 id="實現-unpin-的非同步函式"><a class="header" href="#實現-unpin-的非同步函式">實現 <code>Unpin</code> 的非同步函式</a></h2>
+<p>如本 RFC 中所提議，所有非同步函式均未實現 <code>Unpin</code>，因此將它們從 <code>Pin</code> 中移出是不安全的。這允許它們包含跨越 yield point 的引用。</p>
+<p>我們還可以透過註釋對非同步函式進行型別檢查，以確認它不包含任何跨越 yield point 的引用，從而允許它實做 <code>Unpin</code>。可啟用此功能的註釋暫時未指定。</p>
+<h2 id="異步區塊中的--運算子和控制流構造"><a class="header" href="#異步區塊中的--運算子和控制流構造">異步區塊中的 <code>?</code> 運算子和控制流構造</a></h2>
+<p>這個 RFC 沒有提出 <code>?</code> 運算子和控制流結構如 <code>return</code>、<code>break</code> 和 <code>continue</code> 應該如何在非同步區塊中工作。</p>
+<p>不過有討論非同步區塊應該充當 <code>?</code> 運算子的邊界。讓它們適用於易出錯的 IO：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let reader: AsyncRead = ...;
+async {
+    let foo = await!(reader.read_to_end())?;
+    Ok(foo.parse().unwrap_or(0))
+}: impl Future&lt;Output = io::Result&lt;u32&gt;&gt;
+<span class="boring">}</span></code></pre></pre>
+<p>此外，還討論了允許使用 break 從非同步區塊中提前回傳：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async {
+    if true { break &quot;foo&quot; }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>使用 <code>break</code> 關鍵字而不是 <code>return</code> 可能有助於表明它適用於非同步區塊而不是其周圍的函式。另一方面，這會給使用 <code>return</code> 關鍵字的 closure 和非同步 closure 帶來區別。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="2342-const-control-flow.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="2495-min-rust-version.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="2342-const-control-flow.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="2495-min-rust-version.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

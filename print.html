@@ -9,7 +9,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -35,13 +34,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -57,7 +56,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -69,7 +68,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -82,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -100,7 +99,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -133,7 +132,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -382,8 +381,7 @@ consensus and community norms, not impose more structure than necessary.</p>
     /// Support the SSLv2, SSLv3 and TLSv1 protocols
     Sslv23,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>然而，所有的 <code>match</code> 只能在 <code>cfg</code> 啟用時使用 <code>Sslv2</code>，例如下面內容是無效的：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -394,8 +392,7 @@ consensus and community norms, not impose more structure than necessary.</p>
         _ =&gt; &quot;...&quot;
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>一個有效的方法則必須有兩個定義：<code>#[cfg(sslv2)] fn name(...)</code> 和 <code>#[cfg(not(sslv2)] fn name(...)</code>
 。前者有 <code>Sslv2</code> 的分支，後者沒有。顯然，對於枚舉中每個額外的 <code>cfg</code> 變體，這都會以指數型的方式爆炸。</p>
 <p>分支權重將允許仔細的微優化器（micro-optimiser）通知編譯器，例如，鮮少採取某個配對分支：</p>
@@ -406,8 +403,7 @@ consensus and community norms, not impose more structure than necessary.</p>
     #[cold]
     Rare =&gt; {}
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h1 id="詳細設計"><a class="header" href="#詳細設計">詳細設計</a></h1>
 <p>一般的屬性語法，應用於整個配對分支。</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -422,8 +418,7 @@ consensus and community norms, not impose more structure than necessary.</p>
     #[attr]
     _ =&gt; {}
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h1 id="替代方案"><a class="header" href="#替代方案">替代方案</a></h1>
 <p>實際上沒有通用的替代方案; 人們也許可以用一些巨集（macro）和輔助函數來解決條件枚舉變體的配對問題; 但一般來說，這起不了任何作用。</p>
 <h1 id="未解決的問題"><a class="header" href="#未解決的問題">未解決的問題</a></h1>
@@ -471,8 +466,7 @@ trait SliceMut&lt;Idx, S&gt; {
     fn slice_to_mut(&amp;'a mut self, to: Idx) -&gt; &amp;'a mut S;
     fn slice_mut(&amp;'a mut self, from: Idx, to: Idx) -&gt; &amp;'a mut S;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>（請注意，此處的可變名稱是命名規則可能更改的一部分，將在單獨的 RFC 中描述）。</p>
 <p>這些特徵將在解釋以下符號時使用：</p>
 <p><em>不可變切片</em></p>
@@ -516,8 +510,7 @@ trait SliceMut&lt;Idx, S&gt; {
 let v = vec!(0u8, 1, 2);
 use_slice(&amp;v)           // automatically coerce here
 use_slice(v.as_slice()) // equivalent
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>不幸的是，添加這樣的強制需要在以下選項中進行選擇：</p>
 <ul>
 <li>
@@ -536,8 +529,7 @@ use_slice(v.as_slice()) // equivalent
 let v = vec!(0u8, 1, 2);
 use_slice(&amp;*v)          // take advantage of deref
 use_slice(v.as_slice()) // equivalent
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>但是，這樣做至少有兩個缺點：</p>
 <ul>
 <li>
@@ -572,22 +564,19 @@ my_asm_func:
 extern {
     fn my_asm_func();
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h1 id="動機-2"><a class="header" href="#動機-2">動機</a></h1>
 <p>此功能有兩個主要使用案例。首先，它允許完全在組合語言中寫入函式，這大大消除了對 <code>naked</code> 屬性的需要。這主要適用於使用自訂呼叫規則（如中斷處置器）的函式。</p>
 <p>另一個重要的使用案例是，它允許外部組合語言檔案在 Rust 模組中使用，而無需駭入編譯系統。</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>global_asm!(include_str!(&quot;my_asm_file.s&quot;));
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>組合語言檔案也可以由 <code>build.rs</code> 預處理或產生（例如使用 C 預處理器），這將在 Cargo 輸出目錄中產生輸出檔案：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>global_asm!(include_str!(concat!(env!(&quot;OUT_DIR&quot;), &quot;/preprocessed_asm.s&quot;)));
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h1 id="詳細設計-2"><a class="header" href="#詳細設計-2">詳細設計</a></h1>
 <p>見上文所述，沒有要多補充的。巨集（macro）會直接映射到 LLVM 的 <code>module asm</code>。</p>
 <h1 id="缺點-1"><a class="header" href="#缺點-1">缺點</a></h1>
@@ -616,8 +605,7 @@ extern {
     type Item&lt;'a&gt;;
     fn next&lt;'a&gt;(&amp;'a mut self) -&gt; Option&lt;Self::Item&lt;'a&gt;&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>這樣的特徵是很實用的，它能提供一種疊代器（Iterator）所回傳的數值能附有一個生命週期，且能與傳至 <code>next</code> 的引用所擁有的生命週期綁定。此特徵最明顯的使用情境就是對一個向量（vector）所產生的疊代器，在每次疊代時都能產生重疊（overlapping）且可變（mutable）的子切片（subslice）。使用標準的 <code>Iterator</code> 介面的話，這樣的實作是無效的，因為每個切片必須活得與整個疊代器一樣長，而非只是透過 <code>next</code> 借用的時間而已。</p>
 <p>這樣的特徵無法用現在的 Rust 表現出來，因為它需要依賴某種形式的高階種類多型。本 RFC 將擴充 Rust 來確保此特定形式的高階種類多型，也就是我們在此所稱作的關聯型別建構子。此功能有各種應用場景，但最主要的應用都還是與 <code>StreamingIterator</code> 類似：定義的特徵所持有的型別能附有一個生命週期，並與接收型別所借用的生命週期相互關聯。</p>
 <h1 id="設計細節"><a class="header" href="#設計細節">設計細節</a></h1>
@@ -629,8 +617,7 @@ extern {
 </span>fn not(x: bool) -&gt; bool {
    !x
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p><code>not</code> 的型別為 <code>bool -&gt; bool</code>（抱歉這邊開始會使用些與 Rust 不大一樣的語法），而  <code>not(true)</code> 的型別則是 <code>bool</code>。注意這樣的不同點正是了解高階種類的關鍵。</p>
 <p>在種類的分析中，<code>bool</code>、<code>char</code>、<code>bool -&gt; bool</code> 等等型別都有 <code>type</code> 這種種類。每個型別都有  <code>type</code> 種類。然而 <code>type</code> 只是基本種類，就像 <code>bool</code> 只是個基本型別，我們能寫出更複雜的種類像是 <code>type -&gt; type</code>，這樣的種類其中一個範例就是 <code>Vec</code> 能接受一個型別然後產生出一個型別。而 <code>Vec</code> 的種類與 <code>Vec&lt;i32&gt;</code> 的種類（也就是 <code>type</code>）之間的差異，就相對應於 <code>not</code> 與 <code>not(true)</code> 之間的差異。另外注意 <code>Vec&lt;T&gt;</code> 的種類和 <code>Vec&lt;i32&gt;</code> 一樣仍然是 <code>type</code>。盡管 <code>T</code> 是個型別參數，<code>Vec&lt;T&gt;</code> 還是接收了一個型別，就像 <code>not(x)</code> 的型別仍然是 <code>bool</code>，盡管 <code>x</code> 是個變數一樣。</p>
 <p>Rust 相對不尋常的特色是它有<strong>兩種</strong>基本種類，相較於許多語言處理高階種類時只會有一種種類 <code>type</code>。Rust 的另一個基本種類就是生命週期參數。如果你有個型別像是 <code>Foo&lt;'a&gt;</code>，<code>Foo</code> 的種類就是 <code>lifetime -&gt; type</code>。</p>
@@ -645,8 +632,7 @@ extern {
 </span>trait StreamingIterator {
    type Item&lt;'a&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>這樣能清楚表達關聯項目 <code>Item</code> 是一個型別建構子，而非只是個型別，因為它有個型別參數附加在旁。</p>
 <p>與關聯型別一樣，關聯型別建構子可以用在界限內：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -657,14 +643,12 @@ extern {
     
     fn iter&lt;'a&gt;(&amp;'a self) -&gt; Self::Iter&lt;'a&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>此界限套用到型別建構子的「輸出」，然後參數會被視為高階參數。也就是說上述的界限幾乎等於對特徵加上這樣的界限：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>for&lt;'a&gt; Self::Iter&lt;'a&gt;: Iterator&lt;Item = Self::Item&lt;'a&gt;&gt;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>在 <code>impl</code> 中賦值給關聯型別建構子的語法與賦值給關聯型別的非常接近：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -672,8 +656,7 @@ extern {
     type Item&lt;'a&gt; = &amp;'a mut [T];
     ...
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h3 id="使用關聯型別建構子建立型別"><a class="header" href="#使用關聯型別建構子建立型別">使用關聯型別建構子建立型別</a></h3>
 <p>一旦特徵擁有關聯型別建構子時，它就能套用在作用域中的任何參數或具體項。這能同時用在特徵的本體內與本體外，使用的語法就與使用關聯型別類似。以下是一些範例：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -688,8 +671,7 @@ struct Foo&lt;T: StreamingIterator&gt; {
     // 在特徵外將實際生命週期套用至建構子。
     bar: &lt;T as StreamingIterator&gt;::Item&lt;'static&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>關聯型別建構子也能用來產生其他型別建構子：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -704,8 +686,7 @@ trait Baz {
 impl&lt;T&gt; Baz for T where T: Foo {
     type Quux&lt;'a&gt; = &lt;T as Foo&gt;::Bar&lt;'a, 'static&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>最後，關聯型別建構子的生命週期和其他型別建構子的一樣能被省略。加上生命週期省略的話，<code>StreamingIterator</code> 的完整定義就可以是：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -713,8 +694,7 @@ impl&lt;T&gt; Baz for T where T: Foo {
     type Item&lt;'a&gt;;
     fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h3 id="在界限中使用關聯型別建構子"><a class="header" href="#在界限中使用關聯型別建構子">在界限中使用關聯型別建構子</a></h3>
 <p>對於參數的型別是由特徵的關聯型別建構子產生的話，使用者可以用高階特徵界限（Higher-Rank Trait Bounds）來綁定。無論是對型別相等的界限或是對此種類的特徵界限都是有效的：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -722,8 +702,7 @@ impl&lt;T&gt; Baz for T where T: Foo {
 </span>fn foo&lt;T: for&lt;'a&gt; StreamingIterator&lt;Item&lt;'a&gt;=&amp;'a [i32]&gt;&gt;(iter: T) { ... }
 
 fn foo&lt;T&gt;(iter: T) where T: StreamingIterator, for&lt;'a&gt; T::Item&lt;'a&gt;: Display { ... }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>本 RFC 並沒有提出任何允許型別建構子自己綁定的形式，無論是相等界限或特徵界限（當然特徵界限是不可能的）。</p>
 <h2 id="型別引數的關聯型別建構子"><a class="header" href="#型別引數的關聯型別建構子">型別引數的關聯型別建構子</a></h2>
 <p>本 RFC 目前所有的範例都專注在生命週期引數的關聯型別建構子。但是本 RFC 一樣有提出導入型別的關聯型別建構子：</p>
@@ -732,8 +711,7 @@ fn foo&lt;T&gt;(iter: T) where T: StreamingIterator, for&lt;'a&gt; T::Item&lt;'a
 </span>trait Foo {
     type Bar&lt;T&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>本 RFC <strong>並沒有</strong>打算讓高階特徵界限能進一步接收型別引數，因為這會讓它們更難清楚地表達語義。我們的確有這樣的擴充需求，但這超出本 RFC 的範疇。</p>
 <p>型別引數可以透過「Family」模式來達成其他形式的高階種類多型。舉例來說，使用 <code>PointerFamily</code> 特徵可以將 Arc 與 Rc 抽象出來：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -764,8 +742,7 @@ impl PointerFamily for RcFamily {
 struct Foo&lt;P: PointerFamily&gt; {
     bar: P::Pointer&lt;String&gt;,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="特徵界限與-where"><a class="header" href="#特徵界限與-where">特徵界限與 where</a></h2>
 <h3 id="關聯型別建構子的界限"><a class="header" href="#關聯型別建構子的界限">關聯型別建構子的界限</a></h3>
 <p>關聯型別建構子的界限會被視為特徵自己的高階界限。這讓它們的行為能與一般關聯型別的界限一致。舉例來說：</p>
@@ -774,16 +751,14 @@ struct Foo&lt;P: PointerFamily&gt; {
 </span>trait Foo {
     type Assoc&lt;'a&gt;: Trait&lt;'a&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>就等同於：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>trait Foo where for&lt;'a&gt; Self::Assoc&lt;'a&gt;: Trait&lt;'a&gt; {
     type Assoc&lt;'a&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h3 id="關聯型別上的-where"><a class="header" href="#關聯型別上的-where">關聯型別上的 <code>where</code></a></h3>
 <p>另一方面，在關聯型別上使用 where 則會要求每次使用關聯型別時都得滿足其限制。舉例來說：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -791,8 +766,7 @@ struct Foo&lt;P: PointerFamily&gt; {
 </span>trait Foo {
     type Assoc where Self: Sized;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>每次呼叫 <code>&lt;T as Foo&gt;::Assoc</code> 時都需要證明 <code>T: Sized</code>，就像其他場合需要證明有符合 impl 的界限一樣。</p>
 <p>(@nikomatsakis 相信在某些場合的 where 會需要關聯型別建構子指明處理生命週期。實際細節將不會包含在本 RFC，因為這在實際實作時才會更清楚。)</p>
 <h2 id="在其他高階種類多型之前只實作此功能的優點"><a class="header" href="#在其他高階種類多型之前只實作此功能的優點">在其他高階種類多型之前只實作此功能的優點</a></h2>
@@ -827,8 +801,7 @@ trait Foo&lt;'a&gt; {
 trait Foo&lt;'a&gt; {
     type Bar&lt;'a&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="並非完整的高階種類型別"><a class="header" href="#並非完整的高階種類型別">並非完整的「高階種類型別」</a></h2>
 <p>本 RFC 並沒有加入當大家講到高階種類型別時的所有功能。舉例來說，它並沒有辦法提供特徵像是 <code>Monad</code>。有些人傾向於一次實作完所有這些功能。然而，此功能是能夠兼容於其他形式的高階種類多型的，且並沒有將他們的可能性排除掉。事實上，它還解決了一些會影響其他高階種類形式的實作細節，為它們開拓了可能的路徑，像是 Partial Application。</p>
 <h2 id="語法與其他形式的高階種類多型都不一樣"><a class="header" href="#語法與其他形式的高階種類多型都不一樣">語法與其他形式的高階種類多型都不一樣</a></h2>
@@ -844,8 +817,7 @@ trait Foo&lt;'a&gt; {
    type Item: 'a;
    fn next(&amp;'a self) -&gt; Option&lt;Self::Item&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>這樣你就可以綁定型別成 <code>T: for&lt;'a&gt; StreamingIterator&lt;'a&gt;</code> 來避免每次出現 <code>StreamingIterator</code> 時都會被生命週期感染。</p>
 <p>然而這樣僅避免了 <code>StreamingIterator</code> 的傳染性，只能用在一些關聯型別建構子能夠表達的型別，而且這更像是針對限制下的權變措施，而非等價的替代方案。</p>
 <h2 id="對關聯型別建構子施加限制"><a class="header" href="#對關聯型別建構子施加限制">對關聯型別建構子施加限制</a></h2>
@@ -865,8 +837,7 @@ trait Foo&lt;'a&gt; {
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>struct IterItem&lt;'a, I: Iterable&gt;(I::Item&lt;'a&gt;);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h1 id="未解決問題-1"><a class="header" href="#未解決問題-1">未解決問題</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Feature Name: <code>const_generics</code></li>
@@ -924,8 +895,7 @@ trait Foo&lt;'a&gt; {
 </span>struct RectangularArray&lt;T, const WIDTH: usize, const HEIGHT: usize&gt; {
     array: [[T; WIDTH]; HEIGHT],
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>這些宣告的身份（ident）就是常數參數（在本 RFC 內文中可替稱作「常數變數」）的名稱，而且所有數值必定其推導的型別。本 RFC 後文將說明能被推導的型別有哪些限制。</p>
 <p>宣告的常數變數範圍在該項目（type、impl、function、method、…等等）的整體範圍中。</p>
 <h2 id="套用常數作為參數"><a class="header" href="#套用常數作為參數">套用常數作為參數</a></h2>
@@ -936,8 +906,7 @@ trait Foo&lt;'a&gt; {
 
 let x: RectangularArray&lt;i32, 2, 4&gt;;
 let y: RectangularArray&lt;i32, X, {2 * 2}&gt;;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h3 id="陣列"><a class="header" href="#陣列">陣列</a></h3>
 <p>陣列語法中有一個特別的構造語法：<code>[T; CONST]</code>。在陣列中大括號不需要存在於任何的常數表達式中，<code>[i32; N * 2]</code> 是一個合理的型別。</p>
 <h2 id="何時可使用常數變數"><a class="header" href="#何時可使用常數變數">何時可使用常數變數</a></h2>
@@ -958,8 +927,7 @@ let y: RectangularArray&lt;i32, X, {2 * 2}&gt;;
 
     struct Foo([i32; X]);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>這樣的限制就如同型別型別不能用在函式本體中建造的型別一樣。所有的宣告雖然專用於該項目，但也必需獨立於它，且不能有任何在其範圍內的參數。</p>
 <h2 id="兩個常數的型別相等性之相等原則"><a class="header" href="#兩個常數的型別相等性之相等原則">兩個常數的型別相等性之相等原則</a></h2>
 <p>在統一且重疊的檢查期間，何時兩個型別是否相等是關重要的。因為型別現在可依賴於常數了，所以我們必須定義我們如何比較兩個常數表達式的相等性。</p>
@@ -980,8 +948,7 @@ let y: RectangularArray&lt;i32, X, {2 * 2}&gt;;
     let x: [i32; N + 1] = [0; N + 1];
     x
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>但如果這樣寫的話，它將只有一個型別：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -991,8 +958,7 @@ fn foo&lt;const N: usize&gt;() -&gt; Foo&lt;N&gt; {
     let x: Foo&lt;N&gt; = Default::default();
     x
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h4 id="未來的擴展性"><a class="header" href="#未來的擴展性">未來的擴展性</a></h4>
 <p>未來的某一天我們可以利用一些操作的基本性質（例如加法和乘法的可交換性），而對常數投影的相等性做出更聰明的判斷。但是，本 RFC 並不打算在此提案中建造這些可能性，而是打算留給未來的 RFC 決定。</p>
 <h2 id="常數變數的特化specialization"><a class="header" href="#常數變數的特化specialization">常數變數的特化（Specialization）</a></h2>
@@ -1041,8 +1007,7 @@ if x &gt; y {
 } else {
     // do something with b
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>這支程式永遠都會 panic（除非 <code>x</code> 和 <code>y</code> 同時是 <code>0</code>）因為不管是 <code>x - y</code> 或是 <code>y - x</code> 都會造成溢位。為了解決此問題，我們必須把 <code>let a</code> 及 <code>let b</code> 個別搬進 <code>if</code> 及 <code>else</code> 中。</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1055,8 +1020,7 @@ if x &gt; y {
     let b = y - x;
     // do something with b
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>當改用常數時，上面的寫法就會出現新問題：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1069,8 +1033,7 @@ const FOO: SomeType = if X &gt; Y {
     const B: u32 = Y - X;
     ...
 };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p><code>A</code> 和 <code>B</code> 會比 <code>FOO</code> 先被求值，因為常數在定義上就是「常數」，所以不應被求值順序影響。這項假設在有錯誤的情況下並不成立，因為錯誤屬於副作用（side effects），因此不純（pure）。</p>
 <p>為了解決此問題，我們必須把中介常數消掉並改為直接對 <code>X - Y</code> 及 <code>Y - X</code> 求值。</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -1084,8 +1047,7 @@ const FOO: SomeType = if X &gt; Y {
     let b = Y - X;
     ...
 };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h1 id="技術文件式解說"><a class="header" href="#技術文件式解說">技術文件式解說</a></h1>
 <p><code>if</code> 或是在 variant 沒有欄位的 enums 上做 <code>match</code> 會在 HIR -&gt; MIR 階段時，被轉譯成 <code>switchInt</code> 終止器（terminator）。Mir 直譯器現在將會針對那些終止器求值（之前就可以了）。</p>
 <p>在 variant 沒有欄位的 enums 上做 <code>match</code> 會被轉譯成 <code>switch</code>，表示他會被檢查 discriminant 或是在 packed enums（例如 <code>Option&lt;&amp;T&gt;</code>）的情況會運算 discriminant（這個情況 discriminant 沒有特別的記憶體位址，但他會把所有的零視為 <code>None</code>，並把其他的值都當作 <code>Some</code>）。當進入 <code>match</code> 的分支時，匹配上的值基本上會被 transmute 成 enum 的 variant 型別，如此一來可以允許其他程式碼來存取該 enum 的欄位。</p>
@@ -1103,8 +1065,7 @@ const AB: u32 = if X &gt; Y {
 } else {
     Y - X
 };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p><code>X - Y</code> 或是 <code>Y - X</code> 其中一方有可能會報錯，這時必須加入中介 const fn</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1118,10 +1079,303 @@ const fn foo(x: u32, y: u32) -&gt; u32 {
     }
 }
 const AB: u32 = foo(X, Y);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>const fn 的 <code>x</code> 和 <code>y</code> 參數未知，無法做常數求值（const evaluate）。當提供此 const fn 參數並求值時，只會對相應的分支求值。</p>
 <h1 id="未解決問題-3"><a class="header" href="#未解決問題-3">未解決問題</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Feature Name: async_await</li>
+<li>Start Date: 2018-03-30</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2394">rust-lang/rfcs#2394</a></li>
+<li>Rust Issues: 
+<ul>
+<li><a href="https://github.com/rust-lang/rust/issues/50547">rust-lang/rust#50547</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/62290">rust-lang/rust#62290</a> - #!feature(async_closure)</li>
+</ul>
+</li>
+<li>Translators:[<a href="https://github.com/FizzyElt">@FizzyElt</a>]</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/6041dd9ff2ed97eff4e054117cc1581b8c45d8c1/text/2394-async_await.md">The commit link this page based on</a></li>
+<li>Updated 2022-09-21</li>
+</ul>
+<h1 id="概要-2"><a class="header" href="#概要-2">概要</a></h1>
+<p>新增 async 和 await 語法，使撰寫程式碼操作 futures 更符合人因工程學。</p>
+<p>另有一個<a href="2592-futures.html">配套 RFC</a>，用於向 libstd 和 libcore 新增一個小型 futures API。</p>
+<h1 id="動機-6"><a class="header" href="#動機-6">動機</a></h1>
+<p>高效能網路服務經常使用非同步 IO，而不是阻塞式 IO，這樣在處理許多並行連線時更容易獲得更好的效能表現。 Rust 已經在網路服務領域得到了一些採用，我們希望透過使 Rust 中撰寫非同步網路服務更符合人因工程學，繼續支援這些使用者 - 並支援其他使用者採用。</p>
+<p>Rust 中非同步 IO 的發展經歷了多個階段。在 1.0 之前，我們嘗試在語言中內嵌綠色執行緒（green-threading） runtime。然而，事實證明這太過武斷了——因為它影響了每個用 Rust 撰寫的程式——並且在 1.0 之前不久就被刪除了。在 1.0 之後，非同步 IO 最初的重點是 mio 函式庫，它為 Linux、Mac OS 和 Windows 的非同步 IO 基元（primitive）提供了一個跨平台抽象。 2016 年年中，future crate 的引入產生了重大影響，它為非同步操作提供了一個方便且可共享的抽象。 tokio 函式庫提供了一個基於 mio 的事件循環，可以執行使用 future 介面實作的程式碼。</p>
+<p>在獲得基於 future 的生態系統的經驗和使用者的回饋後，我們發現了某些人因工程學挑戰。使用需要在等待點（await point）之間共享的狀態，是非常不符合人因工程學的（需要 Arc 或 join chaining）雖然組合器通常比手動撰寫 future 更符合人因工程學，但它們仍然經常導致混亂的嵌套和 chained callbacks。</p>
+<p>幸運的是，Future 抽象非常適合與一種語法糖一起使用——這個語法糖在許多具有非同步 IO 的語言中愈來愈常見：async 和 await 關鍵字。簡而言之，非同步函式回傳一個 future，而不是在呼叫時立即執行。在函式內部，可以使用 await 表達式等待其他 future，這使它們在輪詢 future 時讓出控制權。從使用者的角度來看，他們可以像在使用同步程式碼一樣使用 async/await，並且只需要標注其函式和調用。</p>
+<p>Async/await 和 futures 通常是非同步和並行的強大抽象，並且可能可以應用在非同步 I/O 空間以外的地方。我們今天遇到的案例通常與非同步 IO 相關，但透過引入一等公民語法和 libstd 的支援，我們相信更多不直接與非同步 IO 相關的 async 和 await 案例也會蓬勃發展。</p>
+<h1 id="教學式解說-1"><a class="header" href="#教學式解說-1">教學式解說</a></h1>
+<h2 id="非同步函式"><a class="header" href="#非同步函式">非同步函式</a></h2>
+<p>對函式加上 <code>async</code> 關鍵字，使它們成為「非同步函式」：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn function(argument: &amp;str) -&gt; usize {
+     // ...
+}
+<span class="boring">}</span></code></pre></pre>
+<p>非同步函式的工作方式與普通函式不同。呼叫非同步函式時，它不會立即進入主體。相反，它執行實作 <code>Future</code> 特徵的匿名型別。當輪詢該 future 時，該函式被執行到它內部的下一個 <code>await</code> 或回傳點（請參閱接下來 await 語法部分）。</p>
+<p>非同步函式是延遲計算的一種 - 在您開始輪詢函式回傳的 future 之前，函式本體中沒有任何內容被實際執行。例如：</p>
+<pre><pre class="playground"><code class="language-rust">async fn print_async() {
+     println!(&quot;Hello from print_async&quot;)
+}
+
+fn main() {
+     let future = print_async();
+     println!(&quot;Hello from main&quot;);
+     futures::executor::block_on(future);
+}</code></pre></pre>
+<p>這將在印出 <code>&quot;Hello from main&quot;</code> 之前印出 <code>&quot;Hello from print_async&quot;</code>。</p>
+<p><code>async fn foo(args..) -&gt; T</code> 是 <code>fn(args..) -&gt; impl Future&lt;Output = T&gt;</code> 型別的函式。回傳型別是編譯器產生的匿名型別。</p>
+<h3 id="async--closures"><a class="header" href="#async--closures"><code>async ||</code> closures</a></h3>
+<p>除了函式，非同步也可以應用在 closure 上面。與非同步函式一樣，非同步 closure 的回傳型別為 <code>impl Future&lt;Output = T&gt;</code>，而不是 <code>T</code>。當您呼叫該 closure 時，它會立即回傳一個 future，且不會執行任何程式碼（就像非同步函式一樣）。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let closure = async || {
+         println!(&quot;Hello from async closure.&quot;);
+    };
+    println!(&quot;Hello from main&quot;);
+    let future = closure();
+    println!(&quot;Hello from main again&quot;);
+    futures::block_on(future);
+}</code></pre></pre>
+<p>這將在印出 <code>&quot;Hello from async closure.&quot;</code> 之前印出兩個 <code>&quot;Hello from main&quot;</code>。</p>
+<p><code>async</code> closure 可以用 <code>move</code> 來捕捉它們包覆在 closure 內的變數的所有權。</p>
+<h2 id="async-區塊"><a class="header" href="#async-區塊"><code>async</code> 區塊</a></h2>
+<p>您可以使用 <code>async</code> 區塊直接將 future 建立為表達式：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let my_future = async {
+    println!(&quot;Hello from an async block&quot;);
+};
+<span class="boring">}</span></code></pre></pre>
+<p>這種形式幾乎等同於立即呼叫的 <code>async</code> closure。即是：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async { /* body */ }
+
+// is equivalent to
+
+(async || { /* body */ })()
+<span class="boring">}</span></code></pre></pre>
+<p>除了像 <code>return</code>、<code>break</code> 和 <code>continue</code> 這樣的控制流程結構不允許在 <code>body</code> 中使用（除非它們出現在一個新的控制流上下文中，比如 closure 或 loop）。 尚未確定 <code>?</code> 運算子和提早回傳（early return）在非同步區塊運作的方式（請參閱未解決的問題）。</p>
+<p>與 <code>async</code> closure 一樣，<code>async</code> 區塊可以加入 <code>move</code>，以捕捉區塊內所包覆的變數的所有權。</p>
+<h2 id="編譯器內嵌的-await"><a class="header" href="#編譯器內嵌的-await">編譯器內嵌的 <code>await!</code></a></h2>
+<p>編譯器加入了一個名為 <code>await!</code> 的內建函式。<code>await!</code> 可用於「暫停」future 的計算，將控制權交還給呼叫者。<code>await!</code> 接受任何實作 <code>IntoFuture</code> 的表達式，並計算為此 future 所傳入的泛型型別（如下面範例的 <code>Output</code>）之值。</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// future: impl Future&lt;Output = usize&gt;
+let n = await!(future);
+<span class="boring">}</span></code></pre></pre>
+<p>await 展開的程式碼，會重複在接收到的 future 上呼叫 <code>poll</code>：<code>poll</code> 回傳 <code>Poll::Pending</code> 時讓出 (yield) 函式的控制權，並在最終回傳 <code>Poll::Ready</code> 時取得項目的值。</p>
+<p><code>await!</code> 只能在非同步函式、closure 或區塊內使用，除此之外使用它都是錯誤的。</p>
+<p>（<code>await!</code> 是編譯器的內建函式，為以後確定其確切語法保留彈性空間。詳細資訊請參閱〈未解決的問題〉部分。）</p>
+<h1 id="技術文件式解說-1"><a class="header" href="#技術文件式解說-1">技術文件式解說</a></h1>
+<h2 id="關鍵字"><a class="header" href="#關鍵字">關鍵字</a></h2>
+<p><code>async</code> 和 <code>await</code> 在 2018 版本中都成為關鍵字。</p>
+<h2 id="async-函式closure區塊的回傳型別"><a class="header" href="#async-函式closure區塊的回傳型別"><code>async</code> 函式、closure、區塊的回傳型別</a></h2>
+<p>非同步函式的回傳型別是編譯器生成的唯一匿名型別，和 closure 的型別類似。你可以把這種型別想像成一個枚舉，函式的每個「yield point」都是一個變體——開頭、await 表達式和每一次的回傳。每個變體都會儲存需要保存的狀態，以便從該 yield point 恢復控制。</p>
+<p>呼叫函式時，此匿名型別以其初始狀態回傳，其中包含此函式的所有引數。</p>
+<h3 id="特徵綁定"><a class="header" href="#特徵綁定">特徵綁定</a></h3>
+<p>匿名回傳型別實作 <code>Future</code>，<code>Item</code> 為它的回傳型別。輪詢它會推進函數的狀態，當它在 <code>await</code> 狀態時會返回 <code>Pending</code>；當它在 <code>return</code> 狀態時則返回 <code>Ready</code>。任何在它已經回傳 <code>Ready</code> 一次後對其嘗試進行輪詢都將造成恐慌。</p>
+<p>匿名回傳型別對 <code>Unpin</code> 特徵有一個相反的實作，即 <code>impl !Unpin</code>。這是因為 future 可能有內部引用，這意味著它永遠不需要被移動。</p>
+<h2 id="匿名-future-的生命週期捕捉"><a class="header" href="#匿名-future-的生命週期捕捉">匿名 future 的生命週期捕捉</a></h2>
+<p>該函式的所有輸入生命週期都在非同步函式回傳的 future 捕捉，因為它將函式的所有引數儲存在其初始狀態（可能還有以後的狀態）。也就是說，給定這樣的函數：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn foo(arg: &amp;str) -&gt; usize { ... }
+<span class="boring">}</span></code></pre></pre>
+<p>它具有與此等效的類型簽名：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo&lt;'a&gt;(arg: &amp;'a str) -&gt; impl Future&lt;Output = usize&gt; + 'a { ... }
+<span class="boring">}</span></code></pre></pre>
+<p>這與 <code>impl Trait</code> 的預設值不同，它不捕捉生命週期。這就是為什麼回傳類型是 <code>T</code> 而不是 <code>impl Future&lt;Output = T&gt;</code> 的一個重要部分。</p>
+<h3 id="初始化模式"><a class="header" href="#初始化模式">「初始化」模式</a></h3>
+<p>有時會出現的一種模式是 future 有一個「初始化」步驟，應該在其建立期間被執行。這在處理資料轉換和臨時借用時很有用。因為 async 函式在您輪詢它之前不會開始計算，並且它會捕捉其引數的生命週期，因此這種模式不能直接用 <code>async fn</code> 表示。</p>
+<p>其中一個解決辦法，是撰寫一個回傳 <code>impl Future</code> 的函式，而回傳值是會立即計算 (evaluate) 的 closure：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// only arg1's lifetime is captured in the returned future
+fn foo&lt;'a&gt;(arg1: &amp;'a str, arg2: &amp;str) -&gt; impl Future&lt;Output = usize&gt; + 'a {
+    // do some initialization using arg2
+
+    // closure which is evaluated immediately
+    async move {
+         // asynchronous portion of the function
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h2 id="await-展開後的程式碼"><a class="header" href="#await-展開後的程式碼">await 展開後的程式碼</a></h2>
+<p>內嵌的  <code>await!</code> 展開結果大致如下：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut future = IntoFuture::into_future($expression);
+let mut pin = unsafe { Pin::new_unchecked(&amp;mut future) };
+loop {
+    match Future::poll(Pin::borrow(&amp;mut pin), &amp;mut ctx) {
+          Poll::Ready(item) =&gt; break item,
+          Poll::Pending     =&gt; yield,
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>這不是真正意義上的『展開』，因為 <code>yield</code> 概念不能用 <code>async</code> 函式中的表層語法來表達。這就是為什麼 <code>await!</code> 是一個內建編譯器函式，而不是實際的巨集。</p>
+<h2 id="async-和-move-的順序"><a class="header" href="#async-和-move-的順序"><code>async</code> 和 <code>move</code> 的順序</a></h2>
+<p>非同步 closure 和區塊可以用 <code>move</code> 註釋來捕捉它們包覆的變數的所有權。關鍵字的順序固定為 <code>async move</code>。只允許一種順序，可以避免語義上「是否有重要意義」的混淆。</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async move {
+    // body
+}
+<span class="boring">}</span></code></pre></pre>
+<h1 id="缺點-5"><a class="header" href="#缺點-5">缺點</a></h1>
+<p>在 Rust 中新增 async 和 await 語法是對語言的重大更改 - 這是自 1.0 以來最重要的新增功能之一。雖然我們從最小的功能開始，但從長遠來看，它所隱含的功能集也會增長（請參閱未解決的問題部分）。對於這樣一個重要的新增功能，我們絕不能掉以輕心，只有在強烈的動機下才能進行。</p>
+<p>我們相信，一個符合人因工程學的非同步 IO 解決方案對於 Rust 作為撰寫高效能網路服務的語言的成功至關重要，這是我們 2018 年的目標之一。基於 Future trait 的 async &amp; await 語法是在不久的將來實現這一目標最便捷和低風險的途徑。</p>
+<p>這個 RFC，連同其配套的 lib RFC，對 future 和 async/await 做出比我們過往的專案更堅定的承諾。如果我們在穩定這些特性之後決定反其道而行，那將付出相當大的代價。因為這個 RFC 的存在，增加非同步程式的替代機制的成本會更高。然而，有鑑於我們在 future 方面的經驗，我們相信這是正確的發展方向。</p>
+<p>我們所做的幾個小決定也有缺點。例如，在使用「内部」回傳型別和「外部」回傳型別之間有一個權衡。我們可以為非同步函式建立一個不同的求值模型，即在第一個等待（await point）點之前立即對其進行求值。我們在這些問題上做出的决定在 RFC 的相應部分都有說明。</p>
+<h1 id="原理和替代方案"><a class="header" href="#原理和替代方案">原理和替代方案</a></h1>
+<p>本節包含了本 RFC 拒絕的替代性設計決定（相對於那些只是推遲的設計）。</p>
+<h2 id="回傳型別使用-t-而不是-impl-futureoutput--t"><a class="header" href="#回傳型別使用-t-而不是-impl-futureoutput--t">回傳型別（使用 <code>T</code> 而不是 <code>impl Future&lt;Output = T&gt;</code>）</a></h2>
+<p>非同步函式的回傳型別是一個有點複雜的問題。對於非同步函式的回傳型別，有兩個不同的觀點：「内部」回傳型別 - 你用 <code>return</code> 關鍵字回傳的型別，以及「外部」回傳型別 - 當你呼叫函式時回傳的型別。</p>
+<p>大多數帶有非同步函式的靜態型別語言在函式簽名中顯示「外部」回傳型別。本 RFC 建議在函式簽名中顯示「内部」回傳型別。這既有優點也有缺點。</p>
+<h3 id="生命週期消除問題"><a class="header" href="#生命週期消除問題">生命週期消除問題</a></h3>
+<p>正如前面所提到的，回傳的 future 捕捉了所有傳入的生命週期。預設情況下，<code>impl Trait</code> 不捕捉任何生命週期。為了準確反應外部回傳型別，有必要消除生命週期的省略：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn foo&lt;'ret, 'a: 'ret, 'b: 'ret&gt;(x: &amp;'a i32, y: &amp;'b i32) -&gt; impl Future&lt;Output = i32&gt; + 'ret {
+     *x + *y
+}
+<span class="boring">}</span></code></pre></pre>
+<p>這將是非常不符合人因工程學的，並且使非同步的使用變得更不愉快，更不易於學習。這個問題在決定回傳內部型別時佔很大比重。</p>
+<p>我們可以讓它回傳 <code>impl Future</code>，但對於 <code>async fn</code> 的回傳型別，生命週期捕捉的運作方式與其他函式不同，這似乎比顯示內部型別更糟糕。</p>
+<h3 id="多型的回傳對我們來說並非是一個因素"><a class="header" href="#多型的回傳對我們來說並非是一個因素">多型的回傳（對我們來說並非是一個因素）</a></h3>
+<p>根據 C# 開發者的說法，回傳 <code>Task&lt;T&gt;</code>（他們的「外部型別」）的主要因素之一是，他們希望有可以回傳 <code>Task</code> 以外型別的非同步函式。我們對此沒有一個可以令人信服的實例。</p>
+<ol>
+<li>在 future 的 0.2 分支中，<code>Future</code> 和 <code>StableFuture</code> 之間是有區別的。然而，這種區分是人為的，單純是因為物件安全（object-safe）的自定義自型別（self-types）在穩定版本上還不能使用。</li>
+<li>目前的 <code>#[async]</code> 巨集有一個 <code>(boxed)</code> 變體。我們更傾向於讓非同步函式盡可能的不包裝，只在呼叫處明確包裝。屬性變體的動機是為了支援物件安全特徵中的非同步方法。這是在物件安全特徵中支援 <code>impl Trait</code> 的一個特例（可能是透過在物件情况下對回傳型別進行包裝），我們希望這個特性與非同步函式分開。</li>
+<li>有人建議我們支援回傳串流（stream）的 <code>async fn</code>。然而，這意味著内部函式的語意在回傳 future 和串流的函式之間會有顯著的不同。正如在未解决的問題部分所討論的，基於生成器和非同步生成器的解決方案似乎更有機會。</li>
+</ol>
+<p>基於這些原因，我們認為從多型的角度來看，回傳外部型別的論點並不強烈。</p>
+<h3 id="可學習性文件的權衡"><a class="header" href="#可學習性文件的權衡">可學習性/文件的權衡</a></h3>
+<p>從可學習性的角度來看，支援外部和内部回傳型別的論點都有。支援外部回傳型別最有說服力的論據之一是文件：當你閱讀自動產生的 API 文件時，你肯定會看到你作為呼叫者得到的東西。相較之下，由於回傳型別和你 <code>return</code> 的表達式的型別之間的對應關係，可以更容易理解如何使用内部回傳型別撰寫非同步函式。</p>
+<p>Rustdoc 可以透過幾種方式處理使用内部回傳型別的非同步函式，使其更容易理解。我們至少應該確保在文件中包含 <code>async</code> 註解，這樣了解 async 符號的使用者就知道此函式將回傳一個 future。我們還可以進行其他轉換，可能是可選的，以顯示函式的外部簽名。如何確切處理非同步函式的 API 文件是一個尚未解决的問題。</p>
+<h2 id="內嵌語法而不是在生成器中使用巨集"><a class="header" href="#內嵌語法而不是在生成器中使用巨集">內嵌語法，而不是在生成器中使用巨集</a></h2>
+<p>另一個選擇是專注於穩定程序性巨集（procedural macro）和生成器，而不是為非同步函式引入內嵌語法。一個非同步函式可以被建模為一個生成器，它將產生 <code>()</code>。</p>
+<p>從長遠來看，我們相信我們會希望有專門的語法來處理非同步函式，因為它更符合人因工程學原理，而且使用情境也足夠令人信服和重要，可以證明這一點（類似於 - 例如 - 有内嵌的 for 迴圈和 if 判斷式，而不是有編譯成迴圈和配對判斷式的巨集）。鑑於此，唯一的問題是，我們是否可以透過暫時使用生成器來獲得比現在引入非同步函式更好的穩定性。</p>
+<p>使用展開到生成器的巨集似乎不太可能使其更快的穩定。生成器可以表現更多的可能性，並且有更多的開放性問題 - 包括語法和語意。這甚至沒有解決穩定更多程序性巨集的開放問題。出於這個原因，我們認為穩定最小的内嵌 async/await 功能比試圖穩定生成器和 proc 巨集更有效益。</p>
+<h2 id="單純基於生成器的-async"><a class="header" href="#單純基於生成器的-async">單純基於生成器的 <code>async</code></a></h2>
+<p>另一種設計是將非同步函式作為建立生成器的語法。在這種設計中，我們可以寫一個這樣的生成器：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn foo(arg: Arg) -&gt; Return yield Yield
+<span class="boring">}</span></code></pre></pre>
+<p>return 和 yield 都是可選的，預設為 <code>()</code>。一個產生 <code>()</code> 的非同步函式將使用全面實作（blanket impl）來實作 <code>Future</code>。一個回傳 <code>()</code> 的非同步函式將實作 <code>Iterator</code>。</p>
+<p>此方法的問題是，它不能從人因工程學的角度處理 <code>Stream</code>，Stream 需要產生 <code>Poll&lt;Option&lt;T&gt;&gt;</code>。目前還不清楚在一個產生 <code>()</code> 以外的東西（包括 Stream）的非同步函式裡的 <code>await</code> 如何運作。由於這個原因，「矩陣」方法，即我們對生成器函式、非同步函式和非同步生成器函式有獨立的語法，似乎是一個更可行的方法。</p>
+<h2 id="hot-async-functions"><a class="header" href="#hot-async-functions">&quot;Hot async functions&quot;</a></h2>
+<p>正如本 RFC 所建議的，所有的非同步函式都會立即回傳，根本不需要執行其主體。如上所述，這對於需要立即進行「初始化」步驟的情境來說並不方便 - 例如，這些情境需要使用一個終端非同步區塊。</p>
+<p>另一種方法是讓非同步函式立即求值，直到它們的第一個 <code>await</code>，在那之前保留它們的狀態。這將是一個相當複雜的實現 - 它們需要在 <code>await</code> 中擁有一个額外的 yield point，在輪詢被 await 的 future 之前，條件是 await 是否是 future 主體中的第一個 await。</p>
+<p>Rust 的 future 與其它語言的 future 的一個根本區別是，Rust 的 future 除非被輪詢，否則不會做任何事情。整個系统都是圍繞這一點建立的：例如，取消正是因為這個原因而捨棄了 future。相反，在其它語言中，呼叫一個非同步函式會產生一個立即開始執行的 future。這種差異也延續到了 <code>async fn</code> 和 <code>async</code> 區塊中，其中至關重要的是，產生的 future 要<strong>主動輪詢</strong>以取得進展。允許部分、急迫的執行很可能會引發嚴重的混亂和錯誤。</p>
+<p>從使用者的角度來看，這也很複雜 - 主體的一部分何時被執行取決於它是否出現在所有 <code>await</code> 語句（可能是巨集生成的）之前。使用终端 async 區塊提供了一個更清晰的機制來區分帶有初始化步驟的 future 中立即執行部分和非同步執行部分。</p>
+<h2 id="使用-asyncawait-而不是其他的非同步性系統"><a class="header" href="#使用-asyncawait-而不是其他的非同步性系統">使用 async/await 而不是其他的非同步性系統</a></h2>
+<p>最後，一個極端的選擇是放棄 future 和 async/await 作為 Rust 中 async/await 的機制，而採用不同的典範。在這些建議中，有一個常見的效果系统，monad 和 do 語法（do notation）、綠色執行緒和滿堆疊（stack-full）的協程。</p>
+<p>假設性上來說，Rust 可以透過 async/await 語法來達成一些泛化（generalization），但在這個領域的研究還不足以在短期内支援它。考慮到我們 2018 年的目標 - 強調 - async/await 語法（一個在許多語言中廣泛存在的概念，與我們現有的 async IO 函式庫運作良好）是在 Rust 發展的這個階段最合理的實作。</p>
+<h2 id="非同步區塊與非同步-closure"><a class="header" href="#非同步區塊與非同步-closure">非同步區塊與非同步 closure</a></h2>
+<p>正如文中所指出的，非同步區塊和非同步 closure 是密切相關的，而且大致上是可以相互表達的：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// almost equivalent
+async { ... }
+(async || { ... })()
+
+// almost equivalent
+async |..| { ... }
+|..| async { ... }
+<span class="boring">}</span></code></pre></pre>
+<p>我們可以考慮只採用兩個結構中的其中一個。然而：</p>
+<ul>
+<li>
+<p>為了與 <code>async fn</code> 保持一致，我們有充分的理由使用 <code>async ||</code>；這樣的 closure 通常對建構一個服務這樣的高階構造很有用。</p>
+</li>
+<li>
+<p>有一個強而有力的理由讓我們採用非同步區塊。RFC 文件中提到的初始化模式，以及事實上它提供了一種更直接、更原始的方式建立 future。</p>
+</li>
+</ul>
+<p>RFC 提議在前面就包含這兩個構造，因為我們似乎不可避免地需要這兩者，但我們總是可以在穩定之前重新思考這個問題。</p>
+<h1 id="現有技術"><a class="header" href="#現有技術">現有技術</a></h1>
+<p>在其他語言中，包含 C#、JavaScript 和 Python，有很多關於使用 async/await 語法作為處理非同步操作的一種方式的先例。</p>
+<p>目前主流的非同步程式設計有以下三種範式：</p>
+<ul>
+<li>async 和 await 符號。</li>
+<li>隱式並行的執行階段程式庫（implicit concurrent runtime），通常稱為「綠色執行緒」，例如通信順序行程（例如 Go）或參與者模型（例如 Erlang）。</li>
+<li>延遲執行程式中的 Monadic 轉換，例如：Haskell 的 do 語法（do notation）。</li>
+</ul>
+<p>async/await 是 Rust 最引人注目的模型，因為它與所有權和借用互動良好（不像基於 Monadic 的系统），而且它使我們能夠擁有一個完全基於函式庫的非同步模型（不像綠色執行緒）。</p>
+<p>我們對 async/await 的處理不同於大多數其他靜態型別語言（例如 C#），我們選擇顯示「內部」回傳型別，而不是外部回傳型別。正如在替代方案部分中討論的那樣，在 Rust 定義的特定脈絡下（生命週期省略，不需要回傳型別多型），這種偏差的動機充分。</p>
+<h1 id="未解決的問題-1"><a class="header" href="#未解決的問題-1">未解決的問題</a></h1>
+<p>本節包含已推延且未包含在此初始 RFC 中設計的延伸。</p>
+<h2 id="await-表達式的最終語法"><a class="header" href="#await-表達式的最終語法"><code>await</code> 表達式的最終語法</a></h2>
+<p>儘管此 RFC 建議 <code>await</code> 是一個內建的巨集，但我們希望有一天它成為一個正常的控制流結構。如何處理它的運算子優先順序，以及是否需要某種分隔符號則尚待解決。</p>
+<p>特別是， <code>await</code> 與 <code>?</code> 有一個有趣的互動。很常見的情況是有一個 future，它將被執行為一個 <code>Result</code>，然後使用者會想把這個结果應用到 <code>?</code> 這意味著 await 應該比 <code>?</code> 有更高的優先順序，這樣該模式就能按照使用者的意願運作。然而，由於它引入了一個空格，看起來這並不是你要得到的優先順序：</p>
+<pre><code>await future?
+</code></pre>
+<p>以下有幾種可能的解決方案：</p>
+<ol>
+<li>需要某種的分隔符號，可能是大括號或括號或兩者之一，讓它看起來更符合期望的那樣 - await {future}？ - 這很煩躁。</li>
+<li>將優先順序定義為，如果優先順序不符使用者本意，需要使用者明確指出 <code>(await future)?</code> - 對使用者來說非常令人驚訝。</li>
+<li>將其定義為不方便的優先順序 —— 這似乎與其他優先順序一樣令人驚訝。</li>
+<li>引入一種特殊的語法來處理多個應用程式，例如 <code>await? future</code> - 這似乎是很不尋常的方式。</li>
+</ol>
+<p>這個問題留給未來找尋另一種解決方案，或是從上述方案中選擇最不糟糕的一個。</p>
+<h2 id="for-await-和處理串流"><a class="header" href="#for-await-和處理串流"><code>for await</code> 和處理串流</a></h2>
+<p>RFC 目前遺漏的另一個延伸是使用 for 迴圈處理串流的能力。可以想像 <code>for await</code> 這樣的結構，它採用 <code>IntoStream</code> 而不是 <code>IntoIterator</code>：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for await value in stream {
+    println!(&quot;{}&quot;, value);
+}
+<span class="boring">}</span></code></pre></pre>
+<p>這被排除在最初的 RFC 之外，以避免必須在標準庫中穩定 <code>Stream</code> 的定義（以使與此相關的 RFC 盡可能小）。</p>
+<h2 id="生成器和串流"><a class="header" href="#生成器和串流">生成器和串流</a></h2>
+<p>將來，我們可能還希望能夠定義對串流求值非同步函式，而不是對 future 求值。我們建議透過生成器來處理這個案例。生成器可以轉換為一種迭代器，而非同步生成器可以轉換為一種串流。</p>
+<p>例如（使用的語法可能會改變）；</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Returns an iterator of i32
+fn foo(mut x: i32) yield i32 {
+     while x &gt; 0 {
+          yield x;
+          x -= 2;
+     }
+}
+
+// Returns a stream of i32
+async fn foo(io: &amp;AsyncRead) yield i32 {
+    async for line in io.lines() {
+        yield line.unwrap().parse().unwrap();
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h2 id="實現-unpin-的非同步函式"><a class="header" href="#實現-unpin-的非同步函式">實現 <code>Unpin</code> 的非同步函式</a></h2>
+<p>如本 RFC 中所提議，所有非同步函式均未實現 <code>Unpin</code>，因此將它們從 <code>Pin</code> 中移出是不安全的。這允許它們包含跨越 yield point 的引用。</p>
+<p>我們還可以透過註釋對非同步函式進行型別檢查，以確認它不包含任何跨越 yield point 的引用，從而允許它實做 <code>Unpin</code>。可啟用此功能的註釋暫時未指定。</p>
+<h2 id="異步區塊中的--運算子和控制流構造"><a class="header" href="#異步區塊中的--運算子和控制流構造">異步區塊中的 <code>?</code> 運算子和控制流構造</a></h2>
+<p>這個 RFC 沒有提出 <code>?</code> 運算子和控制流結構如 <code>return</code>、<code>break</code> 和 <code>continue</code> 應該如何在非同步區塊中工作。</p>
+<p>不過有討論非同步區塊應該充當 <code>?</code> 運算子的邊界。讓它們適用於易出錯的 IO：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let reader: AsyncRead = ...;
+async {
+    let foo = await!(reader.read_to_end())?;
+    Ok(foo.parse().unwrap_or(0))
+}: impl Future&lt;Output = io::Result&lt;u32&gt;&gt;
+<span class="boring">}</span></code></pre></pre>
+<p>此外，還討論了允許使用 break 從非同步區塊中提前回傳：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async {
+    if true { break &quot;foo&quot; }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>使用 <code>break</code> 關鍵字而不是 <code>return</code> 可能有助於表明它適用於非同步區塊而不是其周圍的函式。另一方面，這會給使用 <code>return</code> 關鍵字的 closure 和非同步 closure 帶來區別。</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Feature Name: <code>min_rust_version</code></li>
 <li>Start Date: 2018-06-28</li>
@@ -1138,11 +1392,11 @@ name = &quot;foo&quot;
 version = &quot;0.1.0&quot;
 rust = &quot;1.30&quot;
 </code></pre>
-<h1 id="動機-6"><a class="header" href="#動機-6">動機</a></h1>
+<h1 id="動機-7"><a class="header" href="#動機-7">動機</a></h1>
 <p>當前 crate 無任何正式方法指定 MSRV，導致使用者無法在不建構該 crate 的情況下得知 crate 是否可透過他們的工具鏈（toolchain）建構。這也帶來有關如何在提升 MSRV 時管理 crate 版本的爭論，保守的作法是將之視為破壞性改動，這種作法會阻礙整個生態採納新功能，或使得版本號通膨式提升，進而讓下游的 crate 很難跟上。另一方面，若作法稍微寬鬆些，則導致採用較舊編譯器版本的使用者無法成功編譯它們的 crate。</p>
-<h1 id="教學式解說-1"><a class="header" href="#教學式解說-1">教學式解說</a></h1>
+<h1 id="教學式解說-2"><a class="header" href="#教學式解說-2">教學式解說</a></h1>
 <p>若你想指定一個特定 MSRV 版本，請在 <code>Cargo.toml</code> 的 <code>[package]</code> 區塊中的 <code>rust</code> 欄位設定指定的 Rust 版本。如果你建構一個 crate 時有任一依賴要求的 MSRV 比你當前工具鏈更高，會導致編譯錯誤，指明該依賴與它的 MSRV。這個行為可以透過 <code>--no-msrv-check</code> 選項來停用。</p>
-<h1 id="技術文件式解說-1"><a class="header" href="#技術文件式解說-1">技術文件式解說</a></h1>
+<h1 id="技術文件式解說-2"><a class="header" href="#技術文件式解說-2">技術文件式解說</a></h1>
 <p>在建構過程（包含 <code>run</code>、<code>test</code>、<code>benchmark</code>、<code>verify</code> 與 <code>publish</code> 子指令），<code>cargo</code> 會以依賴樹（dependency tree）的形式，檢查所有將要建構或檢查的所有 crate 之 MSRV 要求。在依賴樹內但不會被構建的 crate 不會執行此項檢查（例如特定目標平台或可選的 crate）。</p>
 <p><code>rust</code> 欄位應至少遵循下列要求：</p>
 <ul>
@@ -1186,7 +1440,7 @@ rust = &quot;1.33&quot;
 <li>類語意化版本條件：<code>nightly: &gt;=2018-01-01</code>、<code>nightly: &gt;=2018-01-01, &lt;=2018-01-15</code>、<code>nightly: &gt;=2018-01-01, &lt;=2018-01-15, 2018-01-20</code>。（後者會解讀為 「(version &gt;= 2018-01-01 &amp;&amp; version &lt;= 2018-01-20) || version == 2018-01-20」）</li>
 </ul>
 <p>這些條件或許很嚴苛，盼使用這功能的 crate 一隻手數得出來。</p>
-<h1 id="缺點-5"><a class="header" href="#缺點-5">缺點</a></h1>
+<h1 id="缺點-6"><a class="header" href="#缺點-6">缺點</a></h1>
 <ul>
 <li>即使宣告了 MSRV 且檢查過，並無法保持 crate 能夠正確在指定 MSRV 下正確執行，只有合理配置的 CI 能做到此事。</li>
 <li>更複雜的依賴版本解析演算法。</li>
@@ -1222,7 +1476,7 @@ rust = &quot;1.33&quot;
 <li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/a31e5941133de5935b97b5d3e09b921b6e796abb/text/2592-futures.md">The commit link this page based on</a></li>
 <li>Updated 2022-08-13</li>
 </ul>
-<h1 id="概要-2"><a class="header" href="#概要-2">概要</a></h1>
+<h1 id="概要-3"><a class="header" href="#概要-3">概要</a></h1>
 <p>此 RFC 提議替一等公民語法 <code>async</code>/<code>await</code> 穩定相關函式庫組件。特別是，它將穩定：</p>
 <ul>
 <li><code>std</code> 中任務系統所有的 API，例如 <code>std::task::*</code>。</li>
@@ -1230,7 +1484,7 @@ rust = &quot;1.33&quot;
 </ul>
 <p>它<strong>不提議</strong>穩定任何 <code>async</code>/<code>await</code> 語法本身，該語法自有另外的提議。它也不包括已在<a href="https://github.com/rust-lang/rust/issues/55766">別處</a>提出的 <code>Pin</code> API 的穩定性。</p>
 <p>這是早期 <a href="https://github.com/rust-lang/rfcs/pull/2418">futures RFC</a> 的修訂和精簡版本，該 RFC 已暫緩，直到 nightly 版本獲得更多經驗之後。</p>
-<h1 id="動機-7"><a class="header" href="#動機-7">動機</a></h1>
+<h1 id="動機-8"><a class="header" href="#動機-8">動機</a></h1>
 <h2 id="為何-future-要在-std-之中"><a class="header" href="#為何-future-要在-std-之中">為何 <code>Future</code> 要在 <code>std</code> 之中？</a></h2>
 <p>此 RFC 的核心動機是穩定 <code>async</code>/<code>await</code> 語法的支援機制。語法本身是在（已經合併的）<a href="https://github.com/rust-lang/rfcs/pull/2394">配套 RFC</a> 中提出的，並且有一篇<a href="https://aturon.github.io/tech/2018/04/24/async-borrowing/">部落格文章</a>更詳細介紹它的重要性。</p>
 <p>與 closures 一樣，<code>async</code> 語法涉及到生成一個匿名型別，該型別實作一個關鍵特徵：<code>Future</code>。因為 <code>async</code>/<code>await</code> 需要語言層級的支援，所以底層特徵也必須是標準函式庫的一部分。因此，這個 RFC 的目標是穩定這個 <code>Future</code> 特徵和它所依賴的型別。這是我們能夠穩定 <code>async</code>/<code>await</code> 本身之前所需的最後一步。</p>
@@ -1266,27 +1520,25 @@ rust = &quot;1.33&quot;
 </li>
 </ul>
 <p>自從最初的 futures 0.3 發布以來，除了上面提到的改進之外，核心 <code>Future</code> 特徵和任務系統的變化相對較小。實際的 <code>Future</code> 特徵基本上與 4 月時相同。</p>
-<h1 id="教學式解說-2"><a class="header" href="#教學式解說-2">教學式解說</a></h1>
+<h1 id="教學式解說-3"><a class="header" href="#教學式解說-3">教學式解說</a></h1>
 <p><code>Future</code> 特徵代表了一個非同步和惰性計算，它最終可能會產生一個最終值，但不以阻塞當前執行緒為前提來達成。</p>
 <p>Future 可以通過 <code>async</code> 區塊或 <code>async</code> 函式來創建，例如</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>async fn read_frame(socket: &amp;TcpStream) -&gt; Result&lt;Frame, io::Error&gt; { ... }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>當呼叫這個 <code>async</code> 函式，會產生一個 future，代表完成了從给定的 socket 中讀取一個框（frame）。函式簽名等同於：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn read_frame&lt;'sock&gt;(socket: &amp;'sock TcpStream)
     -&gt; impl Future&lt;Output = Result&lt;Frame, io::Error&gt;&gt; + 'sock;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>其他非同步函數可以 <strong>await</strong> 這個 future; 有關完整詳細信息，請參閱<a href="https://github.com/rust-lang/rfcs/pull/2394">隨附的 RFC</a>。</p>
 <p>除了 <code>async fn</code> 定義，future 還可以使用轉接器（adapter）來創建，就像 <code>Iterator</code> 一樣。最初，這些轉接器將完全由其他 crate 所提供，但最终它們將帶入標準函式庫。</p>
 <p>最終非同步計算以<strong>任務</strong>的形式執行，相當於輕量級執行緒。 <strong>executor</strong> 提供了從 <code>()</code> 生成的 <code>Future</code> 創建任務的能力。執行器將固定 <code>Future</code> 並對其進行 <code>poll</code>，直到為其創建的任務完成。</p>
 <p>executor 的實作以協同式地（cooperative）排程它的任務。是否使用一個或多個作業系統執行緒以及可以在其之上平行生成多少任務取決於 executor 的實作。一些 executor 的實作可能只能驅動單個 <code>Future</code> 完成，而另一些則可以提供動態接受新 <code>Future</code> 的能力，這些 Future 是在任務中被驅動完成。</p>
 <p>該 RFC 不包含任何 executor 的定義。它僅以 API 的形式定義了 executors、tasks 和 <code>Future</code> 之間的交互關係，這些 API 允許任務請求再次進行排程。 這些 API 由 <code>task</code> 模組提供，在手動實作 <code>Future</code> 或 executor 時需要這些 API。</p>
-<h1 id="技術文件式解說-2"><a class="header" href="#技術文件式解說-2">技術文件式解說</a></h1>
+<h1 id="技術文件式解說-3"><a class="header" href="#技術文件式解說-3">技術文件式解說</a></h1>
 <h2 id="coretask-模組"><a class="header" href="#coretask-模組"><code>core::task</code> 模組</a></h2>
 <p>Rust 中非同步運算的基本機制是<strong>任務</strong>，它們是輕量級的執行緒；許多任務可以協同調度到單個作業系統執行緒上。</p>
 <p>為了執行這種協作調度，我們使用了一種有時被稱為「<a href="https://en.wikipedia.org/wiki/Trampoline_(computing)">trampoline</a>」的技術。當一個任務需要阻塞等待某個事件時，它會保存一個物件，允許它稍後再次被調度並<strong>返回</strong>到運行它的執行器，然後它可以執行另一個任務。隨後的喚醒將任務放回就緒任務的執行者隊列中，就像作業系統中的執行緒調度程序一樣。</p>
@@ -1307,8 +1559,7 @@ pub enum Poll&lt;T&gt; {
     /// progress can be made.
     Pending,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>當一個任務返回 <code>Poll::Ready</code> 時，執行器知道該任務已經完成並且可以被刪除。</p>
 <h3 id="喚醒"><a class="header" href="#喚醒">喚醒</a></h3>
 <p>如果 future 在執行期間無法直接完成並返回 <code>Pending</code>，則它需要一種方法來稍後通知執行器它需要再次輪詢以取得進展。</p>
@@ -1425,8 +1676,7 @@ impl Drop for Waker {
         unsafe { (self.waker.vtable.drop_fn)(self.waker.data) }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p><code>Waker</code> 必須滿足以下要求：</p>
 <ul>
 <li>它們必須是可以克隆的。</li>
@@ -1502,8 +1752,7 @@ impl Drop for Waker {
     /// [`Waker::wake`]: ../task/struct.Waker.html#method.wake
     fn poll(self: Pin&lt;&amp;mut Self&gt;, waker: &amp;Waker) -&gt; Poll&lt;Self::Output&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>這裡的大部分解釋都遵循我們已經說過的關於任務系統的內容。一個轉折是 <code>Pin</code> 的使用，這使得可以在不同的 <code>poll</code> 調用中保留借用資訊（即「borrowing over yield
 points」）。固定機制在介紹它的 <a href="https://github.com/rust-lang/rfcs/pull/2349">RFC</a> 和有關最新修訂的<a href="https://boats.gitlab.io/blog/post/rethinking-pin/">部落格文章</a>中進行了解釋。</p>
 <h2 id="與-futures-01-的關係"><a class="header" href="#與-futures-01-的關係">與 futures 0.1 的關係</a></h2>
@@ -1603,14 +1852,13 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
     wake: |data: *const ()| EXECUTOR.borrow_mut().as_mut().expect(...).work_queue.push(data as usize),
     drop,
 };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>雖然此解決方案向 <code>LocalWaker</code> 方法提供了較差的錯誤訊息（因為在錯誤的執行緒上發生 <code>wake</code> 之前，它不会恐慌，而不是在 <code>LocalWaker</code> 轉換為 <code>Waker</code> 時發生恐慌），它極大地透過去除 <code>LocalWaker</code> 和 <code>Waker</code> 型別的重複，簡化了給使用者的 API 。</p>
 <p>在實際情況下，非常可能 Rust 生態系統中最常見的執行器繼續與多執行緒相容（就像現在一樣），因此在更特化的情況，針對這種情況最佳化其人因工程學，優先於更好的錯誤訊息。</p>
-<h1 id="現有技術"><a class="header" href="#現有技術">現有技術</a></h1>
+<h1 id="現有技術-1"><a class="header" href="#現有技術-1">現有技術</a></h1>
 <p>以 async/await 語法和以 future（又名 promise）為基礎的大量現有技術。提議的 futures API 是受到 Scala 的 futures 的影響，並且與各種其他語言的 API 大體相似（就以提供的轉接器而言）。</p>
 <p>此 RFC 中模型的獨特之處在於使用了任務，而不是 callback。RFC 的作者不知道其他 <em>future</em> 函式庫是否使用這種技術，但它是 functional programming 中一種相當知名且更普遍的技術。有關於最近的範例，請參閱這篇關於 Haskell 平行的<a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2011/01/monad-par.pdf">論文</a>。這個 RFC 似乎是一个將 「trampoline」 技術與明確的、開放式的任務/喚醒模型结合起来的新想法。</p>
-<h1 id="未解決的問題-1"><a class="header" href="#未解決的問題-1">未解決的問題</a></h1>
+<h1 id="未解決的問題-2"><a class="header" href="#未解決的問題-2">未解決的問題</a></h1>
 <p>暫時沒有。</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Feature Name: sparse_index</li>
@@ -1623,11 +1871,11 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 </ul>
 <h1 id="總結-5"><a class="header" href="#總結-5">總結</a></h1>
 <p>可透過 HTTP 選擇性下載 crates-io 索引，類於 Ruby 的 Bundler 的作法。傳輸方式從預先（ahead-of-time）Git clone 改變為 HTTP 按需下載。既有的索引結構和內容維持不變。重要的是，此提案可與靜態檔案協同運作，而不需客製化的伺服器端 API。</p>
-<h1 id="動機-8"><a class="header" href="#動機-8">動機</a></h1>
+<h1 id="動機-9"><a class="header" href="#動機-9">動機</a></h1>
 <p>完整的 crate 索引相對龐大且下載慢。它還會隨著 crates.io 增長而增長，讓情況每況愈下。需要下載完整索引這件事拖累了首次使用 Cargo 的速度。尤其是在無狀態的 CI 環境下更是緩慢又浪費且只使用完整索引的非常小一部分，剩下全都給拋棄。快取索引在 CI 環境可謂困難重重（<code>.cargo</code> 目錄很巨）又經常低效（如：在 Travis Ci 上傳下載大型快取幾乎和下載新鮮索引一樣慢）。</p>
 <p>目前索引的儲存資料格式和 git 協定搭配起來並不是很舒服。未壓縮的索引內容 tarball（截止 eb037b4863）佔 176MiB，<code>gzip -1</code> 需要 16MiB，而 <code>xz -6</code> 壓縮則要 10MiB。然 Git clone 卻回報下載了 215 MiB，比未壓縮的最新索引內容還大，且是壓縮後 tarball 的 <strong>二十倍之多</strong>。</p>
 <p>將 git 歷史記錄 shallow clone 或 squash 只是暫時解。且不論事實上 <a href="http://blog.cocoapods.org/Master-Spec-Repo-Rate-Limiting-Post-Mortem/">GitHub 指出它們不想支援大型儲存庫的 shallow clone</a>，也不論 libgit2 尚未支援 shallow clone，實際上這作法仍未解決客戶端必須下載包含所有 crate 的整包索引。</p>
-<h1 id="教學式解說-3"><a class="header" href="#教學式解說-3">教學式解說</a></h1>
+<h1 id="教學式解說-4"><a class="header" href="#教學式解說-4">教學式解說</a></h1>
 <p>將索引作為純文字檔案，透過 HTTP 開放出來。開放既有的索引佈局排列也夠用（就像從 raw.githubusercontent.com 看到的長相），不過以 HTTP 來說 URL scheme 可能可以簡化。</p>
 <p>欲了解 crate 資訊和解析依賴，Cargo（或其他客戶端）可對每個依賴建立請求，並送往已知的 URL 以取得需要的資訊，例如：<code>https://index.example.com/se/rd/serde</code>。對各個依賴來說，客戶端也會繼續請求其依賴資訊， 遞迴循環，直到取得所有依賴（並快取）到本機端。</p>
 <p>請求依賴檔案是有辦法平行化運作的，所以依賴解析最差情況下的延遲會限制在依賴樹的最大深度。實務上最差情況非常少見，因為依賴通常會多次出現在樹中，因此可以提前發現並增加平行化機會。且，若已有 lock 檔案，所有列在其中的依賴也都可平行化核對處理，</p>
@@ -1642,7 +1890,7 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 <h2 id="處理移除的-crate"><a class="header" href="#處理移除的-crate">處理移除的 crate</a></h2>
 <p>有需要的話，本提議的解法可支援 crate 移除。當客戶端欲檢查一個已移除的 crate 的新鮮度，會向伺服器請求並獲得 404/410/451 HTTP 狀態。客戶端可以根據情況處理，並清理本機端的資料（甚至是 tarball 和原始碼已簽出的情況下）。 </p>
 <p>若客戶端對該移除 crate 不感興趣，就不會檢查之，但極大機率從來不會這樣做，也不會下載它。若主動清除已移除的 crate 快取資訊非常重要，則可以延伸「增量式變更記錄」來通知該移除。</p>
-<h1 id="缺點-6"><a class="header" href="#缺點-6">缺點</a></h1>
+<h1 id="缺點-7"><a class="header" href="#缺點-7">缺點</a></h1>
 <ul>
 <li>crates-io 計畫替索引加上加密簽章，作為 HTTP 上額外一層保護。對 git 索引來說加密驗證非常直觀，不過簽署鬆散的 HTTP 索引可能蠻有挑戰性的。</li>
 <li>在還沒有增量式變更記錄前，一個基本的實作，需要許多請求來更新索引。和 git fetch 相比會有更高的延遲。然而，在一些早期的效能比較下，若 CDN 支援足夠（&gt;60）多的平行請求，會比 git fetch 更快。對 Github 上的索引來說，Cargo 有一個捷徑會檢查 master 分支是否改變。若有增量式變更記錄檔，同樣的捷徑可以透過條件式 HTTP 請求該變更記錄檔來達成（例如，檢查 <code>ETag</code> 或 <code>Last-Modified</code>）。</li>
@@ -1695,17 +1943,17 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 <h1 id="總結-6"><a class="header" href="#總結-6">總結</a></h1>
 <p>棄用現有的 <code>asm!</code> 巨集（macro），並提供一個名為 <code>llvm_asm!</code> 的相同巨集（macro）。功能開關也從 <code>asm</code> 重新命名為 <code>llvm_asm</code> 。
 與 <code>asm!</code> 不同的是， <code>llvm_asm!</code> 不打算成為穩定版。</p>
-<h1 id="動機-9"><a class="header" href="#動機-9">動機</a></h1>
+<h1 id="動機-10"><a class="header" href="#動機-10">動機</a></h1>
 <p>這個變更將 <code>asm!</code> 巨集（macro）釋放了，使它可用於內嵌組合語言項目組新設計的 <code>asm!</code> 巨集（macro），
 同時為現在使用 <code>asm!</code> 的用戶提供一個簡單的方法來保持代碼的正常運作。</p>
 <p>對尚未支援新的 <code>asm!</code> 巨集（macro）的架構，在（nightly 版本）上執行內嵌組合語言可能會有用。</p>
-<h1 id="教學式解說-4"><a class="header" href="#教學式解說-4">教學式解說</a></h1>
+<h1 id="教學式解說-5"><a class="header" href="#教學式解說-5">教學式解說</a></h1>
 <p>Rust 團隊目前正在重新設計 <code>asm!</code> 巨集（macro）。您應該將所有使用 <code>asm!</code> 的代碼都替換為 <code>llvm_asm!</code> ，以避免代碼在實施新的 <code>asm!</code> 巨集（macro）時毀壞。</p>
-<h1 id="技術文件式解說-3"><a class="header" href="#技術文件式解說-3">技術文件式解說</a></h1>
+<h1 id="技術文件式解說-4"><a class="header" href="#技術文件式解說-4">技術文件式解說</a></h1>
 <p>編譯器內所有對 <code>asm!</code> 的參考都將改參考 <code>llvm_asm!</code> 。
 <code>asm!</code> 將變成一個單純（已棄用）的 <code>macro_rules!</code> ，它會重新導到<code>llvm_asm!</code>。
 棄用警告將告知使用者 <code>asm!</code> 將來的語義會作改變，並邀請他們使用 <code>llvm_asm!</code> 來替代。<code>llvm_asm!</code> 巨集（macro）將由 <code>llvm_asm</code> 功能開關來把控。</p>
-<h1 id="缺點-7"><a class="header" href="#缺點-7">缺點</a></h1>
+<h1 id="缺點-8"><a class="header" href="#缺點-8">缺點</a></h1>
 <p>此變更可能需要人為變更兩次代碼：首先變更為 <code>llvm_asm!</code> ，然後再實施新的 <code>asm!</code> 巨集（macro）。</p>
 <h1 id="原理及替代方案-2"><a class="header" href="#原理及替代方案-2">原理及替代方案</a></h1>
 <p>我們可以跳過棄用期，並同時執行重新命名新的 <code>asm!</code> 巨集（macro）。
@@ -1729,7 +1977,7 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 </ul>
 <h1 id="總結-7"><a class="header" href="#總結-7">總結</a></h1>
 <p>透過引進<strong>輸入輸出安全性</strong>（I/O safety）之概念與一系列新型別與特徵，保障 <code>AsRaw</code> 及相關特徵的使用者對原始資源 handle （raw resource handle）之使用，以彌補 Rust 封裝邊界的漏洞。</p>
-<h1 id="動機-10"><a class="header" href="#動機-10">動機</a></h1>
+<h1 id="動機-11"><a class="header" href="#動機-11">動機</a></h1>
 <p>Rust 標準函式庫幾乎算是已經提供了<strong>輸入輸出安全性</strong>，保證程式的一部分若私自持有一個原始 handle （raw handle），其他部分就無法存取。例如 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html#tymethod.from_raw_fd"><code>FromRawFd::from_raw_fd</code></a> 標示為不安全，它不允許使用者在 safe Rust 之下執行如 <code>File::from_raw_fd(7)</code> 等操作，或是在程式各處私自持有檔案描述子（file descriptor）來執行輸入輸出。</p>
 <p>不過仍有漏網之魚。許多函式庫的 API 透過接受 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html"><code>AsRawFd</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.IntoRawFd.html"><code>IntoRawFd</code></a> 來執行輸入輸出操作：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -1737,8 +1985,7 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 </span>pub fn do_some_io&lt;FD: AsRawFd&gt;(input: &amp;FD) -&gt; io::Result&lt;()&gt; {
     some_syscall(input.as_raw_fd())
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p><code>AsRawFd</code> 並無限制 <code>as_raw_fd</code> 的回傳值，所以 <code>do_some_io</code> 最終會對任意 <code>RawRd</code> 的值執行輸入輸出。由於 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html"><code>RawFd</code></a> 本身實作了 <code>AsRawFd</code>，甚至可以寫出 <code>do_some_io(&amp;7)</code>。</p>
 <p>這會使得程式<a href="https://cwe.mitre.org/data/definitions/910.html">存取錯誤的資源</a>，更甚者為其他地方私有的原始 handle 建立多個別名（alias），從而打破封裝的邊界，造成<a href="https://en.wikipedia.org/wiki/Action_at_a_distance_(computer_programming)">遠處來的詭異行為</a>。</p>
 <p>而在特殊情況下，違反輸入輸出安全性恐導致違反記憶體安全性。舉例來說，理論上替透過 Linux <a href="https://man7.org/linux/man-pages/man2/memfd_create.2.html"><code>memfd_create</code></a> 系統呼叫建立出來的檔案描述子打造  <code>mmap</code> 的安全封裝，並將之傳給 safe Rust 是可行的，畢竟它就是匿名的被開啟的檔案（anonymous open file），表示其他行程（process）無法存取之。然而，在沒有輸入輸出安全性且沒有永久封閉該檔案的情況下，該程式中其他程式碼恐意外地對該檔案描述子呼叫 <code>write</code> 或 <code>ftruncate</code>，進而打破記憶體安全性 <code>&amp;[u8]</code> 不變的規則。</p>
@@ -1748,7 +1995,7 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 <li>一系列全新的型別與特徵。</li>
 <li>替 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.FromRawFd.html#tymethod.from_raw_fd"><code>from_raw_fd</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.FromRawHandle.html#tymethod.from_raw_handle"><code>from_raw_handle</code></a>/<a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.FromRawSocket.html#tymethod.from_raw_socket"><code>from_raw_socket</code></a> 撰寫新文件，解釋就輸入輸出安全性而言，它們為何不安全，順便解決出現好<a href="https://github.com/rust-lang/rust/issues/72175">幾</a><a href="https://users.rust-lang.org/t/why-is-fromrawfd-unsafe/39670">次</a>的相同問題。</li>
 </ul>
-<h1 id="教學式解說-5"><a class="header" href="#教學式解說-5">教學式解說</a></h1>
+<h1 id="教學式解說-6"><a class="header" href="#教學式解說-6">教學式解說</a></h1>
 <h2 id="輸入輸出安全性概念"><a class="header" href="#輸入輸出安全性概念">輸入輸出安全性概念</a></h2>
 <p>Rust 標準函式庫提供了低階型別，以表示原始的作業系統資源 handle：類 Unix 平台的 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html"><code>RawFd</code></a> 和 Windows 上的 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawHandle.html"><code>RawHandle</code></a> 與 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawSocket.html"><code>RawSocket</code></a>。然而，它們並沒有提供任何自身的行為，而是僅作為一個標識符（identifier），並在低階的作業系統 API 間傳遞。</p>
 <p>這些原始 handle 可以視為原始指標（raw pointer）且具有相同的危險性。雖然<strong>取得</strong>一個原始指標是安全的，但當該原始指標是非法指標，或是比其指向記憶體之處活得更久時，對原始指標<strong>取值</strong>（dereference）都可能引發未定義行為（undefined behavior）。無獨有偶，透過 <a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsRawFd.html#tymethod.as_raw_fd"><code>AsRawFd::as_raw_fd</code></a> 或類似方法<strong>取得</strong>一個原始 handle 是安全的，但當它並非合法 handle 或在關閉之後才拿來用時，用該 handle 來執行輸入輸出恐導致「損毀的輸出結果」、「遺失或洩漏輸入資料」或「違反封裝的邊界」。在這兩個案例中，影響不僅限於本地，也會影響程式的其他部分。保護原始指標免於危險稱作記憶體安全性，所以保護原始 handle 免於危險我們叫它<strong>輸入輸出安全性</strong>。</p>
@@ -1781,8 +2028,7 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
     // 實例，例如 `another`。因此，一個 `unsafe` 區塊告知呼叫者對此有責任，需使
     // 其免於這些風險。
     let dangling = unsafe { File::from_raw_fd(raw_fd) };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>呼叫端必須確保傳入 <code>from_raw_fd</code> 的值一定是從作業系統回傳所得，並且 <code>from_raw_fd</code> 的回傳值的生命週期不會長於和作業系統關聯的 handle。</p>
 <p>雖然將輸入輸出安全性作為明確的概念是個新作法，但其實它也反映出許多常見的實踐。除了引入一些新型別與特徵及其實作外，Rust <code>std</code> 並不需改變已經穩定的界面。在推行之初，並不需讓整個 Rust 生態系馬上支援輸入輸出安全性，而是可以漸進式地採用之。</p>
 <h2 id="ownedfd-與-borrowedfdfd"><a class="header" href="#ownedfd-與-borrowedfdfd"><code>OwnedFd</code> 與 <code>BorrowedFd&lt;'fd&gt;</code></a></h2>
@@ -1804,8 +2050,7 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 </span>pub fn do_some_io&lt;FD: AsFd&gt;(input: &amp;FD) -&gt; io::Result&lt;()&gt; {
     some_syscall(input.as_fd())
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>至於在 Windows 上，會以 <code>Handle</code> 和 <code>Socket</code> 形式呈現相應的型別。</p>
 <h2 id="漸進式採用"><a class="header" href="#漸進式採用">漸進式採用</a></h2>
 <p>輸入輸出安全性及其新型別與新特徵並不需要一次性全面導入，而是能夠分階段漸進採用：</p>
@@ -1814,7 +2059,7 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 <li>在此之後，crate 可以開始用這些新型別，並替 crate 自己的型別實作這些新特徵。這些改變相對小，而且符合語意化版號相容性，不需其他特殊處理。</li>
 <li>當標準函式庫和夠多的熱門 crate 實作這些新特徵後，其他 crate 可按照它們的開發步調，將這些新特徵作為泛型引數的限定條件（bound)。雖然這些改變不符合語意化版號的相容性，不過多數 API 使用者改用新特徵時並不需改變程式碼。</li>
 </ul>
-<h1 id="技術文件式解說-4"><a class="header" href="#技術文件式解說-4">技術文件式解說</a></h1>
+<h1 id="技術文件式解說-5"><a class="header" href="#技術文件式解說-5">技術文件式解說</a></h1>
 <h2 id="輸入輸出安全性概念-1"><a class="header" href="#輸入輸出安全性概念-1">輸入輸出安全性概念</a></h2>
 <p>Rust 語言除了有記憶體安全性之外，Rust 標準函式庫同時提供了對輸入輸出安全性的保證。一個合法的輸入輸出操作，其所操作的原始 handle（<a href="https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html"><code>RawFd</code></a>、 <a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawHandle.html"><code>RawHandle</code></a>、<a href="https://doc.rust-lang.org/stable/std/os/windows/io/type.RawSocket.html"><code>RawSocket</code></a>）必為明確從作業系統回傳之值，且這些操作僅發生在與作業系統關聯之生命週期內。當一段 Rust 程式碼宣稱輸入輸出安全性，代表該程式碼不可能導致非法的輸入輸出操作。</p>
 <p>雖然有些作業系統的文件中說明其檔案描述子的配置演算法，但從這些演算法旁敲側擊出來的 handle 值並不會視為「明確從作業系統回傳之值」。</p>
@@ -1828,7 +2073,7 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 <p>上述所有原型放在：</p>
 <p><a href="https://github.com/sunfishcode/io-lifetimes">https://github.com/sunfishcode/io-lifetimes</a></p>
 <p>README.md 有文件鏈結、範例、和當前提供類似功能的 crate 之調查研究。</p>
-<h1 id="缺點-8"><a class="header" href="#缺點-8">缺點</a></h1>
+<h1 id="缺點-9"><a class="header" href="#缺點-9">缺點</a></h1>
 <p>Crate 若用到檔案描述子，如 <a href="https://crates.io/crates/nix"><code>nix</code></a> 或 <a href="https://crates.io/crates/mio"><code>mio</code></a>，將需要遷移到有實作 <code>AsFd</code> 的型別，或將這類函式標示為不安全。</p>
 <p>crates 若用 <code>AsRawFd</code> 或 <code>IntoRawFd</code> 來接收任何「類檔案」或「類 socket」型別，如 <a href="https://crates.io/crates/socket2"><code>socket2</code></a> 的 <a href="https://docs.rs/socket2/0.4.0/socket2/struct.SockRef.html#method.from"><code>SockRef::from</code></a>，將需換成 <code>AsFd</code> 或 <code>Into&lt;OwnedFd&gt;</code>，或將這類函式標示為不安全。</p>
 <h1 id="原理及替代方案-3"><a class="header" href="#原理及替代方案-3">原理及替代方案</a></h1>
@@ -1891,7 +2136,7 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 <li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/6de9eb35193852dd910c38f5c2c41e6f3e2a8ed4/text/3151-scoped-threads.md">The commit link this page based on</a></li>
 <li>Updated: 2022-07-05</li>
 </ul>
-<h1 id="概要-3"><a class="header" href="#概要-3">概要</a></h1>
+<h1 id="概要-4"><a class="header" href="#概要-4">概要</a></h1>
 <p>在標準函式庫中新增作用域執行緒，其允許產生可借用父執行緒之變數的執行緒。</p>
 <p>範例:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -1902,14 +2147,13 @@ thread::scope(|s| {
     s.spawn(|_| println!(&quot;borrowed from thread #1: {}&quot;, var));
     s.spawn(|_| println!(&quot;borrowed from thread #2: {}&quot;, var));
 });
-<span class="boring">}
-</span></code></pre></pre>
-<h1 id="動機-11"><a class="header" href="#動機-11">動機</a></h1>
+<span class="boring">}</span></code></pre></pre>
+<h1 id="動機-12"><a class="header" href="#動機-12">動機</a></h1>
 <p>在 Rust 1.0 發布之前，我們有與作用域執行續相同作用的 <a href="https://docs.rs/thread-scoped/1.0.2/thread_scoped/"><code>thread::scoped()</code></a>，但後來發現一個健全性的問題，可能導致 use-after-frees，所以它已被移除。這一歷史事件稱為<a href="http://cglab.ca/~abeinges/blah/everyone-poops/">洩密事件</a>。</p>
 <p>幸運的是，舊的作用域執行緒可被修復，透過閉包（closure）而非守護（guard)，來確保生成的執行緒會自動會合（join）。但我們對在 Rust 1.0 中加入的作用域執行緒並不放心，所以我們決定將其放在外部 crates 之中，並有可能在未來的某個時刻回到標準函式庫中。四年過去了，那個未來就是現在。</p>
 <p>作用域執行緒在 <a href="https://docs.rs/crossbeam/0.7.1/crossbeam/thread/index.html">Crossbeam</a> 中經過多年的經驗累積，我們的設計已經趨於成熟，足以被推廣到標準函式庫中。</p>
 <p>更多內容請看<a href="3151-scoped-threads.html#rationale-and-alternatives">基本理由及替代方案</a>部分。</p>
-<h1 id="教學式解說-6"><a class="header" href="#教學式解說-6">教學式解說</a></h1>
+<h1 id="教學式解說-7"><a class="header" href="#教學式解說-7">教學式解說</a></h1>
 <p>執行緒生成的 &quot;hello world&quot; 可能如下所示：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1920,8 +2164,7 @@ let handle = thread::spawn(move || {
 });
 
 handle.join().unwrap();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>現在讓我們嘗試生成兩個使用相同 greeting 的執行緒。不幸的是，我們必須克隆它，因為 <a href="https://doc.rust-lang.org/std/thread/fn.spawn.html"><code>thread::spawn()</code></a> 有 <code>F: 'static</code> 要求，這意味著執行緒不能借用局部變數：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1940,8 +2183,7 @@ let handle2 = thread::spawn(move || {
 
 handle1.join().unwrap();
 handle2.join().unwrap();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>作用域執行緒來解決！透過打開一個新的 <code>thread::scope()</code> 區塊，我們可以向編譯器證明在這作用域內產生的所有執行緒也會在這個作用域內結束生命。</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1959,8 +2201,7 @@ thread::scope(|s| {
     handle1.join().unwrap();
     handle2.join().unwrap();
 });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>這意味著可以毫無顧忌地借用作用域之外的變數！</p>
 <p>現在我們不必再手動會合執行緒，因為所有未會合的執行緒將在作用域結束時自動會合：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -1976,8 +2217,7 @@ thread::scope(|s| {
         println!(&quot;thread #2 says: {}&quot;, greeting);
     });
 });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>當以這種方式利用自動會合時，請注意，如果任何自動會合的執行緒出現恐慌，<code>thread::scope()</code> 將出現恐慌。</p>
 <p>你可能已經注意到作用域執行緒現在只接受一個參數，它只是對 <code>s</code> 的另一個引用。由於 <code>s</code> 存在於作用域內，我們不能直接借用它。使用傳遞的參數來生成巢狀執行緒：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -1989,16 +2229,14 @@ thread::scope(|s| {
         });
     });
 });
-<span class="boring">}
-</span></code></pre></pre>
-<h1 id="技術文件式解說-5"><a class="header" href="#技術文件式解說-5">技術文件式解說</a></h1>
+<span class="boring">}</span></code></pre></pre>
+<h1 id="技術文件式解說-6"><a class="header" href="#技術文件式解說-6">技術文件式解說</a></h1>
 <p>我們在 <code>std::thread</code> 模組中新增兩個新的型別：</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>struct Scope&lt;'env&gt; {}
 struct ScopedJoinHandle&lt;'scope, T&gt; {}
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>生命週期 <code>'env</code> 代表作用域外的環境，而 <code>'scope</code> 代表作用域本身。更準確地說，作用域外的所有內容都比 <code>'env</code> 和 <code>'scope</code> 內的所有內容都長。生命週期的關係是：</p>
 <pre><code>'variables_outside: 'env: 'scope: 'variables_inside
 </code></pre>
@@ -2015,8 +2253,7 @@ impl&lt;'env&gt; Scope&lt;'env&gt; {
         F: FnOnce(&amp;Scope&lt;'env&gt;) -&gt; T + Send + 'env,
         T: Send + 'env;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>這就是作用域執行緒的要點，真的。</p>
 <p>現在我們只需要再做兩件事來使 API 完整。首先，<code>ScopedJoinHandle</code> 等同於 <code>JoinHandle</code>，但與 <code>'scope</code> 生命週期掛勾，所以它將有同樣的方法。第二，執行緒生成器需要能夠在一個作用域内生成執行緒。</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -2036,9 +2273,8 @@ impl Builder {
         F: FnOnce(&amp;Scope&lt;'env&gt;) -&gt; T + Send + 'env,
         T: Send + 'env;
 }
-<span class="boring">}
-</span></code></pre></pre>
-<h1 id="缺點-9"><a class="header" href="#缺點-9">缺點</a></h1>
+<span class="boring">}</span></code></pre></pre>
+<h1 id="缺點-10"><a class="header" href="#缺點-10">缺點</a></h1>
 <p>作用域執行緒的主要缺點是使標準函式庫有點大。</p>
 <h1 id="基本原理和替代方案"><a class="header" href="#基本原理和替代方案">基本原理和替代方案</a></h1>
 <ul>
@@ -2079,7 +2315,7 @@ impl Builder {
 </ul>
 </li>
 </ul>
-<h1 id="現有技術-1"><a class="header" href="#現有技術-1">現有技術</a></h1>
+<h1 id="現有技術-2"><a class="header" href="#現有技術-2">現有技術</a></h1>
 <p>自 Rust 1.0 以來，Crossbeam 就有了<a href="https://docs.rs/crossbeam/0.7.1/crossbeam/thread/index.html">作用域執行緒</a>。</p>
 <p>Crossbeam 的作用域執行緒有兩種設計。舊的是在 <code>thread::scoped()</code> 被刪除後，我們想在 Rust 1.0 時代有一個合理的替代方案。新的則是在去年的大改版之中。</p>
 <ul>
@@ -2102,7 +2338,7 @@ impl Builder {
 </li>
 </ol>
 <p>Rayon 也有作用域，但它們在不同的抽象級別上工作——Rayon 產生任務而不是執行緒。它的 API 與本 RFC 中提出的 API 相同。</p>
-<h1 id="未解決的問題-2"><a class="header" href="#未解決的問題-2">未解決的問題</a></h1>
+<h1 id="未解決的問題-3"><a class="header" href="#未解決的問題-3">未解決的問題</a></h1>
 <p>這個概念可以延伸到非同步嗎？會有任何行為或 API 差異嗎？</p>
 <h1 id="未來的可能性"><a class="header" href="#未來的可能性">未來的可能性</a></h1>
 <p>在未来，我們也可以有一個像 Rayon 那樣的執行緒池，可以生成作用域内的任務。</p>
@@ -2139,22 +2375,22 @@ updated: YYYY-MMM-DD
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
