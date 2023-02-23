@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>2843-llvm-asm - The Rust RFC Book</title>
+        <title>non-goals - The Rust RFC Book</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html" class="active">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded "><a href="3392-leadership-council.html">3392-leadership-council</a></li><li class="chapter-item expanded "><a href="alternatives.html">alternatives</a></li><li class="chapter-item expanded "><a href="initial-work-of-the-council.html">initial-work-of-the-council</a></li><li class="chapter-item expanded "><a href="motivation.html">motivation</a></li><li class="chapter-item expanded "><a href="non-goals.html">non-goals</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded "><a href="3392-leadership-council.html">3392-leadership-council</a></li><li class="chapter-item expanded "><a href="alternatives.html">alternatives</a></li><li class="chapter-item expanded "><a href="initial-work-of-the-council.html">initial-work-of-the-council</a></li><li class="chapter-item expanded "><a href="motivation.html">motivation</a></li><li class="chapter-item expanded "><a href="non-goals.html" class="active">non-goals</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,50 +143,32 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Feature Name: <code>llvm_asm</code></li>
-<li>Start Date: 2019-12-31</li>
-<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2843">rust-lang/rfcs#2843</a></li>
-<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/70173">rust-lang/rust#70173</a></li>
-<li>Translators: [<a href="https://github.com/TSOTSI1">@TSOTSI1</a>]</li>
-<li>Commit: <a href="https://github.com/Amanieu/rfcs/blob/9911615f81471229684b0ab704409c9fcae55ede/text/2843-llvm-asm.md">The commit link this page based on</a></li>
-<li>Updated: 2022-06-29</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfc-leadership-council/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/non-goals.md">The commit link this page based on</a></li>
 </ul>
-<h1 id="總結"><a class="header" href="#總結">總結</a></h1>
-<p>棄用現有的 <code>asm!</code> 巨集（macro），並提供一個名為 <code>llvm_asm!</code> 的相同巨集（macro）。功能開關也從 <code>asm</code> 重新命名為 <code>llvm_asm</code> 。
-與 <code>asm!</code> 不同的是， <code>llvm_asm!</code> 不打算成為穩定版。</p>
-<h1 id="動機"><a class="header" href="#動機">動機</a></h1>
-<p>這個變更將 <code>asm!</code> 巨集（macro）釋放了，使它可用於內嵌組合語言項目組新設計的 <code>asm!</code> 巨集（macro），
-同時為現在使用 <code>asm!</code> 的用戶提供一個簡單的方法來保持代碼的正常運作。</p>
-<p>對尚未支援新的 <code>asm!</code> 巨集（macro）的架構，在（nightly 版本）上執行內嵌組合語言可能會有用。</p>
-<h1 id="教學式解說"><a class="header" href="#教學式解說">教學式解說</a></h1>
-<p>Rust 團隊目前正在重新設計 <code>asm!</code> 巨集（macro）。您應該將所有使用 <code>asm!</code> 的代碼都替換為 <code>llvm_asm!</code> ，以避免代碼在實施新的 <code>asm!</code> 巨集（macro）時毀壞。</p>
-<h1 id="技術文件式解說"><a class="header" href="#技術文件式解說">技術文件式解說</a></h1>
-<p>編譯器內所有對 <code>asm!</code> 的參考都將改參考 <code>llvm_asm!</code> 。
-<code>asm!</code> 將變成一個單純（已棄用）的 <code>macro_rules!</code> ，它會重新導到<code>llvm_asm!</code>。
-棄用警告將告知使用者 <code>asm!</code> 將來的語義會作改變，並邀請他們使用 <code>llvm_asm!</code> 來替代。<code>llvm_asm!</code> 巨集（macro）將由 <code>llvm_asm</code> 功能開關來把控。</p>
-<h1 id="缺點"><a class="header" href="#缺點">缺點</a></h1>
-<p>此變更可能需要人為變更兩次代碼：首先變更為 <code>llvm_asm!</code> ，然後再實施新的 <code>asm!</code> 巨集（macro）。</p>
-<h1 id="原理及替代方案"><a class="header" href="#原理及替代方案">原理及替代方案</a></h1>
-<p>我們可以跳過棄用期，並同時執行重新命名新的 <code>asm!</code> 巨集（macro）。
-總之用 Rust（nightly 版本）保證能一次破壞大量代碼，就無需任何過渡期。</p>
-<h1 id="先驅技術"><a class="header" href="#先驅技術">先驅技術</a></h1>
-<p>D 語言也支援兩種形式的內嵌組合語言。<a href="https://dlang.org/spec/iasm.html">first one</a> 提供用於內嵌組合語言的嵌入式 DSL，它可以在不用 Clobber 情況下直接存取範圍內的變量，但只能在x86和x86_64的架構上使用。
-<a href="https://wiki.dlang.org/LDC_inline_assembly_expressions">second one</a> 是 LLVM 內部內嵌組合語言句法的 RAM 接口，但它只適用於 DSL 的後端架構。</p>
-<h1 id="未解決問題"><a class="header" href="#未解決問題">未解決問題</a></h1>
-<p>無</p>
-<h1 id="未來展望"><a class="header" href="#未來展望">未來展望</a></h1>
-<p>當下執行的會在 <a href="https://github.com/rust-lang/rfcs/pull/2873">new <code>asm!</code> macro</a> 被執行後替換掉，這會破壞那些尚未轉換 <code>llvm_asm!</code> 的代碼。
-由於運算元分隔符將從 <code>:</code> 更改為 <code>,</code> ，所以不會有靜默的錯誤編譯，新的 <code>asm!</code> 巨集（macro）會出現語法錯誤，來保證現有 <code>asm!</code> 的任何呼叫都會失敗，</p>
+<h1 id="non-goals-of-this-rfc"><a class="header" href="#non-goals-of-this-rfc">Non-goals of this RFC</a></h1>
+<p>The following are non-goals of this RFC. These may be met in future RFCs but are explicitly not part of this RFC.</p>
+<p>Non-goal #1: <em>Laying out the complete policies and procedures of the Council</em>. While the RFC lays out and bounds the structure of the Council, the Council's full policies and procedures will be created by the Council itself. It is also expected that the Council will change and adapt to meet the needs of the Rust Project as it evolves.</p>
+<p>Non-goal #2: <em>Addressing all governance and potential governance concerns</em>. One of the Council's responsibilities will be to identify and reflect on the issues present in governance, but we see the formation of the Council as part of a continuous process of improving Rust's leadership and how it meets the needs of the Project.</p>
+<p>Non-goal #3: <em>Forming additional teams</em>. The focus of this RFC is to form the Council and does not include the creation of additional teams, subteams, or groups of any kind.</p>
+<p>We recognize the importance of having additional teams, but see this as outside of the scope of this RFC. Instead, it will be the responsibility of the Council to investigate and understand such needs and then create additional teams to ultimately handle these issues.</p>
+<p>This has one exception, other than the Council itself: the &quot;launching pad&quot; top-level team, which provides a temporary grouping of teams not yet attached to any existing top-level team either directly or indirectly.</p>
+<p>Non-goal #4: <em>Altering the charters or purviews of existing teams</em>. While this RFC does discuss membership in the Council, it does not extend beyond this to update the charter or purview of any existing team. Existing teams continue to follow their existing charters and purviews.</p>
+<p>This has two exceptions:</p>
+<ul>
+<li>the core team: As part of this RFC, all of the capabilities and responsibilities of the core team move to the Council and are then clarified, modified, and constrained by the rest of this RFC.</li>
+<li>the moderation team: As this RFC covers topics like conflict resolution and Council oversight, it does define additional capabilities for the moderation team, as well as additional checks and balances providing bidirectional oversight between the moderation team and the Council.</li>
+</ul>
+<p>Non-goal #5: <em>Establishing completely immutable properties of the Council</em>. Any aspect established in this RFC can be modified in the future, via the public policy decision-making process, with oversight provided by that process. This RFC lays out policies for making such changes, and the processes of changing such policies must follow the existing policies.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="2789-sparse-index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="motivation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="3128-io-safety.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="CONTRIBUTING.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -196,11 +178,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="2789-sparse-index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="motivation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="3128-io-safety.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="CONTRIBUTING.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

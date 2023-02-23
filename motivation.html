@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>2843-llvm-asm - The Rust RFC Book</title>
+        <title>motivation - The Rust RFC Book</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html" class="active">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded "><a href="3392-leadership-council.html">3392-leadership-council</a></li><li class="chapter-item expanded "><a href="alternatives.html">alternatives</a></li><li class="chapter-item expanded "><a href="initial-work-of-the-council.html">initial-work-of-the-council</a></li><li class="chapter-item expanded "><a href="motivation.html">motivation</a></li><li class="chapter-item expanded "><a href="non-goals.html">non-goals</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded "><a href="3392-leadership-council.html">3392-leadership-council</a></li><li class="chapter-item expanded "><a href="alternatives.html">alternatives</a></li><li class="chapter-item expanded "><a href="initial-work-of-the-council.html">initial-work-of-the-council</a></li><li class="chapter-item expanded "><a href="motivation.html" class="active">motivation</a></li><li class="chapter-item expanded "><a href="non-goals.html">non-goals</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,50 +143,50 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Feature Name: <code>llvm_asm</code></li>
-<li>Start Date: 2019-12-31</li>
-<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/2843">rust-lang/rfcs#2843</a></li>
-<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/70173">rust-lang/rust#70173</a></li>
-<li>Translators: [<a href="https://github.com/TSOTSI1">@TSOTSI1</a>]</li>
-<li>Commit: <a href="https://github.com/Amanieu/rfcs/blob/9911615f81471229684b0ab704409c9fcae55ede/text/2843-llvm-asm.md">The commit link this page based on</a></li>
-<li>Updated: 2022-06-29</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfc-leadership-council/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/motivation.md">The commit link this page based on</a></li>
 </ul>
-<h1 id="總結"><a class="header" href="#總結">總結</a></h1>
-<p>棄用現有的 <code>asm!</code> 巨集（macro），並提供一個名為 <code>llvm_asm!</code> 的相同巨集（macro）。功能開關也從 <code>asm</code> 重新命名為 <code>llvm_asm</code> 。
-與 <code>asm!</code> 不同的是， <code>llvm_asm!</code> 不打算成為穩定版。</p>
-<h1 id="動機"><a class="header" href="#動機">動機</a></h1>
-<p>這個變更將 <code>asm!</code> 巨集（macro）釋放了，使它可用於內嵌組合語言項目組新設計的 <code>asm!</code> 巨集（macro），
-同時為現在使用 <code>asm!</code> 的用戶提供一個簡單的方法來保持代碼的正常運作。</p>
-<p>對尚未支援新的 <code>asm!</code> 巨集（macro）的架構，在（nightly 版本）上執行內嵌組合語言可能會有用。</p>
-<h1 id="教學式解說"><a class="header" href="#教學式解說">教學式解說</a></h1>
-<p>Rust 團隊目前正在重新設計 <code>asm!</code> 巨集（macro）。您應該將所有使用 <code>asm!</code> 的代碼都替換為 <code>llvm_asm!</code> ，以避免代碼在實施新的 <code>asm!</code> 巨集（macro）時毀壞。</p>
-<h1 id="技術文件式解說"><a class="header" href="#技術文件式解說">技術文件式解說</a></h1>
-<p>編譯器內所有對 <code>asm!</code> 的參考都將改參考 <code>llvm_asm!</code> 。
-<code>asm!</code> 將變成一個單純（已棄用）的 <code>macro_rules!</code> ，它會重新導到<code>llvm_asm!</code>。
-棄用警告將告知使用者 <code>asm!</code> 將來的語義會作改變，並邀請他們使用 <code>llvm_asm!</code> 來替代。<code>llvm_asm!</code> 巨集（macro）將由 <code>llvm_asm</code> 功能開關來把控。</p>
-<h1 id="缺點"><a class="header" href="#缺點">缺點</a></h1>
-<p>此變更可能需要人為變更兩次代碼：首先變更為 <code>llvm_asm!</code> ，然後再實施新的 <code>asm!</code> 巨集（macro）。</p>
-<h1 id="原理及替代方案"><a class="header" href="#原理及替代方案">原理及替代方案</a></h1>
-<p>我們可以跳過棄用期，並同時執行重新命名新的 <code>asm!</code> 巨集（macro）。
-總之用 Rust（nightly 版本）保證能一次破壞大量代碼，就無需任何過渡期。</p>
-<h1 id="先驅技術"><a class="header" href="#先驅技術">先驅技術</a></h1>
-<p>D 語言也支援兩種形式的內嵌組合語言。<a href="https://dlang.org/spec/iasm.html">first one</a> 提供用於內嵌組合語言的嵌入式 DSL，它可以在不用 Clobber 情況下直接存取範圍內的變量，但只能在x86和x86_64的架構上使用。
-<a href="https://wiki.dlang.org/LDC_inline_assembly_expressions">second one</a> 是 LLVM 內部內嵌組合語言句法的 RAM 接口，但它只適用於 DSL 的後端架構。</p>
-<h1 id="未解決問題"><a class="header" href="#未解決問題">未解決問題</a></h1>
-<p>無</p>
-<h1 id="未來展望"><a class="header" href="#未來展望">未來展望</a></h1>
-<p>當下執行的會在 <a href="https://github.com/rust-lang/rfcs/pull/2873">new <code>asm!</code> macro</a> 被執行後替換掉，這會破壞那些尚未轉換 <code>llvm_asm!</code> 的代碼。
-由於運算元分隔符將從 <code>:</code> 更改為 <code>,</code> ，所以不會有靜默的錯誤編譯，新的 <code>asm!</code> 巨集（macro）會出現語法錯誤，來保證現有 <code>asm!</code> 的任何呼叫都會失敗，</p>
+<h1 id="motivation"><a class="header" href="#motivation">Motivation</a></h1>
+<p>The Rust Project is composed of hundreds of globally distributed individuals each of whom have very different motivations for working on Rust. Rust's open culture allows for these individuals to collaborate in a productive manner where complex technical and organizational decisions are made through consensus building and stakeholder feedback.</p>
+<p>Rust's model for project management and decision-making delegates most decisions to the appropriate team. Teams are ultimately accountable for their purview. While teams' decision-making processes do not strictly need to be consensus based, stakeholder feedback is repeatedly solicited to ensure a plethora of opinions on each matter are considered and factored in.</p>
+<p>However, at times this leads to issues. These issues can be summarized by the following questions which do not have clear answers in Rust's current governance model:</p>
+<ul>
+<li>What happens when it is unclear which teams' purviews a certain decision falls under?</li>
+<li>Who is in charge of important but non-urgent work that is not clearly owned by an existing team?</li>
+<li>Who is accountable when that work does not happen and organizational debt accrues?</li>
+<li>How are teams in the Project held accountable to each other and to the wider Project?</li>
+</ul>
+<p>Examples of the type of work in question include the following. Please note that this list is far from exhaustive and is merely meant to give an impression of the type of work in question:</p>
+<ul>
+<li>Helping identify gaps where existing teams are struggling to accomplish work or grow to meet challenges.</li>
+<li>Establishing large structural changes such as the Rust Foundation or new top-level teams.</li>
+<li>Project self-reflection. What aspects of Project operations are less than ideal? What do we do to change course?</li>
+<li>Project-wide community management. While individual teams can ensure that their teams are welcoming places, how do we ensure that the Project as a whole is?</li>
+<li>Policy work, for policies that have ramifications across the Project or even legal ramifications.</li>
+<li>Ensuring teams coordinate their work so that the Rust Project produces results greater than the sum of the output of the individual teams.</li>
+</ul>
+<p>While the current system does at times lead to positive outcomes in the above scenarios, it often does not. Some examples of failure mode categories include:</p>
+<ul>
+<li>No one is accountable for a decision and so the decision goes unmade, leaving it undefined. This requires solutions to repeatedly be developed either &quot;off the cuff&quot; or from first principles. This requires enormous amounts of energy and often leads to work not being done well or at all. In some cases it can even lead to burning out Project participants.</li>
+<li>Much Project work that is non-urgent often does not get done. This can lead to processes and procedures that are done not because they are the best way to handle a situation but simply because they are the easiest. This can lead to outcomes that are unfair or even actively harmful to individuals. In general, working this way leads to a culture of &quot;putting out fires&quot; instead of actively fostering improvements.</li>
+<li>The solutions to many of the issues facing the Rust Project require coordinated action across many different teams. Finding solutions for these issues requires investment at the organizational level, and it is often very difficult for individuals to coordinate and implement such structural investment.</li>
+<li>Still, such Project work is often taken up by motivated individuals who then lack structural support for accomplishing goals leading to frustration and at times conflict and burnout.</li>
+</ul>
+<p>Historically, the core team delegated authority to &quot;top-level&quot; teams who have further delegated authority to subteams or other governance structures. However, since the work outlined above is often Project-wide and outside the purview of individual teams, delegation was sometimes difficult. As a result, the core team assumed the following two responsibilities:</p>
+<ul>
+<li>Identifying, prioritizing, and advertising that certain important work needs to get done and does not fall under the purview of an existing team</li>
+<li>Attempting to do that work</li>
+</ul>
+<p>Through experience by the core team, it has become clear that both the identification of problems <em>and</em> the actual work itself is far too much for a single team. This has led to less than ideal results and in some cases, burnout. While a small amount of work requires urgent and immediate action, the vast majority of work would benefit from being tracked and handled by dedicated governance structures.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="2789-sparse-index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="initial-work-of-the-council.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="3128-io-safety.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="non-goals.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -196,11 +196,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="2789-sparse-index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="initial-work-of-the-council.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="3128-io-safety.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="non-goals.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

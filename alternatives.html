@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>alternatives - The Rust RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded "><a href="3392-leadership-council.html">3392-leadership-council</a></li><li class="chapter-item expanded "><a href="alternatives.html" class="active">alternatives</a></li><li class="chapter-item expanded "><a href="initial-work-of-the-council.html">initial-work-of-the-council</a></li><li class="chapter-item expanded "><a href="motivation.html">motivation</a></li><li class="chapter-item expanded "><a href="non-goals.html">non-goals</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Commit: <a href="https://github.com/rust-lang/rfc-leadership-council/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/alternatives.md">The commit link this page based on</a></li>
+</ul>
+<h1 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>The design space for governance is quite large. This section only attempts to address the largest and most consequential alternatives to the design decisions presented in this RFC. This section presents each such alternative along with justifications for why they were not selected.</p>
+<h2 id="broader-governance-changes-in-this-rfc"><a class="header" href="#broader-governance-changes-in-this-rfc">Broader governance changes in this RFC</a></h2>
+<p>We considered doing <em>more</em> in this RFC to set up initial governance structures and improve existing governance structures. In particular, we considered changes to the existing set of top-level teams.</p>
+<p>However, we felt strongly that anything that <em>could</em> be deferred to the Council should be, and that this RFC should focus on defining and delimiting the Council itself and its interactions with the rest of the Project. We felt it would go beyond the mandate of the transitional leadership structure to do much more than just architecting long-term leadership.</p>
+<p>We also felt that further incremental evolutions would become much easier with the structures proposed by this RFC in place.</p>
+<p>We recognize that changes to the set of top-level teams will prove especially difficult. However, we felt that the interim leadership group (including top-level team leads) would have that problem in common with the Council. Furthermore, we found that many members and leads of top-level teams were if anything <em>enthusiastic</em> about potential systematic improvements in this area, rather than resistant to them, even when such changes involved their own teams.</p>
+<p>Apart from that, developing and building consensus on this RFC already represented a massive time investment by many people, and making it larger would make it take even longer.</p>
+<h2 id="alternative-council-structures-and-non-representative-council-members"><a class="header" href="#alternative-council-structures-and-non-representative-council-members">Alternative Council structures and non-representative Council members</a></h2>
+<p>As an alternative to Council representatives exclusively being the representatives of top-level teams, we extensively considered other structures, whether in addition or in place of that. For instance, the Council could appoint additional members, or appoint successors, or some or all Council representatives could be elected by the Project. Such approaches could potentially make it easier to represent aspects or constituencies of the Project not <em>yet</em> represented by existing top-level teams, before even the nascent structures of those teams started to take shape.</p>
+<p>Specific variants we decided not to pursue:</p>
+<h3 id="non-representative-council-structures"><a class="header" href="#non-representative-council-structures">Non-representative Council structures</a></h3>
+<p>Alternative structures in which Council members are not representatives of top-level teams would have various drawbacks:</p>
+<ul>
+<li>Any structure that does not guarantee each team a representative would provide less comprehensive and balanced representation for existing teams.</li>
+<li>A structure not based on team-appointed representatives would make it harder to change representatives quickly and easily in a pinch, such as in response to changes in personal circumstances, or changes in a representative's affiliations that cause a violation of the limits placed on shared affiliations.</li>
+<li>Some variants of this (such as Council-appointed additional members or Council-appointed successors) would steer the Council towards a more self-perpetuating nature that we wanted to avoid.</li>
+</ul>
+<p>Ultimately, we addressed part of this issue by instead allowing the Council to easily create provisional teams (so as to introduce additional <em>representatives</em> on the Council), and then made room for the Council to further evolve its structure in the future by consent.</p>
+<h3 id="elections"><a class="header" href="#elections">Elections</a></h3>
+<p>Any structure involving elections would raise additional problems:</p>
+<ul>
+<li>Accurately determining the electorate: who precisely qualifies as being &quot;part of the Rust Project&quot;?
+<ul>
+<li>Many people have intuitive ideas about this, and such intuitions don't currently cause problems because we don't tie much of substance to that status. However, such intuitive definitions cause serious issues if membership in the Project determines eligibility to vote.</li>
+</ul>
+</li>
+<li>The usual problems of popularity contests: not all folks doing organizational/coordinative work are especially visible/glamorous/popular, and those doing visible/glamorous/popular work may serve the Project better doing that work rather than reallocating their time towards organizational/coordinative work.</li>
+<li>Elections motivate some form of campaigning.</li>
+<li>A robust election system would introduce more process complexity, both directly for the voting process, indirectly by making it harder to rotate/replace candidates in a pinch or supply alternates/backups.</li>
+<li>Elections would introduce more difficult challenges when needing to change representatives quickly and easily in a pinch, such as in response to changes in personal circumstances, or changes in affiliation that run into the limits upon shared affiliations. The voters will have chosen candidates, and it's harder to go back to the electorate for new candidates, so there would have to be (for example) careful rules for selecting backup candidates based on the next lower number of votes.</li>
+<li>Elections, no matter what voting system they use, inherently ignore the consent of many constituents.</li>
+<li>Simpler election structures would not guarantee teams a representative, and would thus provide less comprehensive and balanced representation for existing teams. Providing more comprehensive/proportional representation of teams would add even more complexity to the election system.
+<ul>
+<li>In particular, if the people in the project fall into teams in a vaguely Pareto-style structure (a small number of teams contain a large number of people), a simple election structure may result in many teams having <em>no</em> representation.</li>
+</ul>
+</li>
+</ul>
+<p>We felt that we could better improve people's routes to be heard and taken into account by ensuring all governance structures and all Project members are connected through parent teams, and thus that every member of the Project has at least one representative on the Council.</p>
+<h2 id="referendums"><a class="header" href="#referendums">Referendums</a></h2>
+<p>We considered introducing a full-fledged referendum system, by which proposals could be introduced, supported, and voted on by the Project as a whole. This would sidestep issues of ensuring proposals get considered and added to the Council's agenda, and would make it easier to make substantial changes not aligned with the existing Council (for better or for worse); it would also serve as an addition check and balance on the Council.</p>
+<p>However:</p>
+<ul>
+<li>This would have all the problems mentioned above about determining constituency in the Project.</li>
+<li>This would also be a <em>complex</em> new structure introduced entirely in this RFC (rather than later by the Council).
+<ul>
+<li>This mechanism and its eligibility and corner cases would need to be <em>very</em> precisely specified, as it would often be invoked in situations with high tension and a need for a timely and authoritative decision.</li>
+</ul>
+</li>
+<li>Voting mechanisms, no matter what voting system they use, inherently ignore the consent of many constituents.
+<ul>
+<li>Voting mechanisms trend towards picking winners and losers, rather than consensus-seeking and finding ways to meet <em>everyone's</em> needs.</li>
+</ul>
+</li>
+<li>If such a mechanism were trivial to initiate, it could become a dysfunctional pseudo-&quot;communication&quot; mechanism in its own right, substituting for healthier communication and more consent-driven actions. It would, effectively, escalate problems into public dirty laundry, making it <em>harder</em> to resolve smaller problems. In addition, reporting on such events can generate unwarranted news like &quot;Rust considers X&quot; even if X has no meaningful support.</li>
+<li>If such a mechanism were not trivial to initiate, the type of grassroots organizing required to successfully raise and pass such a referendum would produce better effects by working through teams, when the Project is well-aligned.</li>
+<li>Conversely, if the Project has substantial issues aligning with its leadership, making <em>individual</em> decisions doesn't solve the underlying problem with Project health.</li>
+</ul>
+<p>We chose to instead provide extensive checks on the Council itself, and mechanisms to ensure feedback and alignment between the Council and the Project, as well as a last-resort mechanism, rather than providing an ongoing mechanism to make or override <em>individual</em> Project-wide decisions.</p>
+<h2 id="alternative-checks-and-balances-between-the-leadership-council-and-the-project"><a class="header" href="#alternative-checks-and-balances-between-the-leadership-council-and-the-project">Alternative checks and balances between the Leadership Council and the Project</a></h2>
+<p>We considered many structures for additional checks and balances between the Leadership Council and the Project:</p>
+<ul>
+<li>We considered &quot;vote of no confidence&quot; mechanisms, but these would have many of the same problems as referendums, including determining the electorate, being either too difficult or too easy to initiate, and tending towards escalation rather than resolution.</li>
+<li>We considered arrangements in which members of teams could directly raise objections to Council RFCs. However, this added complexity for something that the consent decision-making mechanism <em>should</em> make redundant.</li>
+<li>We considered more formal feedback systems that could provide checks on <em>individual</em> Council decisions. However, any such mechanisms would also make it difficult to make timely decisions, and the blocking mechanisms would cause problems if they were either too easy or too difficult to initiate.</li>
+</ul>
+<h2 id="alternative-checks-and-balances-between-the-leadership-council-and-the-moderation-team"><a class="header" href="#alternative-checks-and-balances-between-the-leadership-council-and-the-moderation-team">Alternative checks and balances between the Leadership Council and the moderation team</a></h2>
+<p>We went through substantial tuning on the checks and balances between the Leadership Council and the moderation team:</p>
+<ul>
+<li>We considered making audits not automatically granted, and instead having the Council decide whether to grant an audit request. However, this would raise fairness questions for how the Council decides when to grant an audit based on limited information, as well as motivating procedural delays to give time for such an evaluation. We also felt that automatic audits (at least initially) would provide an opportunity to thoroughly test and evaluate the audit process.</li>
+<li>We also considered structures using separate auditors rather than using the &quot;contingent moderators&quot; as auditors, but this raised <em>severe</em> trust issues with sharing private moderation information with those auditors.</li>
+</ul>
+<h2 id="launching-pad-alternatives"><a class="header" href="#launching-pad-alternatives">Launching pad alternatives</a></h2>
+<p>We considered other alternate structures apart from the &quot;launching pad&quot;, for handling existing teams that aren't attached to the rest of the team structure. For instance, we considered attaching such teams directly to the Council; however, this would have required special-case handling for representation that would start to look a lot like the launching pad, but with more coordination work attached to the Council.</p>
+<p>We also considered options in which we <em>didn't</em> connect those teams, and permitted &quot;disconnected&quot; working groups and similar. This would require less transition, but would leave many Project members unrepresented and disenfranchised.</p>
+<p>We felt that we could best improve people's routes to be heard and taken into account by ensuring all governance structures and all Project members are connected through parent teams.</p>
+<p>We considered giving additional purviews to the launching pad, such as contributing to team organization and structure, best practices, or processes. However, the launching pad is already the one exception in which this RFC creates a new team, and we already have concerns about successfully staffing that team; we don't want to add further complexity beyond that in this RFC. The Council has the option of changing the launching pad's purview in the future.</p>
+<p>We considered the name &quot;landing pad&quot; (a place for unattached teams to land) instead of &quot;launching pad&quot;, but we felt that &quot;launching pad&quot; better conveyed the idea of incubating teams and helping them thrive rather than just serving as a holding area.</p>
+<h2 id="double-linking"><a class="header" href="#double-linking">Double-linking</a></h2>
+<p>We considered adopting a &quot;double-linking&quot; structure between the Council and top-level teams, in which teams have two representatives on the Council, one more responsible for connecting team-to-Council and the other more responsible for connecting Council-to-team. Such redundancy could provide a firmer connection between the Council and teams, making it <em>much</em> less likely that concerns from teams would fail to propagate to the Council and vice versa. However:</p>
+<ul>
+<li>Such a structure would require either an unmanageable number of Council members or far fewer than our current number of top-level teams (and we did not want to change the number of top-level teams in this RFC, or limit the number of top-level teams that strongly).</li>
+<li>This would require substantial changes to the structures of top-level teams themselves to permit such linking, and such structural changes would go beyond the remit of this RFC.</li>
+<li>Some models of double-linking would have one of the representatives determined by the team and the other by the Council; such a model would add complexity to the membership of the Council, such that members were not exclusively the representatives of top-level teams, which would have many of the downsides of such variations mentioned above, notably giving the Council a more self-perpetuating nature.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="3392-leadership-council.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="initial-work-of-the-council.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="3392-leadership-council.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="initial-work-of-the-council.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

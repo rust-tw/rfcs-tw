@@ -33,6 +33,7 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
@@ -81,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded "><a href="3392-leadership-council.html">3392-leadership-council</a></li><li class="chapter-item expanded "><a href="alternatives.html">alternatives</a></li><li class="chapter-item expanded "><a href="initial-work-of-the-council.html">initial-work-of-the-council</a></li><li class="chapter-item expanded "><a href="motivation.html">motivation</a></li><li class="chapter-item expanded "><a href="non-goals.html">non-goals</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -2342,6 +2343,738 @@ impl Builder {
 <p>這個概念可以延伸到非同步嗎？會有任何行為或 API 差異嗎？</p>
 <h1 id="未來的可能性"><a class="header" href="#未來的可能性">未來的可能性</a></h1>
 <p>在未来，我們也可以有一個像 Rayon 那樣的執行緒池，可以生成作用域内的任務。</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Feature Name: leadership-council</li>
+<li>Start Date: 2022-08-01</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/3392">rust-lang/rfcs#3392</a></li>
+<li>Rust Issue: N/A</li>
+<li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council.md">The commit link this page based on</a></li>
+</ul>
+<h1 id="summary"><a class="header" href="#summary">Summary</a></h1>
+<p>This RFC establishes a Leadership Council as the successor of the core team<sup class="footnote-reference"><a href="#core">1</a></sup> and the new governance structure through which Rust Project members collectively confer the authority<sup class="footnote-reference"><a href="#authority">2</a></sup> to ensure successful operation of the Project. The Leadership Council delegates much of this authority to teams (which includes subteams, working groups, etc.<sup class="footnote-reference"><a href="#teams">3</a></sup>) who autonomously make decisions concerning their purviews. However, the Council retains some decision-making authority, outlined and delimited by this RFC.</p>
+<p>The Council will be composed of representatives delegated to the Council from each <a href="3392-leadership-council.html#top-level-teams">top-level team</a>.</p>
+<p>The Council is charged with the success of the Rust Project as a whole. The Council will identify work that needs to be done but does not yet have a clear owner, create new teams to accomplish this work, hold existing teams accountable for the work in their purview, and coordinate and adjust the organizational structure of Project teams.</p>
+<h1 id="outline"><a class="header" href="#outline">Outline</a></h1>
+<ul>
+<li><a href="3392-leadership-council.html#reference-materials">Reference materials</a></li>
+<li><a href="3392-leadership-council.html#motivation">Motivation</a></li>
+<li><a href="3392-leadership-council.html#duties-expectations-and-constraints-on-the-council">Duties, expectations, and constraints on the Council</a></li>
+<li><a href="3392-leadership-council.html#structure-of-the-council">Structure of the Council</a>
+<ul>
+<li><a href="3392-leadership-council.html#top-level-teams">Top-level teams</a>
+<ul>
+<li><a href="3392-leadership-council.html#initial-list-of-top-level-teams">Initial list of top-level teams</a></li>
+<li><a href="3392-leadership-council.html#the-launching-pad-top-level-team">The &quot;launching pad&quot; top-level team</a></li>
+<li><a href="3392-leadership-council.html#removing-top-level-teams">Removing top-level teams</a></li>
+</ul>
+</li>
+<li><a href="3392-leadership-council.html#alternates-and-forgoing-representation">Alternates and forgoing representation</a></li>
+<li><a href="3392-leadership-council.html#term-limits">Term limits</a></li>
+<li><a href="3392-leadership-council.html#limits-on-representatives-from-a-single-companyentity">Limits on representatives from a single company/entity</a></li>
+<li><a href="3392-leadership-council.html#candidate-criteria">Candidate criteria</a></li>
+<li><a href="3392-leadership-council.html#relationship-to-the-core-team">Relationship to the core team</a></li>
+<li><a href="3392-leadership-council.html#relationship-to-the-rust-foundation">Relationship to the Rust Foundation</a></li>
+</ul>
+</li>
+<li><a href="3392-leadership-council.html#the-councils-decision-making-process">The Council's decision-making process</a>
+<ul>
+<li><a href="3392-leadership-council.html#operational-vs-policy-decisions">Operational vs policy decisions</a></li>
+<li><a href="3392-leadership-council.html#repetition-and-exceptions">Repetition and exceptions</a></li>
+<li><a href="3392-leadership-council.html#the-consent-decision-making-process">The consent decision-making process</a>
+<ul>
+<li><a href="3392-leadership-council.html#approval-criteria">Approval criteria</a></li>
+</ul>
+</li>
+<li><a href="3392-leadership-council.html#modifying-and-tuning-the-decision-making-process">Modifying and tuning the decision-making process</a></li>
+<li><a href="3392-leadership-council.html#agenda-and-backlog">Agenda and backlog</a></li>
+<li><a href="3392-leadership-council.html#deadlock-resolution">Deadlock resolution</a></li>
+<li><a href="3392-leadership-council.html#feedback-and-evaluation">Feedback and evaluation</a></li>
+</ul>
+</li>
+<li><a href="3392-leadership-council.html#transparency-and-oversight-for-decision-making">Transparency and oversight for decision making</a>
+<ul>
+<li><a href="3392-leadership-council.html#decisions-that-the-council-may-make-internally">Decisions that the Council may make internally</a></li>
+<li><a href="3392-leadership-council.html#decisions-that-the-council-must-necessarily-make-privately">Decisions that the Council must necessarily make privately</a></li>
+<li><a href="3392-leadership-council.html#decisions-that-the-council-must-make-via-public-proposal">Decisions that the Council must make via public proposal</a></li>
+<li><a href="3392-leadership-council.html#conflicts-of-interest">Conflicts of interest</a></li>
+<li><a href="3392-leadership-council.html#determining-and-changing-team-purviews">Determining and changing team purviews</a></li>
+</ul>
+</li>
+<li><a href="3392-leadership-council.html#mechanisms-for-oversight-and-accountability">Mechanisms for oversight and accountability</a>
+<ul>
+<li><a href="3392-leadership-council.html#ensuring-the-council-is-accountable">Ensuring the Council is accountable</a></li>
+<li><a href="3392-leadership-council.html#ensuring-council-representatives-are-accountable">Ensuring Council representatives are accountable</a></li>
+<li><a href="3392-leadership-council.html#ensuring-teams-are-accountable">Ensuring teams are accountable</a></li>
+</ul>
+</li>
+<li><a href="3392-leadership-council.html#moderation-disagreements-and-conflicts">Moderation, disagreements, and conflicts</a>
+<ul>
+<li><a href="3392-leadership-council.html#disagreements-among-teams">Disagreements among teams</a></li>
+<li><a href="3392-leadership-council.html#conflicts-involving-teams-or-project-members">Conflicts involving teams or Project members</a></li>
+<li><a href="3392-leadership-council.html#contingent-moderators">Contingent moderators</a></li>
+<li><a href="3392-leadership-council.html#moderation-team-policies-and-procedures">Moderation team policies and procedures</a></li>
+<li><a href="3392-leadership-council.html#audits">Audits</a></li>
+<li><a href="3392-leadership-council.html#last-resort-accountability">Last-resort accountability</a></li>
+<li><a href="3392-leadership-council.html#moderation-actions-involving-project-members">Moderation actions involving Project members</a></li>
+<li><a href="3392-leadership-council.html#conflicts-involving-council-representatives">Conflicts involving Council representatives</a></li>
+<li><a href="3392-leadership-council.html#conflicts-involving-moderation-team-members">Conflicts involving moderation team members</a></li>
+</ul>
+</li>
+<li><a href="3392-leadership-council.html#ratification-of-this-rfc">Ratification of this RFC</a></li>
+<li><a href="3392-leadership-council.html#footnotes">Footnotes</a></li>
+</ul>
+<h1 id="reference-materials"><a class="header" href="#reference-materials">Reference materials</a></h1>
+<p>To reduce the size of this RFC, non-binding reference materials appear in separate documents:</p>
+<ul>
+<li><a href="3392-leadership-council/motivation.html">Full motivation</a>
+<ul>
+<li><a href="https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html">Further research into the needs of Project-wide governance (Inside Rust blog post)</a></li>
+</ul>
+</li>
+<li><a href="3392-leadership-council/non-goals.html">Non-goals of this RFC</a></li>
+<li><a href="3392-leadership-council/alternatives.html">Rationale and alternatives</a></li>
+<li><a href="3392-leadership-council/initial-work-of-the-council.html">Recommendations for initial work of the Council</a></li>
+</ul>
+<h1 id="motivation"><a class="header" href="#motivation">Motivation</a></h1>
+<p>The Rust project consists of hundreds of globally distributed people, organized into teams with various purviews. However, a great deal of work falls outside the purview of any established team, and still needs to get done.</p>
+<p>Historically, the core team both identified and prioritized important work that fell outside of team purviews, and also attempted to do that work itself. However, putting both of those activities in the same team has not scaled and has led to burnout.</p>
+<p>The Leadership Council established by this RFC focuses on identifying and prioritizing work outside of team purviews. The Council primarily delegates that work, rather than doing that work itself. The Council can also serve as a coordination, organization, and accountability body between teams, such as for cross-team efforts, roadmaps, and the long-term success of the Project.</p>
+<p>This RFC also establishes mechanisms for oversight and accountability between the Council as a whole, individual Council members, the moderation team, the Project teams, and Project members.</p>
+<h1 id="duties-expectations-and-constraints-on-the-council"><a class="header" href="#duties-expectations-and-constraints-on-the-council">Duties, expectations, and constraints on the Council</a></h1>
+<p>At a high-level, the Council is <em>only</em> in charge of the following duties:</p>
+<ul>
+<li>Identifying, prioritizing, and tracking work that goes undone due to lack of clear ownership (and not due to the owners' explicit de-prioritization, placement in a backlog, etc.).</li>
+<li>Delegating this work, potentially establishing new (and possibly <em>temporary</em>) teams to own this work.</li>
+<li>Making decisions on <em>urgent</em> matters that do not have a clear owner.
+<ul>
+<li>This should only be done in exceptional circumstances where the decision cannot be delegated either to existing teams or to newly created ones.</li>
+</ul>
+</li>
+<li>Coordinating Project-wide changes to teams, structures, or processes.</li>
+<li>Ensuring top-level teams are accountable to their purviews, to other teams, and to the Project.</li>
+<li>Ensuring where possible that teams have the people and resources they need to accomplish their work.</li>
+<li>Establishing the official position, opinion, or will of the Rust Project as a whole.
+<ul>
+<li>This helps reduce the need for Project-wide coordination, especially when a long public polling and consensus-building process is not practical - for example, when communicating with third parties who require some understanding of what the Rust Project as a whole &quot;wants&quot;.</li>
+</ul>
+</li>
+</ul>
+<p>In addition to these duties, the Council has additional expectations and constraints, to help determine if the Council is functioning properly:</p>
+<ul>
+<li><em>Delegate work</em>: The Council should not take on work beyond what this RFC explicitly assigns to it; it must delegate to existing or new teams distinct from the Council. Such teams may include Council representatives, but such membership is not part of the duties of a Council representative.</li>
+<li><em>Ensure the Project runs smoothly in the long term</em>: The Council should ensure that non-urgent Project management work is prioritized and completed with enough regularity that the Project does not accumulate organizational debt.</li>
+<li><em>Be Accountable</em>: As the Council wields broad power, the Council and Council representatives must be accountable for their actions. They should listen to others' feedback, and actively reflect on whether they continue to meet the duties and expectations of the position they hold.</li>
+<li><em>Be representational</em>: Council representatives should not only represent the breadth of Project concerns but also the diversity of the Rust community in as many aspects as possible (demographics, technical background, etc).</li>
+<li><em>Share burden</em>: All Council representatives must share burden of Council duties.</li>
+<li><em>Respect others' purviews</em>: The Council must respect the purviews delegated to teams. The Council should consult with and work together with teams on solutions to issues, and should almost never make decisions that go against the wishes of any given team.</li>
+<li><em>Act in good faith</em>: Council representatives should make decisions in the best interest of the Rust Project <em>as a whole</em> even if those decisions come into conflict with their individual teams, their employers, or other outside interests.</li>
+<li><em>Be transparent</em>: While not all decisions (or all aspects of a decision) can be made public, the Council should be as open and transparent about their decision-making as possible. The Council should also ensure the organizational structure of the Project is clear and transparent.</li>
+<li><em>Respect privacy</em>: The Council must never compromise personal or confidential information for the sake of transparency, including adjacent information that could unintentionally disclose privileged information.</li>
+<li><em>Foster a healthy working environment</em>: The Council representatives should all feel satisfied with the amount and nature of their contribution. They should not feel that their presence on the Council is merely out of obligation but rather because they are actively participating in a meaningful way.</li>
+<li><em>Evolve</em>: The Council is expected to evolve over time to meet the evolving needs of teams, the Project, and the community.</li>
+</ul>
+<p>Council representatives, moderation team members, and other Project members serve as examples for those around them and the broader community. All of these roles represent positions of responsibility and leadership; their actions carry weight and can exert great force within the community, and should be wielded with due care. People choosing to serve in these roles should thus recognize that those around them will hold them to a correspondingly high standard.</p>
+<h1 id="structure-of-the-council"><a class="header" href="#structure-of-the-council">Structure of the Council</a></h1>
+<p>The Council consists of a set of team representatives, each representing one <a href="3392-leadership-council.html#top-level-teams">top-level team</a> and its subteams.</p>
+<p>Each top-level team designates exactly one representative, by a process of their choice.</p>
+<p>Any member of the top-level team or a member of any of their subteams is eligible to be the representative. Teams should provide members of their subteams with an opportunity for input and feedback on potential candidates.</p>
+<p>Each representative represents at most one top-level team, even if they're also a member of other teams. The primary responsibility of representing any Rust team falls to the representative of the top-level team they fall under.<sup class="footnote-reference"><a href="#under-multiple-teams">4</a></sup></p>
+<p>All teams in the Rust Project must ultimately fall under at least one top-level team. For teams that do not currently have a parent team, this RFC establishes the <a href="3392-leadership-council.html#the-launching-pad-top-level-team">&quot;launching pad&quot; team</a> as a temporary home. This ensures that all teams have representation on the Council.</p>
+<h2 id="top-level-teams"><a class="header" href="#top-level-teams">Top-level teams</a></h2>
+<p>The Council establishes top-level teams via public policy decisions. In general, top-level teams should meet the following criteria:</p>
+<ul>
+<li>Have a purview that is foundational to the Rust Project</li>
+<li>Be the ultimate decision-makers on all aspects of that purview</li>
+<li>Have a purview that not is a subset of another team's purview (that is, it must not be a subteam or similar governance structure)</li>
+<li>Have an open-ended purview that's expected to continue indefinitely</li>
+<li>Be a currently active part of the Rust Project</li>
+</ul>
+<p>There must be between 4 and 9 top-level teams (inclusive), preferably between 5 and 8. This number balances the desire for a diverse and relatively shallow structure while still being practical for productive conversation and consent.<sup class="footnote-reference"><a href="#number-of-representatives">5</a></sup></p>
+<p>When the Council creates a new top-level team, that team then designates a Council representative.<sup class="footnote-reference"><a href="#bootstrapping-new-teams">6</a></sup> When creating a new top-level team, the Council must provide justification for why it should not be a subteam or other governance structure.</p>
+<h3 id="initial-list-of-top-level-teams"><a class="header" href="#initial-list-of-top-level-teams">Initial list of top-level teams</a></h3>
+<p>The initial list of top-level teams is formed from all teams listed on <a href="https://www.rust-lang.org/governance">the rust-lang.org website's top-level governance section</a> (besides core and alumni) at the time of initial publication of this RFC, plus the <a href="3392-leadership-council.html#the-launching-pad-top-level-team">&quot;launching pad&quot; team</a>:</p>
+<ul>
+<li>Compiler</li>
+<li>Crates.io</li>
+<li>Dev tools</li>
+<li>Infrastructure</li>
+<li>Language</li>
+<li>Launching Pad</li>
+<li>Library</li>
+<li>Moderation</li>
+<li>Release</li>
+</ul>
+<p>This list is not an optimal set of top-level teams. This RFC recommends that the first order of business of the Council be to go through existing governance structures and ensure that all structures have representation either directly or indirectly through one or more top-level teams as well as ensure that all top-level teams sufficiently meet the criteria for being considered a top-level team. This will involve modifying the set of top-level teams.</p>
+<h3 id="the-launching-pad-top-level-team"><a class="header" href="#the-launching-pad-top-level-team">The &quot;launching pad&quot; top-level team</a></h3>
+<p>This RFC establishes the &quot;launching pad&quot; team to <em>temporarily</em> accept subteams that otherwise do not have a top-level team to slot underneath of. This ensures that all teams have representation on the Council, while more permanent parent teams are found or established.</p>
+<p>The &quot;launching pad&quot; team is an umbrella team: it has no direct members, only subteam representatives.</p>
+<p>The Council should work to find or create a more appropriate parent for each subteam of the &quot;launching pad&quot;, and subsequently move those subteams to their new parent team.</p>
+<p>In some cases, an appropriate parent team may exist but not yet be ready to accept subteams; the launching pad can serve as an interim home in such cases.</p>
+<p>The launching pad also serves as a default home for subteams of a team that's removed or reorganized away, if that removal or reorganization does not explicitly place those subteams somewhere else in the organization.</p>
+<p>The Council must review subteam membership in the &quot;launching pad&quot; every 6 months to ensure that proper progress is being made on finding all subteams new parent teams. As with other top-level teams, the &quot;launching pad&quot; team can be retired (and have its representation within the Council removed) if the Council finds it to be no longer necessary. The process for retiring the &quot;launching pad&quot; team is the same as with other top-level teams. Alternatively, the Council is free to give the &quot;launching pad&quot; team its own purview, but doing so is out of scope for this RFC.</p>
+<h3 id="removing-top-level-teams"><a class="header" href="#removing-top-level-teams">Removing top-level teams</a></h3>
+<p>Any decision to remove a team's top-level designation (or otherwise affect eligibility for the Council) requires the consent of all Council representatives, with the exception of the representative of the top-level team being removed. Despite this caveat, the representative of the team under consideration must be invited to Council deliberations concerning the team's removal, and the Council should only remove a team over their objections in extreme cases.</p>
+<p>The Council cannot remove the moderation team. The Council cannot change the moderation team's purview without the agreement of the moderation team.</p>
+<h2 id="alternates-and-forgoing-representation"><a class="header" href="#alternates-and-forgoing-representation">Alternates and forgoing representation</a></h2>
+<p>A representative may end their term early if necessary, such as due to changes in their availability or circumstances. The respective top-level team must then begin selecting a new representative. The role of representative is a volunteer position. No one is obligated to fill that role, and no team is permitted to make serving as a representative a necessary obligation of membership in a team. However, a representative is obligated to fulfill the duties of the position of representative, or resign that position.</p>
+<p>A top-level team may decide to temporarily relinquish their representation, such as if the team is temporarily understaffed and they have no willing representative. However, if the team does not designate a Council representative, they forgo their right to actively participate in decision-making at a Project-wide level. All Council procedures including decision-making should not be blocked due to this omission. The Council is still obligated to consider new information and objections from all Project members. However, the Council is not obligated to block decisions to specially consider or collate a non-represented team's feedback.</p>
+<p>Sending a representative to the Council is considered a duty of a top-level team, and not being able to regularly do so means the team is not fulfilling its duties. However, a Council representative does not relinquish their role in cases of short absence due to temporary illness, vacation, etc.</p>
+<p>A top-level team can designate an alternate representative to serve in the event their primary representative is unavailable. This alternate assumes the full role of Council representative until the return of the primary representative. Alternate representatives do not regularly attend meetings when the primary representative is present (to avoid doubling the number of attendees).</p>
+<p>If a team's representative <em>and</em> any alternates fail to participate in any Council proceedings for 3 consecutive weeks, the team's representative ceases to count towards the decision-making quorum requirements of the Council until the team can provide a representative able to participate. The Council must notify the team of this before it takes effect. If a team wishes to ensure the Council does not make decisions without their input or without an ability for objections to be made on their behalf, they should ensure they have an alternate representative available.</p>
+<p>A top-level team may change their representative before the end of their term, if necessary.  However, as maintaining continuity incurs overhead, teams should avoid changing their representatives more than necessary. Teams have the primary responsibility for briefing their representative and alternates on team-specific issues or positions they wish to handle on an ongoing basis. The Council and team share the responsibilities of maintaining continuity for ongoing issues within the Council, and of providing context to alternates and other new representatives.</p>
+<p>For private matters, the Council should exercise discretion on informing alternates, to avoid spreading private information unnecessarily; the Council can brief alternates if they need to step in.</p>
+<h2 id="term-limits"><a class="header" href="#term-limits">Term limits</a></h2>
+<p>Council representatives' terms are one year in length. Each representative has a soft limit of three consecutive full terms for any given representative delegation (the delegation from a particular top-level team). A representative may exceed this soft limit if and only if the Council receives explicit confirmation from the respective team that they are unable to produce a different team member as a representative (for example, due to lack of a willing alternative candidate, or due to team members having blocking objections to any other candidate).</p>
+<p>Beyond this, there is no hard limit on the number of terms a representative can serve for other top-level teams or non-consecutive terms for a single top-level team. Teams should strive for a balance between continuity of experience and rotating representatives to provide multiple people with such experience.<sup class="footnote-reference"><a href="#representative-selection">7</a></sup></p>
+<p>Half of the representative appointments shall happen at the end of March while half shall happen at the end of September. This avoids changing all Council representatives at the same time. For the initial Council, and anytime the set of top-level teams is changed, the Council and top-level teams should work together to keep term end-dates roughly evenly divided between March and September. However, each term should last for a minimum of 6 months (temporary imbalance is acceptable to avoid excessively short terms).</p>
+<p>If the Council and top-level teams cannot agree on appropriate term end-date changes, representatives are randomly assigned to one or the other end date (at least 6 months out) to maintain balance.</p>
+<h2 id="limits-on-representatives-from-a-single-companyentity"><a class="header" href="#limits-on-representatives-from-a-single-companyentity">Limits on representatives from a single company/entity</a></h2>
+<p>Council representatives must not disproportionately come from any one company, legal entity, or closely related set of legal entities, to avoid impropriety or the appearance of impropriety. If the Council has 5 or fewer representatives, no more than 1 representative may have the same affiliation; if the Council has 6 or more representatives, no more than 2 representatives may have the same affiliation.</p>
+<p>Closely related legal entities include branches/divisions/subsidiaries of the same entity, entities connected through substantial ownership interests, or similar. The Council may make a judgment call in unusual cases, taking care to avoid conflicts of interest in that decision.</p>
+<p>A Council representative is affiliated with a company or other legal entity if they derive a substantive fraction of their income from that entity (such as from an employer, client, or major sponsor). Representatives must promptly disclose changes in their affiliations.</p>
+<p>If this constraint does not hold, whether by a representative changing affiliation, top-level teams appointing new representatives, or the Council size changing, restore the constraint as follows:</p>
+<ul>
+<li>Representatives with the same affiliation may first attempt to resolve the issue amongst themselves, such that a representative voluntarily steps down and their team appoints someone else.
+<ul>
+<li>This must be a decision by the representative, not their affiliated entity; it is considered improper for the affiliated entity to influence this decision.</li>
+<li>Representatives have equal standing in such a discussion; factors such as seniority in the Project or the Council must not be used to pressure people.</li>
+</ul>
+</li>
+<li>If the representatives with that affiliation cannot agree, one such representative is removed at random. (If the constraint still does not hold, the remaining representatives may again attempt to resolve the issue amongst themselves before repeating this.) This is likely to produce suboptimal results; a voluntary solution will typically be preferable.</li>
+<li>While a team should immediately begin the process of selecting a successor, the team's existing representative may continue to serve up to 3 months of their remaining term.</li>
+<li>The existing representative should coordinate the transition with the incoming representative but it is the team's choice which one is an actual representative during the up to 3 month window. There is only ever one representative from the top-level team.</li>
+</ul>
+<h2 id="candidate-criteria"><a class="header" href="#candidate-criteria">Candidate criteria</a></h2>
+<p>The following are criteria for deciding ideal candidates. These are similar to but not the same as the criteria for an effective team lead or co-lead. While a team lead <em>might</em> also make a good Council representative, serving as a team lead and serving as a Council representative both require a substantial time investment, which likely motivates dividing those roles among different people. The criteria are not hard requirements but can be used for determining who is best positioned to be a team's representative. In short, the representative should have:</p>
+<ul>
+<li>sufficient time and energy to dedicate to the needs of the Council.</li>
+<li>an interest in helping with the topics of Project operations and Project governance.</li>
+<li>broad awareness of the needs of the Project outside of their teams or areas of active contribution.</li>
+<li>a keen sense of the needs of their team.</li>
+<li>the temperament and ability to represent and center the needs of others above any personal agenda.</li>
+<li>ability and willingness to represent all viewpoints from their team, not just a subset, and not just those they agree with.</li>
+</ul>
+<p>While some teams may not currently have an abundance of candidates who fit this criteria, the Council should actively foster such skills within the larger Project, as these are helpful not only for Council membership but across the entire Project.</p>
+<h2 id="relationship-to-the-core-team"><a class="header" href="#relationship-to-the-core-team">Relationship to the core team</a></h2>
+<p>The Leadership Council serves as the successor to the core team in all capacities. This RFC was developed with the participation and experience of the core team members, and the Council should continue seeking such input and institutional memory when possible, especially while ramping up.</p>
+<p>External entities or processes may have references to &quot;the Rust core team&quot; in various capacities. The Council doesn't use the term &quot;core team&quot;, but the Council will serve in that capacity for the purposes of any such external references.</p>
+<h2 id="relationship-to-the-rust-foundation"><a class="header" href="#relationship-to-the-rust-foundation">Relationship to the Rust Foundation</a></h2>
+<p>The Council is responsible for establishing the process for selecting Project directors. The Project directors are the mechanism by which the Rust Project's interests are reflected on the Rust Foundation board.</p>
+<p>The Council delegates a purview to the Project directors to represent the Project's interests on the Foundation Board and to make certain decisions on Foundation-related matters. The exact boundaries of that purview are out of scope for this RFC.</p>
+<h1 id="the-councils-decision-making-process"><a class="header" href="#the-councils-decision-making-process">The Council's decision-making process</a></h1>
+<p>The Leadership Council make decisions of two different types: operational decisions and policy decisions. Certain considerations may be placed on a given decision depending on its classification. However, by default, the Council will use a consent decision-making process for all decisions regardless of classification.</p>
+<h2 id="operational-vs-policy-decisions"><a class="header" href="#operational-vs-policy-decisions">Operational vs policy decisions</a></h2>
+<p>Operational decisions are made on a daily basis by the Council to carry out their aims, including regular actions taking place outside of meetings (based on established policy). Policy decisions provide general reusable patterns or frameworks, meant to frame, guide, and support operations. In particular, policy decisions can provide partial automation for operational decisions or other aspects of operations. The council defaults to the consent decision making process for all decisions unless otherwise specified in this RFC or other policy.</p>
+<p>This RFC does not attempt to precisely define which decisions are operations versus policy; rather, they fall somewhere along a continuum. The purpose of this distinction is not to direct or constrain the council's decision-making procedures. Instead, this distinction provides guidance to the Council, and clarifies how the Council intends to record, review, and refine its decisions over time. For the purposes of any requirements or guidance associated with the operational/policy classification, anything not labeled as either operational or policy in this or future policy defaults to policy. </p>
+<h2 id="repetition-and-exceptions"><a class="header" href="#repetition-and-exceptions">Repetition and exceptions</a></h2>
+<p>Policy decisions often systematically address what might otherwise require repeated operational decisions. The Council should strive to recognize when repeated operational decisions indicate the need for a policy decision, or a policy change. In particular, the Council should avoid allowing repeated operational decisions to constitute de facto policy.</p>
+<p>Exceptions to existing policy cannot be made via an operational decision unless such exceptions are explicitly allowed in said policy. Avoiding ad-hoc exceptions helps avoid <a href="https://en.wikipedia.org/wiki/Normalization_of_deviance">&quot;normalization of deviance&quot;</a>.</p>
+<h2 id="the-consent-decision-making-process"><a class="header" href="#the-consent-decision-making-process">The consent decision-making process</a></h2>
+<p>The Council will initially be created with a single process for determining agreement to a proposal. It is however expected that the Council will add additional processes to its toolbox soon after creation.</p>
+<p>Consent means that no representative's requirements (and thus those of the top-level team and subteams they represent) can be disregarded. The Council hears all relevant input and sets a good foundation for working together equitably with all voices weighted equally.</p>
+<p>The Council uses consent decision-making where instead of being asked &quot;do you agree?&quot;, representatives are asked &quot;do you object?&quot;. This eliminates &quot;pocket vetoes&quot; where people have fully reviewed a proposal but decide against approving it without giving clear feedback as to the reason. Concerns, feedback, preferences, and other less critical forms of feedback do not prevent making a decision, but should still be considered for incorporation earlier in drafting and discussion. Objections, representing an unmet requirement or need, <em>must</em> be considered and resolved to proceed with a decision.</p>
+<h3 id="approval-criteria"><a class="header" href="#approval-criteria">Approval criteria</a></h3>
+<p>The consent decision-making process has the following approval criteria:</p>
+<ul>
+<li>Posting the proposal in one of the Leadership Council's designated communication spaces (a meeting or a specific channel).</li>
+<li>Having confirmation that at least N-2 Council representatives (where N is the total number of Council representatives) have fully reviewed the final proposal and give their consent.</li>
+<li>Having no outstanding explicit objections from any Council representative.</li>
+<li>Providing a minimum 10 days for feedback.</li>
+</ul>
+<p>The approval criteria provides a quorum mechanism, as well as sufficient time for representatives to have seen the proposal. Allowing for two non-signoffs is an acknowledgement of the volunteer nature of the Project, based on experience balancing the speed of decisions with the amount of confirmation needed for consent and non-objection; this assumes that those representatives have had time to object if they wished to do so. (This is modeled after the process used today for approval of RFCs.)</p>
+<p>The decision-making process can end at any time if the representative proposing it decides to retract their proposal. Another representative can always adopt a proposal to keep it alive.</p>
+<p>If conflicts of interest result in the Council being unable to meet the N-2 quorum for a decision, the Council cannot make that decision unless it follows the process documented in <a href="3392-leadership-council.html#conflicts-of-interest">the &quot;Conflicts of interest&quot; section for how a decision may proceed with conflicts documented</a>. In such a case, the Council should consider appropriate processes and policies to avoid future recurrences of a similar conflict.</p>
+<h2 id="modifying-and-tuning-the-decision-making-process"><a class="header" href="#modifying-and-tuning-the-decision-making-process">Modifying and tuning the decision-making process</a></h2>
+<p>Using the public policy process, the Council can establish different decision-making processes for classes of decisions.</p>
+<p>For example, the Council will almost certainly also want a mechanism for quick decision-making on a subset of operational decisions, without having to wait for all representatives to affirmatively respond. This RFC doesn't define such a mechanism, but recommends that the Council develop one as one of its first actions.</p>
+<p>When deciding on which decision-making process to adopt for a particular class of decision, the Council balances the need for quick decisions with the importance of confidence in full alignment. Consent decision-making processes fall on the following spectrum:</p>
+<ul>
+<li>Consensus decision making (prioritizes confidence in full alignment at the expense of quick decision making): team members must review and prefer the proposal over all others, any team members may raise a blocking objection</li>
+<li>Consent decision making (default for the Council, balances quick decisions and confidence in alignment): team members must review and may raise a blocking objection</li>
+<li>One second and no objections (prioritizes quick decision making at the expense of confidence in alignment): one team member must review and support, any team member may raise a blocking objection</li>
+</ul>
+<p>Any policy that defines decision-making processes must at a minimum address where the proposal may be posted, quorum requirements, number of reviews required, and minimum time delay for feedback. A lack of objections is part of the approval criteria for all decision-making processes.</p>
+<p>If conflicts of interest prevent more than a third of the Council from participating in a decision, the Council cannot make that decision unless it follows the process documented in <a href="3392-leadership-council.html#conflicts-of-interest">the &quot;Conflicts of interest&quot; section for how a decision may proceed with conflicts documented</a>. (This is true regardless of any other quorum requirements for the decision-making process in use.) In such a case, the Council should consider appropriate processes and policies to avoid future recurrences of a similar conflict.</p>
+<p>The Council may also delegate subsets of its own decision-making purviews via a public policy decision, to teams, other governance structures, or roles created and filled by the Council, such as operational lead, meeting facilitator, or scribe/secretary.</p>
+<p>Note that the Council may delegate the drafting of a proposal without necessarily delegating the decision to approve that proposal. This may be necessary in cases of Project-wide policy that intersects the purviews of many teams, or falls outside the purview of any team. This may also help when bootstrapping a new team incrementally.</p>
+<h2 id="agenda-and-backlog"><a class="header" href="#agenda-and-backlog">Agenda and backlog</a></h2>
+<p>The Council's agenda and backlog are the primary interface through which the Council tracks and gives progress updates on issues raised by Project members throughout the Project.</p>
+<p>To aid in the fairness and effectiveness of the agenda and backlog, the Council must:</p>
+<ul>
+<li>Use a tool that allows Project members to submit requests to the Council and to receive updates on those requests.</li>
+<li>Use a transparent and inclusive process for deciding on the priorities and goals for the upcoming period. This must involve regular check-ins and feedback from all representatives.</li>
+<li>Strive to maintain a balance between long-term strategic goals and short-term needs in the backlog and on the agenda.</li>
+<li>Be flexible and adaptable and be willing to adjust the backlog and agenda as needed in response to changing circumstances or priorities.</li>
+<li>Regularly review and update the backlog to ensure that it accurately reflects the current priorities and goals of the Council.</li>
+<li>Follow a clear and consistent process for moving items from the backlog to the agenda, such as delegating responsibility to roles (e.g. meeting facilitator and scribe), and consenting to the agenda at the start of meetings. Any agenda items rejected during the consent process must have their objections documented in the published meeting minutes of the Council.</li>
+</ul>
+<h2 id="deadlock-resolution"><a class="header" href="#deadlock-resolution">Deadlock resolution</a></h2>
+<p>In some situations the Council might need to make an decision urgently and not feel it can construct a proposal in that time that everyone will consent to. In such cases, if everyone agrees that a timely decision they disagree with would be a better outcome than no timely decision at all, the Council may use an alternative decision-making method to attempt to resolve the deadlock. The alternative process is informal, and the council members must still re-affirm their consent to the outcome through the existing decision making process. Council members may still raise objections at any time.</p>
+<p>For example, the Council can consent to a vote, then once the vote is complete all of the council members would consent to whatever decision the vote arrived to. The Council should strive to document the perceived advantages and disadvantages for choosing a particular alternative decision-making model.</p>
+<p>There is, by design, no mandatory mechanism for deadlock resolution. If the representatives do not all consent to making a decision even if they don't prefer the outcome of that decision, or if any representative feels it is still possible to produce a proposal that will garner the Council's consent, they may always maintain their objections.</p>
+<p>If a representative withdraws an objection, or consents to a decision they do not fully agree with (whether as a result of an alternative decision-making process or otherwise), the Council should schedule an evaluation or consider shortening the time until an already scheduled evaluation, and should establish a means of measuring/evaluating the concerns voiced. The results of this review are intended to determine whether the Council should consider changing its prior decision.</p>
+<h2 id="feedback-and-evaluation"><a class="header" href="#feedback-and-evaluation">Feedback and evaluation</a></h2>
+<p>All policy decisions should have an evaluation date as part of the policy. Initial evaluation periods should be shorter in duration than subsequent evaluation periods. The length of evaluation periods should be adjusted based on the needs of the situation. Policies that seem to be working well and require few changes should be extended so less time is spent on unnecessary reviews. Policies that have been recently adjusted or called into question should have shortened evaluation periods to ensure they're iterating towards stability more quickly. The Council should establish standardized periods for classes of policy to use as defaults when determining periods for new policy. For instance, roles could have an evaluation date of 3 months initially then 1 year thereafter, while general policy could default to 6 months initially and 2 years thereafter.</p>
+<ul>
+<li>New policy decisions can always modify or replace existing policies.</li>
+<li>Policy decisions must be published in a central location, with version history.</li>
+<li>Modifications to the active policy docs should include or link to relevant context for the policy decision, rather than expecting people to find that context later.</li>
+</ul>
+<h1 id="transparency-and-oversight-for-decision-making"><a class="header" href="#transparency-and-oversight-for-decision-making">Transparency and oversight for decision making</a></h1>
+<p>Decisions made by the Leadership Council will necessarily require varying levels of transparency and oversight based on the kind of decision being made. This section gives guidance on how the Council will seek oversight for its decisions, and what qualifies decisions to be made in private or in public.</p>
+<p>This RFC places certain decisions into each category. All decisions not specifically enumerated must use the public policy process. The Council may evolve the categorization through the <a href="decisions-that-the-Council-must-make-via-public-proposal">public policy process</a>.</p>
+<p>Decisions made by the Council fall into one of three categories, based on the level of oversight possible and necessary:</p>
+<ul>
+<li>Decisions that the Council may make internally</li>
+<li>Decisions that the Council must necessarily make privately</li>
+<li>Decisions that the Council must make via public proposal</li>
+</ul>
+<h2 id="decisions-that-the-council-may-make-internally"><a class="header" href="#decisions-that-the-council-may-make-internally">Decisions that the Council may make internally</a></h2>
+<p>Some types of operational decisions can be made internally by the Council, with the provision that the Council has a mechanism for community feedback on the decision after it has been made.</p>
+<p>Adding a new decision to the list of decisions the Council can make internally requires a public policy decision. Any decisions that impact the structure, decision-makers, or oversight of the Council itself should not be added to this list.</p>
+<p>The Council should also strive to avoid establishing de facto unwritten policy via repeated internal decisions in an effort to avoid public proposal. See <a href="3392-leadership-council.html#repetition-and-exceptions">&quot;Repetition and exceptions&quot;</a> for more details.</p>
+<p>This list exhaustively enumerates the set of decisions that the Council may make internally:</p>
+<ul>
+<li>Deciding to start a process that itself will play out in public (e.g. &quot;let's start developing and posting the survey&quot;, &quot;let's draft an RFC for this future public decision&quot;).</li>
+<li>Expressing and communicating an official position statement of the Rust Project.</li>
+<li>Expressing and communicating the position of the Rust Project directly to another entity, such as the Rust Foundation.</li>
+<li>Communicating via Rust Project communication resources (via the blog or all@).</li>
+<li>Making most operational decisions about the Council's own internal processes, including how the Council coordinates, the platforms it uses to communicate, where and when it meets, templates used for making and recording decisions (subject to requirements elsewhere in this RFC).</li>
+<li>Appointing officers or temporary roles within the Council, for purposes such as leading/facilitating meetings, recording and publishing minutes, obtaining and collating feedback from various parties, etc.<sup class="footnote-reference"><a href="#council-roles">8</a></sup> Note that any such roles (titles, duties, and current holders) must be publicly disclosed and documented.</li>
+<li>Inviting specific attendees other than Council representatives to specific Council meetings or discussions, or holding a meeting open to the broader community. (In particular, the Council is encouraged to invite stakeholders of a particular decision to meetings or discussions where said decision is to be discussed.)</li>
+<li>Making decisions requested by one or more teams that would be within the normal purviews of those teams to make without a public proposal. (Note that teams can ask for Council input without requesting a Council decision.)</li>
+<li>Making one-off judgment calls in areas where the purviews of teams overlap or are ambiguous (though <em>changing</em> the purviews of those teams must be a public policy decision).</li>
+<li>Any decision that this RFC or future Council policy specifies as an operational decision.</li>
+</ul>
+<p>See the <a href="3392-leadership-council.html#mechanisms-for-oversight-and-accountability">accountability section</a> for details on the feedback mechanism for Council decisions.</p>
+<h2 id="decisions-that-the-council-must-necessarily-make-privately"><a class="header" href="#decisions-that-the-council-must-necessarily-make-privately">Decisions that the Council must necessarily make privately</a></h2>
+<p>Some decisions necessarily involve private details of individuals or other entities, and making these details public would have a negative impact both on those individuals or entities (e.g. safety) and on the Project (eroding trust).</p>
+<p>This additional constraint should be considered an exceptional case. This does not permit making <a href="3392-leadership-council.html#decisions-that-the-Council-must-make-via-public-proposal">decisions that would require a public proposal per the next section</a>. However, this does permit decisions that the Council makes internally to be kept private, without full information provided for public oversight.</p>
+<p>The Council may also decline to make a decision privately, such as if the Council considers the matter outside their purview (and chooses to defer to another team) or believes the matter should be handled publicly. However, even in such a case, the Council still cannot publicly reveal information shared with it in confidence (since otherwise the Council would not be trusted to receive such information). Obvious exceptions exist for imminent threats to safety.</p>
+<p>Private decisions must not establish policy. The Council should also strive to avoid establishing de facto unwritten policy via repeated private decisions in an effort to avoid public proposal. See <a href="3392-leadership-council.html#repetition-and-exceptions">&quot;Repetition and exceptions&quot;</a> for more details.</p>
+<p>This list exhaustively enumerates the set of decisions that the Council may make either partly or entirely in private:</p>
+<ul>
+<li>Determining relationships with new industry / Open Source initiatives, that require confidentiality before launching.</li>
+<li>Discussing the personal aspects of a dispute between teams that involves some interpersonal dynamics/conflicts.</li>
+<li>Participating in contract negotiations on behalf of the Project with third parties (e.g. accepting resources provided to the Project).</li>
+<li>Decisions touching on Project-relevant controversial aspects of politics, personal safety, or other topics in which people may not be safe speaking freely in public.</li>
+<li>Discussing whether and why a team or individual needs help and support, which may touch on personal matters.</li>
+<li>Any decision that this RFC or future Council policy specifies as a private decision.</li>
+</ul>
+<p>The Council may pull in members of other teams for private discussions leading to either a private or public decision, unless doing so would more broadly expose private information disclosed to the Council without permission. When possible, the Council should attempt to pull in people or teams affected by a decision. This also provides additional oversight.</p>
+<p>Some matters may not be fit for full public disclosure while still being fine to share in smaller, more trusted circles (such as with all Project members, with team leads, or with involved/affected parties). The Council should strive to share information with the largest appropriate audiences for that information.</p>
+<p>The Council may decide to withhold new decisions or aspects of decisions when it's unclear whether the information is sensitive. However, as time progresses and it becomes clearer who the appropriate audience is or that the appropriate audience has expanded, the council should revisit its information-sharing decisions.</p>
+<p>The Council should always loop in the moderation team for matters involving interpersonal conflict/dispute, both because such matters are the purview of the moderation team, and to again provide additional oversight.</p>
+<p>The council should evaluate which portions of a decision or its related discussions necessarily need to be private, and should consider whether it can feasibly make non-sensitive portions public, rather than keeping an entire matter private just because one portion of it needs to be. This may include the existence of the discussion, or the general topic, if those details are not themselves sensitive.</p>
+<p>Private matters may potentially be able to become public, or partially public, at a later date if they're no longer sensitive. However, some matters may potentially <em>never</em> be able to become public, which means they will never become subject to broader review and oversight. Thus, the Council must exercise caution and prudence before making a private decision.</p>
+<p>The Council should make every effort to not make private decisions. The Council should have appropriate additional processes in place to encourage representatives to collectively review such decisions and consider their necessity.</p>
+<h2 id="decisions-that-the-council-must-make-via-public-proposal"><a class="header" href="#decisions-that-the-council-must-make-via-public-proposal">Decisions that the Council must make via public proposal</a></h2>
+<p>Decisions in this category require the Council to publicly seek feedback from the broader Rust Project <em>in advance</em> of the decision being made. Such decisions are proposed and decided via the appropriate public decision process, currently the RFC process (though the Council may adopt a different public proposal process in the future). The public decision process must require the consent of representatives (either affirmatively or via non-objection), must allow for blocking objections by Council representatives, must provide reasonable time for public evaluation and discussion, and must provide a clear path for public feedback to the Council. </p>
+<p>Following the existing RFC process, public proposals must have a minimum time-delay for feedback before the decision takes effect. Any representative may request that the feedback period for a particular decision is extended to at most 20 days total. The Council may make an internal operational decision to extend the feedback period beyond 20 days. The time-delay for feedback starts only when the necessary threshold for approval is otherwise met, including there not being any raised objections. If objections are raised and resolved during the time-delay, the waiting period starts again.</p>
+<p>The Leadership Council is expected to evolve over time to meet the evolving needs of the teams, the Rust Project, and the community. Such evolutionary changes may be small or large in scope and require corresponding amounts of oversight. Changes that materially impact the shape of the Council would need to be part of a public decision process.</p>
+<p>As an exception to the above, modifications or removals of a single top-level team (other than the moderation team) may occur with the unanimous agreement of the Council absent the representative delegated by that top-level team.</p>
+<p>The Council is permitted to have private <em>discussions</em> even on something that ultimately ends up as a public proposal or a publicly disclosed internal decision. The Council may wish to do this if the discussions are sensitive to allow decision participants to speak more frankly and freely. Additionally, in some cases, private information that can't be disclosed may impact an otherwise public decision/proposal; the Council should strive to be as transparent and non-misleading as possible and avoid having opaque decisions where all rationale is private.</p>
+<p>Note that all decisions fall into this category unless explicitly designated (via this RFC or future public proposals) to fall into another category, so this list (unlike those in the other two categories) is intentionally vague/broad: it is intended to give guidance on what likely should belong in this category without necessarily being prescriptive.</p>
+<ul>
+<li>Any decision that has the effect of modifying the list of decision-makers on the Leadership Council or the decision-making process of the Leadership Council. For instance:
+<ul>
+<li>Changing this list (or this RFC in general).</li>
+<li>Modifying the publication and approval process used for the Council's public proposals. Such a proposal must use the existing established process, not the proposed process.</li>
+<li>Adding, modifying, or removing policies affecting eligibility for Council representatives.</li>
+<li>Adding, modifying, or removing one or more top-level teams. This includes:
+<ul>
+<li>modifying the purview of a top-level team to such an extent that it meaningfully becomes a different team.</li>
+<li>reorganizing the Project such that top-level teams move underneath other teams.</li>
+</ul>
+</li>
+<li>Adding other types of Council representatives other than those delegated by top-level teams.</li>
+<li>Adding, modifying, or removing policies regarding Council quorums or the locations in which binding decisions can be made.</li>
+</ul>
+</li>
+<li>Any policy decision, as opposed to a one-off operational decision. (See the <a href="3392-leadership-council.html#the-council-s-decision-making-process">decision-making section</a> for details on policy decisions versus operational decisions.) This includes any decision that binds the decisions of other parts of the Project (e.g. other teams or individuals), effectively serving as an exception to the normal purviews of all teams. Some examples of policy decisions:
+<ul>
+<li>Modifying or extending existing policies, including those previously made via RFC.</li>
+<li>A legal/licensing policy affecting Rust Project software or other work of the Rust Project.</li>
+<li>A change to the Code of Conduct.</li>
+<li>A policy affecting eligibility for membership in the Rust Project or any team thereof.</li>
+<li>A change to how the moderation team moderates Council representatives or the Leadership Council as a whole. Such decisions must be made jointly with the moderation team.</li>
+<li>An agreement with another project or organization that makes any ongoing commitments on behalf of the Rust Project. (One-off commitments involving teams that have agreed to those commitments are fine.)</li>
+<li>Creating or substantially modifying legal structures (e.g. additional Foundations, changing relationship with the Rust Foundation, partnering with other legal entities).</li>
+<li>Making policy decisions requested by one or more teams that would be within the normal purviews of those teams. (Note that teams can ask for Council input without requesting a Council decision.)</li>
+<li>Deciding that a class of future decisions always belongs within the Council, rather than being delegated to any other team.</li>
+</ul>
+</li>
+<li>Any decision that this RFC or future Council policy specifies as a public policy decision.</li>
+</ul>
+<h2 id="conflicts-of-interest"><a class="header" href="#conflicts-of-interest">Conflicts of interest</a></h2>
+<p>A Council representative must not take part in or influence a decision in which they have a conflict of interest.</p>
+<p>Potential sources of conflicts of interest include, but are not limited to:</p>
+<ul>
+<li>Personal: a decision about themselves</li>
+<li>Financial: a decision with any substantive financial impact on the representative</li>
+<li>Employment or equivalent: a decision involves another person at the same company, or would benefit/harm that company disproportionately more than others</li>
+<li>Professional or other affiliation: a decision involves an organization the representative is associated with, such as an industry/professional/standards/governmental organization</li>
+<li>Familial/Friendship: a decision about a person the representative cannot be expected to be impartial about, including a conflict of interest of another type through that person (such as a family member's business)</li>
+</ul>
+<p>Council representatives must promptly disclose conflicts of interest and recuse themselves from affected decisions. Council representatives must also proactively disclose likely sources of potential conflict annually to other representatives and to the moderation team.</p>
+<p>Note that conflicts of interest can arise even if a proposal does not name a specific entity. Council representatives cannot, for instance, use their position to tailor requirements in a proposal to disproportionately benefit their employer.</p>
+<p>A proposal favored widely across the Rust community does not automatically represent a conflict of interest for a representative merely because that representative's employer or equivalent also favors the general area of that proposal, as long as the proposal does not favor any particular entities. For example, a proposal to improve the security of a particular Rust component is not a conflict of interest for representatives just because their employers generally care about Rust security; however, a proposal to engage specific developers or security experts, or one's compensation being predicated on such a proposal, might still raise a conflict.</p>
+<p>The Council may not waive a conflict of interest if one applies, even if the Council considers it minor. However, the Council may evaluate <em>whether</em> a conflict exists at all. Council representatives must raise potential conflicts so that the Council can make such a determination.</p>
+<p>The Council may request specific information from a recused representative, and the recused representative may provide that information upon request.</p>
+<p>Where possible and practical, the Council should separate decisions to reduce the scope of a conflict of interest. For instance, the Council could separate a decision to arrange access to a class of hardware (without setting specific requirements or selecting vendors) from the decision of which exact hardware to purchase and where to purchase it, if doing so made a conflict of interest only apply to the latter decision.</p>
+<p>A representative simultaneously considering the interests of the Rust Project and the interests of any Project team is not necessarily a conflict of interest. In particular, representatives are <em>expected</em> to regularly take part in decisions involving their teams, as delegates from those teams.</p>
+<p>In the unlikely event that a proposed decision produces a conflict of interest with enough representatives that the remainder cannot meet a previously established quorum requirement, and the decision must still be made, then either top-level teams must provide alternate representatives for the purposes of the specific decision, or (for public decisions only) the Council may elect to proceed with the decision while publicly documenting all conflicts of interest. (Note that proceeding with a public decision, even with conflicts documented, does not actually eliminate the conflicts or prevent them from influencing the decision; it only allows the public to judge whether the conflicts might have influenced the decision. Eliminating the conflicts entirely is always preferable.) In such a case, the Council should consider appropriate processes and policies to avoid future recurrences of a similar conflict.</p>
+<h2 id="determining-and-changing-team-purviews"><a class="header" href="#determining-and-changing-team-purviews">Determining and changing team purviews</a></h2>
+<p>The Council can move an area or activity between the purviews of top-level teams either already existing or newly created (other than the moderation team). Though the purview of a given top-level team may be further sub-divided by that team, the Council only moves or adjusts top-level purviews. If a sub-divided purview is moved, the Council will work with the involved teams to coordinate the appropriate next steps. This mechanism should be used when the Council believes the existing team's purview is too broad, such that it is not feasible to expect the team to fulfill the full purview under the current structure.  However, this should not happen when a team only <em>currently</em> lacks resources to perform part of its duties.</p>
+<p>The Council also must approve expansions of a top-level team's purview, and must be notified of reductions in a top-level team's purview. This most often happens when a team self-determines that they wish to expand or reduce their purview. This could also happen as part of top-level teams agreeing to adjust purviews between themselves. Council awareness of changes to a purview is necessary, in part, to ensure that the purview can be re-assigned elsewhere or intentionally left unassigned by the Council.</p>
+<p>However, teams (individually or jointly) may further delegate their purviews to subteams without approval from the Council. Top-level teams remain accountable for the full purviews assigned to them, even if they delegate (in other words, teams are responsible for ensuring the delegation is successful).</p>
+<p>The Council should favor working with teams on alternative strategies prior to shifting purviews between teams, as this is a relatively heavyweight step. It's also worth noting that one of the use cases for this mechanism is shifting a purview previously delegated to a team that functionally no longer exists (for instance, because no one on the team has time), potentially on a relatively temporary basis until people arrive with the time and ability to re-create that team. This section of the RFC intentionally does not put constraints on the Council for exactly how (or whether) this consultation should happen.</p>
+<h1 id="mechanisms-for-oversight-and-accountability"><a class="header" href="#mechanisms-for-oversight-and-accountability">Mechanisms for oversight and accountability</a></h1>
+<p>The following are various mechanisms that the Council uses to keep itself and others accountable.</p>
+<h2 id="ensuring-the-council-is-accountable"><a class="header" href="#ensuring-the-council-is-accountable">Ensuring the Council is accountable</a></h2>
+<p>The Council must publicly ensure that the wider Project and community's expectations of the Council are consistently being met. This should be done both by adjusting the policies, procedures, and outcomes of the Council as well as education of the Project and community when their expectations are not aligned with the reality.</p>
+<p>To achieve this, in addition to rotating representatives and adopting a &quot;public by default&quot; orientation, the Council must regularly (at least on a quarterly basis) provide some sort of widely available public communication on their activities as well as an evaluation of how well the Council is functioning using the list of duties, expectations, and constraints as the criteria for this evaluation.</p>
+<p>Each year, the Council must solicit feedback on whether the Council is serving its purpose effectively from all willing and able Project members and openly discuss this feedback in a forum that allows and encourages active participation from all Project members. To do so, the Council and other Project members consult the high-level duties, expectations, and constraints listed in this RFC and any subsequent revisions thereof to determine if the Council is meeting its duties and obligations.</p>
+<p>In addition, it is every representative's <em>individual</em> responsibility to watch for, call out, and refuse to go along with failures to follow this RFC, other Council policies and procedures, or any other aspects of Council accountability. Representatives should strive to actively avoid <a href="https://en.wikipedia.org/wiki/Diffusion_of_responsibility">&quot;diffusion of responsibility&quot;</a>, the phenomenon in which a group of people collectively fail to do something because each individual member (consciously or subconsciously) believes that someone else will do so. The Council may also wish to designate a specific role with the responsibility of handling and monitoring procedural matters, and in particular raising procedural points of order, though others can and should still do so as well.</p>
+<p>If any part of the above process comes to the conclusion that the Council is <em>not</em> meeting its obligations, then a plan for how the Council will change to better be able to meet their obligations must be presented as soon as possible. This may require an RFC changing charter or similar, a rotation of representatives, or other substantive changes. Any plan should have concrete measures for how the Council and/or Rust governance as a whole will evolve in light of the previous year's experience.</p>
+<h2 id="ensuring-council-representatives-are-accountable"><a class="header" href="#ensuring-council-representatives-are-accountable">Ensuring Council representatives are accountable</a></h2>
+<p>Council representatives should participate in regular feedback with each other and with their respective top-level team (the nature of which is outside the scope of this RFC) to reflect on how well they are fulfilling their duties as representatives. The goal of the feedback session is to help representatives better understand how they can better serve the Project. This feedback must be shared with all representatives, all members of the representative's top-level team, and with the moderation team. This feedback should ask for both what representatives have done well and what they could have done better.</p>
+<p>Separately, representatives should also be open to private feedback from their teams and fellow representatives at any time, and should regularly engage in self-reflection about their role and efficacy on the Council.</p>
+<p>Artifacts from these feedback processes must never be made public to ensure a safe and open process. The Council should also reflect on and adjust the feedback process if the results do not lead to positive change.</p>
+<p>If other members of the Council feel that a Council representative is not collaborating well with the rest of the Council, they should talk to that representative, and if necessary to that representative's team. Council representatives should bring in moderation/mediation resources as needed to facilitate those conversations. Moderation can help resolve the issue, and/or determine if the issue is actionable and motivates some level of escalation.</p>
+<p>While it is out of scope for this RFC to specify how individual teams ensure their representatives are held accountable, we encourage teams to use the above mechanisms as inspiration for their own policies and procedures.</p>
+<h2 id="ensuring-teams-are-accountable"><a class="header" href="#ensuring-teams-are-accountable">Ensuring teams are accountable</a></h2>
+<p>Teams regularly coordinate and cooperate with each other, and have conversations about their needs; under normal circumstances the Council must respect the autonomy of individual teams.</p>
+<p>However, the Council serves as a means for teams to jointly hold each other accountable, to one another and to the Project as a whole. The Council can:</p>
+<ul>
+<li>Ask a team to reconsider a decision that failed to take the considerations of other teams or the Project as a whole into consideration.</li>
+<li>Encourage teams to establish processes that more regularly take other teams into consideration.</li>
+<li>Ensure a shared understanding of teams' purviews.</li>
+<li>Ensure teams are willing and able to fulfill those purviews.</li>
+<li>Establish new teams that split a team's purview up into more manageable chunks.</li>
+</ul>
+<p>The accountability process must not be punitive, and the process must be done with the active collaboration of the teams in question.</p>
+<p>In extreme circumstances where teams are willfully choosing to not act in good faith with regards to the wider Project, the Council has the authority to change a team's purview, move some subset of a team's purview to another team, or remove a team entirely. This is done through the Council's regular decision making process. (This does not apply to the moderation team; see the next section for accountability between the Council and moderation team.)</p>
+<h1 id="moderation-disagreements-and-conflicts"><a class="header" href="#moderation-disagreements-and-conflicts">Moderation, disagreements, and conflicts</a></h1>
+<p>This section describes the roles of the Leadership Council and the moderation team in helping resolve disagreements and conflicts, as well as the interactions between those teams.</p>
+<p>Disagreements and conflicts fall on a spectrum of interpersonal interaction. Disagreements are more factual and/or technical misalignments, while conflicts are more social or relational roadblocks to collaboration. Many interactions might display aspects of both disagreement and conflict. The Council can help with aspects of disagreement, while aspects of conflict are the purview of the moderation team.</p>
+<p>This RFC does not specify moderation policy in general, only the portion of it necessary to specify interactions with the Council and the checks and balances between the Council and the moderation team. General moderation policy is out of scope for this RFC.</p>
+<p>Much of the work of the Rust Project involves collaboration with other people, all of whom care deeply about their work. It's normal for people to disagree, and to feel strongly about that disagreement. Disagreement can also be a powerful tool for surfacing and addressing issues, and ideally, people who disagree can collaboratively and (mostly) amicably explore those disagreements without escalating into interpersonal conflicts.</p>
+<p>Situations where disagreements and conflicts arise may be complex. Disagreements can escalate into conflicts, and conflicts can de-escalate into disagreements. If the distinction between a disagreement and a conflict is not clear in the situation, or if participants disagree, assume the situation is a conflict.</p>
+<p>In the event of a conflict, involved parties should reach out to the moderation team to help resolve the conflict as soon as possible. Time is a critical resource in attempting to resolve a conflict before it gets worse or causes more harm.</p>
+<h2 id="disagreements-among-teams"><a class="header" href="#disagreements-among-teams">Disagreements among teams</a></h2>
+<p>Where possible, teams should attempt to resolve disagreements on their own, with assistance from the Council as needed. The Council can make judgment calls to settle disagreements, but teams need to maintain good working relationships with each other to avoid persistent disagreements or escalations into conflicts.</p>
+<p>Potential resolution paths for disagreements between teams could include selecting a previously discussed option, devising a new option, deciding whose purview the decision falls in, or deciding that the decision is outside the purviews of both teams and leaving it to the Council to find a new home for that work.</p>
+<h2 id="conflicts-involving-teams-or-project-members"><a class="header" href="#conflicts-involving-teams-or-project-members">Conflicts involving teams or Project members</a></h2>
+<p>Conflicts involving teams or Project members should be brought to the moderation team as soon as possible. The Council can help mitigate the impact of those conflicts on pending/urgent decisions, but the moderation team is responsible for helping with conflicts and interpersonal issues, across teams or otherwise.</p>
+<p>Individuals or teams may also voluntarily engage in other processes to address conflicts or interpersonal issues, such as non-binding external mediation. Individuals or teams should keep the moderation team in the loop when doing so, and should seek guidance from the moderation team regarding appropriate resources or approaches for doing so. Individuals or teams must not use resources that would produce a conflict of interest.</p>
+<h2 id="contingent-moderators"><a class="header" href="#contingent-moderators">Contingent moderators</a></h2>
+<p>The moderation team must at all times maintain a publicly documented list of &quot;contingent moderators&quot;, who must be approved by both the moderation team and the Council via internal consent decision. The moderation team and contingent moderation team should both consist of at least three members each. The contingent moderators must be:</p>
+<ul>
+<li>Not part of the current moderation team <em>or</em> the Leadership Council.</li>
+<li>Widely trusted by Rust Project members as jointly determined by the Council and moderation team; this will often mean they're already part of the Project in some capacity.</li>
+<li>Qualified to do moderation work and <a href="3392-leadership-council.html#audits">audits</a> as jointly determined by the Council and moderation team. More detailed criteria and guidelines will be established by moderation policy, which is out of scope for this RFC.</li>
+<li>Willing to serve as contingent moderators: willing to do audits, and willing to do interim moderation work if the moderation team dissolves or becomes unavailable, until they can appoint new full moderators. (The contingent moderators are not expected to be willing to do moderation work long-term.)</li>
+<li>Willing to stay familiar with moderation policy and procedure to the standards expected of a moderation team member (including any associated training). Contingent moderators should receive the same opportunities for training as the moderation team where possible.</li>
+</ul>
+<p>The need for contingent moderators arises in a high-tension situation, and the Project and Council must be prepared to trust them to step into that situation. Choosing people known and trusted by the rest of the Project helps lower tensions in that situation.</p>
+<p>Moderation is a high-burnout activity, and individual moderators or the moderation team may find itself wishing to step away from that work. Note that one or more individual moderators may always choose to step down, in which case the moderation team should identify and bring in new moderators to fill any gaps or shortfalls; if the moderation team asks a contingent moderator to become a full moderator, the team should then appoint a new contingent moderator. An individual moderator who stepped down <em>may</em> be selected as a contingent moderator. If the moderation team as a whole becomes simultaneously unavailable (as determined jointly by the Council and contingent moderators via internal consent decision), or chooses to step down simultaneously, the contingent moderators become the interim moderation team and must promptly appoint new contingent moderators and start seeking new full moderators.</p>
+<p>As the contingent moderator role does not have any regular required activities outside of exceptional situations, those appointed to that role must have regular check-ins with the moderation team, to reconfirm that they're still willing to serve in that role, and to avoid a circumstance in which the contingent moderators are abruptly needed and turn out to be unavailable.</p>
+<h2 id="moderation-team-policies-and-procedures"><a class="header" href="#moderation-team-policies-and-procedures">Moderation team policies and procedures</a></h2>
+<p>The moderation team has a duty to have robust policies and procedures in place. The Council provides oversight and assistance to ensure that the moderation team has those policies and procedures and that they are sufficiently robust.</p>
+<p>The Council may provide feedback to the moderation team and the moderation team is required to consider all feedback received. If the Council feels the moderation team has not followed moderation policies and procedures, the Council may <a href="3392-leadership-council.html#audits">require an audit</a> by the contingent moderators. However, the Council may not overrule a moderation decision or policy.</p>
+<h2 id="audits"><a class="header" href="#audits">Audits</a></h2>
+<p>If any Council member believes a moderation decision (or series of decisions) has not followed the moderation team's policies and procedures, they should promptly inform the moderation team. The Council and moderation team should then engage with each other, discuss and understand these concerns, and work to address them.</p>
+<p>One of the mechanisms this RFC provides for checking the moderation team's actions in a privacy-preserving manner is an audit mechanism. In any case where any Council member believes moderation team actions have not followed documented policies or procedures, the Council member may decide to initiate the audit process. (In particular, they might do this in response to a report from a community member involved in a moderation situation.) This happens <em>in addition</em> to the above engagement and conversation; it is not a replacement for direct communication between the Council and the moderation team.</p>
+<p>In an audit, the contingent moderation team works with the moderation team to establish whether the moderation team followed documented policies and procedures. This mechanism necessarily involves the contingent moderation team using their own judgment to evaluate moderation policy, specific evidence or communications, and corresponding moderation actions or proposed actions. However, this mechanism is not intended to second-guess the actions themselves; the audit mechanism focuses on establishing whether the moderation team is acting according to its established policy and procedures.</p>
+<p>The contingent moderators also reach out to the Council to find out any additional context they might need.</p>
+<p>Moderation processes and audits both take time, and must be performed with diligence. However, the Council, contingent moderators, and moderation team should all aim to communicate their concerns and expectations to each other in a reasonably timely fashion and maintain open lines of communication.</p>
+<p>Contingent moderators must not take part in decisions or audits for which they have a conflict of interest. Contingent moderators must not have access to private information provided to moderation before the contingent moderator was publicly listed as part of the contingent moderation team; this gives people speaking with the moderation team the opportunity to evaluate potential concerns or conflicts of interest.</p>
+<p>The discussions with the Council and the contingent moderation team may discover that the moderation team had to make an exception in policy for a particular case, as there was an unexpected condition in policies or that there was contextual information that couldn't be incorporated in policy. This is an expected scenario that merits additional scrutiny by the contingent moderation team on the rationale for making an exception and the process for deciding the necessity to make an exception, but is not inherently a violation of moderation team responsibilities.</p>
+<p>As the audit process and the Council/moderation discussions proceed, the moderation team may decide to alter moderation policies and/or change the outcome of specific moderation decisions or proposed decisions. This is solely a decision for the moderation team to make.</p>
+<p>The contingent moderation team must report the results of the audit to the moderation team and the Council for their review. This must not include any details that may reveal private information, either directly or indirectly. Together with the discussions with the moderation team, this should aim to address the concerns of the Council.</p>
+<h2 id="last-resort-accountability"><a class="header" href="#last-resort-accountability">Last-resort accountability</a></h2>
+<p>The Leadership Council and moderation team each have substantial power within the Rust Project. This RFC provides many tools by which they can work out conflicts. This section outlines the last-resort mechanisms by which those teams can hold each other accountable. This section is written in the hopes that it will never be needed, and that teams will make every possible effort to resolve conflicts without reaching this point.</p>
+<p>If the Council believes there is a systemic problem with the moderation team (whether based on an audit report from the contingent moderation team or otherwise), and the Council and moderation team cannot voluntarily come to agreement on how to address the situation, then as a <strong>last resort</strong>, the Council (by unanimous decision) may simultaneously dissolve itself and the moderation team. The top-level teams must then appoint new representatives to the Council, and the contingent moderation team becomes the new interim moderation team.</p>
+<p>Conversely, if the moderation team believes the Council has a systemic problem, and the Council and moderation team cannot voluntarily come to agreement on how to address the situation, then as a <strong>last resort</strong>, the moderation team (by unanimous decision) may simultaneously dissolve itself and the Council. This process can only be enacted if there are at least three moderation team members. The top-level teams must then appoint new representatives to the Council, and the contingent moderation team becomes the new interim moderation team.</p>
+<p>The moderation team's representative is recused from the decision to dissolve the Council and moderation team to avoid conflicts of interest, though that representative must still step down as well.</p>
+<p>The removed representatives and moderators may not serve on either the Council or the moderation team for at least one year.</p>
+<p>By default, the new Council and interim moderation team will take responsibility for clearly communicating the transition.</p>
+<p>This mechanism is an absolute last resort. It will almost certainly produce suboptimal outcomes, to say the least. If situations escalate to this outcome, many things have gone <em>horribly</em> wrong, and those cleaning up the aftermath should endeavor to prevent it from ever happening again. The indication (by either the moderation team or the Council) that the situation <em>might</em> escalate to this point should be considered a strong signal to come to the table and find a way to do &quot;Something Else which is Not That&quot; to avoid the situation.</p>
+<h2 id="moderation-actions-involving-project-members"><a class="header" href="#moderation-actions-involving-project-members">Moderation actions involving Project members</a></h2>
+<p>The moderation team, in the course of doing moderation work, necessarily requires the ability to take action not just against members of the Rust community but also against members of the Rust Project. Those actions may span the ladder of escalation all the way from a conversation to removal from the Project. This puts the moderation team in a position of power and trust. This RFC seeks to provide appropriate accountability and cross-checks for the moderation team, as well as for the Council.</p>
+<p>If the moderation team plans to enact externally visible sanctions against any member of the Rust Project (anything that would create a conspicuous absence, such as removal from a role, or exclusion from participation in a Project space for more than a week), then any party may request that an <a href="3392-leadership-council.html#audits">audit</a> take place by reaching out to either the Council or contingent moderators, and that audit will be automatically granted.</p>
+<p>For the first year after the ratification of this RFC, audits are automatically performed even without a request, to ensure the process is functional. After that time, the Council and moderation team will jointly review and decide whether to renew this provision.</p>
+<p>When the moderation team sends a warning to a Project member, or sends a notification of moderation action regarding a Project member, that message will mention the option of requesting an audit.</p>
+<p>Conflicts regarding Project members should be brought to the moderation team as soon as possible.</p>
+<h2 id="conflicts-involving-council-representatives"><a class="header" href="#conflicts-involving-council-representatives">Conflicts involving Council representatives</a></h2>
+<p>Conflicts involving Council representatives, or alternates, follow the same process as conflicts involving Project members. The moderation team has the same ability to moderate representatives or alternates as any other member of the Project, including the required <a href="3392-leadership-council.html#audits">audit</a> by the contingent moderators for any externally visible sanction. This remains subject to the same accountability mechanisms as for other decisions of the moderation team.</p>
+<p>In addition to the range of moderation actions already available, the moderation team may take the following additional actions for representatives or alternates as a near-last resort, as a lesser step on the ladder of escalation than removing a member from the Project entirely. These actions are not generally specific to the Council, and apply to other Rust teams as well.</p>
+<ul>
+<li>The moderation team may decide to remove a representative from the Council. The top-level team represented by that representative should delegate a new representative to serve the remainder of the term, starting immediately.</li>
+<li>The moderation team may decide to prevent a Project member from becoming a Council representative.</li>
+<li>The moderation team and Council (excluding the affected parties) may jointly decide (as a private operational consent decision) to apply other sanctions limiting the representative's involvement in the Council. (In this scenario, representatives are not excluded if they have a conflict of interest, as the entire Council will have to cooperate to make the sanctions effective. If the conflicts of interest thus prevent applying these partial sanctions, the moderation team always has the option of full sanctions such as removal.)</li>
+</ul>
+<p>All of these also trigger a required audit. The Council must also be notified of any moderation actions involving representatives or alternates, or actions directly preventing people from becoming representatives.</p>
+<h2 id="conflicts-involving-moderation-team-members"><a class="header" href="#conflicts-involving-moderation-team-members">Conflicts involving moderation team members</a></h2>
+<p>Conflicts involving a member of the moderation team will be handled by the remaining members of the moderation team (minus any with a conflict of interest), <em>together with</em> the contingent moderation team to provide additional oversight. Any member of the moderation or contingent moderation team should confer with the Council if there is a more systemic issue within the moderation team. The contingent moderators must audit this decision and must provide an audit report to the Council and moderation team.</p>
+<h1 id="ratification-of-this-rfc"><a class="header" href="#ratification-of-this-rfc">Ratification of this RFC</a></h1>
+<p>Since November of 2021 the following group has been acting as de-facto Project leadership: all members of the core team, all members of the moderation team, all Project representatives on the Rust Foundation board, and the leads of the &quot;top-level&quot; teams:</p>
+<ul>
+<li>Compiler</li>
+<li>Crates.io</li>
+<li>Dev tools</li>
+<li>Infrastructure</li>
+<li>Language</li>
+<li>Library</li>
+<li>Moderation (already included above)</li>
+<li>Release</li>
+</ul>
+<p>This RFC will be ratified using the standard RFC process, with the approving team being all the members of this de facto leadership group. This group should also raise objections on behalf of other members of the Project; in particular, team leads should solicit feedback from their teams and subteams.</p>
+<h1 id="footnotes"><a class="header" href="#footnotes">Footnotes</a></h1>
+<div class="footnote-definition" id="core"><sup class="footnote-definition-label">1</sup>
+<p>Unlike in some other Open Source projects, the Rust Project's &quot;core team&quot; does not refer to a group that decides the technical direction of the Project. As explained in more detail elsewhere in the RFC, the Rust Project distributes decision-making to many different teams who have responsibility for their specific purview. For example, the compiler team is in charge of the Rust compiler, the language team is in charge of language evolution, etc. This is part of why this RFC discontinues use of the term &quot;core team&quot;.</p>
+</div>
+<div class="footnote-definition" id="authority"><sup class="footnote-definition-label">2</sup>
+<p>The term 'authority' here refers to the powers and responsibilities the Council has to ensure the success of the Rust Project. This RFC lays out the limits of these powers, so that the Council will delegate the authority it has to teams responsible for the concerns of the Project. These concerns may include - but are not limited to - product vision, day-to-day procedures, engineering decisions, mentoring, and marketing.</p>
+</div>
+<div class="footnote-definition" id="teams"><sup class="footnote-definition-label">3</sup>
+<p>Throughout this document, &quot;teams&quot; includes subteams, working groups, project groups, initiatives, and all other forms of official collaboration structures within the Project. &quot;Subteams&quot; includes all forms of collaboration structures that report up through a team.</p>
+</div>
+<div class="footnote-definition" id="under-multiple-teams"><sup class="footnote-definition-label">4</sup>
+<p>Subteams or individuals that fall under multiple top-level teams should not get disproportionate representation by having multiple representatives speaking for them on the Council. Whenever a &quot;diamond&quot; structure like this exists anywhere in the organization, the teams involved in that structure should strive to avoid ambiguity or diffusion of responsibility, and ensure people and teams know what paths they should use to raise issues and provide feedback.</p>
+</div>
+<div class="footnote-definition" id="bootstrapping-new-teams"><sup class="footnote-definition-label">6</sup>
+<p>The Council consists only of the representatives provided to it by top-level teams, and cannot appoint new ad hoc members to itself. However, if the Council identifies a gap in the project, it can create a new top-level team. In particular, the Council can bootstrap the creation of a team to address a problem for which the Project doesn't currently have coordinated/organized expertise and for which the Council doesn't know the right solution structure to charter a team solving it. In that case, the Council could bring together a team whose purview is to explore the solution-space for that problem, determine the right solution, and to return to the Council with a proposal and charter. That team would then provide a representative to the Council, who can work with the Council on aspects of that problem and solution.</p>
+</div>
+<div class="footnote-definition" id="number-of-representatives"><sup class="footnote-definition-label">5</sup>
+<p>This also effectively constrains the number of Council representatives to the same range. Note that this constraint is independently important.</p>
+</div>
+<div class="footnote-definition" id="representative-selection"><sup class="footnote-definition-label">7</sup>
+<p>Being a Council representative is ultimately a position of service to the respective team and to the Project as a whole. While the authors of this RFC hope that the position is fulfilling and engaging to whomever fills it, we also hope that it is not viewed as a position of status to vie for.</p>
+</div>
+<div class="footnote-definition" id="council-roles"><sup class="footnote-definition-label">8</sup>
+<p>The Council is not required to assign such roles exclusively to Council representatives; the Council may appoint any willing Project member. Such roles do not constitute membership in the Council for purposes such as decision-making.</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Commit: <a href="https://github.com/rust-lang/rfc-leadership-council/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/alternatives.md">The commit link this page based on</a></li>
+</ul>
+<h1 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>The design space for governance is quite large. This section only attempts to address the largest and most consequential alternatives to the design decisions presented in this RFC. This section presents each such alternative along with justifications for why they were not selected.</p>
+<h2 id="broader-governance-changes-in-this-rfc"><a class="header" href="#broader-governance-changes-in-this-rfc">Broader governance changes in this RFC</a></h2>
+<p>We considered doing <em>more</em> in this RFC to set up initial governance structures and improve existing governance structures. In particular, we considered changes to the existing set of top-level teams.</p>
+<p>However, we felt strongly that anything that <em>could</em> be deferred to the Council should be, and that this RFC should focus on defining and delimiting the Council itself and its interactions with the rest of the Project. We felt it would go beyond the mandate of the transitional leadership structure to do much more than just architecting long-term leadership.</p>
+<p>We also felt that further incremental evolutions would become much easier with the structures proposed by this RFC in place.</p>
+<p>We recognize that changes to the set of top-level teams will prove especially difficult. However, we felt that the interim leadership group (including top-level team leads) would have that problem in common with the Council. Furthermore, we found that many members and leads of top-level teams were if anything <em>enthusiastic</em> about potential systematic improvements in this area, rather than resistant to them, even when such changes involved their own teams.</p>
+<p>Apart from that, developing and building consensus on this RFC already represented a massive time investment by many people, and making it larger would make it take even longer.</p>
+<h2 id="alternative-council-structures-and-non-representative-council-members"><a class="header" href="#alternative-council-structures-and-non-representative-council-members">Alternative Council structures and non-representative Council members</a></h2>
+<p>As an alternative to Council representatives exclusively being the representatives of top-level teams, we extensively considered other structures, whether in addition or in place of that. For instance, the Council could appoint additional members, or appoint successors, or some or all Council representatives could be elected by the Project. Such approaches could potentially make it easier to represent aspects or constituencies of the Project not <em>yet</em> represented by existing top-level teams, before even the nascent structures of those teams started to take shape.</p>
+<p>Specific variants we decided not to pursue:</p>
+<h3 id="non-representative-council-structures"><a class="header" href="#non-representative-council-structures">Non-representative Council structures</a></h3>
+<p>Alternative structures in which Council members are not representatives of top-level teams would have various drawbacks:</p>
+<ul>
+<li>Any structure that does not guarantee each team a representative would provide less comprehensive and balanced representation for existing teams.</li>
+<li>A structure not based on team-appointed representatives would make it harder to change representatives quickly and easily in a pinch, such as in response to changes in personal circumstances, or changes in a representative's affiliations that cause a violation of the limits placed on shared affiliations.</li>
+<li>Some variants of this (such as Council-appointed additional members or Council-appointed successors) would steer the Council towards a more self-perpetuating nature that we wanted to avoid.</li>
+</ul>
+<p>Ultimately, we addressed part of this issue by instead allowing the Council to easily create provisional teams (so as to introduce additional <em>representatives</em> on the Council), and then made room for the Council to further evolve its structure in the future by consent.</p>
+<h3 id="elections"><a class="header" href="#elections">Elections</a></h3>
+<p>Any structure involving elections would raise additional problems:</p>
+<ul>
+<li>Accurately determining the electorate: who precisely qualifies as being &quot;part of the Rust Project&quot;?
+<ul>
+<li>Many people have intuitive ideas about this, and such intuitions don't currently cause problems because we don't tie much of substance to that status. However, such intuitive definitions cause serious issues if membership in the Project determines eligibility to vote.</li>
+</ul>
+</li>
+<li>The usual problems of popularity contests: not all folks doing organizational/coordinative work are especially visible/glamorous/popular, and those doing visible/glamorous/popular work may serve the Project better doing that work rather than reallocating their time towards organizational/coordinative work.</li>
+<li>Elections motivate some form of campaigning.</li>
+<li>A robust election system would introduce more process complexity, both directly for the voting process, indirectly by making it harder to rotate/replace candidates in a pinch or supply alternates/backups.</li>
+<li>Elections would introduce more difficult challenges when needing to change representatives quickly and easily in a pinch, such as in response to changes in personal circumstances, or changes in affiliation that run into the limits upon shared affiliations. The voters will have chosen candidates, and it's harder to go back to the electorate for new candidates, so there would have to be (for example) careful rules for selecting backup candidates based on the next lower number of votes.</li>
+<li>Elections, no matter what voting system they use, inherently ignore the consent of many constituents.</li>
+<li>Simpler election structures would not guarantee teams a representative, and would thus provide less comprehensive and balanced representation for existing teams. Providing more comprehensive/proportional representation of teams would add even more complexity to the election system.
+<ul>
+<li>In particular, if the people in the project fall into teams in a vaguely Pareto-style structure (a small number of teams contain a large number of people), a simple election structure may result in many teams having <em>no</em> representation.</li>
+</ul>
+</li>
+</ul>
+<p>We felt that we could better improve people's routes to be heard and taken into account by ensuring all governance structures and all Project members are connected through parent teams, and thus that every member of the Project has at least one representative on the Council.</p>
+<h2 id="referendums"><a class="header" href="#referendums">Referendums</a></h2>
+<p>We considered introducing a full-fledged referendum system, by which proposals could be introduced, supported, and voted on by the Project as a whole. This would sidestep issues of ensuring proposals get considered and added to the Council's agenda, and would make it easier to make substantial changes not aligned with the existing Council (for better or for worse); it would also serve as an addition check and balance on the Council.</p>
+<p>However:</p>
+<ul>
+<li>This would have all the problems mentioned above about determining constituency in the Project.</li>
+<li>This would also be a <em>complex</em> new structure introduced entirely in this RFC (rather than later by the Council).
+<ul>
+<li>This mechanism and its eligibility and corner cases would need to be <em>very</em> precisely specified, as it would often be invoked in situations with high tension and a need for a timely and authoritative decision.</li>
+</ul>
+</li>
+<li>Voting mechanisms, no matter what voting system they use, inherently ignore the consent of many constituents.
+<ul>
+<li>Voting mechanisms trend towards picking winners and losers, rather than consensus-seeking and finding ways to meet <em>everyone's</em> needs.</li>
+</ul>
+</li>
+<li>If such a mechanism were trivial to initiate, it could become a dysfunctional pseudo-&quot;communication&quot; mechanism in its own right, substituting for healthier communication and more consent-driven actions. It would, effectively, escalate problems into public dirty laundry, making it <em>harder</em> to resolve smaller problems. In addition, reporting on such events can generate unwarranted news like &quot;Rust considers X&quot; even if X has no meaningful support.</li>
+<li>If such a mechanism were not trivial to initiate, the type of grassroots organizing required to successfully raise and pass such a referendum would produce better effects by working through teams, when the Project is well-aligned.</li>
+<li>Conversely, if the Project has substantial issues aligning with its leadership, making <em>individual</em> decisions doesn't solve the underlying problem with Project health.</li>
+</ul>
+<p>We chose to instead provide extensive checks on the Council itself, and mechanisms to ensure feedback and alignment between the Council and the Project, as well as a last-resort mechanism, rather than providing an ongoing mechanism to make or override <em>individual</em> Project-wide decisions.</p>
+<h2 id="alternative-checks-and-balances-between-the-leadership-council-and-the-project"><a class="header" href="#alternative-checks-and-balances-between-the-leadership-council-and-the-project">Alternative checks and balances between the Leadership Council and the Project</a></h2>
+<p>We considered many structures for additional checks and balances between the Leadership Council and the Project:</p>
+<ul>
+<li>We considered &quot;vote of no confidence&quot; mechanisms, but these would have many of the same problems as referendums, including determining the electorate, being either too difficult or too easy to initiate, and tending towards escalation rather than resolution.</li>
+<li>We considered arrangements in which members of teams could directly raise objections to Council RFCs. However, this added complexity for something that the consent decision-making mechanism <em>should</em> make redundant.</li>
+<li>We considered more formal feedback systems that could provide checks on <em>individual</em> Council decisions. However, any such mechanisms would also make it difficult to make timely decisions, and the blocking mechanisms would cause problems if they were either too easy or too difficult to initiate.</li>
+</ul>
+<h2 id="alternative-checks-and-balances-between-the-leadership-council-and-the-moderation-team"><a class="header" href="#alternative-checks-and-balances-between-the-leadership-council-and-the-moderation-team">Alternative checks and balances between the Leadership Council and the moderation team</a></h2>
+<p>We went through substantial tuning on the checks and balances between the Leadership Council and the moderation team:</p>
+<ul>
+<li>We considered making audits not automatically granted, and instead having the Council decide whether to grant an audit request. However, this would raise fairness questions for how the Council decides when to grant an audit based on limited information, as well as motivating procedural delays to give time for such an evaluation. We also felt that automatic audits (at least initially) would provide an opportunity to thoroughly test and evaluate the audit process.</li>
+<li>We also considered structures using separate auditors rather than using the &quot;contingent moderators&quot; as auditors, but this raised <em>severe</em> trust issues with sharing private moderation information with those auditors.</li>
+</ul>
+<h2 id="launching-pad-alternatives"><a class="header" href="#launching-pad-alternatives">Launching pad alternatives</a></h2>
+<p>We considered other alternate structures apart from the &quot;launching pad&quot;, for handling existing teams that aren't attached to the rest of the team structure. For instance, we considered attaching such teams directly to the Council; however, this would have required special-case handling for representation that would start to look a lot like the launching pad, but with more coordination work attached to the Council.</p>
+<p>We also considered options in which we <em>didn't</em> connect those teams, and permitted &quot;disconnected&quot; working groups and similar. This would require less transition, but would leave many Project members unrepresented and disenfranchised.</p>
+<p>We felt that we could best improve people's routes to be heard and taken into account by ensuring all governance structures and all Project members are connected through parent teams.</p>
+<p>We considered giving additional purviews to the launching pad, such as contributing to team organization and structure, best practices, or processes. However, the launching pad is already the one exception in which this RFC creates a new team, and we already have concerns about successfully staffing that team; we don't want to add further complexity beyond that in this RFC. The Council has the option of changing the launching pad's purview in the future.</p>
+<p>We considered the name &quot;landing pad&quot; (a place for unattached teams to land) instead of &quot;launching pad&quot;, but we felt that &quot;launching pad&quot; better conveyed the idea of incubating teams and helping them thrive rather than just serving as a holding area.</p>
+<h2 id="double-linking"><a class="header" href="#double-linking">Double-linking</a></h2>
+<p>We considered adopting a &quot;double-linking&quot; structure between the Council and top-level teams, in which teams have two representatives on the Council, one more responsible for connecting team-to-Council and the other more responsible for connecting Council-to-team. Such redundancy could provide a firmer connection between the Council and teams, making it <em>much</em> less likely that concerns from teams would fail to propagate to the Council and vice versa. However:</p>
+<ul>
+<li>Such a structure would require either an unmanageable number of Council members or far fewer than our current number of top-level teams (and we did not want to change the number of top-level teams in this RFC, or limit the number of top-level teams that strongly).</li>
+<li>This would require substantial changes to the structures of top-level teams themselves to permit such linking, and such structural changes would go beyond the remit of this RFC.</li>
+<li>Some models of double-linking would have one of the representatives determined by the team and the other by the Council; such a model would add complexity to the membership of the Council, such that members were not exclusively the representatives of top-level teams, which would have many of the downsides of such variations mentioned above, notably giving the Council a more self-perpetuating nature.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Commit: <a href="https://github.com/rust-lang/rfc-leadership-council/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/initial-work-of-the-council.md">The commit link this page based on</a></li>
+</ul>
+<h1 id="recommendations-for-initial-work-of-the-council"><a class="header" href="#recommendations-for-initial-work-of-the-council">Recommendations for initial work of the Council</a></h1>
+<p>In the course of developing this RFC, and thinking extensively about the structure and operation of the Council, the interim leadership team also identified many other tasks that fell outside the scope of this RFC, and explicitly decided to defer those tasks to the new Council. This section documents those tasks, as a suggested starting point for bootstrapping the work of the Council. None of these are binding suggestions, and the Council can freely set and prioritize its own agenda; this section serves as a public, transparent handoff of knowledge and proposals to the Leadership Council.</p>
+<p>Some of these tasks represent meta-level decisions about the processes of the Council, and we chose not to make those decisions in this RFC to avoid enshrining a particular structure rather than deferring to those who will be working regularly with that structure. The remaining tasks represent a partial todo list of long-standing tasks that fall within the Council's purview, insofar as they have fallen through the gaps between team purviews. Some of these tasks should be delegated by the Council rather than worked on directly by the Council. The inclusion of a task in this list doesn't change what type of decision-making process is required for it; some of these may be Council-internal operational decisions or private operational decisions, while others will require a public policy process.</p>
+<p>These are in no particular order, other than that meta-level decisions about processes for making decisions will need to happen before decisions relying on those processes.</p>
+<h2 id="meta-level-decisions-about-processes-and-policies"><a class="header" href="#meta-level-decisions-about-processes-and-policies">Meta-level decisions about processes and policies</a></h2>
+<ul>
+<li>Determining where, when, and how frequently the Council meets.</li>
+<li>Establishing processes for where the Council makes decisions, both synchronously (in meetings) and asynchronously.</li>
+<li>Writing and agreeing on templates for decisions, that help guide the Council to remember and follow process steps.</li>
+<li>Establishing specific processes around Council transparency, including records of decisions, minutes of meetings, the locations where these get published, and similar.</li>
+<li>Establishing a process for appointing the &quot;Project directors&quot; to the Rust Foundation board in a timely fashion. The Council will need to make such appointments soon after formation, and will also need to help ensure continuity across the transition.</li>
+<li>Establishing processes and conventions for the Council's regular review of its policy decisions. In particular, establishing expectations for the frequency of such reviews, with mechanisms to adjust those downwards when representatives express concern, or upwards after previous successful reviews.</li>
+<li>Selecting tools and establishing processes for tracking the Council's backlog/todo list, making as much of that list as possible public for transparency, and having a well-defined mechanism for Project members or teams to ask the Council to address something (either publicly or privately).</li>
+<li>Defining and documenting processes for external requests to the Council from outside the Project, ensuring they get routed appropriately, and taking steps where possible to ensure they can be directly routed to appropriate teams (potentially including new teams) in the future.</li>
+<li>Bootstrapping the new &quot;Launching Pad&quot; team and ensuring it has enough structure to operate.</li>
+<li>Organizing teams within Rust, and ensuring all teams and other governance structures are &quot;attached&quot; to appropriate places in the structure. (This includes working with teams to find appropriate homes, and ensuring such changes are ultimately reflected in the team metadata repository.)</li>
+<li>Establishing and agreeing on processes for faster decision-making for simple one-off operational matters, such as responding to emails reaching out to the Project.</li>
+<li>Ensuring the policy decision process (RFC process) is well-documented and linked from the Council documentation, so people know how Council public proposals happen.</li>
+<li>Develop handoff procedures for handling transitions to new Council representatives, or to alternates.</li>
+</ul>
+<h2 id="other-tasksgaps-potentially-within-the-councils-purview"><a class="header" href="#other-tasksgaps-potentially-within-the-councils-purview">Other tasks/gaps potentially within the Council's purview</a></h2>
+<ul>
+<li>Checking in with teams and individuals across the Project, seeing what's going well and what needs help, and adding to the Council's todo list.
+<ul>
+<li>Checking for priority items that need <em>urgent</em> help from the Council.</li>
+<li>Checking in with members of the former core team to identify items from their past todo lists and other open issues they're aware of, to add to the Council's todo list, and subsequently to either work on or delegate or otherwise disposition.</li>
+<li>Checking in with the moderation team, to ensure they have sufficient support and resources to ensure growth and sustainability. Collaborating with the moderation team as they develop and codify their policies and procedures to better handle a broader range of situations across the Project.</li>
+<li>Helping to develop plans to support understaffed or otherwise unsustainable teams.</li>
+</ul>
+</li>
+<li>Work with the infra team to develop a transition plan for privileges traditionally maintained by core (such as root privileges / logged-use break-glass credentials). Coordinate appropriate policies with infra.</li>
+<li>Working with the Launching Pad team to help transition teams out of it into appropriate places in the organization.</li>
+<li>Ensuring that top-level teams have well-documented purviews, starting to identify gaps between those purviews, and working with teams to determine when those gaps should fall to specific existing teams or become the purview of new teams.</li>
+<li>Establishing policies to enable delegation of communication/PR tasks that have traditionally fallen to top-level leadership, and then making appropriate delegations of such work, potentially including the creation of teams.</li>
+<li>Working with teams to establish coordination channels for team roadmaps, and developing processes to support cohesion across those roadmaps.</li>
+<li>Making concrete plans to improve Rust Project diversity, including working with individual teams on how to better support diversity initiatives, as well as addressing gaps for which no individual team currently has responsibility.</li>
+<li>Working with teams on processes for receiving feedback from subteams, particularly on proposed Council representatives. Particular attention should be paid to:
+<ul>
+<li>Ensure feedback is processed early, often, fairly, and consistently such that subteam members feel heard and Council members are given opportunity to address feedback and improve.</li>
+<li>Help detect and address bias in Council representative selection, including status-quo bias towards existing Rust leaders or people similar to them.</li>
+</ul>
+</li>
+<li>Documenting and improving processes for interaction with the Rust Foundation, and considering organizational improvements to provide further ongoing support for those interactions (such as how and where Project directors fit into the organizational structure and how they interface with the Council regularly).
+<ul>
+<li>In particular, establishing the purview of the Project directors along with policies and procedures for ensuring proper representation of Project interests on the Foundation board.</li>
+</ul>
+</li>
+<li>Establishing proper procedures, and potentially teams, for handling issues which may have legal implications on the Project or Project participants.</li>
+<li>Ensuring that people and teams within the Rust Project have access to appropriate training and resources for the positions they find themselves in, beyond the skills required for their direct purview. Foster a culture of team membership that values such skills and help teams find resources or training to bolster such skills. Such skills and training include, among many others:
+<ul>
+<li>General leadership and coordination skills, within a team and across a community</li>
+<li>Transparent and legible reasoning skills, recognizing and documenting underlying values, crux-finding, and collaborative disagreement</li>
+<li>Conflict resolution and de-escalation</li>
+<li>Project management and planning</li>
+<li>Communications between individuals, teams, and projects</li>
+<li>Public communications</li>
+</ul>
+</li>
+<li>Help teams evaluate and consider replicating useful aspects of the Council's structure and processes within other teams across the Project (particularly top-level teams), such as:
+<ul>
+<li>Appropriate structures to help subteams collaborate and coordinate amongst themselves and with top-level teams</li>
+<li>Structures for decision-making, including policies allowing for some types of decisions to be made more quickly, where appropriate</li>
+<li>Transparency, privacy, and documentation of decisions</li>
+<li>Policies for handling conflicts of interest among team members</li>
+<li>Policies on the number of team members sharing a common affiliation</li>
+</ul>
+</li>
+<li>Ensure Project and Project member health by understanding and working against common work patterns where select &quot;heroes&quot; assume an outsized and unreasonable share of the maintenance burden by:
+<ul>
+<li>taking on large amounts of essential work that they do not really <em>want</em> to do because no one else volunteers</li>
+<li>taking on so much work (either voluntarily or out of seeming necessity) that they are prone to burnout</li>
+<li>taking on work no one else has the ability to do and for which the member's absence would lead to potential crises in the Project</li>
+</ul>
+</li>
+<li>Evaluating improvements to the RFC decision process, such as tracking and supporting multiple potential outcomes and changes in people's preferences without restarting decisions, and providing lighter-weight mechanisms for reversible decisions.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Commit: <a href="https://github.com/rust-lang/rfc-leadership-council/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/motivation.md">The commit link this page based on</a></li>
+</ul>
+<h1 id="motivation-1"><a class="header" href="#motivation-1">Motivation</a></h1>
+<p>The Rust Project is composed of hundreds of globally distributed individuals each of whom have very different motivations for working on Rust. Rust's open culture allows for these individuals to collaborate in a productive manner where complex technical and organizational decisions are made through consensus building and stakeholder feedback.</p>
+<p>Rust's model for project management and decision-making delegates most decisions to the appropriate team. Teams are ultimately accountable for their purview. While teams' decision-making processes do not strictly need to be consensus based, stakeholder feedback is repeatedly solicited to ensure a plethora of opinions on each matter are considered and factored in.</p>
+<p>However, at times this leads to issues. These issues can be summarized by the following questions which do not have clear answers in Rust's current governance model:</p>
+<ul>
+<li>What happens when it is unclear which teams' purviews a certain decision falls under?</li>
+<li>Who is in charge of important but non-urgent work that is not clearly owned by an existing team?</li>
+<li>Who is accountable when that work does not happen and organizational debt accrues?</li>
+<li>How are teams in the Project held accountable to each other and to the wider Project?</li>
+</ul>
+<p>Examples of the type of work in question include the following. Please note that this list is far from exhaustive and is merely meant to give an impression of the type of work in question:</p>
+<ul>
+<li>Helping identify gaps where existing teams are struggling to accomplish work or grow to meet challenges.</li>
+<li>Establishing large structural changes such as the Rust Foundation or new top-level teams.</li>
+<li>Project self-reflection. What aspects of Project operations are less than ideal? What do we do to change course?</li>
+<li>Project-wide community management. While individual teams can ensure that their teams are welcoming places, how do we ensure that the Project as a whole is?</li>
+<li>Policy work, for policies that have ramifications across the Project or even legal ramifications.</li>
+<li>Ensuring teams coordinate their work so that the Rust Project produces results greater than the sum of the output of the individual teams.</li>
+</ul>
+<p>While the current system does at times lead to positive outcomes in the above scenarios, it often does not. Some examples of failure mode categories include:</p>
+<ul>
+<li>No one is accountable for a decision and so the decision goes unmade, leaving it undefined. This requires solutions to repeatedly be developed either &quot;off the cuff&quot; or from first principles. This requires enormous amounts of energy and often leads to work not being done well or at all. In some cases it can even lead to burning out Project participants.</li>
+<li>Much Project work that is non-urgent often does not get done. This can lead to processes and procedures that are done not because they are the best way to handle a situation but simply because they are the easiest. This can lead to outcomes that are unfair or even actively harmful to individuals. In general, working this way leads to a culture of &quot;putting out fires&quot; instead of actively fostering improvements.</li>
+<li>The solutions to many of the issues facing the Rust Project require coordinated action across many different teams. Finding solutions for these issues requires investment at the organizational level, and it is often very difficult for individuals to coordinate and implement such structural investment.</li>
+<li>Still, such Project work is often taken up by motivated individuals who then lack structural support for accomplishing goals leading to frustration and at times conflict and burnout.</li>
+</ul>
+<p>Historically, the core team delegated authority to &quot;top-level&quot; teams who have further delegated authority to subteams or other governance structures. However, since the work outlined above is often Project-wide and outside the purview of individual teams, delegation was sometimes difficult. As a result, the core team assumed the following two responsibilities:</p>
+<ul>
+<li>Identifying, prioritizing, and advertising that certain important work needs to get done and does not fall under the purview of an existing team</li>
+<li>Attempting to do that work</li>
+</ul>
+<p>Through experience by the core team, it has become clear that both the identification of problems <em>and</em> the actual work itself is far too much for a single team. This has led to less than ideal results and in some cases, burnout. While a small amount of work requires urgent and immediate action, the vast majority of work would benefit from being tracked and handled by dedicated governance structures.</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Commit: <a href="https://github.com/rust-lang/rfc-leadership-council/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/non-goals.md">The commit link this page based on</a></li>
+</ul>
+<h1 id="non-goals-of-this-rfc"><a class="header" href="#non-goals-of-this-rfc">Non-goals of this RFC</a></h1>
+<p>The following are non-goals of this RFC. These may be met in future RFCs but are explicitly not part of this RFC.</p>
+<p>Non-goal #1: <em>Laying out the complete policies and procedures of the Council</em>. While the RFC lays out and bounds the structure of the Council, the Council's full policies and procedures will be created by the Council itself. It is also expected that the Council will change and adapt to meet the needs of the Rust Project as it evolves.</p>
+<p>Non-goal #2: <em>Addressing all governance and potential governance concerns</em>. One of the Council's responsibilities will be to identify and reflect on the issues present in governance, but we see the formation of the Council as part of a continuous process of improving Rust's leadership and how it meets the needs of the Project.</p>
+<p>Non-goal #3: <em>Forming additional teams</em>. The focus of this RFC is to form the Council and does not include the creation of additional teams, subteams, or groups of any kind.</p>
+<p>We recognize the importance of having additional teams, but see this as outside of the scope of this RFC. Instead, it will be the responsibility of the Council to investigate and understand such needs and then create additional teams to ultimately handle these issues.</p>
+<p>This has one exception, other than the Council itself: the &quot;launching pad&quot; top-level team, which provides a temporary grouping of teams not yet attached to any existing top-level team either directly or indirectly.</p>
+<p>Non-goal #4: <em>Altering the charters or purviews of existing teams</em>. While this RFC does discuss membership in the Council, it does not extend beyond this to update the charter or purview of any existing team. Existing teams continue to follow their existing charters and purviews.</p>
+<p>This has two exceptions:</p>
+<ul>
+<li>the core team: As part of this RFC, all of the capabilities and responsibilities of the core team move to the Council and are then clarified, modified, and constrained by the rest of this RFC.</li>
+<li>the moderation team: As this RFC covers topics like conflict resolution and Council oversight, it does define additional capabilities for the moderation team, as well as additional checks and balances providing bidirectional oversight between the moderation team and the Council.</li>
+</ul>
+<p>Non-goal #5: <em>Establishing completely immutable properties of the Council</em>. Any aspect established in this RFC can be modified in the future, via the public policy decision-making process, with oversight provided by that process. This RFC lays out policies for making such changes, and the processes of changing such policies must follow the existing policies.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="contributing"><a class="header" href="#contributing">Contributing</a></h1>
 <p>我們歡迎任何協助，非常感謝你願意一起支援這個社群！</p>
 <h2 id="授權條款"><a class="header" href="#授權條款">授權條款</a></h2>
@@ -2396,5 +3129,6 @@ updated: YYYY-MMM-DD
         });
         </script>
 
+    </div>
     </body>
 </html>

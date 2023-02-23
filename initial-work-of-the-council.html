@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>initial-work-of-the-council - The Rust RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded "><a href="3392-leadership-council.html">3392-leadership-council</a></li><li class="chapter-item expanded "><a href="alternatives.html">alternatives</a></li><li class="chapter-item expanded "><a href="initial-work-of-the-council.html" class="active">initial-work-of-the-council</a></li><li class="chapter-item expanded "><a href="motivation.html">motivation</a></li><li class="chapter-item expanded "><a href="non-goals.html">non-goals</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Commit: <a href="https://github.com/rust-lang/rfc-leadership-council/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/initial-work-of-the-council.md">The commit link this page based on</a></li>
+</ul>
+<h1 id="recommendations-for-initial-work-of-the-council"><a class="header" href="#recommendations-for-initial-work-of-the-council">Recommendations for initial work of the Council</a></h1>
+<p>In the course of developing this RFC, and thinking extensively about the structure and operation of the Council, the interim leadership team also identified many other tasks that fell outside the scope of this RFC, and explicitly decided to defer those tasks to the new Council. This section documents those tasks, as a suggested starting point for bootstrapping the work of the Council. None of these are binding suggestions, and the Council can freely set and prioritize its own agenda; this section serves as a public, transparent handoff of knowledge and proposals to the Leadership Council.</p>
+<p>Some of these tasks represent meta-level decisions about the processes of the Council, and we chose not to make those decisions in this RFC to avoid enshrining a particular structure rather than deferring to those who will be working regularly with that structure. The remaining tasks represent a partial todo list of long-standing tasks that fall within the Council's purview, insofar as they have fallen through the gaps between team purviews. Some of these tasks should be delegated by the Council rather than worked on directly by the Council. The inclusion of a task in this list doesn't change what type of decision-making process is required for it; some of these may be Council-internal operational decisions or private operational decisions, while others will require a public policy process.</p>
+<p>These are in no particular order, other than that meta-level decisions about processes for making decisions will need to happen before decisions relying on those processes.</p>
+<h2 id="meta-level-decisions-about-processes-and-policies"><a class="header" href="#meta-level-decisions-about-processes-and-policies">Meta-level decisions about processes and policies</a></h2>
+<ul>
+<li>Determining where, when, and how frequently the Council meets.</li>
+<li>Establishing processes for where the Council makes decisions, both synchronously (in meetings) and asynchronously.</li>
+<li>Writing and agreeing on templates for decisions, that help guide the Council to remember and follow process steps.</li>
+<li>Establishing specific processes around Council transparency, including records of decisions, minutes of meetings, the locations where these get published, and similar.</li>
+<li>Establishing a process for appointing the &quot;Project directors&quot; to the Rust Foundation board in a timely fashion. The Council will need to make such appointments soon after formation, and will also need to help ensure continuity across the transition.</li>
+<li>Establishing processes and conventions for the Council's regular review of its policy decisions. In particular, establishing expectations for the frequency of such reviews, with mechanisms to adjust those downwards when representatives express concern, or upwards after previous successful reviews.</li>
+<li>Selecting tools and establishing processes for tracking the Council's backlog/todo list, making as much of that list as possible public for transparency, and having a well-defined mechanism for Project members or teams to ask the Council to address something (either publicly or privately).</li>
+<li>Defining and documenting processes for external requests to the Council from outside the Project, ensuring they get routed appropriately, and taking steps where possible to ensure they can be directly routed to appropriate teams (potentially including new teams) in the future.</li>
+<li>Bootstrapping the new &quot;Launching Pad&quot; team and ensuring it has enough structure to operate.</li>
+<li>Organizing teams within Rust, and ensuring all teams and other governance structures are &quot;attached&quot; to appropriate places in the structure. (This includes working with teams to find appropriate homes, and ensuring such changes are ultimately reflected in the team metadata repository.)</li>
+<li>Establishing and agreeing on processes for faster decision-making for simple one-off operational matters, such as responding to emails reaching out to the Project.</li>
+<li>Ensuring the policy decision process (RFC process) is well-documented and linked from the Council documentation, so people know how Council public proposals happen.</li>
+<li>Develop handoff procedures for handling transitions to new Council representatives, or to alternates.</li>
+</ul>
+<h2 id="other-tasksgaps-potentially-within-the-councils-purview"><a class="header" href="#other-tasksgaps-potentially-within-the-councils-purview">Other tasks/gaps potentially within the Council's purview</a></h2>
+<ul>
+<li>Checking in with teams and individuals across the Project, seeing what's going well and what needs help, and adding to the Council's todo list.
+<ul>
+<li>Checking for priority items that need <em>urgent</em> help from the Council.</li>
+<li>Checking in with members of the former core team to identify items from their past todo lists and other open issues they're aware of, to add to the Council's todo list, and subsequently to either work on or delegate or otherwise disposition.</li>
+<li>Checking in with the moderation team, to ensure they have sufficient support and resources to ensure growth and sustainability. Collaborating with the moderation team as they develop and codify their policies and procedures to better handle a broader range of situations across the Project.</li>
+<li>Helping to develop plans to support understaffed or otherwise unsustainable teams.</li>
+</ul>
+</li>
+<li>Work with the infra team to develop a transition plan for privileges traditionally maintained by core (such as root privileges / logged-use break-glass credentials). Coordinate appropriate policies with infra.</li>
+<li>Working with the Launching Pad team to help transition teams out of it into appropriate places in the organization.</li>
+<li>Ensuring that top-level teams have well-documented purviews, starting to identify gaps between those purviews, and working with teams to determine when those gaps should fall to specific existing teams or become the purview of new teams.</li>
+<li>Establishing policies to enable delegation of communication/PR tasks that have traditionally fallen to top-level leadership, and then making appropriate delegations of such work, potentially including the creation of teams.</li>
+<li>Working with teams to establish coordination channels for team roadmaps, and developing processes to support cohesion across those roadmaps.</li>
+<li>Making concrete plans to improve Rust Project diversity, including working with individual teams on how to better support diversity initiatives, as well as addressing gaps for which no individual team currently has responsibility.</li>
+<li>Working with teams on processes for receiving feedback from subteams, particularly on proposed Council representatives. Particular attention should be paid to:
+<ul>
+<li>Ensure feedback is processed early, often, fairly, and consistently such that subteam members feel heard and Council members are given opportunity to address feedback and improve.</li>
+<li>Help detect and address bias in Council representative selection, including status-quo bias towards existing Rust leaders or people similar to them.</li>
+</ul>
+</li>
+<li>Documenting and improving processes for interaction with the Rust Foundation, and considering organizational improvements to provide further ongoing support for those interactions (such as how and where Project directors fit into the organizational structure and how they interface with the Council regularly).
+<ul>
+<li>In particular, establishing the purview of the Project directors along with policies and procedures for ensuring proper representation of Project interests on the Foundation board.</li>
+</ul>
+</li>
+<li>Establishing proper procedures, and potentially teams, for handling issues which may have legal implications on the Project or Project participants.</li>
+<li>Ensuring that people and teams within the Rust Project have access to appropriate training and resources for the positions they find themselves in, beyond the skills required for their direct purview. Foster a culture of team membership that values such skills and help teams find resources or training to bolster such skills. Such skills and training include, among many others:
+<ul>
+<li>General leadership and coordination skills, within a team and across a community</li>
+<li>Transparent and legible reasoning skills, recognizing and documenting underlying values, crux-finding, and collaborative disagreement</li>
+<li>Conflict resolution and de-escalation</li>
+<li>Project management and planning</li>
+<li>Communications between individuals, teams, and projects</li>
+<li>Public communications</li>
+</ul>
+</li>
+<li>Help teams evaluate and consider replicating useful aspects of the Council's structure and processes within other teams across the Project (particularly top-level teams), such as:
+<ul>
+<li>Appropriate structures to help subteams collaborate and coordinate amongst themselves and with top-level teams</li>
+<li>Structures for decision-making, including policies allowing for some types of decisions to be made more quickly, where appropriate</li>
+<li>Transparency, privacy, and documentation of decisions</li>
+<li>Policies for handling conflicts of interest among team members</li>
+<li>Policies on the number of team members sharing a common affiliation</li>
+</ul>
+</li>
+<li>Ensure Project and Project member health by understanding and working against common work patterns where select &quot;heroes&quot; assume an outsized and unreasonable share of the maintenance burden by:
+<ul>
+<li>taking on large amounts of essential work that they do not really <em>want</em> to do because no one else volunteers</li>
+<li>taking on so much work (either voluntarily or out of seeming necessity) that they are prone to burnout</li>
+<li>taking on work no one else has the ability to do and for which the member's absence would lead to potential crises in the Project</li>
+</ul>
+</li>
+<li>Evaluating improvements to the RFC decision process, such as tracking and supporting multiple potential outcomes and changes in people's preferences without restarting decisions, and providing lighter-weight mechanisms for reversible decisions.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="alternatives.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="motivation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="alternatives.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="motivation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
