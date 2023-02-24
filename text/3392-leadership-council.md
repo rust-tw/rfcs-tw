@@ -43,7 +43,7 @@ The Council is charged with the success of the Rust Project as a whole. The Coun
   - [理事會須經公開提案做出之決定](#理事會須經公開提案做出之決定)
   - [利益衝突](#利益衝突)
   - [確定與更改團隊權責](#確定與更改團隊權責)
-- [監督與究責機制](#監督與究責機制)
+- [監督與問責機制](#監督與問責機制)
   - [確保能追究理事會之責任](#確保能追究理事會之責任)
   - [確保能追究理事會代表之責任](#確保能追究理事會代表之責任)
   - [確保能追究團隊之責任](#確保能追究團隊之責任)
@@ -53,7 +53,7 @@ The Council is charged with the success of the Rust Project as a whole. The Coun
   - [非常設仲裁人](#非常設仲裁人)
   - [仲裁團隊之政策與程序](#仲裁團隊之政策與程序)
   - [稽核](#稽核)
-  - [最終究責](#最終究責)
+  - [最終問責機制](#最終問責機制)
   - [涉及專案成員之仲裁措施](#涉及專案成員之仲裁措施)
   - [涉及理事會代表之衝突](#涉及理事會代表之衝突)
   - [涉及仲裁團隊成員之衝突](#涉及仲裁團隊成員之衝突)
@@ -471,7 +471,7 @@ However, teams (individually or jointly) may further delegate their purviews to 
 
 The Council should favor working with teams on alternative strategies prior to shifting purviews between teams, as this is a relatively heavyweight step. It's also worth noting that one of the use cases for this mechanism is shifting a purview previously delegated to a team that functionally no longer exists (for instance, because no one on the team has time), potentially on a relatively temporary basis until people arrive with the time and ability to re-create that team. This section of the RFC intentionally does not put constraints on the Council for exactly how (or whether) this consultation should happen.
 
-# 監督與究責機制
+# 監督與問責機制
 [accountability]: #mechanisms-for-oversight-and-accountability
 
 The following are various mechanisms that the Council uses to keep itself and others accountable.
@@ -584,7 +584,7 @@ As the audit process and the Council/moderation discussions proceed, the moderat
 
 The contingent moderation team must report the results of the audit to the moderation team and the Council for their review. This must not include any details that may reveal private information, either directly or indirectly. Together with the discussions with the moderation team, this should aim to address the concerns of the Council.
 
-## 最終究責
+## 最終問責機制
 
 The Leadership Council and moderation team each have substantial power within the Rust Project. This RFC provides many tools by which they can work out conflicts. This section outlines the last-resort mechanisms by which those teams can hold each other accountable. This section is written in the hopes that it will never be needed, and that teams will make every possible effort to resolve conflicts without reaching this point.
 
