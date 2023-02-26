@@ -47,16 +47,16 @@ The Council is charged with the success of the Rust Project as a whole. The Coun
   - [確保能追究理事會之責任](#確保能追究理事會之責任)
   - [確保能追究理事會代表之責任](#確保能追究理事會代表之責任)
   - [確保能追究團隊之責任](#確保能追究團隊之責任)
-- [仲裁、分歧與衝突](#仲裁、分歧與衝突)
+- [審核、分歧與衝突](#審核、分歧與衝突)
   - [團隊間之分歧](#團隊間之分歧)
   - [涉及團隊或專案成員之衝突](#涉及團隊或專案成員之衝突)
-  - [仲裁人代表團](#仲裁人代表團)
-  - [仲裁團隊之政策與程序](#仲裁團隊之政策與程序)
+  - [審核人代表團](#審核人代表團)
+  - [審核團隊之政策與程序](#審核團隊之政策與程序)
   - [稽核](#稽核)
   - [最終問責機制](#最終問責機制)
-  - [涉及專案成員之仲裁措施](#涉及專案成員之仲裁措施)
+  - [涉及專案成員之審核措施](#涉及專案成員之審核措施)
   - [涉及理事會代表之衝突](#涉及理事會代表之衝突)
-  - [涉及仲裁團隊成員之衝突](#涉及仲裁團隊成員之衝突)
+  - [涉及審核團隊成員之衝突](#涉及審核團隊成員之衝突)
 - [本案之批准](#本案之批准)
 - [附註](#附註)
 
@@ -108,7 +108,7 @@ This RFC also establishes mechanisms for oversight and accountability between th
 - *維持健康的工作環境*：理事會代表應該要為他們的貢獻與其性質感到滿意。他們不應認為自己在理事會中的存在只是義務所為，而必須是因為他們用有意義的方式主動參與。
 - *持續演化*：理事會受到期待會隨著時間演化以應對團隊、專案以及社群的演化。
 
-理事會代表、仲裁團隊成員以及其他專案成員都應該能為身邊的人以及更廣泛的社群做好示範。這些職位都有對應的責任與領導，也因此這些人的行為都帶有份量而會對社群造成重大影響，也因此必須注意行使職權。選擇要行使這些職權的人都應該要知道身邊的人會以對應的高標準看待他們。
+理事會代表、審核團隊成員以及其他專案成員都應該能為身邊的人以及更廣泛的社群做好示範。這些職位都有對應的責任與領導，也因此這些人的行為都帶有份量而會對社群造成重大影響，也因此必須注意行使職權。選擇要行使這些職權的人都應該要知道身邊的人會以對應的高標準看待他們。
 
 # 理事會組織架構
 
@@ -146,7 +146,7 @@ This RFC also establishes mechanisms for oversight and accountability between th
 - 語言
 - 啟動台
 - 函式庫
-- 仲裁
+- 審核
 - 發佈
 
 本清單並不是最佳的一級團隊組成。本案建議理事會的最開始的工作就是檢視既存的管理架構並確保所有架構都在一個或多個一級團隊中有直接或間接的代表，並且確保所有一級團隊都有符合能被認定為一級團隊的條件。這將會涉及對一級團隊組成的調整。
@@ -170,7 +170,7 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 任何要移除團隊的一級指定（或其他會導致無法參與理事會）的決策，都需要除卻將被移除的一級團隊代表外所有理事會代表的共識。雖然如此，必須要邀請考慮移除的團隊代表參與關於團隊移除的理事會審議，而理事會也只能在極端特例下不顧團隊反對將之移除。
 
-理事會不得移除仲裁團隊。理事會不能在沒有仲裁團隊的同意下改變仲裁團隊的權責。
+理事會不得移除審核團隊。理事會不能在沒有審核團隊的同意下改變審核團隊的權責。
 
 ## 候補與放棄代表權利
 
@@ -516,7 +516,7 @@ The accountability process must not be punitive, and the process must be done wi
 
 In extreme circumstances where teams are willfully choosing to not act in good faith with regards to the wider Project, the Council has the authority to change a team's purview, move some subset of a team's purview to another team, or remove a team entirely. This is done through the Council's regular decision making process. (This does not apply to the moderation team; see the next section for accountability between the Council and moderation team.)
 
-# 仲裁、分歧與衝突
+# 審核、分歧與衝突
 
 This section describes the roles of the Leadership Council and the moderation team in helping resolve disagreements and conflicts, as well as the interactions between those teams.
 
@@ -542,7 +542,7 @@ Conflicts involving teams or Project members should be brought to the moderation
 
 Individuals or teams may also voluntarily engage in other processes to address conflicts or interpersonal issues, such as non-binding external mediation. Individuals or teams should keep the moderation team in the loop when doing so, and should seek guidance from the moderation team regarding appropriate resources or approaches for doing so. Individuals or teams must not use resources that would produce a conflict of interest.
 
-## 仲裁人代表團
+## 審核人代表團
 
 The moderation team must at all times maintain a publicly documented list of "contingent moderators", who must be approved by both the moderation team and the Council via internal consent decision. The moderation team and contingent moderation team should both consist of at least three members each. The contingent moderators must be:
 - Not part of the current moderation team *or* the Leadership Council.
@@ -557,7 +557,7 @@ Moderation is a high-burnout activity, and individual moderators or the moderati
 
 As the contingent moderator role does not have any regular required activities outside of exceptional situations, those appointed to that role must have regular check-ins with the moderation team, to reconfirm that they're still willing to serve in that role, and to avoid a circumstance in which the contingent moderators are abruptly needed and turn out to be unavailable.
 
-## 仲裁團隊之政策與程序
+## 審核團隊之政策與程序
 
 The moderation team has a duty to have robust policies and procedures in place. The Council provides oversight and assistance to ensure that the moderation team has those policies and procedures and that they are sufficiently robust.
 
@@ -600,7 +600,7 @@ By default, the new Council and interim moderation team will take responsibility
 
 This mechanism is an absolute last resort. It will almost certainly produce suboptimal outcomes, to say the least. If situations escalate to this outcome, many things have gone *horribly* wrong, and those cleaning up the aftermath should endeavor to prevent it from ever happening again. The indication (by either the moderation team or the Council) that the situation *might* escalate to this point should be considered a strong signal to come to the table and find a way to do "Something Else which is Not That" to avoid the situation.
 
-## 涉及專案成員之仲裁措施
+## 涉及專案成員之審核措施
 [moderation-actions-involving-Project-members]: #moderation-actions-involving-Project-members
 
 The moderation team, in the course of doing moderation work, necessarily requires the ability to take action not just against members of the Rust community but also against members of the Rust Project. Those actions may span the ladder of escalation all the way from a conversation to removal from the Project. This puts the moderation team in a position of power and trust. This RFC seeks to provide appropriate accountability and cross-checks for the moderation team, as well as for the Council.
@@ -625,7 +625,7 @@ In addition to the range of moderation actions already available, the moderation
 
 All of these also trigger a required audit. The Council must also be notified of any moderation actions involving representatives or alternates, or actions directly preventing people from becoming representatives.
 
-## 涉及仲裁團隊成員之衝突
+## 涉及審核團隊成員之衝突
 
 Conflicts involving a member of the moderation team will be handled by the remaining members of the moderation team (minus any with a conflict of interest), *together with* the contingent moderation team to provide additional oversight. Any member of the moderation or contingent moderation team should confer with the Council if there is a more systemic issue within the moderation team. The contingent moderators must audit this decision and must provide an audit report to the Council and moderation team.
 
