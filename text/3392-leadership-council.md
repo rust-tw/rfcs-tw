@@ -82,95 +82,95 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 # 理事會之職責、期待與限制
 
-At a high-level, the Council is *only* in charge of the following duties:
+高層級描述下，理事會*只*負責以下職責：
 
-- Identifying, prioritizing, and tracking work that goes undone due to lack of clear ownership (and not due to the owners' explicit de-prioritization, placement in a backlog, etc.).
-- Delegating this work, potentially establishing new (and possibly *temporary*) teams to own this work.
-- Making decisions on *urgent* matters that do not have a clear owner.
-    - This should only be done in exceptional circumstances where the decision cannot be delegated either to existing teams or to newly created ones.
-- Coordinating Project-wide changes to teams, structures, or processes.
-- Ensuring top-level teams are accountable to their purviews, to other teams, and to the Project.
-- Ensuring where possible that teams have the people and resources they need to accomplish their work.
-- Establishing the official position, opinion, or will of the Rust Project as a whole.
-    - This helps reduce the need for Project-wide coordination, especially when a long public polling and consensus-building process is not practical - for example, when communicating with third parties who require some understanding of what the Rust Project as a whole "wants".
+- 識別、優先排序以及追蹤由於缺乏明確負責者而無法執行的工作（而不應對負責者刻意降低優先度、置於待辦事項等的工作）。
+- 委派該工作，並潛在可建立全新的（並可能為*暫時性的*）團隊來負責此工作。
+- 為沒有明確負責者的*緊急*事項下達決策。
+    - 此行為只能在特例情境下執行，即該決策無法委派給既有團隊也無法交付給全新團隊時。
+- 為團隊、架構或流程協調橫跨專案的變更。
+- 確保一級團隊能為其權責、對其他團隊以及對專案本身負責。
+- 確保各個團隊能有完成其工作所需的人力與資源。
+- 為 Rust 專案整體建立起官方的定位、觀點或意願。
+    - 藉此能幫助降低橫跨專案的協調需求，尤其是面對長期公開投票與共識建立流程不夠實際的情境。舉例來說，要對第三方單位溝通 Rust 專案整體「 所想要的目標」時。
 
-In addition to these duties, the Council has additional expectations and constraints, to help determine if the Council is functioning properly:
+除了這些職責外，對理事會也有額外的期待與限制，以幫助判斷理事會是否正常運作：
 
-- *Delegate work*: The Council should not take on work beyond what this RFC explicitly assigns to it; it must delegate to existing or new teams distinct from the Council. Such teams may include Council representatives, but such membership is not part of the duties of a Council representative.
-- *Ensure the Project runs smoothly in the long term*: The Council should ensure that non-urgent Project management work is prioritized and completed with enough regularity that the Project does not accumulate organizational debt.
-- *Be Accountable*: As the Council wields broad power, the Council and Council representatives must be accountable for their actions. They should listen to others' feedback, and actively reflect on whether they continue to meet the duties and expectations of the position they hold.
-- *Be representational*: Council representatives should not only represent the breadth of Project concerns but also the diversity of the Rust community in as many aspects as possible (demographics, technical background, etc).
-- *Share burden*: All Council representatives must share burden of Council duties.
-- *Respect others' purviews*: The Council must respect the purviews delegated to teams. The Council should consult with and work together with teams on solutions to issues, and should almost never make decisions that go against the wishes of any given team.
-- *Act in good faith*: Council representatives should make decisions in the best interest of the Rust Project *as a whole* even if those decisions come into conflict with their individual teams, their employers, or other outside interests.
-- *Be transparent*: While not all decisions (or all aspects of a decision) can be made public, the Council should be as open and transparent about their decision-making as possible. The Council should also ensure the organizational structure of the Project is clear and transparent.
-- *Respect privacy*: The Council must never compromise personal or confidential information for the sake of transparency, including adjacent information that could unintentionally disclose privileged information.
-- *Foster a healthy working environment*: The Council representatives should all feel satisfied with the amount and nature of their contribution. They should not feel that their presence on the Council is merely out of obligation but rather because they are actively participating in a meaningful way.
-- *Evolve*: The Council is expected to evolve over time to meet the evolving needs of teams, the Project, and the community.
+- *委派工作*：理事會不應該主動執行本案沒有明確指派的工作；理事會必須委派給既有團隊或者成員與理事會不重複的全新團隊。執行工作的團隊中可以有理事會的代表，但是做為團隊成員並不屬於理事會代表的權責。
+- *為了確保專案長期的流暢運作*：理事會應該要確保非緊急專案管理工作有接受優先度排序，並且能定期完成以確保專案不會累積成整個組織級別的負擔。
+- *負責任*：由於理事會擁有廣泛的權力，理事會與理事會代表必須要為自己的行為負責任。他們應該要傾聽他人的回饋，並且能對他們是否可以繼續達到該職位所需的職責與期待進行主動的反思。
+- *做好代表*：理事會代表不只要能代表整個專案各形式的考量，也要能盡可能代表 Rust 社群的各方面（人口分布、技術背景等等）。
+- *共享負擔*：所有理事會代表都必須共享理事會職責的負擔。
+- *尊重他人的權責*：理事會必須尊重委派給各團隊的權責。理事會必須與各團隊諮商並且共同合作解決問題，並且盡量不作出違背任何團隊意願的決策。
+- *以良善原則行事*：理事會代表應該以 Rust 專案*整體*的利益作出決策，即便這些決策可能會與各個團隊、雇主以及其他外部單位的利益衝突。
+- *保持透明*：雖然不是所有決策（以及決策的各方面）都能被公開，理事會應該要盡可能維持其決策的公開與透明。理事會也應該要確保專案的組織架構很明確透明。
+- *尊重隱私*：理事會的成員絕不能為了透明性而洩漏個人或者機密情報，包含可能會意外洩漏重要資訊的周邊資訊。
+- *維持健康的工作環境*：理事會代表應該要為他們的貢獻與其性質感到滿意。他們不應認為自己在理事會中的存在只是義務所為，而必須是因為他們用有意義的方式主動參與。
+- *持續演化*：理事會受到期待會隨著時間演化以應對團隊、專案以及社群的演化。
 
-Council representatives, moderation team members, and other Project members serve as examples for those around them and the broader community. All of these roles represent positions of responsibility and leadership; their actions carry weight and can exert great force within the community, and should be wielded with due care. People choosing to serve in these roles should thus recognize that those around them will hold them to a correspondingly high standard.
+理事會代表、仲裁團隊成員以及其他專案成員都應該能為身邊的人以及更廣泛的社群做好示範。這些職位都有對應的責任與領導，也因此這些人的行為都帶有份量而會對社群造成重大影響，也因此必須注意行使職權。選擇要行使這些職權的人都應該要知道身邊的人會以對應的高標準看待他們。
 
 # 理事會組織架構
 
-The Council consists of a set of team representatives, each representing one [top-level team][top-level-teams] and its subteams.
+理事會由一群團隊代表所組成，各代表一支[一級團隊][top-level-teams]以及其子團隊。
 
-Each top-level team designates exactly one representative, by a process of their choice.
+每支一級團隊都能用各自所選的程序選出恰好一名代表。
 
-Any member of the top-level team or a member of any of their subteams is eligible to be the representative. Teams should provide members of their subteams with an opportunity for input and feedback on potential candidates.
+任何一級團隊的成員或其子團隊的成員都能作為其代表。團隊必須提供子團隊成員對潛在候選給予意見與回饋的經驗。
 
-Each representative represents at most one top-level team, even if they're also a member of other teams. The primary responsibility of representing any Rust team falls to the representative of the top-level team they fall under.[^under-multiple-teams]
+各個代表最多代表一支一級團隊，就算他們也是其他團隊的成員。代表任何 Rust 團隊的主要責任將由其所屬的一級團隊代表負責。[^under-multiple-teams]
 
-All teams in the Rust Project must ultimately fall under at least one top-level team. For teams that do not currently have a parent team, this RFC establishes the ["launching pad" team][launching-pad] as a temporary home. This ensures that all teams have representation on the Council.
+所有 Rust 專案團隊都必須至少隸屬於一支一級團隊。對於目前沒有母團隊的團隊，本案會建立起[「啟動台團隊」][launching-pad]作為暫時性的隸屬對象。以確保所有團隊都在理事會有對應的代表。
 
 ## 一級團隊單位
-[top-level-teams]: #top-level-teams
+[top-level-teams]: #一級團隊單位
 
-The Council establishes top-level teams via public policy decisions. In general, top-level teams should meet the following criteria:
-- Have a purview that is foundational to the Rust Project
-- Be the ultimate decision-makers on all aspects of that purview
-- Have a purview that not is a subset of another team's purview (that is, it must not be a subteam or similar governance structure)
-- Have an open-ended purview that's expected to continue indefinitely
-- Be a currently active part of the Rust Project
+理事會將會透過公開政策決策建立一級團隊。一般來說，一級團隊應該要符合以下條件：
+- 有對 Rust 專案具備根本重要性的權責
+- 是該權責全面向的最終決策者
+- 所有權責不隸屬於其他團隊權責（不能為子團隊或相似管理架構所有）
+- 有著能期待無止盡持續的開放權責
+- 目前為 Rust 專案中活躍的存在
 
-There must be between 4 and 9 top-level teams (inclusive), preferably between 5 and 8. This number balances the desire for a diverse and relatively shallow structure while still being practical for productive conversation and consent.[^number-of-representatives]
+一級團隊的數量必須介於 4 到 9（包含）之間，傾向介於 5 到 8 之間。這個數字能相對平衡多元性的需求以及相對小的架構，同時又在進行有效對話與共識凝聚時具備實務性。[^number-of-representatives]
 
-When the Council creates a new top-level team, that team then designates a Council representative.[^bootstrapping-new-teams] When creating a new top-level team, the Council must provide justification for why it should not be a subteam or other governance structure.
+當理事會建立起全新一級團隊時，該團隊則該指派一名理事會代表。[^bootstrapping-new-teams]當建立起全新的一級團隊時，理事會必須提供為何該一級團隊不能作為子團隊或者其他管理架構存在的解釋。
 
 ### 一級團隊初始名單
 
-The initial list of top-level teams is formed from all teams listed on [the rust-lang.org website's top-level governance section](https://www.rust-lang.org/governance) (besides core and alumni) at the time of initial publication of this RFC, plus the ["launching pad" team][launching-pad]:
-- Compiler
+一級團隊的初始名單由本案使發表時列於 [rust-lang.org 網站的一級管理區域](https://www.rust-lang.org/governance)的所有團隊組成（除去核心團隊與校友），再加上[「啟動台」團隊][launching-pad]：
+- 編譯器
 - Crates.io
-- Dev tools
-- Infrastructure
-- Language
-- Launching Pad
-- Library
-- Moderation
-- Release
+- 開發工具
+- 基礎架構
+- 語言
+- 啟動台
+- 函式庫
+- 仲裁
+- 發佈
 
-This list is not an optimal set of top-level teams. This RFC recommends that the first order of business of the Council be to go through existing governance structures and ensure that all structures have representation either directly or indirectly through one or more top-level teams as well as ensure that all top-level teams sufficiently meet the criteria for being considered a top-level team. This will involve modifying the set of top-level teams.
+本清單並不是最佳的一級團隊組成。本案建議理事會的最開始的工作就是檢視既存的管理架構並確保所有架構都在一個或多個一級團隊中有直接或間接的代表，並且確保所有一級團隊都有符合能被認定為一級團隊的條件。這將會涉及對一級團隊組成的調整。
 
-### 「啟動台」 一級團隊
-[launching-pad]: #the-launching-pad-top-level-team
+### 「啟動台」一級團隊
+[launching-pad]: #「啟動台」一級團隊
 
-This RFC establishes the "launching pad" team to *temporarily* accept subteams that otherwise do not have a top-level team to slot underneath of. This ensures that all teams have representation on the Council, while more permanent parent teams are found or established.
+本案會建立「啟動台」團隊以*暫時*接受沒有對應一級團隊可以歸類的子團隊。這樣能夠確保在更加永久性的母團隊被找到或者建立起之前，所有團隊都在理事會有代表。
 
-The "launching pad" team is an umbrella team: it has no direct members, only subteam representatives.
+「啟動台」是個雨傘團隊：該團隊沒有直接成員，只有子團隊代表。
 
-The Council should work to find or create a more appropriate parent for each subteam of the "launching pad", and subsequently move those subteams to their new parent team.
+理事會應該要致力於為所有「啟動台」子團隊找尋或者建立更合適的母團隊，並且隨之將子團隊移轉至對應的母團隊。
 
-In some cases, an appropriate parent team may exist but not yet be ready to accept subteams; the launching pad can serve as an interim home in such cases.
+在某些情況下，雖有合適的母團隊但尚未準備好接受子團隊時，啟動台能作為臨時歸宿容納這些例子。
 
-The launching pad also serves as a default home for subteams of a team that's removed or reorganized away, if that removal or reorganization does not explicitly place those subteams somewhere else in the organization.
+而對於團隊面臨移除或重組時，如果移除或重組時並沒有明確將其子團隊納入其他組織中的母團隊，則啟動台將會作為這些子團隊的預設歸宿。
 
-The Council must review subteam membership in the "launching pad" every 6 months to ensure that proper progress is being made on finding all subteams new parent teams. As with other top-level teams, the "launching pad" team can be retired (and have its representation within the Council removed) if the Council finds it to be no longer necessary. The process for retiring the "launching pad" team is the same as with other top-level teams. Alternatively, the Council is free to give the "launching pad" team its own purview, but doing so is out of scope for this RFC.
+理事會必須每六個月審視「啟動台」中的子團隊成員狀況，以確保有合適的流程在協助所有子團隊成員找到新的母團隊。而與其它一級團隊相同的是，只要理事會認為「啟動台」團隊不再需要，就可以將之撤除（並且移除掉其在理事會中的代表）。撤除「啟動台」團隊的流程與其他一級團隊同理。除此之外，理事會也可以給予「啟動台」團隊自己的權責，但是此措施不屬於本案的範圍內。
 
 ### 廢除一級團隊
 
-Any decision to remove a team's top-level designation (or otherwise affect eligibility for the Council) requires the consent of all Council representatives, with the exception of the representative of the top-level team being removed. Despite this caveat, the representative of the team under consideration must be invited to Council deliberations concerning the team's removal, and the Council should only remove a team over their objections in extreme cases.
+任何要移除團隊的一級指定（或其他會導致無法參與理事會）的決策，都需要除卻將被移除的一級團隊代表外所有理事會代表的共識。雖然如此，必須要邀請考慮移除的團隊代表參與關於團隊移除的理事會審議，而理事會也只能在極端特例下不顧團隊反對將之移除。
 
-The Council cannot remove the moderation team. The Council cannot change the moderation team's purview without the agreement of the moderation team.
+理事會不得移除仲裁團隊。理事會不能在沒有仲裁團隊的同意下改變仲裁團隊的權責。
 
 ## 候補與放棄代表權利
 
