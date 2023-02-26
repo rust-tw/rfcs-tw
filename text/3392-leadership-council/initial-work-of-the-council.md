@@ -1,4 +1,4 @@
-- Commit: [The commit link this page based on](https://github.com/rust-lang/rfc-leadership-council/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/initial-work-of-the-council.md)
+- Commit: [The commit link this page based on](https://github.com/rust-lang/rfcs/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council/initial-work-of-the-council.md)
 
 # Recommendations for initial work of the Council
 
