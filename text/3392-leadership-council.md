@@ -138,7 +138,7 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 ### 一級團隊初始名單
 
-一級團隊的初始名單由本案使發表時列於 [rust-lang.org 網站的一級管理區域](https://www.rust-lang.org/governance)的所有團隊組成（除去核心團隊與校友會），再加上[「啟動台」團隊][launching-pad]：
+一級團隊的初始名單由本案使發表時列於 [rust-lang.org 網站的一級管理區域](https://www.rust-lang.org/governance)的所有團隊組成（除去核心團隊與校友），再加上[「啟動台」團隊][launching-pad]：
 - 編譯器
 - Crates.io
 - 開發工具
