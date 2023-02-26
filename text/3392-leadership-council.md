@@ -26,7 +26,7 @@ The Council is charged with the success of the Rust Project as a whole. The Coun
   - [任期限制](#任期限制)
   - [對單一公司或實體代表之限制](#對單一公司或實體代表之限制)
   - [候選資格](#候選資格)
-  - [與核心團隊之關係](#與核心團隊之關係)
+  - [與 Core 團隊之關係](#與-core-團隊之關係)
   - [與 Rust 基金會之關係](#與-rust-基金會之關係)
 - [理事會決策流程](#理事會決策流程)
   - [營運與政策決策](#營運與政策決策)
@@ -138,7 +138,7 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 ### 一級團隊初始名單
 
-一級團隊的初始名單由本案使發表時列於 [rust-lang.org 網站的一級管理區域](https://www.rust-lang.org/governance)的所有團隊組成（除去核心團隊與校友），再加上[「啟動台」團隊][launching-pad]：
+一級團隊的初始名單由本案使發表時列於 [rust-lang.org 網站的一級管理區域](https://www.rust-lang.org/governance)的所有團隊組成（除去 Core 團隊與校友），再加上[「啟動台」團隊][launching-pad]：
 - 編譯器
 - Crates.io
 - 開發工具
@@ -226,7 +226,7 @@ The following are criteria for deciding ideal candidates. These are similar to b
 
 While some teams may not currently have an abundance of candidates who fit this criteria, the Council should actively foster such skills within the larger Project, as these are helpful not only for Council membership but across the entire Project.
 
-## 與核心團隊之關係
+## 與 Core 團隊之關係
 
 The Leadership Council serves as the successor to the core team in all capacities. This RFC was developed with the participation and experience of the core team members, and the Council should continue seeking such input and institutional memory when possible, especially while ramping up.
 
