@@ -631,17 +631,17 @@ Conflicts involving a member of the moderation team will be handled by the remai
 
 # 本案之批准
 
-Since November of 2021 the following group has been acting as de-facto Project leadership: all members of the core team, all members of the moderation team, all Project representatives on the Rust Foundation board, and the leads of the "top-level" teams:
-- Compiler
+自 2021 年 11 月以來，下列成員實質上已在專案擔任中領導角色：所有 Core 團隊成員、所有審核團隊成員、Rust Foundation 理事會（board）上的所有專案代表以及「一級」團隊的負責人：
+- 編譯器
 - Crates.io
-- Dev tools
-- Infrastructure
-- Language
-- Library
-- Moderation (already included above)
-- Release
+- 開發工具
+- 基礎架構
+- 語言
+- 函式庫
+- 審核（已包含在上方）
+- 發佈
 
-This RFC will be ratified using the standard RFC process, with the approving team being all the members of this de facto leadership group. This group should also raise objections on behalf of other members of the Project; in particular, team leads should solicit feedback from their teams and subteams.
+此 RFC 將以標準 RFC 程序審批，由前述實質上的領導層成員來批准。這些成員還應代表專案中其他成員提出異議，更具體來說，團隊負責人應徵求他的團隊和子團隊的回饋。
 
 # 附註
 
