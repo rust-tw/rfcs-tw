@@ -216,15 +216,15 @@ If this constraint does not hold, whether by a representative changing affiliati
 
 ## 候選資格
 
-The following are criteria for deciding ideal candidates. These are similar to but not the same as the criteria for an effective team lead or co-lead. While a team lead *might* also make a good Council representative, serving as a team lead and serving as a Council representative both require a substantial time investment, which likely motivates dividing those roles among different people. The criteria are not hard requirements but can be used for determining who is best positioned to be a team's representative. In short, the representative should have:
-- sufficient time and energy to dedicate to the needs of the Council.
-- an interest in helping with the topics of Project operations and Project governance.
-- broad awareness of the needs of the Project outside of their teams or areas of active contribution.
-- a keen sense of the needs of their team.
-- the temperament and ability to represent and center the needs of others above any personal agenda.
-- ability and willingness to represent all viewpoints from their team, not just a subset, and not just those they agree with.
+以下是決定理想候選人的標準，這些標準雖類似團隊領導者或共同領導者的標準，但並不完全相同。儘管團隊領導者**可能**也能成為傑出的理事會代表，但擔任團隊領導者和委員會代表都需要大量時間投入，這會促使將這些角色分配給不同的人。這些標準並非硬性要求，但可用於決定誰最適合成為團隊代表。簡而言之，代表應具備以下條件：
+- 有充沛的時間與精力，以滿足委員會的需求。
+- 有興趣協助處理專案營運和治理相關事務。
+- 廣泛了解專案的需求，且不限於其所在團隊或積極貢獻之領域。
+- 對自己的團隊需求有敏銳的感知。
+- 具備代表他人的氣質和能力，超越任何私人事務。
+- 能夠代表其團隊的所有觀點，不僅僅是部分觀點，也不僅僅是團隊成員同意的觀點。
 
-While some teams may not currently have an abundance of candidates who fit this criteria, the Council should actively foster such skills within the larger Project, as these are helpful not only for Council membership but across the entire Project.
+儘管有些團隊目前可能沒有足夠的候選人符合這些標準，委員會應積極培養這些技能，因為這些技能不僅對委員會成員資格有幫助，也對這個專案也有益。
 
 ## 與 Core 團隊之關係
 
