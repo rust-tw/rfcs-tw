@@ -190,13 +190,13 @@ For private matters, the Council should exercise discretion on informing alterna
 
 ## 任期限制
 
-Council representatives' terms are one year in length. Each representative has a soft limit of three consecutive full terms for any given representative delegation (the delegation from a particular top-level team). A representative may exceed this soft limit if and only if the Council receives explicit confirmation from the respective team that they are unable to produce a different team member as a representative (for example, due to lack of a willing alternative candidate, or due to team members having blocking objections to any other candidate).
+理事會代表任期為一年。對於任何已被認可的代表團（來自特定一級團隊的代表團），每位代表有最多連任三次的非硬性限制。一位代表在理事會收到來自個別團隊明確指出他們無法產生另一位代表時，得超過任期限制（舉例來說，因為缺乏其他有意願的候選人，或是因為團隊成員對其他任何候選人提出反對意見）。
 
-Beyond this, there is no hard limit on the number of terms a representative can serve for other top-level teams or non-consecutive terms for a single top-level team. Teams should strive for a balance between continuity of experience and rotating representatives to provide multiple people with such experience.[^representative-selection]
+除此之外，對於單一代表在其他一級團隊服務的任期數、或是在單一一級團隊的非連續任期，並沒有任何硬性限制。團隊應該力求在經驗的存續與代表的替換之間取得平衡，以提供更多人這樣的經驗。[^representative-selection]
 
-Half of the representative appointments shall happen at the end of March while half shall happen at the end of September. This avoids changing all Council representatives at the same time. For the initial Council, and anytime the set of top-level teams is changed, the Council and top-level teams should work together to keep term end-dates roughly evenly divided between March and September. However, each term should last for a minimum of 6 months (temporary imbalance is acceptable to avoid excessively short terms).
+一半的代表將在（每年的）三月底進行任命，另一半則在九月底進行任命。這避免了同時更換所有理事會代表。對於初始的理事會以及在任何時候的一級團隊組成發生改變，理事會以及一級團隊應該共同努力使任期結束日大約平均落在在三月與九月各半。然而，每個任期應該至少持續六個月（為了避免任期過短，暫時的不平衡是可被接受的）。
 
-If the Council and top-level teams cannot agree on appropriate term end-date changes, representatives are randomly assigned to one or the other end date (at least 6 months out) to maintain balance.
+如果理事會及一級團隊無法就適當的任期結束日變更達成共識，代表將在三月底或九月底兩者之間被隨機分配一個任期結束日（且在至少 6 個月後）以維持平衡。
 
 ## 對單一公司或實體代表之限制
 
@@ -657,6 +657,6 @@ This RFC will be ratified using the standard RFC process, with the approving tea
 
 [^number-of-representatives]: This also effectively constrains the number of Council representatives to the same range. Note that this constraint is independently important.
 
-[^representative-selection]: Being a Council representative is ultimately a position of service to the respective team and to the Project as a whole. While the authors of this RFC hope that the position is fulfilling and engaging to whomever fills it, we also hope that it is not viewed as a position of status to vie for.
+[^representative-selection]: 最終整體來說，作為一位理事會代表是為了服務個別的團隊以及 Rust 計畫。儘管此 RFC 的作者希望這個職位能夠滿足並且吸引任何足以勝任這份工作的人，我們仍然希望它不被視為是用來爭奪地位的職位。
 
 [^council-roles]: The Council is not required to assign such roles exclusively to Council representatives; the Council may appoint any willing Project member. Such roles do not constitute membership in the Council for purposes such as decision-making.
