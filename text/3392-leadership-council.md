@@ -123,7 +123,7 @@ This RFC also establishes mechanisms for oversight and accountability between th
 所有 Rust 專案團隊都必須至少隸屬於一支一級團隊。對於目前沒有母團隊的團隊，本案會建立起[「啟動台團隊」][launching-pad]作為暫時性的隸屬對象。以確保所有團隊都在理事會有對應的代表。
 
 ## 一級團隊單位
-[top-level-teams]: #一級團隊
+[top-level-teams]: #一級團隊單位
 
 理事會將會透過公開政策決策建立一級團隊。一般來說，一級團隊應該要符合以下條件：
 - 有對 Rust 專案具備根本重要性的權責
