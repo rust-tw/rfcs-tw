@@ -50,7 +50,7 @@ The Council is charged with the success of the Rust Project as a whole. The Coun
 - [仲裁、分歧與衝突](#仲裁、分歧與衝突)
   - [團隊間之分歧](#團隊間之分歧)
   - [涉及團隊或專案成員之衝突](#涉及團隊或專案成員之衝突)
-  - [非常設仲裁人](#非常設仲裁人)
+  - [仲裁人代表團](#仲裁人代表團)
   - [仲裁團隊之政策與程序](#仲裁團隊之政策與程序)
   - [稽核](#稽核)
   - [最終問責機制](#最終問責機制)
@@ -542,7 +542,7 @@ Conflicts involving teams or Project members should be brought to the moderation
 
 Individuals or teams may also voluntarily engage in other processes to address conflicts or interpersonal issues, such as non-binding external mediation. Individuals or teams should keep the moderation team in the loop when doing so, and should seek guidance from the moderation team regarding appropriate resources or approaches for doing so. Individuals or teams must not use resources that would produce a conflict of interest.
 
-## 非常設仲裁人
+## 仲裁人代表團
 
 The moderation team must at all times maintain a publicly documented list of "contingent moderators", who must be approved by both the moderation team and the Council via internal consent decision. The moderation team and contingent moderation team should both consist of at least three members each. The contingent moderators must be:
 - Not part of the current moderation team *or* the Leadership Council.
