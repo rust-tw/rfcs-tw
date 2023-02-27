@@ -38,9 +38,9 @@ The Council is charged with the success of the Rust Project as a whole. The Coun
   - [解決僵局](#解決僵局)
   - [回饋與評估](#回饋與評估)
 - [決策流程之透明度和監督](#決策流程之透明度和監督)
-  - [理事會可在內部做出之決定](#理事會可在內部做出之決定)
-  - [理事會須私下保密做出之決定](#理事會須私下保密做出之決定)
-  - [理事會須經公開提案做出之決定](#理事會須經公開提案做出之決定)
+  - [理事會可在內部做出之決策](#理事會可在內部做出之決策)
+  - [理事會須私下保密做出之決策](#理事會須私下保密做出之決策)
+  - [理事會須經公開提案做出之決策](#理事會須經公開提案做出之決策)
   - [利益衝突](#利益衝突)
   - [確定與更改團隊權責](#確定與更改團隊權責)
 - [監督與問責機制](#監督與問責機制)
@@ -89,7 +89,7 @@ This RFC also establishes mechanisms for oversight and accountability between th
 - 為沒有明確負責者的*緊急*事項下達決策。
     - 此行為只能在特例情境下執行，即該決策無法委派給既有團隊也無法交付給全新團隊時。
 - 為團隊、架構或流程協調橫跨專案的變更。
-- 確保一級團隊能為其權責、對其他團隊以及對專案本身負責。
+- 確保一級團隊能為其權責、對其它團隊以及對專案本身負責。
 - 確保各個團隊能有完成其工作所需的人力與資源。
 - 為 Rust 專案整體建立起官方的定位、觀點或意願。
     - 藉此能幫助降低橫跨專案的協調需求，尤其是面對長期公開投票與共識建立流程不夠實際的情境。舉例來說，要對第三方單位溝通 Rust 專案整體「 所想要的目標」時。
@@ -102,25 +102,25 @@ This RFC also establishes mechanisms for oversight and accountability between th
 - *做好代表*：理事會代表不只要能代表整個專案各形式的考量，也要能盡可能代表 Rust 社群的各方面（人口分布、技術背景等等）。
 - *共享負擔*：所有理事會代表都必須共享理事會職責的負擔。
 - *尊重他人的權責*：理事會必須尊重委派給各團隊的權責。理事會必須與各團隊諮商並且共同合作解決問題，並且盡量不作出違背任何團隊意願的決策。
-- *以良善原則行事*：理事會代表應該以 Rust 專案*整體*的利益作出決策，即便這些決策可能會與各個團隊、雇主以及其他外部單位的利益衝突。
+- *以良善原則行事*：理事會代表應該以 Rust 專案*整體*的利益作出決策，即便這些決策可能會與各個團隊、雇主以及其它外部單位的利益衝突。
 - *保持透明*：雖然不是所有決策（以及決策的各方面）都能被公開，理事會應該要盡可能維持其決策的公開與透明。理事會也應該要確保專案的組織架構很明確透明。
 - *尊重隱私*：理事會的成員絕不能為了透明性而洩漏個人或者機密情報，包含可能會意外洩漏重要資訊的周邊資訊。
 - *維持健康的工作環境*：理事會代表應該要為他們的貢獻與其性質感到滿意。他們不應認為自己在理事會中的存在只是義務所為，而必須是因為他們用有意義的方式主動參與。
 - *持續演化*：理事會受到期待會隨著時間演化以應對團隊、專案以及社群的演化。
 
-理事會代表、審核團隊成員以及其他專案成員都應該能為身邊的人以及更廣泛的社群做好示範。這些職位都有對應的責任與領導，也因此這些人的行為都帶有份量而會對社群造成重大影響，也因此必須注意行使職權。選擇要行使這些職權的人都應該要知道身邊的人會以對應的高標準看待他們。
+理事會代表、審核團隊成員以及其它專案成員都應該能為身邊的人以及更廣泛的社群做好示範。這些職位都有對應的責任與領導，也因此這些人的行為都帶有份量而會對社群造成重大影響，也因此必須注意行使職權。選擇要行使這些職權的人都應該要知道身邊的人會以對應的高標準看待他們。
 
 # 理事會組織架構
 
-理事會由一群團隊代表所組成，各代表一支[一級團隊][top-level-teams]以及其子團隊。
+理事會由一群團隊代表所組成，各代表一個[一級團隊][top-level-teams]以及其子團隊。
 
 每支一級團隊都能用各自所選的程序選出恰好一名代表。
 
 任何一級團隊的成員或其子團隊的成員都能作為其代表。團隊必須提供子團隊成員對潛在候選給予意見與回饋的經驗。
 
-各個代表最多代表一支一級團隊，就算他們也是其他團隊的成員。代表任何 Rust 團隊的主要責任將由其所屬的一級團隊代表負責。[^under-multiple-teams]
+各個代表最多代表一個一級團隊，就算他們也是其它團隊的成員。代表任何 Rust 團隊的主要責任將由其所屬的一級團隊代表負責。[^under-multiple-teams]
 
-所有 Rust 專案團隊都必須至少隸屬於一支一級團隊。對於目前沒有母團隊的團隊，本案會建立起[「啟動台團隊」][launching-pad]作為暫時性的隸屬對象。以確保所有團隊都在理事會有對應的代表。
+所有 Rust 專案團隊都必須至少隸屬於一個一級團隊。對於目前沒有母團隊的團隊，本案會建立起[「啟動台團隊」][launching-pad]作為暫時性的隸屬對象。以確保所有團隊都在理事會有對應的代表。
 
 ## 一級團隊單位
 [top-level-teams]: #一級團隊單位
@@ -128,13 +128,13 @@ This RFC also establishes mechanisms for oversight and accountability between th
 理事會將會透過公開政策決策建立一級團隊。一般來說，一級團隊應該要符合以下條件：
 - 有對 Rust 專案具備根本重要性的權責
 - 是該權責全面向的最終決策者
-- 所有權責不隸屬於其他團隊權責（不能為子團隊或相似管理架構所有）
+- 所有權責不隸屬於其它團隊權責（不能為子團隊或相似管理架構所有）
 - 有著能期待無止盡持續的開放權責
 - 目前為 Rust 專案中活躍的存在
 
 一級團隊的數量必須介於 4 到 9（包含）之間，傾向介於 5 到 8 之間。這個數字能相對平衡多元性的需求以及相對小的架構，同時又在進行有效對話與共識凝聚時具備實務性。[^number-of-representatives]
 
-當理事會建立起全新一級團隊時，該團隊則該指派一名理事會代表。[^bootstrapping-new-teams]當建立起全新的一級團隊時，理事會必須提供為何該一級團隊不能作為子團隊或者其他管理架構存在的解釋。
+當理事會建立起全新一級團隊時，該團隊則該指派一名理事會代表。[^bootstrapping-new-teams]當建立起全新的一級團隊時，理事會必須提供為何該一級團隊不能作為子團隊或者其它管理架構存在的解釋。
 
 ### 一級團隊初始名單
 
@@ -162,13 +162,13 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 在某些情況下，雖有合適的母團隊但尚未準備好接受子團隊時，啟動台能作為臨時歸宿容納這些例子。
 
-而對於團隊面臨移除或重組時，如果移除或重組時並沒有明確將其子團隊納入其他組織中的母團隊，則啟動台將會作為這些子團隊的預設歸宿。
+而對於團隊面臨移除或重組時，如果移除或重組時並沒有明確將其子團隊納入其它組織中的母團隊，則啟動台將會作為這些子團隊的預設歸宿。
 
-理事會必須每六個月審視「啟動台」中的子團隊成員狀況，以確保有合適的流程在協助所有子團隊成員找到新的母團隊。而與其它一級團隊相同的是，只要理事會認為「啟動台」團隊不再需要，就可以將之撤除（並且移除掉其在理事會中的代表）。撤除「啟動台」團隊的流程與其他一級團隊同理。除此之外，理事會也可以給予「啟動台」團隊自己的權責，但是此措施不屬於本案的範圍內。
+理事會必須每六個月審視「啟動台」中的子團隊成員狀況，以確保有合適的流程在協助所有子團隊成員找到新的母團隊。而與其它一級團隊相同的是，只要理事會認為「啟動台」團隊不再需要，就可以將之撤除（並且移除掉其在理事會中的代表）。撤除「啟動台」團隊的流程與其它一級團隊同理。除此之外，理事會也可以給予「啟動台」團隊自己的權責，但是此措施不屬於本案的範圍內。
 
 ### 廢除一級團隊
 
-任何要移除團隊的一級指定（或其他會導致無法參與理事會）的決策，都需要除卻將被移除的一級團隊代表外所有理事會代表的共識。雖然如此，必須要邀請考慮移除的團隊代表參與關於團隊移除的理事會審議，而理事會也只能在極端特例下不顧團隊反對將之移除。
+任何要移除團隊的一級指定（或其它會導致無法參與理事會）的決策，都需要除卻將被移除的一級團隊代表外所有理事會代表的共識。雖然如此，必須要邀請考慮移除的團隊代表參與關於團隊移除的理事會審議，而理事會也只能在極端特例下不顧團隊反對將之移除。
 
 理事會不得移除審核團隊。理事會不能在沒有審核團隊的同意下改變審核團隊的權責。
 
@@ -192,7 +192,7 @@ For private matters, the Council should exercise discretion on informing alterna
 
 理事會代表任期為一年。對於任何已被認可的代表團（來自特定一級團隊的代表團），每位代表有最多連任三次的非硬性限制。一位代表在理事會收到來自個別團隊明確指出他們無法產生另一位代表時，得超過任期限制（舉例來說，因為缺乏其他有意願的候選人，或是因為團隊成員對其他任何候選人提出反對意見）。
 
-除此之外，對於單一代表在其他一級團隊服務的任期數、或是在單一一級團隊的非連續任期，並沒有任何硬性限制。團隊應該力求在經驗的存續與代表的替換之間取得平衡，以提供更多人這樣的經驗。[^representative-selection]
+除此之外，對於單一代表在其它一級團隊服務的任期數、或是在單一一級團隊的非連續任期，並沒有任何硬性限制。團隊應該力求在經驗的存續與代表的替換之間取得平衡，以提供更多人這樣的經驗。[^representative-selection]
 
 一半的代表將在（每年的）三月底進行任命，另一半則在九月底進行任命。這避免了同時更換所有理事會代表。對於初始的理事會以及在任何時候的一級團隊組成發生改變，理事會以及一級團隊應該共同努力使任期結束日大約平均落在在三月與九月各半。然而，每個任期應該至少持續六個月（為了避免任期過短，暫時的不平衡是可被接受的）。
 
@@ -331,107 +331,107 @@ All policy decisions should have an evaluation date as part of the policy. Initi
 
 # 決策流程之透明度和監督
 
-Decisions made by the Leadership Council will necessarily require varying levels of transparency and oversight based on the kind of decision being made. This section gives guidance on how the Council will seek oversight for its decisions, and what qualifies decisions to be made in private or in public.
+由領導理事會作出的決策，根據其決策的性質會需要不同等級的透明度和監督。本段落將會給予指引，提供理事會對其決策尋求監督的手段，以及怎樣的決策會在私下或公開執行。
 
-This RFC places certain decisions into each category. All decisions not specifically enumerated must use the public policy process. The Council may evolve the categorization through the [public policy process](decisions-that-the-Council-must-make-via-public-proposal).
+本案將會為特定的決策分類。所有沒有被特別提到的決策都必須使用公開決策流程。理事會可以透過[公開政策流程](decisions-that-the-Council-must-make-via-public-proposal)為分類方式進行演變。
 
-Decisions made by the Council fall into one of three categories, based on the level of oversight possible and necessary:
+由理事會作出的決策會根據其監督的可能性與必要性被分為三種分類之一：
 
-- Decisions that the Council may make internally
-- Decisions that the Council must necessarily make privately
-- Decisions that the Council must make via public proposal
+- 理事會可在內部做出之決策
+- 理事會須私下保密做出之決策
+- 理事會須經公開提案做出之決策
 
-## 理事會可在內部做出之決定
+## 理事會可在內部做出之決策
 
-Some types of operational decisions can be made internally by the Council, with the provision that the Council has a mechanism for community feedback on the decision after it has been made.
+某些類型的營運決策可以在理事會內部做出，只要理事會存有機制讓社群在決策做出後能給予回饋。
 
-Adding a new decision to the list of decisions the Council can make internally requires a public policy decision. Any decisions that impact the structure, decision-makers, or oversight of the Council itself should not be added to this list.
+要將全新的決策加入理事會可以內部做出的決策清單，必須透過公開政策決策進行。任何會影響架構、決策者或者對理事會監督的決策都不應該加入此清單。
 
-The Council should also strive to avoid establishing de facto unwritten policy via repeated internal decisions in an effort to avoid public proposal. See ["Repetition and exceptions"][repetition-and-exceptions] for more details.
+理事會應該要致力於避免使用重複的內部決策建立起不成文的政策，藉此來避免進行公開提案。請見[重複與例外][repetition-and-exceptions]的詳細資訊。
 
-This list exhaustively enumerates the set of decisions that the Council may make internally:
+本清單會明列所有理事會可以內部做出的決策：
 
-- Deciding to start a process that itself will play out in public (e.g. "let's start developing and posting the survey", "let's draft an RFC for this future public decision").
-- Expressing and communicating an official position statement of the Rust Project.
-- Expressing and communicating the position of the Rust Project directly to another entity, such as the Rust Foundation.
-- Communicating via Rust Project communication resources (via the blog or all@).
-- Making most operational decisions about the Council's own internal processes, including how the Council coordinates, the platforms it uses to communicate, where and when it meets, templates used for making and recording decisions (subject to requirements elsewhere in this RFC).
-- Appointing officers or temporary roles within the Council, for purposes such as leading/facilitating meetings, recording and publishing minutes, obtaining and collating feedback from various parties, etc.[^council-roles] Note that any such roles (titles, duties, and current holders) must be publicly disclosed and documented.
-- Inviting specific attendees other than Council representatives to specific Council meetings or discussions, or holding a meeting open to the broader community. (In particular, the Council is encouraged to invite stakeholders of a particular decision to meetings or discussions where said decision is to be discussed.)
-- Making decisions requested by one or more teams that would be within the normal purviews of those teams to make without a public proposal. (Note that teams can ask for Council input without requesting a Council decision.)
-- Making one-off judgment calls in areas where the purviews of teams overlap or are ambiguous (though *changing* the purviews of those teams must be a public policy decision).
-- Any decision that this RFC or future Council policy specifies as an operational decision.
+- 決定展開一個會公開進行的流程（如「我們來建立並貼出問卷調查」、「我們來撰寫此未來公開決策的提案」）。
+- 表達與溝通 Rust 專案的官方定位宣言。
+- 對另一個實體（如 Rust 基金會）直接表達與溝通 Rust 專案的定位。
+- 藉由 Rust 專案的溝通資源進行溝通（透過網誌或者所有 @ 標註）。
+- 執行關於理事會內部流程的大多數營運決策，包含理事會的協調方式、使用來溝通的平台、見面的地點與時機、用於做出並記錄決策的範本（需求由本案它處規定）。
+- 為了帶領／組織會議、紀錄與發佈記錄、從各個單位取得並整理回饋等等而指派執行官。[^council-roles]注意這些職位（頭銜、責任以及目前的在任者）都必須要被公開揭曉與記錄。
+- 邀請理事會代表以外的特定人士參與特定的理事會會議或者討論，又或者主持開放給更廣闊社群的會議。（特別是鼓勵理事會邀請特定決策的受影響者參與該決策進行的會議或討論。）
+- 為一個或多支團隊於其正常職權範圍內請求理事會不經公開提案做出的決策。（注意團隊可以選擇請求理事會的意見而無須請求理事會做出決策。）
+- 為團隊職權重疊或模糊的情境做出一次性的判斷（但是**改變**團隊職權時一定要經過公開政策決策）。
+- 任何此案或者未來理事會政策指定為營運決策的決策。
 
-See the [accountability section][accountability] for details on the feedback mechanism for Council decisions.
+請見[監督與問責機制][accountability]以了解理事會決策的回饋機制。
 
-## 理事會須私下保密做出之決定
+## 理事會須私下保密做出之決策
 
-Some decisions necessarily involve private details of individuals or other entities, and making these details public would have a negative impact both on those individuals or entities (e.g. safety) and on the Project (eroding trust).
+有些決策必然會涉及關於個人或者其它實體的隱私細節，公開這些細節會對個人或實體和專案造成負面影響（如個人與實體的安全性，和對專案的信任）。
 
-This additional constraint should be considered an exceptional case. This does not permit making [decisions that would require a public proposal per the next section][decisions-that-the-Council-must-make-via-public-proposal]. However, this does permit decisions that the Council makes internally to be kept private, without full information provided for public oversight.
+這項額外限制應該要被視為特例。並不會允許私下做出[下一段落會提到需要公開提案的決策][decisions-that-the-Council-must-make-via-public-proposal]。但是可以允許理事會於內部做出的決策能維持其隱私性，而不需要提供公開監督完整的資訊。
 
-The Council may also decline to make a decision privately, such as if the Council considers the matter outside their purview (and chooses to defer to another team) or believes the matter should be handled publicly. However, even in such a case, the Council still cannot publicly reveal information shared with it in confidence (since otherwise the Council would not be trusted to receive such information). Obvious exceptions exist for imminent threats to safety.
+理事會也可以拒絕私下做出決策，如理事會認定不屬權責內事項（並且選則轉交給另一個團隊），或者相信此事項必須被公開應對的時候。然而即便在這樣的狀況下，理事會仍然不能公開揭曉所機密交付的資訊（否則理事會就沒有辦法受到信任交付這些資訊）。此明顯特例是為了避免對安全造成即刻威脅而設立的。
 
-Private decisions must not establish policy. The Council should also strive to avoid establishing de facto unwritten policy via repeated private decisions in an effort to avoid public proposal. See ["Repetition and exceptions"][repetition-and-exceptions] for more details.
+私下決策不能被用來建立政策。理事會應該要致力於避免使用重複的內部決策建立起不成文的政策，藉此來避免公開提案。請見[重複與例外][repetition-and-exceptions]的詳細資訊。
 
-This list exhaustively enumerates the set of decisions that the Council may make either partly or entirely in private:
+本清單會詳盡列出理事會可以部分或完全私下做出的決策：
 
-- Determining relationships with new industry / Open Source initiatives, that require confidentiality before launching.
-- Discussing the personal aspects of a dispute between teams that involves some interpersonal dynamics/conflicts.
-- Participating in contract negotiations on behalf of the Project with third parties (e.g. accepting resources provided to the Project).
-- Decisions touching on Project-relevant controversial aspects of politics, personal safety, or other topics in which people may not be safe speaking freely in public.
-- Discussing whether and why a team or individual needs help and support, which may touch on personal matters.
-- Any decision that this RFC or future Council policy specifies as a private decision.
+- 決定與新產業／開源事業的關係時，必須於推出前維持機密性時。
+- 討論團隊之間涉及人際間互動／衝突的個人資訊時。
+- 代表專案與第三方進行契約磋商時（如接受提供給專案的資源）。
+- 涉及專案相關的爭議政治、個人安全、或者其它可能會讓人無法安全公開發言的議題時。
+- 討論一個團隊或個人是否與為何需要協助與支持，可能會涉及個人資訊時。
+- 任何此案或者未來理事會政策指定為私下決策的項目。
 
-The Council may pull in members of other teams for private discussions leading to either a private or public decision, unless doing so would more broadly expose private information disclosed to the Council without permission. When possible, the Council should attempt to pull in people or teams affected by a decision. This also provides additional oversight.
+理事會可以將將其它團隊的成員拉入可能會帶來私下或公開決策的私下討論，除非這麼做會導致揭露給理事會的隱私資訊會在不被允許的情況下更大幅度曝光。可能的情況下，理事會應該要試著將會受到決策影響的人或團隊納入討論。如此一來也能提供額外的監督。
 
-Some matters may not be fit for full public disclosure while still being fine to share in smaller, more trusted circles (such as with all Project members, with team leads, or with involved/affected parties). The Council should strive to share information with the largest appropriate audiences for that information.
+有些事項可能不適合進行完全公開的揭曉，但仍適合分享給能被信任的討論圈（例如所有專案成員、團隊領導者或者會涉及／影響的單位）。理事會應該要致力於將資訊分享給最大合適的對象。
 
-The Council may decide to withhold new decisions or aspects of decisions when it's unclear whether the information is sensitive. However, as time progresses and it becomes clearer who the appropriate audience is or that the appropriate audience has expanded, the council should revisit its information-sharing decisions.
+理事會可以在未知資訊是否有敏感性時決定要保留決策或者決策的某些面向。然而，隨時間過去合適的分享對象更加明確或擴展時，理事會應該要回顧其資訊分享決策。
 
-The Council should always loop in the moderation team for matters involving interpersonal conflict/dispute, both because such matters are the purview of the moderation team, and to again provide additional oversight.
+理事會應該讓審核團隊知曉涉及人際衝突／紛爭的事項，因為該事項屬於審核團隊的職權內，同時也能得額外的監督。
 
-The council should evaluate which portions of a decision or its related discussions necessarily need to be private, and should consider whether it can feasibly make non-sensitive portions public, rather than keeping an entire matter private just because one portion of it needs to be. This may include the existence of the discussion, or the general topic, if those details are not themselves sensitive.
+理事會應該要評估決策的那些部分或其相關討論應該私下保密，並且考慮是否有將非敏感的部分公諸於眾，而不該只因其中一部分應該要維持私下保密而將整件事保密。所能公布的可能性包含討論本身的存在，或者是自身細節不具備敏感性的一般性議題。
 
-Private matters may potentially be able to become public, or partially public, at a later date if they're no longer sensitive. However, some matters may potentially *never* be able to become public, which means they will never become subject to broader review and oversight. Thus, the Council must exercise caution and prudence before making a private decision.
+私下保密的事項在未來不再具備敏感性時，可以被公開或者部分公開。然而有些事項可能**永遠**都無法被公開，代表說這些事項將不可能接受更廣泛的檢視或監督。因此，理事會在做出私下決策前必須要審慎考慮。
 
-The Council should make every effort to not make private decisions. The Council should have appropriate additional processes in place to encourage representatives to collectively review such decisions and consider their necessity.
+理事會應該要盡可能不做出私下決策。理事會應該要有合適的額外流程能鼓勵代表們共同檢視如此決策並考慮其必要性。
 
-## 理事會須經公開提案做出之決定
-[decisions-that-the-Council-must-make-via-public-proposal]: #decisions-that-the-Council-must-make-via-public-proposal
+## 理事會須經公開提案做出之決策
+[decisions-that-the-Council-must-make-via-public-proposal]: #理事會須經公開提案做出之決策
 
-Decisions in this category require the Council to publicly seek feedback from the broader Rust Project *in advance* of the decision being made. Such decisions are proposed and decided via the appropriate public decision process, currently the RFC process (though the Council may adopt a different public proposal process in the future). The public decision process must require the consent of representatives (either affirmatively or via non-objection), must allow for blocking objections by Council representatives, must provide reasonable time for public evaluation and discussion, and must provide a clear path for public feedback to the Council. 
+在此分類中的決策需要理事會主動**提前**在決策做下前向更廣泛的 Rust 專案參與者尋求回饋。這樣的決策會透過合適的公開決策流程提案並決策，目前必須透過 RFC 流程（然而理事會未來可以採用不同的公開提案流程）。公開決策流程必須有所有代表的共識（無論是透過主動同意或無反對的形式），必須接受理事會代表的反對阻擋，必須有合理的時間接受公開評估與討論，並且必須提供公開回饋給理事會的明確途徑。
 
-Following the existing RFC process, public proposals must have a minimum time-delay for feedback before the decision takes effect. Any representative may request that the feedback period for a particular decision is extended to at most 20 days total. The Council may make an internal operational decision to extend the feedback period beyond 20 days. The time-delay for feedback starts only when the necessary threshold for approval is otherwise met, including there not being any raised objections. If objections are raised and resolved during the time-delay, the waiting period starts again.
+依循既有的 RFC 流程，公開提案必須要在決策生效前有個最低的延遲時間以接受回饋。任何代表都可以要求特定決策接受回饋的時長最多延長至總計 20 天。理事會可以做出內部營運決策來延長回饋期間至超過 20 天。接受回饋的延遲期間只有在通過決策的必要條件都滿足時才能開始計算，包含沒有任何提出的反對。如果在延遲期間有反對被提出並且解決，延遲等待期間將會再次重新計算。
 
-The Leadership Council is expected to evolve over time to meet the evolving needs of the teams, the Rust Project, and the community. Such evolutionary changes may be small or large in scope and require corresponding amounts of oversight. Changes that materially impact the shape of the Council would need to be part of a public decision process.
+領導理事會被期待能隨時間演化以應對團隊、Rust 專案以及社群需求的演變。如此演變的規模可大可小，即會需要對應的監督程度。會在本質上影響理事會形式的變更必須要被納入公開決策流程。
 
-As an exception to the above, modifications or removals of a single top-level team (other than the moderation team) may occur with the unanimous agreement of the Council absent the representative delegated by that top-level team.
+作為上述的例外，對於一個一級團隊（審核團隊除外）的調整或移除可以在對應一級團隊委派代表缺席的情況下由一致同意做出。
 
-The Council is permitted to have private *discussions* even on something that ultimately ends up as a public proposal or a publicly disclosed internal decision. The Council may wish to do this if the discussions are sensitive to allow decision participants to speak more frankly and freely. Additionally, in some cases, private information that can't be disclosed may impact an otherwise public decision/proposal; the Council should strive to be as transparent and non-misleading as possible and avoid having opaque decisions where all rationale is private.
+理事會被允許進行私下**討論**可能會最後成為公開提案或者公開揭露的內部決策，討論的敏感性使得私下討論能允許決策參與者更自由坦蕩地發言時可以如此進行。除此之外在特定例子下，無法被揭曉的隱私資訊可能會影響到一個公開決策／提案，此情況下理事會應該要致力於維持透明性與降低誤導資訊，並且避免做出所有判斷都私下進行的完全不透明決策。
 
-Note that all decisions fall into this category unless explicitly designated (via this RFC or future public proposals) to fall into another category, so this list (unlike those in the other two categories) is intentionally vague/broad: it is intended to give guidance on what likely should belong in this category without necessarily being prescriptive.
+注意除非有被明確指出（透過此案或者未來的公開提案），否則所有決策都隸屬於此分類，因此此清單（與其它兩個分類不同）是刻意有模糊與廣泛性：目標是在不需要明確規定的情況下提供指引怎樣的決策會隸屬於此分類。
 
-- Any decision that has the effect of modifying the list of decision-makers on the Leadership Council or the decision-making process of the Leadership Council. For instance:
-    - Changing this list (or this RFC in general).
-    - Modifying the publication and approval process used for the Council's public proposals. Such a proposal must use the existing established process, not the proposed process.
-    - Adding, modifying, or removing policies affecting eligibility for Council representatives.
-    - Adding, modifying, or removing one or more top-level teams. This includes:
-        - modifying the purview of a top-level team to such an extent that it meaningfully becomes a different team.
-        - reorganizing the Project such that top-level teams move underneath other teams.
-    - Adding other types of Council representatives other than those delegated by top-level teams.
-    - Adding, modifying, or removing policies regarding Council quorums or the locations in which binding decisions can be made.
-- Any policy decision, as opposed to a one-off operational decision. (See the [decision-making section][decision-making] for details on policy decisions versus operational decisions.) This includes any decision that binds the decisions of other parts of the Project (e.g. other teams or individuals), effectively serving as an exception to the normal purviews of all teams. Some examples of policy decisions:
-    - Modifying or extending existing policies, including those previously made via RFC.
-    - A legal/licensing policy affecting Rust Project software or other work of the Rust Project.
-    - A change to the Code of Conduct.
-    - A policy affecting eligibility for membership in the Rust Project or any team thereof.
-    - A change to how the moderation team moderates Council representatives or the Leadership Council as a whole. Such decisions must be made jointly with the moderation team.
-    - An agreement with another project or organization that makes any ongoing commitments on behalf of the Rust Project. (One-off commitments involving teams that have agreed to those commitments are fine.)
-    - Creating or substantially modifying legal structures (e.g. additional Foundations, changing relationship with the Rust Foundation, partnering with other legal entities).
-    - Making policy decisions requested by one or more teams that would be within the normal purviews of those teams. (Note that teams can ask for Council input without requesting a Council decision.)
-    - Deciding that a class of future decisions always belongs within the Council, rather than being delegated to any other team.
-- Any decision that this RFC or future Council policy specifies as a public policy decision.
+- 任何會修改領導理事會的決策者清單或者決策流程的決策。例如：
+    - 改變這個清單（或者對此案的修改）。
+    - 修改用於發表與核准理事會公開提案的流程。該提案必須使用既有的流程進行，而不能使用所提案的流程進行。
+    - 增加、修改或移除會影響理事會成員資格的政策。
+    - 增加、修改或移除一個或多個一級團隊。其中包含：
+        - 修改一個一級團隊的權責到會使之實質上成為不同團隊的程度時。
+        - 重新組織專案到頂級團隊會會隸屬到其它團隊下的程度時。
+    - 增加除了一級團隊委派的代表以外的理事會代表。
+    - 增加、修改或移除政策關於理事會法定人數或能制定具約束力的決策所能制定的地點時。
+- 任何政策決策，除了一次性的營運決策以外（見[決策相關段落][decision-making]以了解關於政策決策與營運決策差異的細節）。其中包含任何會對其它專案中的部分（如其它團隊或個人）造成約束力，實質成為所有團隊普通權責例外的決策。在此舉例一些政策決策：
+    - 修改或延長既存的政策，包含過去透過 RFC 決議的政策。
+    - 會影響 Rust 專案軟體或者其它 Rust 專案成果的條約／授權政策。
+    - 對行為準則進行的變更。
+    - 會影響 Rust 專案成員與任何團隊資格的政策。
+    - 對審核團隊如何審核理事會代表與領導理事會整體的變更。此類決策必須與審核團隊共同決策。
+    - 代表 Rust 專案整體對其它專案或組織做出長期承諾的協議。（涉及團隊已經同意承諾的一次性承諾則不受此限）
+    - 創造或者大幅修改條約架構時（如增設額外的基金會、改變與 Rust 基金會之間的關係、與其它法律實體合作時）。
+    - 根據一個或多個團隊制定隸屬於這些團隊普通權責範圍內的政策決策時。（注意團隊可以請求理事會提供意見而不需要請求理事會做出決策）
+    - 決定某類型的未來決策都將永遠都由理事會做出，而不委派給其它團隊時。
+- 任何本案或未來理事會政策指定為公開政策決策的決策。
 
 ## 利益衝突
 [conflicts-of-interest]: #conflicts-of-interest
