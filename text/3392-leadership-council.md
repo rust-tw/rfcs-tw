@@ -82,11 +82,11 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 # 理事會之職責、期待與限制
 
-高層級描述下，理事會*只*負責以下職責：
+高層級描述下，理事會**只**負責以下職責：
 
 - 識別、優先排序以及追蹤由於缺乏明確負責者而無法執行的工作（而不應對負責者刻意降低優先度、置於待辦事項等的工作）。
-- 委派該工作，並潛在可建立全新的（並可能為*暫時性的*）團隊來負責此工作。
-- 為沒有明確負責者的*緊急*事項下達決策。
+- 委派該工作，並潛在可建立全新的（並可能為**暫時性的**）團隊來負責此工作。
+- 為沒有明確負責者的**緊急**事項下達決策。
     - 此行為只能在特例情境下執行，即該決策無法委派給既有團隊也無法交付給全新團隊時。
 - 為團隊、架構或流程協調橫跨專案的變更。
 - 確保一級團隊能為其權責、對其它團隊以及對專案本身負責。
@@ -96,17 +96,17 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 除了這些職責外，對理事會也有額外的期待與限制，以幫助判斷理事會是否正常運作：
 
-- *委派工作*：理事會不應該主動執行本案沒有明確指派的工作；理事會必須委派給既有團隊或者成員與理事會不重複的全新團隊。執行工作的團隊中可以有理事會的代表，但是做為團隊成員並不屬於理事會代表的權責。
-- *為了確保專案長期的流暢運作*：理事會應該要確保非緊急專案管理工作有接受優先度排序，並且能定期完成以確保專案不會累積成整個組織級別的負擔。
-- *負責任*：由於理事會擁有廣泛的權力，理事會與理事會代表必須要為自己的行為負責任。他們應該要傾聽他人的回饋，並且能對他們是否可以繼續達到該職位所需的職責與期待進行主動的反思。
-- *做好代表*：理事會代表不只要能代表整個專案各形式的考量，也要能盡可能代表 Rust 社群的各方面（人口分布、技術背景等等）。
-- *共享負擔*：所有理事會代表都必須共享理事會職責的負擔。
-- *尊重他人的權責*：理事會必須尊重委派給各團隊的權責。理事會必須與各團隊諮商並且共同合作解決問題，並且盡量不作出違背任何團隊意願的決策。
-- *以良善原則行事*：理事會代表應該以 Rust 專案*整體*的利益作出決策，即便這些決策可能會與各個團隊、雇主以及其它外部單位的利益衝突。
-- *保持透明*：雖然不是所有決策（以及決策的各方面）都能被公開，理事會應該要盡可能維持其決策的公開與透明。理事會也應該要確保專案的組織架構很明確透明。
-- *尊重隱私*：理事會的成員絕不能為了透明性而洩漏個人或者機密情報，包含可能會意外洩漏重要資訊的周邊資訊。
-- *維持健康的工作環境*：理事會代表應該要為他們的貢獻與其性質感到滿意。他們不應認為自己在理事會中的存在只是義務所為，而必須是因為他們用有意義的方式主動參與。
-- *持續演化*：理事會受到期待會隨著時間演化以應對團隊、專案以及社群的演化。
+- **委派工作**：理事會不應該主動執行本案沒有明確指派的工作；理事會必須委派給既有團隊或者成員與理事會不重複的全新團隊。執行工作的團隊中可以有理事會的代表，但是做為團隊成員並不屬於理事會代表的權責。
+- **為了確保專案長期的流暢運作**：理事會應該要確保非緊急專案管理工作有接受優先度排序，並且能定期完成以確保專案不會累積成整個組織級別的負擔。
+- **負責任**：由於理事會擁有廣泛的權力，理事會與理事會代表必須要為自己的行為負責任。他們應該要傾聽他人的回饋，並且能對他們是否可以繼續達到該職位所需的職責與期待進行主動的反思。
+- **做好代表**：理事會代表不只要能代表整個專案各形式的考量，也要能盡可能代表 Rust 社群的各方面（人口分布、技術背景等等）。
+- **共享負擔**：所有理事會代表都必須共享理事會職責的負擔。
+- **尊重他人的權責**：理事會必須尊重委派給各團隊的權責。理事會必須與各團隊諮商並且共同合作解決問題，並且盡量不作出違背任何團隊意願的決策。
+- **以良善原則行事**：理事會代表應該以 Rust 專案**整體**的利益作出決策，即便這些決策可能會與各個團隊、雇主以及其他外部單位的利益衝突。
+- **保持透明**：雖然不是所有決策（以及決策的各方面）都能被公開，理事會應該要盡可能維持其決策的公開與透明。理事會也應該要確保專案的組織架構很明確透明。
+- **尊重隱私**：理事會的成員絕不能為了透明性而洩漏個人或者機密情報，包含可能會意外洩漏重要資訊的周邊資訊。
+- **維持健康的工作環境**：理事會代表應該要為他們的貢獻與其性質感到滿意。他們不應認為自己在理事會中的存在只是義務所為，而必須是因為他們用有意義的方式主動參與。
+- **持續演化**：理事會受到期待會隨著時間演化以應對團隊、專案以及社群的演化。
 
 理事會代表、審核團隊成員以及其它專案成員都應該能為身邊的人以及更廣泛的社群做好示範。這些職位都有對應的責任與領導，也因此這些人的行為都帶有份量而會對社群造成重大影響，也因此必須注意行使職權。選擇要行使這些職權的人都應該要知道身邊的人會以對應的高標準看待他們。
 
@@ -154,7 +154,7 @@ This RFC also establishes mechanisms for oversight and accountability between th
 ### 「啟動台」一級團隊
 [launching-pad]: #「啟動台」一級團隊
 
-本案會建立「啟動台」團隊以*暫時*接受沒有對應一級團隊可以歸類的子團隊。這樣能夠確保在更加永久性的母團隊被找到或者建立起之前，所有團隊都在理事會有代表。
+本案會建立「啟動台（launching pad）」團隊以**暫時**接受沒有對應一級團隊可以歸類的子團隊。這樣能夠確保在更加永久性的母團隊被找到或者建立起之前，所有團隊都在理事會有代表。
 
 「啟動台」是個雨傘團隊：該團隊沒有直接成員，只有子團隊代表。
 
@@ -216,15 +216,15 @@ If this constraint does not hold, whether by a representative changing affiliati
 
 ## 候選資格
 
-The following are criteria for deciding ideal candidates. These are similar to but not the same as the criteria for an effective team lead or co-lead. While a team lead *might* also make a good Council representative, serving as a team lead and serving as a Council representative both require a substantial time investment, which likely motivates dividing those roles among different people. The criteria are not hard requirements but can be used for determining who is best positioned to be a team's representative. In short, the representative should have:
-- sufficient time and energy to dedicate to the needs of the Council.
-- an interest in helping with the topics of Project operations and Project governance.
-- broad awareness of the needs of the Project outside of their teams or areas of active contribution.
-- a keen sense of the needs of their team.
-- the temperament and ability to represent and center the needs of others above any personal agenda.
-- ability and willingness to represent all viewpoints from their team, not just a subset, and not just those they agree with.
+以下是決定理想候選人的標準，這些標準雖類似團隊領導者或共同領導者的標準，但並不完全相同。儘管團隊領導者**可能**也能成為傑出的理事會代表，但擔任團隊領導者和委員會代表都需要大量時間投入，這會促使將這些角色分配給不同的人。這些標準並非硬性要求，但可用於決定誰最適合成為團隊代表。簡而言之，代表應具備以下條件：
+- 有充沛的時間與精力，以滿足委員會的需求。
+- 有興趣協助處理專案營運和治理相關事務。
+- 廣泛了解專案的需求，且不限於其所在團隊或積極貢獻之領域。
+- 對自己的團隊需求有敏銳的感知。
+- 具備代表他人的氣質和能力，超越任何私人事務。
+- 能夠代表其團隊的所有觀點，不僅僅是部分觀點，也不僅僅是團隊成員同意的觀點。
 
-While some teams may not currently have an abundance of candidates who fit this criteria, the Council should actively foster such skills within the larger Project, as these are helpful not only for Council membership but across the entire Project.
+儘管有些團隊目前可能沒有足夠的候選人符合這些標準，委員會應積極培養這些技能之人才，因為這些技能不僅對委員會成員資格有幫助，也對這個專案有益。
 
 ## 與 Core 團隊之關係
 
@@ -631,17 +631,17 @@ Conflicts involving a member of the moderation team will be handled by the remai
 
 # 本案之批准
 
-Since November of 2021 the following group has been acting as de-facto Project leadership: all members of the core team, all members of the moderation team, all Project representatives on the Rust Foundation board, and the leads of the "top-level" teams:
-- Compiler
+自 2021 年 11 月以來，下列成員實質上已在專案擔任中領導角色：所有 Core 團隊成員、所有審核團隊成員、Rust Foundation 理事會（board）上的所有專案代表以及「一級」團隊的負責人：
+- 編譯器
 - Crates.io
-- Dev tools
-- Infrastructure
-- Language
-- Library
-- Moderation (already included above)
-- Release
+- 開發工具
+- 基礎架構
+- 語言
+- 函式庫
+- 審核（已包含在上方）
+- 發佈
 
-This RFC will be ratified using the standard RFC process, with the approving team being all the members of this de facto leadership group. This group should also raise objections on behalf of other members of the Project; in particular, team leads should solicit feedback from their teams and subteams.
+此 RFC 將以標準 RFC 程序審批，由前述實質上的領導層成員來批准。這些成員還應代表專案中其他成員提出異議，更具體來說，團隊負責人應徵求他的團隊和子團隊的回饋。
 
 # 附註
 
