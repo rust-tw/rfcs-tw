@@ -434,32 +434,32 @@ All policy decisions should have an evaluation date as part of the policy. Initi
 - 任何本案或未來理事會政策指定為公開政策決策的決策。
 
 ## 利益衝突
-[conflicts-of-interest]: #conflicts-of-interest
+[conflicts-of-interest]: #利益衝突
 
-A Council representative must not take part in or influence a decision in which they have a conflict of interest.
+理事會代表不應參與或影響其具有利益衝突的決策。
 
-Potential sources of conflicts of interest include, but are not limited to:
-- Personal: a decision about themselves
-- Financial: a decision with any substantive financial impact on the representative
-- Employment or equivalent: a decision involves another person at the same company, or would benefit/harm that company disproportionately more than others
-- Professional or other affiliation: a decision involves an organization the representative is associated with, such as an industry/professional/standards/governmental organization
-- Familial/Friendship: a decision about a person the representative cannot be expected to be impartial about, including a conflict of interest of another type through that person (such as a family member's business)
+前在的利益衝突包含，但不限於：
+- 個人：與他們個人有關的決策
+- 財務：會對該代表造成重大的財務影響
+- 聘僱或同性質決策：涉及同公司的他人或者對該公司會相對其它公司造成顯著較多的好處／壞處的決策
+- 專業或其它相關性：會涉及該代表相關的組織的決策，例如產業／專業／標準／政府組織
+- 家庭或朋友：決策涉及對象使得無法期待該代表能公正決策時，包含用其它形式與該人相關的利益衝突（例如家庭成員的事業）
 
-Council representatives must promptly disclose conflicts of interest and recuse themselves from affected decisions. Council representatives must also proactively disclose likely sources of potential conflict annually to other representatives and to the moderation team.
+理事會代表必須及時揭曉其利益衝突並迴避會受影響的決策。理事會代表還必須每年主動向其他代表和審核團隊揭曉可能會造成潛在衝突的來源。
 
-Note that conflicts of interest can arise even if a proposal does not name a specific entity. Council representatives cannot, for instance, use their position to tailor requirements in a proposal to disproportionately benefit their employer.
+請注意，即使一項提案中沒有提及特定的實體，也有可能會造成利益衝突。例如，理事會代表不能利用他們的職位調整提案中的需求，使其雇主不成比例地受益。
 
-A proposal favored widely across the Rust community does not automatically represent a conflict of interest for a representative merely because that representative's employer or equivalent also favors the general area of that proposal, as long as the proposal does not favor any particular entities. For example, a proposal to improve the security of a particular Rust component is not a conflict of interest for representatives just because their employers generally care about Rust security; however, a proposal to engage specific developers or security experts, or one's compensation being predicated on such a proposal, might still raise a conflict.
+就算一名代表的雇主或者同性質的存在偏好一項提案的大致內容，對 Rust 社群整體都偏好的提案並不會自動導致一名代表產生利益衝突，只要提案本身不偏好特定的實體。舉例來說，一項提案改善特定 Rust 元件安全性的提案，並不會因為代表們的雇主對 Rust 的安全性有偏好而產生利益衝突；然而如果一項提議會涉及特定開發者、安全專家或特定人士能預期從此提案中獲得利益時，則可能還是會造成衝突。
 
-The Council may not waive a conflict of interest if one applies, even if the Council considers it minor. However, the Council may evaluate *whether* a conflict exists at all. Council representatives must raise potential conflicts so that the Council can make such a determination.
+即便被理事會視為輕微衝突，理事會也不得無視任何有效的利益衝突。然而理事會可以評估**是否**存在衝突。理事會代表必須要提出潛在的衝突讓理事會能夠作出此判斷。
 
-The Council may request specific information from a recused representative, and the recused representative may provide that information upon request.
+理事會可以會向迴避的代表請求特定資訊，而迴避的代表也可以在受到請求時提供該項資訊。
 
-Where possible and practical, the Council should separate decisions to reduce the scope of a conflict of interest. For instance, the Council could separate a decision to arrange access to a class of hardware (without setting specific requirements or selecting vendors) from the decision of which exact hardware to purchase and where to purchase it, if doing so made a conflict of interest only apply to the latter decision.
+在可能且實際時，理事會應該要拆開決策以降低利益衝突的影響範圍。舉例來說，理事會可以將對特定類型硬體的取用決策（而不指定特定需求或選擇提供者）與具體購置硬體與購買地點的決策分開，使得特定利益衝突只會影響到後者的決策。
 
-A representative simultaneously considering the interests of the Rust Project and the interests of any Project team is not necessarily a conflict of interest. In particular, representatives are *expected* to regularly take part in decisions involving their teams, as delegates from those teams.
+同時考慮 Rust 專案與任何專案團隊的利益時並不必然致使利益衝突。特指受團隊委派的代表本來就被**期待**要參與與該團隊相關的決策。
 
-In the unlikely event that a proposed decision produces a conflict of interest with enough representatives that the remainder cannot meet a previously established quorum requirement, and the decision must still be made, then either top-level teams must provide alternate representatives for the purposes of the specific decision, or (for public decisions only) the Council may elect to proceed with the decision while publicly documenting all conflicts of interest. (Note that proceeding with a public decision, even with conflicts documented, does not actually eliminate the conflicts or prevent them from influencing the decision; it only allows the public to judge whether the conflicts might have influenced the decision. Eliminating the conflicts entirely is always preferable.) In such a case, the Council should consider appropriate processes and policies to avoid future recurrences of a similar conflict.
+在不太可能發生的情況下，如果一項決策提案與足夠多的代表產生了利益衝突，以致其餘的代表不能滿足過去確立的法定人數要求，而決策仍然必須做出時，則可以應對的方式包含一級團隊必須為此特定決策提供備用的代表，或者（僅適用於公開決策時）理事會可以選擇繼續進行決策，同時公開記錄所有的利益衝突。（請注意，即使在記錄了衝突的情況下，繼續進行公開決策，實際上並不會消除衝突或防止對決策的影響；只會允許公眾判斷衝突是否影響了決策。完全消除衝突永遠是最好的作法。）在這種情況下，理事會應該要考慮合適的流程與政策，以避免未來再次發生類似的衝突。
 
 ## 確定與更改團隊權責
 
