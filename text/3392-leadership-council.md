@@ -463,13 +463,13 @@ All policy decisions should have an evaluation date as part of the policy. Initi
 
 ## 確定與更改團隊權責
 
-The Council can move an area or activity between the purviews of top-level teams either already existing or newly created (other than the moderation team). Though the purview of a given top-level team may be further sub-divided by that team, the Council only moves or adjusts top-level purviews. If a sub-divided purview is moved, the Council will work with the involved teams to coordinate the appropriate next steps. This mechanism should be used when the Council believes the existing team's purview is too broad, such that it is not feasible to expect the team to fulfill the full purview under the current structure.  However, this should not happen when a team only *currently* lacks resources to perform part of its duties.
+理事會可以在既存或新創的一級團隊（除審核團隊外）的權責之間移動領域或活動。即便特定一級團隊的權責可能會被該團隊進一步細分，理事會只會移動或調整一級團隊的權責。如果一個被細分的權責進行了移動，理事會則會與相關團隊合作，協調合適的下一步。此機制的使用時機只限於理事會認為既有團隊的權責過於廣泛，使得無法期待該團隊於現有架構下能夠完全實現其職責下使用。然而，當一個團隊只是**目前**缺乏資源來履行其部分職責時，則不應該如此進行。
 
-The Council also must approve expansions of a top-level team's purview, and must be notified of reductions in a top-level team's purview. This most often happens when a team self-determines that they wish to expand or reduce their purview. This could also happen as part of top-level teams agreeing to adjust purviews between themselves. Council awareness of changes to a purview is necessary, in part, to ensure that the purview can be re-assigned elsewhere or intentionally left unassigned by the Council.
+理事會還必須負責核准一級團隊權責的擴張，並且必須在一級團隊職權的減少收到通知。此情況通常會在一個團隊自行決定他們希望擴大或減少其權責時發生。這也可能發生在部分一級團隊同意調整其之間的權責。理事會對於權責變化的認知是必要的，以確保理事會能重新指派或刻意不加以指派該項權責。
 
-However, teams (individually or jointly) may further delegate their purviews to subteams without approval from the Council. Top-level teams remain accountable for the full purviews assigned to them, even if they delegate (in other words, teams are responsible for ensuring the delegation is successful).
+然而單獨或聯合的團隊可以在無須理事會核准之下進一步將其權責委託給子團隊。然而即便進行了委派，一級團隊仍應該對分配到的權責負起全責（換句話說，團隊有責任確保其委派能成功達成）。
 
-The Council should favor working with teams on alternative strategies prior to shifting purviews between teams, as this is a relatively heavyweight step. It's also worth noting that one of the use cases for this mechanism is shifting a purview previously delegated to a team that functionally no longer exists (for instance, because no one on the team has time), potentially on a relatively temporary basis until people arrive with the time and ability to re-create that team. This section of the RFC intentionally does not put constraints on the Council for exactly how (or whether) this consultation should happen.
+理事會應該要偏好在團隊間權責移轉前與各個團隊合作找出替代方案，因為此項措施是非常重大的步驟。同時值得注意的是，這個機制的一個使用情境是將過去委託於一個不再存在功能性的團隊的權責加以轉移（例如該團隊的成員都沒有足夠時間），潛在可以於有對應時間與能力的人手到位重新建立該團隊時可以作為暫時處置。本案的此段落是刻意保留不限制理事會如何（與否）進行此諮商。
 
 # 監督與問責機制
 [accountability]: #mechanisms-for-oversight-and-accountability
