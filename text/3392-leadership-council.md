@@ -62,13 +62,13 @@ The Council is charged with the success of the Rust Project as a whole. The Coun
 
 # 參考資料
 
-To reduce the size of this RFC, non-binding reference materials appear in separate documents:
+為了縮短此 RFC 的篇幅，不具約束性質的參考資料將以單獨文件形式呈現：
 
-- [Full motivation](3392-leadership-council/motivation.md)
-  - [Further research into the needs of Project-wide governance (Inside Rust blog post)](https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html)
-- [Non-goals of this RFC](3392-leadership-council/non-goals.md)
-- [Rationale and alternatives](3392-leadership-council/alternatives.md)
-- [Recommendations for initial work of the Council](3392-leadership-council/initial-work-of-the-council.md)
+- [完整動機](3392-leadership-council/motivation.md)
+  - [Further research into the needs of Project-wide governance（Inside Rust 部落格文章）](https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html)
+- [非此 RFC 之直接目標](3392-leadership-council/non-goals.md)
+- [原理和替代方案](3392-leadership-council/alternatives.md)
+- [對於理事會初期工作之建議](3392-leadership-council/initial-work-of-the-council.md)
 
 # 動機
 
