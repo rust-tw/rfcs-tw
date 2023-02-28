@@ -472,49 +472,49 @@ All policy decisions should have an evaluation date as part of the policy. Initi
 理事會應該要偏好在團隊間權責移轉前與各個團隊合作找出替代方案，因為此項措施是非常重大的步驟。同時值得注意的是，這個機制的一個使用情境是將過去委託於一個不再存在功能性的團隊的權責加以轉移（例如該團隊的成員都沒有足夠時間），潛在可以於有對應時間與能力的人手到位重新建立該團隊時可以作為暫時處置。本案的此段落是刻意保留不限制理事會如何（與否）進行此諮商。
 
 # 監督與問責機制
-[accountability]: #mechanisms-for-oversight-and-accountability
+[accountability]: #監督與問責機制
 
-The following are various mechanisms that the Council uses to keep itself and others accountable.
+以下是諸多理事會可以確保自身與他者能負起責任的機制。
 
 ## 確保能追究理事會之責任
 
-The Council must publicly ensure that the wider Project and community's expectations of the Council are consistently being met. This should be done both by adjusting the policies, procedures, and outcomes of the Council as well as education of the Project and community when their expectations are not aligned with the reality.
+理事會必須公開確保持續達到專案整體與社群對理事會的期待。其手段包含調整理事會的政策、措施與產出結果，同時在專案與社群期待不夠現實時予以充足的教育。
 
-To achieve this, in addition to rotating representatives and adopting a "public by default" orientation, the Council must regularly (at least on a quarterly basis) provide some sort of widely available public communication on their activities as well as an evaluation of how well the Council is functioning using the list of duties, expectations, and constraints as the criteria for this evaluation.
+要達成這件事情，除了輪替代表並採納「預設的公開性」觀點以外，理事會也應該定期（會至少每季）對他們的活動進行廣大的公開溝通，同時也要評估根據理事會的職責、期待與限制為標準去評估理事會的運作狀況。
 
-Each year, the Council must solicit feedback on whether the Council is serving its purpose effectively from all willing and able Project members and openly discuss this feedback in a forum that allows and encourages active participation from all Project members. To do so, the Council and other Project members consult the high-level duties, expectations, and constraints listed in this RFC and any subsequent revisions thereof to determine if the Council is meeting its duties and obligations.
+每一年，理事會都應該要向所有願意的專案成員徵求回饋以了解理事會是否有效地完成其目標，並且在一場允許並鼓勵所有專案成員主動參加的論壇中公開討論回饋。為了達到這件事，理事會與其他專案成員要討論本案與未來改版中提到的高層級職責、期待與限制，以判斷理事會是否達成其職責與義務。
 
-In addition, it is every representative's *individual* responsibility to watch for, call out, and refuse to go along with failures to follow this RFC, other Council policies and procedures, or any other aspects of Council accountability. Representatives should strive to actively avoid ["diffusion of responsibility"](https://en.wikipedia.org/wiki/Diffusion_of_responsibility), the phenomenon in which a group of people collectively fail to do something because each individual member (consciously or subconsciously) believes that someone else will do so. The Council may also wish to designate a specific role with the responsibility of handling and monitoring procedural matters, and in particular raising procedural points of order, though others can and should still do so as well.
+除此之外，每位代表**個人**都有責任注意、指出並拒絕無法依循本案、其它理事會政策或其它面向理事會責任的情境。代表應該要致力於主動迴避「[責任分散效應](https://en.wikipedia.org/wiki/Diffusion_of_responsibility)」，即群體中會因為個別成員（有意無意地）認為其他人會負責而一同無法達成特定事項的現象。理事會也可以指派一個特定職位來負責應對並監督程序性事務，特別是負責提出程序上有[秩序問題](https://en.wikipedia.org/wiki/Point_of_order)，然而其他代表依然能做這件事情。
 
-If any part of the above process comes to the conclusion that the Council is *not* meeting its obligations, then a plan for how the Council will change to better be able to meet their obligations must be presented as soon as possible. This may require an RFC changing charter or similar, a rotation of representatives, or other substantive changes. Any plan should have concrete measures for how the Council and/or Rust governance as a whole will evolve in light of the previous year's experience.
+如果任何前述的流程中得出了理事會**並沒有**達成其義務，則理事會必須要盡快提出可以幫助理事會改變以更能達成目標的計畫。其方法可能是提出修改 RFC 或相似的措施、代表的輪替或者其它重大變更。任何計畫都應該要有理事會或者 Rust 管理上整體要如何根據去年經驗演變的明確措施。
 
 ## 確保能追究理事會代表之責任
 
-Council representatives should participate in regular feedback with each other and with their respective top-level team (the nature of which is outside the scope of this RFC) to reflect on how well they are fulfilling their duties as representatives. The goal of the feedback session is to help representatives better understand how they can better serve the Project. This feedback must be shared with all representatives, all members of the representative's top-level team, and with the moderation team. This feedback should ask for both what representatives have done well and what they could have done better.
+理事會代表應該要參與他者與其對應一級團隊（其性質則在本案範圍外）的定期回饋，以反映他們作為代表實現其職責的狀況。此回饋活動的目的是要幫助代表了解自己能如何更有效幫助專案。此回饋必須要分享給所有代表、所有代表的一級團隊與審核團隊。此項回饋應該要同時詢問代表做得好與能改善的部分。
 
-Separately, representatives should also be open to private feedback from their teams and fellow representatives at any time, and should regularly engage in self-reflection about their role and efficacy on the Council.
+除此之外，代表也應該要隨時開放其團隊與其他代表的私下回饋，並且應該要定期省思自己在理事會中的職位與成效。
 
-Artifacts from these feedback processes must never be made public to ensure a safe and open process. The Council should also reflect on and adjust the feedback process if the results do not lead to positive change.
+此種回饋流程的產物絕不能被公開，以確保流程的安全與公正。理事會也應該要在結果無法帶來正向改變時反映並改變回饋流程。
 
-If other members of the Council feel that a Council representative is not collaborating well with the rest of the Council, they should talk to that representative, and if necessary to that representative's team. Council representatives should bring in moderation/mediation resources as needed to facilitate those conversations. Moderation can help resolve the issue, and/or determine if the issue is actionable and motivates some level of escalation.
+如果其他理事會的成員認為一名理事會代表與其餘理事會成員並沒有辦法良好合作，則他們該與對應代表進行對話，而有必要時也該向該代表的團隊對話。理事會代表也必須要納入可以促進這些對話進行的審核／調解資源。審核可以幫助解決問題，且／或能判斷是否需要為此問題行動並且是否需要擴張應對的層級。
 
-While it is out of scope for this RFC to specify how individual teams ensure their representatives are held accountable, we encourage teams to use the above mechanisms as inspiration for their own policies and procedures.
+雖然個別團隊要如何確保能追究其代表責任並不在本案的範圍內，我們鼓勵各團隊以上述機制為靈感去規劃各自的政策與措施。
 
 ## 確保能追究團隊之責任
 
-Teams regularly coordinate and cooperate with each other, and have conversations about their needs; under normal circumstances the Council must respect the autonomy of individual teams.
+各團隊要定期彼此協調與合作，並且溝通自己的需求；在正常狀況下，理事會必須尊重個別團隊的自主性。
 
-However, the Council serves as a means for teams to jointly hold each other accountable, to one another and to the Project as a whole. The Council can:
+然而，理事會也作為各團隊可以共同以團隊或專案整體來追究彼此責任的手段。理事會可以：
 
-- Ask a team to reconsider a decision that failed to take the considerations of other teams or the Project as a whole into consideration.
-- Encourage teams to establish processes that more regularly take other teams into consideration.
-- Ensure a shared understanding of teams' purviews.
-- Ensure teams are willing and able to fulfill those purviews.
-- Establish new teams that split a team's purview up into more manageable chunks.
+- 請求一個團隊重新考慮一個並未納入其他團隊或者專案整體考慮的決策。
+- 鼓勵各團隊建立可以定期將其他團隊納入考慮的流程。
+- 確保對所有團隊權責有共同的瞭解。
+- 確保各團隊都願意並且有能力實現這些權責。
+- 建立新團隊將一個團隊的權責分為更能被應對的大小。
 
-The accountability process must not be punitive, and the process must be done with the active collaboration of the teams in question.
+追究的流程不得句被懲罰性，同時此流程必須在受到影響團隊的主動和做下進行。
 
-In extreme circumstances where teams are willfully choosing to not act in good faith with regards to the wider Project, the Council has the authority to change a team's purview, move some subset of a team's purview to another team, or remove a team entirely. This is done through the Council's regular decision making process. (This does not apply to the moderation team; see the next section for accountability between the Council and moderation team.)
+在極端情境下，如果團隊刻意選擇對專案整體不以良善原則行動時，則理事會有權力去改變團隊的權責、將部分權責轉移至其他團隊或直接移除整個團隊。此作為可以透過理事會常規的決策流程進行。（此項措施對審核團隊並不適用；請見下一段落關於理事會與審核團隊之間的問責機制）
 
 # 審核、分歧與衝突
 
