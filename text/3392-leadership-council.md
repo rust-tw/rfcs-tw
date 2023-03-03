@@ -234,7 +234,7 @@ If this constraint does not hold, whether by a representative changing affiliati
 
 ## 與 Rust 基金會之關係
 
-理事會負責建立選擇*專案管理者*的流程。專案管理者在基金會理事會上反映 Rust 專案的利益。
+理事會負責建立選擇專案管理者的流程。專案管理者在基金會理事會上反映 Rust 專案利益。
 
 理事會授權專案管理者在基金會理事會上代表 Rust 專案的利益，並且在基金會相關事項上做出某些決策。授權的確切界線則超出此 RFC 的討論範圍。
 
