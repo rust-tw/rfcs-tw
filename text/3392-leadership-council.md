@@ -174,19 +174,19 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 ## 候補與放棄代表權利
 
-A representative may end their term early if necessary, such as due to changes in their availability or circumstances. The respective top-level team must then begin selecting a new representative. The role of representative is a volunteer position. No one is obligated to fill that role, and no team is permitted to make serving as a representative a necessary obligation of membership in a team. However, a representative is obligated to fulfill the duties of the position of representative, or resign that position.
+若有必要，例如工作時間或是情況變化，代表可提前結束任期。該團隊則須開始選任新代表。代表是一志願職位，沒有人有義務擔任該職，也不允許將擔任代表作為團隊成員之義務。然而，代表自身有義務履行其職責，或是辭去該職位。
 
-A top-level team may decide to temporarily relinquish their representation, such as if the team is temporarily understaffed and they have no willing representative. However, if the team does not designate a Council representative, they forgo their right to actively participate in decision-making at a Project-wide level. All Council procedures including decision-making should not be blocked due to this omission. The Council is still obligated to consider new information and objections from all Project members. However, the Council is not obligated to block decisions to specially consider or collate a non-represented team's feedback.
+一級團隊可決定暫時放棄他們的代表權，例如，該團隊暫時人手不足且無人自願擔任代表。然而，若該團隊沒有指定理事會代表，視同放棄積極參與整個專案的決策權。其他所有理事會程序，包括決策，不應因此缺漏而受阻。理事會仍有義務考慮來自所有專案成員的訊息與異議。然而，理事會並無義務阻擋任何決策，來特別考慮或整理未被代表的團隊之回饋。
 
-Sending a representative to the Council is considered a duty of a top-level team, and not being able to regularly do so means the team is not fulfilling its duties. However, a Council representative does not relinquish their role in cases of short absence due to temporary illness, vacation, etc.
+派遣代表參加理事會是一級團隊的職責所在，無法定期參加理事會表示該團隊未盡其職責。然而，因臨時生病，休假等因素而暫時缺席，理事會代表一職並不會因此棄權。
 
-A top-level team can designate an alternate representative to serve in the event their primary representative is unavailable. This alternate assumes the full role of Council representative until the return of the primary representative. Alternate representatives do not regularly attend meetings when the primary representative is present (to avoid doubling the number of attendees).
+一級團隊可指定候補代表，在其主要代表無法出席的情況下候補。候補代表將承擔主要代表的一切職責，直到主要代表回歸。當主要代表出席定期會議時，候補代表並不會參加（以避免參與人數倍增）。
 
-If a team's representative *and* any alternates fail to participate in any Council proceedings for 3 consecutive weeks, the team's representative ceases to count towards the decision-making quorum requirements of the Council until the team can provide a representative able to participate. The Council must notify the team of this before it takes effect. If a team wishes to ensure the Council does not make decisions without their input or without an ability for objections to be made on their behalf, they should ensure they have an alternate representative available.
+如果一個團隊的代表和候補代表連續三週未參與理事會的任何程序，直到該團隊能提供能夠參與的代表之前，該團隊之代表將不再列入理事會決策法定人數要求。理事會須在此生效前通知該團隊。若一個團隊希望理事會不會在缺少該團隊意見，或無法代表該團隊提出反對的狀況下進行決策，該團隊應要確保有一名候補代表。
 
-A top-level team may change their representative before the end of their term, if necessary.  However, as maintaining continuity incurs overhead, teams should avoid changing their representatives more than necessary. Teams have the primary responsibility for briefing their representative and alternates on team-specific issues or positions they wish to handle on an ongoing basis. The Council and team share the responsibilities of maintaining continuity for ongoing issues within the Council, and of providing context to alternates and other new representatives.
+若有必要，一級團隊可在任期結束前替換其代表。然而，考量維持連續性的成本，團隊應避免非必要時不替換其代表。團隊的首要職責是向他們的代表和候補代表介紹在團隊中希望能持續處理的問題與立場。理事會和團隊共同負責維持理事會內部正在處理的問題之連續性，並向主要以及候補代表說明情況。
 
-For private matters, the Council should exercise discretion on informing alternates, to avoid spreading private information unnecessarily; the Council can brief alternates if they need to step in.
+有關私人事務，理事會將酌情通知候補代表，以避免分享不必要的私人資訊。若候補代表需要出面，則理事會可說明該情況。
 
 ## 任期限制
 
