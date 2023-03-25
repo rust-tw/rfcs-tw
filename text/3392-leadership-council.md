@@ -239,95 +239,95 @@ The Council is responsible for establishing the process for selecting Project di
 The Council delegates a purview to the Project directors to represent the Project's interests on the Foundation Board and to make certain decisions on Foundation-related matters. The exact boundaries of that purview are out of scope for this RFC.
 
 # 理事會決策流程
-[decision-making]: #the-council-s-decision-making-process
+[decision-making]: #理事會決策流程
 
-The Leadership Council make decisions of two different types: operational decisions and policy decisions. Certain considerations may be placed on a given decision depending on its classification. However, by default, the Council will use a consent decision-making process for all decisions regardless of classification.
+領導理事會作出兩種不同類型的決策：營運決策和政策決策。並可能會根據決策的類別，給予不同的考慮。然而在預設情況下無論分類為何，理事會將對所有決策使用共識決策流程。
 
 ## 營運與政策決策
 
-Operational decisions are made on a daily basis by the Council to carry out their aims, including regular actions taking place outside of meetings (based on established policy). Policy decisions provide general reusable patterns or frameworks, meant to frame, guide, and support operations. In particular, policy decisions can provide partial automation for operational decisions or other aspects of operations. The council defaults to the consent decision making process for all decisions unless otherwise specified in this RFC or other policy.
+營運決策是理事會為實現其目標而每天作出的決策，包括在會議之外進行的常規行動（基於既定政策）。政策決策提供通用且可重複使用的模式或框架，旨在構建、指導和支援營運。特別是政策決策可以為營運決策或營運的其他方面提供部分自動化。除非在本 RFC 或其他政策中另有規定，否則理事會對所有決策預設使用共識決策流程。
 
-This RFC does not attempt to precisely define which decisions are operations versus policy; rather, they fall somewhere along a continuum. The purpose of this distinction is not to direct or constrain the council's decision-making procedures. Instead, this distinction provides guidance to the Council, and clarifies how the Council intends to record, review, and refine its decisions over time. For the purposes of any requirements or guidance associated with the operational/policy classification, anything not labeled as either operational or policy in this or future policy defaults to policy. 
+本 RFC 並不會試圖精確界定哪些決策是營運決策，哪些是政策決策；實際上決策將會落於連續光譜中的其中一處。進行此項區別的目的並不是指示或限制理事會的決策程序。與此相對的，這種區別為理事會提供了指引，並澄清理事會如何隨著時間記錄、審視和完善其決策。而對於與營運或政策分類相關的任何要求或指示，任何沒有在本案或者未來政策中標示為營運或政策決策者，都將預設視為政策決策。
 
 ## 重複與例外
-[repetition-and-exceptions]: #repetition-and-exceptions
+[repetition-and-exceptions]: #重複與例外
 
-Policy decisions often systematically address what might otherwise require repeated operational decisions. The Council should strive to recognize when repeated operational decisions indicate the need for a policy decision, or a policy change. In particular, the Council should avoid allowing repeated operational decisions to constitute de facto policy.
+政策決策通常會以系統化的方式解決可能需要反覆進行的營運決策。理事會應該致力於認知反覆的營運決策顯現需要的政策決策或政策變更。特別是理事會應該避免讓反覆的營運決策構成事實上的政策。
 
-Exceptions to existing policy cannot be made via an operational decision unless such exceptions are explicitly allowed in said policy. Avoiding ad-hoc exceptions helps avoid ["normalization of deviance"](https://en.wikipedia.org/wiki/Normalization_of_deviance).
+除非該政策明確允許例外，否則不能通過營運決策對現有政策進行例外。避免臨時例外有助於避免[「偏差常態化」](https://en.wikipedia.org/wiki/Normalization_of_deviance)。
 
 ## 共識決策流程
 
-The Council will initially be created with a single process for determining agreement to a proposal. It is however expected that the Council will add additional processes to its toolbox soon after creation.
+理事會最初將採用一種確定同意提案的流程。然而也期待理事會在成立後不久將在其工具組中加入額外的流程。
 
-Consent means that no representative's requirements (and thus those of the top-level team and subteams they represent) can be disregarded. The Council hears all relevant input and sets a good foundation for working together equitably with all voices weighted equally.
+共識意味著不能忽略任何代表的要求（因此也包括他們代表的一級團隊和子團隊的要求）。理事會聽取所有相關意見，並會為了能與所有聲浪平等合作而奠定良好基礎。
 
-The Council uses consent decision-making where instead of being asked "do you agree?", representatives are asked "do you object?". This eliminates "pocket vetoes" where people have fully reviewed a proposal but decide against approving it without giving clear feedback as to the reason. Concerns, feedback, preferences, and other less critical forms of feedback do not prevent making a decision, but should still be considered for incorporation earlier in drafting and discussion. Objections, representing an unmet requirement or need, *must* be considered and resolved to proceed with a decision.
+理事會採用共識決策，不會以「你同意嗎？」詢問，而是以「你反對嗎？」來詢問代表。這樣可以消除[「口袋否決」](https://zh.wikipedia.org/zh-tw/%E5%8F%A3%E8%A2%8B%E5%90%A6%E6%B1%BA)，即在完整審查提案後，卻在沒有提供明確回饋的情況下否決掉。考量、回饋、偏好和其他不關鍵的回饋形式並不會阻止決策的做出，但在起草和討論的初期仍應考慮納入。反對意見，代表未滿足的要求或需求，則**必須**考慮和解決後才能繼續進行決策。
 
 ### 核准標準
 
-The consent decision-making process has the following approval criteria:
-- Posting the proposal in one of the Leadership Council's designated communication spaces (a meeting or a specific channel).
-- Having confirmation that at least N-2 Council representatives (where N is the total number of Council representatives) have fully reviewed the final proposal and give their consent.
-- Having no outstanding explicit objections from any Council representative.
-- Providing a minimum 10 days for feedback.
+共識決策流程具有以下核准標準：
+- 將提案發布在領導理事會指定的溝通空間之一（會議或特定管道）。
+- 確認至少 N-2 理事會代表（其中 N 是理事會代表的總數）已經完全審查了最終提案並給予同意。
+- 無任何理事會代表未解決的明確反對意見。
+- 提供至少 10 天的回饋時間。
 
-The approval criteria provides a quorum mechanism, as well as sufficient time for representatives to have seen the proposal. Allowing for two non-signoffs is an acknowledgement of the volunteer nature of the Project, based on experience balancing the speed of decisions with the amount of confirmation needed for consent and non-objection; this assumes that those representatives have had time to object if they wished to do so. (This is modeled after the process used today for approval of RFCs.)
+核准標準提供了法定人數機制，並提供代表足夠時間查看提案。允許兩個非簽署人是對專案志願性質的認同，基於在決策速度與共識和無異議所需確認量之間取得平衡的經驗加以制定；如此設計是假定對應代表如果希望要反對，也應已有時間提出反對意見。（這是根據現在用於核准 RFC 的流程所規劃的。）
 
-The decision-making process can end at any time if the representative proposing it decides to retract their proposal. Another representative can always adopt a proposal to keep it alive.
+如果提議代表決定撤回他們的提案，則決策流程可以隨時結束。其他代表可以隨時接手提案以維持其活躍。
 
-If conflicts of interest result in the Council being unable to meet the N-2 quorum for a decision, the Council cannot make that decision unless it follows the process documented in [the "Conflicts of interest" section for how a decision may proceed with conflicts documented][conflicts-of-interest]. In such a case, the Council should consider appropriate processes and policies to avoid future recurrences of a similar conflict.
+如果利益衝突導致理事會無法達到 N-2 的法定人數來作出決定，則理事會不能作出該決定，除非遵循[「利益衝突」段落中關於如何在記錄衝突下繼續進行決策的流程][conflicts-of-interest]。在這種情況下，理事會應該考慮適當的流程和政策，以避免類似衝突的重演。
 
 ## 變更與調整決策流程
 
-Using the public policy process, the Council can establish different decision-making processes for classes of decisions.
+利用公共政策流程，理事會可以為不同類型的決策建立不同的決策流程。
 
-For example, the Council will almost certainly also want a mechanism for quick decision-making on a subset of operational decisions, without having to wait for all representatives to affirmatively respond. This RFC doesn't define such a mechanism, but recommends that the Council develop one as one of its first actions.
+例如，理事會肯定會希望對一部分營運決策的子集進行快速決策，而無需等待所有代表積極回應。本 RFC 中沒有定義這樣的機制，但建議理事會將其作為首要行動之一加以制定。
 
-When deciding on which decision-making process to adopt for a particular class of decision, the Council balances the need for quick decisions with the importance of confidence in full alignment. Consent decision-making processes fall on the following spectrum:
+在決定采用哪種決策流程來處理特定類型的決策時，理事會需在快速決策與完全一致性的信心之間取得平衡。共識決策流程包括以下範疇：
 
-- Consensus decision making (prioritizes confidence in full alignment at the expense of quick decision making): team members must review and prefer the proposal over all others, any team members may raise a blocking objection
-- Consent decision making (default for the Council, balances quick decisions and confidence in alignment): team members must review and may raise a blocking objection
-- One second and no objections (prioritizes quick decision making at the expense of confidence in alignment): one team member must review and support, any team member may raise a blocking objection
+- 一致共識決策（以犧牲快速決策為代價，提高完全一致性的信心）：團隊成員必須審查並優先考慮該提案而非其他提案，任何團隊成員都可以提出阻止性反對意見。
+- 共識決策（理事會的預設方式，平衡快速決策與一致性信心）：團隊成員必須審查並可以提出阻止性反對意見。
+- 一個贊成且無異議（以犧牲一致性信心為代價，優先考慮快速決策）：一個團隊成員必須審查並支持，任何團隊成員都可以提出阻止性反對意見。
 
-Any policy that defines decision-making processes must at a minimum address where the proposal may be posted, quorum requirements, number of reviews required, and minimum time delay for feedback. A lack of objections is part of the approval criteria for all decision-making processes.
+任何定義決策流程的政策都必須至少處理以下要素：提案可以被發布的地方、法定人數要求、所需審查數和回饋的最短時間延遲。所有決策流程的核准標準都包括無異議。
 
-If conflicts of interest prevent more than a third of the Council from participating in a decision, the Council cannot make that decision unless it follows the process documented in [the "Conflicts of interest" section for how a decision may proceed with conflicts documented][conflicts-of-interest]. (This is true regardless of any other quorum requirements for the decision-making process in use.) In such a case, the Council should consider appropriate processes and policies to avoid future recurrences of a similar conflict.
+如果利益衝突導致超過三分之一的理事會無法參與決策，理事會在不遵循[「利益衝突」段落中關於如何在記錄衝突下繼續進行決策的流程][conflicts-of-interest]的情況下，無法做出該決策。（無論使用的決策流程的其他法定人數要求如何，都是如此。）在這種情況下，理事會應該考慮適當的流程和政策，以避免類似衝突的未來重演。
 
-The Council may also delegate subsets of its own decision-making purviews via a public policy decision, to teams, other governance structures, or roles created and filled by the Council, such as operational lead, meeting facilitator, or scribe/secretary.
+理事會還可以通過公共政策決策將其決策範疇的子集委派給團隊、其他治理結構或由理事會創建和任命的職位，如營運負責人、會議主持人或書記、秘書。
 
-Note that the Council may delegate the drafting of a proposal without necessarily delegating the decision to approve that proposal. This may be necessary in cases of Project-wide policy that intersects the purviews of many teams, or falls outside the purview of any team. This may also help when bootstrapping a new team incrementally.
+請注意，理事會可以委派起草提案，而不一定要委派決策該提案的核准與否。這在涉及許多團隊的權責或不屬於任何團隊權責的專案整體政策的情況下可能是必要的。在逐步建立新團隊時，這也可能有所幫助。
 
 ## 議程與待辦事項
 
-The Council's agenda and backlog are the primary interface through which the Council tracks and gives progress updates on issues raised by Project members throughout the Project.
+理事會的議程和待辦事項是理事會追蹤和更新專案成員在整個專案中提出的問題的主要界面。
 
-To aid in the fairness and effectiveness of the agenda and backlog, the Council must:
+為了提高議程和待辦事項的公平性和有效性，理事會必須：
 
-- Use a tool that allows Project members to submit requests to the Council and to receive updates on those requests.
-- Use a transparent and inclusive process for deciding on the priorities and goals for the upcoming period. This must involve regular check-ins and feedback from all representatives.
-- Strive to maintain a balance between long-term strategic goals and short-term needs in the backlog and on the agenda.
-- Be flexible and adaptable and be willing to adjust the backlog and agenda as needed in response to changing circumstances or priorities.
-- Regularly review and update the backlog to ensure that it accurately reflects the current priorities and goals of the Council.
-- Follow a clear and consistent process for moving items from the backlog to the agenda, such as delegating responsibility to roles (e.g. meeting facilitator and scribe), and consenting to the agenda at the start of meetings. Any agenda items rejected during the consent process must have their objections documented in the published meeting minutes of the Council.
+- 使用一個工具，讓專案成員能夠向理事會提交請求並接收有關這些請求的更新。
+- 使用透明和包容的流程，為近期確定優先事項和目標。其中必須包括所有代表定期的事態了解和回饋。
+- 力求在待辦事項和議程中在長期戰略目標和短期需求之間保持平衡。
+- 保持靈活和適應性，並根據不斷變化的情況或優先事項，根據需要調整待辦事項和議程。
+- 定期審視和更新待辦事項，以確保其準確反映了理事會的目前優先事項和目標。
+- 遵循明確且一致的流程將項目從待辦事項移至議程，例如將責任委派給特定職位（例如會議主持人和書記），並在會議開始時同意議程。任何在同意流程中否決的議程項目都必須在理事會公布的會議記錄中記錄其反對意見。
 
 ## 解決僵局
 
-In some situations the Council might need to make an decision urgently and not feel it can construct a proposal in that time that everyone will consent to. In such cases, if everyone agrees that a timely decision they disagree with would be a better outcome than no timely decision at all, the Council may use an alternative decision-making method to attempt to resolve the deadlock. The alternative process is informal, and the council members must still re-affirm their consent to the outcome through the existing decision making process. Council members may still raise objections at any time.
+在某些情況下，理事會可能需要緊急作出決定，並且認為在這段時間內無法構建每個人都能同意的提案。在這種情況下，若每個人都同意及時作出他們不同意的決定會比根本沒有及時作出決定的結果更好，則理事會可以使用替代決策方法來嘗試解決僵局。替代流程是非正式的，理事會成員仍然必須通過現有的決策流程重新確認他們對結果的同意。理事會成員仍然可以隨時提出反對意見。
  
-For example, the Council can consent to a vote, then once the vote is complete all of the council members would consent to whatever decision the vote arrived to. The Council should strive to document the perceived advantages and disadvantages for choosing a particular alternative decision-making model.
+例如，理事會可以同意進行投票，然後在投票完成後，所有理事會成員都將同意投票所得出的任何決定。理事會應致力於記錄選擇特定替代決策模型的潛在優點和缺點。
 
-There is, by design, no mandatory mechanism for deadlock resolution. If the representatives do not all consent to making a decision even if they don't prefer the outcome of that decision, or if any representative feels it is still possible to produce a proposal that will garner the Council's consent, they may always maintain their objections.
+根據設計，沒有強制性的僵局解決機制。如果代表們都不同意作出決定，即使他們不喜歡該決定的結果，或者如果任何代表覺得仍有可能制定出一個能夠得到理事會同意的提案，他們可以隨時保持反對意見。
 
-If a representative withdraws an objection, or consents to a decision they do not fully agree with (whether as a result of an alternative decision-making process or otherwise), the Council should schedule an evaluation or consider shortening the time until an already scheduled evaluation, and should establish a means of measuring/evaluating the concerns voiced. The results of this review are intended to determine whether the Council should consider changing its prior decision.
+如果代表撤回反對意見，或者同意他們不完全同意的決定（無論是作為替代決策流程的結果還是其他原因），理事會應安排評估或考慮提早已安排評估活動，並應建立衡量、評估表達考量之處的方法。審查的結果旨在確定理事會是否應考慮改變其先前的決定。
 
 ## 回饋與評估
 
-All policy decisions should have an evaluation date as part of the policy. Initial evaluation periods should be shorter in duration than subsequent evaluation periods. The length of evaluation periods should be adjusted based on the needs of the situation. Policies that seem to be working well and require few changes should be extended so less time is spent on unnecessary reviews. Policies that have been recently adjusted or called into question should have shortened evaluation periods to ensure they're iterating towards stability more quickly. The Council should establish standardized periods for classes of policy to use as defaults when determining periods for new policy. For instance, roles could have an evaluation date of 3 months initially then 1 year thereafter, while general policy could default to 6 months initially and 2 years thereafter.
+所有政策決策都應將評估日期作為政策的一部分。初始評估期應比後續評估期短。評估期的長度應根據情況所需進行調整。對於運作良好且需要更動不多的政策，應該延長評估期以減少在不必要的審查上花費的時間。對於近期調整或受到質疑的政策，應該縮短評估期以確保對應政策能更快地迭代至穩定狀態。理事會應為政策類別建立標準化期限，以便在確定新政策的期限時使用預設值。例如，職位的評估日期最初可以為 3 個月，接著改為 1 年，而一般政策則可以預設為最初 6 個月，接著改為 2 年。
 
-- New policy decisions can always modify or replace existing policies.
-- Policy decisions must be published in a central location, with version history.
-- Modifications to the active policy docs should include or link to relevant context for the policy decision, rather than expecting people to find that context later.
+- 新的政策決策始終可以修改或替換現有政策。
+- 政策決策必須於具有版本歷史的形式發佈在中心位置。
+- 修改生效中的政策文件時，應包含或鏈接到與政策決策相關的上下文，而不是期望人們之後去尋找該上下文。
 
 # 決策流程之透明度和監督
 
@@ -400,7 +400,7 @@ All policy decisions should have an evaluation date as part of the policy. Initi
 ## 理事會須經公開提案做出之決策
 [decisions-that-the-Council-must-make-via-public-proposal]: #理事會須經公開提案做出之決策
 
-在此分類中的決策需要理事會主動**提前**在決策做下前向更廣泛的 Rust 專案參與者尋求回饋。這樣的決策會透過合適的公開決策流程提案並決策，目前必須透過 RFC 流程（然而理事會未來可以採用不同的公開提案流程）。公開決策流程必須有所有代表的共識（無論是透過主動同意或無反對的形式），必須接受理事會代表的反對阻擋，必須有合理的時間接受公開評估與討論，並且必須提供公開回饋給理事會的明確途徑。
+在此分類中的決策需要理事會主動**提前**在決策做下前向更廣泛的 Rust 專案參與者尋求回饋。這樣的決策會透過合適的公開決策流程提案並決策，目前必須透過 RFC 流程（然而理事會未來可以採用不同的公開提案流程）。公開決策流程必須有所有代表的共識（無論是透過主動同意或無反對的形式），必須接受理事會代表的阻止性反對意見，必須有合理的時間接受公開評估與討論，並且必須提供公開回饋給理事會的明確途徑。
 
 依循既有的 RFC 流程，公開提案必須要在決策生效前有個最低的延遲時間以接受回饋。任何代表都可以要求特定決策接受回饋的時長最多延長至總計 20 天。理事會可以做出內部營運決策來延長回饋期間至超過 20 天。接受回饋的延遲期間只有在通過決策的必要條件都滿足時才能開始計算，包含沒有任何提出的反對。如果在延遲期間有反對被提出並且解決，延遲等待期間將會再次重新計算。
 
