@@ -518,116 +518,116 @@ All policy decisions should have an evaluation date as part of the policy. Initi
 
 # 審核、分歧與衝突
 
-This section describes the roles of the Leadership Council and the moderation team in helping resolve disagreements and conflicts, as well as the interactions between those teams.
+本段落描述了領導理事會和審核團隊在協助解決分歧和衝突方面的角色，以及這些團隊之間的互動。
 
-Disagreements and conflicts fall on a spectrum of interpersonal interaction. Disagreements are more factual and/or technical misalignments, while conflicts are more social or relational roadblocks to collaboration. Many interactions might display aspects of both disagreement and conflict. The Council can help with aspects of disagreement, while aspects of conflict are the purview of the moderation team.
+分歧和衝突同樣座落在人際互動光譜上。分歧是更多關於事實和、或技術上的不一致，而衝突則是更多關於社交或關係上的合作障礙。許多互動可能同時表現出分歧和衝突的樣貌。理事會可以在分歧方面提供幫助，而衝突方面則屬於審核團隊的權責。
 
-This RFC does not specify moderation policy in general, only the portion of it necessary to specify interactions with the Council and the checks and balances between the Council and the moderation team. General moderation policy is out of scope for this RFC.
+本案並未詳細規定一般審查政策，僅規定了與理事會互動以及理事會與審核團隊之間平衡的部分。一般審查政策超出了本案的範疇。
 
-Much of the work of the Rust Project involves collaboration with other people, all of whom care deeply about their work. It's normal for people to disagree, and to feel strongly about that disagreement. Disagreement can also be a powerful tool for surfacing and addressing issues, and ideally, people who disagree can collaboratively and (mostly) amicably explore those disagreements without escalating into interpersonal conflicts.
+Rust 專案的許多工作都涉及與其他人的合作，所有人都非常關心自己的工作。人們之間的分歧是正常的，對分歧產生強烈情感也是正常的。分歧也可以成為揭示和解決問題的有力工具，理想情況下，有分歧的人可以在合作中（盡量）友好地探討這些分歧，而不升級為人際衝突。
 
-Situations where disagreements and conflicts arise may be complex. Disagreements can escalate into conflicts, and conflicts can de-escalate into disagreements. If the distinction between a disagreement and a conflict is not clear in the situation, or if participants disagree, assume the situation is a conflict.
+分歧和衝突出現的情況可能很複雜。分歧可能升溫為衝突，衝突也可能降級為分歧。如果情況中無法明確區分分歧和衝突，或者參與者對此有分歧，則應假定情況是衝突。
 
-In the event of a conflict, involved parties should reach out to the moderation team to help resolve the conflict as soon as possible. Time is a critical resource in attempting to resolve a conflict before it gets worse or causes more harm.
+在發生衝突的情況下，涉及者應盡快聯繫審核團隊協助解決衝突。時間是在衝突惡化或造成更多傷害之前解決衝突的關鍵資源。
 
 ## 團隊間之分歧
 
-Where possible, teams should attempt to resolve disagreements on their own, with assistance from the Council as needed. The Council can make judgment calls to settle disagreements, but teams need to maintain good working relationships with each other to avoid persistent disagreements or escalations into conflicts.
+在可能的情況下，團隊應嘗試自行解決分歧，如有需要可向理事會尋求協助。理事會可以做出判斷來解決分歧，但團隊需要保持良好的工作關係，以避免持續的分歧或升級為衝突。
 
-Potential resolution paths for disagreements between teams could include selecting a previously discussed option, devising a new option, deciding whose purview the decision falls in, or deciding that the decision is outside the purviews of both teams and leaving it to the Council to find a new home for that work.
+團隊之間分歧的潛在解決途徑可能包括選擇先前討論過的選項，制定新選項，確定決策屬於哪個團隊的職責範疇，或者決定該決策在兩個團隊的權責範疇之外，交由理事會為這項工作找到一個新的歸屬。
 
 ## 涉及團隊或專案成員之衝突
 
-Conflicts involving teams or Project members should be brought to the moderation team as soon as possible. The Council can help mitigate the impact of those conflicts on pending/urgent decisions, but the moderation team is responsible for helping with conflicts and interpersonal issues, across teams or otherwise.
+涉及團隊或專案成員的衝突應盡快提交給審核團隊。理事會可以協助減少這些衝突對未決、緊急決策的影響，但審核團隊負責協助解決團隊之間或其他方面的衝突和人際問題。
 
-Individuals or teams may also voluntarily engage in other processes to address conflicts or interpersonal issues, such as non-binding external mediation. Individuals or teams should keep the moderation team in the loop when doing so, and should seek guidance from the moderation team regarding appropriate resources or approaches for doing so. Individuals or teams must not use resources that would produce a conflict of interest.
+個人或團隊也可以自願參與其他過程來解決衝突或人際問題，例如非約束性的外部審核。在這樣做時，個人或團隊應讓審核團隊知道情況，並尋求審核團隊對於合適的資源或方法的指導。個人或團隊不得使用會產生利益衝突的資源。
 
 ## 審核人代表團
 
-The moderation team must at all times maintain a publicly documented list of "contingent moderators", who must be approved by both the moderation team and the Council via internal consent decision. The moderation team and contingent moderation team should both consist of at least three members each. The contingent moderators must be:
-- Not part of the current moderation team *or* the Leadership Council.
-- Widely trusted by Rust Project members as jointly determined by the Council and moderation team; this will often mean they're already part of the Project in some capacity.
-- Qualified to do moderation work and [audits] as jointly determined by the Council and moderation team. More detailed criteria and guidelines will be established by moderation policy, which is out of scope for this RFC.
-- Willing to serve as contingent moderators: willing to do audits, and willing to do interim moderation work if the moderation team dissolves or becomes unavailable, until they can appoint new full moderators. (The contingent moderators are not expected to be willing to do moderation work long-term.)
-- Willing to stay familiar with moderation policy and procedure to the standards expected of a moderation team member (including any associated training). Contingent moderators should receive the same opportunities for training as the moderation team where possible.
+審核團隊必須始終維護一個公開記錄的「緊急審核者」名單，這些緊急審核者必須通過審核團隊和理事會的內部共識決策得到批准。審核團隊和條件審核團隊應分別由至少三名成員組成。緊急審核者必須：
+- 既不是現任審核團隊的成員，也不是領導理事會的成員。
+- 由理事會和審核團隊共同確定，受到 Rust 專案成員的廣泛信任；這通常意味著他們已經以某種方式參與專案。
+- 由理事會和審核團隊共同確定，具有從事審核工作和[稽核][audits]的資格。更詳細的標準和指導方針將由審核政策確定，該政策超出了本案的範疇。
+- 願意擔任緊急審核者：願意進行審核，並在審核團隊解散或無法進行工作的情況下，願意進行臨時審核工作，直到他們能夠任命新的正式審核者。（緊急審核者無需長期願意從事審核工作。）
+- 願意熟悉審核政策和程序，達到審核團隊成員所期望的標準（包括任何相關培訓）。在可能的情況下，緊急審核者應獲得與審核團隊相同的培訓機會。
 
-The need for contingent moderators arises in a high-tension situation, and the Project and Council must be prepared to trust them to step into that situation. Choosing people known and trusted by the rest of the Project helps lower tensions in that situation.
+需要緊急審核者行動的情境會是高壓緊張的情況，而專案和理事會必須做好信任他們投身於這種情況的準備。選擇其他專案成員所熟悉和信任的人有助於降低這種情況下的緊張。
 
-Moderation is a high-burnout activity, and individual moderators or the moderation team may find itself wishing to step away from that work. Note that one or more individual moderators may always choose to step down, in which case the moderation team should identify and bring in new moderators to fill any gaps or shortfalls; if the moderation team asks a contingent moderator to become a full moderator, the team should then appoint a new contingent moderator. An individual moderator who stepped down *may* be selected as a contingent moderator. If the moderation team as a whole becomes simultaneously unavailable (as determined jointly by the Council and contingent moderators via internal consent decision), or chooses to step down simultaneously, the contingent moderators become the interim moderation team and must promptly appoint new contingent moderators and start seeking new full moderators.
+審核是一項容易耗竭的活動，個別審核者或審核團隊可能會希望遠離這項工作。注意，一個或多個個別審核者可以選擇辭職，此時審核團隊應該確定並引入新的審核者來填補任何空缺或不足；如果審核團隊要求緊急審核者成為正式審核者，該小組應該任命一位新的緊急審核者。辭職的個別審核者**可以**被選為緊急審核者。如果審核團隊整體同時無法進行工作（由理事會和緊急審核者通過內部共識決策共同確定），或選擇同時辭職，緊急審核者將成為臨時審核團隊，並必須迅速任命新的緊急審核者，並開始尋找新的正式審核者。
 
-As the contingent moderator role does not have any regular required activities outside of exceptional situations, those appointed to that role must have regular check-ins with the moderation team, to reconfirm that they're still willing to serve in that role, and to avoid a circumstance in which the contingent moderators are abruptly needed and turn out to be unavailable.
+由於緊急審核者角色除了特殊情況以外不需要執行任何定期活動，因此被任命為該角色的人必須與審核團隊定期檢查，以確認他們仍願意擔任該角色，並避免緊急審核者突然被需要並被發現無法進行工作的情況。
 
 ## 審核團隊之政策與程序
 
-The moderation team has a duty to have robust policies and procedures in place. The Council provides oversight and assistance to ensure that the moderation team has those policies and procedures and that they are sufficiently robust.
+審核團隊有責任制定完善的政策和程序。理事會提供監督和協助，以確保審核團隊擁有這些政策和程序，並且它們足夠完善。
 
-The Council may provide feedback to the moderation team and the moderation team is required to consider all feedback received. If the Council feels the moderation team has not followed moderation policies and procedures, the Council may [require an audit][audits] by the contingent moderators. However, the Council may not overrule a moderation decision or policy.
+理事會可以向審核團隊提供回饋，審核團隊有義務考慮收到的所有回饋。如果理事會認為審核團隊未遵循審核政策和程序，理事會可以[要求緊急審核者進行稽核][audits]。然而，理事會不能否決審核決定或政策。
 
 ## 稽核
-[audits]: #audits
+[audits]: #稽核
 
-If any Council member believes a moderation decision (or series of decisions) has not followed the moderation team's policies and procedures, they should promptly inform the moderation team. The Council and moderation team should then engage with each other, discuss and understand these concerns, and work to address them.
+如果任何理事會成員認為審核決定（或一系列決定）未遵循審核團隊既定的政策和程序，他們應立即通知審核團隊。理事會和審核團隊應該相互合作，討論和理解這些問題，並努力解決它們。
 
-One of the mechanisms this RFC provides for checking the moderation team's actions in a privacy-preserving manner is an audit mechanism. In any case where any Council member believes moderation team actions have not followed documented policies or procedures, the Council member may decide to initiate the audit process. (In particular, they might do this in response to a report from a community member involved in a moderation situation.) This happens *in addition* to the above engagement and conversation; it is not a replacement for direct communication between the Council and the moderation team.
+本案提供的一種以保密形式檢查審核團隊行為的機制，是稽核（audit）機制。在任何情況下，如果任何理事會成員認為審核團隊的行動未遵循記錄紀錄有案的政策或程序時，則該理事會成員可以決定啟動稽核流程。（特別是，理事會成員可以以此形式回應涉及審核情形的社群成員的回報。）此項機制的進行是除了以上的互動和對話之外的**額外**行動；此機制不是理事會與審核團隊之間直接溝通的替代品。
 
-In an audit, the contingent moderation team works with the moderation team to establish whether the moderation team followed documented policies and procedures. This mechanism necessarily involves the contingent moderation team using their own judgment to evaluate moderation policy, specific evidence or communications, and corresponding moderation actions or proposed actions. However, this mechanism is not intended to second-guess the actions themselves; the audit mechanism focuses on establishing whether the moderation team is acting according to its established policy and procedures.
+在稽核中，緊急審核團隊與審核團隊合作，確定審核團隊是否遵循既定的政策和程序。這一機制必然涉及緊急審核團隊依據自己的判斷來評估審核政策、具體證據或溝通以及相應的審核行動或建議行動。然而，稽核機制並不旨在對行動本身進行懷疑；稽核機制的重點是確定審核團隊是否按照其既定的政策和程序行事。
 
-The contingent moderators also reach out to the Council to find out any additional context they might need.
+緊急審核者還會與理事會聯繫，了解他們可能需要的任何額外背景資訊。
 
-Moderation processes and audits both take time, and must be performed with diligence. However, the Council, contingent moderators, and moderation team should all aim to communicate their concerns and expectations to each other in a reasonably timely fashion and maintain open lines of communication.
+審核流程和稽核都需要時間，並且必須謹慎執行。然而，理事會、緊急審核者和審核團隊都應該努力在合理的時間內相互表達他們的顧慮和期望，並保持開放的溝通管道。
 
-Contingent moderators must not take part in decisions or audits for which they have a conflict of interest. Contingent moderators must not have access to private information provided to moderation before the contingent moderator was publicly listed as part of the contingent moderation team; this gives people speaking with the moderation team the opportunity to evaluate potential concerns or conflicts of interest.
+緊急審核者在具有利益衝突的情況下不得參與決策或稽核。在緊急審核者被公開列為緊急審核團隊成員之前，他們不得查看提交給審核團隊的私人資訊；讓與審核團隊交流的人有機會評估潛在的顧慮或利益衝突。
 
-The discussions with the Council and the contingent moderation team may discover that the moderation team had to make an exception in policy for a particular case, as there was an unexpected condition in policies or that there was contextual information that couldn't be incorporated in policy. This is an expected scenario that merits additional scrutiny by the contingent moderation team on the rationale for making an exception and the process for deciding the necessity to make an exception, but is not inherently a violation of moderation team responsibilities.
+與理事會和緊急審核團隊的討論可能發現，審核團隊在某個特定案例中不得不在政策上作出例外，因為政策中存在意想不到的條件，或者存在有無法納入政策的背景資訊。這是一個需要緊急審核團隊對例外的理由和決定例外必要性的流程進行額外審查的預期情境，但本質上並不是審核團隊職責的違反。
 
-As the audit process and the Council/moderation discussions proceed, the moderation team may decide to alter moderation policies and/or change the outcome of specific moderation decisions or proposed decisions. This is solely a decision for the moderation team to make.
+隨著稽核流程和理事會、審核團隊討論的進行，審核團隊可能會決定修改審核政策和、或更改特定審核決定或擬議決定的結果。這完全取決於審核團隊的決定。
 
-The contingent moderation team must report the results of the audit to the moderation team and the Council for their review. This must not include any details that may reveal private information, either directly or indirectly. Together with the discussions with the moderation team, this should aim to address the concerns of the Council.
+緊急審核團隊必須將稽核結果報告給審核團隊和理事會以供他們審查。這不得包括任何可能直接或間接透露私人資訊的細節。此報告與和審核團隊的討論相輔相成，最終旨在解決理事會的顧慮。
 
 ## 最終問責機制
 
-The Leadership Council and moderation team each have substantial power within the Rust Project. This RFC provides many tools by which they can work out conflicts. This section outlines the last-resort mechanisms by which those teams can hold each other accountable. This section is written in the hopes that it will never be needed, and that teams will make every possible effort to resolve conflicts without reaching this point.
+Rust 專案的領導理事會和審核團隊在專案內各自擁有相當大的權力。本案提供了許多工具來解決衝突。本段落概述了這些團隊相互追究責任的最終問責機制。本段落寫成之時期許將永遠不會被用到，希望所有團隊會盡一切可能在達到此情境之前解決衝突。
 
-If the Council believes there is a systemic problem with the moderation team (whether based on an audit report from the contingent moderation team or otherwise), and the Council and moderation team cannot voluntarily come to agreement on how to address the situation, then as a **last resort**, the Council (by unanimous decision) may simultaneously dissolve itself and the moderation team. The top-level teams must then appoint new representatives to the Council, and the contingent moderation team becomes the new interim moderation team.
+如果理事會認為審核團隊存在系統性問題（無論是基於緊急審核團隊的稽核報告還是其他原因），並且理事會和審核團隊無法自願達成協議來解決問題，那麼作為最後手段，理事會（經一致決定）可以同時解散自己和審核團隊。頂級團隊必須為理事會指派新的代表，緊急審核團隊成為新的臨時審核團隊。
 
-Conversely, if the moderation team believes the Council has a systemic problem, and the Council and moderation team cannot voluntarily come to agreement on how to address the situation, then as a **last resort**, the moderation team (by unanimous decision) may simultaneously dissolve itself and the Council. This process can only be enacted if there are at least three moderation team members. The top-level teams must then appoint new representatives to the Council, and the contingent moderation team becomes the new interim moderation team.
+相反地，如果審核團隊認為理事會存在系統性問題，並且理事會和審核團隊無法自願達成協議來解決問題，那麼作為最後手段，審核團隊（經一致決定）可以同時解散自己和理事會。只有在審核團隊成員至少有三人的情況下才能實施這一過程。最高層次的團隊必須為理事會指派新的代表，緊急審核團隊成為新的臨時審核團隊。
 
-The moderation team's representative is recused from the decision to dissolve the Council and moderation team to avoid conflicts of interest, though that representative must still step down as well.
+審核團隊在理事會的代表在決定解散理事會和審核團隊時必須回避，以避免利益衝突，但該代表仍需辭去職務。
 
-The removed representatives and moderators may not serve on either the Council or the moderation team for at least one year.
+被解除職務的代表和審核者在至少一年內不得在理事會或審核團隊中任職。
 
-By default, the new Council and interim moderation team will take responsibility for clearly communicating the transition.
+預設情況下，新理事會和臨時審核團隊將負責清晰地溝通過渡期。
 
-This mechanism is an absolute last resort. It will almost certainly produce suboptimal outcomes, to say the least. If situations escalate to this outcome, many things have gone *horribly* wrong, and those cleaning up the aftermath should endeavor to prevent it from ever happening again. The indication (by either the moderation team or the Council) that the situation *might* escalate to this point should be considered a strong signal to come to the table and find a way to do "Something Else which is Not That" to avoid the situation.
+這個機制是絕對的最後手段。最起碼此手段幾乎肯定不會產生最佳的結果。如果情勢已經升溫到造成此結果，必須要有很多事情都已經陷入**非常糟糕**的情境了，而那些負責清理善後工作的人應該努力防止這種情況再次發生。（無論是審核團隊還是理事會）表示情勢可能升溫到這個程度時，都應該被認為是一個強烈的信號，讓各方一起討論找到一個「總之不要用上那招」的方法來避免這種情境。
 
 ## 涉及專案成員之審核措施
-[moderation-actions-involving-Project-members]: #moderation-actions-involving-Project-members
+[moderation-actions-involving-Project-members]: #涉及專案成員之審核措施
 
-The moderation team, in the course of doing moderation work, necessarily requires the ability to take action not just against members of the Rust community but also against members of the Rust Project. Those actions may span the ladder of escalation all the way from a conversation to removal from the Project. This puts the moderation team in a position of power and trust. This RFC seeks to provide appropriate accountability and cross-checks for the moderation team, as well as for the Council.
+在進行審核工作過程中，審核團隊不僅需要對 Rust 社群成員採取行動，還需要對 Rust 專案成員採取行動。這些行動可能涵蓋從對話到從專案中移除的之間的所有可能升溫措施階級。這使得審核團隊處於需要具備權力和信任的地位。此案旨在為審核團隊及理事會提供適當的問責和相互檢查手段。
 
-If the moderation team plans to enact externally visible sanctions against any member of the Rust Project (anything that would create a conspicuous absence, such as removal from a role, or exclusion from participation in a Project space for more than a week), then any party may request that an [audit][audits] take place by reaching out to either the Council or contingent moderators, and that audit will be automatically granted.
+如果審核團隊計劃對任何 Rust 專案成員實施外部可見的制裁（任何可能引起顯著缺席的行動，例如從角色中移除或從某專案空間中排除參與超過一週），則任何一方都可以通過與理事會或緊急審核者聯繫來要求進行[稽核][audits]，並且該稽核將自動獲准。
 
-For the first year after the ratification of this RFC, audits are automatically performed even without a request, to ensure the process is functional. After that time, the Council and moderation team will jointly review and decide whether to renew this provision.
+在此案批准後的第一年內，即使沒有請求也會自動執行稽核，以確保該流程正常運行。在那之後，理事會和審核團隊將共同審查並決定是否更新此條款。
 
-When the moderation team sends a warning to a Project member, or sends a notification of moderation action regarding a Project member, that message will mention the option of requesting an audit.
+當審核團隊向專案成員發出警告，或者向專案成員發出有關審核行動的通知時，該消息將提及要求稽核的選項。
 
-Conflicts regarding Project members should be brought to the moderation team as soon as possible.
+應盡快將有關專案成員的衝突通知給審核團隊知曉。
 
 ## 涉及理事會代表之衝突
 
-Conflicts involving Council representatives, or alternates, follow the same process as conflicts involving Project members. The moderation team has the same ability to moderate representatives or alternates as any other member of the Project, including the required [audit][audits] by the contingent moderators for any externally visible sanction. This remains subject to the same accountability mechanisms as for other decisions of the moderation team.
+涉及理事會代表或替補代表的衝突遵循與涉及專案成員的衝突相同的流程。審核團隊具有與專案其他成員相同的審核代表或替補代表的能力，包括對任何外部可見制裁所需的[稽核][audits]。此項行為仍然受到與審核團隊其他決策相同的問責機制的約束。
 
-In addition to the range of moderation actions already available, the moderation team may take the following additional actions for representatives or alternates as a near-last resort, as a lesser step on the ladder of escalation than removing a member from the Project entirely. These actions are not generally specific to the Council, and apply to other Rust teams as well.
+除了既有的審核行動範圍之外，審核團隊還可以在接近最後手段的情況下，作為使用升溫措施階級中較輕微的手段，從專案中移除代表或替補代表。這些行動並不是特別針對理事會的行動，並且適用於其他 Rust 團隊。
 
-- The moderation team may decide to remove a representative from the Council. The top-level team represented by that representative should delegate a new representative to serve the remainder of the term, starting immediately.
-- The moderation team may decide to prevent a Project member from becoming a Council representative.
-- The moderation team and Council (excluding the affected parties) may jointly decide (as a private operational consent decision) to apply other sanctions limiting the representative's involvement in the Council. (In this scenario, representatives are not excluded if they have a conflict of interest, as the entire Council will have to cooperate to make the sanctions effective. If the conflicts of interest thus prevent applying these partial sanctions, the moderation team always has the option of full sanctions such as removal.)
+- 審核團隊可以決定將一名代表從理事會中移除。該代表所代表的頂級團隊應立即委派一位新代表來完成剩餘的任期。
+- 審核團隊可以決定阻止一名專案成員成為理事會代表。
+- 審核團隊和理事會（排除受影響方）可以共同決定（作為私下保密共識決策）限制代表在理事會中的參與。 （在這種情況下，即便有代表存在利益衝突，他們也不會被排除在外，因為整個理事會都必須合作使制裁生效。如果利益衝突因此阻止了執行這些部分制裁，審核團隊始終可以選擇全面制裁，例如將之移除。）
 
-All of these also trigger a required audit. The Council must also be notified of any moderation actions involving representatives or alternates, or actions directly preventing people from becoming representatives.
+所有這些行動都將觸發需要進行的稽核。理事會還必須被告知涉及代表或替補代表這樣的審核行動，或直接阻止人們成為代表的行動。
 
 ## 涉及審核團隊成員之衝突
 
-Conflicts involving a member of the moderation team will be handled by the remaining members of the moderation team (minus any with a conflict of interest), *together with* the contingent moderation team to provide additional oversight. Any member of the moderation or contingent moderation team should confer with the Council if there is a more systemic issue within the moderation team. The contingent moderators must audit this decision and must provide an audit report to the Council and moderation team.
+涉及審核團隊成員的衝突將由餘下的審核團隊成員（扣除任何有利益衝突的成員）和緊急審核團隊**共同**處理，以提供額外的監督。審核團隊或緊急審核團隊的任何成員如果認為審核團隊內存在更多系統性問題，應與理事會磋商。緊急審核者必須稽核此決策並向理事會和審核團隊提供稽核報告。
 
 # 本案之批准
 
