@@ -200,19 +200,19 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 ## 對單一公司或實體代表之限制
 
-Council representatives must not disproportionately come from any one company, legal entity, or closely related set of legal entities, to avoid impropriety or the appearance of impropriety. If the Council has 5 or fewer representatives, no more than 1 representative may have the same affiliation; if the Council has 6 or more representatives, no more than 2 representatives may have the same affiliation.
+理事會代表不得過度來自同一家公司、法人實體（legal entity）或密切相關的法人實體，以避免出現不當或疑似不當行為。若理事會代表人數不超過五人，則不得超過一名代表有相同隸屬關係；若理事會有六名或更多代表，則不得超過兩名代表有相同隸屬關係（affiliation）。
 
-Closely related legal entities include branches/divisions/subsidiaries of the same entity, entities connected through substantial ownership interests, or similar. The Council may make a judgment call in unusual cases, taking care to avoid conflicts of interest in that decision.
+密切相關的法人實體是指包括同一實體的分部（branch）／部門（division）／子公司（subsidiary），透過實質上所有權之權益相關聯的實體或類似實體。理事會可在特殊情況下做出判斷，以避免該決策中的利益衝突。
 
-A Council representative is affiliated with a company or other legal entity if they derive a substantive fraction of their income from that entity (such as from an employer, client, or major sponsor). Representatives must promptly disclose changes in their affiliations.
+若理事會代表的大部分收入來自一公司或法人實體（例如來自雇主、客戶或主要贊助商），則表示該代表與其有隸屬關係。該代表須即時揭露其隸屬關係的變化。
 
-If this constraint does not hold, whether by a representative changing affiliation, top-level teams appointing new representatives, or the Council size changing, restore the constraint as follows:
-- Representatives with the same affiliation may first attempt to resolve the issue amongst themselves, such that a representative voluntarily steps down and their team appoints someone else.
-  - This must be a decision by the representative, not their affiliated entity; it is considered improper for the affiliated entity to influence this decision.
-  - Representatives have equal standing in such a discussion; factors such as seniority in the Project or the Council must not be used to pressure people.
-- If the representatives with that affiliation cannot agree, one such representative is removed at random. (If the constraint still does not hold, the remaining representatives may again attempt to resolve the issue amongst themselves before repeating this.) This is likely to produce suboptimal results; a voluntary solution will typically be preferable.
-- While a team should immediately begin the process of selecting a successor, the team's existing representative may continue to serve up to 3 months of their remaining term.
-- The existing representative should coordinate the transition with the incoming representative but it is the team's choice which one is an actual representative during the up to 3 month window. There is only ever one representative from the top-level team.
+無論因為代表更改隸屬關係、一級團隊任命新代表或理事會人數規模變化，而導致違反上述限制條件，則按照下列方式恢復之：
+- 具有相同隸屬關係的代表可先試圖在其內部解決問題，例如一名代表自願下台，其所屬團隊再任命其他人。
+  - 這必須由代表而非其隸屬實體決策；隸屬實體影響該決策視同不當行為。
+  - 每名代表在此類討論中皆享有平等地位；不得使用在專案或理事會的資歷等因素施壓他人。
+- 若有相同隸屬關係的代表無法達成一致，則隨機刪除其中一名。（若仍違反限制條件，剩下的代表可再次嘗試內部解決，再重複此過程。）這很有可能是次佳解；自願解決方案通常更好。
+- 雖然團隊應立即啟動選擇接班人的程序，但團隊現任代表仍可續任其剩餘任期至多三個月。
+- 現有代表應與繼任代表協調交接事宜，不過在三個月的過渡期間，該團隊須選擇哪名代表是實際代表。一個一級團隊無論如何只能有一名代表。
 
 ## 候選資格
 
