@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>The Rust RFC Book</title>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex">
 
 
         <!-- Custom HTML head -->
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -32,7 +32,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -62,24 +62,29 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -89,15 +94,37 @@
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -1948,26 +1975,26 @@ static VTABLE: &amp;RawWakerVTable = &amp;RawWakerVTable {
 與 <code>asm!</code> 不同的是， <code>llvm_asm!</code> 不打算成為穩定版。</p>
 <h1 id="動機-10"><a class="header" href="#動機-10">動機</a></h1>
 <p>這個變更將 <code>asm!</code> 巨集（macro）釋放了，使它可用於內嵌組合語言項目組新設計的 <code>asm!</code> 巨集（macro），
-同時為現在使用 <code>asm!</code> 的用戶提供一個簡單的方法來保持代碼的正常運作。</p>
+同時為現在使用 <code>asm!</code> 的使用者提供一個簡單的方法來保持程式碼的正常運作。</p>
 <p>對尚未支援新的 <code>asm!</code> 巨集（macro）的架構，在（nightly 版本）上執行內嵌組合語言可能會有用。</p>
 <h1 id="教學式解說-5"><a class="header" href="#教學式解說-5">教學式解說</a></h1>
-<p>Rust 團隊目前正在重新設計 <code>asm!</code> 巨集（macro）。您應該將所有使用 <code>asm!</code> 的代碼都替換為 <code>llvm_asm!</code> ，以避免代碼在實施新的 <code>asm!</code> 巨集（macro）時毀壞。</p>
+<p>Rust 團隊目前正在重新設計 <code>asm!</code> 巨集（macro）。您應該將所有使用 <code>asm!</code> 的程式碼都替換為 <code>llvm_asm!</code> ，以避免程式碼在實施新的 <code>asm!</code> 巨集（macro）時毀壞。</p>
 <h1 id="技術文件式解說-4"><a class="header" href="#技術文件式解說-4">技術文件式解說</a></h1>
 <p>編譯器內所有對 <code>asm!</code> 的參考都將改參考 <code>llvm_asm!</code> 。
 <code>asm!</code> 將變成一個單純（已棄用）的 <code>macro_rules!</code> ，它會重新導到<code>llvm_asm!</code>。
 棄用警告將告知使用者 <code>asm!</code> 將來的語義會作改變，並邀請他們使用 <code>llvm_asm!</code> 來替代。<code>llvm_asm!</code> 巨集（macro）將由 <code>llvm_asm</code> 功能開關來把控。</p>
 <h1 id="缺點-8"><a class="header" href="#缺點-8">缺點</a></h1>
-<p>此變更可能需要人為變更兩次代碼：首先變更為 <code>llvm_asm!</code> ，然後再實施新的 <code>asm!</code> 巨集（macro）。</p>
+<p>此變更可能需要人為變更兩次程式碼：首先變更為 <code>llvm_asm!</code> ，然後再實施新的 <code>asm!</code> 巨集（macro）。</p>
 <h1 id="原理及替代方案-2"><a class="header" href="#原理及替代方案-2">原理及替代方案</a></h1>
 <p>我們可以跳過棄用期，並同時執行重新命名新的 <code>asm!</code> 巨集（macro）。
-總之用 Rust（nightly 版本）保證能一次破壞大量代碼，就無需任何過渡期。</p>
+總之用 Rust（nightly 版本）保證能一次破壞大量程式碼，就無需任何過渡期。</p>
 <h1 id="先驅技術-2"><a class="header" href="#先驅技術-2">先驅技術</a></h1>
-<p>D 語言也支援兩種形式的內嵌組合語言。<a href="https://dlang.org/spec/iasm.html">first one</a> 提供用於內嵌組合語言的嵌入式 DSL，它可以在不用 Clobber 情況下直接存取範圍內的變量，但只能在x86和x86_64的架構上使用。
-<a href="https://wiki.dlang.org/LDC_inline_assembly_expressions">second one</a> 是 LLVM 內部內嵌組合語言句法的 RAM 接口，但它只適用於 DSL 的後端架構。</p>
+<p>D 語言也支援兩種形式的內嵌組合語言。<a href="https://dlang.org/spec/iasm.html">first one</a> 提供用於內嵌組合語言的嵌入式 DSL，它可以在不用 Clobber 情況下直接存取範圍內的變數，但只能在x86和x86_64的架構上使用。
+<a href="https://wiki.dlang.org/LDC_inline_assembly_expressions">second one</a> 是 LLVM 內部內嵌組合語言句法的 RAM 介面，但它只適用於 DSL 的後端架構。</p>
 <h1 id="未解決問題-6"><a class="header" href="#未解決問題-6">未解決問題</a></h1>
 <p>無</p>
 <h1 id="未來展望-1"><a class="header" href="#未來展望-1">未來展望</a></h1>
-<p>當下執行的會在 <a href="https://github.com/rust-lang/rfcs/pull/2873">new <code>asm!</code> macro</a> 被執行後替換掉，這會破壞那些尚未轉換 <code>llvm_asm!</code> 的代碼。
+<p>當下執行的會在 <a href="https://github.com/rust-lang/rfcs/pull/2873">new <code>asm!</code> macro</a> 被執行後替換掉，這會破壞那些尚未轉換 <code>llvm_asm!</code> 的程式碼。
 由於運算元分隔符將從 <code>:</code> 更改為 <code>,</code> ，所以不會有靜默的錯誤編譯，新的 <code>asm!</code> 巨集（macro）會出現語法錯誤，來保證現有 <code>asm!</code> 的任何呼叫都會失敗，</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Feature Name: <code>io_safety</code></li>
