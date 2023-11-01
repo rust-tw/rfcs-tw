@@ -26,7 +26,7 @@ The Council is charged with the success of the Rust Project as a whole. The Coun
   - [任期限制](#任期限制)
   - [對單一公司或實體代表之限制](#對單一公司或實體代表之限制)
   - [候選資格](#候選資格)
-  - [與 Core 團隊之關係](#與-core-團隊之關係)
+  - [與核心團隊之關係](#與核心團隊之關係)
   - [與 Rust 基金會之關係](#與-rust-基金會之關係)
 - [理事會決策流程](#理事會決策流程)
   - [營運與政策決策](#營運與政策決策)
@@ -92,7 +92,7 @@ This RFC also establishes mechanisms for oversight and accountability between th
 - 確保一級團隊能為其權責、對其它團隊以及對專案本身負責。
 - 確保各個團隊能有完成其工作所需的人力與資源。
 - 為 Rust 專案整體建立起官方的定位、觀點或意願。
-    - 藉此能幫助降低橫跨專案的協調需求，尤其是面對長期公開投票與共識建立流程不夠實際的情境。舉例來說，要對第三方單位溝通 Rust 專案整體「 所想要的目標」時。
+    - 藉此能幫助降低橫跨專案的協調需求，尤其是面對長期公開投票與共識建立流程不夠實際的情境。舉例來說，要對第三方單位溝通 Rust 專案整體「所想要的目標」時。
 
 除了這些職責外，對理事會也有額外的期待與限制，以幫助判斷理事會是否正常運作：
 
@@ -226,17 +226,17 @@ This RFC also establishes mechanisms for oversight and accountability between th
 
 儘管有些團隊目前可能沒有足夠的候選人符合這些標準，理事會應積極培養這些技能之人才，因為這些技能不僅對理事會成員資格有幫助，也對這個專案有益。
 
-## 與 Core 團隊之關係
+## 與核心團隊之關係
 
-The Leadership Council serves as the successor to the core team in all capacities. This RFC was developed with the participation and experience of the core team members, and the Council should continue seeking such input and institutional memory when possible, especially while ramping up.
+領導理事會繼承核心團隊所有職務。這份 RFC 是在核心團隊成員的參與和經驗下開發的，在可能的情況下理事會應該繼續尋求類似的意見與機構記憶，特別是在擴張（組織）時。
 
-External entities or processes may have references to "the Rust core team" in various capacities. The Council doesn't use the term "core team", but the Council will serve in that capacity for the purposes of any such external references.
+外部實體或流程可能以各種身份提及「*Rust 核心團隊*」。理事會並不使用「核心團隊」這個名稱，但理事會將在這些外部參考需要時作為這樣的角色存在。
 
 ## 與 Rust 基金會之關係
 
-The Council is responsible for establishing the process for selecting Project directors. The Project directors are the mechanism by which the Rust Project's interests are reflected on the Rust Foundation board.
+理事會負責建立選擇專案管理者的流程。專案管理者在基金會理事會上反映 Rust 專案利益。
 
-The Council delegates a purview to the Project directors to represent the Project's interests on the Foundation Board and to make certain decisions on Foundation-related matters. The exact boundaries of that purview are out of scope for this RFC.
+理事會授權專案管理者在基金會理事會上代表 Rust 專案的利益，並且在基金會相關事項上做出某些決策。授權的確切界線則超出此 RFC 的討論範圍。
 
 # 理事會決策流程
 [decision-making]: #理事會決策流程
@@ -370,7 +370,7 @@ The Council delegates a purview to the Project directors to represent the Projec
 
 這項額外限制應該要被視為特例。並不會允許私下做出[下一段落會提到需要公開提案的決策][decisions-that-the-Council-must-make-via-public-proposal]。但是可以允許理事會於內部做出的決策能維持其隱私性，而不需要提供公開監督完整的資訊。
 
-理事會也可以拒絕私下做出決策，如理事會認定不屬權責內事項（並且選則轉交給另一個團隊），或者相信此事項必須被公開應對的時候。然而即便在這樣的狀況下，理事會仍然不能公開揭曉所機密交付的資訊（否則理事會就沒有辦法受到信任交付這些資訊）。此明顯特例是為了避免對安全造成即刻威脅而設立的。
+理事會也可以拒絕私下做出決策，如理事會認定不屬權責內事項（並且選擇轉交給另一個團隊），或者相信此事項必須被公開應對的時候。然而即便在這樣的狀況下，理事會仍然不能公開揭曉所機密交付的資訊（否則理事會就沒有辦法受到信任交付這些資訊）。此明顯特例是為了避免對安全造成即刻威脅而設立的。
 
 私下決策不能被用來建立政策。理事會應該要致力於避免使用重複的內部決策建立起不成文的政策，藉此來避免公開提案。請見[重複與例外][repetition-and-exceptions]的詳細資訊。
 
