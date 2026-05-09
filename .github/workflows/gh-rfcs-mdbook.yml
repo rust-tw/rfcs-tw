@@ -49,11 +49,12 @@ jobs:
             - name: Generate summary
               run: ./generate-book.sh
 
-            # HTML publication as Github Page
+            # HTML publication to https://grebedoc.dev/
             #
             - name: Publish HTML
               uses: peaceiris/actions-gh-pages@v3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./book
+                  publish_branch: pages
 
