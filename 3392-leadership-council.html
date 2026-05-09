@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,43 +7,57 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-ffbb82b8.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-fbc239cb.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,85 +71,69 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
-        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0049-match-arm-attributes.html">0049-match-arm-attributes</a></li><li class="chapter-item expanded "><a href="0198-slice-notation.html">0198-slice-notation</a></li><li class="chapter-item expanded "><a href="1548-global-asm.html">1548-global-asm</a></li><li class="chapter-item expanded "><a href="1598-generic_associated_types.html">1598-generic_associated_types</a></li><li class="chapter-item expanded "><a href="2000-const-generics.html">2000-const-generics</a></li><li class="chapter-item expanded "><a href="2342-const-control-flow.html">2342-const-control-flow</a></li><li class="chapter-item expanded "><a href="2394-async_await.html">2394-async_await</a></li><li class="chapter-item expanded "><a href="2495-min-rust-version.html">2495-min-rust-version</a></li><li class="chapter-item expanded "><a href="2592-futures.html">2592-futures</a></li><li class="chapter-item expanded "><a href="2789-sparse-index.html">2789-sparse-index</a></li><li class="chapter-item expanded "><a href="2843-llvm-asm.html">2843-llvm-asm</a></li><li class="chapter-item expanded "><a href="3128-io-safety.html">3128-io-safety</a></li><li class="chapter-item expanded "><a href="3151-scoped-threads.html">3151-scoped-threads</a></li><li class="chapter-item expanded "><a href="3392-leadership-council.html" class="active">3392-leadership-council</a></li><li class="chapter-item expanded "><a href="alternatives.html">alternatives</a></li><li class="chapter-item expanded "><a href="initial-work-of-the-council.html">initial-work-of-the-council</a></li><li class="chapter-item expanded "><a href="motivation.html">motivation</a></li><li class="chapter-item expanded "><a href="non-goals.html">non-goals</a></li><li class="chapter-item expanded affix "><a href="CONTRIBUTING.html">Contributing</a></li></ol>
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
-        <div id="page-wrapper" class="page-wrapper">
+        <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
                         </label>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
                         </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
                         </button>
                     </div>
 
@@ -143,33 +141,38 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
                     </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="content" class="content">
+                <div id="mdbook-content" class="content">
                     <main>
                         <ul>
 <li>Feature Name: leadership-council</li>
@@ -179,77 +182,77 @@
 <li>Commit: <a href="https://github.com/rust-lang/rfcs/blob/075f4b30f5c33315163c8e6a75e3210af6229ded/text/3392-leadership-council.md">The commit link this page based on</a></li>
 </ul>
 <h1 id="摘要"><a class="header" href="#摘要">摘要</a></h1>
-<p>This RFC establishes a Leadership Council as the successor of the core team<sup class="footnote-reference"><a href="#core">1</a></sup> and the new governance structure through which Rust Project members collectively confer the authority<sup class="footnote-reference"><a href="#authority">2</a></sup> to ensure successful operation of the Project. The Leadership Council delegates much of this authority to teams (which includes subteams, working groups, etc.<sup class="footnote-reference"><a href="#teams">3</a></sup>) who autonomously make decisions concerning their purviews. However, the Council retains some decision-making authority, outlined and delimited by this RFC.</p>
-<p>The Council will be composed of representatives delegated to the Council from each <a href="#%E4%B8%80%E7%B4%9A%E5%9C%98%E9%9A%8A%E5%96%AE%E4%BD%8D">top-level team</a>.</p>
+<p>This RFC establishes a Leadership Council as the successor of the core team<sup class="footnote-reference" id="fr-core-1"><a href="#footnote-core">1</a></sup> and the new governance structure through which Rust Project members collectively confer the authority<sup class="footnote-reference" id="fr-authority-1"><a href="#footnote-authority">2</a></sup> to ensure successful operation of the Project. The Leadership Council delegates much of this authority to teams (which includes subteams, working groups, etc.<sup class="footnote-reference" id="fr-teams-1"><a href="#footnote-teams">3</a></sup>) who autonomously make decisions concerning their purviews. However, the Council retains some decision-making authority, outlined and delimited by this RFC.</p>
+<p>The Council will be composed of representatives delegated to the Council from each <a href="#一級團隊單位">top-level team</a>.</p>
 <p>The Council is charged with the success of the Rust Project as a whole. The Council will identify work that needs to be done but does not yet have a clear owner, create new teams to accomplish this work, hold existing teams accountable for the work in their purview, and coordinate and adjust the organizational structure of Project teams.</p>
 <h1 id="大綱"><a class="header" href="#大綱">大綱</a></h1>
 <ul>
-<li><a href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99">參考資料</a></li>
-<li><a href="#%E5%8B%95%E6%A9%9F">動機</a></li>
-<li><a href="#%E7%90%86%E4%BA%8B%E6%9C%83%E4%B9%8B%E8%81%B7%E8%B2%AC%E3%80%81%E6%9C%9F%E5%BE%85%E8%88%87%E9%99%90%E5%88%B6">理事會之職責、期待與限制</a></li>
-<li><a href="#%E7%90%86%E4%BA%8B%E6%9C%83%E7%B5%84%E7%B9%94%E6%9E%B6%E6%A7%8B">理事會組織架構</a>
+<li><a href="#參考資料">參考資料</a></li>
+<li><a href="#動機">動機</a></li>
+<li><a href="#理事會之職責、期待與限制">理事會之職責、期待與限制</a></li>
+<li><a href="#理事會組織架構">理事會組織架構</a>
 <ul>
-<li><a href="#%E4%B8%80%E7%B4%9A%E5%9C%98%E9%9A%8A%E5%96%AE%E4%BD%8D">一級團隊單位</a>
+<li><a href="#一級團隊單位">一級團隊單位</a>
 <ul>
-<li><a href="#%E4%B8%80%E7%B4%9A%E5%9C%98%E9%9A%8A%E5%88%9D%E5%A7%8B%E5%90%8D%E5%96%AE">一級團隊初始名單</a></li>
-<li><a href="#%E5%95%9F%E5%8B%95%E5%8F%B0-%E4%B8%80%E7%B4%9A%E5%9C%98%E9%9A%8A">「啟動台」 一級團隊</a></li>
-<li><a href="#%E5%BB%A2%E9%99%A4%E4%B8%80%E7%B4%9A%E5%9C%98%E9%9A%8A">廢除一級團隊</a></li>
+<li><a href="#一級團隊初始名單">一級團隊初始名單</a></li>
+<li><a href="#啟動台-一級團隊">「啟動台」 一級團隊</a></li>
+<li><a href="#廢除一級團隊">廢除一級團隊</a></li>
 </ul>
 </li>
-<li><a href="#%E5%80%99%E8%A3%9C%E8%88%87%E6%94%BE%E6%A3%84%E4%BB%A3%E8%A1%A8%E6%AC%8A%E5%88%A9">候補與放棄代表權利</a></li>
-<li><a href="#%E4%BB%BB%E6%9C%9F%E9%99%90%E5%88%B6">任期限制</a></li>
-<li><a href="#%E5%B0%8D%E5%96%AE%E4%B8%80%E5%85%AC%E5%8F%B8%E6%88%96%E5%AF%A6%E9%AB%94%E4%BB%A3%E8%A1%A8%E4%B9%8B%E9%99%90%E5%88%B6">對單一公司或實體代表之限制</a></li>
-<li><a href="#%E5%80%99%E9%81%B8%E8%B3%87%E6%A0%BC">候選資格</a></li>
-<li><a href="#%E8%88%87-core-%E5%9C%98%E9%9A%8A%E4%B9%8B%E9%97%9C%E4%BF%82">與 Core 團隊之關係</a></li>
-<li><a href="#%E8%88%87-rust-%E5%9F%BA%E9%87%91%E6%9C%83%E4%B9%8B%E9%97%9C%E4%BF%82">與 Rust 基金會之關係</a></li>
+<li><a href="#候補與放棄代表權利">候補與放棄代表權利</a></li>
+<li><a href="#任期限制">任期限制</a></li>
+<li><a href="#對單一公司或實體代表之限制">對單一公司或實體代表之限制</a></li>
+<li><a href="#候選資格">候選資格</a></li>
+<li><a href="#與-core-團隊之關係">與 Core 團隊之關係</a></li>
+<li><a href="#與-rust-基金會之關係">與 Rust 基金會之關係</a></li>
 </ul>
 </li>
-<li><a href="#%E7%90%86%E4%BA%8B%E6%9C%83%E6%B1%BA%E7%AD%96%E6%B5%81%E7%A8%8B">理事會決策流程</a>
+<li><a href="#理事會決策流程">理事會決策流程</a>
 <ul>
-<li><a href="#%E7%87%9F%E9%81%8B%E8%88%87%E6%94%BF%E7%AD%96%E6%B1%BA%E7%AD%96">營運與政策決策</a></li>
-<li><a href="#%E9%87%8D%E8%A4%87%E8%88%87%E4%BE%8B%E5%A4%96">重複與例外</a></li>
-<li><a href="#%E5%85%B1%E8%AD%98%E6%B1%BA%E7%AD%96%E6%B5%81%E7%A8%8B">共識決策流程</a>
+<li><a href="#營運與政策決策">營運與政策決策</a></li>
+<li><a href="#重複與例外">重複與例外</a></li>
+<li><a href="#共識決策流程">共識決策流程</a>
 <ul>
-<li><a href="#%E6%A0%B8%E5%87%86%E6%A8%99%E6%BA%96">核准標準</a></li>
+<li><a href="#核准標準">核准標準</a></li>
 </ul>
 </li>
-<li><a href="#%E8%AE%8A%E6%9B%B4%E8%88%87%E8%AA%BF%E6%95%B4%E6%B1%BA%E7%AD%96%E6%B5%81%E7%A8%8B">變更與調整決策流程</a></li>
-<li><a href="#%E8%AD%B0%E7%A8%8B%E8%88%87%E5%BE%85%E8%BE%A6%E4%BA%8B%E9%A0%85">議程與待辦事項</a></li>
-<li><a href="#%E8%A7%A3%E6%B1%BA%E5%83%B5%E5%B1%80">解決僵局</a></li>
-<li><a href="#%E5%9B%9E%E9%A5%8B%E8%88%87%E8%A9%95%E4%BC%B0">回饋與評估</a></li>
+<li><a href="#變更與調整決策流程">變更與調整決策流程</a></li>
+<li><a href="#議程與待辦事項">議程與待辦事項</a></li>
+<li><a href="#解決僵局">解決僵局</a></li>
+<li><a href="#回饋與評估">回饋與評估</a></li>
 </ul>
 </li>
-<li><a href="#%E6%B1%BA%E7%AD%96%E6%B5%81%E7%A8%8B%E4%B9%8B%E9%80%8F%E6%98%8E%E5%BA%A6%E5%92%8C%E7%9B%A3%E7%9D%A3">決策流程之透明度和監督</a>
+<li><a href="#決策流程之透明度和監督">決策流程之透明度和監督</a>
 <ul>
-<li><a href="#%E7%90%86%E4%BA%8B%E6%9C%83%E5%8F%AF%E5%9C%A8%E5%85%A7%E9%83%A8%E5%81%9A%E5%87%BA%E4%B9%8B%E6%B1%BA%E7%AD%96">理事會可在內部做出之決策</a></li>
-<li><a href="#%E7%90%86%E4%BA%8B%E6%9C%83%E9%A0%88%E7%A7%81%E4%B8%8B%E4%BF%9D%E5%AF%86%E5%81%9A%E5%87%BA%E4%B9%8B%E6%B1%BA%E7%AD%96">理事會須私下保密做出之決策</a></li>
-<li><a href="#%E7%90%86%E4%BA%8B%E6%9C%83%E9%A0%88%E7%B6%93%E5%85%AC%E9%96%8B%E6%8F%90%E6%A1%88%E5%81%9A%E5%87%BA%E4%B9%8B%E6%B1%BA%E7%AD%96">理事會須經公開提案做出之決策</a></li>
-<li><a href="#%E5%88%A9%E7%9B%8A%E8%A1%9D%E7%AA%81">利益衝突</a></li>
-<li><a href="#%E7%A2%BA%E5%AE%9A%E8%88%87%E6%9B%B4%E6%94%B9%E5%9C%98%E9%9A%8A%E6%AC%8A%E8%B2%AC">確定與更改團隊權責</a></li>
+<li><a href="#理事會可在內部做出之決策">理事會可在內部做出之決策</a></li>
+<li><a href="#理事會須私下保密做出之決策">理事會須私下保密做出之決策</a></li>
+<li><a href="#理事會須經公開提案做出之決策">理事會須經公開提案做出之決策</a></li>
+<li><a href="#利益衝突">利益衝突</a></li>
+<li><a href="#確定與更改團隊權責">確定與更改團隊權責</a></li>
 </ul>
 </li>
-<li><a href="#%E7%9B%A3%E7%9D%A3%E8%88%87%E5%95%8F%E8%B2%AC%E6%A9%9F%E5%88%B6">監督與問責機制</a>
+<li><a href="#監督與問責機制">監督與問責機制</a>
 <ul>
-<li><a href="#%E7%A2%BA%E4%BF%9D%E8%83%BD%E8%BF%BD%E7%A9%B6%E7%90%86%E4%BA%8B%E6%9C%83%E4%B9%8B%E8%B2%AC%E4%BB%BB">確保能追究理事會之責任</a></li>
-<li><a href="#%E7%A2%BA%E4%BF%9D%E8%83%BD%E8%BF%BD%E7%A9%B6%E7%90%86%E4%BA%8B%E6%9C%83%E4%BB%A3%E8%A1%A8%E4%B9%8B%E8%B2%AC%E4%BB%BB">確保能追究理事會代表之責任</a></li>
-<li><a href="#%E7%A2%BA%E4%BF%9D%E8%83%BD%E8%BF%BD%E7%A9%B6%E5%9C%98%E9%9A%8A%E4%B9%8B%E8%B2%AC%E4%BB%BB">確保能追究團隊之責任</a></li>
+<li><a href="#確保能追究理事會之責任">確保能追究理事會之責任</a></li>
+<li><a href="#確保能追究理事會代表之責任">確保能追究理事會代表之責任</a></li>
+<li><a href="#確保能追究團隊之責任">確保能追究團隊之責任</a></li>
 </ul>
 </li>
-<li><a href="#%E5%AF%A9%E6%A0%B8%E3%80%81%E5%88%86%E6%AD%A7%E8%88%87%E8%A1%9D%E7%AA%81">審核、分歧與衝突</a>
+<li><a href="#審核、分歧與衝突">審核、分歧與衝突</a>
 <ul>
-<li><a href="#%E5%9C%98%E9%9A%8A%E9%96%93%E4%B9%8B%E5%88%86%E6%AD%A7">團隊間之分歧</a></li>
-<li><a href="#%E6%B6%89%E5%8F%8A%E5%9C%98%E9%9A%8A%E6%88%96%E5%B0%88%E6%A1%88%E6%88%90%E5%93%A1%E4%B9%8B%E8%A1%9D%E7%AA%81">涉及團隊或專案成員之衝突</a></li>
-<li><a href="#%E5%AF%A9%E6%A0%B8%E4%BA%BA%E4%BB%A3%E8%A1%A8%E5%9C%98">審核人代表團</a></li>
-<li><a href="#%E5%AF%A9%E6%A0%B8%E5%9C%98%E9%9A%8A%E4%B9%8B%E6%94%BF%E7%AD%96%E8%88%87%E7%A8%8B%E5%BA%8F">審核團隊之政策與程序</a></li>
-<li><a href="#%E7%A8%BD%E6%A0%B8">稽核</a></li>
-<li><a href="#%E6%9C%80%E7%B5%82%E5%95%8F%E8%B2%AC%E6%A9%9F%E5%88%B6">最終問責機制</a></li>
-<li><a href="#%E6%B6%89%E5%8F%8A%E5%B0%88%E6%A1%88%E6%88%90%E5%93%A1%E4%B9%8B%E5%AF%A9%E6%A0%B8%E6%8E%AA%E6%96%BD">涉及專案成員之審核措施</a></li>
-<li><a href="#%E6%B6%89%E5%8F%8A%E7%90%86%E4%BA%8B%E6%9C%83%E4%BB%A3%E8%A1%A8%E4%B9%8B%E8%A1%9D%E7%AA%81">涉及理事會代表之衝突</a></li>
-<li><a href="#%E6%B6%89%E5%8F%8A%E5%AF%A9%E6%A0%B8%E5%9C%98%E9%9A%8A%E6%88%90%E5%93%A1%E4%B9%8B%E8%A1%9D%E7%AA%81">涉及審核團隊成員之衝突</a></li>
+<li><a href="#團隊間之分歧">團隊間之分歧</a></li>
+<li><a href="#涉及團隊或專案成員之衝突">涉及團隊或專案成員之衝突</a></li>
+<li><a href="#審核人代表團">審核人代表團</a></li>
+<li><a href="#審核團隊之政策與程序">審核團隊之政策與程序</a></li>
+<li><a href="#稽核">稽核</a></li>
+<li><a href="#最終問責機制">最終問責機制</a></li>
+<li><a href="#涉及專案成員之審核措施">涉及專案成員之審核措施</a></li>
+<li><a href="#涉及理事會代表之衝突">涉及理事會代表之衝突</a></li>
+<li><a href="#涉及審核團隊成員之衝突">涉及審核團隊成員之衝突</a></li>
 </ul>
 </li>
-<li><a href="#%E6%9C%AC%E6%A1%88%E4%B9%8B%E6%89%B9%E5%87%86">本案之批准</a></li>
-<li><a href="#%E9%99%84%E8%A8%BB">附註</a></li>
+<li><a href="#本案之批准">本案之批准</a></li>
+<li><a href="#附註">附註</a></li>
 </ul>
 <h1 id="參考資料"><a class="header" href="#參考資料">參考資料</a></h1>
 <p>為了縮短此 RFC 的篇幅，不具約束性質的參考資料將以單獨文件形式呈現：</p>
@@ -303,11 +306,11 @@
 </ul>
 <p>理事會代表、審核團隊成員以及其它專案成員都應該能為身邊的人以及更廣泛的社群做好示範。這些職位都有對應的責任與領導，也因此這些人的行為都帶有份量而會對社群造成重大影響，也因此必須注意行使職權。選擇要行使這些職權的人都應該要知道身邊的人會以對應的高標準看待他們。</p>
 <h1 id="理事會組織架構"><a class="header" href="#理事會組織架構">理事會組織架構</a></h1>
-<p>理事會由一群團隊代表所組成，各代表一個<a href="#%E4%B8%80%E7%B4%9A%E5%9C%98%E9%9A%8A%E5%96%AE%E4%BD%8D">一級團隊</a>以及其子團隊。</p>
+<p>理事會由一群團隊代表所組成，各代表一個<a href="#一級團隊單位">一級團隊</a>以及其子團隊。</p>
 <p>每支一級團隊都能用各自所選的程序選出恰好一名代表。</p>
 <p>任何一級團隊的成員或其子團隊的成員都能作為其代表。團隊必須提供子團隊成員對潛在候選給予意見與回饋的經驗。</p>
-<p>各個代表最多代表一個一級團隊，就算他們也是其它團隊的成員。代表任何 Rust 團隊的主要責任將由其所屬的一級團隊代表負責。<sup class="footnote-reference"><a href="#under-multiple-teams">4</a></sup></p>
-<p>所有 Rust 專案團隊都必須至少隸屬於一個一級團隊。對於目前沒有母團隊的團隊，本案會建立起<a href="#%E3%80%8C%E5%95%9F%E5%8B%95%E5%8F%B0%E3%80%8D%E4%B8%80%E7%B4%9A%E5%9C%98%E9%9A%8A">「啟動台團隊」</a>作為暫時性的隸屬對象。以確保所有團隊都在理事會有對應的代表。</p>
+<p>各個代表最多代表一個一級團隊，就算他們也是其它團隊的成員。代表任何 Rust 團隊的主要責任將由其所屬的一級團隊代表負責。<sup class="footnote-reference" id="fr-under-multiple-teams-1"><a href="#footnote-under-multiple-teams">4</a></sup></p>
+<p>所有 Rust 專案團隊都必須至少隸屬於一個一級團隊。對於目前沒有母團隊的團隊，本案會建立起<a href="#「啟動台」一級團隊">「啟動台團隊」</a>作為暫時性的隸屬對象。以確保所有團隊都在理事會有對應的代表。</p>
 <h2 id="一級團隊單位"><a class="header" href="#一級團隊單位">一級團隊單位</a></h2>
 <p>理事會將會透過公開政策決策建立一級團隊。一般來說，一級團隊應該要符合以下條件：</p>
 <ul>
@@ -317,10 +320,10 @@
 <li>有著能期待無止盡持續的開放權責</li>
 <li>目前為 Rust 專案中活躍的存在</li>
 </ul>
-<p>一級團隊的數量必須介於 4 到 9（包含）之間，傾向介於 5 到 8 之間。這個數字能相對平衡多元性的需求以及相對小的架構，同時又在進行有效對話與共識凝聚時具備實務性。<sup class="footnote-reference"><a href="#number-of-representatives">5</a></sup></p>
-<p>當理事會建立起全新一級團隊時，該團隊則該指派一名理事會代表。<sup class="footnote-reference"><a href="#bootstrapping-new-teams">6</a></sup>當建立起全新的一級團隊時，理事會必須提供為何該一級團隊不能作為子團隊或者其它管理架構存在的解釋。</p>
+<p>一級團隊的數量必須介於 4 到 9（包含）之間，傾向介於 5 到 8 之間。這個數字能相對平衡多元性的需求以及相對小的架構，同時又在進行有效對話與共識凝聚時具備實務性。<sup class="footnote-reference" id="fr-number-of-representatives-1"><a href="#footnote-number-of-representatives">5</a></sup></p>
+<p>當理事會建立起全新一級團隊時，該團隊則該指派一名理事會代表。<sup class="footnote-reference" id="fr-bootstrapping-new-teams-1"><a href="#footnote-bootstrapping-new-teams">6</a></sup>當建立起全新的一級團隊時，理事會必須提供為何該一級團隊不能作為子團隊或者其它管理架構存在的解釋。</p>
 <h3 id="一級團隊初始名單"><a class="header" href="#一級團隊初始名單">一級團隊初始名單</a></h3>
-<p>一級團隊的初始名單由本案使發表時列於 <a href="https://www.rust-lang.org/governance">rust-lang.org 網站的一級管理區域</a>的所有團隊組成（除去 Core 團隊與校友），再加上<a href="#%E3%80%8C%E5%95%9F%E5%8B%95%E5%8F%B0%E3%80%8D%E4%B8%80%E7%B4%9A%E5%9C%98%E9%9A%8A">「啟動台」團隊</a>：</p>
+<p>一級團隊的初始名單由本案使發表時列於 <a href="https://www.rust-lang.org/governance">rust-lang.org 網站的一級管理區域</a>的所有團隊組成（除去 Core 團隊與校友），再加上<a href="#「啟動台」一級團隊">「啟動台」團隊</a>：</p>
 <ul>
 <li>編譯器</li>
 <li>Crates.io</li>
@@ -353,7 +356,7 @@
 <p>有關私人事務，理事會將酌情通知候補代表，以避免分享不必要的私人資訊。若候補代表需要出面，則理事會可說明該情況。</p>
 <h2 id="任期限制"><a class="header" href="#任期限制">任期限制</a></h2>
 <p>理事會代表任期為一年。對於任何已被認可的代表團（來自特定一級團隊的代表團），每位代表有最多連任三次的非硬性限制。一位代表在理事會收到來自個別團隊明確指出他們無法產生另一位代表時，得超過任期限制（舉例來說，因為缺乏其他有意願的候選人，或是因為團隊成員對其他任何候選人提出反對意見）。</p>
-<p>除此之外，對於單一代表在其它一級團隊服務的任期數、或是在單一一級團隊的非連續任期，並沒有任何硬性限制。團隊應該力求在經驗的存續與代表的替換之間取得平衡，以提供更多人這樣的經驗。<sup class="footnote-reference"><a href="#representative-selection">7</a></sup></p>
+<p>除此之外，對於單一代表在其它一級團隊服務的任期數、或是在單一一級團隊的非連續任期，並沒有任何硬性限制。團隊應該力求在經驗的存續與代表的替換之間取得平衡，以提供更多人這樣的經驗。<sup class="footnote-reference" id="fr-representative-selection-1"><a href="#footnote-representative-selection">7</a></sup></p>
 <p>一半的代表將在（每年的）三月底進行任命，另一半則在九月底進行任命。這避免了同時更換所有理事會代表。對於初始的理事會以及在任何時候的一級團隊組成發生改變，理事會以及一級團隊應該共同努力使任期結束日大約平均落在在三月與九月各半。然而，每個任期應該至少持續六個月（為了避免任期過短，暫時的不平衡是可被接受的）。</p>
 <p>如果理事會及一級團隊無法就適當的任期結束日變更達成共識，代表將在三月底或九月底兩者之間被隨機分配一個任期結束日（且在至少 6 個月後）以維持平衡。</p>
 <h2 id="對單一公司或實體代表之限制"><a class="header" href="#對單一公司或實體代表之限制">對單一公司或實體代表之限制</a></h2>
@@ -385,10 +388,10 @@
 <p>儘管有些團隊目前可能沒有足夠的候選人符合這些標準，理事會應積極培養這些技能之人才，因為這些技能不僅對理事會成員資格有幫助，也對這個專案有益。</p>
 <h2 id="與-core-團隊之關係"><a class="header" href="#與-core-團隊之關係">與 Core 團隊之關係</a></h2>
 <p>The Leadership Council serves as the successor to the core team in all capacities. This RFC was developed with the participation and experience of the core team members, and the Council should continue seeking such input and institutional memory when possible, especially while ramping up.</p>
-<p>External entities or processes may have references to &quot;the Rust core team&quot; in various capacities. The Council doesn't use the term &quot;core team&quot;, but the Council will serve in that capacity for the purposes of any such external references.</p>
+<p>External entities or processes may have references to “the Rust core team” in various capacities. The Council doesn’t use the term “core team”, but the Council will serve in that capacity for the purposes of any such external references.</p>
 <h2 id="與-rust-基金會之關係"><a class="header" href="#與-rust-基金會之關係">與 Rust 基金會之關係</a></h2>
-<p>The Council is responsible for establishing the process for selecting Project directors. The Project directors are the mechanism by which the Rust Project's interests are reflected on the Rust Foundation board.</p>
-<p>The Council delegates a purview to the Project directors to represent the Project's interests on the Foundation Board and to make certain decisions on Foundation-related matters. The exact boundaries of that purview are out of scope for this RFC.</p>
+<p>The Council is responsible for establishing the process for selecting Project directors. The Project directors are the mechanism by which the Rust Project’s interests are reflected on the Rust Foundation board.</p>
+<p>The Council delegates a purview to the Project directors to represent the Project’s interests on the Foundation Board and to make certain decisions on Foundation-related matters. The exact boundaries of that purview are out of scope for this RFC.</p>
 <h1 id="理事會決策流程"><a class="header" href="#理事會決策流程">理事會決策流程</a></h1>
 <p>領導理事會作出兩種不同類型的決策：營運決策和政策決策。並可能會根據決策的類別，給予不同的考慮。然而在預設情況下無論分類為何，理事會將對所有決策使用共識決策流程。</p>
 <h2 id="營運與政策決策"><a class="header" href="#營運與政策決策">營運與政策決策</a></h2>
@@ -411,7 +414,7 @@
 </ul>
 <p>核准標準提供了法定人數機制，並提供代表足夠時間查看提案。允許兩個非簽署人是對專案志願性質的認同，基於在決策速度與共識和無異議所需確認量之間取得平衡的經驗加以制定；如此設計是假定對應代表如果希望要反對，也應已有時間提出反對意見。（這是根據現在用於核准 RFC 的流程所規劃的。）</p>
 <p>如果提議代表決定撤回他們的提案，則決策流程可以隨時結束。其他代表可以隨時接手提案以維持其活躍。</p>
-<p>如果利益衝突導致理事會無法達到 N-2 的法定人數來作出決定，則理事會不能作出該決定，除非遵循<a href="#%E5%88%A9%E7%9B%8A%E8%A1%9D%E7%AA%81">「利益衝突」段落中關於如何在記錄衝突下繼續進行決策的流程</a>。在這種情況下，理事會應該考慮適當的流程和政策，以避免類似衝突的重演。</p>
+<p>如果利益衝突導致理事會無法達到 N-2 的法定人數來作出決定，則理事會不能作出該決定，除非遵循<a href="#利益衝突">「利益衝突」段落中關於如何在記錄衝突下繼續進行決策的流程</a>。在這種情況下，理事會應該考慮適當的流程和政策，以避免類似衝突的重演。</p>
 <h2 id="變更與調整決策流程"><a class="header" href="#變更與調整決策流程">變更與調整決策流程</a></h2>
 <p>利用公共政策流程，理事會可以為不同類型的決策建立不同的決策流程。</p>
 <p>例如，理事會肯定會希望對一部分營運決策的子集進行快速決策，而無需等待所有代表積極回應。本 RFC 中沒有定義這樣的機制，但建議理事會將其作為首要行動之一加以制定。</p>
@@ -422,7 +425,7 @@
 <li>一個贊成且無異議（以犧牲一致性信心為代價，優先考慮快速決策）：一個團隊成員必須審查並支持，任何團隊成員都可以提出阻止性反對意見。</li>
 </ul>
 <p>任何定義決策流程的政策都必須至少處理以下要素：提案可以被發布的地方、法定人數要求、所需審查數和回饋的最短時間延遲。所有決策流程的核准標準都包括無異議。</p>
-<p>如果利益衝突導致超過三分之一的理事會無法參與決策，理事會在不遵循<a href="#%E5%88%A9%E7%9B%8A%E8%A1%9D%E7%AA%81">「利益衝突」段落中關於如何在記錄衝突下繼續進行決策的流程</a>的情況下，無法做出該決策。（無論使用的決策流程的其他法定人數要求如何，都是如此。）在這種情況下，理事會應該考慮適當的流程和政策，以避免類似衝突的未來重演。</p>
+<p>如果利益衝突導致超過三分之一的理事會無法參與決策，理事會在不遵循<a href="#利益衝突">「利益衝突」段落中關於如何在記錄衝突下繼續進行決策的流程</a>的情況下，無法做出該決策。（無論使用的決策流程的其他法定人數要求如何，都是如此。）在這種情況下，理事會應該考慮適當的流程和政策，以避免類似衝突的未來重演。</p>
 <p>理事會還可以通過公共政策決策將其決策範疇的子集委派給團隊、其他治理結構或由理事會創建和任命的職位，如營運負責人、會議主持人或書記、秘書。</p>
 <p>請注意，理事會可以委派起草提案，而不一定要委派決策該提案的核准與否。這在涉及許多團隊的權責或不屬於任何團隊權責的專案整體政策的情況下可能是必要的。在逐步建立新團隊時，這也可能有所幫助。</p>
 <h2 id="議程與待辦事項"><a class="header" href="#議程與待辦事項">議程與待辦事項</a></h2>
@@ -460,7 +463,7 @@
 <h2 id="理事會可在內部做出之決策"><a class="header" href="#理事會可在內部做出之決策">理事會可在內部做出之決策</a></h2>
 <p>某些類型的營運決策可以在理事會內部做出，只要理事會存有機制讓社群在決策做出後能給予回饋。</p>
 <p>要將全新的決策加入理事會可以內部做出的決策清單，必須透過公開政策決策進行。任何會影響架構、決策者或者對理事會監督的決策都不應該加入此清單。</p>
-<p>理事會應該要致力於避免使用重複的內部決策建立起不成文的政策，藉此來避免進行公開提案。請見<a href="#%E9%87%8D%E8%A4%87%E8%88%87%E4%BE%8B%E5%A4%96">重複與例外</a>的詳細資訊。</p>
+<p>理事會應該要致力於避免使用重複的內部決策建立起不成文的政策，藉此來避免進行公開提案。請見<a href="#重複與例外">重複與例外</a>的詳細資訊。</p>
 <p>本清單會明列所有理事會可以內部做出的決策：</p>
 <ul>
 <li>決定展開一個會公開進行的流程（如「我們來建立並貼出問卷調查」、「我們來撰寫此未來公開決策的提案」）。</li>
@@ -468,18 +471,18 @@
 <li>對另一個實體（如 Rust 基金會）直接表達與溝通 Rust 專案的定位。</li>
 <li>藉由 Rust 專案的溝通資源進行溝通（透過網誌或者所有 @ 標註）。</li>
 <li>執行關於理事會內部流程的大多數營運決策，包含理事會的協調方式、使用來溝通的平台、見面的地點與時機、用於做出並記錄決策的範本（需求由本案它處規定）。</li>
-<li>為了帶領／組織會議、紀錄與發佈記錄、從各個單位取得並整理回饋等等而指派執行官。<sup class="footnote-reference"><a href="#council-roles">8</a></sup>注意這些職位（頭銜、責任以及目前的在任者）都必須要被公開揭曉與記錄。</li>
+<li>為了帶領／組織會議、紀錄與發佈記錄、從各個單位取得並整理回饋等等而指派執行官。<sup class="footnote-reference" id="fr-council-roles-1"><a href="#footnote-council-roles">8</a></sup>注意這些職位（頭銜、責任以及目前的在任者）都必須要被公開揭曉與記錄。</li>
 <li>邀請理事會代表以外的特定人士參與特定的理事會會議或者討論，又或者主持開放給更廣闊社群的會議。（特別是鼓勵理事會邀請特定決策的受影響者參與該決策進行的會議或討論。）</li>
 <li>為一個或多支團隊於其正常職權範圍內請求理事會不經公開提案做出的決策。（注意團隊可以選擇請求理事會的意見而無須請求理事會做出決策。）</li>
 <li>為團隊職權重疊或模糊的情境做出一次性的判斷（但是<strong>改變</strong>團隊職權時一定要經過公開政策決策）。</li>
 <li>任何此案或者未來理事會政策指定為營運決策的決策。</li>
 </ul>
-<p>請見<a href="#%E7%9B%A3%E7%9D%A3%E8%88%87%E5%95%8F%E8%B2%AC%E6%A9%9F%E5%88%B6">監督與問責機制</a>以了解理事會決策的回饋機制。</p>
+<p>請見<a href="#監督與問責機制">監督與問責機制</a>以了解理事會決策的回饋機制。</p>
 <h2 id="理事會須私下保密做出之決策"><a class="header" href="#理事會須私下保密做出之決策">理事會須私下保密做出之決策</a></h2>
 <p>有些決策必然會涉及關於個人或者其它實體的隱私細節，公開這些細節會對個人或實體和專案造成負面影響（如個人與實體的安全性，和對專案的信任）。</p>
-<p>這項額外限制應該要被視為特例。並不會允許私下做出<a href="#%E7%90%86%E4%BA%8B%E6%9C%83%E9%A0%88%E7%B6%93%E5%85%AC%E9%96%8B%E6%8F%90%E6%A1%88%E5%81%9A%E5%87%BA%E4%B9%8B%E6%B1%BA%E7%AD%96">下一段落會提到需要公開提案的決策</a>。但是可以允許理事會於內部做出的決策能維持其隱私性，而不需要提供公開監督完整的資訊。</p>
+<p>這項額外限制應該要被視為特例。並不會允許私下做出<a href="#理事會須經公開提案做出之決策">下一段落會提到需要公開提案的決策</a>。但是可以允許理事會於內部做出的決策能維持其隱私性，而不需要提供公開監督完整的資訊。</p>
 <p>理事會也可以拒絕私下做出決策，如理事會認定不屬權責內事項（並且選則轉交給另一個團隊），或者相信此事項必須被公開應對的時候。然而即便在這樣的狀況下，理事會仍然不能公開揭曉所機密交付的資訊（否則理事會就沒有辦法受到信任交付這些資訊）。此明顯特例是為了避免對安全造成即刻威脅而設立的。</p>
-<p>私下決策不能被用來建立政策。理事會應該要致力於避免使用重複的內部決策建立起不成文的政策，藉此來避免公開提案。請見<a href="#%E9%87%8D%E8%A4%87%E8%88%87%E4%BE%8B%E5%A4%96">重複與例外</a>的詳細資訊。</p>
+<p>私下決策不能被用來建立政策。理事會應該要致力於避免使用重複的內部決策建立起不成文的政策，藉此來避免公開提案。請見<a href="#重複與例外">重複與例外</a>的詳細資訊。</p>
 <p>本清單會詳盡列出理事會可以部分或完全私下做出的決策：</p>
 <ul>
 <li>決定與新產業／開源事業的關係時，必須於推出前維持機密性時。</li>
@@ -519,7 +522,7 @@
 <li>增加、修改或移除政策關於理事會法定人數或能制定具約束力的決策所能制定的地點時。</li>
 </ul>
 </li>
-<li>任何政策決策，除了一次性的營運決策以外（見<a href="#%E7%90%86%E4%BA%8B%E6%9C%83%E6%B1%BA%E7%AD%96%E6%B5%81%E7%A8%8B">決策相關段落</a>以了解關於政策決策與營運決策差異的細節）。其中包含任何會對其它專案中的部分（如其它團隊或個人）造成約束力，實質成為所有團隊普通權責例外的決策。在此舉例一些政策決策：
+<li>任何政策決策，除了一次性的營運決策以外（見<a href="#理事會決策流程">決策相關段落</a>以了解關於政策決策與營運決策差異的細節）。其中包含任何會對其它專案中的部分（如其它團隊或個人）造成約束力，實質成為所有團隊普通權責例外的決策。在此舉例一些政策決策：
 <ul>
 <li>修改或延長既存的政策，包含過去透過 RFC 決議的政策。</li>
 <li>會影響 Rust 專案軟體或者其它 Rust 專案成果的條約／授權政策。</li>
@@ -601,7 +604,7 @@
 <ul>
 <li>既不是現任審核團隊的成員，也不是領導理事會的成員。</li>
 <li>由理事會和審核團隊共同確定，受到 Rust 專案成員的廣泛信任；這通常意味著他們已經以某種方式參與專案。</li>
-<li>由理事會和審核團隊共同確定，具有從事審核工作和<a href="#%E7%A8%BD%E6%A0%B8">稽核</a>的資格。更詳細的標準和指導方針將由審核政策確定，該政策超出了本案的範疇。</li>
+<li>由理事會和審核團隊共同確定，具有從事審核工作和<a href="#稽核">稽核</a>的資格。更詳細的標準和指導方針將由審核政策確定，該政策超出了本案的範疇。</li>
 <li>願意擔任緊急審核者：願意進行審核，並在審核團隊解散或無法進行工作的情況下，願意進行臨時審核工作，直到他們能夠任命新的正式審核者。（緊急審核者無需願意長期從事審核工作。）</li>
 <li>願意熟悉審核政策和程序，達到審核團隊成員所期望的標準（包括任何相關培訓）。在可能的情況下，緊急審核者應獲得與審核團隊相同的培訓機會。</li>
 </ul>
@@ -610,7 +613,7 @@
 <p>由於緊急審核者角色除了特殊情況以外不需要執行任何定期活動，因此被任命為該角色的人必須與審核團隊定期檢查，以確認他們仍願意擔任該角色，並避免緊急審核者突然被需要並被發現無法進行工作的情況。</p>
 <h2 id="審核團隊之政策與程序"><a class="header" href="#審核團隊之政策與程序">審核團隊之政策與程序</a></h2>
 <p>審核團隊有責任制定完善的政策和程序。理事會提供監督和協助，以確保審核團隊擁有這些政策和程序，並且它們足夠完善。</p>
-<p>理事會可以向審核團隊提供回饋，審核團隊有義務考慮收到的所有回饋。如果理事會認為審核團隊未遵循審核政策和程序，理事會可以<a href="#%E7%A8%BD%E6%A0%B8">要求緊急審核者進行稽核</a>。然而，理事會不能否決審核決定或政策。</p>
+<p>理事會可以向審核團隊提供回饋，審核團隊有義務考慮收到的所有回饋。如果理事會認為審核團隊未遵循審核政策和程序，理事會可以<a href="#稽核">要求緊急審核者進行稽核</a>。然而，理事會不能否決審核決定或政策。</p>
 <h2 id="稽核"><a class="header" href="#稽核">稽核</a></h2>
 <p>如果任何理事會成員認為審核決定（或一系列決定）未遵循審核團隊既定的政策和程序，他們應立即通知審核團隊。理事會和審核團隊應該相互合作，討論和理解這些問題，並努力解決它們。</p>
 <p>本案提供的一種以保密形式檢查審核團隊行為的機制，是稽核（audit）機制。在任何情況下，如果任何理事會成員認為審核團隊的行動未遵循記錄紀錄有案的政策或程序時，則該理事會成員可以決定啟動稽核流程。（特別是，理事會成員可以以此形式回應涉及審核情形的社群成員的回報。）此項機制的進行是除了以上的互動和對話之外的<strong>額外</strong>行動；此機制不是理事會與審核團隊之間直接溝通的替代品。</p>
@@ -631,12 +634,12 @@
 <p>這個機制是絕對的最後手段。最起碼此手段幾乎肯定不會產生最佳的結果。如果情勢已經升溫到造成此結果，必須要有很多事情都已經陷入<strong>非常糟糕</strong>的情境了，而那些負責清理善後工作的人應該努力防止這種情況再次發生。（無論是審核團隊還是理事會）表示情勢可能升溫到這個程度時，都應該被認為是一個強烈的信號，讓各方一起討論找到一個「總之不要用上那招」的方法來避免這種情境。</p>
 <h2 id="涉及專案成員之審核措施"><a class="header" href="#涉及專案成員之審核措施">涉及專案成員之審核措施</a></h2>
 <p>在進行審核工作過程中，審核團隊不僅需要對 Rust 社群成員採取行動，還需要對 Rust 專案成員採取行動。這些行動可能涵蓋從對話到從專案中移除之間的所有可能升溫措施階級。這使得審核團隊處於需要具備權力和信任的地位。此案旨在為審核團隊及理事會提供適當的問責和相互檢查手段。</p>
-<p>如果審核團隊計劃對任何 Rust 專案成員實施外部可見的制裁（任何可能引起顯著缺席的行動，例如從職務中移除或從某專案空間中排除參與超過一週），則任何一方都可以通過與理事會或緊急審核者聯繫來要求進行<a href="#%E7%A8%BD%E6%A0%B8">稽核</a>，並且該稽核將自動獲准。</p>
+<p>如果審核團隊計劃對任何 Rust 專案成員實施外部可見的制裁（任何可能引起顯著缺席的行動，例如從職務中移除或從某專案空間中排除參與超過一週），則任何一方都可以通過與理事會或緊急審核者聯繫來要求進行<a href="#稽核">稽核</a>，並且該稽核將自動獲准。</p>
 <p>在此案批准後的第一年內，即使沒有請求也會自動執行稽核，以確保該流程正常運行。在那之後，理事會和審核團隊將共同審查並決定是否更新此條款。</p>
 <p>當審核團隊向專案成員發出警告，或者向專案成員發出有關審核行動的通知時，該消息將提及要求稽核的選項。</p>
 <p>應盡快將有關專案成員的衝突通知給審核團隊知曉。</p>
 <h2 id="涉及理事會代表之衝突"><a class="header" href="#涉及理事會代表之衝突">涉及理事會代表之衝突</a></h2>
-<p>涉及理事會代表或替補代表的衝突遵循與涉及專案成員的衝突相同的流程。審核團隊具有與專案其他成員相同的審核代表或替補代表的能力，包括對任何外部可見制裁所需的<a href="#%E7%A8%BD%E6%A0%B8">稽核</a>。此項行為仍然受到與審核團隊其他決策相同的問責機制的約束。</p>
+<p>涉及理事會代表或替補代表的衝突遵循與涉及專案成員的衝突相同的流程。審核團隊具有與專案其他成員相同的審核代表或替補代表的能力，包括對任何外部可見制裁所需的<a href="#稽核">稽核</a>。此項行為仍然受到與審核團隊其他決策相同的問責機制的約束。</p>
 <p>除了既有的審核行動範圍之外，審核團隊還可以在接近最後手段的情況下，作為使用升溫措施階級中較輕微的手段，從專案中移除代表或替補代表。這些行動並不是特別針對理事會的行動，並且適用於其他 Rust 團隊。</p>
 <ul>
 <li>審核團隊可以決定將一名代表從理事會中移除。該代表所代表的頂級團隊應立即委派一位新代表來完成剩餘的任期。</li>
@@ -660,41 +663,44 @@
 </ul>
 <p>此 RFC 將以標準 RFC 程序審批，由前述實質上的領導層成員來批准。這些成員還應代表專案中其他成員提出異議，更具體來說，團隊負責人應徵求他的團隊和子團隊的回饋。</p>
 <h1 id="附註"><a class="header" href="#附註">附註</a></h1>
-<div class="footnote-definition" id="core"><sup class="footnote-definition-label">1</sup>
-<p>Unlike in some other Open Source projects, the Rust Project's &quot;core team&quot; does not refer to a group that decides the technical direction of the Project. As explained in more detail elsewhere in the RFC, the Rust Project distributes decision-making to many different teams who have responsibility for their specific purview. For example, the compiler team is in charge of the Rust compiler, the language team is in charge of language evolution, etc. This is part of why this RFC discontinues use of the term &quot;core team&quot;.</p>
-</div>
-<div class="footnote-definition" id="authority"><sup class="footnote-definition-label">2</sup>
-<p>The term 'authority' here refers to the powers and responsibilities the Council has to ensure the success of the Rust Project. This RFC lays out the limits of these powers, so that the Council will delegate the authority it has to teams responsible for the concerns of the Project. These concerns may include - but are not limited to - product vision, day-to-day procedures, engineering decisions, mentoring, and marketing.</p>
-</div>
-<div class="footnote-definition" id="teams"><sup class="footnote-definition-label">3</sup>
-<p>Throughout this document, &quot;teams&quot; includes subteams, working groups, project groups, initiatives, and all other forms of official collaboration structures within the Project. &quot;Subteams&quot; includes all forms of collaboration structures that report up through a team.</p>
-</div>
-<div class="footnote-definition" id="under-multiple-teams"><sup class="footnote-definition-label">4</sup>
-<p>Subteams or individuals that fall under multiple top-level teams should not get disproportionate representation by having multiple representatives speaking for them on the Council. Whenever a &quot;diamond&quot; structure like this exists anywhere in the organization, the teams involved in that structure should strive to avoid ambiguity or diffusion of responsibility, and ensure people and teams know what paths they should use to raise issues and provide feedback.</p>
-</div>
-<div class="footnote-definition" id="bootstrapping-new-teams"><sup class="footnote-definition-label">6</sup>
-<p>The Council consists only of the representatives provided to it by top-level teams, and cannot appoint new ad hoc members to itself. However, if the Council identifies a gap in the project, it can create a new top-level team. In particular, the Council can bootstrap the creation of a team to address a problem for which the Project doesn't currently have coordinated/organized expertise and for which the Council doesn't know the right solution structure to charter a team solving it. In that case, the Council could bring together a team whose purview is to explore the solution-space for that problem, determine the right solution, and to return to the Council with a proposal and charter. That team would then provide a representative to the Council, who can work with the Council on aspects of that problem and solution.</p>
-</div>
-<div class="footnote-definition" id="number-of-representatives"><sup class="footnote-definition-label">5</sup>
-<p>This also effectively constrains the number of Council representatives to the same range. Note that this constraint is independently important.</p>
-</div>
-<div class="footnote-definition" id="representative-selection"><sup class="footnote-definition-label">7</sup>
-<p>最終整體來說，作為一位理事會代表是為了服務個別的團隊以及 Rust 計畫。儘管此 RFC 的作者希望這個職位能夠滿足並且吸引任何足以勝任這份工作的人，我們仍然希望它不被視為是用來爭奪地位的職位。</p>
-</div>
-<div class="footnote-definition" id="council-roles"><sup class="footnote-definition-label">8</sup>
-<p>The Council is not required to assign such roles exclusively to Council representatives; the Council may appoint any willing Project member. Such roles do not constitute membership in the Council for purposes such as decision-making.</p>
-</div>
+<hr>
+<ol class="footnote-definition">
+<li id="footnote-core">
+<p>Unlike in some other Open Source projects, the Rust Project’s “core team” does not refer to a group that decides the technical direction of the Project. As explained in more detail elsewhere in the RFC, the Rust Project distributes decision-making to many different teams who have responsibility for their specific purview. For example, the compiler team is in charge of the Rust compiler, the language team is in charge of language evolution, etc. This is part of why this RFC discontinues use of the term “core team”. <a href="#fr-core-1">↩</a></p>
+</li>
+<li id="footnote-authority">
+<p>The term ‘authority’ here refers to the powers and responsibilities the Council has to ensure the success of the Rust Project. This RFC lays out the limits of these powers, so that the Council will delegate the authority it has to teams responsible for the concerns of the Project. These concerns may include - but are not limited to - product vision, day-to-day procedures, engineering decisions, mentoring, and marketing. <a href="#fr-authority-1">↩</a></p>
+</li>
+<li id="footnote-teams">
+<p>Throughout this document, “teams” includes subteams, working groups, project groups, initiatives, and all other forms of official collaboration structures within the Project. “Subteams” includes all forms of collaboration structures that report up through a team. <a href="#fr-teams-1">↩</a></p>
+</li>
+<li id="footnote-under-multiple-teams">
+<p>Subteams or individuals that fall under multiple top-level teams should not get disproportionate representation by having multiple representatives speaking for them on the Council. Whenever a “diamond” structure like this exists anywhere in the organization, the teams involved in that structure should strive to avoid ambiguity or diffusion of responsibility, and ensure people and teams know what paths they should use to raise issues and provide feedback. <a href="#fr-under-multiple-teams-1">↩</a></p>
+</li>
+<li id="footnote-number-of-representatives">
+<p>This also effectively constrains the number of Council representatives to the same range. Note that this constraint is independently important. <a href="#fr-number-of-representatives-1">↩</a></p>
+</li>
+<li id="footnote-bootstrapping-new-teams">
+<p>The Council consists only of the representatives provided to it by top-level teams, and cannot appoint new ad hoc members to itself. However, if the Council identifies a gap in the project, it can create a new top-level team. In particular, the Council can bootstrap the creation of a team to address a problem for which the Project doesn’t currently have coordinated/organized expertise and for which the Council doesn’t know the right solution structure to charter a team solving it. In that case, the Council could bring together a team whose purview is to explore the solution-space for that problem, determine the right solution, and to return to the Council with a proposal and charter. That team would then provide a representative to the Council, who can work with the Council on aspects of that problem and solution. <a href="#fr-bootstrapping-new-teams-1">↩</a></p>
+</li>
+<li id="footnote-representative-selection">
+<p>最終整體來說，作為一位理事會代表是為了服務個別的團隊以及 Rust 計畫。儘管此 RFC 的作者希望這個職位能夠滿足並且吸引任何足以勝任這份工作的人，我們仍然希望它不被視為是用來爭奪地位的職位。 <a href="#fr-representative-selection-1">↩</a></p>
+</li>
+<li id="footnote-council-roles">
+<p>The Council is not required to assign such roles exclusively to Council representatives; the Council may appoint any willing Project member. Such roles do not constitute membership in the Council for purposes such as decision-making. <a href="#fr-council-roles-1">↩</a></p>
+</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="3151-scoped-threads.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
                             <a rel="next prefetch" href="alternatives.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
                         <div style="clear: both"></div>
@@ -704,16 +710,21 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="3151-scoped-threads.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
                     <a rel="next prefetch" href="alternatives.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
 
         </div>
 
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
@@ -722,15 +733,16 @@
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
+
 
 
     </div>
