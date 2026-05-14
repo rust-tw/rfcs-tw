@@ -6,11 +6,11 @@
 
 # 摘要
 
-This RFC establishes a Leadership Council as the successor of the core team[^core] and the new governance structure through which Rust Project members collectively confer the authority[^authority] to ensure successful operation of the Project. The Leadership Council delegates much of this authority to teams (which includes subteams, working groups, etc.[^teams]) who autonomously make decisions concerning their purviews. However, the Council retains some decision-making authority, outlined and delimited by this RFC.
+這份請求意見書（RFC）確立了一個領導理事會，作為核心團隊的繼任者[^core]和 Rust 專案的新治理結構，透過這個結構，Rust 專案成員共同授權[^authority]以確保專案的成功運作。領導理事會將大部分的權限委派給各個團隊（包括子團隊、工作小組等[^teams]），讓他們自主決策有關其範圍的事項。但理事會仍然保留一些決策權限，由這份請求意見書來明確和界定。
 
-The Council will be composed of representatives delegated to the Council from each [top-level team][top-level-teams].
+該理事會由從每個[高層團隊][top-level-teams] 中被委派為理事會代表的成員組成。
 
-The Council is charged with the success of the Rust Project as a whole. The Council will identify work that needs to be done but does not yet have a clear owner, create new teams to accomplish this work, hold existing teams accountable for the work in their purview, and coordinate and adjust the organizational structure of Project teams.
+理事會負責整個 Rust 專案的成功。理事會將確立需要完成但尚未有明確負責人的工作，創建新的團隊來完成這些工作，監督現有團隊負責其範圍內的工作，並協調和調整專案團隊的組織結構。
 
 # 大綱
 
@@ -72,13 +72,13 @@ The Council is charged with the success of the Rust Project as a whole. The Coun
 
 # 動機
 
-The Rust project consists of hundreds of globally distributed people, organized into teams with various purviews. However, a great deal of work falls outside the purview of any established team, and still needs to get done.
+Rust 專案由分布在全球的數百人組成，組織成擁有不同職責範圍的團隊。然而，許多工作超出了任何既有團隊的範圍，且仍然需要完成。
 
-Historically, the core team both identified and prioritized important work that fell outside of team purviews, and also attempted to do that work itself. However, putting both of those activities in the same team has not scaled and has led to burnout.
+歷史上，核心團隊既辨識和優先處理落在團隊範圍之外的重要工作，也試圖自行完成這些工作。然而，將這兩種活動放在同一個團隊中無法擴展，反而會導致工作過度造成精疲力盡。
 
-The Leadership Council established by this RFC focuses on identifying and prioritizing work outside of team purviews. The Council primarily delegates that work, rather than doing that work itself. The Council can also serve as a coordination, organization, and accountability body between teams, such as for cross-team efforts, roadmaps, and the long-term success of the Project.
+這份RFC確立的領導理事會專注於確定和優先處理團隊範圍之外的工作。理事會主要是授權其他人去完成工作，而不是自己親自去執行。理事會也可以充當各個團隊之間的協調、組織和負責任機構，例如跨團隊合作、路線圖以及項目的長期成功。
 
-This RFC also establishes mechanisms for oversight and accountability between the Council as a whole, individual Council members, the moderation team, the Project teams, and Project members.
+此RFC還建立了一系列監督和負責制度的機制，以協調整個委員會、各個委員會成員、管理團隊、項目團隊和項目成員之間的關係。
 
 # 理事會之職責、期待與限制
 
